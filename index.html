@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Héros d’Arcancia – Tome I : Raphaël</title>
   <style>
     @keyframes fadeInUp {
@@ -12,176 +12,66 @@
     }
 
     body {
+      background: #f4f2ec;
+      font-family: Georgia, serif;
+      margin: 0;
+      padding: 2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .navbar {
+      background: #4c3791;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 4px solid #6a4cc3;
+    }
+
+    .navbar ul {
+      list-style: none;
       margin: 0;
       padding: 0;
-      background: #faf9f6;
-      font-family: 'Georgia', serif;
     }
 
-    section {
-      animation: fadeInUp 0.8s ease-out;
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #fdfcf8;
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .book-block, .testimonials, .excerpt, .contact-form, .newsletter {
-      margin-bottom: 3rem;
-    }
-
-    .book-block {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .book-cover img {
-      max-width: 250px;
-      width: 100%;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .book-info {
-      flex: 1;
-      min-width: 260px;
-    }
-
-    .book-info h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    .book-info h3 { font-size: 1.2rem; font-weight: normal; color: #666; margin-bottom: 1rem; }
-    .book-info p { line-height: 1.5; margin-bottom: 1rem; }
-    .book-info ul { padding-left: 1.2rem; }
-    .book-info li { margin-bottom: 0.5rem; }
-
-    .book-links a {
+    .navbar li {
       display: inline-block;
-      margin-top: 1rem;
-      margin-right: 1rem;
-      background: #6a4cc3;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
+      margin: 0 1rem;
+    }
+
+    .navbar a {
       text-decoration: none;
-      transition: background 0.3s;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
 
-    .book-links a:hover { background: #4d349b; }
-
-    .excerpt pre {
-      background: #fff;
-      padding: 1rem;
-      border-left: 4px solid #6a4cc3;
-      white-space: pre-wrap;
+    .navbar a:hover {
+      text-decoration: underline;
     }
 
-    .testimonials blockquote {
-      background: #eee;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-left: 5px solid #6a4cc3;
+    h1 {
+      color: #4c3791;
+      font-size: 2rem;
     }
 
-    .contact-form form,
-    .newsletter form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    input, textarea {
-      padding: 0.7rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    button {
-      padding: 0.7rem;
-      background: #6a4cc3;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    button:hover { background: #4d349b; }
-
-    @media (max-width: 768px) {
-      .book-block {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .book-info {
-        max-width: 100%;
-      }
-
-      .book-links a {
-        margin-bottom: 0.5rem;
-      }
+    p {
+      font-size: 1.1rem;
     }
   </style>
 </head>
 <body>
 
-  <section class="book-block">
-    <div class="book-cover">
-      <img src="chemin/vers/couverture.jpg" alt="Couverture Les Héros d'Arcancia" />
-    </div>
-    <div class="book-info">
-      <h2>Les Héros d’Arcancia – Tome I : Raphaël</h2>
-      <h3>Un roman jeunesse d’aventure et de magie, dès 8 ans</h3>
-      <p><strong>Par Samantha DULIS</strong></p>
-      <p>Raphaël pensait mener une vie ordinaire… jusqu’au jour où un mystérieux bâton le transporte dans un monde fabuleux : Arcancia.</p>
-      <p>Ce premier tome vous emmène à la rencontre des Zouppis, des Grolls, et d'une princesse aussi énigmatique qu’attachante.</p>
-      <ul>
-        <li>Roman jeunesse (dès 8 ans)</li>
-        <li>300 pages – Format 13,5 x 20 cm</li>
-        <li>Disponible en version papier et numérique</li>
-      </ul>
-      <div class="book-links">
-        <a href="#">Commander le livre</a>
-        <a href="#">Découvrir un extrait</a>
-        <a href="#">Voir la couverture</a>
-      </div>
-    </div>
-  </section>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.html#le-livre">Le livre</a></li>
+      <li><a href="blog-arcancia.html">Blog</a></li>
+    </ul>
+  </nav>
 
-  <section class="excerpt">
-    <h3>Extrait du livre :</h3>
-    <pre>
-« Raphaël s’avança dans la forêt, guidé par la lumière douce des cabanes suspendues. Une brise tiède fit frémir les feuilles, et le bâton dans sa main sembla vibrer d’une étrange énergie… »
-    </pre>
-  </section>
-
-  <section class="testimonials">
-    <h3>Ils ont lu et adoré :</h3>
-    <blockquote>« Un merveilleux voyage initiatique ! Mon fils de 9 ans a dévoré le livre. » – Claire B.</blockquote>
-    <blockquote>« Magique, poétique et intelligent. On attend le tome 2 avec impatience ! » – Julien D.</blockquote>
-  </section>
-
-  <section class="contact-form">
-    <h3>Me contacter</h3>
-    <form>
-      <input type="text" placeholder="Votre nom" required />
-      <input type="email" placeholder="Votre email" required />
-      <textarea rows="4" placeholder="Votre message" required></textarea>
-      <button type="submit">Envoyer</button>
-    </form>
-  </section>
-
-  <section class="newsletter">
-    <h3>S’inscrire à la newsletter</h3>
-    <form>
-      <input type="email" placeholder="Votre email" required />
-      <button type="submit">Je m’inscris</button>
-    </form>
-  </section>
+  <main>
+    <h1 id="le-livre">Bienvenue dans le monde d’Arcancia</h1>
+    <p>Découvrez l’univers magique des Héros d’Arcancia, à travers les aventures de Raphaël, un jeune héros entraîné dans une quête inoubliable...</p>
+  </main>
 
 </body>
 </html>
