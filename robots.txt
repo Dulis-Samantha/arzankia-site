@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dulis-samantha.github.io/arcancia-site/sitemap.xml
