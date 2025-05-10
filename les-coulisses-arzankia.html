@@ -9,7 +9,7 @@
       margin: 0;
       padding: 2rem;
       font-family: Georgia, serif;
-      background-image: url('fond_coulisse_arzankia.png');
+      background-image: url('https://dulis-samantha.github.io/arzankia-site/fond_coulisse_arzankia.png');
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
@@ -33,6 +33,34 @@
       100% { background-position: 200% 0; }
     }
 
+    .titre-coulisses {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5rem;
+      color: #f9f7ff;
+      text-shadow: 0 0 6px #b497ff, 0 0 12px #7e5acc;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1.5px;
+      z-index: 999;
+      animation: apparition 3s ease-out, flottement 4s ease-in-out infinite;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.5rem 1.2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(3px);
+    }
+
+    @keyframes apparition {
+      from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @keyframes flottement {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-6px); }
+    }
+
     .blog-post {
       max-width: 800px;
       margin: 0 auto;
@@ -41,6 +69,7 @@
       border-radius: 1rem;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(6px);
+      margin-top: 120px;
     }
 
     .blog-post h2 {
@@ -78,6 +107,7 @@
 </head>
 <body>
   <div class="bande-magique"></div>
+  <div class="titre-coulisses">✨ Les Coulisses d’Arzankia</div>
 
   <article class="blog-post">
     <h2>Derrière le voile d’Arzankia : comment est né le monde des Héros</h2>
@@ -96,7 +126,7 @@
     <h3>🔮 Ce que j’espère transmettre</h3>
     <p>Ce premier tome est une invitation. À rêver, à s’interroger, à grandir avec bienveillance. Arzankia n’est pas qu’un lieu : c’est un passage, une transformation. Et j’ai hâte que vous en découvriez davantage…</p>
     
-    <a href="https://dulis-samantha.github.io/arzankia-site/index.html">← Retour à la page d’accueil</a>
+    <p><a href="https://dulis-samantha.github.io/arzankia-site/index.html">← Retour à la page d’accueil</a></p>
   </article>
 </body>
 </html>
