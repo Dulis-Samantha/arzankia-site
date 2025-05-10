@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les Héros d’Arzankia – Accueil</title>
+  <title>Derrière le voile d’Arzankia</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Georgia', serif;
-      background-image: url('fond_arzankia.png');
+      padding: 2rem;
+      font-family: Georgia, serif;
+      background-image: url('assets/fond_coulisse_arcanzia.jpg');
       background-size: cover;
-      background-position: center;
       background-attachment: fixed;
+      background-position: center;
       background-repeat: no-repeat;
       color: #fff;
-      text-align: center;
     }
 
     .bande-magique {
@@ -33,68 +33,100 @@
       100% { background-position: 200% 0; }
     }
 
-    h1 {
-      margin-top: 130px;
-      font-size: 3rem;
-      color: #f9f6ff;
-      text-shadow: 0 0 10px #a98dfc;
-      animation: apparition 2s ease-out, flottement 5s ease-in-out infinite;
+    .titre-coulisses {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5rem;
+      color: #f9f7ff;
+      text-shadow: 0 0 6px #b497ff, 0 0 12px #7e5acc;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1.5px;
+      z-index: 999;
+      animation: apparition 3s ease-out, flottement 4s ease-in-out infinite;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.5rem 1.2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(3px);
     }
 
     @keyframes apparition {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
     @keyframes flottement {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-6px); }
     }
 
-    .boutons {
-      margin-top: 3rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+    .blog-post {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 240, 0.85);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      margin-top: 100px;
     }
 
-    .btn-magique {
-      background-color: #7a4ed9;
-      color: white;
-      padding: 0.8em 1.6em;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 12px #b497ff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .blog-post h2 {
+      font-size: 2rem;
+      color: #f2e9ff;
+      text-shadow: 0 0 4px #4c3791;
     }
 
-    .btn-magique:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #e5d3ff;
-    }
-
-    footer {
-      margin-top: 4rem;
+    .meta {
       font-size: 0.9rem;
-      color: #ccc;
+      color: #eee;
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-post h3 {
+      color: #d6caff;
+      margin-top: 1.8rem;
+    }
+
+    .blog-post p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    a {
+      color: #ccb7ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="bande-magique"></div>
+  <div class="titre-coulisses">Les Coulisses d’Arzankia</div>
 
-  <h1>✨ Bienvenue dans l’univers d’Arzankia ✨</h1>
-
-  <div class="boutons">
-    <a class="btn-magique" href="les-coulisses-arzankia.html">🌙 Entrer dans les coulisses</a>
-    <a class="btn-magique" href="blog-arcancia.html">📖 Découvrir le roman</a>
-  </div>
-
-  <footer>
-    © 2025 Samantha Dulis – Tous droits réservés
-  </footer>
+  <article class="blog-post">
+    <h2>Derrière le voile d’Arzankia : comment est né le monde des Héros</h2>
+    <p class="meta">Publié le 6 mai 2025 • Par Samantha DULIS</p>
+    <p>Avant que Raphaël ne foule les terres d’Arzankia, ce monde n’existait que dans un carnet griffonné, entre deux rêves d’enfant et quelques notes volées à la lune.</p>
+    
+    <h3>🌿 L’inspiration : un monde entre découverte et magie</h3>
+    <p>Arzankia m’est apparue comme une évidence : un monde lumineux, peuplé de créatures à la fois farfelues et symboliques. Les <strong>Zouppis</strong>, guides espiègles, me sont venus en observant les lucioles un soir d’été. Les <strong>Grolls</strong>, eux, sont nés d’un besoin : celui de rire, même au cœur du danger.</p>
+    
+    <h3>📚 La construction de l’univers</h3>
+    <p>J’ai établi une carte physique du monde d’Arzankia. Chaque territoire a ses règles, ses créatures, ses couleurs. J’ai voulu un univers à la fois magique et cohérent : ainsi, chaque élément fantastique repose sur un fondement logique ou émotionnel.</p>
+    
+    <h3>🧒 Le héros : Raphaël, un reflet du lecteur</h3>
+    <p>Raphaël n’est pas un héros parfait. Il doute, il trébuche, mais il avance. C’est un enfant de notre monde, qui découvre que l’imaginaire n’est pas une fuite, mais une force. À travers lui, j’ai voulu que chaque jeune lecteur se sente capable d’explorer ses propres mondes intérieurs.</p>
+    
+    <h3>🔮 Ce que j’espère transmettre</h3>
+    <p>Ce premier tome est une invitation. À rêver, à s’interroger, à grandir avec bienveillance. Arzankia n’est pas qu’un lieu : c’est un passage, une transformation. Et j’ai hâte que vous en découvriez davantage…</p>
+    
+    <p><a href="index.html">← Retour à la page d’accueil</a></p>
+  </article>
 </body>
 </html>
-
