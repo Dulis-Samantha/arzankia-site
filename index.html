@@ -69,3 +69,118 @@
     }
 
     .navbar li {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #f0e6ff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .navbar a:hover {
+      color: #ffd700;
+    }
+
+    /* Section titre */
+    .hero,
+    .section {
+      background: none;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #ffe066;
+      text-align: center;
+      text-shadow: 2px 2px 4px black;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      color: #ffe066;
+      text-shadow: 1px 1px 3px black;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    /* Bouton magique */
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      background: linear-gradient(135deg, #ffea8a, #fff6c1);
+      color: #2c2c2c;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(255, 236, 150, 0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 236, 150, 0.9),
+                  0 0 10px rgba(255, 255, 200, 0.7);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      font-size: 0.9rem;
+      color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a></li>
+      <li><a href="autrice.html">À propos de l'Autrice</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Bienvenue à Arzankia</h1>
+    <p>Plongez dans un univers magique, peuplé de créatures fantastiques, de forêts lumineuses et de quêtes initiatiques. Découvrez l'aventure de Raphaël, un jeune héros pas comme les autres.</p>
+  </section>
+
+  <section class="section" id="livre">
+    <h2>📖 Le livre – Tome I : Raphaël</h2>
+    <p>Raphaël pensait vivre une journée ordinaire pour ses douze ans. Mais une porte magique s’ouvre à lui, révélant les mondes cachés d’Arzankia. Dans cet univers où le merveilleux côtoie le danger, il devra affronter ses plus grandes peurs et découvrir en lui la force d’un véritable aventurier. Le destin d’Arzankia est désormais entre ses mains. Magie, humour, découverte : les trois clefs d’un roman jeunesse qui vous entraînera dans une épopée inoubliable.</p>
+    <a href="#" class="button">✨ Commander</a>
+  </section>
+
+  <div class="footer">
+    © 2025 Samantha DULIS – Les Héros d’Arzankia
+  </div>
+
+</body>
+</html>
+
