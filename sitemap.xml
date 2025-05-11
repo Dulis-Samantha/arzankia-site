@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <url>
+    <loc>https://dulis-samantha.github.io/arzankia-site/</loc>
+    <lastmod>2025-05-11</lastmod>
+    <priority>1.00</priority>
+  </url>
 
-<url>
-  <loc>https://dulis-samantha.github.io/arcancia-site/</loc>
-  <lastmod>2025-05-08T08:50:59+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://dulis-samantha.github.io/arcancia-site/index.html</loc>
-  <lastmod>2025-05-08T08:50:59+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dulis-samantha.github.io/arcancia-site/les-coulisses-arcancia.html</loc>
-  <lastmod>2025-05-08T08:50:59+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dulis-samantha.github.io/arcancia-site/autrice.html</loc>
-  <lastmod>2025-05-08T08:50:59+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+  <url>
+    <loc>https://dulis-samantha.github.io/arzankia-site/index.html</loc>
+    <lastmod>2025-05-11</lastmod>
+    <priority>0.80</priority>
+  </url>
 
+  <url>
+    <loc>https://dulis-samantha.github.io/arzankia-site/autrice.html</loc>
+    <lastmod>2025-05-11</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://dulis-samantha.github.io/arzankia-site/les-coulisses-arzankia.html</loc>
+    <lastmod>2025-05-11</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://dulis-samantha.github.io/arzankia-site/les-heros-arzankia.html</loc>
+    <lastmod>2025-05-11</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://dulis-samantha.github.io/arzankia-site/les-mondes-arzankia.html</loc>
+    <lastmod>2025-05-11</lastmod>
+    <priority>0.70</priority>
+  </url>
 
 </urlset>
