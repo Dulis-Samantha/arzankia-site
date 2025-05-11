@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quel Héros es-tu ?</title>
+  <style>
+    body {
+      background-image: url('fond_heros.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 2em;
+      font-family: Georgia, serif;
+      color: #fffff2;
+      text-shadow: 0 0 6px #000;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(0,0,0,0.5);
+      padding: 2em;
+      border-radius: 12px;
+    }
+    h1 {
+      text-align: center;
+      color: #ffd700;
+      text-shadow: 0 0 10px #3a1c00;
+    }
+    form {
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.4em;
+    }
+    .submit-btn {
+      text-align: center;
+      margin-top: 2em;
+    }
+    button {
+      padding: 0.8em 1.6em;
+      border-radius: 10px;
+      background: #ffd700;
+      color: #222;
+      font-weight: bold;
+      border: none;
+      box-shadow: 0 0 10px #fff7b2;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #ffe88a;
+      box-shadow: 0 0 20px #fffbcf;
+      transform: scale(1.05);
+    }
+    #quiz-result {
+      margin-top: 2em;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .back-button {
+      text-align: center;
+      margin-top: 3em;
+    }
+    .back-button a {
+      display: inline-block;
+      background: linear-gradient(135deg, #fff6c1, #ffe18a);
+      color: #3a2f00;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0.8em 1.6em;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ffeba0;
+      transition: all 0.3s ease;
+    }
+    .back-button a:hover {
+      background: #fff2b0;
+      box-shadow: 0 0 20px #fff8c6;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>❓ Quel Héros d’Arzankia es-tu ?</h1>
+    <form id="quiz-form">
+      <p>1. Quelle qualité te définit le mieux ?</p>
+      <label><input type="radio" name="q1" value="aventurier"> Le courage</label>
+      <label><input type="radio" name="q1" value="chercheur"> La curiosité</label>
+      <label><input type="radio" name="q1" value="dresseur"> L’instinct</label>
+      <label><input type="radio" name="q1" value="chasseur"> La précision</label>
+      <label><input type="radio" name="q1" value="magicien"> L’intuition</label>
+      <label><input type="radio" name="q1" value="protecteur"> L’empathie</label>
+
+      <p>2. Quel compagnon magique choisirais-tu ?</p>
+      <label><input type="radio" name="q2" value="dresseur"> Un dragon ou un caméléon</label>
+      <label><input type="radio" name="q2" value="aventurier"> Une luciole ou un griffon</label>
+      <label><input type="radio" name="q2" value="magicien"> Une licorne ou une fée</label>
+      <label><input type="radio" name="q2" value="chercheur"> Un corbeau messager</label>
+      <label><input type="radio" name="q2" value="protecteur"> Un animal blessé à protéger</label>
+      <label><input type="radio" name="q2" value="chasseur"> Un faucon loyal</label>
+
+      <p>3. Face à un mystère... tu :</p>
+      <label><input type="radio" name="q3" value="chercheur"> Cherches des indices méthodiquement</label>
+      <label><input type="radio" name="q3" value="chasseur"> Tends un piège pour voir ce qui en sort</label>
+      <label><input type="radio" name="q3" value="dresseur"> Demandes conseil à ton compagnon</label>
+      <label><input type="radio" name="q3" value="aventurier"> Te lances sans réfléchir</label>
+      <label><input type="radio" name="q3" value="magicien"> Te concentres pour ressentir les énergies</label>
+      <label><input type="radio" name="q3" value="protecteur"> Protèges ceux qui t'entourent avant d'agir</label>
+
+      <p>4. Ton endroit préféré dans Arzankia serait :</p>
+      <label><input type="radio" name="q4" value="dresseur"> Le sanctuaire des créatures</label>
+      <label><input type="radio" name="q4" value="chercheur"> Les archives oubliées</label>
+      <label><input type="radio" name="q4" value="aventurier"> Le sommet du mont désert</label>
+      <label><input type="radio" name="q4" value="magicien"> Le cercle des runes élémentaires</label>
+      <label><input type="radio" name="q4" value="protecteur"> Le jardin de la lune</label>
+      <label><input type="radio" name="q4" value="chasseur"> La Forêt des Ombres</label>
+
+      <p>5. Quel outil magique aimerais-tu posséder ?</p>
+      <label><input type="radio" name="q5" value="magicien"> Une baguette ancestrale</label>
+      <label><input type="radio" name="q5" value="aventurier"> Une carte mouvante des mondes</label>
+      <label><input type="radio" name="q5" value="chasseur"> Une arbalète qui ne rate jamais</label>
+      <label><input type="radio" name="q5" value="dresseur"> Un collier de lien avec les bêtes</label>
+      <label><input type="radio" name="q5" value="protecteur"> Un bouclier protecteur d'énergie</label>
+      <label><input type="radio" name="q5" value="chercheur"> Une loupe magique détectant les illusions</label>
+
+      <p>6. Tu ressens la magie comme :</p>
+      <label><input type="radio" name="q6" value="magicien"> Une force naturelle que tu canalises</label>
+      <label><input type="radio" name="q6" value="protecteur"> Une vibration douce reliant les êtres</label>
+      <label><input type="radio" name="q6" value="chercheur"> Un mystère que tu veux percer</label>
+      <label><input type="radio" name="q6" value="aventurier"> Un appel à l'aventure</label>
+      <label><input type="radio" name="q6" value="dresseur"> Une voie de communication animale</label>
+      <label><input type="radio" name="q6" value="chasseur"> Un outil pour survivre</label>
+
+      <p>7. Ton style de combat ?</p>
+      <label><input type="radio" name="q7" value="chasseur"> Rapide et précis</label>
+      <label><input type="radio" name="q7" value="dresseur"> En duo avec une créature</label>
+      <label><input type="radio" name="q7" value="aventurier"> Adapté à chaque situation</label>
+      <label><input type="radio" name="q7" value="magicien"> À distance avec des sorts</label>
+      <label><input type="radio" name="q7" value="protecteur"> Pour protéger les autres</label>
+      <label><input type="radio" name="q7" value="chercheur"> En prévoyant les faiblesses de l'adversaire</label>
+
+      <p>8. Si tu recevais une mission secrète...</p>
+      <label><input type="radio" name="q8" value="aventurier"> Tu partirais sans attendre</label>
+      <label><input type="radio" name="q8" value="chercheur"> Tu analyserais chaque détail</label>
+      <label><input type="radio" name="q8" value="magicien"> Tu consulterais les étoiles</label>
+      <label><input type="radio" name="q8" value="chasseur"> Tu traquerais ta cible discrètement</label>
+      <label><input type="radio" name="q8" value="dresseur"> Tu demanderais de l'aide à ton allié animal</label>
+      <label><input type="radio" name="q8" value="protecteur"> Tu veillerais d'abord sur tes proches</label>
+
+      <p>9. Quelle couleur préfères-tu ?</p>
+      <label><input type="radio" name="q9" value="magicien"> Violet ou bleu mystique</label>
+      <label><input type="radio" name="q9" value="protecteur"> Blanc ou argent doux</label>
+      <label><input type="radio" name="q9" value="chercheur"> Noir ou gris brume</label>
+      <label><input type="radio" name="q9" value="aventurier"> Rouge ou orange feu</label>
+      <label><input type="radio" name="q9" value="dresseur"> Vert naturel</label>
+      <label><input type="radio" name="q9" value="chasseur"> Brun ou cuivre terre</label>
+
+      <p>10. En un mot, tu es...</p>
+      <label><input type="radio" name="q10" value="protecteur"> Bienveillant(e)</label>
+      <label><input type="radio" name="q10" value="magicien"> Intuitif/Intuitive</label>
+      <label><input type="radio" name="q10" value="chercheur"> Observateur/Observatrice</label>
+      <label><input type="radio" name="q10" value="aventurier"> Audacieux/Audacieuse</label>
+      <label><input type="radio" name="q10" value="dresseur"> Complice</label>
+      <label><input type="radio" name="q10" value="chasseur"> Stratège</label>
+
+      <div class="submit-btn">
+        <button type="button" onclick="calculateResult()">Voir mon profil</button>
+      </div>
+    </form>
+
+    <div id="quiz-result"></div>
+
+    <div class="back-button">
+      <a href="les-heros-arzankia.html">← Retour aux Héros</a>
+    </div>
+  </div>
+
+  <script>
+    function calculateResult() {
+      const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'];
+      const scores = {aventurier:0, chercheur:0, dresseur:0, chasseur:0, magicien:0, protecteur:0};
+      for (let q of questions) {
+        const answer = document.querySelector(`input[name="${q}"]:checked`);
+        if (answer) scores[answer.value]++;
+      }
+      const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+      const result = sorted[0][0];
+      const descriptions = {
+        aventurier: "🧽 Tu es un Aventurier : courageux, spontané et toujours prêt pour une nouvelle quête !",
+        chercheur: "🔍 Tu es un Chercheur : observateur, curieux et maître des mystères oubliés.",
+        dresseur: "🐾 Tu es un Dresseur : tu tisses des liens profonds avec les créatures d’Arzankia.",
+        chasseur: "🎯 Tu es un Chasseur : rapide, stratégique et protecteur de ton territoire.",
+        magicien: "✨ Tu es un Magicien : tu ressens la magie qui t’entoure et la fais rayonner.",
+        protecteur: "🛡️ Tu es un Protecteur : tu veilles sur les autres avec une force douce et une grande loyauté."
+      };
+      document.getElementById("quiz-result").innerHTML = descriptions[result];
+    }
+  </script>
+</body>
+</html>
