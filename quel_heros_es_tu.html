@@ -204,28 +204,28 @@ function calculateResult() {
     if (answer) scores[answer.value]++;
   }
 
-  // Règle spéciale : priorité au magicien sauf si protecteur a ≥ 6
-  if (
-    scores['magicien'] === scores['protecteur'] &&
-    scores['magicien'] > 0
-  ) {
-    const result = scores['protecteur'] >= 6 ? 'protecteur' : 'magicien';
-    const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
-    window.location.href = url;
+  // Tri des résultats
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const topScore = sorted[0][1];
+  const topSpecialties = sorted.filter(([_, score]) => score === topScore).map(([spec]) => spec);
+
+  let result = topSpecialties[0]; // par défaut, prendre le premier
+
+  // Cas spécial magicien vs protecteur
+  if (topSpecialties.includes('magicien') && topSpecialties.includes('protecteur')) {
+    result = (scores['protecteur'] >= 6) ? 'protecteur' : 'magicien';
+  }
+
+  const ficheExiste = ['aventurier','chercheur','dresseur','chasseur','magicien','protecteur'].includes(result);
+  if (!ficheExiste) {
+    alert("Une erreur est survenue. Réessaye ou contacte le gardien des héros.");
     return;
   }
 
-  // Cas général
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const result = sorted[0][0];
   const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
   window.location.href = url;
 }
 </script>
-
-
-
-
 
 </body>
 </html>
