@@ -5,63 +5,85 @@
   <title>Les Héros d’Arzankia</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Georgia, serif;
-      background-image: url('fond_arzankia.png');
+      background-image: url('fond_hero.png');
       background-size: cover;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
       background-position: center;
-      color: white;
-      text-align: center;
-      text-shadow: 1px 1px 2px #000;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 2em;
+      font-family: Georgia, serif;
+      color: #fffff2;
+      text-shadow: 0 0 6px #000;
     }
 
-    .content {
-      max-width: 900px;
-      margin: 5em auto;
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.4);
       padding: 2em;
+      border-radius: 12px;
     }
 
     h1 {
-      font-size: 2.5em;
+      text-align: center;
       color: #ffd700;
-      margin-bottom: 1em;
+      text-shadow: 0 0 10px #3a1c00;
+      margin-bottom: 2em;
     }
 
-    p {
-      font-size: 1.2rem;
-      line-height: 1.6;
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
     }
 
-    .button {
-      display: inline-block;
-      margin-top: 2em;
-      background-color: rgba(255, 215, 0, 0.85);
-      color: #2c2c2c;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
+    .hero-buttons a {
+      background-color: #7a4ed9;
+      color: white;
+      padding: 0.8em 1.4em;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-      transition: 0.3s ease;
+      box-shadow: 0 0 12px #b497ff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
     }
 
-    .button:hover {
-      background-color: #fff2a0;
-      box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
+    .hero-buttons a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #e5d3ff;
+    }
+
+    p.intro {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 2em;
     }
   </style>
 </head>
-
 <body>
-  <div class="content">
+  <div class="container">
     <h1>✨ Les Héros d’Arzankia</h1>
-    <p>Découvre les personnages principaux et secondaires qui peuplent la saga. Chaque héros possède sa propre histoire, sa spécialité magique, et un rôle à jouer dans l’équilibre des mondes…</p>
-    <p>Du courageux Raphaël à la mystérieuse Paola, les Héros d’Arzankia sont plus qu’un groupe : ce sont des porteurs de lumière dans des mondes parfois plongés dans l’ombre.</p>
+    <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros…</p>
 
-    <a href="les-coulisses-arzankia.html" class="button">← Retour aux coulisses</a>
+    <div class="hero-buttons">
+      <a href="#">Raphaël</a>
+      <a href="#">Fanfan</a>
+      <a href="#">Antony</a>
+      <a href="#">Estéban</a>
+      <a href="#">Louise</a>
+      <a href="#">Cassandre</a>
+      <a href="#">Kelyan</a>
+      <a href="#">Amandine</a>
+      <a href="#">Andréa</a>
+      <a href="#">Maxime</a>
+      <a href="#">Lizéa</a>
+      <a href="#">Anaïs</a>
+      <a href="#">Philibert</a>
+      <a href="#">Binbin</a>
+      <a href="#">Mô</a>
+    </div>
   </div>
 </body>
 </html>
