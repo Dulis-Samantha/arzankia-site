@@ -182,26 +182,29 @@
     </div>
   </div>
 
-  <script>
-    function calculateResult() {
-      const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'];
-      const scores = {aventurier:0, chercheur:0, dresseur:0, chasseur:0, magicien:0, protecteur:0};
-      for (let q of questions) {
-        const answer = document.querySelector(`input[name="${q}"]:checked`);
-        if (answer) scores[answer.value]++;
-      }
-      const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
-      const result = sorted[0][0];
-      const descriptions = {
-        aventurier: "🧽 Tu es un Aventurier : courageux, spontané et toujours prêt pour une nouvelle quête !",
-        chercheur: "🔍 Tu es un Chercheur : observateur, curieux et maître des mystères oubliés.",
-        dresseur: "🐾 Tu es un Dresseur : tu tisses des liens profonds avec les créatures d’Arzankia.",
-        chasseur: "🎯 Tu es un Chasseur : rapide, stratégique et protecteur de ton territoire.",
-        magicien: "✨ Tu es un Magicien : tu ressens la magie qui t’entoure et la fais rayonner.",
-        protecteur: "🛡️ Tu es un Protecteur : tu veilles sur les autres avec une force douce et une grande loyauté."
-      };
-      document.getElementById("quiz-result").innerHTML = descriptions[result];
-    }
-  </script>
+<script>
+function calculateResult() {
+  const prenom = document.getElementById("prenom").value.trim();
+  if (!prenom) {
+    alert("Merci d’entrer ton prénom avant de valider !");
+    return;
+  }
+
+  const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'];
+  const scores = {aventurier:0, chercheur:0, dresseur:0, chasseur:0, magicien:0, protecteur:0};
+  for (let q of questions) {
+    const answer = document.querySelector(`input[name="${q}"]:checked`);
+    if (answer) scores[answer.value]++;
+  }
+
+  const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+  const result = sorted[0][0];
+
+  // Redirection vers fiche personnalisée
+  const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
+  window.location.href = url;
+}
+</script>
+
 </body>
 </html>
