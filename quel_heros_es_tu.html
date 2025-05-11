@@ -183,7 +183,13 @@
   </div>
 <script>
 function calculateResult() {
-  const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10'];
+  const prenom = document.getElementById("prenom").value.trim();
+  if (!prenom) {
+    alert("Merci d’entrer ton prénom avant de valider !");
+    return;
+  }
+
+  const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'];
   const scores = {
     aventurier: 0,
     chercheur: 0,
@@ -198,29 +204,25 @@ function calculateResult() {
     if (answer) scores[answer.value]++;
   }
 
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const topScore = sorted[0][1];
-  const bestMatches = sorted.filter(([_, score]) => score === topScore);
-
-  // Prénom
-  const prenom = document.getElementById("prenom-input")?.value || "Héros";
-
-  // Message en cas d’égalité
-  if (bestMatches.length > 1) {
-    const noms = bestMatches.map(([cle]) => cle.charAt(0).toUpperCase() + cle.slice(1));
-    const choisi = bestMatches[Math.floor(Math.random() * bestMatches.length)][0];
-
-    // On affiche une alerte avant redirection
-    alert(`${prenom}, tu sembles avoir plusieurs forces en toi : ${noms.join(" et ")} !\n\nPour cette aventure, nous t’attribuons la spécialité ${choisi.charAt(0).toUpperCase() + choisi.slice(1)}.`);
-
-    // Redirection
-    window.location.href = `fiche_${choisi}.html?prenom=${encodeURIComponent(prenom)}`;
-  } else {
-    const result = sorted[0][0];
-    window.location.href = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
+  // Règle spéciale : priorité au magicien sauf si protecteur a ≥ 6
+  if (
+    scores['magicien'] === scores['protecteur'] &&
+    scores['magicien'] > 0
+  ) {
+    const result = scores['protecteur'] >= 6 ? 'protecteur' : 'magicien';
+    const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
+    window.location.href = url;
+    return;
   }
+
+  // Cas général
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const result = sorted[0][0];
+  const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
+  window.location.href = url;
 }
 </script>
+
 
 
 
