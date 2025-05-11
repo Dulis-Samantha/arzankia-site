@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://dulis-samantha.github.io/arcancia-site/sitemap.xml
+Sitemap: https://dulis-samantha.github.io/arzankia-site/sitemap.xml
+
