@@ -8,7 +8,12 @@
       font-family: 'Georgia', serif;
       margin: 0;
       padding: 0;
-      background-color: #fdfcfa;
+      background-image: url('fond_autrice.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: white;
     }
 
     .card-grid {
@@ -21,79 +26,56 @@
     }
 
     .card {
-      background-color: #fff;
-      border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
       padding: 2em;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+      color: white;
+      text-shadow: 1px 1px 2px #000;
     }
 
     .card h3 {
-      margin-top: 0;
-      font-size: 1.6em;
-      color: #5a3d85;
+      font-size: 2em;
+      color: #ffd700;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .card p,
+    .card li,
+    .card blockquote {
+      color: white;
+      text-shadow: 1px 1px 2px #000;
+      font-size: 1.1rem;
     }
 
     .card ul {
-      padding-left: 1em;
+      padding-left: 1.2em;
+      margin-top: 1em;
     }
 
     .card blockquote {
-      margin: 1.5em 0;
-      padding-left: 1em;
-      border-left: 4px solid #ccc;
-      color: #666;
+      margin: 2em 0;
+      border-left: 4px solid #ffd700;
       font-style: italic;
+    }
+
+    a.button-retour {
+      background-color: rgba(255, 215, 0, 0.8);
+      color: #2c2c2c;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      transition: 0.3s ease;
+    }
+
+    a.button-retour:hover {
+      background-color: #fff2a0;
+      box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
   </style>
 </head>
-  <style>
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2em;
-  margin: 3em auto;
-  max-width: 900px;
-  padding: 0 1em;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  padding: 2em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-}
-
-.card h3 {
-  margin-top: 0;
-  font-size: 1.6em;
-  color: #5a3d85;
-}
-
-.card ul {
-  padding-left: 1em;
-}
-
-.card blockquote {
-  margin: 1.5em 0;
-  padding-left: 1em;
-  border-left: 4px solid #ccc;
-  color: #666;
-  font-style: italic;
-}
-</style>
-
 
 <body>
   <div class="card-grid">
@@ -132,12 +114,9 @@
       </ul>
 
       <p style="text-align: center; margin-top: 2em;">
-        <a href="index.html" style="background-color: #7a4ed9; color: white; padding: 0.6em 1.2em; border-radius: 8px; text-decoration: none; font-weight: bold;">← Retour à l’accueil</a>
+        <a href="index.html" class="button-retour">← Retour à l’accueil</a>
       </p>
     </div>
   </div>
 </body>
 </html>
-
-   
-
