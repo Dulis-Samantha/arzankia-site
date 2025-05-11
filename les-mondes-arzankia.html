@@ -4,29 +4,6 @@
   <meta charset="UTF-8">
   <title>Les Mondes d’Arzankia</title>
   <style>
-    .back-button {
-      display: block;
-      text-align: center;
-      margin-top: 3em;
-    }
-
-    .back-button a {
-      background-color: #ffffffcc;
-      color: #333;
-      padding: 0.7em 1.4em;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(255,255,255,0.4);
-      transition: all 0.3s ease;
-    }
-
-    .back-button a:hover {
-      background-color: #fff;
-      color: #000;
-      box-shadow: 0 0 15px #fff;
-    }
-
     body {
       background-image: url('fond_mondes.png');
       background-size: cover;
@@ -65,11 +42,9 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 1em;
-      position: relative;
     }
 
     .world-buttons a {
-      position: relative;
       background-color: #00b0d9;
       color: white;
       padding: 0.8em 1.4em;
@@ -87,69 +62,45 @@
       box-shadow: 0 0 20px #b8ffff;
     }
 
-    .world-buttons a::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 245, 225, 0.95);
-      color: #352e18;
-      padding: 0.7em 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 8px #ffc76d;
-      white-space: nowrap;
-      font-family: 'Georgia', serif;
-      font-size: 0.95rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 10;
-    }
-
-    .world-buttons a:hover::after {
-      opacity: 1;
-    }
-
-    .magic-frame {
+    #image-container {
       margin-top: 2em;
       text-align: center;
-      padding: 1em;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.3));
-      box-shadow: 0 0 30px rgba(255, 236, 170, 0.3);
+    }
+
+    #world-image {
+      max-width: 80%;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #000;
       display: none;
     }
 
-    .magic-frame img {
-      max-width: 80%;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(255, 236, 170, 0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .magic-frame img.animate {
-      animation: shimmer 1.2s ease-out;
-    }
-
-    .magic-frame img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 40px rgba(255, 250, 200, 0.9);
-    }
-
-    .caption {
+    #world-caption {
+      color: #fffff2;
+      font-size: 1.1rem;
       margin-top: 1em;
-      font-size: 1.2em;
-      color: #fffde0;
-      text-shadow: 1px 1px 3px #000;
-      font-style: italic;
-      transition: opacity 0.3s ease;
     }
 
-    @keyframes shimmer {
-      0% { box-shadow: 0 0 20px rgba(255, 236, 150, 0.4); }
-      50% { box-shadow: 0 0 40px rgba(255, 250, 200, 0.9); }
-      100% { box-shadow: 0 0 20px rgba(255, 236, 150, 0.4); }
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 3em;
+    }
+
+    .back-button a {
+      background-color: #ffffffcc;
+      color: #333;
+      padding: 0.7em 1.4em;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .back-button a:hover {
+      background-color: #fff;
+      color: #000;
+      box-shadow: 0 0 15px #fff;
     }
   </style>
 </head>
@@ -159,27 +110,25 @@
     <p class="intro">Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
 
     <div class="world-buttons">
-      <a href="#" data-tooltip="Un monde peuplé de minuscules créatures malicieuses">Monde des Ptikitis</a>
-      <a href="#" data-tooltip="Un lieu brumeux où errent les âmes perdues">Monde des Âmes perdues</a>
-      <a href="#" data-tooltip="Un monde lumineux protégé par de puissantes fées">Monde des Fées</a>
-      <a href="#" data-tooltip="Terre ancestrale où vivent des géants pacifiques">Monde des Géants</a>
-      <a href="#" data-tooltip="Chaque œuvre est une âme vivante">Monde des Artistes</a>
-      <a href="#" data-tooltip="Un monde aérien gouverné par des sages élevant des dragons">Monde des Yakkas</a>
-      <a href="#" data-tooltip="Une cité ensablée aux temples et trésors cachés">Monde des Cités d’or</a>
-      <a href="#" data-tooltip="Une forêt magique où vit la dernière licorne d’Arzankia">Monde de la forêt enchantée</a>
-      <a href="#" data-tooltip="Des récifs où chantent les sirènes envoûtantes">Monde des Sirènes</a>
-      <a href="#" data-tooltip="Une cité engloutie aux trésors oubliés">Monde d’Atlantides</a>
-      <a href="#" data-tooltip="Un monde où se déroulent les plus grands spectacles d’Arzankia">Monde d’Arenyth</a>
-      <a href="#" data-tooltip="On y consulte des oracles et de puissants marabouts">Monde des Quacks</a>
-      <a href="#" data-tooltip="Un monde dangereux, peuplé de créatures mythiques">Monde des Créatures Légendaires</a>
+      <a href="#">Monde des Ptikitis</a>
+      <a href="#">Monde des Âmes perdues</a>
+      <a href="#">Monde des Fées</a>
+      <a href="#">Monde des Géants</a>
+      <a href="#">Monde des Artistes</a>
+      <a href="#">Monde des Yakkas</a>
+      <a href="#">Monde des Cités d’or</a>
+      <a href="#">Monde de la forêt enchantée</a>
+      <a href="#">Monde des Sirènes</a>
+      <a href="#">Monde d’Atlantides</a>
+      <a href="#">Monde d’Arenyth</a>
+      <a href="#">Monde des Quacks</a>
+      <a href="#">Monde des Créatures Légendaires</a>
     </div>
 
-    <div id="image-container" class="magic-frame">
-      <img id="world-image" src="" alt="" />
-      <p id="world-caption" class="caption"></p>
+    <div id="image-container">
+      <img id="world-image" src="" alt="">
+      <p id="world-caption"></p>
     </div>
-
-    <audio id="magic-sound" src="magic-chime.mp3" preload="auto"></audio>
 
     <div class="back-button">
       <a href="index.html">← Retour à l’accueil</a>
@@ -195,43 +144,26 @@
         img: "ptikitis.png",
         caption: "Un monde minuscule, rempli de créatures malicieuses et d’herbes géantes."
       }
+      // Tu peux ajouter les autres mondes ici
     };
-
-    function writeMagicText(text, elementId, speed = 30) {
-      const el = document.getElementById(elementId);
-      const sound = document.getElementById('magic-sound');
-      if (sound) {
-        sound.currentTime = 0;
-        sound.play();
-      }
-      el.textContent = '';
-      let i = 0;
-      function type() {
-        if (i < text.length) {
-          el.textContent += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        }
-      }
-      type();
-    }
 
     document.querySelectorAll('.world-buttons a').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const text = e.target.innerText;
-        const world = imageMap[text];
+        const name = e.target.innerText;
+        const data = imageMap[name];
+
         const img = document.getElementById('world-image');
-        const frame = document.getElementById('image-container');
         const caption = document.getElementById('world-caption');
-        if (world) {
-          img.classList.remove('animate');
-          void img.offsetWidth;
-          img.src = world.img;
-          img.alt = text;
-          img.classList.add('animate');
-          frame.style.display = 'block';
-          writeMagicText(world.caption, 'world-caption');
+
+        if (data) {
+          img.src = data.img;
+          img.alt = name;
+          img.style.display = 'block';
+          caption.textContent = data.caption;
+        } else {
+          img.style.display = 'none';
+          caption.textContent = '';
         }
       });
     });
