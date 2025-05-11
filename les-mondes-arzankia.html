@@ -140,35 +140,6 @@
     </div>
   </div>
 
-  <script>
-    const imageMap = {
-      "Monde des Ptikitis": {
-        img: "ptikitis.png",
-        caption: "Un monde minuscule, rempli de créatures malicieuses et d’herbes géantes."
-      }
-      // Tu peux ajouter les autres mondes ici
-    };
-
-    document.querySelectorAll('.world-buttons a').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const name = e.target.innerText;
-        const data = imageMap[name];
-
-        const img = document.getElementById('world-image');
-        const caption = document.getElementById('world-caption');
-
-        if (data) {
-          img.src = data.img;
-          img.alt = name;
-          img.style.display = 'block';
-          caption.textContent = data.caption;
-        } else {
-          img.style.display = 'none';
-          caption.textContent = '';
-        }
-      });
-    });
-  </script>
+  
 </body>
 </html>
