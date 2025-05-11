@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Monde des Ptikitis</title>
- <style>
+<style>
   body {
     margin: 0;
     padding: 0;
@@ -16,14 +16,28 @@
 
   .container {
     width: 420px;
-    margin: 2em 0 0 2em; /* Haut et gauche */
-    background: rgba(0, 0, 0, 0.5);
+    margin: 2em 0 0 2em;
+    background: rgba(0, 0, 0, 0.3);
     padding: 1.5em;
     border-radius: 12px;
     box-shadow: 0 0 20px #70ecff;
     position: relative;
     font-size: 1em;
     line-height: 1.6;
+    animation: slideInLeft 1.2s ease-out forwards;
+    opacity: 0;
+    backdrop-filter: blur(2px);
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(50px); /* Glisse depuis la droite */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   h1 {
@@ -60,6 +74,7 @@
     box-shadow: 0 0 15px #fff;
   }
 </style>
+
 
 </head>
 <body>
