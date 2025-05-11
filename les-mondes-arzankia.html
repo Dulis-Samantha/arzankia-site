@@ -5,27 +5,27 @@
   <title>Les Mondes d’Arzankia</title>
   <style>
     .back-button {
-  display: block;
-  text-align: center;
-  margin-top: 3em;
-}
+      display: block;
+      text-align: center;
+      margin-top: 3em;
+    }
 
-.back-button a {
-  background-color: #ffffffcc;
-  color: #333;
-  padding: 0.7em 1.4em;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  transition: all 0.3s ease;
-}
+    .back-button a {
+      background-color: #ffffffcc;
+      color: #333;
+      padding: 0.7em 1.4em;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+      transition: all 0.3s ease;
+    }
 
-.back-button a:hover {
-  background-color: #fff;
-  color: #000;
-  box-shadow: 0 0 15px #fff;
-}
+    .back-button a:hover {
+      background-color: #fff;
+      color: #000;
+      box-shadow: 0 0 15px #fff;
+    }
 
     body {
       background-image: url('fond_mondes.png');
@@ -111,27 +111,45 @@
       opacity: 1;
     }
 
-    .back-button {
-      display: block;
+    .magic-frame {
+      margin-top: 2em;
       text-align: center;
-      margin-top: 3em;
+      padding: 1em;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.3));
+      box-shadow: 0 0 30px rgba(255, 236, 170, 0.3);
+      display: none;
     }
 
-    .back-button a {
-      background-color: #ffffffcc;
-      color: #333;
-      padding: 0.7em 1.4em;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(255,255,255,0.4);
-      transition: all 0.3s ease;
+    .magic-frame img {
+      max-width: 80%;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(255, 236, 170, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .back-button a:hover {
-      background-color: #fff;
-      color: #000;
-      box-shadow: 0 0 15px #fff;
+    .magic-frame img.animate {
+      animation: shimmer 1.2s ease-out;
+    }
+
+    .magic-frame img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 40px rgba(255, 250, 200, 0.9);
+    }
+
+    .caption {
+      margin-top: 1em;
+      font-size: 1.2em;
+      color: #fffde0;
+      text-shadow: 1px 1px 3px #000;
+      font-style: italic;
+      transition: opacity 0.3s ease;
+    }
+
+    @keyframes shimmer {
+      0% { box-shadow: 0 0 20px rgba(255, 236, 150, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(255, 250, 200, 0.9); }
+      100% { box-shadow: 0 0 20px rgba(255, 236, 150, 0.4); }
     }
   </style>
 </head>
@@ -155,50 +173,68 @@
       <a href="#" data-tooltip="On y consulte des oracles et de puissants marabouts">Monde des Quacks</a>
       <a href="#" data-tooltip="Un monde dangereux, peuplé de créatures mythiques">Monde des Créatures Légendaires</a>
     </div>
-    <div id="image-container" style="margin-top: 2em; text-align: center;">
-  <img id="world-image" src="" alt="" style="max-width: 80%; border-radius: 12px; box-shadow: 0 0 15px #000; display: none;">
-</div>
 
-<script>
-  const imageMap = {
-    "Monde des Ptikitis": "ptikitis.png",
-    "Monde des Âmes perdues": "ames_perdues.png",
-    "Monde des Fées": "fees.png",
-    "Monde des Géants": "geants.png",
-    "Monde des Artistes": "artistes.png",
-    "Monde des Yakkas": "yakkas.png",
-    "Monde des Cités d’or": "cites_or.png",
-    "Monde de la forêt enchantée": "foret_enchantee.png",
-    "Monde des Sirènes": "sirenes.png",
-    "Monde d’Atlantides": "atlantides.png",
-    "Monde d’Arenyth": "arenyth.png",
-    "Monde des Quacks": "quacks.png",
-    "Monde des Créatures Légendaires": "creatures_legendaires.png"
-  };
+    <div id="image-container" class="magic-frame">
+      <img id="world-image" src="" alt="" />
+      <p id="world-caption" class="caption"></p>
+    </div>
 
-  document.querySelectorAll('.world-buttons a').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const text = e.target.innerText;
-      const imageName = imageMap[text];
-      const img = document.getElementById('world-image');
-      if (imageName) {
-        img.src = imageName;
-        img.alt = text;
-        img.style.display = 'block';
-      }
-    });
-  });
-</script>
-
+    <audio id="magic-sound" src="magic-chime.mp3" preload="auto"></audio>
 
     <div class="back-button">
       <a href="index.html">← Retour à l’accueil</a>
     </div>
     <div class="back-button">
-  <a href="les-coulisses-arzankia.html">← Retour aux Coulisses d’Arzankia</a>
-</div>
-
+      <a href="les-coulisses-arzankia.html">← Retour aux Coulisses d’Arzankia</a>
+    </div>
   </div>
+
+  <script>
+    const imageMap = {
+      "Monde des Ptikitis": {
+        img: "ptikitis.png",
+        caption: "Un monde minuscule, rempli de créatures malicieuses et d’herbes géantes."
+      }
+    };
+
+    function writeMagicText(text, elementId, speed = 30) {
+      const el = document.getElementById(elementId);
+      const sound = document.getElementById('magic-sound');
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play();
+      }
+      el.textContent = '';
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      type();
+    }
+
+    document.querySelectorAll('.world-buttons a').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const text = e.target.innerText;
+        const world = imageMap[text];
+        const img = document.getElementById('world-image');
+        const frame = document.getElementById('image-container');
+        const caption = document.getElementById('world-caption');
+        if (world) {
+          img.classList.remove('animate');
+          void img.offsetWidth;
+          img.src = world.img;
+          img.alt = text;
+          img.classList.add('animate');
+          frame.style.display = 'block';
+          writeMagicText(world.caption, 'world-caption');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
