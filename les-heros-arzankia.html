@@ -31,14 +31,22 @@
       margin-bottom: 2em;
     }
 
+    p.intro {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 2em;
+    }
+
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1em;
+      position: relative;
     }
 
     .hero-buttons a {
+      position: relative;
       background-color: #7a4ed9;
       color: white;
       padding: 0.8em 1.4em;
@@ -48,6 +56,7 @@
       box-shadow: 0 0 12px #b497ff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: inline-block;
+      cursor: pointer;
     }
 
     .hero-buttons a:hover {
@@ -55,10 +64,51 @@
       box-shadow: 0 0 20px #e5d3ff;
     }
 
-    p.intro {
+    .hero-buttons a::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 245, 225, 0.95);
+      color: #352e18;
+      padding: 0.7em 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #ffc76d;
+      white-space: nowrap;
+      font-family: 'Georgia', serif;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .hero-buttons a:hover::after {
+      opacity: 1;
+    }
+
+    .back-button {
       text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 2em;
+      margin-top: 3em;
+    }
+
+    .back-button a {
+      display: inline-block;
+      background: linear-gradient(135deg, #fff6c1, #ffe18a);
+      color: #3a2f00;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0.8em 1.6em;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ffeba0;
+      transition: all 0.3s ease;
+    }
+
+    .back-button a:hover {
+      background: #fff2b0;
+      box-shadow: 0 0 20px #fff8c6;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -67,23 +117,23 @@
     <h1>✨ Les Héros d’Arzankia</h1>
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros…</p>
 
- <div class="hero-buttons">
-  <a href="#" title="Aventurier du monde Ptikiti, porteur de la Canneya renfermant de grand pouvoirs">Raphaël</a>
-  <a href="#" title="Chercheuse du monde d'Hégaïa, alliée mystérieuse">Fanfan</a>
-  <a href="#" title="Chasseur du monde des dinausores, stratège redoutable">Antony</a>
-  <a href="#" title="Dresseur de dragon du monde des Yakkas, allié de confiance">Estéban</a>
-  <a href="#" title="Chasseuse des mondes aquatique, protège les océans">Louise</a>
-  <a href="#" title="Magicienne des océans du monde d'Atlantide">Cassandre</a>
-  <a href="#" title="Dresseur de caméléon au pouvoir d'invisibilité">Kelyan</a>
-  <a href="#" title="Magicienne d'air du monde des Pans, douce mais redoutable">Amandine</a>
-  <a href="#" title="Magicienne de feu du monde des Cité d'or">Andréa</a>
-  <a href="#" title="Chasseur expérimenté du monde des créature légendaires">Maxime</a>
-  <a href="#" title="Dresseuse de licorne du monde de la forêt enchantée">Lizéa</a>
-  <a href="#" title="Chercheuse du monde des fées, mère de Raphaël">Anaïs</a>
-  <a href="#" title="Chercheur légendaire, mentor de Raphaël">Philibert</a>
-  <a href="#" title="Aventurier farceur mais loyal des Zouppis">Binbin</a>
-  <a href="#" title="Gardien des portes d’Arzankia">Mô</a>
-</div>
+    <div class="hero-buttons">
+      <a href="#" data-tooltip="Aventurier du monde Ptikiti, porteur de la Canneya renfermant de grands pouvoirs">Raphaël</a>
+      <a href="#" data-tooltip="Chercheuse du monde d'Hégaïa, alliée mystérieuse">Fanfan</a>
+      <a href="#" data-tooltip="Chasseur du monde des dinosaures, stratège redoutable">Antony</a>
+      <a href="#" data-tooltip="Dresseur de dragon du monde des Yakkas, allié de confiance">Estéban</a>
+      <a href="#" data-tooltip="Chasseuse des mondes aquatiques, protège les océans">Louise</a>
+      <a href="#" data-tooltip="Magicienne des océans du monde d'Atlantide">Cassandre</a>
+      <a href="#" data-tooltip="Dresseur de caméléon au pouvoir d'invisibilité">Kelyan</a>
+      <a href="#" data-tooltip="Magicienne d'air du monde des Pans, douce mais redoutable">Amandine</a>
+      <a href="#" data-tooltip="Magicienne de feu du monde des Cités d'or">Andréa</a>
+      <a href="#" data-tooltip="Chasseur expérimenté du monde des créatures légendaires">Maxime</a>
+      <a href="#" data-tooltip="Dresseuse de licorne du monde de la forêt enchantée">Lizéa</a>
+      <a href="#" data-tooltip="Chercheuse du monde des fées, mère de Raphaël">Anaïs</a>
+      <a href="#" data-tooltip="Chercheur légendaire, mentor de Raphaël">Philibert</a>
+      <a href="#" data-tooltip="Aventurier farceur mais loyal des Zouppis">Binbin</a>
+      <a href="#" data-tooltip="Gardien des portes d’Arzankia">Mô</a>
+    </div>
 
     <div class="back-button">
       <a href="index.html">← Retour à l’accueil</a>
