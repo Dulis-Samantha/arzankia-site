@@ -18,7 +18,7 @@
    .container {
   width: 320px;
   height: 320px;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
   border-radius: 50%;
   padding: 2em;
   position: absolute;
@@ -26,7 +26,7 @@
   left: 5%;
   font-size: 1em;
   line-height: 1.6;
-  backdrop-filter: blur(5px);
+ backdrop-filter: blur(2px);
   animation: vaisseauMagique 20s ease-in-out infinite alternate,
              brillanceMagique 6s ease-in-out infinite alternate,
              respirationBulle 8s ease-in-out infinite;
@@ -52,16 +52,17 @@
     }
 
     .back-button a {
-      background-color: #ffffffcc;
-      color: #333;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(255,255,255,0.4);
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
+  background-color: #ffffff99;
+  color: #333;
+  padding: 0.3em 0.6em;
+  font-size: 0.75em;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+
 
     .back-button a:hover {
       background-color: #fff;
@@ -114,21 +115,23 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const p = document.querySelector(".container p");
-      const text = p.textContent.trim();
-      p.innerHTML = "";
+  document.addEventListener("DOMContentLoaded", function () {
+    const p = document.querySelector(".container p");
+    const text = p.textContent.trim();
+    p.innerHTML = "";
 
-      for (let i = 0; i < text.length; i++) {
-        const span = document.createElement("span");
-        span.textContent = text[i];
-        span.style.display = "inline-block";
-        span.style.opacity = "0";
-        span.style.animation = `apparitionTexte 0.5s ease forwards`;
-        span.style.animationDelay = `${i * 0.03}s`;
-        p.appendChild(span);
-      }
-    });
-  </script>
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.style.display = char === " " ? "inline" : "inline-block"; // espace = inline
+      span.style.opacity = "0";
+      span.style.animation = `apparitionTexte 0.5s ease forwards`;
+      span.style.animationDelay = `${i * 0.03}s`;
+      p.appendChild(span);
+    }
+  });
+</script>
+
 </body>
 </html>
