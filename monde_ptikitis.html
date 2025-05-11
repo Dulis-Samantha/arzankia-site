@@ -64,11 +64,10 @@
 }
 
 
-    .back-button a:hover {
-      background-color: #fff;
-      color: #000;
-      box-shadow: 0 0 15px #fff;
-    }
+    ..back-button a {
+  font-size: 0.7em;
+  padding: 0.2em 0.5em;
+}
 
     @keyframes vaisseauMagique {
       0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
@@ -101,10 +100,19 @@
     }
   </style>
 </head>
-
+  <style>
+  h1 {
+    font-size: 1.3em;
+    color: #ffd700;
+    margin-bottom: 0.5em;
+    text-align: center;
+    font-weight: bold;
+  }
+</style>
 <body>
   <div class="container">
     <h1>🌿 Monde des Ptikitis</h1>
+
     <p>
       Bienvenue dans le monde des Ptikitis : un royaume minuscule, luxuriant, peuplé de créatures malicieuses qui vivent cachées dans les herbes géantes. Ici, tout est gigantesque à leurs yeux, et la magie naturelle pulse dans chaque feuille.
     </p>
@@ -114,7 +122,7 @@
     </div>
   </div>
 
-  <script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     const p = document.querySelector(".container p");
     const text = p.textContent.trim();
@@ -123,8 +131,8 @@
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       const span = document.createElement("span");
-      span.textContent = char;
-      span.style.display = char === " " ? "inline" : "inline-block"; // espace = inline
+      span.innerHTML = char === " " ? "&nbsp;" : char;
+      span.style.display = "inline-block";
       span.style.opacity = "0";
       span.style.animation = `apparitionTexte 0.5s ease forwards`;
       span.style.animationDelay = `${i * 0.03}s`;
@@ -132,6 +140,7 @@
     }
   });
 </script>
+
 
 </body>
 </html>
