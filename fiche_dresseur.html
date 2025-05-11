@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fiche Héros</title>
+  <style>
+    body {
+      background: url('fond_heros.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Georgia, serif;
+      color: #fff8e6;
+      text-shadow: 1px 1px 4px #000;
+      padding: 3em;
+      text-align: center;
+    }
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2em;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 20px #ffd700;
+    }
+    h1 {
+      color: #ffd700;
+      font-size: 2.5em;
+    }
+    .type {
+      font-size: 1.8em;
+      margin-top: 0.5em;
+      color: #b8dfff;
+    }
+    .description {
+      font-size: 1.2em;
+      margin-top: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="prenom"></h1>
+    <div class="type" id="type"></div>
+    <p class="description" id="description"></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const prenom = params.get('prenom');
+
+    const type = window.location.pathname
+      .split("_")[1]
+      .replace(".html", "")
+      .toLowerCase();
+
+    const descriptions = {
+
+      dresseur: "🦜 Tu es un Dresseur : tu tisses des liens profonds avec les créatures d’Arzankia.",
+
+    };
+
+    document.getElementById("prenom").textContent = prenom;
+    document.getElementById("type").textContent = type.charAt(0).toUpperCase() + type.slice(1);
+    document.getElementById("description").textContent = descriptions[type];
+  </script>
+</body>
+</html>
