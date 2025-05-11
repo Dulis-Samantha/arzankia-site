@@ -155,6 +155,42 @@
       <a href="#" data-tooltip="On y consulte des oracles et de puissants marabouts">Monde des Quacks</a>
       <a href="#" data-tooltip="Un monde dangereux, peuplé de créatures mythiques">Monde des Créatures Légendaires</a>
     </div>
+    <div id="image-container" style="margin-top: 2em; text-align: center;">
+  <img id="world-image" src="" alt="" style="max-width: 80%; border-radius: 12px; box-shadow: 0 0 15px #000; display: none;">
+</div>
+
+<script>
+  const imageMap = {
+    "Monde des Ptikitis": "ptikitis.png",
+    "Monde des Âmes perdues": "ames_perdues.png",
+    "Monde des Fées": "fees.png",
+    "Monde des Géants": "geants.png",
+    "Monde des Artistes": "artistes.png",
+    "Monde des Yakkas": "yakkas.png",
+    "Monde des Cités d’or": "cites_or.png",
+    "Monde de la forêt enchantée": "foret_enchantee.png",
+    "Monde des Sirènes": "sirenes.png",
+    "Monde d’Atlantides": "atlantides.png",
+    "Monde d’Arenyth": "arenyth.png",
+    "Monde des Quacks": "quacks.png",
+    "Monde des Créatures Légendaires": "creatures_legendaires.png"
+  };
+
+  document.querySelectorAll('.world-buttons a').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const text = e.target.innerText;
+      const imageName = imageMap[text];
+      const img = document.getElementById('world-image');
+      if (imageName) {
+        img.src = imageName;
+        img.alt = text;
+        img.style.display = 'block';
+      }
+    });
+  });
+</script>
+
 
     <div class="back-button">
       <a href="index.html">← Retour à l’accueil</a>
