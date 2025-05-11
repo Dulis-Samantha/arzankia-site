@@ -5,63 +5,83 @@
   <title>Les Mondes d’Arzankia</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Georgia, serif;
-      background-image: url('fond_ciel-arcancia.jpg.jpg');
+      background-image: url('fond_monde.png');
       background-size: cover;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
       background-position: center;
-      color: white;
-      text-align: center;
-      text-shadow: 1px 1px 2px #000;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 2em;
+      font-family: Georgia, serif;
+      color: #fffff2;
+      text-shadow: 0 0 6px #000;
     }
 
-    .content {
-      max-width: 900px;
-      margin: 5em auto;
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.4);
       padding: 2em;
+      border-radius: 12px;
     }
 
     h1 {
-      font-size: 2.5em;
-      color: #8fd7ff;
-      margin-bottom: 1em;
+      text-align: center;
+      color: #00d9ff;
+      text-shadow: 0 0 10px #014a68;
+      margin-bottom: 2em;
     }
 
-    p {
-      font-size: 1.2rem;
-      line-height: 1.6;
+    .world-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
     }
 
-    .button {
-      display: inline-block;
-      margin-top: 2em;
-      background-color: rgba(160, 210, 255, 0.85);
-      color: #2c2c2c;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
+    .world-buttons a {
+      background-color: #00b0d9;
+      color: white;
+      padding: 0.8em 1.4em;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(160, 210, 255, 0.6);
-      transition: 0.3s ease;
+      box-shadow: 0 0 12px #70ecff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
     }
 
-    .button:hover {
-      background-color: #d0f0ff;
-      box-shadow: 0 0 15px rgba(160, 210, 255, 0.9);
+    .world-buttons a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #b8ffff;
+    }
+
+    p.intro {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 2em;
     }
   </style>
 </head>
-
 <body>
-  <div class="content">
+  <div class="container">
     <h1>🌍 Les Mondes d’Arzankia</h1>
-    <p>Arzankia ne se limite pas à un seul univers. De nombreux mondes s’y entrelacent : mystiques, élémentaires, mécaniques ou légendaires. Chacun cache des secrets, des quêtes… et parfois des dangers.</p>
-    <p>Explore-les tous pour comprendre les lois qui régissent cet univers magique, et les missions confiées à ses héros.</p>
+    <p class="intro">Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
 
-    <a href="les-coulisses-arzankia.html" class="button">← Retour aux coulisses</a>
+    <div class="world-buttons">
+      <a href="#">Monde des Pikitis</a>
+      <a href="#">Monde des Âmes perdues</a>
+      <a href="#">Monde des Fées</a>
+      <a href="#">Monde des Géants</a>
+      <a href="#">Monde des Artistes</a>
+      <a href="#">Monde des Yakkas</a>
+      <a href="#">Monde des Cités d’or</a>
+      <a href="#">Monde de la forêt enchantée</a>
+      <a href="#">Monde des Sirènes</a>
+      <a href="#">Monde d’Atlantides</a>
+      <a href="#">Monde d’Arenyth</a>
+      <a href="#">Monde des Quacks</a>
+      <a href="#">Monde des Créatures Légendaires</a>
+    </div>
   </div>
 </body>
 </html>
