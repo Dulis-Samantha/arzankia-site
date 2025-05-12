@@ -16,7 +16,6 @@
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
 
   <style>
-    /* Fond magique */
     body {
       margin: 0;
       font-family: Georgia, serif;
@@ -28,7 +27,6 @@
       color: white;
     }
 
-    /* Menu féérique */
     .navbar {
       position: relative;
       background: rgba(40, 20, 80, 0.6);
@@ -54,12 +52,8 @@
     }
 
     @keyframes shimmer {
-      0% {
-        transform: translateX(-50%);
-      }
-      100% {
-        transform: translateX(50%);
-      }
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(50%); }
     }
 
     .navbar ul {
@@ -85,9 +79,7 @@
       color: #ffd700;
     }
 
-    /* Section titre */
-    .hero,
-    .section {
+    .hero, .section {
       background: none;
       padding: 2rem;
       max-width: 800px;
@@ -125,7 +117,6 @@
       text-shadow: 1px 1px 2px black;
     }
 
-    /* Bouton magique */
     .button {
       display: inline-block;
       margin-top: 1rem;
@@ -141,8 +132,7 @@
 
     .button:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 236, 150, 0.9),
-                  0 0 10px rgba(255, 255, 200, 0.7);
+      box-shadow: 0 0 20px rgba(255, 236, 150, 0.9), 0 0 10px rgba(255, 255, 200, 0.7);
     }
 
     .footer {
@@ -155,14 +145,13 @@
     }
   </style>
 </head>
-
 <body>
-
   <nav class="navbar">
     <ul>
       <li><a href="index.html">Accueil</a></li>
       <li><a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a></li>
       <li><a href="autrice.html">À propos de l'Autrice</a></li>
+      <li><a href="#avis">Voir les avis</a></li>
     </ul>
   </nav>
 
@@ -181,5 +170,58 @@
     © 2025 Samantha DULIS – Les Héros d’Arzankia
   </div>
 
+  <!-- SECTION AVIS MAGIQUE -->
+  <section id="avis" class="section" style="background-color: rgba(30, 27, 47, 0.8); border-top: 2px solid #ffe066; padding: 60px; color: #fff8e6;">
+    <h2>📣 Les avis des lecteurs</h2>
+    <p>Tu as lu <em>Raphaël</em> ? Donne une note et partage ton avis avec les futurs aventuriers !</p>
+
+    <form id="formAvis" style="margin-top: 20px;">
+      <label for="nom">Ton prénom :</label><br>
+      <input type="text" id="nom" name="nom" required style="width: 50%; padding: 5px;"><br><br>
+
+      <label>Ta note :</label><br>
+      <div style="font-size: 1.5rem; margin-bottom: 1rem;">
+        <label><input type="radio" name="note" value="⭐" required> ⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐"> ⭐⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐⭐"> ⭐⭐⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐⭐⭐"> ⭐⭐⭐⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐⭐⭐⭐"> ⭐⭐⭐⭐⭐</label>
+      </div>
+
+      <label for="message">Ton avis :</label><br>
+      <textarea id="message" name="message" rows="4" style="width: 90%; padding: 5px;" required></textarea><br><br>
+
+      <button type="submit" class="button">✨ Envoyer mon avis</button>
+    </form>
+
+    <div id="listeAvis" style="margin-top: 40px; background-color: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+      <h3>Avis des lecteurs :</h3>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("formAvis").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nom = document.getElementById("nom").value;
+      const message = document.getElementById("message").value;
+      const note = document.querySelector('input[name="note"]:checked').value;
+
+      const nouvelAvis = document.createElement("div");
+      nouvelAvis.style.marginTop = "20px";
+      nouvelAvis.style.padding = "10px";
+      nouvelAvis.style.background = "rgba(255,255,255,0.07)";
+      nouvelAvis.style.borderRadius = "8px";
+      nouvelAvis.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
+
+      nouvelAvis.innerHTML = `
+        <p><strong>${nom}</strong> ${note}</p>
+        <p style="font-style: italic;">"${message}"</p>
+      `;
+
+      document.getElementById("listeAvis").appendChild(nouvelAvis);
+      this.reset();
+    });
+  </script>
 </body>
 </html>
