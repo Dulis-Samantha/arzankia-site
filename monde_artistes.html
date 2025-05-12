@@ -2,174 +2,85 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Monde des Artistes</title>
+  <title>Le Monde des Artistes</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: url('artistes.png') no-repeat center center fixed;
+      background: url('ton-image-de-fond.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
-    .bubble {
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-      border-radius: 50%;
-      padding: 2em;
+    .bulle {
       position: absolute;
-      backdrop-filter: blur(2px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-      box-shadow:
-        0 0 25px rgba(112, 236, 255, 0.2),
-        0 0 30px rgba(255, 200, 255, 0.1),
-        0 0 30px rgba(255, 255, 255, 0.05),
-        inset 0 0 8px rgba(255, 255, 255, 0.1);
-      animation:
-        vaisseauMagique 20s ease-in-out infinite alternate,
-        brillanceMagique 6s ease-in-out infinite alternate,
-        respirationBulle 8s ease-in-out infinite;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      padding: 40px;
+      width: 360px;
+      height: auto;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
 
-    .bubble h1, .bubble h2 {
-      font-size: 1.2em;
-      color: #ffd700;
-      margin-bottom: 0.5em;
-      font-weight: bold;
+    .bulle1 {
+      top: 80px;
+      left: 60px;
     }
 
-    .bubble p {
-      font-size: 1em;
-      line-height: 1.6;
+    .bulle2 {
+      bottom: 80px;
+      right: 60px; /* réduite par rapport à avant pour que la bulle reste dans l’écran */
     }
 
-    .bubble ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .bubble li {
-      margin-top: 0.5em;
-    }
-
-    .bubble a {
-      color: #ffd700;
+    a.bouton {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 15px;
+      background-color: #ccc;
+      color: #000;
       text-decoration: none;
+      border-radius: 8px;
       font-weight: bold;
-      transition: text-shadow 0.3s ease;
     }
 
-    .bubble a:hover {
-      text-shadow: 0 0 5px #fff, 0 0 10px #ffd700;
+    h2 {
+      margin-top: 0;
     }
 
-    .bubble.artistes {
-      top: 5%;
-      left: 5%;
-    }
-
-    .bubble.camidjo {
-      top: 50%;
-      left: 60%;
-    }
-
-    .back-button {
-      margin-top: 1em;
-    }
-
-    .back-button a {
-      background-color: #ffffff99;
-      color: #333;
-      padding: 0.3em 0.6em;
-      font-size: 0.75em;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 5px rgba(255,255,255,0.2);
-      transition: all 0.3s ease;
-    }
-
-    @keyframes vaisseauMagique {
-      0%   { transform: translate(0, 0) rotate(-1deg); }
-      25%  { transform: translate(10px, 20px) rotate(1deg); }
-      50%  { transform: translate(-15px, 25px) rotate(-2deg); }
-      75%  { transform: translate(5px, 10px) rotate(1deg); }
-      100% { transform: translate(0, 0) rotate(0deg); }
-    }
-
-    @keyframes brillanceMagique {
-      0%   { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50%  { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
-      100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-    }
-
-    @keyframes respirationBulle {
-      0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.04); }
-    }
-
-    @keyframes apparitionTexte {
-      0%   { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @media screen and (max-width: 1200px) {
+      .bulle {
+        width: 90vw;
+        border-radius: 30px;
+      }
+      .bulle1 {
+        top: 40px;
+        left: 5%;
+      }
+      .bulle2 {
+        bottom: 40px;
+        right: 5%;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Bulle 1 : Monde des Artistes -->
-  <div class="bubble artistes">
-    <h1>🎨 Le Monde des Artistes</h1>
-    <p>
-      Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.  
-      Un monde vivant, changeant, façonné par la création pure.
-    </p>
-    <div class="back-button">
-      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
-    </div>
+  <div class="bulle bulle1">
+    <h2>🎨 Le Monde des Artistes</h2>
+    <p>Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.
+    <br>Un monde vivant, changeant, façonné par la création pure.</p>
+    <a class="bouton" href="index.html">← Retour aux Mondes</a>
   </div>
 
-  <!-- Bulle 2 : Camidjo et ses chansons -->
-  <div class="bubble camidjo">
+  <div class="bulle bulle2">
     <h2>🎧 Camidjo – Le Créateur</h2>
-    <p>
-      Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.
-    </p>
-    <ul>
-      <li><a href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">Écouter Pensée pour elle</a></li>
-      <li><a href="https://www.jammable.com/conversion/camidjo-AXzXp-X7DJOcba" target="_blank">Écouter La fée</a></li>
-    </ul>
+    <p>Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.</p>
+    <a class="bouton" href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">🎵 Écouter Pensée pour elle</a>
   </div>
-
-  <!-- Animation texte lettre par lettre pour la 1ère bulle -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const p = document.querySelector(".bubble.artistes p");
-      const text = p.textContent.trim();
-      p.innerHTML = "";
-
-      for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-        const span = document.createElement("span");
-        span.innerHTML = char === " " ? "&nbsp;" : char;
-        span.style.display = "inline-block";
-        span.style.opacity = "0";
-        span.style.animation = "apparitionTexte 0.5s ease forwards";
-        span.style.animationDelay = `${i * 0.03}s`;
-        p.appendChild(span);
-      }
-    });
-  </script>
 
 </body>
 </html>
