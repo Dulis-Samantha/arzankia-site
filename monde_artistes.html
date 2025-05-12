@@ -7,62 +7,68 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('ton-image-de-fond.jpg') no-repeat center center fixed;
+      background: url('artistes.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: Georgia, serif;
+      font-family: 'Georgia', serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
-      overflow-x: hidden;
     }
 
     .bulle {
       position: absolute;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 50%;
-      padding: 40px;
-      width: 360px;
-      height: auto;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      background: rgba(30, 30, 30, 0.6);
+      border-radius: 30px;
+      padding: 30px;
+      max-width: 360px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
     }
 
     .bulle1 {
-      top: 80px;
-      left: 60px;
+      top: 10%;
+      left: 5%;
     }
 
     .bulle2 {
-      bottom: 80px;
-      right: 60px; /* réduite par rapport à avant pour que la bulle reste dans l’écran */
-    }
-
-    a.bouton {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 8px 15px;
-      background-color: #ccc;
-      color: #000;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+      bottom: 10%;
+      right: 5%;
     }
 
     h2 {
+      font-size: 1.6em;
       margin-top: 0;
+      color: #ffdd88;
     }
 
-    @media screen and (max-width: 1200px) {
+    p {
+      margin: 0.5em 0;
+    }
+
+    .bouton {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 15px;
+      background-color: #f6f3e9;
+      color: #333;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 2px 2px 4px #000;
+    }
+
+    .qr {
+      margin-top: 15px;
+      width: 100%;
+      max-width: 160px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    @media screen and (max-width: 1000px) {
       .bulle {
-        width: 90vw;
-        border-radius: 30px;
-      }
-      .bulle1 {
-        top: 40px;
-        left: 5%;
-      }
-      .bulle2 {
-        bottom: 40px;
-        right: 5%;
+        position: static;
+        margin: 20px auto;
+        display: block;
       }
     }
   </style>
@@ -71,8 +77,8 @@
 
   <div class="bulle bulle1">
     <h2>🎨 Le Monde des Artistes</h2>
-    <p>Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.
-    <br>Un monde vivant, changeant, façonné par la création pure.</p>
+    <p>Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.</p>
+    <p>Un monde vivant, changeant, façonné par la création pure.</p>
     <a class="bouton" href="index.html">← Retour aux Mondes</a>
   </div>
 
@@ -80,6 +86,8 @@
     <h2>🎧 Camidjo – Le Créateur</h2>
     <p>Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.</p>
     <a class="bouton" href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">🎵 Écouter Pensée pour elle</a>
+    <br>
+    <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fwww.jammable.com%2Fconversion%2Fcamidjo-AXzXp-mbxn-TKS" alt="QR Code Camidjo">
   </div>
 
 </body>
