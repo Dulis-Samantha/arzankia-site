@@ -199,29 +199,42 @@
     </div>
   </section>
 
-  <script>
-    document.getElementById("formAvis").addEventListener("submit", function(event) {
-      event.preventDefault();
+ <script>
+  document.getElementById("formAvis").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-      const nom = document.getElementById("nom").value;
-      const message = document.getElementById("message").value;
-      const note = document.querySelector('input[name="note"]:checked').value;
+    const nom = document.getElementById("nom").value;
+    const message = document.getElementById("message").value;
+    const note = document.querySelector('input[name="note"]:checked').value;
 
-      const nouvelAvis = document.createElement("div");
-      nouvelAvis.style.marginTop = "20px";
-      nouvelAvis.style.padding = "10px";
-      nouvelAvis.style.background = "rgba(255,255,255,0.07)";
-      nouvelAvis.style.borderRadius = "8px";
-      nouvelAvis.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
-
-      nouvelAvis.innerHTML = `
-        <p><strong>${nom}</strong> ${note}</p>
-        <p style="font-style: italic;">"${message}"</p>
-      `;
-
-      document.getElementById("listeAvis").appendChild(nouvelAvis);
-      this.reset();
+    // 🔄 Envoi vers Google Sheets
+    fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nom, note, message })
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log("Avis enregistré dans Google Sheet : " + data);
     });
-  </script>
+
+    // 🖼️ Affichage local sur la page
+    const nouvelAvis = document.createElement("div");
+    nouvelAvis.style.marginTop = "20px";
+    nouvelAvis.style.padding = "10px";
+    nouvelAvis.style.background = "rgba(255,255,255,0.07)";
+    nouvelAvis.style.borderRadius = "8px";
+    nouvelAvis.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
+
+    nouvelAvis.innerHTML = `
+      <p><strong>${nom}</strong> ${note}</p>
+      <p style="font-style: italic;">"${message}"</p>
+    `;
+
+    document.getElementById("listeAvis").appendChild(nouvelAvis);
+    document.getElementById("formAvis").reset();
+  });
+</script>
+
 </body>
 </html>
