@@ -193,7 +193,10 @@
 
       <button type="submit" class="button">✨ Envoyer mon avis</button>
     </form>
-
+    <p id="confirmationAvis" style="color: #ffe066; font-weight: bold; display: none; margin-top: 1rem; opacity: 0; transition: opacity 0.3s ease;">
+  Merci pour ton avis ✨ Il a bien été enregistré !
+</p>
+    
     <div id="listeAvis" style="margin-top: 40px; background-color: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
       <h3>Avis des lecteurs :</h3>
     </div>
@@ -217,6 +220,23 @@
     .then(data => {
       console.log("Avis enregistré dans Google Sheet : " + data);
     });
+// ✅ Affiche le message de remerciement en fondu
+const confirmation = document.getElementById("confirmationAvis");
+confirmation.style.opacity = 0;
+confirmation.style.display = "block";
+
+let opacity = 0;
+const fadeIn = setInterval(() => {
+  if (opacity >= 1) {
+    clearInterval(fadeIn);
+    setTimeout(() => {
+      confirmation.style.display = "none";
+    }, 4000); // visible pendant 4 secondes
+  } else {
+    opacity += 0.05;
+    confirmation.style.opacity = opacity;
+  }
+}, 30);
 
     // 🖼️ Affichage local sur la page
     const nouvelAvis = document.createElement("div");
