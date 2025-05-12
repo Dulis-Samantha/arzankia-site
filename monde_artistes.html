@@ -15,36 +15,67 @@
       overflow: hidden;
     }
 
-   .container {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-  border-radius: 50%;
-  padding: 2em;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  font-size: 1em;
-  line-height: 1.6;
- backdrop-filter: blur(2px);
-  animation: vaisseauMagique 20s ease-in-out infinite alternate,
-             brillanceMagique 6s ease-in-out infinite alternate,
-             respirationBulle 8s ease-in-out infinite;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  box-shadow:
-    0 0 25px rgba(112, 236, 255, 0.2),
-    0 0 30px rgba(255, 200, 255, 0.1),
-    0 0 30px rgba(255, 255, 255, 0.05),
-    inset 0 0 8px rgba(255, 255, 255, 0.1);
-}
+    .bubble {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      border-radius: 50%;
+      padding: 2em;
+      position: absolute;
+      backdrop-filter: blur(2px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow:
+        0 0 25px rgba(112, 236, 255, 0.2),
+        0 0 30px rgba(255, 200, 255, 0.1),
+        0 0 30px rgba(255, 255, 255, 0.05),
+        inset 0 0 8px rgba(255, 255, 255, 0.1);
+      animation: respirationBulle 8s ease-in-out infinite;
+    }
 
-    .container span {
-      display: inline-block;
+    .bubble h1, .bubble h2 {
+      font-size: 1.2em;
+      color: #ffd700;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+
+    .bubble p {
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    .bubble ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .bubble li {
+      margin-top: 0.5em;
+    }
+
+    .bubble a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+      transition: text-shadow 0.3s ease;
+    }
+
+    .bubble a:hover {
+      text-shadow: 0 0 5px #fff, 0 0 10px #ffd700;
+    }
+
+    .bubble.artistes {
+      top: 10%;
+      left: 8%;
+    }
+
+    .bubble.camidjo {
+      top: 50%;
+      left: 60%;
     }
 
     .back-button {
@@ -52,35 +83,15 @@
     }
 
     .back-button a {
-  background-color: #ffffff99;
-  color: #333;
-  padding: 0.3em 0.6em;
-  font-size: 0.75em;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 5px rgba(255,255,255,0.2);
-  transition: all 0.3s ease;
-}
-
-
-    ..back-button a {
-  font-size: 0.7em;
-  padding: 0.2em 0.5em;
-}
-
-    @keyframes vaisseauMagique {
-      0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
-      25%  { top: 8%; left: 15%; transform: rotate(1deg); }
-      50%  { top: 12%; left: 10%; transform: rotate(-2deg); }
-      75%  { top: 9%; left: 3%; transform: rotate(1deg); }
-      100% { top: 5%; left: 5%; transform: rotate(0deg); }
-    }
-
-    @keyframes brillanceMagique {
-      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
-      100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
+      background-color: #ffffff99;
+      color: #333;
+      padding: 0.3em 0.6em;
+      font-size: 0.75em;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 5px rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
     }
 
     @keyframes respirationBulle {
@@ -89,64 +100,37 @@
     }
 
     @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-  <style>
-  h1 {
-    font-size: 1.3em;
-    color: #ffd700;
-    margin-bottom: 0.5em;
-    text-align: center;
-    font-weight: bold;
-  }
-</style>
+
 <body>
-  <div class="container">
-  <h1>🌿 Bienvenu au Monde des Artistes 🌿</h1>
 
-  <p>
-    Monde le plus visité après celui des Fées, et pourtant né de l’imagination d’un seul rêveur : Camidjo, un créateur solitaire qui chantonne encore entre les ruelles colorées de son chef-d'œuvre vivant.
-  </p>
-
-  <p style="margin-top: 1em;">
-    🎶 <a href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank" style="color: #ffd700; text-decoration: underline;">
-      Écoute la musique de Camidjo ici
-    </a>
-  </p>
-
-  <div class="back-button">
-    <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <!-- Bulle 1 : Monde des Artistes -->
+  <div class="bubble artistes">
+    <h1>🎨 Le Monde des Artistes</h1>
+    <p>
+      Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.  
+      Un monde vivant, changeant, façonné par la création pure.
+    </p>
+    <div class="back-button">
+      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+    </div>
   </div>
-</div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const p = document.querySelector(".container p");
-    const text = p.textContent.trim();
-    p.innerHTML = "";
-
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const span = document.createElement("span");
-      span.innerHTML = char === " " ? "&nbsp;" : char;
-      span.style.display = "inline-block";
-      span.style.opacity = "0";
-      span.style.animation = `apparitionTexte 0.5s ease forwards`;
-      span.style.animationDelay = `${i * 0.03}s`;
-      p.appendChild(span);
-    }
-  });
-</script>
-
+  <!-- Bulle 2 : Camidjo et ses chansons -->
+  <div class="bubble camidjo">
+    <h2>🎧 Camidjo – Le Créateur</h2>
+    <p>
+      Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.
+    </p>
+    <ul>
+      <li><a href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">Écouter le titre principal</a></li>
+      <!-- Tu peux ajouter d'autres chansons ici -->
+    </ul>
+  </div>
 
 </body>
 </html>
