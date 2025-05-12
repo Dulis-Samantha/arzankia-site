@@ -94,6 +94,18 @@
       font-weight: bold;
       box-shadow: 0 0 5px rgba(255,255,255,0.2);
       transition: all 0.3s ease;
+  @keyframes vaisseauMagique {
+      0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
+      25%  { top: 8%; left: 15%; transform: rotate(1deg); }
+      50%  { top: 12%; left: 10%; transform: rotate(-2deg); }
+      75%  { top: 9%; left: 3%; transform: rotate(1deg); }
+      100% { top: 5%; left: 5%; transform: rotate(0deg); }
+    }
+
+    @keyframes brillanceMagique {
+      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
+      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
+      100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
     }
 
     @keyframes respirationBulle {
@@ -101,13 +113,11 @@
       50% { transform: scale(1.04); }
     }
 
-    @keyframes danseMagique {
-      0%   { transform: translateY(0) rotate(0deg); }
-      25%  { transform: translateY(-4px) rotate(1deg); }
-      50%  { transform: translateY(2px) rotate(-1deg); }
-      75%  { transform: translateY(-3px) rotate(1deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
+    @keyframes apparitionTexte {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
   </style>
 </head>
 
