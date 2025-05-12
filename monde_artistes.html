@@ -28,14 +28,16 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      overflow: hidden;
       box-shadow:
         0 0 25px rgba(112, 236, 255, 0.2),
         0 0 30px rgba(255, 200, 255, 0.1),
         0 0 30px rgba(255, 255, 255, 0.05),
         inset 0 0 8px rgba(255, 255, 255, 0.1);
       animation:
-        respirationBulle 8s ease-in-out infinite,
-        danseMagique 12s ease-in-out infinite;
+        vaisseauMagique 20s ease-in-out infinite alternate,
+        brillanceMagique 6s ease-in-out infinite alternate,
+        respirationBulle 8s ease-in-out infinite;
     }
 
     .bubble h1, .bubble h2 {
@@ -53,6 +55,7 @@
     .bubble ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
 
     .bubble li {
@@ -71,8 +74,8 @@
     }
 
     .bubble.artistes {
-      top: 10%;
-      left: 8%;
+      top: 5%;
+      left: 5%;
     }
 
     .bubble.camidjo {
@@ -94,30 +97,31 @@
       font-weight: bold;
       box-shadow: 0 0 5px rgba(255,255,255,0.2);
       transition: all 0.3s ease;
-  @keyframes vaisseauMagique {
-      0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
-      25%  { top: 8%; left: 15%; transform: rotate(1deg); }
-      50%  { top: 12%; left: 10%; transform: rotate(-2deg); }
-      75%  { top: 9%; left: 3%; transform: rotate(1deg); }
-      100% { top: 5%; left: 5%; transform: rotate(0deg); }
+    }
+
+    @keyframes vaisseauMagique {
+      0%   { transform: translate(0, 0) rotate(-1deg); }
+      25%  { transform: translate(10px, 20px) rotate(1deg); }
+      50%  { transform: translate(-15px, 25px) rotate(-2deg); }
+      75%  { transform: translate(5px, 10px) rotate(1deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
     }
 
     @keyframes brillanceMagique {
-      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
+      0%   { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
+      50%  { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
       100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
     }
 
     @keyframes respirationBulle {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+      50%      { transform: scale(1.04); }
     }
 
     @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
+      0%   { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
@@ -143,9 +147,28 @@
     </p>
     <ul>
       <li><a href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">Écouter le titre principal</a></li>
-      <!-- Tu peux ajouter d'autres chansons ici -->
     </ul>
   </div>
+
+  <!-- Animation texte lettre par lettre pour la 1ère bulle -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const p = document.querySelector(".bubble.artistes p");
+      const text = p.textContent.trim();
+      p.innerHTML = "";
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const span = document.createElement("span");
+        span.innerHTML = char === " " ? "&nbsp;" : char;
+        span.style.display = "inline-block";
+        span.style.opacity = "0";
+        span.style.animation = "apparitionTexte 0.5s ease forwards";
+        span.style.animationDelay = `${i * 0.03}s`;
+        p.appendChild(span);
+      }
+    });
+  </script>
 
 </body>
 </html>
