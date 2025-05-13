@@ -118,7 +118,8 @@
   align-items: center;
   gap: 40px;
   padding: 20px;
-
+}
+  
 @keyframes magicPulse {
   0% {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(120, 180, 255, 0.4);
@@ -276,6 +277,20 @@
       50%  { box-shadow: 0 0 12px rgba(255, 255, 200, 0.4); }
       100% { box-shadow: 0 0 8px  rgba(255, 255, 200, 0.2); }
     }
+    @media (max-width: 768px) {
+  .livre-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .texte-livre {
+    text-align: center;
+  }
+
+  .btn-commander {
+    display: inline-block;
+    margin: 20px auto 0;
+  }
   </style>
 </head>
   
