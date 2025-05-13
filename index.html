@@ -225,8 +225,7 @@
       setTimeout(() => bloc.classList.add("visible"), 50);
       document.getElementById("listeAvis").appendChild(bloc);
     }
-
-    fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec")
+    fetch("https://script.google.com/macros/s/AKfycbzz9A9va7_UexLEc0V3s39mjHGCjcTnJ7PLR7TflG3aMK0nP68OOLyQzzQDGaQzf4gvow/exec")
       .then(res => res.json())
       .then(data => data.forEach(afficherAvis))
       .catch(err => console.error("Erreur chargement des avis", err));
