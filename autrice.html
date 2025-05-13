@@ -83,18 +83,31 @@
   border: none;
 }
 
+.bougie-secret::after,
 .bougie-secret::before {
   content: "";
   position: absolute;
-  top: -20px;
+  top: -40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 12px;
-  height: 20px;
- background: radial-gradient(circle, #a67c52, transparent 60%);
+  width: 20px;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.3), transparent 70%);
   border-radius: 50%;
-  animation: flame 1s infinite ease-in-out;
-  z-index: 1001;
+  opacity: 0.6;
+  pointer-events: none;
+  animation: smoke 4s infinite ease-in-out;
+}
+
+.bougie-secret::before {
+  top: -50px;
+  left: 55%;
+  width: 15px;
+  height: 35px;
+  opacity: 0.4;
+  animation: smoke2 5s infinite ease-in-out;
+}
+
  @keyframes flame {
   0% {
     transform: translateX(-50%) scale(1);
