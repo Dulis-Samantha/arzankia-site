@@ -16,6 +16,7 @@
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
 
   <style>
+    
     .presentation-livre {
   background: rgba(255, 255, 255, 0.05);
   padding: 40px 20px;
@@ -32,6 +33,64 @@
   margin-bottom: 20px;
   font-family: 'Georgia', serif;
   text-shadow: 1px 1px 4px #000;
+}
+.livre-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.couverture-livre {
+  max-width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.couverture-livre {
+  max-width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+.couverture-livre:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 255, 200, 0.6), 0 0 45px rgba(255, 255, 160, 0.4);
+}
+
+.texte-livre {
+  max-width: 400px;
+  text-align: left;
+}
+
+.texte-livre h2 {
+  font-size: 26px;
+  color: #fff8e6;
+  margin-bottom: 0;
+  font-family: 'Georgia', serif;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.texte-livre h3 {
+  font-size: 20px;
+  color: #ddd0b8;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-family: 'Georgia', serif;
+  text-shadow: 1px 1px 3px #000;
+}
+
+/* Apparition douce */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.appear {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .resume {
@@ -220,14 +279,21 @@
     <h1>Bienvenue à Arzankia</h1>
     <p>Plongez dans un univers magique, peuplé de créatures fantastiques, de forêts lumineuses et de quêtes initiatiques. Découvrez l'aventure de Raphaël, un jeune héros pas comme les autres.</p>
   </section>
-<section class="presentation-livre">
-  <h2>✨ Les Héros d’Arzankia – Tome 1 : Raphaël ✨</h2>
-  <p class="resume">
-    Dans un monde où chaque enfant peut accéder à son propre univers à douze ans, Raphaël découvre qu’il est lié à une prophétie ancienne. Guidé par un étrange chercheur et une canne magique à reconstituer, il devra traverser des mondes fantastiques, affronter des créatures étonnantes et percer le mystère d’une princesse disparue...<br><br>
-    Une aventure initiatique mêlant magie, écologie et destin, idéale pour les jeunes lecteurs dès 9 ans.
-  </p>
-  <a href="https://ton-lien-de-commande.com" class="btn-commander">📘 Commander</a>
+<section class="presentation-livre fade-in">
+  <div class="livre-container">
+    <img src="images/couverture-arzankia.png" alt="Couverture Les Héros d’Arzankia" class="couverture-livre">
+    <div class="texte-livre">
+      <h2>✨ Les Héros d’Arzankia ✨</h2>
+      <h3>Tome I : Raphaël</h3>
+      <p class="resume">
+        Dans un monde où chaque enfant peut accéder à son propre univers à douze ans, Raphaël découvre qu’il est lié à une prophétie ancienne. Guidé par un étrange chercheur et une canne magique à reconstituer, il devra traverser des mondes fantastiques, affronter des créatures étonnantes et percer le mystère d’une princesse disparue...<br><br>
+        Une aventure initiatique mêlant magie, écologie et destin, idéale pour les jeunes lecteurs dès 9 ans.
+      </p>
+      <a href="https://ton-lien-de-commande.com" class="btn-commander">📘 Commander</a>
+    </div>
+  </div>
 </section>
+
 
   <section class="section" id="avis">
     <h2>📣 Les avis des lecteurs</h2>
