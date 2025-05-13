@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Les Héros d’Arzankia – Roman jeunesse fantasy dès 8 ans</title>
   <meta name="description" content="Les Héros d’Arzankia est un roman jeunesse mêlant magie, aventure et créatures fantastiques. Pour enfants dès 8 ans. Tome I : Raphaël.">
   <meta name="keywords" content="Les Héros d’Arzankia, roman jeunesse, livre enfants, fantasy, magie, dès 8 ans, Samantha Dulis, Arzankia, littérature jeunesse">
@@ -13,6 +14,7 @@
   <meta property="og:url" content="https://dulis-samantha.github.io/arzankia-site">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
+
   <style>
     body {
       margin: 0;
@@ -24,92 +26,235 @@
       background-position: center;
       color: white;
     }
-    .avis-fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+
+    .navbar {
+      position: relative;
+      background: rgba(40, 20, 80, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      z-index: 10;
     }
-    .avis-fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    .navbar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 200, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+      animation: shimmer 10s linear infinite;
+      pointer-events: none;
+      z-index: 0;
     }
-    .avis-glow {
-      animation: glow 1.5s ease-out;
+
+    @keyframes shimmer {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(50%); }
     }
-    @keyframes glow {
-      0%   { box-shadow: 0 0 20px rgba(255, 255, 200, 0.7); }
-      50%  { box-shadow: 0 0 12px rgba(255, 255, 200, 0.4); }
-      100% { box-shadow: 0 0 8px  rgba(255, 255, 200, 0.2); }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar li {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #f0e6ff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .navbar a:hover {
+      color: #ffd700;
+    }
+
+    .hero, .section {
+      background: none;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #ffe066;
+      text-align: center;
+      text-shadow: 2px 2px 4px black;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      color: #ffe066;
+      text-shadow: 1px 1px 3px black;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      background: linear-gradient(135deg, #ffea8a, #fff6c1);
+      color: #2c2c2c;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(255, 236, 150, 0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 236, 150, 0.9), 0 0 10px rgba(255, 255, 200, 0.7);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      font-size: 0.9rem;
+      color: #eee;
     }
   </style>
 </head>
 <body>
-  <!-- ... contenu principal ... -->
-  <section id="avis">
-    <form id="formAvis">
-      <input id="nom" name="nom" required>
-      <textarea id="message" name="message" required></textarea>
-      <input type="radio" name="note" value="⭐⭐⭐⭐⭐" required> 5 ⭐
-      <button type="submit">Envoyer</button>
-    </form>
-    <p id="confirmationAvis" style="display:none; opacity: 0;">Merci pour ton avis ✨</p>
-    <div id="listeAvis"></div>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a></li>
+      <li><a href="autrice.html">À propos de l'Autrice</a></li>
+      <li><a href="#avis">Voir les avis</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Bienvenue à Arzankia</h1>
+    <p>Plongez dans un univers magique, peuplé de créatures fantastiques, de forêts lumineuses et de quêtes initiatiques. Découvrez l'aventure de Raphaël, un jeune héros pas comme les autres.</p>
   </section>
 
-  <script>
-    function afficherAvis(avis) {
-      const bloc = document.createElement("div");
-      bloc.classList.add("avis-fade-in", "avis-glow");
-      bloc.style.marginTop = "20px";
-      bloc.style.padding = "10px";
-      bloc.style.background = "rgba(255,255,255,0.07)";
-      bloc.style.borderRadius = "8px";
+  <section class="section" id="livre">
+    <h2>📖 Le livre – Tome I : Raphaël</h2>
+    <p>Raphaël pensait vivre une journée ordinaire pour ses douze ans. Mais une porte magique s’ouvre à lui, révélant les mondes cachés d’Arzankia. Dans cet univers où le merveilleux côtoie le danger, il devra affronter ses plus grandes peurs et découvrir en lui la force d’un véritable aventurier. Le destin d’Arzankia est désormais entre ses mains. Magie, humour, découverte : les trois clefs d’un roman jeunesse qui vous entraînera dans une épopée inoubliable.</p>
+    <a href="#" class="button">✨ Commander</a>
+  </section>
 
-      const date = new Date(avis.timestamp || new Date());
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      const dateLisible = date.toLocaleDateString('fr-FR', options);
+  <div class="footer">
+    © 2025 Samantha DULIS – Les Héros d’Arzankia
+  </div>
 
-      bloc.innerHTML = `
-        <p><strong>${avis.nom}</strong> ${avis.note}</p>
-        <p style="font-style: italic;">"${avis.message}"</p>
-        <p style="font-size: 0.9rem; color: #ccc;">Posté le ${dateLisible}</p>
-      `;
-      setTimeout(() => bloc.classList.add("visible"), 50);
-      document.getElementById("listeAvis").appendChild(bloc);
-    }
+  <!-- SECTION AVIS MAGIQUE -->
+  <section id="avis" class="section" style="background-color: rgba(30, 27, 47, 0.8); border-top: 2px solid #ffe066; padding: 60px; color: #fff8e6;">
+    <h2>📣 Les avis des lecteurs</h2>
+    <p>Tu as lu <em>Raphaël</em> ? Donne une note et partage ton avis avec les futurs aventuriers !</p>
 
-    fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec")
-      .then(res => res.json())
-      .then(data => data.forEach(afficherAvis))
-      .catch(err => console.error("Erreur chargement des avis", err));
+    <form id="formAvis" style="margin-top: 20px;">
+      <label for="nom">Ton prénom :</label><br>
+      <input type="text" id="nom" name="nom" required style="width: 50%; padding: 5px;"><br><br>
 
-    document.getElementById("formAvis").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const nom = document.getElementById("nom").value;
-      const message = document.getElementById("message").value;
-      const note = document.querySelector('input[name="note"]:checked').value;
+      <label>Ta note :</label><br>
+      <div style="font-size: 1.5rem; margin-bottom: 1rem;">
+        <label><input type="radio" name="note" value="⭐" required> ⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐"> ⭐⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐⭐"> ⭐⭐⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐⭐⭐"> ⭐⭐⭐⭐</label>
+        <label><input type="radio" name="note" value="⭐⭐⭐⭐⭐"> ⭐⭐⭐⭐⭐</label>
+      </div>
 
-      fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nom, note, message })
-      }).then(r => r.text()).then(console.log);
+      <label for="message">Ton avis :</label><br>
+      <textarea id="message" name="message" rows="4" style="width: 90%; padding: 5px;" required></textarea><br><br>
 
-      const confirmation = document.getElementById("confirmationAvis");
-      confirmation.style.display = "block";
-      confirmation.style.opacity = 0;
-      let opacity = 0;
-      const fadeIn = setInterval(() => {
-        if ((opacity += 0.05) >= 1) {
-          clearInterval(fadeIn);
-          setTimeout(() => confirmation.style.display = "none", 4000);
-        }
-        confirmation.style.opacity = opacity;
-      }, 30);
+      <button type="submit" class="button">✨ Envoyer mon avis</button>
+    </form>
+    <p id="confirmationAvis" style="color: #ffe066; font-weight: bold; display: none; margin-top: 1rem; opacity: 0; transition: opacity 0.3s ease;">
+  Merci pour ton avis ✨ Il a bien été enregistré !
+</p>
+    
+    <div id="listeAvis" style="margin-top: 40px; background-color: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
+      <h3>Avis des lecteurs :</h3>
+    </div>
+  </section>
 
-      afficherAvis({ nom, note, message, timestamp: new Date() });
-      document.getElementById("formAvis").reset();
+ <script>
+  document.getElementById("formAvis").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nom = document.getElementById("nom").value;
+    const message = document.getElementById("message").value;
+    const note = document.querySelector('input[name="note"]:checked').value;
+
+    // 🔄 Envoi vers Google Sheets
+    fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nom, note, message })
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log("Avis enregistré dans Google Sheet : " + data);
     });
-  </script>
+// ✅ Affiche le message de remerciement en fondu
+const confirmation = document.getElementById("confirmationAvis");
+confirmation.style.opacity = 0;
+confirmation.style.display = "block";
+
+let opacity = 0;
+const fadeIn = setInterval(() => {
+  if (opacity >= 1) {
+    clearInterval(fadeIn);
+    setTimeout(() => {
+      confirmation.style.display = "none";
+    }, 4000); // visible pendant 4 secondes
+  } else {
+    opacity += 0.05;
+    confirmation.style.opacity = opacity;
+  }
+}, 30);
+
+    // 🖼️ Affichage local sur la page
+    const nouvelAvis = document.createElement("div");
+    nouvelAvis.style.marginTop = "20px";
+    nouvelAvis.style.padding = "10px";
+    nouvelAvis.style.background = "rgba(255,255,255,0.07)";
+    nouvelAvis.style.borderRadius = "8px";
+    nouvelAvis.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
+
+    nouvelAvis.innerHTML = 
+      <p><strong>${nom}</strong> ${note}</p>
+      <p style="font-style: italic;">"${message}"</p>
+    ;
+
+    document.getElementById("listeAvis").appendChild(nouvelAvis);
+    document.getElementById("formAvis").reset();
+  });
+</script>
+
 </body>
 </html>
