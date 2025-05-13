@@ -71,16 +71,16 @@
     }
 .bougie-secret {
   position: fixed;
-  bottom: 20px;
-  left: 40px;
-  width: 48px;
-  height: 80px;
-  background: linear-gradient(to top, #ffdbac, #fff7e6);
-  border-radius: 12px 12px 4px 4px;
-  box-shadow: 0 0 20px rgba(255, 223, 130, 0.6);
+  bottom: 30px;
+  left: 30px;
+  width: 40px;
+  height: 70px;
+  background: linear-gradient(to bottom, #a56b2c, #6e3b14); /* Marron doux vers foncé */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
   z-index: 1000;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
 }
 
 .bougie-secret::before {
@@ -114,7 +114,20 @@
   }
   100% {
     transform: translateX(-50%) scale(1
-
+.bougie-secret::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.3), transparent 70%);
+  animation: smoke 4s infinite ease-in-out;
+  opacity: 0.6;
+  pointer-events: none;
+}
+  
 </style>
 </head>
 
