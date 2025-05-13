@@ -203,7 +203,7 @@ Et très vite, un garçon nommé <strong>Raphaël</strong> faisait ses premiers 
 
         function type() {
           if (i < text.length) {
-            element.textContent += text.charAt(i);
+           element.innerText += text.charAt(i);
             i++;
             setTimeout(type, speed);
           } else if (callback) {
