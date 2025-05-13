@@ -206,11 +206,31 @@
     50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
   }
+.bulle-magique {
+  display: none;
+  position: fixed;
+  bottom: 110px;
+  left: 30px;
+  width: 260px;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 1.1em;
+  text-align: center;
+  color: #fff8e6;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+  z-index: 1001;
+}
 
 </style>
 </head>
 
 <body>
+  
+  <div class="bulle-magique" id="bulle-magique"></div>
  <div id="message-secret" style="display: none;">
   Le voile s’est levé… Tu viens d’ouvrir le premier passage secret d’Arzankia.
   <div class="brume-magique"></div>
@@ -257,17 +277,48 @@
   <a href="index.html" class="button-retour">← Retour à l’accueil</a>
 </p>
 
-  </div><script>
+  </div>
+  
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     const bougie = document.getElementById("bougie");
     const message = document.getElementById("message-secret");
+    const bulle = document.getElementById("bulle-magique");
+    const text = "Le voile s’est levé… Tu viens d’ouvrir le premier passage secret d’Arzankia.";
 
-    if (bougie && message) {
+    function typeText(element, text, speed, callback) {
+      element.textContent = "";
+      let i = 0;
+      element.style.display = "block";
+
+      function type() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else if (callback) {
+          callback();
+        }
+      }
+
+      type();
+    }
+
+    if (bougie && message && bulle) {
       bougie.addEventListener("click", function (e) {
-        e.preventDefault(); // Empêche la redirection immédiate
-        message.style.display = "block";
+        e.preventDefault();
+        typeText(bulle, text, 40);
 
-        // Redirige vers voile.html après 5 secondes
+        message.style.display = "block";
+        requestAnimationFrame(() => {
+          message.style.opacity = "1";
+        });
+
+        setTimeout(() => {
+          message.style.opacity = "0";
+          bulle.style.opacity = "0";
+        }, 4000);
+
         setTimeout(() => {
           window.location.href = "voile.html";
         }, 5000);
@@ -275,6 +326,7 @@
     }
   });
 </script>
+
 
 </body>
 </html>
