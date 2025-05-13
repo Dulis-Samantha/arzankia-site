@@ -90,6 +90,66 @@
       background-color: #fff2a0;
       box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
+  .bougie-secret {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 40px;
+  height: 70px;
+  background: linear-gradient(to bottom, #a56b2c, #6e3b14);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
+  z-index: 1000;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.flamme {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 12px;
+  height: 25px;
+  background: radial-gradient(ellipse at center, rgba(255, 200, 50, 0.9), rgba(255, 100, 0, 0));
+  transform: translateX(-50%);
+  border-radius: 50%;
+  animation: scintille 1s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes scintille {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+  50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+}
+
+.fumee {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 20px;
+  height: 60px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-50%);
+  animation: fumer 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes fumer {
+  0% {
+    opacity: 0.2;
+    transform: translateX(-50%) translateY(0px) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(-20px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-40px) scale(1.5);
+  }
+}
+
   </style>
 </head>
 <body>
@@ -130,7 +190,11 @@ Et très vite, un garçon nommé <strong>Raphaël</strong> faisait ses premiers 
 </ul>
 
     <p style="text-align: center;">
-      <a href="voile.html" id="bougie" class="bougie-secret" aria-label="Passage secret"></a>
+     <a href="voile.html" id="bougie" class="bougie-secret" aria-label="Passage secret">
+  <div class="flamme"></div>
+  <div class="fumee"></div>
+</a>
+
     </p>
 
     <p style="text-align: center;">
