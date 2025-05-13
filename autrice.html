@@ -160,12 +160,64 @@
     opacity: 0;
   }
 }
+<!-- Police fantasy -->
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
+<style>
+  #message-secret {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'IM Fell English SC', serif;
+    font-size: 1.8em;
+    color: #fff8e6;
+    padding: 1em 2em;
+    background: rgba(20, 20, 20, 0.6);
+    border-radius: 12px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 2s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; filter: blur(6px); }
+    100% { opacity: 1; filter: blur(0); }
+  }
+
+  .brume-magique {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: brume 6s infinite ease-in-out;
+  }
+
+  @keyframes brume {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  }
+</style>
 
 
 </style>
 </head>
 
 <body>
+  <div id="message-secret">
+  Le voile s’est levé… Tu viens d’ouvrir le premier passage secret d’Arzankia.
+  <div class="brume-magique"></div>
+</div>
+
   <div class="content">
     <h3>🌟 À propos de l'autrice</h3>
 
@@ -207,6 +259,24 @@
   <a href="index.html" class="button-retour">← Retour à l’accueil</a>
 </p>
 
-  </div>
+  </div><script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const bougie = document.getElementById("bougie");
+    const message = document.getElementById("message-secret");
+
+    if (bougie && message) {
+      bougie.addEventListener("click", function (e) {
+        e.preventDefault(); // Empêche la redirection immédiate
+        message.style.display = "block";
+
+        // Redirige vers voile.html après 5 secondes
+        setTimeout(() => {
+          window.location.href = "voile.html";
+        }, 5000);
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
