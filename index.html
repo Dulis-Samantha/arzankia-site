@@ -225,7 +225,7 @@
       setTimeout(() => bloc.classList.add("visible"), 50);
       document.getElementById("listeAvis").appendChild(bloc);
     }
-    fetch("https://script.google.com/macros/s/AKfycbzz9A9va7_UexLEc0V3s39mjHGCjcTnJ7PLR7TflG3aMK0nP68OOLyQzzQDGaQzf4gvow/exec")
+    fetch("https://script.google.com/macros/s/AKfycbxq0OX3usM_qdRcNn5mVrZ2rVnRsH3WfmUP1OWrJEclhijIEPfnNZSMjXOKZEunF1aYjQ/exec")
       .then(res => res.json())
       .then(data => data.forEach(afficherAvis))
       .catch(err => console.error("Erreur chargement des avis", err));
@@ -236,7 +236,7 @@
       const message = document.getElementById("message").value;
       const note = document.querySelector('input[name="note"]:checked').value;
 
-      fetch("https://script.google.com/macros/s/AKfycbzz9A9va7_UexLEc0V3s39mjHGCjcTnJ7PLR7TflG3aMK0nP68OOLyQzzQDGaQzf4gvow/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbxq0OX3usM_qdRcNn5mVrZ2rVnRsH3WfmUP1OWrJEclhijIEPfnNZSMjXOKZEunF1aYjQ/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nom, note, message })
