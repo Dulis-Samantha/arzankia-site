@@ -201,6 +201,31 @@
       <h3>Avis des lecteurs :</h3>
     </div>
   </section>
+// 📥 Récupération des avis déjà enregistrés dans la Google Sheet
+fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec")
+  .then(response => response.json())
+  .then(data => {
+    if (data && data.length > 0) {
+      data.forEach(avis => {
+        const bloc = document.createElement("div");
+        bloc.style.marginTop = "20px";
+        bloc.style.padding = "10px";
+        bloc.style.background = "rgba(255,255,255,0.07)";
+        bloc.style.borderRadius = "8px";
+        bloc.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
+
+        bloc.innerHTML = `
+          <p><strong>${avis.nom}</strong> ${avis.note}</p>
+          <p style="font-style: italic;">"${avis.message}"</p>
+        `;
+
+        document.getElementById("listeAvis").appendChild(bloc);
+      });
+    }
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement des avis :", error);
+  });
 
  <script>
   document.getElementById("formAvis").addEventListener("submit", function(event) {
