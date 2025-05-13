@@ -86,7 +86,19 @@
 .bouton-rond-lumineux:hover {
   transform: scale(1.1);
 }
- </style>
+ .bouton-rond-lumineux:hover::after {
+  content: "Entrée secrète...";
+  position: absolute;
+  top: 110%;
+  left: 0;
+  font-size: 0.8em;
+  color: white;
+  background: rgba(0,0,0,0.7);
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+</style>
 </head>
 
 <body>
