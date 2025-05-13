@@ -73,18 +73,20 @@
   position: fixed;
   bottom: 30px;
   left: 30px;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff8c0, #ffcc33);
-  box-shadow: 0 0 15px #fff2aa, 0 0 30px #ffdd55;
+  background: radial-gradient(circle, #ffedc2, #b98c48);
+  box-shadow: 0 0 20px rgba(255, 230, 180, 0.4), 0 0 40px rgba(185, 140, 72, 0.3);
   cursor: pointer;
   z-index: 1000;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .bouton-rond-lumineux:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(255, 230, 180, 0.6), 0 0 50px rgba(185, 140, 72, 0.5);
 }
  .bouton-rond-lumineux:hover::after {
   content: "Entrée secrète...";
