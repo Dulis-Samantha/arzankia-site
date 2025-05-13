@@ -14,14 +14,23 @@ background-position: center;
 
     }
 
-   .blog-post {
+  .blog-post {
   max-width: 800px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.08);
-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.4); /* fond noir translucide */
+  backdrop-filter: blur(8px); /* flou féerique */
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* effet lumineux doux */
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+.blog-post p,
+.blog-post h2,
+.blog-post h3,
+.blog-post .meta {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* ombre douce */
 }
 
     .blog-post h2 {
