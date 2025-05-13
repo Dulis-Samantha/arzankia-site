@@ -69,37 +69,33 @@
       background-color: #fff2a0;
       box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
-.bouton-rond-lumineux {
+.bougie-secret {
   position: fixed;
-  bottom: 30px;
-  left: 30px;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffedc2, #b98c48);
-  box-shadow: 0 0 20px rgba(255, 230, 180, 0.4), 0 0 40px rgba(185, 140, 72, 0.3);
-  cursor: pointer;
+  bottom: 20px;
+  left: 40px;
+  width: 48px;
+  height: 80px;
+  background: linear-gradient(to top, #ffdbac, #fff7e6);
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 0 20px rgba(255, 223, 130, 0.6);
   z-index: 1000;
-  border: none;
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.bouton-rond-lumineux:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 25px rgba(255, 230, 180, 0.6), 0 0 50px rgba(185, 140, 72, 0.5);
-}
- .bouton-rond-lumineux:hover::after {
-  content: "Entrée secrète...";
+.bougie-secret::before {
+  content: "";
   position: absolute;
-  top: 110%;
-  left: 0;
-  font-size: 0.8em;
-  color: white;
-  background: rgba(0,0,0,0.7);
-  padding: 4px 8px;
-  border-radius: 6px;
-  white-space: nowrap;
-}
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 20px;
+  background: radial-gradient(circle, #ffd700, transparent 60%);
+  border-radius: 50%;
+  animation: flame 1s infinite ease-in-out;
+  z-index: 1001;
+  
 </style>
 </head>
 
@@ -138,7 +134,7 @@
       <li>✨ Et le <strong>tome IV</strong> prend vie, doucement, <em>mot après mot</em>…</li>
     </ul>
 <p style="text-align: center;">
-<a href="voile.html" class="bouton-rond-lumineux" aria-label="Passage secret"></a>
+<a href="voile.html" class="bougie-secret" aria-label="Passage secret"></a>
 </p>
 <br>
 <p style="text-align: center;">
