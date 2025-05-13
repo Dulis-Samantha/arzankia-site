@@ -201,6 +201,7 @@
       <h3>Avis des lecteurs :</h3>
     </div>
   </section>
+<script>
 // 📥 Récupération des avis déjà enregistrés dans la Google Sheet
 fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec")
   .then(response => response.json())
@@ -226,6 +227,7 @@ fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG
   .catch(error => {
     console.error("Erreur lors du chargement des avis :", error);
   });
+</script>
 
  <script>
   document.getElementById("formAvis").addEventListener("submit", function(event) {
