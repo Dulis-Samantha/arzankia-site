@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>À propos de l'autrice</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('fond_autrice.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: white;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 3em auto;
+      padding: 2em;
+      text-shadow: 0 0 1px rgba(0,0,0,0.6);
+    }
+
+    h3 {
+      font-size: 2em;
+      color: #ffd700;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ffffff;
+      text-shadow: 0 0 1px rgba(0,0,0,0.6);
+    }
+
+    .bougie-secret {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 40px;
+      height: 70px;
+      background: linear-gradient(to bottom, #a56b2c, #6e3b14);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .bulle-magique {
+      display: none;
+      position: fixed;
+      bottom: 110px;
+      left: 30px;
+      width: 260px;
+      padding: 1em;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1.1em;
+      text-align: center;
+      color: #fff8e6;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+      z-index: 1001;
+      transition: opacity 1s ease-out;
+    }
+
+    .button-retour {
+      display: inline-block;
+      margin-top: 2em;
+      background-color: rgba(255, 215, 0, 0.85);
+      color: #2c2c2c;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      transition: 0.3s ease;
+    }
+
+    .button-retour:hover {
+      background-color: #fff2a0;
+      box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bulle-magique" id="bulle-magique"></div>
+
+  <div class="content">
+    <h3>🌟 À propos de l'autrice</h3>
+    <p><strong>J’avais 27 ans quand ma fille Paola est née</strong>, et une question m’est alors venue en tête :<br>
+<em>Quel exemple voudrais-je lui donner ?</em></p>
+
+<p>Je n’avais pas fait de grandes études, et je doutais souvent de moi — de ce que j’aurais à lui transmettre, à lui apprendre.
+Mais avec un peu de recul, j’ai compris que le plus précieux héritage que je pouvais lui offrir, c’était <strong>ma force d’avancer malgré les difficultés</strong>.</p>
+
+<p>Je voulais lui montrer que même quand un rêve semble hors de portée,
+<strong>avec de la volonté et du travail, tout devient possible</strong>.</p>
+
+<p>Alors je me suis posé une autre question :<br>
+<em>Qu’est-ce qui me paraît impossible, mais que j’ai toujours rêvé d’accomplir ?</em></p>
+
+<p>Je me suis revue dans une bibliothèque, impressionnée par les rangées de livres, émerveillée par les histoires qu’ils renfermaient…
+et habitée par cette petite voix qui me soufflait :<br>
+<em>“Tu ne seras jamais capable d’écrire une histoire, toi.”</em></p>
+
+<p>C’est là qu’est né mon défi personnel : <strong>écrire une histoire magique et fantastique pour ma fille</strong>.</p>
+
+<p>Malgré les doutes, malgré le manque d’expérience, j’ai décidé de croire en moi.
+Et très vite, un garçon nommé <strong>Raphaël</strong> faisait ses premiers pas en <strong>Arzankia</strong>.</p>
+
+<blockquote>Il m’aura fallu 18 ans pour aller au bout de ce rêve.</blockquote>
+
+<p>Aujourd’hui, je suis fière de vous présenter le <strong>tome I</strong> de ma série <em>Les Héros d’Arzankia</em>.</p>
+
+<ul>
+  <li>📖 Le <strong>tome II</strong> est en cours de finalisation.</li>
+  <li>✍️ Le <strong>tome III</strong> touche à sa fin.</li>
+  <li>✨ Et le <strong>tome IV</strong> prend vie, doucement, <em>mot après mot</em>…</li>
+</ul>
+
+    <p style="text-align: center;">
+      <a href="voile.html" id="bougie" class="bougie-secret" aria-label="Passage secret"></a>
+    </p>
+
+    <p style="text-align: center;">
+      <a href="index.html" class="button-retour">← Retour à l’accueil</a>
+    </p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const bougie = document.getElementById("bougie");
+      const bulle = document.getElementById("bulle-magique");
+      const text = "Le voile s’est levé… Tu viens d’ouvrir le premier passage secret d’Arzankia.";
+
+      function typeText(element, text, speed, callback) {
+        element.textContent = "";
+        let i = 0;
+        element.style.display = "block";
+        element.style.opacity = "1";
+
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else if (callback) {
+            callback();
+          }
+        }
+
+        type();
+      }
+
+      if (bougie && bulle) {
+        bougie.addEventListener("click", function (e) {
+          e.preventDefault();
+          typeText(bulle, text, 80);
+
+          setTimeout(() => {
+            bulle.style.opacity = "0";
+          }, 7000);
+
+          setTimeout(() => {
+            bulle.style.display = "none";
+            window.location.href = "voile.html";
+          }, 8000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
