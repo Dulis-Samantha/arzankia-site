@@ -48,10 +48,15 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 .couverture-livre {
-  max-width: 280px;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  width: 220px;
+  max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+}
+
 }
 
 .couverture-livre:hover {
@@ -118,6 +123,14 @@
   transform: scale(1.05);
   background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
 }
+.livre-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 20px;
+
 @keyframes magicPulse {
   0% {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(120, 180, 255, 0.4);
