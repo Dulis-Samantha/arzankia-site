@@ -13,11 +13,12 @@ background-attachment: fixed;
 background-position: center;
 
     }
-
-  .blog-post {
+    
+.blog-post {
   max-width: 800px;
   margin: 0 auto;
-  background: rgba(0, 0, 0, 0.4); /* fond noir translucide */
+  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+              url('voile.png') center / cover no-repeat fixed;
   backdrop-filter: blur(8px); /* flou féerique */
   padding: 2rem;
   border-radius: 1rem;
@@ -26,6 +27,7 @@ background-position: center;
   position: relative;
   z-index: 1;
 }
+
 .blog-post p,
 .blog-post h2,
 .blog-post h3,
