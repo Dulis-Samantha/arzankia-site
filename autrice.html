@@ -100,15 +100,15 @@
 }
 
 .bougie-secret::before {
-  top: -50px;
-  left: 55%;
-  width: 15px;
+  top: -55px;
+  left: 52%;
+  width: 18px;
   height: 35px;
   opacity: 0.4;
   animation: smoke2 5s infinite ease-in-out;
 }
 
- @keyframes flame {
+@keyframes flame {
   0% {
     transform: translateX(-50%) scale(1);
     opacity: 0.95;
@@ -126,21 +126,12 @@
     opacity: 0.8;
   }
   100% {
-    transform: translateX(-50%) scale(1
-.bougie-secret::after {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 40px;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.3), transparent 70%);
-  animation: smoke 4s infinite ease-in-out;
-  opacity: 0.6;
-  pointer-events: none;
+    transform: translateX(-50%) scale(1);
+    opacity: 0.95;
+  }
 }
-  @keyframes smoke {
+
+@keyframes smoke {
   0% {
     transform: translateX(-50%) translateY(0);
     opacity: 0.3;
@@ -154,6 +145,22 @@
     opacity: 0.1;
   }
 }
+
+@keyframes smoke2 {
+  0% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(-50%) translateY(-12px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-22px);
+    opacity: 0;
+  }
+}
+
 
 </style>
 </head>
