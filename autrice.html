@@ -95,7 +95,16 @@
   border-radius: 50%;
   animation: flame 1s infinite ease-in-out;
   z-index: 1001;
-  
+  @keyframes flame {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 0.7;
+  }
+}
 </style>
 </head>
 
