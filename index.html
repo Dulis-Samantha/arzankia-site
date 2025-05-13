@@ -227,9 +227,8 @@ fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG
   .catch(error => {
     console.error("Erreur lors du chargement des avis :", error);
   });
-</script>
-
- <script>
+<script>
+  // Soumission du formulaire
   document.getElementById("formAvis").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -237,7 +236,7 @@ fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG
     const message = document.getElementById("message").value;
     const note = document.querySelector('input[name="note"]:checked').value;
 
-    // 🔄 Envoi vers Google Sheets
+    // Envoi vers Google Sheets
     fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -247,25 +246,26 @@ fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG
     .then(data => {
       console.log("Avis enregistré dans Google Sheet : " + data);
     });
-// ✅ Affiche le message de remerciement en fondu
-const confirmation = document.getElementById("confirmationAvis");
-confirmation.style.opacity = 0;
-confirmation.style.display = "block";
 
-let opacity = 0;
-const fadeIn = setInterval(() => {
-  if (opacity >= 1) {
-    clearInterval(fadeIn);
-    setTimeout(() => {
-      confirmation.style.display = "none";
-    }, 4000); // visible pendant 4 secondes
-  } else {
-    opacity += 0.05;
-    confirmation.style.opacity = opacity;
-  }
-}, 30);
+    // Message de confirmation
+    const confirmation = document.getElementById("confirmationAvis");
+    confirmation.style.opacity = 0;
+    confirmation.style.display = "block";
 
-    // 🖼️ Affichage local sur la page
+    let opacity = 0;
+    const fadeIn = setInterval(() => {
+      if (opacity >= 1) {
+        clearInterval(fadeIn);
+        setTimeout(() => {
+          confirmation.style.display = "none";
+        }, 4000);
+      } else {
+        opacity += 0.05;
+        confirmation.style.opacity = opacity;
+      }
+    }, 30);
+
+    // Affichage immédiat sur la page
     const nouvelAvis = document.createElement("div");
     nouvelAvis.style.marginTop = "20px";
     nouvelAvis.style.padding = "10px";
@@ -273,14 +273,50 @@ const fadeIn = setInterval(() => {
     nouvelAvis.style.borderRadius = "8px";
     nouvelAvis.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
 
+    const now = new Date();
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const dateLisible = now.toLocaleDateString('fr-FR', options);
+
     nouvelAvis.innerHTML = `
       <p><strong>${nom}</strong> ${note}</p>
       <p style="font-style: italic;">"${message}"</p>
+      <p style="font-size: 0.9rem; color: #ccc;">Posté le ${dateLisible}</p>
     `;
 
     document.getElementById("listeAvis").appendChild(nouvelAvis);
     document.getElementById("formAvis").reset();
   });
+
+  // Chargement des anciens avis au démarrage
+  fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec")
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.length > 0) {
+        data.forEach(avis => {
+          const bloc = document.createElement("div");
+          bloc.style.marginTop = "20px";
+          bloc.style.padding = "10px";
+          bloc.style.background = "rgba(255,255,255,0.07)";
+          bloc.style.borderRadius = "8px";
+          bloc.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
+
+          const date = new Date(avis.timestamp);
+          const options = { day: 'numeric', month: 'long', year: 'numeric' };
+          const dateLisible = date.toLocaleDateString('fr-FR', options);
+
+          bloc.innerHTML = `
+            <p><strong>${avis.nom}</strong> ${avis.note}</p>
+            <p style="font-style: italic;">"${avis.message}"</p>
+            <p style="font-size: 0.9rem; color: #ccc;">Posté le ${dateLisible}</p>
+          `;
+
+          document.getElementById("listeAvis").appendChild(bloc);
+        });
+      }
+    })
+    .catch(error => {
+      console.error("Erreur lors du chargement des avis :", error);
+    });
 </script>
 
 </body>
