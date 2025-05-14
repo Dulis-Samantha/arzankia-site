@@ -113,40 +113,53 @@
       background-color: #fff2a0;
       box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
- .blog-box {
-  background-color: rgba(0, 0, 0, 0.6);
+.blog-box {
+  background-color: rgba(0, 0, 0, 0.75);
   padding: 2rem;
   margin: 2rem auto;
-  max-width: 900px; /* plus large que 700px mais pas plein écran */
-  width: 90%; /* s'adapte bien aux petits écrans */
-  border-radius: 20px;
-  font-size: 1.5rem;
-  line-height: 1.8;
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  max-width: 750px; /* moins large */
+  width: 92%;
+  border-radius: 18px;
+  font-size: 1.35rem;
+  line-height: 1.9;
+  color: #f2f2f2;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   animation: fadeIn 1s ease-out;
 }
 
-
 .blog-box h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
-  color: #ffffff;
-  animation: fadeIn 1s ease-out;
+  margin-bottom: 1.3rem;
+  color: #e6cf85; /* plus doux que #ffe082 */
 }
 
 .blog-box p {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin-bottom: 1.4rem;
+  color: #f2f2f2;
 }
 
-
 .blog-box li {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1.8;
   margin-left: 1.2rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.9rem;
+  color: #f2f2f2;
+}
+
+.blog-box strong {
+  font-weight: bold;
+  color: #aadfe5; /* doux turquoise */
+}
+
+.blog-box em {
+  font-style: italic;
+  color: #f0b8c9; /* rose très clair */
+}
+
+.blog-box li::marker {
+  color: #ffd54f;
 }
 
 .button-retour:hover {
@@ -154,36 +167,23 @@
   box-shadow: 0 0 15px rgba(255, 255, 150, 0.9), 0 0 30px rgba(255, 255, 150, 0.6);
   transform: scale(1.05);
 }
-.blog-box {
-  color: #f2f2f2;
-}
-
-.blog-box h3 {
-  color: #ffe082;
-}
-
-.blog-box strong {
-  color: #80deea;
-  font-weight: bold;
-}
-
-.blog-box em {
-  color: #f8bbd0;
-  font-style: italic;
-}
-
-.blog-box li::marker {
-  color: #ffd54f;
-}
 
 @media screen and (max-width: 768px) {
   .blog-box {
-    padding: 1.5rem;
-    font-size: 1.25rem;
+    padding: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .blog-box h3 {
     font-size: 1.5rem;
+  }
+
+  .blog-box p {
+    font-size: 1.2rem;
+  }
+
+  .blog-box li {
+    font-size: 1.15rem;
   }
 }
 
@@ -192,6 +192,7 @@
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
 
   </style>
 </head>
