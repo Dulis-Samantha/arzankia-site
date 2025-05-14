@@ -107,21 +107,23 @@
       position: fixed;
       bottom: 30px;
       left: 30px;
-      width: 40px;
-      height: 70px;
+      width: 30px;
+      height: 50px;
       background: linear-gradient(to bottom, #a56b2c, #6e3b14);
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
       z-index: 1000;
       cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
     .flamme {
       position: absolute;
       top: -20px;
       left: 50%;
-      width: 12px;
-      height: 25px;
+      width: 10px;
+      height: 20px;
       background: radial-gradient(ellipse at center, rgba(255, 200, 50, 0.9), rgba(255, 100, 0, 0));
       transform: translateX(-50%);
       border-radius: 50%;
@@ -133,8 +135,8 @@
       position: absolute;
       top: -40px;
       left: 50%;
-      width: 20px;
-      height: 60px;
+      width: 15px;
+      height: 45px;
       background: radial-gradient(ellipse at center, rgba(255,255,255,0.25), transparent);
       transform: translateX(-50%);
       animation: fumer 3s infinite ease-in-out;
@@ -209,14 +211,14 @@
       <li>✨ Et le <strong>tome IV</strong> prend vie, doucement, mot après mot…</li>
     </ul>
     <div style="text-align: center;">
+      <p style="text-align: center;">
+        <a href="index.html" class="button-retour">&larr; Retour à l'accueil</a>
+      </p>
       <div id="bougie" class="bougie-secret" aria-label="Passage secret">
         <div class="flamme"></div>
         <div class="fumee"></div>
       </div>
     </div>
-    <p style="text-align: center;">
-      <a href="index.html" class="button-retour">&larr; Retour à l'accueil</a>
-    </p>
   </div>
 
   <script>
@@ -256,6 +258,11 @@
           }, 8000);
         });
       }
+
+      // Apparition de la bougie en douceur après 3 secondes
+      setTimeout(() => {
+        if (bougie) bougie.style.opacity = "1";
+      }, 3000);
     });
   </script>
 </body>
