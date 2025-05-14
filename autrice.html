@@ -29,6 +29,14 @@
     position: relative;
     z-index: 1;
   }
+  .blog-post h2 {
+  font-size: 2.2rem;           /* Taille grande et lisible */
+  color: #9b84ff;              /* Violet lumineux comme “voile” */
+  text-align: center;          /* Centré */
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Ombre douce */
+}
+
 
   .blog-post p,
   .blog-post h2,
@@ -38,9 +46,13 @@
   }
 
   .blog-post h2 {
-    font-size: 2rem;
-    color: #4c3791;
-  }
+  font-size: 2rem; /* tu peux augmenter à 2.2rem si tu veux encore plus gros */
+  color: #9b84ff;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
 
   .blog-post h3 {
     color: #6a4cc3;
@@ -166,6 +178,44 @@
     50% { opacity: 0.5; transform: translateY(-20px) scale(1.2); }
     100% { opacity: 0; transform: translateY(-40px) scale(1.5); }
   }
+  
+  .titre-magique {
+  font-size: 2.2rem;
+  color: #9b84ff;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow:
+    0 0 5px #9b84ff,
+    0 0 10px #9b84ff,
+    0 0 15px #a07fff,
+    0 0 20px #b095ff;
+  animation: haloMagique 3s ease-in-out infinite;
+}
+
+@keyframes haloMagique {
+  0% {
+    text-shadow:
+      0 0 5px #9b84ff,
+      0 0 10px #9b84ff,
+      0 0 15px #a07fff,
+      0 0 20px #b095ff;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #b49bff,
+      0 0 20px #c4b2ff,
+      0 0 30px #d6c9ff,
+      0 0 40px #e5ddff;
+  }
+  100% {
+    text-shadow:
+      0 0 5px #9b84ff,
+      0 0 10px #9b84ff,
+      0 0 15px #a07fff,
+      0 0 20px #b095ff;
+  }
+}
+
 </style>
 
 </head>
@@ -175,7 +225,7 @@
 
   <div class="content">
     <article class="blog-post fade-in">
-      <h3>🌟 À propos de l'autrice</h3>
+ <h2 class="titre-magique">🌟 À propos de l’autrice</h2>
       <p><strong>J’avais 27 ans quand ma fille Paola est née</strong>, et une question m’est alors venue en tête :<br>
       <em>Quel exemple voudrais-je lui donner ?</em></p>
       <p>Je n’avais pas fait de grandes études, et je doutais souvent de moi — de ce que j’aurais à lui transmettre, à lui apprendre.
