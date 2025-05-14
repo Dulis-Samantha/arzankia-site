@@ -147,20 +147,64 @@
   transition: all 0.5s ease-in-out;
 }
 
-.artiste:hover {
-  opacity: 1;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-}
+ /* Monde des Fées – effet scintillant féerique */
+  @keyframes féeGlow {
+    0%, 100% { box-shadow: 0 0 10px #ffb6f2; }
+    50%      { box-shadow: 0 0 20px #ffc0ff; }
+  }
+  .fee {
+    background: radial-gradient(circle at center, #f8a9e0, #c27bb2);
+    animation: féeGlow 3s ease-in-out infinite;
+  }
 
+  /* Monde des Âmes perdues – aura brumeuse */
+  @keyframes brume {
+    0%   { box-shadow: 0 0 8px rgba(200, 200, 255, 0.3); }
+    50%  { box-shadow: 0 0 18px rgba(180, 180, 255, 0.6); }
+    100% { box-shadow: 0 0 8px rgba(200, 200, 255, 0.3); }
+  }
+  .ames {
+    background: linear-gradient(135deg, #888ca0, #c2c6d6);
+    animation: brume 4s ease-in-out infinite;
+  }
+
+  /* Monde des Atlantides – effet galaxie ou œil mystique */
+  .atlantides {
+    background: radial-gradient(circle at 30% 30%, #3a5fcd, #111);
+    box-shadow: 0 0 20px rgba(100, 149, 237, 0.6);
+    animation: pulseMagic 3.5s ease-in-out infinite;
+  }
+
+  /* Monde des Cités d’or – sable doré scintillant */
+  @keyframes sable {
+    0%, 100% { box-shadow: 0 0 10px #ffeb8a; }
+    50%      { box-shadow: 0 0 20px #ffe066; }
+  }
+  .cite {
+    background: linear-gradient(135deg, #f7d774, #eec643);
+    animation: sable 2.8s ease-in-out infinite;
+  }
+
+  /* Monde des Ptikitis – feuillage doux animé */
+  .ptikiti {
+    background: url('ptikitis_feuilles.jpg') center/cover no-repeat;
+    box-shadow: 0 0 10px rgba(144, 238, 144, 0.5);
+  }
+
+  /* Monde des Artistes – reste discret et invisible */
+  .artiste {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    opacity: 0.6;
+    transition: all 0.5s ease-in-out;
+  
+/* Monde des Créatures légendaires – effet poils ou plumes */
+  .creatures {
+    background: url('texture_creatures.jpg') center/cover no-repeat;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+    animation: pulseMagic 3.8s ease-in-out infinite;
+  }
     
-    .quacks     { background-color: rgba(255, 213, 79, 0.7); }
-    .cite       { background-color: rgba(251, 192, 45, 0.7); }
-    .foret      { background-color: rgba(56, 142, 60, 0.7); }
-    .atlantides { background-color: rgba(3, 155, 229, 0.7); }
-    .ames       { background-color: rgba(144, 164, 174, 0.7); }
-    .arenyth    { background-color: rgba(120, 144, 156, 0.7); }
-    .creatures  { background-color: rgba(171, 71, 188, 0.7); }
-
     /* Animations flottantes des bulles */
   @keyframes float1 {
   0%   { transform: translate(0, 0); }
