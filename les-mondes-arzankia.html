@@ -204,6 +204,24 @@
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
     animation: pulseMagic 3.8s ease-in-out infinite;
   }
+     /* Monde de la Forêt enchantée – poussière arc-en-ciel */
+  @keyframes poussiereArcEnCiel {
+    0% { box-shadow: 0 0 8px #ff66cc; }
+    25% { box-shadow: 0 0 10px #66ccff; }
+    50% { box-shadow: 0 0 12px #99ff66; }
+    75% { box-shadow: 0 0 10px #ffcc66; }
+    100% { box-shadow: 0 0 8px #ff66cc; }
+  }
+  .foret {
+    background: linear-gradient(135deg, #e0ffe0, #f8f0ff);
+    animation: poussiereArcEnCiel 5s infinite;
+  }
+
+  /* Monde d’Arenyth – effet bouclier métallique */
+  .arenyth {
+    background: url('arenyth_bouclier.jpg') center/cover no-repeat;
+    box-shadow: 0 0 12px rgba(180, 180, 180, 0.5);
+    animation: pulseMagic 3s ease-in-out infinite;
     
     /* Animations flottantes des bulles */
   @keyframes float1 {
@@ -345,6 +363,6 @@
     <span class="label">Créatures</span>
   </div>
 </a>
-
+ 
 </body>
 </html>
