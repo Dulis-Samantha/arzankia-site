@@ -1,39 +1,106 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bougie Magique - Corrigée</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos de l'autrice - Les Héros d'Arzankia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: #000;
       background-image: url('fond_autrice.png');
-      color: white;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #f2f2f2;
     }
 
-    .bulle-magique {
-      display: none;
-      position: fixed;
-      bottom: 110px;
-      left: 30px;
-      width: 260px;
-      padding: 1em;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.4);
+    .blog-box {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 750px;
+      width: 92%;
+      border-radius: 18px;
+      font-size: 1.35rem;
+      line-height: 1.9;
+      box-shadow:
+        0 0 12px rgba(255, 235, 180, 0.2),
+        0 0 30px rgba(255, 215, 100, 0.1),
+        0 0 50px rgba(255, 215, 100, 0.08);
+      animation: fadeIn 1s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-box::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
       border-radius: 20px;
-      font-family: 'IM Fell English SC', serif;
-      font-size: 1.1em;
-      text-align: center;
-      color: #fff8e6;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 12px rgba(255,255,255,0.2);
-      z-index: 1001;
-      transition: opacity 1s ease-out;
+      background: radial-gradient(circle, rgba(255, 240, 180, 0.15) 0%, transparent 70%);
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .blog-box h3 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1.3rem;
+      color: #ffe082;
+    }
+
+    .blog-box h3::before {
+      content: "\1F319 ";
+    }
+
+    .blog-box p {
+      font-size: 1.3rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .blog-box li {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin-left: 1.2rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .blog-box strong {
+      color: #aadfe5;
+      font-weight: bold;
+    }
+
+    .blog-box em {
+      color: #f0b8c9;
+      font-style: italic;
+    }
+
+    .blog-box li::marker {
+      color: #ffd54f;
+    }
+
+    .button-retour {
+      display: inline-block;
+      margin-top: 2em;
+      background-color: rgba(255, 215, 0, 0.85);
+      color: #2c2c2c;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      transition: 0.3s ease;
+    }
+
+    .button-retour:hover {
+      background-color: #fff2a0;
+      box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
+      transform: scale(1.05);
     }
 
     .bougie-secret {
@@ -47,7 +114,6 @@
       box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
       z-index: 1000;
       cursor: pointer;
-      overflow: visible;
     }
 
     .flamme {
@@ -75,6 +141,26 @@
       pointer-events: none;
     }
 
+    .bulle-magique {
+      display: none;
+      position: fixed;
+      bottom: 110px;
+      left: 30px;
+      width: 260px;
+      padding: 1em;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1.1em;
+      text-align: center;
+      color: #fff8e6;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+      z-index: 1001;
+      transition: opacity 1s ease-out;
+    }
+
     @keyframes scintille {
       0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
       50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
@@ -82,189 +168,55 @@
     }
 
     @keyframes fumer {
-      0% {
-        opacity: 0.2;
-        transform: translateX(-50%) translateY(0px) scale(1);
+      0% { opacity: 0.2; transform: translateX(-50%) translateY(0px) scale(1); }
+      50% { opacity: 0.5; transform: translateX(-50%) translateY(-20px) scale(1.2); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-40px) scale(1.5); }
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-box {
+        padding: 1.3rem;
+        font-size: 1.2rem;
       }
-      50% {
-        opacity: 0.5;
-        transform: translateX(-50%) translateY(-20px) scale(1.2);
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-40px) scale(1.5);
+      .blog-box h3 {
+        font-size: 1.5rem;
       }
     }
 
-    .button-retour {
-      display: inline-block;
-      margin-top: 2em;
-      background-color: rgba(255, 215, 0, 0.85);
-      color: #2c2c2c;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-      transition: 0.3s ease;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
-    .button-retour:hover {
-      background-color: #fff2a0;
-      box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
-    }
-.blog-box {
-  background-color: rgba(0, 0, 0, 0.75);
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 750px;
-  width: 92%;
-  border-radius: 18px;
-  font-size: 1.35rem;
-  line-height: 1.9;
-  color: #f2f2f2;
-  box-shadow:
-    0 0 12px rgba(255, 235, 180, 0.2),
-    0 0 30px rgba(255, 215, 100, 0.1),
-    0 0 50px rgba(255, 215, 100, 0.08); /* effet lueur douce */
-  animation: fadeIn 1s ease-out;
-  position: relative;
-  z-index: 1;
-}
-
-.blog-box::before {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: 20px;
-  background: radial-gradient(circle, rgba(255, 240, 180, 0.15) 0%, transparent 70%);
-  filter: blur(12px);
-  z-index: -1;
-}
-
-.blog-box h3 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1.3rem;
-  color: #ffe082;
-}
-
-.blog-box h3::before {
-  content: "🌙 ";
-}
-
-.blog-box p {
-  font-size: 1.3rem;
-  margin-bottom: 1.4rem;
-  color: #f2f2f2;
-}
-
-.blog-box li {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  margin-left: 1.2rem;
-  margin-bottom: 0.9rem;
-  color: #f2f2f2;
-}
-
-.blog-box strong {
-  font-weight: bold;
-  color: #aadfe5;
-}
-
-.blog-box em {
-  font-style: italic;
-  color: #f0b8c9;
-}
-
-.blog-box li::marker {
-  color: #ffd54f;
-}
-
-.button-retour:hover {
-  background-color: #fff2a0;
-  box-shadow: 0 0 15px rgba(255, 255, 150, 0.9), 0 0 30px rgba(255, 255, 150, 0.6);
-  transform: scale(1.05);
-}
-
-@media screen and (max-width: 768px) {
-  .blog-box {
-    padding: 1.3rem;
-    font-size: 1.2rem;
-  }
-
-  .blog-box h3 {
-    font-size: 1.5rem;
-  }
-
-  .blog-box p {
-    font-size: 1.2rem;
-  }
-
-  .blog-box li {
-    font-size: 1.15rem;
-  }
-}
-
-/* Animation douce à l'affichage */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-
   </style>
 </head>
 <body>
-
   <div class="bulle-magique" id="bulle-magique"></div>
-  
-  <div class="content">
-    <div class="blog-box">
-    <h3>🌟 À propos de l'autrice</h3>
-    
-    <p><strong>J’avais 27 ans quand ma fille Paola est née</strong>, et une question m’est alors venue en tête :<br>
-    <em>Quel exemple voudrais-je lui donner ?</em></p>
 
-    <p>Je n’avais pas fait de grandes études, et je doutais souvent de moi — de ce que j’aurais à lui transmettre, à lui apprendre.
-    Mais avec un peu de recul, j’ai compris que le plus précieux héritage que je pouvais lui offrir, c’était <strong>ma force d’avancer malgré les difficultés</strong>.</p>
-
-    <p>Je voulais lui montrer que même quand un rêve semble hors de portée,
-    <strong>avec de la volonté et du travail, tout devient possible</strong>.</p>
-
-    <p>Alors je me suis posé une autre question :<br>
-    <em>Qu’est-ce qui me paraît impossible, mais que j’ai toujours rêvé d’accomplir ?</em></p>
-
-    <p>Je me suis revue dans une bibliothèque, impressionnée par les rangées de livres, émerveillée par les histoires qu’ils renfermaient…
-    et habitée par cette petite voix qui me soufflait :<br>
-    <em>“Tu ne seras jamais capable d’écrire une histoire, toi.”</em></p>
-
-    <p>C’est là qu’est né mon défi personnel : <strong>écrire une histoire magique et fantastique pour ma fille</strong>.</p>
-
-    <p>Malgré les doutes, malgré le manque d’expérience, j’ai décidé de croire en moi.
-    Et très vite, un garçon nommé <strong>Raphaël</strong> faisait ses premiers pas en <strong>Arzankia</strong>.</p>
-
-    <blockquote>Il m’aura fallu 18 ans pour aller au bout de ce rêve.</blockquote>
-
-    <p>Aujourd’hui, je suis fière de vous présenter le <strong>tome I</strong> de ma série <em>Les Héros d’Arzankia</em>.</p>
-
+  <div class="blog-box">
+    <h3>À propos de l'autrice</h3>
+    <p><strong>J'avais 27 ans quand ma fille Paola est née</strong>, et une question m'est alors venue en tête :<br><em>Quel exemple voudrais-je lui donner ?</em></p>
+    <p>Je n'avais pas fait de grandes études, et je doutais souvent de moi. Mais avec le recul, j'ai compris que le plus précieux héritage que je pouvais lui offrir, c'était <strong>ma force d'avancer malgré les difficultés</strong>.</p>
+    <p>Je voulais lui montrer que même quand un rêve semble hors de portée, <strong>avec de la volonté et du travail, tout devient possible</strong>.</p>
+    <p>Alors je me suis posé une autre question :<br><em>Qu'est-ce qui me paraît impossible, mais que j'ai toujours rêvé d'accomplir ?</em></p>
+    <p>Je me suis revue dans une bibliothèque, impressionnée par les rangées de livres... et cette petite voix qui me soufflait :<br><em>"Tu ne seras jamais capable d'écrire une histoire, toi."</em></p>
+    <p>C'est là qu'est né mon défi personnel : <strong>écrire une histoire magique et fantastique pour ma fille</strong>.</p>
+    <p>Malgré les doutes, j'ai décidé de croire en moi. Et très vite, un garçon nommé <strong>Raphaël</strong> faisait ses premiers pas en <strong>Arzankia</strong>.</p>
+    <blockquote>Il m'aura fallu 18 ans pour aller au bout de ce rêve.</blockquote>
+    <p>Aujourd'hui, je suis fière de vous présenter le <strong>tome I</strong> de ma série <em>Les Héros d'Arzankia</em>.</p>
     <ul>
-      <li>📖 Le <strong>tome II</strong> est en cours de finalisation</li>
+      <li>📓 Le <strong>tome II</strong> est en cours de finalisation</li>
       <li>✍️ Le <strong>tome III</strong> touche à sa fin</li>
       <li>✨ Et le <strong>tome IV</strong> prend vie, doucement, mot après mot…</li>
     </ul>
-
     <div style="text-align: center;">
       <div id="bougie" class="bougie-secret" aria-label="Passage secret">
         <div class="flamme"></div>
         <div class="fumee"></div>
       </div>
     </div>
-
     <p style="text-align: center;">
-      <a href="index.html" class="button-retour">← Retour à l’accueil</a>
+      <a href="index.html" class="button-retour">&larr; Retour à l'accueil</a>
     </p>
-
   </div>
 
   <script>
