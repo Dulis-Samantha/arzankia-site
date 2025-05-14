@@ -118,34 +118,41 @@
     .creatures  { background-color: rgba(171, 71, 188, 0.7); }
 
     /* Animations flottantes des bulles */
-    @keyframes float1 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(0, -10px); }
-      100% { transform: translate(0, 0); }
-    }
+   @keyframes float1 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(6px, -8px); }
+  50%  { transform: translate(-5px, 5px); }
+  75%  { transform: translate(-8px, -4px); }
+  100% { transform: translate(0, 0); }
+}
 
-    @keyframes float2 {
-      0%   { transform: translate(5px, 0); }
-      50%  { transform: translate(-5px, -12px); }
-      100% { transform: translate(5px, 0); }
-    }
+@keyframes float2 {
+  0%   { transform: translate(0, 0); }
+  30%  { transform: translate(-6px, 10px); }
+  60%  { transform: translate(5px, -6px); }
+  100% { transform: translate(0, 0); }
+}
 
-    @keyframes float3 {
-      0%   { transform: translate(-3px, 2px); }
-      50%  { transform: translate(3px, -10px); }
-      100% { transform: translate(-3px, 2px); }
-    }
+@keyframes float3 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(8px, 6px); }
+  50%  { transform: translate(-7px, -8px); }
+  75%  { transform: translate(4px, -3px); }
+  100% { transform: translate(0, 0); }
+}
 
-    @keyframes float4 {
-      0%   { transform: translate(2px, 0); }
-      50%  { transform: translate(-4px, -8px); }
-      100% { transform: translate(2px, 0); }
-    }
+@keyframes float4 {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3px, -9px); }
+  50%  { transform: translate(6px, 6px); }
+  80%  { transform: translate(-6px, 2px); }
+  100% { transform: translate(0, 0); }
+}
 
-    .float1 { animation: float1 5s ease-in-out infinite; }
-    .float2 { animation: float2 6s ease-in-out infinite; }
+    .float1 { animation: float1 3s ease-in-out infinite; }
+    .float2 { animation: float2 5s ease-in-out infinite; }
     .float3 { animation: float3 7s ease-in-out infinite; }
-    .float4 { animation: float4 4.5s ease-in-out infinite; }
+    .float4 { animation: float4 9.5s ease-in-out infinite; }
   </style>
 </head>
 <body>
