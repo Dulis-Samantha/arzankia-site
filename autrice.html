@@ -216,6 +216,17 @@
   }
 }
 
+  .apparition-scroll {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.apparition-scroll.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
 </style>
 
 </head>
@@ -225,7 +236,7 @@
 
   <div class="content">
     <article class="blog-post fade-in">
- <h2 class="titre-magique">🌟 À propos de l’autrice</h2>
+ <h2 class="titre-magique apparition-scroll" id="titreAutrice">🌟 À propos de l’autrice</h2>
       <p><strong>J’avais 27 ans quand ma fille Paola est née</strong>, et une question m’est alors venue en tête :<br>
       <em>Quel exemple voudrais-je lui donner ?</em></p>
       <p>Je n’avais pas fait de grandes études, et je doutais souvent de moi — de ce que j’aurais à lui transmettre, à lui apprendre.
@@ -257,47 +268,59 @@
   <div id="bougie" class="bougie-secret" aria-label="Passage secret">
     <div class="flamme"></div>
     <div class="fumee"></div>
-  </div>
-
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const bougie = document.getElementById("bougie");
-      const bulle = document.getElementById("bulle-magique");
-      const text = "Le voile s’est levé… Tu viens d’ouvrir un passages secrets d’Arzankia.";
+  document.addEventListener("DOMContentLoaded", function () {
+    // Bougie magique
+    const bougie = document.getElementById("bougie");
+    const bulle = document.getElementById("bulle-magique");
+    const text = "Le voile s’est levé… Tu viens d’ouvrir un passages secrets d’Arzankia.";
 
-      function typeText(element, text, speed, callback) {
-        element.style.display = "block";
-        element.style.opacity = "1";
-        const span = document.createElement("span");
-        element.innerHTML = "";
-        element.appendChild(span);
-        let i = 0;
-        function type() {
-          if (i < text.length) {
-            span.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-          } else if (callback) {
-            callback();
-          }
+    function typeText(element, text, speed, callback) {
+      element.style.display = "block";
+      element.style.opacity = "1";
+      const span = document.createElement("span");
+      element.innerHTML = "";
+      element.appendChild(span);
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          span.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else if (callback) {
+          callback();
         }
-        setTimeout(type, 50);
       }
+      setTimeout(type, 50);
+    }
 
-      if (bougie && bulle) {
-        bougie.addEventListener("click", function (e) {
-          e.preventDefault();
-          bulle.offsetHeight;
-          typeText(bulle, text, 80);
-          setTimeout(() => { bulle.style.opacity = "0"; }, 7000);
-          setTimeout(() => {
-            bulle.style.display = "none";
-            window.location.href = "voile.html";
-          }, 8000);
-        });
-      }
+    if (bougie && bulle) {
+      bougie.addEventListener("click", function (e) {
+        e.preventDefault();
+        bulle.offsetHeight;
+        typeText(bulle, text, 80);
+        setTimeout(() => { bulle.style.opacity = "0"; }, 7000);
+        setTimeout(() => {
+          bulle.style.display = "none";
+          window.location.href = "voile.html";
+        }, 8000);
+      });
+    }
+
+    // Apparition au scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
     });
-  </script>
+
+    const elements = document.querySelectorAll('.apparition-scroll');
+    elements.forEach(el => observer.observe(el));
+  });
+</script>
+
 
 </body>
 </html>
