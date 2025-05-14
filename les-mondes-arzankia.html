@@ -13,78 +13,79 @@
       padding: 2em;
       font-family: Georgia, serif;
       color: #fffff2;
-      text-shadow: 0 0 6px #000;
+      overflow: hidden;
     }
 
     .container {
+      position: relative;
+      z-index: 1;
       max-width: 1000px;
       margin: 0 auto;
       background: rgba(0,0,0,0.4);
       padding: 2em;
       border-radius: 12px;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       color: #00d9ff;
       text-shadow: 0 0 10px #014a68;
       margin-bottom: 2em;
     }
 
     .intro {
-      text-align: center;
       font-size: 1.2rem;
       margin-bottom: 2em;
     }
 
-    .world-buttons {
+    .bubble-button {
+      position: absolute;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 1em;
-    }
-
-    .world-buttons a {
-      background-color: #00b0d9;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
       color: white;
-      padding: 1em 2em;
-      border-radius: 10px;
-      text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 12px #70ecff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-size: 1.2rem;
-      width: 80%;
       text-align: center;
+      padding: 1em;
+      text-decoration: none;
+      font-size: 0.9em;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(6px);
+      animation: float linear infinite;
+      z-index: 2;
     }
 
-    .world-buttons a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #b8ffff;
+    .bubble-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.1);
     }
 
-    #image-container {
-      margin-top: 2em;
-      text-align: center;
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(10px, -20px); }
+      50% { transform: translate(-10px, 10px); }
+      75% { transform: translate(15px, -5px); }
+      100% { transform: translate(0, 0); }
     }
 
-    #world-image {
-      max-width: 80%;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #000;
-      display: none;
-    }
-
-    #world-caption {
-      color: #fffff2;
-      font-size: 1.1rem;
-      margin-top: 1em;
-    }
+    /* Position personnalisée pour chaque bulle */
+    .bubble1 { top: 100px; left: 10%; animation-duration: 25s; }
+    .bubble2 { top: 180px; left: 30%; animation-duration: 30s; }
+    .bubble3 { top: 300px; left: 50%; animation-duration: 28s; }
+    .bubble4 { top: 120px; left: 70%; animation-duration: 22s; }
+    .bubble5 { top: 220px; left: 85%; animation-duration: 32s; }
+    .bubble6 { top: 400px; left: 20%; animation-duration: 35s; }
 
     .back-button {
       display: block;
       text-align: center;
       margin-top: 3em;
+      z-index: 3;
+      position: relative;
     }
 
     .back-button a {
@@ -110,27 +111,6 @@
     <h1>🌍 Les Mondes d’Arzankia</h1>
     <p class="intro">Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
 
-    <div class="world-buttons">
-      <a href="monde_ptikitis.html" target="_blank">🌱 Monde des Ptikitis</a>
-      <a href="monde_ames.html" target="_blank">🌀 Monde des Âmes perdues</a>
-      <a href="monde_fees.html" target="_blank">🧚 Monde des Fées</a>
-      <a href="monde_geants.html" target="_blank">🌳 Monde des Géants</a>
-      <a href="monde_artistes.html" target="_blank">🎨 Monde des Artistes</a>
-      <a href="monde_yakkas.html" target="_blank">🪶 Monde des Yakkas</a>
-      <a href="monde_cites_d_or.html" target="_blank">🏛️ Monde des Cités d’or</a>
-      <a href="monde_foret_enchante.html" target="_blank">🌲 Monde de la forêt enchantée</a>
-      <a href="monde_sirènes.html" target="_blank">🧜 Monde des Sirènes</a>
-      <a href="monde_atlantides.html" target="_blank">🌊 Monde d’Atlantides</a>
-      <a href="monde_arenyth.html" target="_blank">🏟️ Monde d’Arenyth</a>
-      <a href="monde_quacks.html" target="_blank">💨 Monde des Quacks</a>
-      <a href="monde_creatures_legendaires.html" target="_blank">🐉 Monde des Créatures Légendaires</a>
-    </div>
-
-    <div id="image-container">
-      <img id="world-image" src="" alt="">
-      <p id="world-caption"></p>
-    </div>
-
     <div class="back-button">
       <a href="index.html">← Retour à l’accueil</a>
     </div>
@@ -138,5 +118,14 @@
       <a href="les-coulisses-arzankia.html">← Retour aux Coulisses d’Arzankia</a>
     </div>
   </div>
+
+  <!-- Boutons flottants -->
+  <a href="monde_ptikitis.html" target="_blank" class="bubble-button bubble1">Ptikitis</a>
+  <a href="monde_ames.html" target="_blank" class="bubble-button bubble2">Âmes perdues</a>
+  <a href="monde_fees.html" target="_blank" class="bubble-button bubble3">Fées</a>
+  <a href="monde_geants.html" target="_blank" class="bubble-button bubble4">Géants</a>
+  <a href="monde_artistes.html" target="_blank" class="bubble-button bubble5">Artistes</a>
+  <a href="monde_yakkas.html" target="_blank" class="bubble-button bubble6">Yakkas</a>
+
 </body>
 </html>
