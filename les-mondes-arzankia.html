@@ -7,11 +7,11 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('ton_image_de_fond.jpg') no-repeat center center fixed;
+      background: url('fond_arzankia.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Georgia', serif;
       color: white;
-      text-align: center;
+      overflow-x: hidden;
     }
 
     .intro-box {
@@ -21,6 +21,7 @@
       border-radius: 20px;
       max-width: 700px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      text-align: center;
     }
 
     .intro-box h1 {
@@ -45,13 +46,15 @@
     }
 
     .bubble-container {
+      position: relative;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-start;
       padding: 2rem;
       gap: 20px;
-      height: calc(100vh - 350px);
+      min-height: 50vh;
+      overflow: visible;
     }
 
     .bubble {
@@ -64,30 +67,41 @@
       color: white;
       font-family: 'Georgia', serif;
       font-size: 1rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      opacity: 0.85;
+      backdrop-filter: blur(2px);
+      transition: transform 0.3s, opacity 0.3s;
       cursor: pointer;
+      position: relative;
+      animation: float 4s ease-in-out infinite;
     }
 
     .bubble:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 25px rgba(255,255,255,0.5);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      opacity: 1;
     }
 
-    /* Couleurs personnalisées */
-    .fee        { background-color: #f06292; }    /* rose vif */
-    .ptikiti    { background-color: #ffb74d; }    /* orange doux */
-    .geant      { background-color: #aed581; }    /* vert clair */
-    .artiste    { background: linear-gradient(135deg, #f06292, #ffd54f, #4fc3f7); color: black; } /* arc-en-ciel */
-    .yakkas     { background-color: #e53935; }    /* rouge */
-    .quacks     { background-color: #ffd54f; }    /* jaune chaud */
-    .sirenes    { background-color: #4dd0e1; }    /* bleu turquoise */
-    .cite       { background-color: #fbc02d; }    /* doré intense */
-    .foret      { background-color: #388e3c; }    /* vert forêt */
-    .atlantides { background-color: #039be5; }    /* bleu océan */
-    .ames       { background-color: #90a4ae; }    /* gris brume */
-    .arenyth    { background-color: #78909c; }    /* gris bleuté */
-    .creatures  { background-color: #ab47bc; }    /* violet */
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Couleurs personnalisées avec effet transparent */
+    .fee        { background-color: rgba(240, 98, 146, 0.7); }  /* rose vif */
+    .ptikiti    { background-color: rgba(255, 183, 77, 0.7); }  /* orange doux */
+    .geant      { background-color: rgba(174, 213, 129, 0.7); } /* vert clair */
+    .artiste    { background: linear-gradient(135deg, #f06292, #ffd54f, #4fc3f7); color: black; opacity: 0.95; } /* arc-en-ciel */
+    .yakkas     { background-color: rgba(229, 57, 53, 0.7); }   /* rouge */
+    .quacks     { background-color: rgba(255, 213, 79, 0.7); }  /* jaune chaud */
+    .sirenes    { background-color: rgba(77, 208, 225, 0.7); }  /* bleu turquoise */
+    .cite       { background-color: rgba(251, 192, 45, 0.7); }  /* doré intense */
+    .foret      { background-color: rgba(56, 142, 60, 0.7); }   /* vert forêt */
+    .atlantides { background-color: rgba(3, 155, 229, 0.7); }   /* bleu océan */
+    .ames       { background-color: rgba(144, 164, 174, 0.7); } /* gris brume */
+    .arenyth    { background-color: rgba(120, 144, 156, 0.7); } /* gris bleuté */
+    .creatures  { background-color: rgba(171, 71, 188, 0.7); }  /* violet */
   </style>
 </head>
 <body>
