@@ -113,11 +113,12 @@
       background-color: #fff2a0;
       box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
-  .blog-box {
+ .blog-box {
   background-color: rgba(0, 0, 0, 0.6);
   padding: 2rem;
-  margin: 2rem;
-  width: calc(100% - 4rem); /* pleine largeur avec marges */
+  margin: 2rem auto;
+  max-width: 900px; /* plus large que 700px mais pas plein écran */
+  width: 90%; /* s'adapte bien aux petits écrans */
   border-radius: 20px;
   font-size: 1.25rem;
   line-height: 1.8;
@@ -125,6 +126,7 @@
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   animation: fadeIn 1s ease-out;
 }
+
 
 .blog-box h3 {
   font-size: 1.6rem;
