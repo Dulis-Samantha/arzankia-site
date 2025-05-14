@@ -113,14 +113,32 @@
       background-color: #fff2a0;
       box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
+    .blog-box {
+  background-color: rgba(0, 0, 0, 0.6); /* fond sombre légèrement transparent */
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 700px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+@media screen and (max-width: 768px) {
+  .blog-box {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+}
+
   </style>
 </head>
 <body>
 
   <div class="bulle-magique" id="bulle-magique"></div>
-
+  
   <div class="content">
-                                        <h3>🌟 À propos de l'autrice</h3>
+    <div class="blog-box">
+    <h3>🌟 À propos de l'autrice</h3>
     
     <p><strong>J’avais 27 ans quand ma fille Paola est née</strong>, et une question m’est alors venue en tête :<br>
     <em>Quel exemple voudrais-je lui donner ?</em></p>
@@ -147,23 +165,23 @@
 
     <p>Aujourd’hui, je suis fière de vous présenter le <strong>tome I</strong> de ma série <em>Les Héros d’Arzankia</em>.</p>
 
-
-
-              <li>📖 Le <strong>tome II</strong> est en cours de finalisation</li>
-              <li>✍️ Le <strong>tome III</strong> touche à sa fin</li>
-              <li>✨ Et le <strong>tome IV</strong> prend vie, doucement, mot après mot…</li>
+    <ul>
+      <li>📖 Le <strong>tome II</strong> est en cours de finalisation</li>
+      <li>✍️ Le <strong>tome III</strong> touche à sa fin</li>
+      <li>✨ Et le <strong>tome IV</strong> prend vie, doucement, mot après mot…</li>
     </ul>
 
-    <p style="text-align: center;">
+    <div style="text-align: center;">
       <div id="bougie" class="bougie-secret" aria-label="Passage secret">
         <div class="flamme"></div>
         <div class="fumee"></div>
       </div>
-    </p>
+    </div>
 
     <p style="text-align: center;">
       <a href="index.html" class="button-retour">← Retour à l’accueil</a>
     </p>
+
   </div>
 
   <script>
