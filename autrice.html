@@ -113,21 +113,52 @@
       background-color: #fff2a0;
       box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
     }
-    .blog-box {
-  background-color: rgba(0, 0, 0, 0.6); /* fond sombre légèrement transparent */
+   .blog-box {
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   margin: 2rem auto;
   max-width: 700px;
   border-radius: 20px;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1.25rem; /* texte plus gros */
+  line-height: 1.8;
+  color: #ffffff;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease-out;
 }
+
+.blog-box h3 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.blog-box p {
+  margin-bottom: 1.2rem;
+}
+
+.blog-box li {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-left: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
 @media screen and (max-width: 768px) {
   .blog-box {
     padding: 1.5rem;
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
+
+  .blog-box h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animation douce à l'affichage */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
   </style>
