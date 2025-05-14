@@ -85,13 +85,82 @@
   position: static;
 }
     }
-    
+
+    /* 🎸 Bouton guitare magique en haut à gauche */
+#btn-guitare {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(45deg, #ffcc80, #f57f17);
+  color: #000;
+  font-size: 2rem;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ffeb3b;
+  animation: pulse 2s infinite;
+  z-index: 1000;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #fff176; }
+  50% { box-shadow: 0 0 30px #fff176; }
+  100% { box-shadow: 0 0 10px #fff176; }
+}
+
+#lecteur-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+.contenu-lecteur {
+  background: #111;
+  border: 3px solid #fbc02d;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  color: white;
+  box-shadow: 0 0 20px #fbc02d;
+  position: relative;
+}
+.contenu-lecteur h3 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.fermer {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fbc02d;
+}
+
   </style>
 </head>
 
   </style>
 </head>
 <body>
+
+  <!-- 🎸 Bouton guitare magique -->
+<div id="btn-guitare" onclick="ouvrirLecteur()">🎸</div>
+
+<!-- 🎶 Fenêtre magique avec lecteur intégré -->
+<div id="lecteur-popup">
+  <div class="contenu-lecteur">
+    <span class="fermer" onclick="fermerLecteur()">✖</span>
+    <h3>🎶 Chanson bonus</h3>
+    <iframe src="https://suno.com/s/AZ2OzcsSZO4GNwlB" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
 <div class="bulle-container">
   <div id="monde-artistes" class="bulle">
     <h2>🎨 Le Monde des Artistes</h2>
@@ -105,9 +174,16 @@
     <p>Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.</p>
     <a class="bouton" href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">🎵 Écouter Pensée pour elle</a>
     <a class="bouton" href="https://www.jammable.com/conversion/camidjo-AXzXp-X7DJOcba" target="_blank">🎵 La fée</a>
-  
-   
+     
   </div>
-
+<script>
+function ouvrirLecteur() {
+  document.getElementById('lecteur-popup').style.display = 'flex';
+}
+function fermerLecteur() {
+  document.getElementById('lecteur-popup').style.display = 'none';
+}
+</script>
+  
 </body>
 </html>
