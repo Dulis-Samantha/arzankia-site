@@ -112,10 +112,16 @@
       50%  { box-shadow: 0 0 30px #ff8c00; }
       100% { box-shadow: 0 0 15px #ff4500; }
     }
-    .yakkas {
-      background: radial-gradient(circle at center, #ff6347, #b22222);
-      animation: flamme 2.5s infinite;
-    }
+      /* Monde des Yakkas – effet fumée de cheminée (oscillation douce + halo diffus) */
+  @keyframes fumeYak {
+    0%   { box-shadow: 0 0 10px rgba(255, 100, 0, 0.2); transform: translateY(0px); }
+    50%  { box-shadow: 0 0 20px rgba(255, 140, 0, 0.4); transform: translateY(-5px); }
+    100% { box-shadow: 0 0 10px rgba(255, 100, 0, 0.2); transform: translateY(0px); }
+  }
+  .yakkas {
+    background: radial-gradient(circle at center, #b22222, #4b0000);
+    animation: fumeYak 3.2s ease-in-out infinite;
+  }
 
     /* Effet eau pour Sirènes */
     @keyframes vague {
@@ -147,14 +153,15 @@
   transition: all 0.5s ease-in-out;
 }
 
- /* Monde des Fées – effet scintillant féerique */
-  @keyframes féeGlow {
-    0%, 100% { box-shadow: 0 0 10px #ffb6f2; }
-    50%      { box-shadow: 0 0 20px #ffc0ff; }
+/* Monde des Fées – poudre de fée scintillante blanche + contour brillant */
+  @keyframes feePoussiere {
+    0%, 100% { box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; }
+    50%      { box-shadow: 0 0 20px #eeeeee, 0 0 30px #ffffff; }
   }
   .fee {
-    background: radial-gradient(circle at center, #f8a9e0, #c27bb2);
-    animation: féeGlow 3s ease-in-out infinite;
+    background: radial-gradient(circle at center, #ffffffcc, #ffffff22);
+    border: 2px solid #ffffffcc;
+    animation: feePoussiere 3s ease-in-out infinite;
   }
 
   /* Monde des Âmes perdues – aura brumeuse */
@@ -204,17 +211,15 @@
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
     animation: pulseMagic 3.8s ease-in-out infinite;
   }
-     /* Monde de la Forêt enchantée – poussière arc-en-ciel */
-  @keyframes poussiereArcEnCiel {
-    0% { box-shadow: 0 0 8px #ff66cc; }
-    25% { box-shadow: 0 0 10px #66ccff; }
-    50% { box-shadow: 0 0 12px #99ff66; }
-    75% { box-shadow: 0 0 10px #ffcc66; }
-    100% { box-shadow: 0 0 8px #ff66cc; }
+ /* Monde de la Forêt enchantée – ajout contour brillant comme les Fées */
+  @keyframes foretLueur {
+    0%, 100% { box-shadow: 0 0 10px #b3ffcc, 0 0 20px #d0ffd8; }
+    50%      { box-shadow: 0 0 20px #ccffee, 0 0 30px #e0fff2; }
   }
   .foret {
     background: linear-gradient(135deg, #e0ffe0, #f8f0ff);
-    animation: poussiereArcEnCiel 5s infinite;
+    border: 2px solid #ffffff88;
+    animation: foretLueur 4s ease-in-out infinite;
   }
 
   /* Monde d’Arenyth – effet bouclier métallique */
