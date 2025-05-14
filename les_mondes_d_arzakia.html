@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Les Mondes d'Arzankia</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('fond_mondes.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Georgia', serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .intro-box {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 700px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .intro-box h1 {
+      font-size: 2rem;
+      color: #00d4ff;
+    }
+
+    .intro-box p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-box button {
+      background-color: white;
+      color: black;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .bubble-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+    .bubble {
+  width: 150px;
+  height: 150px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      font-family: 'Georgia', serif;
+      font-size: 1.2rem;
+       line-height: 1.3;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      opacity: 0.85;
+      backdrop-filter: blur(2px);
+      transition: transform 0.3s, opacity 0.3s;
+      cursor: pointer;
+      position: absolute;  /* pour que chaque bulle soit placée librement */
+      animation: haloBrillant 3.5s ease-in-out infinite;
+
+      text-decoration: none;
+    }
+    
+.bubble::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border-radius: 50%;
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(255, 255, 255, 0.1); /* halo doux, sans effet cerclé */
+  z-index: -1;
+  animation: haloBrillant 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.bubble.artiste {
+  box-shadow: none !important;
+  opacity: 0.25;
+  background-color: rgba(255, 255, 255, 0.03); /* presque invisible */
+}
+
+
+    .bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      opacity: 1;
+    }
+
+.bubble-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.bubble .label {
+  margin-top: 0.3rem;
+  font-size: 1.1rem;
+}
+    .bubble.flotter1 {
+  animation: flotter1 28s ease-in-out infinite, haloBrillant 3.5s ease-in-out infinite;
+}
+ 
+ @keyframes pulseMagic {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.15); opacity: 0.8; }
+    }
+    
+@keyframes haloBrillant {
+  0%, 100% { box-shadow: 0 0 10px #ffffff66, 0 0 20px #ffffff88; }
+  50% { box-shadow: 0 0 20px #ffffffaa, 0 0 35px #ffffffcc; }
+}
+ @keyframes flotter1 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(20px, -40px); }
+  50% { transform: translate(-25px, 30px); }
+  75% { transform: translate(30px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flotter2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-35px, 25px); }
+  50% { transform: translate(40px, -30px); }
+  75% { transform: translate(-20px, 35px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flotter3 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(15px, 40px); }
+  50% { transform: translate(-30px, -20px); }
+  75% { transform: translate(25px, 25px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flotter4 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-20px, -30px); }
+  50% { transform: translate(30px, 20px); }
+  75% { transform: translate(-10px, -40px); }
+  100% { transform: translate(0, 0); }
+}
+
+.flotter1 { animation: flotter1 28s ease-in-out infinite; }
+.flotter2 { animation: flotter2 32s ease-in-out infinite; }
+.flotter3 { animation: flotter3 36s ease-in-out infinite; }
+.flotter4 { animation: flotter4 30s ease-in-out infinite; }
+
+    
+    /* Monde des Yakkas – flamme animée rouge/orange */
+  @keyframes flammeYak {
+    0%   { box-shadow: 0 0 15px #ff4500; }
+    50%  { box-shadow: 0 0 30px #ff8c00; }
+    100% { box-shadow: 0 0 15px #ff4500; }
+  }
+  .yakkas {
+    background: radial-gradient(circle at center, #ff6347, #b22222);
+    animation: flammeYak 2.5s infinite;
+  }
+
+    /* Effet eau pour Sirènes */
+    @keyframes vague {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+     
+    .sirenes {
+      background: linear-gradient(135deg, #00c3ff, #3a86ff);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+      animation: vague 6s ease-in-out infinite;
+    }
+
+    /* Effet verdure pour Géants */
+    .geant {
+      background: url('feuillage.jpg') center/cover no-repeat;
+      box-shadow: 0 0 10px rgba(34, 139, 34, 0.6);
+    }
+  
+    /* Couleurs par monde */
+    .fee        { background-color: rgba(240, 98, 146, 0.7); }
+    .ptikiti    { background-color: rgba(255, 183, 77, 0.7); }
+    .geant      { background-color: rgba(174, 213, 129, 0.7); }
+    .artiste {
+  background-color: rgba(255, 255, 255, 0.08); /* quasi invisible */
+  border: 1px solid rgba(255, 255, 255, 0.15);  /* léger contour magique */
+  opacity: 0.6;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Monde des Fées – poudre de fée scintillante blanche + contour brillant */
+  @keyframes feePoussiere {
+    0%, 100% { box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; }
+    50%      { box-shadow: 0 0 20px #eeeeee, 0 0 30px #ffffff; }
+  }
+  .fee {
+    background: radial-gradient(circle at center, #ffffffcc, #ffffff22);
+    border: 2px solid #ffffffcc;
+    animation: feePoussiere 3s ease-in-out infinite;
+  }
+
+  /* Monde des Âmes perdues – aura brumeuse */
+  @keyframes brume {
+    0%   { box-shadow: 0 0 8px rgba(200, 200, 255, 0.3); }
+    50%  { box-shadow: 0 0 18px rgba(180, 180, 255, 0.6); }
+    100% { box-shadow: 0 0 8px rgba(200, 200, 255, 0.3); }
+  }
+  .ames {
+    background: linear-gradient(135deg, #888ca0, #c2c6d6);
+    animation: brume 4s ease-in-out infinite;
+  }
+
+  /* Monde des Atlantides – effet galaxie ou œil mystique */
+  .atlantides {
+    background: radial-gradient(circle at 30% 30%, #3a5fcd, #111);
+    box-shadow: 0 0 20px rgba(100, 149, 237, 0.6);
+    animation: pulseMagic 3.5s ease-in-out infinite;
+  }
+
+  /* Monde des Cités d’or – sable doré scintillant */
+  @keyframes sable {
+    0%, 100% { box-shadow: 0 0 10px #ffeb8a; }
+    50%      { box-shadow: 0 0 20px #ffe066; }
+  }
+  .cite {
+    background: linear-gradient(135deg, #f7d774, #eec643);
+    animation: sable 2.8s ease-in-out infinite;
+  }
+
+  /* Monde des Ptikitis – feuillage doux animé */
+  .ptikiti {
+    background: url('ptikitis_feuilles.jpg') center/cover no-repeat;
+    box-shadow: 0 0 10px rgba(144, 238, 144, 0.5);
+  }
+
+  /* Monde des Artistes – reste discret et invisible */
+  .artiste {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    opacity: 0.6;
+    transition: all 0.5s ease-in-out;
+  
+.creatures {
+  background: radial-gradient(circle at 30% 30%, #3e2c23, #000);
+  background-size: cover;
+  box-shadow: 0 0 25px rgba(90, 60, 30, 0.4);
+  animation: pulseMagic 4s ease-in-out infinite;
+  opacity: 0.9;
+}
+    
+ .foret {
+  background: radial-gradient(circle at center, #ffb6d9, #fcdfff);
+  box-shadow: 0 0 25px rgba(255, 182, 193, 0.5), 0 0 40px rgba(255, 192, 203, 0.3);
+  animation: roseScintillant 3.5s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+@keyframes roseScintillant {
+  0%, 100% { box-shadow: 0 0 15px #ffc0cb, 0 0 25px #ffe4e1; }
+  50%      { box-shadow: 0 0 30px #ffbbdd, 0 0 45px #ffe0f0; }
+}
+    
+  .arenyth {
+  background: linear-gradient(135deg, #2a2a2a, #444);
+  box-shadow: 0 0 25px rgba(180, 180, 180, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  animation: acierBrillant 4s ease-in-out infinite;
+  opacity: 0.95;
+}
+
+@keyframes acierBrillant {
+  0%   { box-shadow: 0 0 20px rgba(160, 160, 160, 0.3); }
+  50%  { box-shadow: 0 0 30px rgba(200, 200, 200, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(160, 160, 160, 0.3); }
+}
+    
+.quacks {
+  background: radial-gradient(circle, #2e2e2e 0%, #000000 100%);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  animation: fumeNoire 5s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes fumeNoire {
+  0%   { transform: translateY(0); box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); }
+  50%  { transform: translateY(-5px); box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); }
+  100% { transform: translateY(0); box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="intro-box">
+    <h1>🌍 Les Mondes d’Arzankia</h1>
+    <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
+    <button onclick="location.href='index.html'">← Retour à l’accueil</button>
+  </div>
+  <button onclick="location.href='les-coulisses-arzankia.html'">← Retour aux coulisses d'arzankia</button>
+
+</div>
+
+  <div class="bubble-container"> 
+
+<a href="monde_fees.html" class="bubble fee flotter1" style="top: 15%; left: 10%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Fées</span>
+  </div>
+</a>
+
+<a href="monde_ptikitis.html" class="bubble ptikiti flotter4" style="top: 20%; left: 25%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Ptikitis</span>
+  </div>
+</a>
+
+<a href="monde_ames.html" class="bubble ames flotter2" style="top: 22%; left: 42%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Mondes des Âmes perdues</span>
+  </div>
+</a>
+
+<a href="monde_yakkas.html" class="bubble yakkas flotter3" style="top: 27%; left: 58%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Yakkas</span>
+  </div>
+</a>
+
+<a href="monde_sirènes.html" class="bubble sirenes flotter1" style="top: 15%; left: 80%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Sirènes</span>
+  </div>
+</a>
+
+<a href="monde_quacks.html" class="bubble quacks flotter4" style="top: 30%; left: 72%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Quacks</span>
+  </div>
+</a>
+
+<a href="monde_cites_d_or.html" class="bubble cite float3" style="top: 55%; left: 15%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Cités d’or</span>
+  </div>
+</a>
+
+<a href="monde_foret_enchante.html" class="bubble foret flotter2" style="top: 50%; left: 30%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde de la Forêt enchantée</span>
+  </div>
+</a>
+
+<a href="monde_atlantides.html" class="bubble atlantides flotter4" style="top: 60%; left: 45%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde d'Atlantides</span>
+  </div>
+</a>
+
+<a href="monde_geants.html" class="bubble geant flotter3" style="top: 48%; left: 62%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Géants</span>
+  </div>
+</a>
+
+<a href="monde_arenyth.html" class="bubble arenyth flotter1" style="top: 58%; left: 72%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde d'Arenyth</span>
+  </div>
+</a>
+
+<a href="monde_artistes.html" class="bubble artiste flotter2" style="top: 65%; left: 88%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label"></span>
+  </div>
+</a>
+
+<a href="monde_creatures_legendaires.html" class="bubble creatures flotter3" style="top: 35%; left: 38%;" target="_blank">
+  <div class="bubble-inner">
+    <span class="label">Monde des Créatures légendaires</span>
+  </div>
+</a>
+ 
+</body>
+</html>
