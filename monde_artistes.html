@@ -70,6 +70,20 @@
         margin: 20px auto;
         display: block;
       }
+   .bulle-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.bulle-container .bulle {
+  position: static;
+}
     }
     
     /* Nouveau code à coller */
@@ -94,7 +108,7 @@
   </style>
 </head>
 <body>
-
+<div class="bulle-container">
   <div id="monde-artistes" class="bulle">
     <h2>🎨 Le Monde des Artistes</h2>
     <p>Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.</p>
