@@ -81,9 +81,6 @@
       opacity: 1;
     }
 
-    a.bubble {
-      display: inline-block;
-    }
 .bubble-inner {
   display: flex;
   flex-direction: column;
@@ -99,19 +96,46 @@
   margin-top: 0.3rem;
   font-size: 1.1rem;
 }
-
-    /* Icônes animées */
-    @keyframes pulseMagic {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%      { transform: scale(1.15); opacity: 0.8; }
-    }
-
-    .icon {
+     .icon {
       display: block;
       font-size: 1.8rem;
       animation: pulseMagic 2.8s ease-in-out infinite;
     }
+ @keyframes pulseMagic {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.15); opacity: 0.8; }
+    }
 
+    /* Effet flamme pour Yakkas */
+    @keyframes flamme {
+      0%   { box-shadow: 0 0 15px #ff4500; }
+      50%  { box-shadow: 0 0 30px #ff8c00; }
+      100% { box-shadow: 0 0 15px #ff4500; }
+    }
+    .yakkas {
+      background: radial-gradient(circle at center, #ff6347, #b22222);
+      animation: flamme 2.5s infinite;
+    }
+
+    /* Effet eau pour Sirènes */
+    @keyframes vague {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+     
+
+    .sirenes {
+      background: linear-gradient(135deg, #00c3ff, #3a86ff);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+      animation: vague 6s ease-in-out infinite;
+    }
+
+    /* Effet verdure pour Géants */
+    .geant {
+      background: url('feuillage.jpg') center/cover no-repeat;
+      box-shadow: 0 0 10px rgba(34, 139, 34, 0.6);
+    }
+  
     /* Couleurs par monde */
     .fee        { background-color: rgba(240, 98, 146, 0.7); }
     .ptikiti    { background-color: rgba(255, 183, 77, 0.7); }
@@ -128,9 +152,8 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
-    .yakkas     { background-color: rgba(229, 57, 53, 0.7); }
+    
     .quacks     { background-color: rgba(255, 213, 79, 0.7); }
-    .sirenes    { background-color: rgba(77, 208, 225, 0.7); }
     .cite       { background-color: rgba(251, 192, 45, 0.7); }
     .foret      { background-color: rgba(56, 142, 60, 0.7); }
     .atlantides { background-color: rgba(3, 155, 229, 0.7); }
