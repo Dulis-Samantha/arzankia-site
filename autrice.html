@@ -16,6 +16,7 @@
       background-attachment: fixed;
       background-position: center;
       color: #f2f2f2;
+      min-height: 150vh; /* pour garantir un scroll minimal */
     }
 
     .blog-box {
@@ -259,18 +260,21 @@
         });
       }
 
-      // Apparition de la bougie uniquement après scroll complet
-window.addEventListener("scroll", () => {
-  const bougie = document.getElementById("bougie");
-  if (!bougie) return;
+      // Apparition de la bougie après scroll complet ou directement si pas assez de contenu
+      function showBougieIfNeeded() {
+        const bougie = document.getElementById("bougie");
+        if (!bougie) return;
 
-  const scrollTop = window.scrollY + window.innerHeight;
-  const pageHeight = document.body.scrollHeight;
+        const scrollTop = window.scrollY + window.innerHeight;
+        const pageHeight = document.body.scrollHeight;
 
-  if (scrollTop >= pageHeight - 10) {
-    bougie.style.opacity = "1";
-  }
+        if (scrollTop >= pageHeight - 10) {
+          bougie.style.opacity = "1";
+        }
+      }
 
+      window.addEventListener("scroll", showBougieIfNeeded);
+      window.addEventListener("load", showBougieIfNeeded);
     });
   </script>
 </body>
