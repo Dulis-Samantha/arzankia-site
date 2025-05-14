@@ -29,31 +29,16 @@
     position: relative;
     z-index: 1;
   }
-  .blog-post h2 {
-  font-size: 2.2rem;           /* Taille grande et lisible */
-  color: #9b84ff;              /* Violet lumineux comme “voile” */
-  text-align: center;          /* Centré */
-  margin-bottom: 2rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Ombre douce */
-}
-
-
-  .blog-post p,
-  .blog-post h2,
-  .blog-post h3,
-  .blog-post .meta {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-  }
-
-  .blog-post h2 {
-  font-size: 2rem; /* tu peux augmenter à 2.2rem si tu veux encore plus gros */
-  color: #9b84ff;
+  
+.blog-post h2 {
+  font-size: 2.2rem;               /* Grand titre principal */
+  color: #9b84ff;                  /* Violet lumineux */
   text-align: center;
   margin-bottom: 2rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-
+/* Sous-titres dorés */
 .blog-post h3 {
   font-size: 1.4rem;
   color: #ffe9b6;
@@ -64,11 +49,22 @@
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
+/* Texte standard */
+.blog-post p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
 
-  .blog-post p {
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
+/* Métadonnées ou petits textes */
+.blog-post .meta {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
 
   .meta {
     font-size: 0.9rem;
@@ -232,6 +228,17 @@
   opacity: 1;
   transform: scale(1);
 }
+  
+.container-centre {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
 
 </style>
 
@@ -239,7 +246,8 @@
 <body>
 
   <div class="bulle-magique" id="bulle-magique"></div>
-
+  
+<div class="container-centre">
 <div class="blog-box">
   <h3>🌱 Le déclic d'une maman</h3>
   <p>J’avais 27 ans quand ma fille Paola est née, et une question m’est alors venue en tête :<br>
