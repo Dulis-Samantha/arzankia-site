@@ -106,7 +106,18 @@
     .fee        { background-color: rgba(240, 98, 146, 0.7); }
     .ptikiti    { background-color: rgba(255, 183, 77, 0.7); }
     .geant      { background-color: rgba(174, 213, 129, 0.7); }
-    .artiste    { background: linear-gradient(135deg, #f06292, #ffd54f, #4fc3f7); color: black; opacity: 0.95; }
+    .artiste {
+  background-color: rgba(255, 255, 255, 0.08); /* quasi invisible */
+  border: 1px solid rgba(255, 255, 255, 0.15);  /* léger contour magique */
+  opacity: 0.6;
+  transition: all 0.5s ease-in-out;
+}
+
+.artiste:hover {
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
     .yakkas     { background-color: rgba(229, 57, 53, 0.7); }
     .quacks     { background-color: rgba(255, 213, 79, 0.7); }
     .sirenes    { background-color: rgba(77, 208, 225, 0.7); }
