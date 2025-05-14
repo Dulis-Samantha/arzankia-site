@@ -266,40 +266,52 @@
     opacity: 0.6;
     transition: all 0.5s ease-in-out;
   
-/* Monde des Créatures légendaires – effet poils ou plumes */
-  .creatures {
-    background: url('texture_creatures.jpg') center/cover no-repeat;
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-    animation: pulseMagic 3.8s ease-in-out infinite;
-  }
+.creatures {
+  background: radial-gradient(circle at 30% 30%, #3e2c23, #000);
+  background-size: cover;
+  box-shadow: 0 0 25px rgba(90, 60, 30, 0.4);
+  animation: pulseMagic 4s ease-in-out infinite;
+  opacity: 0.9;
+}
     
  .foret {
-  background: radial-gradient(circle at center, #ffffffee, #ccffddaa);
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 15px #ffffff, 0 0 30px #99ffcc;
-  animation: foretLueur 3s ease-in-out infinite;
-}
-@keyframes foretLueur {
-  0%, 100% { box-shadow: 0 0 20px #99ffcc, 0 0 30px #ffffff; }
-  50% { box-shadow: 0 0 30px #ccffdd, 0 0 40px #baffee; }
+  background: radial-gradient(circle at center, #ffb6d9, #fcdfff);
+  box-shadow: 0 0 25px rgba(255, 182, 193, 0.5), 0 0 40px rgba(255, 192, 203, 0.3);
+  animation: roseScintillant 3.5s ease-in-out infinite;
+  opacity: 0.9;
 }
 
-  /* Monde d’Arenyth – effet bouclier métallique */
+@keyframes roseScintillant {
+  0%, 100% { box-shadow: 0 0 15px #ffc0cb, 0 0 25px #ffe4e1; }
+  50%      { box-shadow: 0 0 30px #ffbbdd, 0 0 45px #ffe0f0; }
+}
+    
   .arenyth {
-    background: url('arenyth_bouclier.jpg') center/cover no-repeat;
-    box-shadow: 0 0 12px rgba(180, 180, 180, 0.5);
-    animation: pulseMagic 3s ease-in-out infinite;
-    }
-    /* Monde des Quacks – effet fumée de cheminée (oscillation douce + halo diffus) */
-  @keyframes fumeQuack {
-    0%   { box-shadow: 0 0 10px rgba(255, 210, 100, 0.2); transform: translateY(0px); }
-    50%  { box-shadow: 0 0 20px rgba(255, 213, 79, 0.5); transform: translateY(-5px); }
-    100% { box-shadow: 0 0 10px rgba(255, 210, 100, 0.2); transform: translateY(0px); }
-  }
-  .quacks {
-    background: radial-gradient(circle at center, #fff176, #ffb300);
-    animation: fumeQuack 3.5s ease-in-out infinite;
-  }
+  background: linear-gradient(135deg, #2a2a2a, #444);
+  box-shadow: 0 0 25px rgba(180, 180, 180, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  animation: acierBrillant 4s ease-in-out infinite;
+  opacity: 0.95;
+}
+
+@keyframes acierBrillant {
+  0%   { box-shadow: 0 0 20px rgba(160, 160, 160, 0.3); }
+  50%  { box-shadow: 0 0 30px rgba(200, 200, 200, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(160, 160, 160, 0.3); }
+}
+    
+.quacks {
+  background: radial-gradient(circle, #2e2e2e 0%, #000000 100%);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  animation: fumeNoire 5s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes fumeNoire {
+  0%   { transform: translateY(0); box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); }
+  50%  { transform: translateY(-5px); box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); }
+  100% { transform: translateY(0); box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); }
+}
+    
     /* Animations flottantes des bulles */
   @keyframes float1 {
   0%   { transform: translate(0, 0); }
