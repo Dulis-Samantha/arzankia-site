@@ -1,151 +1,119 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Les Mondes d’Arzankia</title>
+  <title>Les Mondes d'Arzankia</title>
   <style>
     body {
-      background-image: url('fond_mondes.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
       margin: 0;
-      padding: 2em;
-      font-family: Georgia, serif;
-      color: #fffff2;
-      overflow: hidden;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: 0 auto;
-      background: rgba(0,0,0,0.4);
-      padding: 2em;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #00d9ff;
-      text-shadow: 0 0 10px #014a68;
-      margin-bottom: 2em;
-    }
-
-    .intro {
-      font-size: 1.2rem;
-      margin-bottom: 2em;
-    }
-
-    .bubble-button {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
+      padding: 0;
+      background: url('ton_image_de_fond.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Georgia', serif;
       color: white;
-      font-weight: bold;
       text-align: center;
-      padding: 1em;
-      text-decoration: none;
-      font-size: 0.8em;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(6px);
-      animation: float linear infinite;
-      z-index: 2;
-      line-height: 1.2em;
     }
 
-    .bubble-button:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.1);
+    .intro-box {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 700px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     }
 
-    @keyframes float {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(10px, -20px); }
-      50% { transform: translate(-10px, 10px); }
-      75% { transform: translate(15px, -5px); }
-      100% { transform: translate(0, 0); }
+    .intro-box h1 {
+      font-size: 2rem;
+      color: #00d4ff;
     }
 
-    /* Bulles positionnées en bas pour laisser le texte lisible en haut */
-    .bubble1 { top: 62%; left: 10%; animation-duration: 30s; }
-    .bubble2 { top: 66%; left: 20%; animation-duration: 26s; }
-    .bubble3 { top: 70%; left: 15%; animation-duration: 32s; }
-    .bubble4 { top: 74%; left: 25%; animation-duration: 28s; }
-    .bubble5 { top: 78%; left: 18%; animation-duration: 34s; }
-
-    .bubble6 { top: 62%; left: 70%; animation-duration: 31s; }
-    .bubble7 { top: 66%; left: 80%; animation-duration: 29s; }
-    .bubble8 { top: 70%; left: 75%; animation-duration: 27s; }
-    .bubble9 { top: 74%; left: 85%; animation-duration: 33s; }
-    .bubble10 { top: 78%; left: 72%; animation-duration: 36s; }
-
-    .bubble11 { top: 65%; left: 50%; animation-duration: 35s; }
-    .bubble12 { top: 76%; left: 60%; animation-duration: 30s; }
-    .bubble13 { top: 82%; left: 40%; animation-duration: 32s; }
-
-    .back-button {
-      display: block;
-      text-align: center;
-      margin-top: 3em;
-      z-index: 3;
-      position: relative;
+    .intro-box p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
-    .back-button a {
-      background-color: #ffffffcc;
-      color: #333;
-      padding: 0.7em 1.4em;
+    .intro-box button {
+      background-color: white;
+      color: black;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem;
       border-radius: 10px;
-      text-decoration: none;
+      cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(255,255,255,0.4);
-      transition: all 0.3s ease;
     }
 
-    .back-button a:hover {
-      background-color: #fff;
-      color: #000;
-      box-shadow: 0 0 15px #fff;
+    .bubble-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      gap: 20px;
+      height: calc(100vh - 350px);
     }
+
+    .bubble {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 110px;
+      font-weight: bold;
+      color: white;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255,255,255,0.5);
+    }
+
+    /* Couleurs personnalisées */
+    .fee        { background-color: #f06292; }    /* rose vif */
+    .ptikiti    { background-color: #ffb74d; }    /* orange doux */
+    .geant      { background-color: #aed581; }    /* vert clair */
+    .artiste    { background: linear-gradient(135deg, #f06292, #ffd54f, #4fc3f7); color: black; } /* arc-en-ciel */
+    .yakkas     { background-color: #e53935; }    /* rouge */
+    .quacks     { background-color: #ffd54f; }    /* jaune chaud */
+    .sirenes    { background-color: #4dd0e1; }    /* bleu turquoise */
+    .cite       { background-color: #fbc02d; }    /* doré intense */
+    .foret      { background-color: #388e3c; }    /* vert forêt */
+    .atlantides { background-color: #039be5; }    /* bleu océan */
+    .ames       { background-color: #90a4ae; }    /* gris brume */
+    .arenyth    { background-color: #78909c; }    /* gris bleuté */
+    .creatures  { background-color: #ab47bc; }    /* violet */
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🌍 Les Mondes d’Arzankia</h1>
-    <p class="intro">Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
 
-    <div class="back-button">
-      <a href="index.html">← Retour à l’accueil</a>
-    </div>
-    <div class="back-button">
-      <a href="les-coulisses-arzankia.html">← Retour aux Coulisses d’Arzankia</a>
-    </div>
+  <div class="intro-box">
+    <h1>🌍 Les Mondes d’Arzankia</h1>
+    <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
+    <button onclick="location.href='index.html'">← Retour à l’accueil</button>
+    <button onclick="location.href='coulisses.html'">← Retour aux Coulisses d’Arzankia</button>
   </div>
 
-  <!-- Bulles magiques avec icônes personnalisées -->
-  <a href="monde_fees.html" class="bubble-button bubble1">🧚<br>Fées</a>
-  <a href="monde_geants.html" class="bubble-button bubble2">🌳<br>Géants</a>
-  <a href="monde_yakkas.html" class="bubble-button bubble3">🐉<br>Yakkas</a>
-  <a href="monde_quacks.html" class="bubble-button bubble4">🪶<br>Quacks</a>
-  <a href="monde_sirenes.html" class="bubble-button bubble5">🧜<br>Sirènes</a>
-
-  <a href="monde_ptikitis.html" class="bubble-button bubble6">🌿<br>Ptikitis</a>
-  <a href="monde_ames.html" class="bubble-button bubble7">👻<br>Âmes</a>
-  <a href="monde_atlantides.html" class="bubble-button bubble8">🧿<br>Atlantides</a>
-  <a href="monde_arenyth.html" class="bubble-button bubble9">⚔️<br>Arenyth</a>
-  <a href="monde_creatures_legendaires.html" class="bubble-button bubble10">🦉<br>Créatures</a>
-
-  <a href="monde_artistes.html" class="bubble-button bubble11">🎵<br>Artistes</a>
-  <a href="monde_cites_d_or.html" class="bubble-button bubble12">🏜️<br>Cités d’or</a>
-  <a href="monde_foret_enchantee.html" class="bubble-button bubble13">🦄<br>Forêt</a>
+  <div class="bubble-container">
+    <div class="bubble fee">Fées</div>
+    <div class="bubble ptikiti">Ptikitis</div>
+    <div class="bubble geant">Géants</div>
+    <div class="bubble artiste">Artistes</div>
+    <div class="bubble yakkas">Yakkas</div>
+    <div class="bubble quacks">Quacks</div>
+    <div class="bubble sirenes">Sirènes</div>
+    <div class="bubble cite">Cités d’or</div>
+    <div class="bubble foret">Forêt</div>
+    <div class="bubble atlantides">Atlantides</div>
+    <div class="bubble ames">Âmes</div>
+    <div class="bubble arenyth">Arenyth</div>
+    <div class="bubble creatures">Créatures</div>
+  </div>
 
 </body>
 </html>
