@@ -5,158 +5,177 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Bougie Magique - Corrigée</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #000;
-      background-image: url('fond_autrice.png');
-      color: white;
-    }
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    background-image: url('fond_autrice.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+  }
 
-    .bulle-magique {
-      display: none;
-      position: fixed;
-      bottom: 110px;
-      left: 30px;
-      width: 260px;
-      padding: 1em;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius: 20px;
-      font-family: 'IM Fell English SC', serif;
-      font-size: 1.1em;
-      text-align: center;
-      color: #fff8e6;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 12px rgba(255,255,255,0.2);
-      z-index: 1001;
-      transition: opacity 1s ease-out;
-    }
+  article.blog-post {
+    max-width: 800px;
+    margin: 3rem auto;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url('voile.png') center / cover no-repeat fixed;
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+  }
 
-    .bougie-secret {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 40px;
-      height: 70px;
-      background: linear-gradient(to bottom, #a56b2c, #6e3b14);
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
-      z-index: 1000;
-      cursor: pointer;
-      overflow: visible;
-    }
+  .blog-post p,
+  .blog-post h2,
+  .blog-post h3,
+  .blog-post .meta {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  }
 
-    .flamme {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      width: 12px;
-      height: 25px;
-      background: radial-gradient(ellipse at center, rgba(255, 200, 50, 0.9), rgba(255, 100, 0, 0));
-      transform: translateX(-50%);
-      border-radius: 50%;
-      animation: scintille 1s infinite ease-in-out;
-      pointer-events: none;
-    }
+  .blog-post h2 {
+    font-size: 2rem;
+    color: #4c3791;
+  }
 
-    .fumee {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      width: 20px;
-      height: 60px;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.25), transparent);
-      transform: translateX(-50%);
-      animation: fumer 3s infinite ease-in-out;
-      pointer-events: none;
-    }
+  .blog-post h3 {
+    color: #6a4cc3;
+    margin-top: 1.8rem;
+  }
 
-    @keyframes scintille {
-      0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
-      50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
-      100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
-    }
+  .blog-post p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
 
-    @keyframes fumer {
-      0% { opacity: 0.2; transform: translateX(-50%) translateY(0px) scale(1); }
-      50% { opacity: 0.5; transform: translateX(-50%) translateY(-20px) scale(1.2); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(-40px) scale(1.5); }
-    }
+  .meta {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 1.5rem;
+  }
 
-    .button-retour {
-      display: inline-block;
-      margin-top: 2em;
-      background-color: rgba(255, 215, 0, 0.85);
-      color: #2c2c2c;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-      transition: 0.3s ease;
-    }
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn ease 1.5s;
+    animation-fill-mode: forwards;
+  }
 
-    .button-retour:hover {
-      background-color: #fff2a0;
-      box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
-    }
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 
-    .blog-box {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 700px;
-      border-radius: 20px;
-      font-size: 1.25rem;
-      line-height: 1.8;
-      color: #ffffff;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 1s ease-out;
-    }
+  a {
+    color: #6a4cc3;
+    text-decoration: none;
+  }
 
-    .blog-box h3 {
-      font-size: 1.6rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      color: #ffffff;
-    }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    .blog-box p {
-      margin-bottom: 1.2rem;
-    }
+  .button-retour {
+    display: inline-block;
+    background-color: #7a4ed9;
+    color: white;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 0 12px #b497ff;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+  }
 
-    .blog-box li {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-left: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
+  .button-retour:hover {
+    background-color: #a084ff;
+    box-shadow: 0 0 16px #d4c3ff;
+  }
 
-    @media screen and (max-width: 768px) {
-      .blog-box {
-        padding: 1.5rem;
-        font-size: 1.25rem;
-      }
-      .blog-box h3 {
-        font-size: 1.5rem;
-      }
-    }
+  /* Bougie magique */
+  .bulle-magique {
+    display: none;
+    position: fixed;
+    bottom: 110px;
+    left: 30px;
+    width: 260px;
+    padding: 1em;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 1.1em;
+    text-align: center;
+    color: #fff8e6;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 12px rgba(255,255,255,0.2);
+    z-index: 1001;
+    transition: opacity 1s ease-out;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  .bougie-secret {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 40px;
+    height: 70px;
+    background: linear-gradient(to bottom, #a56b2c, #6e3b14);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
+    z-index: 1000;
+    cursor: pointer;
+    overflow: visible;
+  }
+
+  .flamme {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 12px;
+    height: 25px;
+    background: radial-gradient(ellipse at center, rgba(255, 200, 50, 0.9), rgba(255, 100, 0, 0));
+    transform: translateX(-50%);
+    border-radius: 50%;
+    animation: scintille 1s infinite ease-in-out;
+    pointer-events: none;
+  }
+
+  .fumee {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 20px;
+    height: 60px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.25), transparent);
+    transform: translateX(-50%);
+    animation: fumer 3s infinite ease-in-out;
+    pointer-events: none;
+  }
+
+  @keyframes scintille {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+    50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  }
+
+  @keyframes fumer {
+    0% { opacity: 0.2; transform: translateY(0) scale(1); }
+    50% { opacity: 0.5; transform: translateY(-20px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-40px) scale(1.5); }
+  }
+</style>
+
 </head>
 <body>
 
   <div class="bulle-magique" id="bulle-magique"></div>
 
   <div class="content">
-    <div class="blog-box">
+    <article class="blog-post fade-in">
       <h3>🌟 À propos de l'autrice</h3>
       <p><strong>J’avais 27 ans quand ma fille Paola est née</strong>, et une question m’est alors venue en tête :<br>
       <em>Quel exemple voudrais-je lui donner ?</em></p>
