@@ -7,8 +7,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('fond_arzankia.jpg') no-repeat center center fixed;
-      background-image: url('fond_mondes.png');
+      background: url('fond_mondes.png') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Georgia', serif;
       color: white;
@@ -62,19 +61,23 @@
       width: 110px;
       height: 110px;
       border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      line-height: 110px;
       font-weight: bold;
       color: white;
       font-family: 'Georgia', serif;
       font-size: 1rem;
+      line-height: 1.2;
       box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
       opacity: 0.85;
       backdrop-filter: blur(2px);
       transition: transform 0.3s, opacity 0.3s;
       cursor: pointer;
       position: relative;
-      animation: float 4s ease-in-out infinite;
+      text-decoration: none;
     }
 
     .bubble:hover {
@@ -83,26 +86,66 @@
       opacity: 1;
     }
 
-    @keyframes float {
-      0%   { transform: translateY(0px); }
-      50%  { transform: translateY(-12px); }
-      100% { transform: translateY(0px); }
+    a.bubble {
+      display: inline-block;
     }
 
-    /* Couleurs personnalisées avec effet transparent */
-    .fee        { background-color: rgba(240, 98, 146, 0.7); }  /* rose vif */
-    .ptikiti    { background-color: rgba(255, 183, 77, 0.7); }  /* orange doux */
-    .geant      { background-color: rgba(174, 213, 129, 0.7); } /* vert clair */
-    .artiste    { background: linear-gradient(135deg, #f06292, #ffd54f, #4fc3f7); color: black; opacity: 0.95; } /* arc-en-ciel */
-    .yakkas     { background-color: rgba(229, 57, 53, 0.7); }   /* rouge */
-    .quacks     { background-color: rgba(255, 213, 79, 0.7); }  /* jaune chaud */
-    .sirenes    { background-color: rgba(77, 208, 225, 0.7); }  /* bleu turquoise */
-    .cite       { background-color: rgba(251, 192, 45, 0.7); }  /* doré intense */
-    .foret      { background-color: rgba(56, 142, 60, 0.7); }   /* vert forêt */
-    .atlantides { background-color: rgba(3, 155, 229, 0.7); }   /* bleu océan */
-    .ames       { background-color: rgba(144, 164, 174, 0.7); } /* gris brume */
-    .arenyth    { background-color: rgba(120, 144, 156, 0.7); } /* gris bleuté */
-    .creatures  { background-color: rgba(171, 71, 188, 0.7); }  /* violet */
+    /* Icônes animées */
+    @keyframes pulseMagic {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.15); opacity: 0.8; }
+    }
+
+    .icon {
+      display: block;
+      font-size: 1.8rem;
+      animation: pulseMagic 2.8s ease-in-out infinite;
+    }
+
+    /* Couleurs par monde */
+    .fee        { background-color: rgba(240, 98, 146, 0.7); }
+    .ptikiti    { background-color: rgba(255, 183, 77, 0.7); }
+    .geant      { background-color: rgba(174, 213, 129, 0.7); }
+    .artiste    { background: linear-gradient(135deg, #f06292, #ffd54f, #4fc3f7); color: black; opacity: 0.95; }
+    .yakkas     { background-color: rgba(229, 57, 53, 0.7); }
+    .quacks     { background-color: rgba(255, 213, 79, 0.7); }
+    .sirenes    { background-color: rgba(77, 208, 225, 0.7); }
+    .cite       { background-color: rgba(251, 192, 45, 0.7); }
+    .foret      { background-color: rgba(56, 142, 60, 0.7); }
+    .atlantides { background-color: rgba(3, 155, 229, 0.7); }
+    .ames       { background-color: rgba(144, 164, 174, 0.7); }
+    .arenyth    { background-color: rgba(120, 144, 156, 0.7); }
+    .creatures  { background-color: rgba(171, 71, 188, 0.7); }
+
+    /* Animations flottantes des bulles */
+    @keyframes float1 {
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(0, -10px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes float2 {
+      0%   { transform: translate(5px, 0); }
+      50%  { transform: translate(-5px, -12px); }
+      100% { transform: translate(5px, 0); }
+    }
+
+    @keyframes float3 {
+      0%   { transform: translate(-3px, 2px); }
+      50%  { transform: translate(3px, -10px); }
+      100% { transform: translate(-3px, 2px); }
+    }
+
+    @keyframes float4 {
+      0%   { transform: translate(2px, 0); }
+      50%  { transform: translate(-4px, -8px); }
+      100% { transform: translate(2px, 0); }
+    }
+
+    .float1 { animation: float1 5s ease-in-out infinite; }
+    .float2 { animation: float2 6s ease-in-out infinite; }
+    .float3 { animation: float3 7s ease-in-out infinite; }
+    .float4 { animation: float4 4.5s ease-in-out infinite; }
   </style>
 </head>
 <body>
@@ -114,21 +157,21 @@
     <button onclick="location.href='coulisses.html'">← Retour aux Coulisses d’Arzankia</button>
   </div>
 
- <div class="world-buttons">
-  <a href="monde_ptikitis.html" target="_blank">Monde des Ptikitis</a>
-  <a href="monde_ames.html" target="_blank">Monde des Âmes perdues</a>
-  <a href="monde_fees.html" target="_blank">Monde des Fées</a>
-  <a href="monde_geants.html" target="_blank">Monde des Géants</a>
-  <a href="monde_artistes.html" target="_blank">Monde des Artistes</a>
-  <a href="monde_yakkas.html" target="_blank">Monde des Yakkas</a>
-  <a href="monde_cites_d_or.html" target="_blank">Monde des Cités d’or</a>
-  <a href="monde_foret_enchante.html" target="_blank">Monde de la forêt enchantée</a>
-  <a href="monde_sirènes.html" target="_blank">Monde des Sirènes</a>
-  <a href="monde_atlantides.html" target="_blank">Monde d’Atlantides</a>
-  <a href="monde_arenyth.html" target="_blank">Monde d’Arenyth</a>
-  <a href="monde_quacks.html" target="_blank">Monde des Quacks</a>
-  <a href="monde_creatures_legendaires.html" target="_blank">Monde des Créatures Légendaires</a>
-</div>
+  <div class="bubble-container">
+    <a href="monde_fees.html" class="bubble fee float1" target="_blank"><span class="icon">🧚‍♀️</span>Fées</a>
+    <a href="monde_ptikitis.html" class="bubble ptikiti float2" target="_blank"><span class="icon">🍃</span>Ptikitis</a>
+    <a href="monde_geants.html" class="bubble geant float3" target="_blank"><span class="icon">🌳</span>Géants</a>
+    <a href="monde_artistes.html" class="bubble artiste float4" target="_blank"><span class="icon">🎨</span>Artistes</a>
+    <a href="monde_yakkas.html" class="bubble yakkas float2" target="_blank"><span class="icon">🐉</span>Yakkas</a>
+    <a href="monde_quacks.html" class="bubble quacks float3" target="_blank"><span class="icon">🪶</span>Quacks</a>
+    <a href="monde_sirènes.html" class="bubble sirenes float1" target="_blank"><span class="icon">🧜‍♀️</span>Sirènes</a>
+    <a href="monde_cites_d_or.html" class="bubble cite float4" target="_blank"><span class="icon">🏜️</span>Cités d’or</a>
+    <a href="monde_foret_enchante.html" class="bubble foret float2" target="_blank"><span class="icon">🦄</span>Forêt</a>
+    <a href="monde_atlantides.html" class="bubble atlantides float3" target="_blank"><span class="icon">👁️</span>Atlantides</a>
+    <a href="monde_ames.html" class="bubble ames float1" target="_blank"><span class="icon">👻</span>Âmes</a>
+    <a href="monde_arenyth.html" class="bubble arenyth float4" target="_blank"><span class="icon">⚔️</span>Arenyth</a>
+    <a href="monde_creatures_legendaires.html" class="bubble creatures float2" target="_blank"><span class="icon">🦉</span>Créatures</a>
+  </div>
 
 </body>
 </html>
