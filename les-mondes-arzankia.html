@@ -88,34 +88,54 @@
   pointer-events: none;
 }
 
+.bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+    
+/* --- Bulle Artiste (quasi invisible) --- */
 .bubble.artiste {
   box-shadow: none !important;
   opacity: 0.25;
-  background-color: rgba(255, 255, 255, 0.03); /* presque invisible */
+  background-color: rgba(255, 255, 255, 0.03);
 }
-   .bubble.arenyth::after {
+
+
+/* --- Bulle Quack (orange pâle + fumée noire animée) --- */
+.bubble.quack {
+  background-color: #fdd9b5;
+  color: #000;
+}
+
+.bubble.quack::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 170px;
-  height: 170px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(200, 200, 255, 0.3),
-    rgba(150, 150, 200, 0.2),
-    transparent 70%
-  );
-  animation: acierHalo 3.5s ease-in-out infinite;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3), transparent 70%);
+  animation: fumeNoire 4s infinite ease-in-out;
   z-index: -1;
   filter: blur(12px);
   pointer-events: none;
 }
 
 
-   .bubble.creature::after {
+/* --- Bulle Créature légendaire (fond orange couché de soleil + halo assorti) --- */
+.bubble.creature {
+  background: radial-gradient(
+    ellipse at center,
+    #ffb347,
+    #ff9966
+  );
+  color: #000;
+}
+
+.bubble.creature::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -136,52 +156,28 @@
   pointer-events: none;
 }
 
-@keyframes couchantScintille {
-  0%, 100% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1.08);
-  }
-}
 
-    .bubble.quack {
-      background-color: #fdd9b5; /* orange pâle */
-      color: #000;
-    }
- .bubble.quack::after {
+/* --- Bulle Arenyth (halo acier métallique) --- */
+.bubble.arenyth::after {
   content: '';
   position: absolute;
   top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-  width: 190px;
-  height: 190px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3), transparent 70%);
-  animation: fumeNoire 4s infinite ease-in-out;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(200, 200, 255, 0.3),
+    rgba(150, 150, 200, 0.2),
+    transparent 70%
+  );
+  animation: acierHalo 3.5s ease-in-out infinite;
   z-index: -1;
   filter: blur(12px);
   pointer-events: none;
 }
-
-.bubble.creature::after {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 166px;
-  height: 166px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(255, 223, 100, 0.4), transparent 70%);
-  animation: scintillementOr 3s infinite ease-in-out;
-  z-index: -1;
-  filter: blur(8px);
-  pointer-events: none;
-}
-
 @keyframes couchantScintille {
   0%, 100% {
     opacity: 0.3;
@@ -208,12 +204,6 @@ transform: translate(-50%, -50%);
   }
 }
 
-.bubble:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
-  opacity: 1;
-}
-
 @keyframes acierHalo {
   0%, 100% {
     opacity: 0.3;
@@ -224,6 +214,7 @@ transform: translate(-50%, -50%);
     transform: translate(-50%, -50%) scale(1.05);
   }
 }
+
 
 .bubble-inner {
   display: flex;
