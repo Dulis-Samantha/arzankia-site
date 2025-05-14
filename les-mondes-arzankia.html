@@ -94,10 +94,37 @@
   background-color: rgba(255, 255, 255, 0.03); /* presque invisible */
 }
     
-    .bubble.creature {
-      background-color: #f6e27f; /* couleur paille douce */
-      color: #000;
-    }
+   .bubble.creature::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 150, 50, 0.4),
+    rgba(255, 90, 60, 0.3),
+    transparent 70%
+  );
+  animation: couchantScintille 3.5s ease-in-out infinite;
+  z-index: -1;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+@keyframes couchantScintille {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
 
     .bubble.quack {
       background-color: #fdd9b5; /* orange pâle */
@@ -119,11 +146,6 @@ transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-@keyframes fumeNoire {
-  0%   { transform: scale(1) translateY(0); opacity: 0.4; }
-  50%  { transform: scale(1.1) translateY(-10px); opacity: 0.25; }
-  100% { transform: scale(1) translateY(0); opacity: 0.4; }
-}
 .bubble.creature::after {
   content: '';
   position: absolute;
@@ -139,11 +161,22 @@ transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-@keyframes scintillementOr {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.08); }
+@keyframes couchantScintille {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
 }
 
+@keyframes fumeNoire {
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+  50%  { transform: translate(-50%, calc(-50% - 10px)) scale(1.1); opacity: 0.25; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+}
     .bubble:hover {
       transform: scale(1.1);
       box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
