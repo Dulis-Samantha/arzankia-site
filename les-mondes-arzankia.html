@@ -71,9 +71,22 @@
       transition: transform 0.3s, opacity 0.3s;
       cursor: pointer;
       position: absolute;  /* pour que chaque bulle soit placée librement */
+      animation: haloBrillant 3.5s ease-in-out infinite;
 
       text-decoration: none;
     }
+    
+.bubble::before {
+  content: '';
+  position: absolute;
+  top: -5px; left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border-radius: 50%;
+  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  animation: haloBrillant 4s ease-in-out infinite;
+}
 
     .bubble:hover {
       transform: scale(1.1);
@@ -101,7 +114,13 @@
       0%, 100% { transform: scale(1); opacity: 1; }
       50%      { transform: scale(1.15); opacity: 0.8; }
     }
+    
+@keyframes haloBrillant {
+  0%, 100% { box-shadow: 0 0 10px #ffffff66, 0 0 20px #ffffff88; }
+  50% { box-shadow: 0 0 20px #ffffffaa, 0 0 35px #ffffffcc; }
+}
 
+    
     /* Monde des Yakkas – flamme animée rouge/orange */
   @keyframes flammeYak {
     0%   { box-shadow: 0 0 15px #ff4500; }
@@ -200,16 +219,17 @@
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
     animation: pulseMagic 3.8s ease-in-out infinite;
   }
- /* Monde de la Forêt enchantée – ajout contour brillant comme les Fées */
-  @keyframes foretLueur {
-    0%, 100% { box-shadow: 0 0 10px #b3ffcc, 0 0 20px #d0ffd8; }
-    50%      { box-shadow: 0 0 20px #ccffee, 0 0 30px #e0fff2; }
-  }
-  .foret {
-    background: linear-gradient(135deg, #e0ffe0, #f8f0ff);
-    border: 2px solid #ffffff88;
-    animation: foretLueur 4s ease-in-out infinite;
-  }
+    
+ .foret {
+  background: radial-gradient(circle at center, #ffffffee, #ccffddaa);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 15px #ffffff, 0 0 30px #99ffcc;
+  animation: foretLueur 3s ease-in-out infinite;
+}
+@keyframes foretLueur {
+  0%, 100% { box-shadow: 0 0 20px #99ffcc, 0 0 30px #ffffff; }
+  50% { box-shadow: 0 0 30px #ccffdd, 0 0 40px #baffee; }
+}
 
   /* Monde d’Arenyth – effet bouclier métallique */
   .arenyth {
