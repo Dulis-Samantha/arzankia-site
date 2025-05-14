@@ -72,7 +72,6 @@
       cursor: pointer;
       position: absolute;  /* pour que chaque bulle soit placée librement */
       animation: haloBrillant 3.5s ease-in-out infinite;
-
       text-decoration: none;
     }
     
@@ -292,18 +291,34 @@
       animation: fumeNoire 5s ease-in-out infinite;
       opacity: 0.85;
     }
+.btn-retour {
+  display: inline-block;
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-decoration: none;
+  margin: 10px;
+  transition: transform 0.2s ease;
+}
 
+.btn-retour:hover {
+  transform: scale(1.05);
+}
   </style>
 </head>
 <body>
 
-  <div class="intro-box">
-    <h1>🌍 Les Mondes d’Arzankia</h1>
-    <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
-    <button onclick="location.href='index.html'">← Retour à l’accueil</button>
+ <div class="intro-box">
+  <h1>🌍 Les Mondes d’Arzankia</h1>
+  <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
+  
+  <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+    <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
+    <a href="coulisses.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
   </div>
-  <button onclick="location.href='les-coulisses-arzankia.html'">← Retour aux coulisses d'arzankia</button>
-
 </div>
 
   <div class="bubble-container"> 
