@@ -79,14 +79,28 @@
 .bubble::before {
   content: '';
   position: absolute;
-  top: -5px; left: -5px;
+  top: -5px;
+  left: -5px;
   width: calc(100% + 10px);
   height: calc(100% + 10px);
   border-radius: 50%;
-  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(255, 255, 255, 0.1); /* halo doux, sans effet cerclé */
   z-index: -1;
   animation: haloBrillant 4s ease-in-out infinite;
+  pointer-events: none;
 }
+.bubble.artiste::before {
+  display: none !important;
+}
+
+.bubble.artiste {
+  box-shadow: none !important;
+  opacity: 0.25;
+  background-color: rgba(255, 255, 255, 0.03); /* presque invisible */
+}
+
 
     .bubble:hover {
       transform: scale(1.1);
