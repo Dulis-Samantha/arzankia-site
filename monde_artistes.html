@@ -71,18 +71,38 @@
         display: block;
       }
     }
+    
+    /* Nouveau code à coller */
+    #monde-artistes {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    #camidjo-createur {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+  </style>
+</head>
+
   </style>
 </head>
 <body>
 
-  <div class="bulle bulle1">
+  <div id="monde-artistes" class="bulle">
     <h2>🎨 Le Monde des Artistes</h2>
     <p>Ici, les notes dansent, les couleurs vibrent, et même d’étranges créatures laissent s’exprimer leur talent à la lumière.</p>
     <p>Un monde vivant, changeant, façonné par la création pure.</p>
     <a class="bouton" href="index.html">← Retour aux Mondes</a>
   </div>
 
-  <div class="bulle bulle2">
+  <div id="camidjo-createur" class="bulle">
     <h2>🎧 Camidjo – Le Créateur</h2>
     <p>Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.</p>
     <a class="bouton" href="https://www.jammable.com/conversion/camidjo-AXzXp-mbxn-TKS" target="_blank">🎵 Écouter Pensée pour elle</a>
