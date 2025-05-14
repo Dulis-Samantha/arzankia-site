@@ -91,9 +91,6 @@
   animation: haloBrillant 4s ease-in-out infinite;
   pointer-events: none;
 }
-.bubble.artiste::before {
-  display: none !important;
-}
 
 .bubble.artiste {
   box-shadow: none !important;
@@ -311,44 +308,6 @@
   50%  { transform: translateY(-5px); box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); }
   100% { transform: translateY(0); box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); }
 }
-    
-    /* Animations flottantes des bulles */
-  @keyframes float1 {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(30px, -50px); }
-  50%  { transform: translate(-20px, 40px); }
-  75%  { transform: translate(10px, -30px); }
-  100% { transform: translate(0, 0); }
-}
-
-@keyframes float2 {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-40px, 60px); }
-  50%  { transform: translate(25px, -50px); }
-  75%  { transform: translate(-15px, 30px); }
-  100% { transform: translate(0, 0); }
-}
-
-@keyframes float3 {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(50px, 20px); }
-  50%  { transform: translate(-30px, -40px); }
-  75%  { transform: translate(20px, 60px); }
-  100% { transform: translate(0, 0); }
-}
-
-@keyframes float4 {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-50px, -30px); }
-  50%  { transform: translate(30px, 50px); }
-  75%  { transform: translate(-10px, -60px); }
-  100% { transform: translate(0, 0); }
-}
-
-.float1 { animation: float1 15s ease-in-out infinite; }
-.float2 { animation: float2 18s ease-in-out infinite; }
-.float3 { animation: float3 20s ease-in-out infinite; }
-.float4 { animation: float4 17s ease-in-out infinite; }
 
   </style>
 </head>
@@ -381,7 +340,7 @@
   </div>
 </a>
 
-<a href="monde_yakkas.html" class="bubble yakkas flotter3 style="top: 27%; left: 58%;" target="_blank">
+<a href="monde_yakkas.html" class="bubble yakkas flotter3" style="top: 27%; left: 58%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Yakkas</span>
   </div>
