@@ -109,7 +109,10 @@
   margin-top: 0.3rem;
   font-size: 1.1rem;
 }
-     
+    .bubble.flotter1 {
+  animation: flotter1 28s ease-in-out infinite, haloBrillant 3.5s ease-in-out infinite;
+}
+ 
  @keyframes pulseMagic {
       0%, 100% { transform: scale(1); opacity: 1; }
       50%      { transform: scale(1.15); opacity: 0.8; }
@@ -119,6 +122,42 @@
   0%, 100% { box-shadow: 0 0 10px #ffffff66, 0 0 20px #ffffff88; }
   50% { box-shadow: 0 0 20px #ffffffaa, 0 0 35px #ffffffcc; }
 }
+ @keyframes flotter1 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(20px, -40px); }
+  50% { transform: translate(-25px, 30px); }
+  75% { transform: translate(30px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flotter2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-35px, 25px); }
+  50% { transform: translate(40px, -30px); }
+  75% { transform: translate(-20px, 35px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flotter3 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(15px, 40px); }
+  50% { transform: translate(-30px, -20px); }
+  75% { transform: translate(25px, 25px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flotter4 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-20px, -30px); }
+  50% { transform: translate(30px, 20px); }
+  75% { transform: translate(-10px, -40px); }
+  100% { transform: translate(0, 0); }
+}
+
+.flotter1 { animation: flotter1 28s ease-in-out infinite; }
+.flotter2 { animation: flotter2 32s ease-in-out infinite; }
+.flotter3 { animation: flotter3 36s ease-in-out infinite; }
+.flotter4 { animation: flotter4 30s ease-in-out infinite; }
 
     
     /* Monde des Yakkas – flamme animée rouge/orange */
@@ -296,80 +335,81 @@
     <button onclick="location.href='coulisses.html'">← Retour aux Coulisses d’Arzankia</button>
   </div>
 
-  <div class="bubble-container">
-<a href="monde_fees.html" class="bubble fee float1" style="top: 15%; left: 10%;" target="_blank">
+  <div class="bubble-container"> 
+
+<a href="monde_fees.html" class="bubble fee flotter1" style="top: 15%; left: 10%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Fées</span>
   </div>
 </a>
 
-<a href="monde_ptikitis.html" class="bubble ptikiti float2" style="top: 20%; left: 25%;" target="_blank">
+<a href="monde_ptikitis.html" class="bubble ptikiti flotter4" style="top: 20%; left: 25%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Ptikitis</span>
   </div>
 </a>
 
-<a href="monde_ames.html" class="bubble ames float3" style="top: 22%; left: 42%;" target="_blank">
+<a href="monde_ames.html" class="bubble ames flotter2" style="top: 22%; left: 42%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Mondes des Âmes perdues</span>
   </div>
 </a>
 
-<a href="monde_yakkas.html" class="bubble yakkas float2" style="top: 27%; left: 58%;" target="_blank">
+<a href="monde_yakkas.html" class="bubble yakkas flotter3 style="top: 27%; left: 58%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Yakkas</span>
   </div>
 </a>
 
-<a href="monde_sirènes.html" class="bubble sirenes float1" style="top: 15%; left: 80%;" target="_blank">
+<a href="monde_sirènes.html" class="bubble sirenes flotter1" style="top: 15%; left: 80%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Sirènes</span>
   </div>
 </a>
 
-<a href="monde_quacks.html" class="bubble quacks float3" style="top: 30%; left: 72%;" target="_blank">
+<a href="monde_quacks.html" class="bubble quacks flotter4" style="top: 30%; left: 72%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Quacks</span>
   </div>
 </a>
 
-<a href="monde_cites_d_or.html" class="bubble cite float4" style="top: 55%; left: 15%;" target="_blank">
+<a href="monde_cites_d_or.html" class="bubble cite float3" style="top: 55%; left: 15%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Cités d’or</span>
   </div>
 </a>
 
-<a href="monde_foret_enchante.html" class="bubble foret float2" style="top: 50%; left: 30%;" target="_blank">
+<a href="monde_foret_enchante.html" class="bubble foret flotter2" style="top: 50%; left: 30%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde de la Forêt enchantée</span>
   </div>
 </a>
 
-<a href="monde_atlantides.html" class="bubble atlantides float3" style="top: 60%; left: 45%;" target="_blank">
+<a href="monde_atlantides.html" class="bubble atlantides flotter4" style="top: 60%; left: 45%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde d'Atlantides</span>
   </div>
 </a>
 
-<a href="monde_geants.html" class="bubble geant float1" style="top: 48%; left: 62%;" target="_blank">
+<a href="monde_geants.html" class="bubble geant flotter3" style="top: 48%; left: 62%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Géants</span>
   </div>
 </a>
 
-<a href="monde_arenyth.html" class="bubble arenyth float4" style="top: 58%; left: 72%;" target="_blank">
+<a href="monde_arenyth.html" class="bubble arenyth flotter1" style="top: 58%; left: 72%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde d'Arenyth</span>
   </div>
 </a>
 
-<a href="monde_artistes.html" class="bubble artiste float3" style="top: 65%; left: 88%;" target="_blank">
+<a href="monde_artistes.html" class="bubble artiste flotter2" style="top: 65%; left: 88%;" target="_blank">
   <div class="bubble-inner">
     <span class="label"></span>
   </div>
 </a>
 
-<a href="monde_creatures_legendaires.html" class="bubble creatures float2" style="top: 35%; left: 38%;" target="_blank">
+<a href="monde_creatures_legendaires.html" class="bubble creatures flotter3" style="top: 35%; left: 38%;" target="_blank">
   <div class="bubble-inner">
     <span class="label">Monde des Créatures légendaires</span>
   </div>
