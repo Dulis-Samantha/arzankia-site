@@ -36,6 +36,15 @@
       50% { transform: translateY(-6px); }
     }
 
+    @keyframes glowHint {
+  0%, 100% {
+    text-shadow: 0 0 6px #ffd700;
+  }
+  50% {
+    text-shadow: 0 0 15px #fffbe0, 0 0 10px #ffd700;
+  }
+}
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -66,7 +75,15 @@
     .blog-box p {
       margin-bottom: 1.2rem;
     }
-
+    
+    .secret-hint {
+  font-style: italic;
+  color: #ffe9a8;
+  text-align: center;
+  margin-top: 1.2rem;
+  animation: glowHint 3s ease-in-out infinite;
+}
+    
     .button-container {
       display: flex;
       flex-direction: column;
@@ -124,6 +141,9 @@
     <p>
       Cette section évoluera avec le temps, au fil des tomes et de ton aventure dans les mondes d’Arzankia...
     </p>
+    <p class="secret-hint">
+  Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.
+</p>
     <div class="button-container">
       <a href="les-heros-arzankia.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
       <a href="les-mondes-arzankia.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
