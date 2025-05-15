@@ -16,6 +16,7 @@
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
 
   <style>
+    
     body {
       margin: 0;
       font-family: Georgia, serif;
@@ -26,6 +27,49 @@
       background-position: center;
       color: white;
     }
+
+  .menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    padding: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      z-index: 1100;
+    }
+  }
 
     .navbar {
       position: relative;
@@ -280,16 +324,13 @@
 
 <body>
 <header>
-  <nav class="navbar">
-    <div class="logo">Arzankia</div>
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="hamburger">&#9776;</label>
-    <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a></li>
-      <li><a href="autrice.html">À propos de l'Autrice</a></li>
-      <li><a href="#avis">Voir les avis</a></li>
-    </ul>
+  <h1 style="padding-left: 1rem;">Arzankia</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav class="nav-links" id="mobileMenu">
+    <a href="index.html">Accueil</a>
+    <a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a>
+    <a href="autrice.html">À propos de l’Autrice</a>
+    <a href="avis.html">Voir les avis</a>
   </nav>
 </header>
 
@@ -401,6 +442,13 @@
       document.getElementById("formAvis").reset();
     });
   </script>
+
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('show');
+  }
+</script>
 
 </body>
 </html>
