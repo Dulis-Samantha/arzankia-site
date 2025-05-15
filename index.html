@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://dulis-samantha.github.io/arzankia-site">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
- <style>
+<style>
   body {
     margin: 0;
     font-family: Georgia, serif;
@@ -49,71 +49,75 @@
     z-index: 2000;
   }
 
-  .nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+  /* Version DESKTOP (min-width : 769px) */
+  @media (min-width: 769px) {
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #f0e6ff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .nav-links a:hover {
+      color: #ffd700;
+    }
   }
 
-  .nav-links a {
-    text-decoration: none;
-    color: #f0e6ff;
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-shadow: 1px 1px 2px #000;
-  }
+  /* Version MOBILE (max-width : 768px) */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: #1a1233;
+      border-radius: 16px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      width: 80%;
+      max-width: 300px;
+      margin: 0 auto;
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      padding: 1rem;
+      animation: fadeInMenu 0.5s ease forwards;
+    }
 
-  .nav-links a:hover {
-    color: #ffd700;
-  }
+    .nav-links.show {
+      display: flex;
+    }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background: #1a1233; /* violet foncé opaque */
-    border-radius: 16px;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-    width: 80%;
-    max-width: 300px;
-    margin: 0 auto;
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    padding: 1rem;
-    animation: fadeInMenu 0.5s ease forwards;
-  }
+    .nav-links a {
+      padding: 0.8rem;
+      margin: 0.4rem 0;
+      width: 100%;
+      text-align: center;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
+      color: #f0e6ff;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
-  .nav-links.show {
-    display: flex;
-  }
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
+    }
 
-  .nav-links a {
-    padding: 0.8rem;
-    margin: 0.4rem 0;
-    width: 100%;
-    text-align: center;
-    border-radius: 10px;
-    transition: all 0.2s ease-in-out;
-    color: #f0e6ff;
-    font-weight: bold;
-    text-decoration: none;
+    .menu-toggle {
+      display: block;
+    }
   }
-
-  .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05);
-    box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
 
   /* Apparition fluide */
   @keyframes fadeInMenu {
@@ -171,6 +175,7 @@
     50% { box-shadow: 0 0 16px rgba(255, 255, 150, 0.9); }
   }
 </style>
+
 
 </head>
 <body>
