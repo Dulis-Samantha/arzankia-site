@@ -62,23 +62,56 @@
     .nav-links a:hover {
       color: #ffd700;
     }
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background: rgba(0, 0, 0, 0.7);
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: 0;
-      }
-      .nav-links.show {
-        display: flex;
-      }
-      .menu-toggle {
-        display: block;
-      }
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(20, 20, 60, 0.88); /* Bleu nuit magique */
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(255, 255, 200, 0.2);
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    top: 70px;
+    left: 5%;
+    z-index: 1000;
+    padding: 1rem 0.5rem;
+    animation: fadeInMenu 0.5s ease forwards;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .nav-links a {
+    padding: 0.8rem;
+    margin: 0.4rem 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+  }
+  .nav-links a:hover {
+    background: rgba(255, 255, 200, 0.15);
+    transform: scale(1.05);
+    box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* Apparition fluide */
+@keyframes fadeInMenu {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
     }
     .hero, .section {
       background: none;
