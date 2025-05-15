@@ -36,166 +36,99 @@
       50% { transform: translateY(-6px); }
     }
 
-    .content {
-      max-width: 900px;
-      margin: 3em auto;
-      padding: 2em;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      text-align: center;
-      color: #ffd700;
-      font-size: 2.5em;
-      text-shadow: 0 0 10px #3a1c00cc;
-      margin-bottom: 1em;
-    }
-
-    h2 {
-      color: #ffe9a8;
-      text-shadow: 0 0 8px #3a1c00aa;
-      margin-top: 2em;
-    }
-
-    p {
+    .blog-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 700px;
+      border-radius: 1.5rem;
       font-size: 1.2rem;
-      line-height: 1.7;
-      margin-bottom: 1.5em;
-      color: #fdfdfd;
-      text-shadow: 0 0 5px #000000cc;
+      line-height: 1.8;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1s ease-out;
+      text-align: justify;
     }
 
-    a {
-      color: #ffe176;
-      text-decoration: none;
+    .blog-box h2 {
+      font-size: 1.6rem;
       font-weight: bold;
-      text-shadow: 0 0 6px #000000aa;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      margin-bottom: 1.5rem;
       color: #ffd700;
+      text-align: center;
     }
 
-    .magic-buttons {
+    .blog-box p {
+      margin-bottom: 1.2rem;
+    }
+
+    .button-container {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1em;
-      margin-top: 2em;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      align-items: center;
     }
 
-    .magic-buttons a {
-      display: inline-block;
-      padding: 0.8em 1.5em;
-      background: linear-gradient(135deg, #ffea8a, #fff6c1);
-      color: #2c2c2c;
-      font-weight: bold;
+    .button-container .btn {
+      background-color: #ffffcc;
+      color: #000;
       text-decoration: none;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(255, 236, 150, 0.7);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
     }
 
-    .magic-buttons a:hover {
+    .button-container .btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 236, 150, 0.9),
-                  0 0 10px rgba(255, 255, 200, 0.7);
     }
-    
-  .blog-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 700px;
-  border-radius: 1.5rem;
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-  animation: fadeIn 1s ease-out;
-  text-align: justify;
-}
 
-.blog-box h2 {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  color: #ffd700;
-  text-align: center;
-}
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .blog-box {
+        padding: 1.5rem;
+        margin: 1.2rem;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
 
-.blog-box p {
-  margin-bottom: 1.2rem;
-}
+      .blog-box h2 {
+        font-size: 1.4rem;
+      }
 
-.button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
-  align-items: center;
-}
-
-.button-container .btn {
-  background-color: #ffffcc;
-  color: #000;
-  text-decoration: none;
-  padding: 0.9rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 0.8rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-}
-
-.button-container .btn:hover {
-  transform: scale(1.05);
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .blog-box {
-    padding: 1.5rem;
-    margin: 1.2rem;
-    font-size: 1.1rem;
-    line-height: 1.7;
-  }
-
-  .blog-box h2 {
-    font-size: 1.4rem;
-  }
-
-  .button-container .btn {
-    font-size: 0.95rem;
-    padding: 0.8rem 1.2rem;
-  }
-}
-
- 
+      .button-container .btn {
+        font-size: 0.95rem;
+        padding: 0.8rem 1.2rem;
+      }
+    }
   </style>
 </head>
-
 <body>
+  <h1 style="display:none;">Les Coulisses d’Arzankia</h1>
   <div class="logo-magique"></div>
-<div class="blog-box">
-  <h2>🔍 Les Coulisses d’Arzankia</h2>
-  <p>
-    Bienvenue dans les coulisses du monde d’Arzankia. Ici, tu découvriras les secrets de la création, les inspirations, les anecdotes autour des personnages, des lieux, et des symboles magiques.
-  </p>
-  <p>
-    Cette section évoluera avec le temps, au fil des tomes et de ton aventure dans les mondes d’Arzankia...
-  </p>
-  <div class="button-container">
-    <a href="les-heros-arzankia.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
-    <a href="les-mondes-arzankia.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
-    <a href="index.html" class="btn">← Retour à l’accueil</a>
+  <div class="blog-box">
+    <h2>🔍 Les Coulisses d’Arzankia</h2>
+    <p>
+      Bienvenue dans les coulisses du monde d’Arzankia. Ici, tu découvriras les secrets de la création, les inspirations, les anecdotes autour des personnages, des lieux, et des symboles magiques.
+    </p>
+    <p>
+      Cette section évoluera avec le temps, au fil des tomes et de ton aventure dans les mondes d’Arzankia...
+    </p>
+    <div class="button-container">
+      <a href="les-heros-arzankia.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
+      <a href="les-mondes-arzankia.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
+      <a href="index.html" class="btn">← Retour à l’accueil</a>
+    </div>
   </div>
-</div>
-
-
 </body>
 </html>
