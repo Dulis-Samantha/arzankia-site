@@ -14,7 +14,6 @@
   <meta property="og:url" content="https://dulis-samantha.github.io/arzankia-site">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
-
   <style>
     body {
       margin: 0;
@@ -26,7 +25,6 @@
       background-position: center;
       color: white;
     }
-
     header {
       background: rgba(40, 20, 80, 0.6);
       padding: 1rem;
@@ -37,7 +35,6 @@
       top: 0;
       z-index: 1000;
     }
-
     .menu-toggle {
       display: none;
       font-size: 2rem;
@@ -49,14 +46,12 @@
       padding: 1rem;
       z-index: 2000;
     }
-
     .nav-links {
       display: flex;
       justify-content: center;
       gap: 2rem;
       flex-wrap: wrap;
     }
-
     .nav-links a {
       text-decoration: none;
       color: #f0e6ff;
@@ -64,11 +59,9 @@
       font-size: 1.1rem;
       text-shadow: 1px 1px 2px #000;
     }
-
     .nav-links a:hover {
       color: #ffd700;
     }
-
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -80,24 +73,19 @@
         top: 60px;
         left: 0;
       }
-
       .nav-links.show {
         display: flex;
       }
-
       .menu-toggle {
         display: block;
       }
     }
-
-    /* Autres styles : hero, section, boutons, etc. */
     .hero, .section {
       background: none;
       padding: 2rem;
       max-width: 800px;
       margin: 0 auto;
     }
-
     .hero h1 {
       font-size: 2.5rem;
       color: #ffe066;
@@ -105,7 +93,6 @@
       text-shadow: 2px 2px 4px black;
       margin-bottom: 1rem;
     }
-
     .hero p {
       font-size: 1.2rem;
       text-align: center;
@@ -114,7 +101,6 @@
       color: #ffffff;
       text-shadow: 1px 1px 2px black;
     }
-
     .button-glow {
       animation: glow 2.5s ease-in-out infinite;
       background-color: #fff9c4;
@@ -128,14 +114,12 @@
       border: none;
       cursor: pointer;
     }
-
     @keyframes glow {
       0%, 100% { box-shadow: 0 0 8px rgba(255, 255, 200, 0.6); }
       50% { box-shadow: 0 0 16px rgba(255, 255, 150, 0.9); }
     }
   </style>
 </head>
-
 <body>
   <header>
     <h1 style="padding-left: 1rem;">Arzankia</h1>
@@ -146,100 +130,78 @@
       <a href="#avis">Voir les avis</a>
     </nav>
   </header>
-
   <main>
     <section class="hero">
       <h1>Bienvenue à Arzankia</h1>
       <p>Plongez dans un univers magique, peuplé de créatures fantastiques, de forêts lumineuses et de quêtes initiatiques. Découvrez l'aventure de Raphaël, un jeune héros pas comme les autres.</p>
     </section>
-
     <section class="section" id="livre">
       <h2>📖 Le livre – Tome I : Raphaël</h2>
       <p>Raphaël pensait vivre une journée ordinaire pour ses douze ans. Mais une <strong>porte magique</strong> s’ouvre à lui, révélant les <strong>mondes cachés d’Arzankia</strong>...</p>
       <a href="#" class="button-glow">✨ Commander</a>
     </section>
-
     <section id="avis" class="section" style="background-color: rgba(30, 27, 47, 0.8);">
       <h2>📣 Les avis des lecteurs</h2>
-      <form id="formAvis">
-       <form id="formAvis" style="margin-top: 20px;">
-  <label for="nom">Ton prénom :</label><br>
-  <input type="text" id="nom" name="nom" required style="width: 50%; padding: 5px;"><br><br>
-
-  <label>Ta note :</label><br>
-  <div style="font-size: 1.5rem; margin-bottom: 1rem;">
-    <label><input type="radio" name="note" value="⭐" required> ⭐</label>
-    <label><input type="radio" name="note" value="⭐⭐"> ⭐⭐</label>
-    <label><input type="radio" name="note" value="⭐⭐⭐"> ⭐⭐⭐</label>
-    <label><input type="radio" name="note" value="⭐⭐⭐⭐"> ⭐⭐⭐⭐</label>
-    <label><input type="radio" name="note" value="⭐⭐⭐⭐⭐"> ⭐⭐⭐⭐⭐</label>
-  </div>
-
-  <label for="message">Ton avis :</label><br>
-  <textarea id="message" name="message" rows="4" style="width: 90%; padding: 5px;" required></textarea><br><br>
-
-  <button type="submit" class="button">✨ Envoyer mon avis</button>
-</form>
-
-<p id="confirmationAvis" style="color: #ffe066; font-weight: bold; display: none; margin-top: 1rem;">Merci pour ton avis ✨</p>
-
+      <form id="formAvis" style="margin-top: 20px;">
+        <label for="nom">Ton prénom :</label><br>
+        <input type="text" id="nom" name="nom" required style="width: 50%; padding: 5px;"><br><br>
+        <label>Ta note :</label><br>
+        <div style="font-size: 1.5rem; margin-bottom: 1rem;">
+          <label><input type="radio" name="note" value="⭐" required> ⭐</label>
+          <label><input type="radio" name="note" value="⭐⭐"> ⭐⭐</label>
+          <label><input type="radio" name="note" value="⭐⭐⭐"> ⭐⭐⭐</label>
+          <label><input type="radio" name="note" value="⭐⭐⭐⭐"> ⭐⭐⭐⭐</label>
+          <label><input type="radio" name="note" value="⭐⭐⭐⭐⭐"> ⭐⭐⭐⭐⭐</label>
+        </div>
+        <label for="message">Ton avis :</label><br>
+        <textarea id="message" name="message" rows="4" style="width: 90%; padding: 5px;" required></textarea><br><br>
+        <button type="submit" class="button">✨ Envoyer mon avis</button>
       </form>
+      <p id="confirmationAvis" style="color: #ffe066; font-weight: bold; display: none; margin-top: 1rem;">Merci pour ton avis ✨</p>
       <div id="listeAvis"></div>
     </section>
   </main>
-
   <script>
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('show');
     }
   </script>
-</body>
-  
-<script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbxq00X3usM_qdRcNn5mVrZ2rVnRsH3WfmUP1OWrJEclhijIEPfnNZSMjX0KZEunF1aYjQ/exec";
-
-// Envoi du formulaire
-document.getElementById("formAvis").addEventListener("submit", function(event) {
-  event.preventDefault();
-  const nom = document.getElementById("nom").value;
-  const note = document.querySelector('input[name="note"]:checked').value;
-  const message = document.getElementById("message").value;
-
-  fetch(scriptURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nom, note, message })
-  }).then(res => res.text())
-    .then(() => {
-      document.getElementById("confirmationAvis").style.display = "block";
-      document.getElementById("formAvis").reset();
-      chargerAvis(); // Recharge la liste après ajout
-    });
-});
-
-// Chargement automatique des anciens avis
-function chargerAvis() {
-  fetch(scriptURL)
-    .then(res => res.json())
-    .then(data => {
-      const conteneur = document.getElementById("listeAvis");
-      conteneur.innerHTML = "<h3>Avis des lecteurs :</h3>";
-      data.reverse().forEach(avis => {
-        const bloc = document.createElement("div");
-        bloc.style.marginBottom = "1rem";
-        bloc.style.padding = "1rem";
-        bloc.style.background = "rgba(255,255,255,0.07)";
-        bloc.style.borderRadius = "8px";
-        bloc.innerHTML = `<strong>${avis.nom}</strong> ${avis.note}<br><em>"${avis.message}"</em>`;
-        conteneur.appendChild(bloc);
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxq00X3usM_qdRcNn5mVrZ2rVnRsH3WfmUP1OWrJEclhijIEPfnNZSMjX0KZEunF1aYjQ/exec";
+    document.getElementById("formAvis").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const nom = document.getElementById("nom").value;
+      const note = document.querySelector('input[name="note"]:checked').value;
+      const message = document.getElementById("message").value;
+      fetch(scriptURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nom, note, message })
+      }).then(res => res.text()).then(() => {
+        document.getElementById("confirmationAvis").style.display = "block";
+        document.getElementById("formAvis").reset();
+        chargerAvis();
       });
     });
-}
-
-// Lancer au chargement
-chargerAvis();
-</script>
-
-
+    function chargerAvis() {
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+          const conteneur = document.getElementById("listeAvis");
+          conteneur.innerHTML = "<h3>Avis des lecteurs :</h3>";
+          data.reverse().forEach(avis => {
+            const bloc = document.createElement("div");
+            bloc.style.marginBottom = "1rem";
+            bloc.style.padding = "1rem";
+            bloc.style.background = "rgba(255,255,255,0.07)";
+            bloc.style.borderRadius = "8px";
+            bloc.innerHTML = `<strong>${avis.nom}</strong> ${avis.note}<br><em>"${avis.message}"</em>`;
+            conteneur.appendChild(bloc);
+          });
+        });
+    }
+    chargerAvis();
+  </script>
+</body>
 </html>
