@@ -143,6 +143,59 @@
       font-size: 0.9rem;
       color: #eee;
     }
+
+ <style>
+  /* === Animation scintillante pour le bouton Commander === */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(255, 255, 200, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 16px rgba(255, 255, 150, 0.9);
+    }
+  }
+
+  .button-glow {
+    animation: glow 2.5s ease-in-out infinite;
+    transition: transform 0.3s;
+  }
+
+  .button-glow:hover {
+    transform: scale(1.05);
+  }
+
+  /* === Apparence du bouton === */
+  .button-glow {
+    background-color: #fff9c4;
+    border: none;
+    color: #333;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
+    font-family: 'Georgia', serif;
+  }
+
+  /* === Effet doux sur les liens emoji ou titres === */
+  h2, h3, .section-title {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  /* === Mise en page du paragraphe de présentation === */
+  .intro-texte p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  }
+</style>
+
+
   </style>
 </head>
 <body>
@@ -161,9 +214,23 @@
   </section>
 
   <section class="section" id="livre">
-    <h2>📖 Le livre – Tome I : Raphaël</h2>
-    <p>Raphaël pensait vivre une journée ordinaire pour ses douze ans. Mais une porte magique s’ouvre à lui, révélant les mondes cachés d’Arzankia. Dans cet univers où le merveilleux côtoie le danger, il devra affronter ses plus grandes peurs et découvrir en lui la force d’un véritable aventurier. Le destin d’Arzankia est désormais entre ses mains. Magie, humour, découverte : les trois clefs d’un roman jeunesse qui vous entraînera dans une épopée inoubliable.</p>
-    <a href="#" class="button">✨ Commander</a>
+ <h2>📖 Le livre – Tome I : Raphaël</h2>
+
+<div class="intro-texte">
+  <p>
+    Raphaël pensait vivre une journée ordinaire pour ses douze ans.<br>
+    Mais une <strong>porte magique</strong> s’ouvre à lui, révélant les <strong>mondes cachés d’Arzankia</strong>.<br><br>
+
+    Dans cet univers où le <strong>merveilleux côtoie le danger</strong>, il devra affronter ses plus grandes peurs et découvrir en lui la force d’un <strong>véritable aventurier</strong>.<br><br>
+
+    Le destin d’Arzankia est désormais entre ses mains.<br>
+    <strong>Magie</strong>, <strong>humour</strong>, <strong>découverte</strong> : les trois clefs d’un roman jeunesse qui vous entraînera dans une <strong>épopée inoubliable</strong>.
+  </p>
+</div>
+
+<a class="button-glow" href="lien-de-commande.html">✨ Commander</a>
+
+
   </section>
 
   <div class="footer">
