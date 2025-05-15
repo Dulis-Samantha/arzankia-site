@@ -104,43 +104,98 @@
                   0 0 10px rgba(255, 255, 200, 0.7);
     }
     
-    @media screen and (max-width: 768px) {
+  .blog-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 700px;
+  border-radius: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease-out;
+  text-align: justify;
+}
+
+.blog-box h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #ffd700;
+  text-align: center;
+}
+
+.blog-box p {
+  margin-bottom: 1.2rem;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.button-container .btn {
+  background-color: #ffffcc;
+  color: #000;
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.button-container .btn:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
   .blog-box {
     padding: 1.5rem;
-    margin: 1.5rem;
-    border-radius: 1rem;
+    margin: 1.2rem;
     font-size: 1.1rem;
     line-height: 1.7;
-    text-align: justify;
   }
 
   .blog-box h2 {
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
   }
 
-  .blog-box p {
-    margin-bottom: 1.2rem;
+  .button-container .btn {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
  
   </style>
 </head>
 
 <body>
   <div class="logo-magique"></div>
+<div class="blog-box">
+  <h2>🔍 Les Coulisses d’Arzankia</h2>
+  <p>
+    Bienvenue dans les coulisses du monde d’Arzankia. Ici, tu découvriras les secrets de la création, les inspirations, les anecdotes autour des personnages, des lieux, et des symboles magiques.
+  </p>
+  <p>
+    Cette section évoluera avec le temps, au fil des tomes et de ton aventure dans les mondes d’Arzankia...
+  </p>
+  <div class="button-container">
+    <a href="les-heros-arzankia.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
+    <a href="les-mondes-arzankia.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
+    <a href="index.html" class="btn">← Retour à l’accueil</a>
+  </div>
+</div>
 
-  <div class="content">
-    <h1>🔍 Les Coulisses d’Arzankia</h1>
-
-    <p>Bienvenue dans les coulisses du monde d’Arzankia. Ici, tu découvriras les secrets de la création, les inspirations, les anecdotes autour des personnages, des lieux, et des symboles magiques.</p>
-
-    <p>Cette section évoluera avec le temps, au fil des tomes et de ton aventure dans les mondes d’Arzankia…</p>
-
-      <div class="magic-buttons">
- <a href="les-heros-arzankia.html" target="_blank">✨ Les Héros d’Arzankia</a>
-<a href="les-mondes-arzankia.html" target="_blank">🌍 Les Mondes d’Arzankia</a>
-
-  <a href="index.html">← Retour à l’accueil</a>
 
 </body>
 </html>
