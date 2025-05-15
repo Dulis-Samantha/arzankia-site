@@ -14,145 +14,159 @@
   <meta property="og:url" content="https://dulis-samantha.github.io/arzankia-site">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Georgia, serif;
-      background-image: url('fond_arzankia.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      color: white;
-    }
-    header {
-      background: rgba(40, 20, 80, 0.6);
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      padding: 1rem;
-      z-index: 2000;
-    }
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #f0e6ff;
-      font-weight: bold;
-      font-size: 1.1rem;
-      text-shadow: 1px 1px 2px #000;
-    }
-    .nav-links a:hover {
-      color: #ffd700;
-    }
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(20, 20, 60, 0.88); /* Bleu nuit magique */
-    border-radius: 16px;
-    box-shadow: 0 0 12px rgba(255, 255, 200, 0.2);
-    width: 90%;
-    margin: 0 auto;
-    position: absolute;
-    top: 70px;
-    left: 5%;
-    z-index: 1000;
-    padding: 1rem 0.5rem;
-    animation: fadeInMenu 0.5s ease forwards;
+ <style>
+  body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background-image: url('fond_arzankia.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: white;
   }
-  .nav-links.show {
+
+  header {
+    background: rgba(40, 20, 80, 0.6);
+    padding: 1rem;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
-  .nav-links a {
-    padding: 0.8rem;
-    margin: 0.4rem 0;
-    width: 100%;
-    text-align: center;
-    border-radius: 10px;
-    transition: all 0.2s ease-in-out;
-  }
-  .nav-links a:hover {
-    background: rgba(255, 255, 200, 0.15);
-    transform: scale(1.05);
-    box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
-  }
+
   .menu-toggle {
-    display: block;
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 1rem;
+    z-index: 2000;
   }
-}
 
-/* Apparition fluide */
-@keyframes fadeInMenu {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-    }
-    .hero, .section {
-      background: none;
-      padding: 2rem;
-      max-width: 800px;
+  .nav-links a {
+    text-decoration: none;
+    color: #f0e6ff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  .nav-links a:hover {
+    color: #ffd700;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(20, 20, 60, 0.88);
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(255, 255, 200, 0.2);
+      width: 90%;
       margin: 0 auto;
+      position: absolute;
+      top: 70px;
+      left: 5%;
+      z-index: 1000;
+      padding: 1rem 0.5rem;
+      animation: fadeInMenu 0.5s ease forwards;
     }
-    .hero h1 {
-      font-size: 2.5rem;
-      color: #ffe066;
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .nav-links a {
+      padding: 0.8rem;
+      margin: 0.4rem 0;
+      width: 100%;
       text-align: center;
-      text-shadow: 2px 2px 4px black;
-      margin-bottom: 1rem;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
     }
-    .hero p {
-      font-size: 1.2rem;
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-      color: #ffffff;
-      text-shadow: 1px 1px 2px black;
-    }
-    .button-glow {
-      animation: glow 2.5s ease-in-out infinite;
-      background-color: #fff9c4;
-      color: #333;
-      padding: 0.8rem 1.5rem;
-      border-radius: 12px;
-      font-weight: bold;
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 200, 0.15);
+      transform: scale(1.05);
       box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
-      font-family: 'Georgia', serif;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      margin-top: 1.5rem;
     }
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 8px rgba(255, 255, 200, 0.6); }
-      50% { box-shadow: 0 0 16px rgba(255, 255, 150, 0.9); }
+
+    .menu-toggle {
+      display: block;
     }
-  </style>
+  }
+
+  /* Apparition fluide */
+  @keyframes fadeInMenu {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero, .section {
+    background: none;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    color: #ffe066;
+    text-align: center;
+    text-shadow: 2px 2px 4px black;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black;
+  }
+
+  .button-glow {
+    animation: glow 2.5s ease-in-out infinite;
+    background-color: #fff9c4;
+    color: #333;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
+    font-family: 'Georgia', serif;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.5rem;
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 8px rgba(255, 255, 200, 0.6); }
+    50% { box-shadow: 0 0 16px rgba(255, 255, 150, 0.9); }
+  }
+</style>
+
 </head>
 <body>
   <header>
