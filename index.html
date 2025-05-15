@@ -16,7 +16,6 @@
   <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
 
   <style>
-    
     body {
       margin: 0;
       font-family: Georgia, serif;
@@ -28,90 +27,37 @@
       color: white;
     }
 
-  .menu-toggle {
-    display: none;
-    font-size: 2rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: white;
-    padding: 1rem;
-  }
-
-  .nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-      flex-direction: column;
+    header {
+      background: rgba(40, 20, 80, 0.6);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.7);
-      width: 100%;
-      position: absolute;
-      top: 60px;
-      left: 0;
+      position: sticky;
+      top: 0;
       z-index: 1000;
     }
 
-    .nav-links.show {
-      display: flex;
-    }
-
     .menu-toggle {
-      display: block;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      z-index: 1100;
-    }
-  }
-
-    .navbar {
-      position: relative;
-      background: rgba(40, 20, 80, 0.6);
-      backdrop-filter: blur(4px);
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 10px;
+      color: white;
       padding: 1rem;
-      text-align: center;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      z-index: 10;
+      z-index: 2000;
     }
 
-    .navbar::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, rgba(255, 255, 200, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-      animation: shimmer 10s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
     }
 
-    @keyframes shimmer {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(50%); }
-    }
-
-    .navbar ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar li {
-      display: inline-block;
-      margin: 0 1rem;
-    }
-
-    .navbar a {
+    .nav-links a {
       text-decoration: none;
       color: #f0e6ff;
       font-weight: bold;
@@ -119,10 +65,32 @@
       text-shadow: 1px 1px 2px #000;
     }
 
-    .navbar a:hover {
+    .nav-links a:hover {
       color: #ffd700;
     }
 
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Autres styles : hero, section, boutons, etc. */
     .hero, .section {
       background: none;
       padding: 2rem;
@@ -147,308 +115,66 @@
       text-shadow: 1px 1px 2px black;
     }
 
-    .section h2 {
-      font-size: 1.8rem;
-      color: #ffe066;
-      text-shadow: 1px 1px 3px black;
-      margin-bottom: 1rem;
-    }
-
-    .section p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #ffffff;
-      text-shadow: 1px 1px 2px black;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 1.2rem;
-      background: linear-gradient(135deg, #ffea8a, #fff6c1);
-      color: #2c2c2c;
+    .button-glow {
+      animation: glow 2.5s ease-in-out infinite;
+      background-color: #fff9c4;
+      color: #333;
+      padding: 0.8rem 1.5rem;
       border-radius: 12px;
       font-weight: bold;
+      box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
+      font-family: 'Georgia', serif;
       text-decoration: none;
-      box-shadow: 0 0 12px rgba(255, 236, 150, 0.7);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      cursor: pointer;
     }
 
-    .button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 236, 150, 0.9), 0 0 10px rgba(255, 255, 200, 0.7);
-    }
-
-    .footer {
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      font-size: 0.9rem;
-      color: #eee;
-    }
-
-    /* === Animation scintillante pour le bouton Commander === */
     @keyframes glow {
       0%, 100% { box-shadow: 0 0 8px rgba(255, 255, 200, 0.6); }
       50% { box-shadow: 0 0 16px rgba(255, 255, 150, 0.9); }
     }
-
-    .button-glow {
-      animation: glow 2.5s ease-in-out infinite;
-      transition: transform 0.3s;
-      background-color: #fff9c4;
-      border: none;
-      color: #333;
-      padding: 0.8rem 1.5rem;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
-      font-family: 'Georgia', serif;
-      text-decoration: none;
-
-    }
-
-    .button-glow:hover {
-      transform: scale(1.05);
-    }
-
-    .intro-texte p {
-      font-size: 1.3rem;
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-    }
-
-    /* === Papillons magiques en arrière-plan === */
-    .magic-butterflies {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .magic-butterflies .butterfly {
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Butterfly_icon.svg/512px-Butterfly_icon.svg.png') no-repeat center;
-      background-size: contain;
-      opacity: 0.7;
-      animation: float 12s linear infinite;
-      top: 100%;
-      left: calc(20% * var(--i));
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      25% { opacity: 1; }
-      50% { transform: translateY(-50vh) rotate(180deg); }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
-    
-    .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(to right, #2a1455, #3a1c78);
-  padding: 1rem;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-
-.hamburger {
-  font-size: 1.8rem;
-  cursor: pointer;
-  display: none;
-}
-
-#menu-toggle {
-  display: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #2a1455;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    padding: 1rem 0;
-  }
-
-  #menu-toggle:checked + .hamburger + .nav-links {
-    display: flex;
-  }
-}
-
   </style>
 </head>
 
 <body>
-<header>
-  <h1 style="padding-left: 1rem;">Arzankia</h1>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav class="nav-links" id="mobileMenu">
-    <a href="index.html">Accueil</a>
-    <a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a>
-    <a href="autrice.html">À propos de l’Autrice</a>
-    <a href="avis.html">Voir les avis</a>
-  </nav>
-</header>
+  <header>
+    <h1 style="padding-left: 1rem;">Arzankia</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav class="nav-links" id="mobileMenu">
+      <a href="index.html">Accueil</a>
+      <a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a>
+      <a href="autrice.html">À propos de l’Autrice</a>
+      <a href="#avis">Voir les avis</a>
+    </nav>
+  </header>
 
-  <nav class="navbar">
-    <ul>
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a></li>
-      <li><a href="autrice.html">À propos de l'Autrice</a></li>
-      <li><a href="#avis">Voir les avis</a></li>
-    </ul>
-  </nav>
+  <main>
+    <section class="hero">
+      <h1>Bienvenue à Arzankia</h1>
+      <p>Plongez dans un univers magique, peuplé de créatures fantastiques, de forêts lumineuses et de quêtes initiatiques. Découvrez l'aventure de Raphaël, un jeune héros pas comme les autres.</p>
+    </section>
 
-  <section class="hero">
-    <h1>Bienvenue à Arzankia</h1>
-    <p>Plongez dans un univers magique, peuplé de créatures fantastiques, de forêts lumineuses et de quêtes initiatiques. Découvrez l'aventure de Raphaël, un jeune héros pas comme les autres.</p>
-  </section>
+    <section class="section" id="livre">
+      <h2>📖 Le livre – Tome I : Raphaël</h2>
+      <p>Raphaël pensait vivre une journée ordinaire pour ses douze ans. Mais une <strong>porte magique</strong> s’ouvre à lui, révélant les <strong>mondes cachés d’Arzankia</strong>...</p>
+      <a href="#" class="button-glow">✨ Commander</a>
+    </section>
 
-  <section class="section" id="livre">
-    <h2>📖 Le livre – Tome I : Raphaël</h2>
-    <div class="intro-texte">
-      <p>
-        Raphaël pensait vivre une journée ordinaire pour ses douze ans.<br>
-        Mais une <strong>porte magique</strong> s’ouvre à lui, révélant les <strong>mondes cachés d’Arzankia</strong>.<br><br>
-        Dans cet univers où le <strong>merveilleux côtoie le danger</strong>, il devra affronter ses plus grandes peurs et découvrir en lui la force d’un <strong>véritable aventurier</strong>.<br><br>
-        Le destin d’Arzankia est désormais entre ses mains.<br>
-        <strong>Magie</strong>, <strong>humour</strong>, <strong>découverte</strong> : les trois clefs d’un roman jeunesse qui vous entraînera dans une <strong>épopée inoubliable</strong>.
-      </p>
-    </div>
-    <a href="#" class="button-glow">✨ Commander</a>
-  </section>
-
-  <section id="avis" class="section" style="background-color: rgba(30, 27, 47, 0.8); border-top: 2px solid #ffe066; padding: 60px; color: #fff8e6;">
-    <h2>📣 Les avis des lecteurs</h2>
-    <p>Tu as lu <em>Raphaël</em> ? Donne une note et partage ton avis avec les futurs aventuriers !</p>
-    <form id="formAvis" style="margin-top: 20px;">
-      <label for="nom">Ton prénom :</label><br>
-      <input type="text" id="nom" name="nom" required style="width: 50%; padding: 5px;"><br><br>
-      <label>Ta note :</label><br>
-      <div style="font-size: 1.5rem; margin-bottom: 1rem;">
-        <label><input type="radio" name="note" value="⭐" required> ⭐</label>
-        <label><input type="radio" name="note" value="⭐⭐"> ⭐⭐</label>
-        <label><input type="radio" name="note" value="⭐⭐⭐"> ⭐⭐⭐</label>
-        <label><input type="radio" name="note" value="⭐⭐⭐⭐"> ⭐⭐⭐⭐</label>
-        <label><input type="radio" name="note" value="⭐⭐⭐⭐⭐"> ⭐⭐⭐⭐⭐</label>
-      </div>
-      <label for="message">Ton avis :</label><br>
-      <textarea id="message" name="message" rows="4" style="width: 90%; padding: 5px;" required></textarea><br><br>
-      <button type="submit" class="button">✨ Envoyer mon avis</button>
-    </form>
-    <p id="confirmationAvis" style="color: #ffe066; font-weight: bold; display: none; margin-top: 1rem; opacity: 0; transition: opacity 0.3s ease;">
-      Merci pour ton avis ✨ Il a bien été enregistré !
-    </p>
-    <div id="listeAvis" style="margin-top: 40px; background-color: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px;">
-      <h3>Avis des lecteurs :</h3>
-    </div>
-  </section>
-
-  <!-- Papillons magiques -->
-  <div class="magic-butterflies">
-    <div class="butterfly" style="--i:1;"></div>
-    <div class="butterfly" style="--i:2;"></div>
-    <div class="butterfly" style="--i:3;"></div>
-    <div class="butterfly" style="--i:4;"></div>
-    <div class="butterfly" style="--i:5;"></div>
-  </div>
+    <section id="avis" class="section" style="background-color: rgba(30, 27, 47, 0.8);">
+      <h2>📣 Les avis des lecteurs</h2>
+      <form id="formAvis">
+        <!-- Formulaire d'avis -->
+      </form>
+      <div id="listeAvis"></div>
+    </section>
+  </main>
 
   <script>
-    document.getElementById("formAvis").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const nom = document.getElementById("nom").value;
-      const message = document.getElementById("message").value;
-      const note = document.querySelector('input[name="note"]:checked').value;
-
-      fetch("https://script.google.com/macros/s/AKfycbxTIUvwEvBBrAEK6_KF5mdCuzPlq7DEaG1tYQSfcdtF_z77y8n8p3qsMVlw96lgTcIuRg/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nom, note, message })
-      }).then(response => response.text()).then(data => {
-        console.log("Avis enregistré : " + data);
-      });
-
-      const confirmation = document.getElementById("confirmationAvis");
-      confirmation.style.opacity = 0;
-      confirmation.style.display = "block";
-
-      let opacity = 0;
-      const fadeIn = setInterval(() => {
-        if (opacity >= 1) {
-          clearInterval(fadeIn);
-          setTimeout(() => {
-            confirmation.style.display = "none";
-          }, 4000);
-        } else {
-          opacity += 0.05;
-          confirmation.style.opacity = opacity;
-        }
-      }, 30);
-
-      const nouvelAvis = document.createElement("div");
-      nouvelAvis.style.marginTop = "20px";
-      nouvelAvis.style.padding = "10px";
-      nouvelAvis.style.background = "rgba(255,255,255,0.07)";
-      nouvelAvis.style.borderRadius = "8px";
-      nouvelAvis.style.boxShadow = "0 0 8px rgba(255,255,200,0.2)";
-      nouvelAvis.innerHTML =
-        `<p><strong>${nom}</strong> ${note}</p>
-         <p style="font-style: italic;">"${message}"</p>`;
-      document.getElementById("listeAvis").appendChild(nouvelAvis);
-      document.getElementById("formAvis").reset();
-    });
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('show');
+    }
   </script>
-
-  <script>
-  function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('show');
-  }
-</script>
-
 </body>
+
 </html>
