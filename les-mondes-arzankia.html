@@ -483,6 +483,23 @@
     font-size: 0.7rem !important;
   }
 }
+.fenetre-secret-hegaia {
+  display: none;
+  position: absolute;
+  top: 75%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  color: white;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  max-width: 320px;
+  z-index: 999;
+  text-align: center;
+}
 
   </style>
 </head>
@@ -580,22 +597,41 @@
     <span class="label">Monde des Créatures légendaires</span>
   </div>
 </a>
- <a href="monde_hegaia.html" class="bubble hegaia flotter4" style="top: 72%; left: 40%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde d’Hégaïa</span>
-  </div>
-</a>
 
-<!-- Fenêtre magique Hégaïa -->
-<div id="popup-hegaia" class="popup-secret">
-  <p>Le voile s’est levé… Tu viens d’ouvrir un passages secrets d’Arzankia.</p>
+<div class="bubble hegaia flotter4" style="top: 72%; left: 40%;" onclick="reveleSecretHegaia()">
+  <div class="bubble-inner">
+    <span class="label">???</span>
+  </div>
 </div>
+
+<!-- Fenêtre texte secret Hégaïa -->
+<div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
+  <span id="texte-hegaia-tape"></span>
+</div>
+
 <script>
-function togglePopupHegaia() {
-  const popup = document.getElementById('popup-hegaia');
-  popup.classList.toggle('show');
+function reveleSecretHegaia() {
+  const fenetre = document.getElementById("texte-hegaia-secret");
+  const span = document.getElementById("texte-hegaia-tape");
+  const texte = "🌿 Le voile s’est levé… Tu viens d’ouvrir un passage secret d’Hégaïa.";
+
+  fenetre.style.display = "block";
+  span.textContent = "";
+
+  let i = 0;
+  function type() {
+    if (i < texte.length) {
+      span.textContent += texte.charAt(i);
+      i++;
+      setTimeout(type, 50);
+    }
+  }
+  type();
+
+  setTimeout(() => {
+    window.open("monde_hegaia.html", "_blank");
+  }, 5000);
 }
 </script>
-
 </body>
 </html>
