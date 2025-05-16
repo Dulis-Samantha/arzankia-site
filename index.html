@@ -109,6 +109,35 @@
   }
 }
 
+/* Bande de navigation visible uniquement sur PC */
+.nav-desktop {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .nav-desktop {
+    display: flex;
+    gap: 2rem;
+    margin-right: 2rem;
+  }
+
+  .nav-desktop a {
+    text-decoration: none;
+    color: #f0e6ff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px #000;
+    transition: color 0.3s ease;
+  }
+
+  .nav-desktop a:hover {
+    color: #ffd700;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+}
 
 
   /* Version DESKTOP (min-width : 769px) */
