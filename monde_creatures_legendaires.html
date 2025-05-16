@@ -27,6 +27,11 @@
       font-size: 1em;
       line-height: 1.6;
       backdrop-filter: blur(2px);
+        max-width: 320px;
+        max-height: 320px;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-top: 2.5em;
       animation: vaisseauMagique 20s ease-in-out infinite alternate,
                  brillanceMagique 6s ease-in-out infinite alternate,
                  respirationBulle 8s ease-in-out infinite;
@@ -59,9 +64,9 @@
     }
 
     h1 {
-      font-size: 1.3em;
+      font-size: 1.1em;
+      line-height: 1.2; 
       color: #ffd700;
-      margin-bottom: 0.5em;
       text-align: center;
       font-weight: bold;
     }
@@ -101,13 +106,6 @@
       50% { transform: scale(1.04); }
     }
     
-    .container {
-  /* ... ton style existant ... */
-  max-width: 320px;
-  max-height: 320px;
-  text-align: center;
-  overflow-wrap: break-word;
-}
 
   </style>
 </head>
