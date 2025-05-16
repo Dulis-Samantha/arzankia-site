@@ -15,36 +15,55 @@
       overflow: hidden;
     }
 
-   .container {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-  border-radius: 50%;
-  padding: 2em;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  font-size: 1em;
-  line-height: 1.6;
- backdrop-filter: blur(2px);
-  animation: vaisseauMagique 20s ease-in-out infinite alternate,
-             brillanceMagique 6s ease-in-out infinite alternate,
-             respirationBulle 8s ease-in-out infinite;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  box-shadow:
-    0 0 25px rgba(112, 236, 255, 0.2),
-    0 0 30px rgba(255, 200, 255, 0.1),
-    0 0 30px rgba(255, 255, 255, 0.05),
-    inset 0 0 8px rgba(255, 255, 255, 0.1);
-}
+    .container {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      border-radius: 50%;
+      padding: 2em;
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      font-size: 1em;
+      line-height: 1.6;
+      backdrop-filter: blur(2px);
+      animation: vaisseauMagique 20s ease-in-out infinite alternate,
+                 brillanceMagique 6s ease-in-out infinite alternate,
+                 respirationBulle 8s ease-in-out infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      box-shadow:
+        0 0 25px rgba(112, 236, 255, 0.2),
+        0 0 30px rgba(255, 200, 255, 0.1),
+        0 0 30px rgba(255, 255, 255, 0.05),
+        inset 0 0 8px rgba(255, 255, 255, 0.1);
+    }
 
-    .container span {
-      display: inline-block;
+    .texte-legendaire {
+      width: 85vw;
+      max-width: 320px;
+      margin: auto;
+      background: radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+      border-radius: 50%;
+      padding: 2em;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+      color: #fff8e6;
+      text-shadow: 1px 1px 3px black;
+      box-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+
+    h1 {
+      font-size: 1.3em;
+      color: #ffd700;
+      margin-bottom: 0.5em;
+      text-align: center;
+      font-weight: bold;
     }
 
     .back-button {
@@ -52,22 +71,16 @@
     }
 
     .back-button a {
-  background-color: #ffffff99;
-  color: #333;
-  padding: 0.3em 0.6em;
-  font-size: 0.75em;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 5px rgba(255,255,255,0.2);
-  transition: all 0.3s ease;
-}
-
-
-    ..back-button a {
-  font-size: 0.7em;
-  padding: 0.2em 0.5em;
-}
+      background-color: #ffffff99;
+      color: #333;
+      padding: 0.3em 0.6em;
+      font-size: 0.75em;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 5px rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
 
     @keyframes vaisseauMagique {
       0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
@@ -87,60 +100,24 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.04); }
     }
-
-    @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
   </style>
 </head>
-  <style>
-  h1 {
-    font-size: 1.3em;
-    color: #ffd700;
-    margin-bottom: 0.5em;
-    text-align: center;
-    font-weight: bold;
-  }
-</style>
 <body>
-  <div class="container">
-    <h1>🌿 Bienvenu au Monde des Créatures Légendaires 🌿</h1>
+  <div class="texte-legendaire">
+    <h1>🌿 Bienvenu au Monde des<br>Créatures Légendaires 🌿</h1>
 
     <p>
-   Un Monde qui abrite des êtres uniques, parfois hybrides, si extraordinaires qu’ils sont tenus secrets et protégés. Seuls les plus valeureux peuvent espérer les approcher."
+      Un Monde qui abrite<br>
+      des êtres uniques, parfois hybrides,<br>
+      si extraordinaires qu’ils sont<br>
+      tenus secrets et protégés.<br><br>
+      Seuls les plus valeureux<br>
+      peuvent espérer les approcher.
     </p>
 
     <div class="back-button">
       <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
     </div>
   </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const p = document.querySelector(".container p");
-    const text = p.textContent.trim();
-    p.innerHTML = "";
-
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const span = document.createElement("span");
-      span.innerHTML = char === " " ? "&nbsp;" : char;
-      span.style.display = "inline-block";
-      span.style.opacity = "0";
-      span.style.animation = `apparitionTexte 0.5s ease forwards`;
-      span.style.animationDelay = `${i * 0.03}s`;
-      p.appendChild(span);
-    }
-  });
-</script>
-
-
 </body>
 </html>
