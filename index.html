@@ -258,13 +258,25 @@
 <body>
 <header>
   <h1 style="padding-left: 1rem;">Accueil – Arzankia</h1>
+  
+  <!-- Menu classique (visible sur desktop uniquement) -->
+  <div class="nav-desktop">
+    <a href="les-coulisses-arzankia.html">Les coulisses</a>
+    <a href="autrice.html">L’autrice</a>
+    <a href="#avis">Avis</a>
+  </div>
+
+  <!-- Bouton burger (visible uniquement sur mobile) -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-<nav class="nav-links" id="mobileMenu">
-  <a href="les-coulisses-arzankia.html">Les coulisses d'Arzankia</a>
-  <a href="autrice.html">À propos de l’Autrice</a>
-  <a href="#avis">Voir les avis</a>
-</nav>
+
+  <!-- Menu mobile -->
+  <nav class="nav-links" id="mobileMenu">
+    <a href="les-coulisses-arzankia.html">Les coulisses</a>
+    <a href="autrice.html">L’autrice</a>
+    <a href="#avis">Avis</a>
+  </nav>
 </header>
+
   
   <main>
     <section class="hero">
