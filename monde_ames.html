@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Âmes perdues</title>
   <style>
     body {
@@ -18,8 +19,6 @@
     .container {
       width: 320px;
       height: 320px;
-      max-width: 320px;
-      max-height: 320px;
       padding: 2em;
       padding-top: 2.2em;
       position: absolute;
@@ -80,32 +79,34 @@
     }
 
     @keyframes brillanceMagique {
-      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
+      0%   { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
+      50%  { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
       100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
     }
 
     @keyframes respirationBulle {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+      50%      { transform: scale(1.04); }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>🌍 Bienvenue au Monde des Âmes perdues</h1>
-    <p>
-      Un monde silencieux où dérivent <br>
-      des sphères lumineuses abritant ceux <br>
-      qui ont égaré leur chemin.<br>
-      Relié aux Mondes des Âmes Mortes et des Âmes Volées, <br>
-      ce lieu suspend le temps, <br>
-      en attente d’un destin à réparer.<br>
-    </p>
-    <div class="back-button">
-      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <main>
+    <div class="container">
+      <h1>🌍 Bienvenue au Monde des Âmes perdues</h1>
+      <p>
+        Un monde silencieux où dérivent<br>
+        des sphères lumineuses abritant ceux<br>
+        qui ont égaré leur chemin.<br>
+        Relié aux Mondes des Âmes Mortes et des Âmes Volées,<br>
+        ce lieu suspend le temps,<br>
+        en attente d’un destin à réparer.
+      </p>
+      <div class="back-button">
+        <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+      </div>
     </div>
-  </div>
+  </main>
 </body>
 </html>
