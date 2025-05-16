@@ -91,8 +91,13 @@
     z-index: 1000;
   }
 
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
   .menu-toggle {
-    display: none;
+    display: block;
     font-size: 2rem;
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
@@ -102,6 +107,9 @@
     padding: 1rem;
     z-index: 2000;
   }
+}
+
+
 
   /* Version DESKTOP (min-width : 769px) */
   @media (min-width: 769px) {
