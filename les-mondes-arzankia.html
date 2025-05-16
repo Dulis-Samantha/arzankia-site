@@ -415,14 +415,16 @@
       opacity: 0.85;
     }
 
-    .bubble.hegaia {
-  background: rgba(255, 255, 255, 0.04); /* légère transparence */
-  border: 2px dashed rgba(255, 255, 255, 0.2); /* contour discret */
-  opacity: 0.7;
+.bubble.hegaia {
+  background: rgba(255, 255, 255, 0.01); /* presque invisible */
+  border: none; /* aucun contour */
+  opacity: 0.2;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   filter: none;
+  box-shadow: none;
 }
+
 
 .bubble.hegaia:hover {
   opacity: 1;
