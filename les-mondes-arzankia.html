@@ -414,21 +414,21 @@
       animation: fumeNoire 5s ease-in-out infinite;
       opacity: 0.85;
     }
-.bubble.hegaia {
- background-image: url('hegaia.png');
-  background-size: cover;
-  background-position: center;
+
+    .bubble.hegaia {
+  background: rgba(255, 255, 255, 0.04); /* légère transparence */
+  border: 2px dashed rgba(255, 255, 255, 0.2); /* contour discret */
   opacity: 0.7;
-  filter: grayscale(80%) blur(1px);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  filter: none;
 }
 
 .bubble.hegaia:hover {
   opacity: 1;
-  filter: none;
-  box-shadow: 0 0 12px rgba(100, 255, 150, 0.7);
+  box-shadow: 0 0 12px rgba(100, 255, 150, 0.3);
 }
+
 
 .popup-secret {
   position: fixed;
