@@ -125,64 +125,79 @@
     }
   }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background-color: #1f1639; /* violet profond, opaque */
-    border-radius: 16px;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
-    padding: 1.2rem 1rem;
-    width: 95%;
-    max-width: 300px;
-    position: absolute;
-    top: 65px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    animation: fadeInMenu 0.4s ease forwards;
+/* Animation magique d'ouverture */
+@keyframes menuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .nav-links a {
-    color: #f0e6ff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-align: center;
-    padding: 0.7rem 0.5rem;
-    width: 100%;
-    border-radius: 10px;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-
-  .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.04);
-    box-shadow: 0 0 4px rgba(255, 255, 200, 0.3);
-  }
-
-  .menu-toggle {
-    display: block;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* Menu déroulant stylisé */
+.nav-links {
+  display: none;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background-color: rgba(40, 20, 80, 0.8);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(200, 180, 255, 0.3);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  z-index: 1000;
+  animation: menuSlideDown 0.6s ease-out;
+}
 
-  /* Apparition fluide */
-  @keyframes fadeInMenu {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+/* Apparition au clic */
+.nav-links.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Liens du menu */
+.nav-links a {
+  display: block;
+  color: #f5eaff;
+  text-decoration: none;
+  margin: 1rem 0;
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.nav-links a:hover {
+  color: #ffe066;
+  text-shadow: 0 0 10px #ffe066, 0 0 20px #ffef99;
+  transform: translateX(5px);
+  transition: 0.2s ease;
+}
+
+/* Bouton menu (burger) */
+.menu-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.6rem;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 
  .hero {
   max-width: 900px;
@@ -290,12 +305,12 @@
       <div id="listeAvis"></div>
     </section>
   </main>
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('show');
-    }
-  </script>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('active');
+  }
+</script>
   <script>
   const scriptURL = "https://script.google.com/macros/s/AKfycbw89FagCkM7NZVohhKHSySc_EE8nYLafotmae2RQmwxu--n7JvHZwl5Ih3yqHP0RN7fsg/exec";
     document.getElementById("formAvis").addEventListener("submit", function(event) {
