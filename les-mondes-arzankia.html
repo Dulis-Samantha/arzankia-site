@@ -421,6 +421,24 @@
 .btn-retour:hover {
   transform: scale(1.05);
 }
+    @media (max-width: 768px) {
+  .bubble {
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .bubble::after,
+  .bubble::before {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .bubble .label {
+    font-size: 0.7rem !important;
+  }
+}
+
   </style>
 </head>
 <body>
