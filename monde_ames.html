@@ -4,34 +4,34 @@
   <meta charset="UTF-8">
   <title>Monde des Âmes perdues</title>
   <style>
+    /* --- Corps de la page --- */
     body {
       margin: 0;
       padding: 0;
-      background: url('ames.png') no-repeat center center fixed;
-      background-size: cover;
+      background: url('ames.png') no-repeat center top fixed; /* Affiche l’image en entier, centrée en haut */
+      background-size: contain;       /* L’image est entièrement visible */
+      background-repeat: no-repeat;   /* Pas de répétition */
+      height: 100vh;                  /* Hauteur = hauteur écran */
+      width: 100vw;                   /* Largeur = largeur écran */
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
-      overflow: hidden;
+      overflow: auto;                 /* Active le scroll si besoin */
     }
 
+    /* --- Conteneur rond avec le texte --- */
     .container {
-      width: 320px;
-      height: 320px;
+      width: 90vw;                    /* Responsive : 90% de la largeur écran */
+      max-width: 320px;               /* Ne dépasse pas 320px */
       background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-      border-radius: 50%;
-      padding: 2em;
-      position: absolute;
-      top: 5%;
-      left: 5%;
+      border-radius: 50%;            /* Forme ronde */
+      padding: 2em;                   /* Espace intérieur */
+      margin: 5% auto;                /* Centré avec une marge en haut */
       font-size: 1em;
       line-height: 1.6;
-      backdrop-filter: blur(2px);
-        max-width: 320px;
-        max-height: 320px;
-        text-align: center;
-        overflow-wrap: break-word;
-        padding-top: 2.5em;
+      backdrop-filter: blur(2px);    /* Flou magique derrière */
+      text-align: center;
+      overflow-wrap: break-word;     /* Coupe proprement les longs mots */
       animation: vaisseauMagique 20s ease-in-out infinite alternate,
                  brillanceMagique 6s ease-in-out infinite alternate,
                  respirationBulle 8s ease-in-out infinite;
@@ -39,94 +39,79 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      overflow: hidden;
       box-shadow:
         0 0 25px rgba(112, 236, 255, 0.2),
         0 0 30px rgba(255, 200, 255, 0.1),
         0 0 30px rgba(255, 255, 255, 0.05),
-        inset 0 0 8px rgba(255, 255, 255, 0.1);
+        inset 0 0 8px rgba(255, 255, 255, 0.1); /* Effet lumineux */
     }
 
-    .texte-legendaire {
-      width: 85vw;
-      max-width: 320px;
-      margin: auto;
-      background: radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
-      border-radius: 50%;
-      padding: 2em;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: center;
-      color: #fff8e6;
-      text-shadow: 1px 1px 3px black;
-      box-shadow: 0 0 8px rgba(255,255,255,0.2);
-    }
-
+    /* --- Titre --- */
     h1 {
       font-size: 1.2em;
-      line-height: 1.2; 
-      color: #ffd700;
-      text-align: center;
+      line-height: 1.2;
+      color: #ffd700; /* Or magique */
       font-weight: bold;
+      text-align: center;
     }
 
+    /* --- Bouton retour --- */
     .back-button {
       margin-top: 1em;
     }
 
     .back-button a {
-      background-color: #ffffff99;
+      background-color: #ffffff99;   /* Blanc semi-transparent */
       color: #333;
       padding: 0.3em 0.6em;
       font-size: 0.75em;
       border-radius: 4px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 5px rgba(255,255,255,0.2);
+      box-shadow: 0 0 5px rgba(255,255,255,0.2); /* Petit halo */
       transition: all 0.3s ease;
     }
 
+    /* --- Animation flottante --- */
     @keyframes vaisseauMagique {
-      0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
-      25%  { top: 8%; left: 15%; transform: rotate(1deg); }
-      50%  { top: 12%; left: 10%; transform: rotate(-2deg); }
-      75%  { top: 9%; left: 3%; transform: rotate(1deg); }
-      100% { top: 5%; left: 5%; transform: rotate(0deg); }
+      0%   { transform: rotate(-1deg); }
+      25%  { transform: rotate(1deg); }
+      50%  { transform: rotate(-2deg); }
+      75%  { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
     }
 
+    /* --- Effet de brillance --- */
     @keyframes brillanceMagique {
-      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
+      0%   { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
+      50%  { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
       100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
     }
 
+    /* --- Animation de respiration (gonflement doux) --- */
     @keyframes respirationBulle {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+      50%      { transform: scale(1.04); }
     }
-    
-
   </style>
 </head>
-<body>
-  <div class="container">
-   <h1>🌍 Bienvenue au Monde des<br> 
-     Âmes perdues 🌍</h1>
-      <p>
-        Un monde silencieux où dérivent<br>
-        des sphères lumineuses abritant ceux<br>
-        qui ont égaré leur chemin.<br>
-        Relié aux Mondes des Âmes Mortes et des Âmes Volées,<br>
-        ce lieu suspend le temps,<br>
-        en attente d’un destin à réparer.
-      </p>
 
+<body>
+  <!-- Contenu central -->
+  <div class="container">
+    <h1>🌍 Bienvenue au Monde des<br> Âmes perdues 🌍</h1>
+    <p>
+      Un monde silencieux où dérivent<br>
+      des sphères lumineuses abritant ceux<br>
+      qui ont égaré leur chemin.<br>
+      Relié aux Mondes des Âmes Mortes et des Âmes Volées,<br>
+      ce lieu suspend le temps,<br>
+      en attente d’un destin à réparer.
+    </p>
 
     <div class="back-button">
       <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
     </div>
   </div>
 </body>
-
 </html>
