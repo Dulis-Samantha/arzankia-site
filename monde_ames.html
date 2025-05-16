@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Âmes perdues</title>
   <style>
     body {
@@ -19,14 +18,20 @@
     .container {
       width: 320px;
       height: 320px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      border-radius: 50%;
       padding: 2em;
-      padding-top: 2.2em;
       position: absolute;
       top: 5%;
       left: 5%;
       font-size: 1em;
       line-height: 1.6;
       backdrop-filter: blur(2px);
+        max-width: 320px;
+        max-height: 320px;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-top: 2.5em;
       animation: vaisseauMagique 20s ease-in-out infinite alternate,
                  brillanceMagique 6s ease-in-out infinite alternate,
                  respirationBulle 8s ease-in-out infinite;
@@ -36,8 +41,6 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
       box-shadow:
         0 0 25px rgba(112, 236, 255, 0.2),
         0 0 30px rgba(255, 200, 255, 0.1),
@@ -45,13 +48,27 @@
         inset 0 0 8px rgba(255, 255, 255, 0.1);
     }
 
+    .texte-legendaire {
+      width: 85vw;
+      max-width: 320px;
+      margin: auto;
+      background: radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+      border-radius: 50%;
+      padding: 2em;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+      color: #fff8e6;
+      text-shadow: 1px 1px 3px black;
+      box-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+
     h1 {
-      font-size: 1em;
-      line-height: 1.2;
+      font-size: 1.1em;
+      line-height: 1.2; 
       color: #ffd700;
       text-align: center;
       font-weight: bold;
-      margin: 0 0 0.5em 0;
     }
 
     .back-button {
@@ -79,22 +96,22 @@
     }
 
     @keyframes brillanceMagique {
-      0%   { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50%  { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
+      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
+      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
       100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
     }
 
     @keyframes respirationBulle {
       0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.04); }
+      50% { transform: scale(1.04); }
     }
+    
+
   </style>
 </head>
-
 <body>
-  <main>
-    <div class="container">
-      <h1>🌍 Bienvenue au Monde des Âmes perdues</h1>
+  <div class="container">
+   <h1>🌍 Bienvenue au Monde des Âmes perdues 🌍</h1>
       <p>
         Un monde silencieux où dérivent<br>
         des sphères lumineuses abritant ceux<br>
@@ -103,10 +120,12 @@
         ce lieu suspend le temps,<br>
         en attente d’un destin à réparer.
       </p>
-      <div class="back-button">
-        <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
-      </div>
+
+
+    <div class="back-button">
+      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
     </div>
-  </main>
+  </div>
 </body>
+
 </html>
