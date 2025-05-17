@@ -287,10 +287,22 @@
   100% { transform: translate(0, 0); }
 }
 
-.flotter1 { animation: flotter1 28s ease-in-out infinite; }
-.flotter2 { animation: flotter2 32s ease-in-out infinite; }
-.flotter3 { animation: flotter3 36s ease-in-out infinite; }
-.flotter4 { animation: flotter4 30s ease-in-out infinite; }
+.bubble.flotter1 {
+  animation: flotter1 28s ease-in-out infinite, haloBrillant 3.5s ease-in-out infinite;
+}
+
+.bubble.flotter2 {
+  animation: flotter2 32s ease-in-out infinite, haloBrillant 3.5s ease-in-out infinite;
+}
+
+.bubble.flotter3 {
+  animation: flotter3 36s ease-in-out infinite, haloBrillant 3.5s ease-in-out infinite;
+}
+
+.bubble.flotter4 {
+  animation: flotter4 30s ease-in-out infinite, haloBrillant 3.5s ease-in-out infinite;
+}
+
 
     
     /* Monde des Yakkas – flamme animée rouge/orange */
@@ -502,6 +514,15 @@
   z-index: 999;
   text-align: center;
 }
+    .bubble.hegaia {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.02));
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.22;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
 
   </style>
 </head>
