@@ -7,30 +7,38 @@
     body {
       margin: 0;
       padding: 0;
+      padding-bottom: 8rem; /* Ajout essentiel */
       background: url('parchemin_ames.png') no-repeat center top fixed;
       background-size: contain;
       background-repeat: no-repeat;
-      height: 100vh;
+      min-height: 100vh;
       width: 100vw;
       font-family: Georgia, serif;
-      overflow: hidden;
     }
 
+    .bandeau-haut,
     .bandeau-bas {
       position: fixed;
-      bottom: 0;
-      left: 0;
       width: 100%;
-      background: linear-gradient(145deg, #3a773a, #5aa65a);
-      padding: 1.5rem 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
-      box-shadow: 0 0 15px rgba(50, 150, 50, 0.6);
+      background: linear-gradient(145deg, #3a773a, #5aa65a);
+      padding: 1rem;
       z-index: 1000;
+      box-shadow: 0 0 10px rgba(50, 150, 50, 0.6);
     }
 
+    .bandeau-haut {
+      bottom: 3.7rem;
+    }
+
+    .bandeau-bas {
+      bottom: 0;
+    }
+
+    .bandeau-haut a,
     .bandeau-bas a {
       color: white;
       font-weight: bold;
@@ -42,6 +50,7 @@
       transition: all 0.3s ease;
     }
 
+    .bandeau-haut a:hover,
     .bandeau-bas a:hover {
       background: rgba(255, 255, 255, 0.25);
       transform: scale(1.05);
@@ -50,14 +59,16 @@
 </head>
 <body>
 
-  <!-- SUPPRIMÉ : .button-container et .fond-boutons -->
-
-  <div class="bandeau-bas">
+  <div class="bandeau-haut">
     <a href="extrait-livre.html">📖 Extrait du livre</a>
     <a href="monde_ames_perdues.html">🌌 Entrée du monde</a>
+  </div>
+
+  <div class="bandeau-bas">
     <a href="chanson-camidjo.html">🎵 Chanson de l’artiste Camidjo</a>
     <a href="les-mondes-arzankia.html">↩ Retour aux Mondes</a>
   </div>
 
 </body>
 </html>
+
