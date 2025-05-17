@@ -3,133 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <title>Monde des Âmes perdues</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: url('parchemin_ames.png') no-repeat center top fixed;
-      background-size: contain;
-      background-repeat: no-repeat;
-      height: 100vh;
-      width: 100vw;
       font-family: Georgia, serif;
-      overflow: hidden;
+      background-color: #f8f5e6;
     }
 
-    .button-container {
-      position: absolute;
-      bottom: 5vh;
-      left: 50%;
-      transform: translateX(-50%);
+    .page-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1em;
+      padding: 1rem;
     }
 
-    .magic-button {
-      background: linear-gradient(145deg, #ffd700, #ffcc00);
-      color: #3b2700;
-      font-size: 1.2em;
-      padding: 0.7em 1.5em;
-      border: none;
-      border-radius: 12px;
+    .contenu {
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .illustration {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .texte-parchemin {
+      background: url('parchemin_ames.png') no-repeat center top;
+      background-size: contain;
+      background-repeat: no-repeat;
+      padding: 6rem 2rem;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #2a1a00;
+    }
+
+    .fond-boutons {
+      background: linear-gradient(145deg, #3a773a, #5aa65a);
+      padding: 2rem;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(50, 150, 50, 0.6);
+      margin: 2rem 0;
+      width: 90%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fond-boutons::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.12;
+      animation: sparkle 10s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(20px, 20px); }
+    }
+
+    .fond-boutons .btn {
+      position: relative;
+      z-index: 1;
+      background-color: #ffd700;
+      color: #000;
+      padding: 0.9rem 1.6rem;
       font-weight: bold;
       text-decoration: none;
-      box-shadow: 
-        0 0 10px rgba(255, 215, 0, 0.6),
-        0 0 20px rgba(255, 215, 0, 0.5),
-        inset 0 0 6px rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease;
+      border-radius: 14px;
+      box-shadow: 0 0 8px rgba(255, 240, 120, 0.7);
+      font-family: 'Georgia', serif;
       text-align: center;
-      min-width: 280px;
+      min-width: 240px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .magic-button:hover {
-      background: linear-gradient(145deg, #ffcc33, #ffdb4d);
-      box-shadow: 
-        0 0 20px rgba(255, 223, 70, 0.8),
-        0 0 30px rgba(255, 223, 70, 0.6),
-        inset 0 0 10px rgba(255, 255, 255, 0.5);
-      cursor: pointer;
+    .fond-boutons .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(255, 255, 150, 0.9);
     }
 
-.fond-boutons {
-  position: relative;
-  background: linear-gradient(145deg, #3a773a, #5aa65a); /* Dégradé vert lumineux */
-  padding: 2.5rem;
-  text-align: center;
-  border-radius: 25px;
-  max-width: 650px;
-  margin: 3rem auto;
-  box-shadow: 0 0 20px rgba(50, 150, 50, 0.6);
-  overflow: hidden;
-}
+    /* ✅ PC : illustration à gauche, bouton à droite */
+    @media screen and (min-width: 900px) {
+      .contenu {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 3rem;
+      }
 
-/* Effet de particules magiques */
-.fond-boutons::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.15;
-  animation: sparkle 10s linear infinite;
-  z-index: 0;
-}
+      .texte-parchemin {
+        flex: 1;
+      }
 
-/* Animation douce des particules */
-@keyframes sparkle {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(20px, 20px);
-  }
-}
-
-.fond-boutons .btn {
-  position: relative;
-  display: inline-block;
-  background-color: #ffd700;
-  color: #000;
-  padding: 0.9rem 1.7rem;
-  margin: 0.6rem;
-  border-radius: 14px;
-  font-weight: bold;
-  font-family: 'Georgia', serif;
-  text-decoration: none;
-  box-shadow: 0 0 10px rgba(255, 240, 120, 0.7);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 1;
-}
-
-.fond-boutons .btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
-}
-
-
+      .fond-boutons {
+        margin-top: 0;
+        flex: 1;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="button-container">
-    <a class="magic-button" href="extrait-livre.html">📖 Extrait du livre</a>
-    <a class="magic-button" href="monde_ames_perdues.html">🌌 Entrée du monde</a>
-    <a class="magic-button" href="chanson-camidjo.html">🎵 Chanson de l'artiste Camidjo</a>
-    <a class="magic-button" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <div class="page-container">
+    <div class="contenu">
+      <div class="texte-parchemin">
+        <h2>Bienvenue au<br>Monde des Âmes perdues</h2>
+        <p>Un monde silencieux où dérivent des sphères lumineuses abritant ceux qui ont égaré leur chemin.</p>
+        <p>Relié aux Mondes des Âmes Mortes et des Âmes Volées, ce lieu suspend le temps, en attente d’un destin à réparer.</p>
+      </div>
+
+      <div class="fond-boutons">
+        <a href="extrait-livre.html" class="btn">📖 Extrait du livre</a>
+        <a href="monde_ames_perdues.html" class="btn">🌌 Entrée du monde</a>
+        <a href="chanson-camidjo.html" class="btn">🎵 Chanson de l'artiste Camidjo</a>
+        <a href="les-mondes-arzankia.html" class="btn">← Retour aux Mondes</a>
+      </div>
+    </div>
   </div>
-  
-<div class="fond-boutons">
-  <a href="#" class="btn">📖 Extrait du livre</a>
-  <a href="#" class="btn">🌌 Entrée du monde</a>
-  <a href="#" class="btn">🎵 Chanson de l'artiste Camidjo</a>
-  <a href="#" class="btn">← Retour aux Mondes</a>
-</div>
 
 </body>
 </html>
