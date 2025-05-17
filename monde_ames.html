@@ -8,30 +8,30 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('ames.png') no-repeat center top fixed;
-      background-size: contain;
-      background-repeat: no-repeat;
-      height: 100vh;
-      width: 100vw;
+      background: url('parchemin-magique.png') no-repeat center top fixed; /* Affiche l’image en entier, centrée en haut */
+      background-size: contain;       /* L’image est entièrement visible */
+      background-repeat: no-repeat;   /* Pas de répétition */
+      height: 100vh;                  /* Hauteur = hauteur écran */
+      width: 100vw;                   /* Largeur = largeur écran */
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
-      overflow: auto;
+      overflow: auto;                 /* Active le scroll si besoin */
     }
 
-    /* --- Conteneur rond avec le texte (PC) --- */
+    /* --- Conteneur rond avec le texte --- */
     .container {
-      width: 90vw;
-      max-width: 320px;
+      width: 90vw;                    /* Responsive : 90% de la largeur écran */
+      max-width: 320px;               /* Ne dépasse pas 320px */
       background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-      border-radius: 50%;
-      padding: 2em;
-      margin: 5% auto;
+      border-radius: 50%;            /* Forme ronde */
+      padding: 2em;                   /* Espace intérieur */
+      margin: 5% auto;                /* Centré avec une marge en haut */
       font-size: 1em;
       line-height: 1.6;
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);    /* Flou magique derrière */
       text-align: center;
-      overflow-wrap: break-word;
+      overflow-wrap: break-word;     /* Coupe proprement les longs mots */
       animation: vaisseauMagique 20s ease-in-out infinite alternate,
                  brillanceMagique 6s ease-in-out infinite alternate,
                  respirationBulle 8s ease-in-out infinite;
@@ -43,14 +43,14 @@
         0 0 25px rgba(112, 236, 255, 0.2),
         0 0 30px rgba(255, 200, 255, 0.1),
         0 0 30px rgba(255, 255, 255, 0.05),
-        inset 0 0 8px rgba(255, 255, 255, 0.1);
+        inset 0 0 8px rgba(255, 255, 255, 0.1); /* Effet lumineux */
     }
 
     /* --- Titre --- */
     h1 {
       font-size: 1.2em;
       line-height: 1.2;
-      color: #ffd700;
+      color: #ffd700; /* Or magique */
       font-weight: bold;
       text-align: center;
     }
@@ -61,14 +61,14 @@
     }
 
     .back-button a {
-      background-color: #ffffff99;
+      background-color: #ffffff99;   /* Blanc semi-transparent */
       color: #333;
       padding: 0.3em 0.6em;
       font-size: 0.75em;
       border-radius: 4px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 5px rgba(255,255,255,0.2);
+      box-shadow: 0 0 5px rgba(255,255,255,0.2); /* Petit halo */
       transition: all 0.3s ease;
     }
 
@@ -88,63 +88,18 @@
       100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
     }
 
-    /* --- Respiration bulle --- */
+    /* --- Animation de respiration (gonflement doux) --- */
     @keyframes respirationBulle {
       0%, 100% { transform: scale(1); }
       50%      { transform: scale(1.04); }
-    }
-
-    /* --- Version mobile : remplace la bulle par un parchemin --- */
-    @media screen and (max-width: 768px) {
-      .container {
-        display: none;
-      }
-
-      .texte-parchemin {
-        background: url('parchemin-magique.png') no-repeat center center;
-        background-size: contain;
-        padding: 2.5rem 1.5rem;
-        margin: 2rem auto;
-        max-width: 90vw;
-        min-height: 200px;
-        color: #4b2e19;
-        font-family: 'Georgia', serif;
-        font-size: 1rem;
-        line-height: 1.7;
-        text-align: center;
-        box-shadow: 0 0 15px rgba(255, 255, 200, 0.4);
-        border-radius: 20px;
-        text-shadow: none;
-        background-color: rgba(255, 255, 240, 0.85);
-        border: 1px solid rgba(75, 46, 25, 0.2);
-      }
-
-      .texte-parchemin h2 {
-        font-size: 1.4rem;
-        margin-bottom: 1rem;
-        color: #5a3e2b;
-        text-shadow: 0 0 4px #fff8e6;
-      }
-
-      .texte-parchemin .bouton-retour {
-        display: inline-block;
-        margin-top: 1.5rem;
-        padding: 0.5rem 1rem;
-        background-color: rgba(255, 255, 255, 0.9);
-        color: #333;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: bold;
-      }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Affiché sur mobile uniquement -->
-  <div class="texte-parchemin">
-    <h2>🌐 Bienvenue au Monde des<br> Âmes perdues 🌐</h2>
+  <!-- Contenu central -->
+  <div class="container">
+    <h1>🌍 Bienvenue au Monde des<br> Âmes perdues 🌍</h1>
     <p>
       Un monde silencieux où dérivent<br>
       des sphères lumineuses abritant ceux<br>
@@ -153,8 +108,10 @@
       ce lieu suspend le temps,<br>
       en attente d’un destin à réparer.
     </p>
-    <a href="les-mondes-arzankia.html" class="bouton-retour">← Retour aux Mondes</a>
-  </div>
 
+    <div class="back-button">
+      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+    </div>
+  </div>
 </body>
 </html>
