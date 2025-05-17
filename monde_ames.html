@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <title>Monde des Âmes perdues</title>
@@ -8,20 +7,38 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('parchemin_ames.png') no-repeat center top fixed; /* ✅ nom corrigé */
+      background: url('parchemin_ames.png') no-repeat center top fixed;
       background-size: contain;
       background-repeat: no-repeat;
       height: 100vh;
       width: 100vw;
       font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
-      overflow: auto;
+      overflow: hidden;
+    }
+
+    .retour {
+      position: absolute;
+      bottom: 2vh;
+      left: 2vw;
+      background-color: rgba(255, 255, 255, 0.4);
+      color: #222;
+      font-size: 0.9em;
+      padding: 0.4em 0.7em;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    .retour:hover {
+      background-color: rgba(255, 255, 255, 0.6);
     }
   </style>
 </head>
-
 <body>
-</body>
 
+  <a class="retour" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+
+</body>
 </html>
