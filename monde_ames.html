@@ -16,29 +16,39 @@
       overflow: hidden;
     }
 
-    .retour {
+    .magic-button {
       position: absolute;
-      bottom: 2vh;
-      left: 2vw;
-      background-color: rgba(255, 255, 255, 0.4);
-      color: #222;
-      font-size: 0.9em;
-      padding: 0.4em 0.7em;
-      border-radius: 8px;
-      text-decoration: none;
+      bottom: 5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(145deg, #ffd700, #ffcc00);
+      color: #3b2700;
+      font-size: 1.2em;
+      padding: 0.7em 1.5em;
+      border: none;
+      border-radius: 12px;
       font-weight: bold;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s ease;
+      text-decoration: none;
+      box-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.6),
+        0 0 20px rgba(255, 215, 0, 0.5),
+        inset 0 0 6px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
     }
 
-    .retour:hover {
-      background-color: rgba(255, 255, 255, 0.6);
+    .magic-button:hover {
+      background: linear-gradient(145deg, #ffcc33, #ffdb4d);
+      box-shadow: 
+        0 0 20px rgba(255, 223, 70, 0.8),
+        0 0 30px rgba(255, 223, 70, 0.6),
+        inset 0 0 10px rgba(255, 255, 255, 0.5);
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <a class="retour" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <a class="magic-button" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
 
 </body>
 </html>
