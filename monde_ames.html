@@ -25,7 +25,7 @@
       gap: 1rem;
       flex-wrap: wrap;
       background: linear-gradient(145deg, #3a773a, #5aa65a);
-      padding: 1rem;
+       padding: 1.3rem 1rem;
       z-index: 1000;
       box-shadow: 0 0 10px rgba(50, 150, 50, 0.6);
     }
@@ -38,17 +38,20 @@
       bottom: 0;
     }
 
-    .bandeau-haut a,
-    .bandeau-bas a {
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.1em;
-      padding: 0.5em 1.2em;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.15);
-      transition: all 0.3s ease;
-    }
+   .bandeau-haut a,
+.bandeau-bas a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.4em;              /* plus gros texte */
+  padding: 1em 2em;              /* plus d’espace intérieur */
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  min-width: 200px;              /* largeur minimale plus grande */
+  text-align: center;
+}
+
 
     .bandeau-haut a:hover,
     .bandeau-bas a:hover {
