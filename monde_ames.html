@@ -44,6 +44,15 @@
       text-align: center;
     }
 
+    .bandeau-bas {
+  flex-direction: column; /* si tu veux les empiler sur mobile */
+}
+@media (min-width: 600px) {
+  .bandeau-bas {
+    flex-direction: row;
+  }
+}
+
     .bandeau-bas a:hover {
       background: rgba(255, 255, 255, 0.25);
       transform: scale(1.05);
