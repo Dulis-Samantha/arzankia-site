@@ -93,25 +93,65 @@
       0%, 100% { transform: scale(1); }
       50%      { transform: scale(1.04); }
     }
+    @media screen and (max-width: 768px) {
+  .container {
+    display: none;
+  }
+
+  .texte-parchemin {
+    background: url('parchemin-magique.png') no-repeat center center;
+    background-size: contain;
+    padding: 2.5rem 1.5rem;
+    margin: 2rem auto;
+    max-width: 90vw;
+    color: #4b2e19;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 255, 200, 0.4);
+    border-radius: 20px;
+    text-shadow: none;
+    background-color: rgba(255, 255, 240, 0.2); /* sécurité si l'image ne charge pas */
+  }
+
+  .texte-parchemin h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #5a3e2b;
+    text-shadow: 0 0 4px #fff8e6;
+  }
+
+  .texte-parchemin .bouton-retour {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
   </style>
 </head>
 
 <body>
   <!-- Contenu central -->
-  <div class="container">
-    <h1>🌍 Bienvenue au Monde des<br> Âmes perdues 🌍</h1>
-    <p>
-      Un monde silencieux où dérivent<br>
-      des sphères lumineuses abritant ceux<br>
-      qui ont égaré leur chemin.<br>
-      Relié aux Mondes des Âmes Mortes et des Âmes Volées,<br>
-      ce lieu suspend le temps,<br>
-      en attente d’un destin à réparer.
-    </p>
+ <div class="texte-parchemin">
+  <h2>🌐 Bienvenue au Monde des<br> Âmes perdues 🌐</h2>
+  <p>
+    Un monde silencieux où dérivent<br>
+    des sphères lumineuses abritant ceux<br>
+    qui ont égaré leur chemin.<br>
+    Relié aux Mondes des Âmes Mortes et des Âmes Volées,<br>
+    ce lieu suspend le temps,<br>
+    en attente d’un destin à réparer.
+  </p>
+  <a href="les-mondes-arzankia.html" class="bouton-retour">← Retour aux Mondes</a>
+</div>
 
-    <div class="back-button">
-      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
-    </div>
   </div>
 </body>
 </html>
