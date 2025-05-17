@@ -16,107 +16,48 @@
       overflow: hidden;
     }
 
-    .magic-button {
-      background: linear-gradient(145deg, #ffd700, #ffcc00);
-      color: #3b2700;
-      font-size: 1.2em;
-      padding: 0.7em 1.5em;
-      border: none;
-      border-radius: 12px;
+    .bandeau-bas {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(145deg, #3a773a, #5aa65a);
+      padding: 1.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: 0 0 15px rgba(50, 150, 50, 0.6);
+      z-index: 1000;
+    }
+
+    .bandeau-bas a {
+      color: white;
       font-weight: bold;
       text-decoration: none;
-      box-shadow: 
-        0 0 10px rgba(255, 215, 0, 0.6),
-        0 0 20px rgba(255, 215, 0, 0.5),
-        inset 0 0 6px rgba(255, 255, 255, 0.4);
+      font-size: 1.1em;
+      padding: 0.5em 1.2em;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.15);
       transition: all 0.3s ease;
-      text-align: center;
-      min-width: 280px;
     }
 
-    .magic-button:hover {
-      background: linear-gradient(145deg, #ffcc33, #ffdb4d);
-      box-shadow: 
-        0 0 20px rgba(255, 223, 70, 0.8),
-        0 0 30px rgba(255, 223, 70, 0.6),
-        inset 0 0 10px rgba(255, 255, 255, 0.5);
-      cursor: pointer;
+    .bandeau-bas a:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
     }
-
-.fond-boutons {
-  position: relative;
-  background: linear-gradient(145deg, #3a773a, #5aa65a); /* Dégradé vert lumineux */
-  padding: 2.5rem;
-  text-align: center;
-  border-radius: 25px;
-  max-width: 650px;
-  margin: 3rem auto;
-  box-shadow: 0 0 20px rgba(50, 150, 50, 0.6);
-  overflow: hidden;
-}
-
-/* Effet de particules magiques */
-.fond-boutons::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.15;
-  animation: sparkle 10s linear infinite;
-  z-index: 0;
-}
-
-/* Animation douce des particules */
-@keyframes sparkle {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(20px, 20px);
-  }
-}
-
-.fond-boutons {
-  position: absolute;
-  bottom: 3vh;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(145deg, #3a773a, #5aa65a);
-  padding: 2.5rem;
-  text-align: center;
-  border-radius: 25px;
-  max-width: 650px;
-  box-shadow: 0 0 20px rgba(50, 150, 50, 0.6);
-  overflow: hidden;
-}
-
-.fond-boutons .btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 15px rgba(255, 255, 150, 0.9);
-}
-
-
   </style>
 </head>
 <body>
 
-  <div class="button-container">
-    <a class="magic-button" href="extrait-livre.html">📖 Extrait du livre</a>
-    <a class="magic-button" href="monde_ames_perdues.html">🌌 Entrée du monde</a>
-    <a class="magic-button" href="chanson-camidjo.html">🎵 Chanson de l'artiste Camidjo</a>
-    <a class="magic-button" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <!-- SUPPRIMÉ : .button-container et .fond-boutons -->
+
+  <div class="bandeau-bas">
+    <a href="extrait-livre.html">📖 Extrait du livre</a>
+    <a href="monde_ames_perdues.html">🌌 Entrée du monde</a>
+    <a href="chanson-camidjo.html">🎵 Chanson de l’artiste Camidjo</a>
+    <a href="les-mondes-arzankia.html">↩ Retour aux Mondes</a>
   </div>
-  
-<div class="fond-boutons">
-  <a href="#" class="btn">📖 Extrait du livre</a>
-  <a href="#" class="btn">🌌 Entrée du monde</a>
-  <a href="#" class="btn">🎵 Chanson de l'artiste Camidjo</a>
-  <a href="#" class="btn">← Retour aux Mondes</a>
-</div>
 
 </body>
 </html>
