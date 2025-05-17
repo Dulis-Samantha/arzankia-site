@@ -16,11 +16,18 @@
       overflow: hidden;
     }
 
-    .magic-button {
+    .button-container {
       position: absolute;
       bottom: 5vh;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+    }
+
+    .magic-button {
       background: linear-gradient(145deg, #ffd700, #ffcc00);
       color: #3b2700;
       font-size: 1.2em;
@@ -34,6 +41,8 @@
         0 0 20px rgba(255, 215, 0, 0.5),
         inset 0 0 6px rgba(255, 255, 255, 0.4);
       transition: all 0.3s ease;
+      text-align: center;
+      min-width: 280px;
     }
 
     .magic-button:hover {
@@ -48,7 +57,12 @@
 </head>
 <body>
 
-  <a class="magic-button" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <div class="button-container">
+    <a class="magic-button" href="extrait-livre.html">📖 Extrait du livre</a>
+    <a class="magic-button" href="monde_ames_perdues.html">🌌 Entrée du monde</a>
+    <a class="magic-button" href="chanson-camidjo.html">🎵 Chanson de l'artiste Camidjo</a>
+    <a class="magic-button" href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  </div>
 
 </body>
 </html>
