@@ -2,16 +2,18 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Sirènes</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    font-family: Georgia, serif;
-    color: #fff8e6;
-    text-shadow: 1px 1px 4px #000;
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('fond-marinsombre.png') center top no-repeat;
+      background-color: #001d26;
+      background-size: cover;
+      font-family: Georgia, serif;
+      color: #fff8e6;
+      text-shadow: 1px 1px 4px #000;
 
   .sirene-image {
     width: 100%;
@@ -24,6 +26,8 @@
     width: 95%;
     max-width: 1000px;
     margin: 2em auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
   }
 
   .parchemin-image {
@@ -55,6 +59,7 @@
     margin-bottom: 1em;
     font-size: 1.8em;
     color: #d4af37;
+    text-shadow: 1px 1px 2px #000;
   }
 
   .texte-parchemin p {
@@ -82,6 +87,7 @@
   }
 
   .button-group a {
+    animation: boutonGlow 3s ease-in-out infinite;
     background: linear-gradient(to bottom, #fff8dc, #d4af37);
     padding: 0.7rem 1.5rem;
     border-radius: 12px;
@@ -97,6 +103,15 @@
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
   }
+
+  @keyframes boutonGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 223, 150, 1);
+  }
+}
 
   h1, h2 {
     font-size: 1.3em;
