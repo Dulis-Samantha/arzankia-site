@@ -19,44 +19,22 @@
       display: block;
     }
 
- .parchemin-wrapper {
-  position: relative;
-  width: 100vw;
-  max-width: none;
-  margin: 0 auto;
-}
-
-
-.parchemin-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
- .texte-parchemin {
-  position: absolute;
-  top: 20%;
-  left: 5%;
-  right: 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  text-shadow: none;
-  color: #3b2a1d;
-  font-family: Georgia, serif;
-}
-
-
-    .back-button {
-      text-align: center;
-      margin-top: 2em;
+    .parchemin-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 700px;
+      margin: 2em auto;
     }
 
-     .texte-parchemin {
+    .parchemin-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .texte-parchemin {
       position: absolute;
-      top: 20%;
+      top: 15%;
       left: 10%;
       right: 10%;
       color: #3b2a1d;
@@ -66,7 +44,37 @@
       line-height: 1.6;
       text-shadow: none;
     }
-    
+
+    .texte-parchemin h2, .texte-parchemin p {
+      opacity: 0;
+      animation: apparitionTexte 1s ease forwards;
+    }
+
+    .texte-parchemin h2 {
+      animation-delay: 0.3s;
+      margin-bottom: 1em;
+    }
+
+    .texte-parchemin p {
+      animation-delay: 1s;
+    }
+
+    @keyframes apparitionTexte {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back-button {
+      text-align: center;
+      margin-top: 2em;
+    }
+
     .back-button a {
       background-color: #f4e0a3;
       color: #3b2a1d;
@@ -105,10 +113,11 @@
         et où les poissons aux mille couleurs dansent autour des coraux lumineux.
       </p>
     </div>
-  </div>
-
-  <!-- Bouton retour -->
-  <div class="back-button">
+    
+ <div class="button-group">
+    <a href="extrait-livre.html">📖 Extrait du livre</a>
+    <a href="entree-monde.html">✨ Entrée du monde</a>
+    <a href="chanson-camidjo.html">🎵 Chanson de Camidjo</a>
     <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
   </div>
 
