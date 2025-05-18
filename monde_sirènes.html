@@ -7,144 +7,86 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('sirenes.png') no-repeat center center fixed;
+      background: url('sirenes.png') no-repeat center top fixed;
       background-size: contain;
       background-repeat: no-repeat;
-      background-position: center top;
-      background-color: #000; /* couleur de fond autour si l'image ne remplit pas l'écran */
-
+      background-color: #000;
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
       overflow: hidden;
     }
 
-   .container {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-  border-radius: 50%;
-  padding: 2em;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  font-size: 1em;
-  line-height: 1.6;
- backdrop-filter: blur(2px);
-  animation: vaisseauMagique 20s ease-in-out infinite alternate,
-             brillanceMagique 6s ease-in-out infinite alternate,
-             respirationBulle 8s ease-in-out infinite;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  box-shadow:
-    0 0 25px rgba(112, 236, 255, 0.2),
-    0 0 30px rgba(255, 200, 255, 0.1),
-    0 0 30px rgba(255, 255, 255, 0.05),
-    inset 0 0 8px rgba(255, 255, 255, 0.1);
-}
+    .parchemin-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 700px;
+      margin: 5em auto 2em auto;
+    }
 
-    .container span {
-      display: inline-block;
+    .parchemin-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .texte-parchemin {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      right: 10%;
+      color: #3b2a1d;
+      font-family: Georgia, serif;
+      font-size: 1.1em;
+      text-align: center;
+      line-height: 1.6;
+      text-shadow: none;
     }
 
     .back-button {
-      margin-top: 1em;
+      text-align: center;
+      margin-top: 2em;
     }
 
     .back-button a {
-  background-color: #ffffff99;
-  color: #333;
-  padding: 0.3em 0.6em;
-  font-size: 0.75em;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 5px rgba(255,255,255,0.2);
-  transition: all 0.3s ease;
-}
-
-
-    ..back-button a {
-  font-size: 0.7em;
-  padding: 0.2em 0.5em;
-}
-
-    @keyframes vaisseauMagique {
-      0%   { top: 5%; left: 5%; transform: rotate(-1deg); }
-      25%  { top: 8%; left: 15%; transform: rotate(1deg); }
-      50%  { top: 12%; left: 10%; transform: rotate(-2deg); }
-      75%  { top: 9%; left: 3%; transform: rotate(1deg); }
-      100% { top: 5%; left: 5%; transform: rotate(0deg); }
+      background-color: #f4e0a3;
+      color: #3b2a1d;
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(255, 223, 120, 0.8);
+      transition: all 0.3s ease;
     }
 
-    @keyframes brillanceMagique {
-      0% { box-shadow: 0 0 10px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-      50% { box-shadow: 0 0 20px #a0ffff; background-color: rgba(0, 0, 20, 0.35); }
-      100% { box-shadow: 0 0 15px #70ecff; background-color: rgba(0, 0, 0, 0.3); }
-    }
-
-    @keyframes respirationBulle {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-    }
-
-    @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    h1, h2 {
+      font-size: 1.3em;
+      color: #ffd700;
+      margin-bottom: 0.5em;
+      text-align: center;
+      font-weight: bold;
     }
   </style>
 </head>
-  <style>
-  h1 {
-    font-size: 1.3em;
-    color: #ffd700;
-    margin-bottom: 0.5em;
-    text-align: center;
-    font-weight: bold;
-  }
-</style>
+
 <body>
-  <div class="container">
-    <h1>🌿 Bienvenu au Monde des Sirènes 🌿</h1>
 
-    <p>
-    Un monde dans les profondeurs enchantées où les sirènes veillent, leurs tridents chargés d’éclairs, et où les poissons aux mille couleurs dansent autour des coraux lumineux.
-    </p>
-
-    <div class="back-button">
-      <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  <div class="parchemin-wrapper">
+    <img src="0989f53a-352e-4c4c-a5cf-b95e1895f74d.png" alt="parchemin" class="parchemin-image">
+    <div class="texte-parchemin">
+      <h2>🌿 Bienvenue au Monde des Sirènes 🌿</h2>
+      <p>
+        Un monde dans les profondeurs enchantées où les sirènes veillent,<br>
+        leurs tridents chargés d’éclairs,<br>
+        et où les poissons aux mille couleurs dansent autour des coraux lumineux.
+      </p>
     </div>
   </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const p = document.querySelector(".container p");
-    const text = p.textContent.trim();
-    p.innerHTML = "";
-
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const span = document.createElement("span");
-      span.innerHTML = char === " " ? "&nbsp;" : char;
-      span.style.display = "inline-block";
-      span.style.opacity = "0";
-      span.style.animation = `apparitionTexte 0.5s ease forwards`;
-      span.style.animationDelay = `${i * 0.03}s`;
-      p.appendChild(span);
-    }
-  });
-</script>
-
+  <div class="back-button">
+    <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
+  </div>
 
 </body>
 </html>
