@@ -56,13 +56,13 @@
   opacity: 1;
 }
 
-  .texte-parchemin h2 {
-    animation-delay: 0.3s;
-    margin-bottom: 1em;
-     font-size: 1.4em; /* Taille réduite */
-    color: #d4af37;
-    text-shadow: 1px 1px 2px #000;
-  }
+ .texte-parchemin h2 {
+  animation-delay: 0.3s;           /* Délai avant le début de l’animation d’apparition (0.3 seconde) */
+  margin-bottom: 1em;              /* Espace en bas du titre (avant le paragraphe) */
+  font-size: 1.4em;                /* Taille du titre réduite (1.4 fois la taille du texte normal) */
+  color: #d4af37;                  /* Couleur dorée pour le texte */
+  text-shadow: 1px 1px 2px #000;   /* Légère ombre noire pour donner du relief au texte */
+}
 
   .texte-parchemin p {
     animation-delay: 1s;
@@ -79,13 +79,13 @@
     }
   }
 
-  .button-group {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.5em;
-  padding: 0 1rem;
+.button-group {
+  display: flex;                /* Active le mode flexbox (alignement horizontal des enfants) */
+  justify-content: center;     /* Centre les boutons horizontalement dans le conteneur */
+  flex-wrap: wrap;             /* Permet aux boutons de passer à la ligne s’ils ne rentrent pas */
+  gap: 1rem;                   /* Espace entre les boutons (horizontal et vertical) */
+  margin-top: 0.5em;           /* Espace au-dessus du groupe de boutons */
+  padding: 0 1rem;             /* Padding horizontal (gauche/droite) à l’intérieur du conteneur */
 }
 
 .button-group a {
