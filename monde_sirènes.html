@@ -7,21 +7,23 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('sirenes.png') no-repeat center top fixed;
-      background-size: contain;
-      background-repeat: no-repeat;
       background-color: #000;
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
-      overflow: hidden;
+    }
+
+    .sirene-image {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .parchemin-wrapper {
       position: relative;
       width: 90%;
       max-width: 700px;
-      margin: 5em auto 2em auto;
+      margin: 2em auto;
     }
 
     .parchemin-image {
@@ -71,21 +73,24 @@
 </head>
 
 <body>
-  
-<!-- Image du parchemin -->
-<div class="parchemin-wrapper">
-  <img src="parchemin3.png" alt="parchemin" class="parchemin-image">
-  <div class="texte-parchemin">
-    <h2>🌿 Bienvenue au Monde des Sirènes 🌿</h2>
-    <p>
-      Un monde dans les profondeurs enchantées où les sirènes veillent,<br>
-      leurs tridents chargés d’éclairs,<br>
-      et où les poissons aux mille couleurs dansent autour des coraux lumineux.
-    </p>
+
+  <!-- Image de la sirène en haut -->
+  <img src="sirenes.png" alt="sirène" class="sirene-image">
+
+  <!-- Image du parchemin avec texte -->
+  <div class="parchemin-wrapper">
+    <img src="parchemin3.png" alt="parchemin" class="parchemin-image">
+    <div class="texte-parchemin">
+      <h2>🌿 Bienvenue au Monde des Sirènes 🌿</h2>
+      <p>
+        Un monde dans les profondeurs enchantées où les sirènes veillent,<br>
+        leurs tridents chargés d’éclairs,<br>
+        et où les poissons aux mille couleurs dansent autour des coraux lumineux.
+      </p>
+    </div>
   </div>
-</div>
 
-
+  <!-- Bouton retour -->
   <div class="back-button">
     <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
   </div>
