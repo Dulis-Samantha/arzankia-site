@@ -53,9 +53,8 @@
 }
 
   .texte-parchemin h2, .texte-parchemin p {
-    opacity: 0;
-    animation: apparitionTexte 1s ease forwards;
-  }
+  opacity: 1;
+}
 
   .texte-parchemin h2 {
     animation-delay: 0.3s;
@@ -81,30 +80,29 @@
   }
 
   .button-group {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2em;
-    padding: 0 1rem;
-  }
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5em;
+  padding: 0 1rem;
+}
 
 .button-group a {
-  flex: 1 1 calc(45% - 1rem); /* un peu plus petit que 50% */
+  flex: 1 1 calc(42% - 1rem);
   box-sizing: border-box;
   animation: boutonGlow 3s ease-in-out infinite;
   background: linear-gradient(to bottom, #fff8dc, #d4af37);
-  padding: 0.5rem 0.8rem; /* Réduit l’épaisseur des boutons */
+  padding: 0.4rem 0.6rem;
   border-radius: 10px;
   color: #4a2e00;
   font-weight: bold;
   text-decoration: none;
-  font-size: 0.8em; /* Plus petit texte */
+  font-size: 0.75em;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
   transition: transform 0.2s, box-shadow 0.2s;
   text-align: center;
 }
-
 
   .button-group a:hover {
     transform: scale(1.05);
