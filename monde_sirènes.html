@@ -3,98 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <title>Monde des Sirènes</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
-    }
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font-family: Georgia, serif;
+    color: #fff8e6;
+    text-shadow: 1px 1px 4px #000;
+  }
 
-    .sirene-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+  .sirene-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
-    .parchemin-wrapper {
-      position: relative;
-      width: 90%;
-      max-width: 700px;
-      margin: 2em auto;
-    }
+  .parchemin-wrapper {
+    position: relative;
+    width: 95%;
+    max-width: 1000px;
+    margin: 2em auto;
+  }
 
-    .parchemin-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+  .parchemin-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
-    .texte-parchemin {
-      position: absolute;
-      top: 15%;
-      left: 10%;
-      right: 10%;
-      color: #3b2a1d;
-      font-family: Georgia, serif;
-      font-size: 1.1em;
-      text-align: center;
-      line-height: 1.6;
-      text-shadow: none;
-    }
+  .texte-parchemin {
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    right: 8%;
+    color: #3b2a1d;
+    font-family: Georgia, serif;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 1.6;
+    text-shadow: none;
+  }
 
-    .texte-parchemin h2, .texte-parchemin p {
+  .texte-parchemin h2, .texte-parchemin p {
+    opacity: 0;
+    animation: apparitionTexte 1s ease forwards;
+  }
+
+  .texte-parchemin h2 {
+    animation-delay: 0.3s;
+    margin-bottom: 1em;
+    font-size: 1.8em;
+    color: #d4af37;
+  }
+
+  .texte-parchemin p {
+    animation-delay: 1s;
+  }
+
+  @keyframes apparitionTexte {
+    0% {
       opacity: 0;
-      animation: apparitionTexte 1s ease forwards;
+      transform: translateY(10px);
     }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-    .texte-parchemin h2 {
-      animation-delay: 0.3s;
-      margin-bottom: 1em;
-    }
+  .button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2em;
+    padding: 0 1rem;
+  }
 
-    .texte-parchemin p {
-      animation-delay: 1s;
-    }
+  .button-group a {
+    background: linear-gradient(to bottom, #fff8dc, #d4af37);
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    color: #4a2e00;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1em;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-    @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  .button-group a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
+  }
 
-    .back-button {
-      text-align: center;
-      margin-top: 2em;
-    }
+  h1, h2 {
+    font-size: 1.3em;
+    color: #ffd700;
+    text-align: center;
+    font-weight: bold;
+  }
+</style>
 
-    .back-button a {
-      background-color: #f4e0a3;
-      color: #3b2a1d;
-      padding: 0.6em 1.2em;
-      font-size: 1em;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 8px rgba(255, 223, 120, 0.8);
-      transition: all 0.3s ease;
-    }
-
-    h1, h2 {
-      font-size: 1.3em;
-      color: #ffd700;
-      margin-bottom: 0.5em;
-      text-align: center;
-      font-weight: bold;
-    }
-  </style>
 </head>
 
 <body>
@@ -113,8 +124,10 @@
         et où les poissons aux mille couleurs dansent autour des coraux lumineux.
       </p>
     </div>
-    
- <div class="button-group">
+  </div>
+
+  <!-- Boutons dorés -->
+  <div class="button-group">
     <a href="extrait-livre.html">📖 Extrait du livre</a>
     <a href="entree-monde.html">✨ Entrée du monde</a>
     <a href="chanson-camidjo.html">🎵 Chanson de Camidjo</a>
@@ -122,4 +135,5 @@
   </div>
 
 </body>
+
 </html>
