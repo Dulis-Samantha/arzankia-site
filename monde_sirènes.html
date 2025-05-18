@@ -24,14 +24,13 @@
 }
 
 
-  .parchemin-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    border-radius: 12px;
-  }
+ .parchemin-wrapper {
+  position: relative;
+  width: 100vw;
+  max-width: none;
+  margin: 0 auto;
+}
+
 
   .parchemin-image {
     width: 100%;
@@ -117,6 +116,13 @@
   }
 }
 
+  @media (max-width: 600px) {
+  .texte-parchemin {
+    font-size: 1em;
+    width: 90%;
+  }
+}
+
   h1, h2 {
     font-size: 1.3em;
     color: #ffd700;
@@ -136,7 +142,6 @@
 <div class="parchemin-wrapper">
   <img class="parchemin-image" src="parchemin.png" alt="Parchemin">
   <div class="texte-parchemin">
-    <h2>Monde des Sirènes</h2>
       <h2>🌿 Bienvenue au Monde des Sirènes 🌿</h2>
       <p>
         Un monde dans les profondeurs enchantées où les sirènes veillent,<br>
