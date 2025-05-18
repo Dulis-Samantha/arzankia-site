@@ -89,18 +89,22 @@
     padding: 0 1rem;
   }
 
-  .button-group a {
-    animation: boutonGlow 3s ease-in-out infinite;
-    background: linear-gradient(to bottom, #fff8dc, #d4af37);
-    padding: 0.7rem 1.5rem;
-    border-radius: 12px;
-    color: #4a2e00;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 1em;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+.button-group a {
+  flex: 1 1 calc(50% - 1rem); /* 2 par ligne */
+  box-sizing: border-box;
+  animation: boutonGlow 3s ease-in-out infinite;
+  background: linear-gradient(to bottom, #fff8dc, #d4af37);
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  color: #4a2e00;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9em;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
 
   .button-group a:hover {
     transform: scale(1.05);
