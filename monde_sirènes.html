@@ -19,31 +19,46 @@
       display: block;
     }
 
-    .parchemin-wrapper {
-      position: relative;
-      width: 90%;
-      max-width: 700px;
-      margin: 2em auto;
-    }
+ .parchemin-wrapper {
+  position: relative;
+  width: 100vw;
+  max-width: none;
+  margin: 0 auto;
+}
 
-    .parchemin-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
 
-    .texte-parchemin {
-      position: absolute;
-      top: 20%;
-      left: 10%;
-      right: 10%;
-      color: #3b2a1d;
-      font-family: Georgia, serif;
-      font-size: 1.1em;
-      text-align: center;
-      line-height: 1.6;
-      text-shadow: none;
-    }
+.parchemin-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+ .texte-parchemin {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  right: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  text-shadow: none;
+  color: #3b2a1d;
+  font-family: Georgia, serif;
+}
+.texte-parchemin h2 {
+  font-size: 1.3em;
+  max-width: 40%;
+  text-align: left;
+}
+.texte-parchemin p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 50%;
+  text-align: left;
+}
+
 
     .back-button {
       text-align: center;
