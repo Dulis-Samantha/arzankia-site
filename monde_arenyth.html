@@ -51,10 +51,11 @@ body {
   text-align: center;                                /* Texte centré */
   line-height: 1.6;                                  /* Espace vertical entre les lignes */
   text-shadow: none;                                 /* Pas d’ombre sur ce texte */
-  width: 65%;                                        /* Largeur limitée pour rester dans le parchemin */
-  max-width: 650px;                                  /* Max sur grand écran */
+  width: 75%;                                        /* Largeur limitée pour rester dans le parchemin */
+  max-width: 700px;                                  /* Max sur grand écran */
   padding: 1rem;                                     /* Espace intérieur pour ne pas coller aux bords */
   box-sizing: border-box;                            /* Inclut le padding dans la largeur */
+  text-align: center;
 }
 
 .texte-parchemin h2,
@@ -63,14 +64,14 @@ body {
 }
 
 /* === TITRE SUR PARCHEMIN === */
-.titre-parchemin {
-  display: inline-block;                             /* Nécessaire pour pouvoir le centrer proprement *
+ titre-parchemin {
+ display: inline-block;                              /* Nécessaire pour centrer correctement */
   font-size: clamp(1.6rem, 3.2vw, 2.5rem);           /* Taille responsive du titre */
   font-weight: bold;                                 /* En gras */
   color: #f0d864;                                    /* Jaune doré (style parchemin/fantasy) */
   text-shadow: 1px 1px 2px #00000066;                /* Légère ombre pour détacher le titre du fond */
   text-align: center;                                /* Centre le texte à l’intérieur du bloc */
-  white-space: normal;                             /* Autorise le retour à la ligne si besoin */
+  white-space: normal;                               /* Autorise le retour à la ligne si besoin */
   margin-bottom: 1rem;                               /* Espace sous le titre */
   
 }
@@ -169,7 +170,6 @@ body {
   <img class="parchemin-image" src="parchemin_bleu.png" alt="Parchemin">
 
   <div class="texte-parchemin">
-    <div style="text-align: center;"> <!-- 👍 Centrage horizontal -->
       <div class="titre-parchemin">
         <span>🌿 Bienvenue au Monde d’Arenyth 🌿</span>
       </div>
