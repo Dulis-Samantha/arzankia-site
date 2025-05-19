@@ -132,6 +132,12 @@
     width: 90%;
   }
 }
+      /* 🔧 Spécial mobile : si l'écran est très petit */
+@media screen and (max-width: 420px) {
+  .titre-parchemin {
+    font-size: 1.2rem;                   /* Encore plus petit si nécessaire */
+    white-space: normal;                /* Autorise le retour à la ligne 🌿 si trop serré */
+  }
 
   h1, h2 {
     font-size: 1.3em;
