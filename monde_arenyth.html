@@ -64,12 +64,15 @@ body {
 
 /* === TITRE SUR PARCHEMIN === */
 .titre-parchemin {
+  display: inline-block;                             /* Nécessaire pour pouvoir le centrer proprement *
   font-size: clamp(1.6rem, 3.2vw, 2.5rem);           /* Taille responsive du titre */
   font-weight: bold;                                 /* En gras */
   color: #f0d864;                                    /* Jaune doré (style parchemin/fantasy) */
   text-shadow: 1px 1px 2px #00000066;                /* Légère ombre pour détacher le titre du fond */
-  white-space: nowrap;                               /* Empêche le retour à la ligne (🌿 reste à côté) */
+  text-align: center;                                /* Centre le texte à l’intérieur du bloc */
+  white-space: normal;                             /* Autorise le retour à la ligne si besoin */
   margin-bottom: 1rem;                               /* Espace sous le titre */
+  
 }
 
 /* === ANIMATION DE TEXTE (non utilisée ici mais dispo) === */
@@ -160,21 +163,24 @@ body {
 
   <!-- Image de l'Arène en haut -->
   <img class="arenyth-image" src="arenyth.png">
+  
+<!-- Parchemin avec titre + texte -->
+<div class="parchemin-wrapper">
+  <img class="parchemin-image" src="parchemin_bleu.png" alt="Parchemin">
 
-  <!-- Parchemin avec titre + texte -->
-  <div class="parchemin-wrapper">
-    <img class="parchemin-image" src="parchemin_bleu.png" alt="Parchemin">
-
-    <div class="texte-parchemin">
+  <div class="texte-parchemin">
+    <div style="text-align: center;"> <!-- 👍 Centrage horizontal -->
       <div class="titre-parchemin">
         <span>🌿 Bienvenue au Monde d’Arenyth 🌿</span>
       </div>
-    <p>
-  Un monde où les spectacles annuels ont lieu pour élire les chasseurs ou dresseurs espoir de l’année.
-</p>
-
     </div>
+
+    <p>
+      Un monde où les spectacles annuels ont lieu pour élire les chasseurs ou dresseurs espoir de l’année.
+    </p>
   </div>
+</div>
+
 
   <!-- Boutons dorés -->
   <div class="button-group">
