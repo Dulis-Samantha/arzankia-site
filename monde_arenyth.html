@@ -39,35 +39,37 @@
   }
 
 .texte-parchemin {
-  position: absolute;                      /* Permet de placer le texte librement sur l'image */
-  top: 42%;                                /* Place le texte plus haut (meilleur centrage vertical) */
-  left: 50%;                               /* Centre horizontalement */
-  transform: translate(-50%, -50%);        /* Corrige le centrage exact (milieu de la boîte) */
-  color: #3b2a1d;                          /* Couleur du texte (marron foncé) */
-  font-family: Georgia, serif;             /* Police élégante et classique */
-  font-size: clamp(1.2rem, 2.5vw, 2rem);   /* Taille responsive : min 1.2rem, adaptatif, max 2rem */
-  text-align: center;                      /* Centre le texte dans le bloc */
-  line-height: 1.6;                        /* Espace vertical entre les lignes pour bonne lecture */
-  text-shadow: none;                       /* Pas d’ombre sur le texte */
-  width: 80%;                              /* Le bloc de texte prend 80% de la largeur du parchemin */
-  max-width: 600px;                        /* Ne dépasse jamais 600px sur les très grands écrans */
-  padding: 1rem;                           /* Espace intérieur pour éviter que le texte touche les bords */
-  box-sizing: border-box;                 /* Inclut le padding dans la largeur (évite débordement) */
+  position: absolute;                       /* Position libre sur l’image du parchemin */
+  top: 46%;                                 /* Place le bloc à 46% de la hauteur (ajusté pour centrage visuel) */
+  left: 50%;                                /* Centre horizontalement */
+  transform: translate(-50%, -50%);         /* Recentre parfaitement le bloc au milieu */
+  color: #3b2a1d;                           /* Couleur marron foncé du texte (lisible sur fond parchemin) */
+  font-family: Georgia, serif;              /* Police élégante, adaptée aux contes et à la fantasy */
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);   /* Taille du paragraphe : min 1.2rem (~19px), max 1.7rem (~27px), responsive */
+  text-align: center;                       /* Centre le texte à l’intérieur du bloc */
+  line-height: 1.6;                         /* Espace entre les lignes pour une lecture confortable */
+  text-shadow: none;                        /* Pas d’ombre sur le texte du corps (pour rester clair) */
+  width: 80%;                               /* Prend 80% de la largeur du parchemin */
+  max-width: 650px;                         /* Ne dépasse jamais 650px (même sur très grands écrans) */
+  padding: 1rem;                            /* Espace intérieur pour éviter que le texte touche les bords */
+  box-sizing: border-box;                   /* Le padding est inclus dans la largeur (évite tout débordement) */
 }
-
 
   .texte-parchemin h2, .texte-parchemin p {
   opacity: 1;
 }
 
 .titre-parchemin {
-  font-size: clamp(1.6rem, 3vw, 2.5rem);    /* Titre plus gros et responsive */
-  font-weight: bold;
-  color: #c2a44f;                           /* Or doux pour mise en valeur */
-  text-shadow: 1px 1px 2px #00000055;       /* Légère ombre pour détacher le titre */
-  margin-bottom: 1rem;                      /* Espace avec le texte en dessous */
-  white-space: nowrap;                      /* Empêche le retour à la ligne *
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);   /* Taille du titre : au minimum 1.6rem (~25px), 
+                                               augmente en fonction de la largeur d’écran (3.2%),
+                                               mais ne dépasse jamais 2.5rem (~40px) */
+  font-weight: bold;                         /* Met le texte en gras */
+  color: #f0d864;                            /* Couleur jaune doux (style doré) */
+  text-shadow: 1px 1px 2px #00000066;        /* Légère ombre noire pour lisibilité et relief */
+  white-space: nowrap;                      /* Empêche le retour à la ligne (🌿 reste sur la même ligne que le texte) */
+  margin-bottom: 1rem;                      /* Espace en dessous du titre pour aérer avant le paragraphe */
 }
+
 
 .texte-parchemin {
   font-size: clamp(1.2rem, 2.2vw, 1.7rem);  /* Texte plus gros sur PC et lisible sur mobile */
