@@ -39,17 +39,20 @@
   }
 
 .texte-parchemin {
-  position: absolute;                          /* Positionnement libre sur l'image */
-  top: 48%;                                    /* Position verticale à 48% de la hauteur du parent */
-  left: 50%;                                   /* Position horizontale à 50% (centré) */
-  transform: translate(-50%, -52%);            /* Décale le texte pour le centrer parfaitement */
-  color: #3b2a1d;                              /* Couleur marron foncé du texte */
-  font-family: Georgia, serif;                 /* Style de police élégant, classique */
-  font-size: clamp(1rem, 2.2vw, 1.5rem);       /* Taille responsive : min 1rem, idéal 2.2% largeur écran, max 1.5rem */
-  text-align: center;                          /* Aligne le texte au centre */
-  line-height: 1.6;                            /* Espace vertical entre les lignes pour une bonne lisibilité */
-  text-shadow: none;                           /* Pas d'effet d'ombre sur le texte */
-  width: 65%;                                  /* Le texte occupe 65% de la largeur du parchemin */
+  position: absolute;                      /* Permet de placer le texte librement sur l'image */
+  top: 42%;                                /* Place le texte plus haut (meilleur centrage vertical) */
+  left: 50%;                               /* Centre horizontalement */
+  transform: translate(-50%, -50%);        /* Corrige le centrage exact (milieu de la boîte) */
+  color: #3b2a1d;                          /* Couleur du texte (marron foncé) */
+  font-family: Georgia, serif;             /* Police élégante et classique */
+  font-size: clamp(1.2rem, 2.5vw, 2rem);   /* Taille responsive : min 1.2rem, adaptatif, max 2rem */
+  text-align: center;                      /* Centre le texte dans le bloc */
+  line-height: 1.6;                        /* Espace vertical entre les lignes pour bonne lecture */
+  text-shadow: none;                       /* Pas d’ombre sur le texte */
+  width: 80%;                              /* Le bloc de texte prend 80% de la largeur du parchemin */
+  max-width: 600px;                        /* Ne dépasse jamais 600px sur les très grands écrans */
+  padding: 1rem;                           /* Espace intérieur pour éviter que le texte touche les bords */
+  box-sizing: border-box;                 /* Inclut le padding dans la largeur (évite débordement) */
 }
 
 
