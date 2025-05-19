@@ -60,18 +60,18 @@
   opacity: 1;
 }
 
- .texte-parchemin h2 {
-  animation-delay: 0.3s;           /* Délai avant le début de l’animation d’apparition (0.3 seconde) */
-  margin-top: -0.5em;              /* Espace entre le haut du parchemin et le titre */
-  margin-bottom: 0.8em;            /* Espace en bas du titre (avant le paragraphe) */
-  font-size: 1.1em;                /* Taille du titre réduite (1.4 fois la taille du texte normal) */
-  color: #d4af37;                  /* Couleur dorée pour le texte */
-  text-shadow: 1px 1px 2px #000;   /* Légère ombre noire pour donner du relief au texte */
+.titre-parchemin {
+  font-size: clamp(1.6rem, 3vw, 2.5rem);    /* Titre plus gros et responsive */
+  font-weight: bold;
+  color: #c2a44f;                           /* Or doux pour mise en valeur */
+  text-shadow: 1px 1px 2px #00000055;       /* Légère ombre pour détacher le titre */
+  margin-bottom: 1rem;                      /* Espace avec le texte en dessous */
 }
 
-  .texte-parchemin p {
-    animation-delay: 1s;
-  }
+.texte-parchemin {
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);  /* Texte plus gros sur PC et lisible sur mobile */
+  line-height: 1.6;
+}
 
   @keyframes apparitionTexte {
     0% {
