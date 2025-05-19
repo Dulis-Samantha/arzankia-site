@@ -66,6 +66,7 @@
   color: #c2a44f;                           /* Or doux pour mise en valeur */
   text-shadow: 1px 1px 2px #00000055;       /* Légère ombre pour détacher le titre */
   margin-bottom: 1rem;                      /* Espace avec le texte en dessous */
+  white-space: nowrap;                      /* Empêche le retour à la ligne *
 }
 
 .texte-parchemin {
@@ -142,20 +143,20 @@
 
 <body>
 
-  <!-- Image de l'Arene en haut -->
- <img class="arenyth-image" src="arenyth.png">
+  <!-- Image de l'Arène en haut -->
+  <img class="arenyth-image" src="arenyth.png">
 
+  <!-- Parchemin avec titre + texte -->
+  <div class="parchemin-wrapper">
+    <img class="parchemin-image" src="parchemin_bleu.png" alt="Parchemin">
 
-
-  <!-- Image du parchemin avec texte -->
-<div class="parchemin-wrapper">
-  <img class="parchemin-image" src="parchemin_bleu.png" alt="Parchemin">
-  <div class="texte-parchemin">
-      <h2>🌿 Bienvenue au Monde d'Arenyth 🌿</h2>
+    <div class="texte-parchemin">
+      <div class="titre-parchemin">
+        <span>🌿 Bienvenue au Monde d’Arenyth 🌿</span>
+      </div>
       <p>
-         Un monde où les spectacles annuels ont lieu<br> 
-         pour élire les chasseur ou dresseur espoir de l’année."
-
+        Un monde où les spectacles annuels ont lieu<br>
+        pour élire les chasseurs ou dresseurs espoir de l’année.
       </p>
     </div>
   </div>
