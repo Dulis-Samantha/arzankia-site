@@ -39,18 +39,19 @@
   }
 
 .texte-parchemin {
-  position: absolute;                        /* Position sur l'image */
-  top: 48% !important;                       /* Légèrement plus bas que le centre */
-  left: 50% !important;                      /* Centré horizontalement */
-  transform: translate(-50%, -52%) !important; /* Centre verticalement en fonction de top */
-  color: #3b2a1d;                            /* Couleur du texte */
-  font-family: Georgia, serif;              /* Police élégante */
-  font-size: 1.2em !important;                /* Taille correcte et cohérente */
-  text-align: center;                       /* Alignement centré */
-  line-height: 1.6;                         /* Bonne lisibilité */
-  text-shadow: none;                        /* Pas d'ombre parasite */
-  width: 65% !important;                    /* Bien contenu dans le parchemin */
+  position: absolute;                          /* Positionnement libre sur l'image */
+  top: 48%;                                    /* Position verticale à 48% de la hauteur du parent */
+  left: 50%;                                   /* Position horizontale à 50% (centré) */
+  transform: translate(-50%, -52%);            /* Décale le texte pour le centrer parfaitement */
+  color: #3b2a1d;                              /* Couleur marron foncé du texte */
+  font-family: Georgia, serif;                 /* Style de police élégant, classique */
+  font-size: clamp(1rem, 2.2vw, 1.5rem);       /* Taille responsive : min 1rem, idéal 2.2% largeur écran, max 1.5rem */
+  text-align: center;                          /* Aligne le texte au centre */
+  line-height: 1.6;                            /* Espace vertical entre les lignes pour une bonne lisibilité */
+  text-shadow: none;                           /* Pas d'effet d'ombre sur le texte */
+  width: 65%;                                  /* Le texte occupe 65% de la largeur du parchemin */
 }
+
 
   .texte-parchemin h2, .texte-parchemin p {
   opacity: 1;
