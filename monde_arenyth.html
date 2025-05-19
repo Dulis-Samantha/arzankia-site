@@ -4,148 +4,155 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde d'Arenyth</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('fond-marinsombre.png') center top no-repeat;
-      background-color: #001d26;
-      background-size: cover;
-      font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
+<style>
+/* === STYLES GÉNÉRAUX === */
+/* === STYLES GÉNÉRAUX === */
+body {
+  margin: 0;                                         /* Enlève les marges autour du body */
+  padding: 0;                                        /* Enlève les espacements internes */
+  background: url('fond-marinsombre.png') center top no-repeat;  /* Image de fond centrée en haut */
+  background-color: #001d26;                         /* Couleur de fond si l’image ne charge pas */
+  background-size: cover;                            /* L’image couvre tout l’écran */
+  font-family: Georgia, serif;                       /* Police classique pour ambiance fantasy */
+  color: #fff8e6;                                     /* Couleur texte par défaut (beige clair) */
+  text-shadow: 1px 1px 4px #000;                     /* Légère ombre sur le texte général */
+}
 
- .arenyth-image,
+.arenyth-image,
 .parchemin-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0; /* Supprime les marges */
+  display: block;                                    /* Affiche l’image comme un bloc */
+  width: 100%;                                       /* Prend toute la largeur disponible */
+  height: auto;                                      /* Garde les proportions de l’image */
+  margin: 0;                                         /* Supprime les marges */
 }
 
-
- .parchemin-wrapper {
-  position: relative;
-  width: 100vw;
-  max-width: none;
-  margin: 0 auto;
+.parchemin-wrapper {
+  position: relative;                                /* Pour positionner les éléments à l’intérieur */
+  width: 100vw;                                      /* Largeur égale à la fenêtre */
+  max-width: none;                                   /* Pas de limite */
+  margin: 0 auto;                                    /* Centré horizontalement */
 }
 
+.parchemin-image {
+  width: 100%;                                       /* Largeur pleine */
+  height: auto;                                      /* Garde les proportions */
+  display: block;                                    /* Évite les bugs d’espacement */
+}
 
-  .parchemin-image {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
+/* === TEXTE SUR PARCHEMIN === */
 .texte-parchemin {
-  position: absolute;                       /* Position libre sur l’image du parchemin */
-  top: 46%;                                 /* Place le bloc à 46% de la hauteur (ajusté pour centrage visuel) */
-  left: 50%;                                /* Centre horizontalement */
-  transform: translate(-50%, -50%);         /* Recentre parfaitement le bloc au milieu */
-  color: #3b2a1d;                           /* Couleur marron foncé du texte (lisible sur fond parchemin) */
-  font-family: Georgia, serif;              /* Police élégante, adaptée aux contes et à la fantasy */
-  font-size: clamp(1.2rem, 2.2vw, 1.7rem);   /* Taille du paragraphe : min 1.2rem (~19px), max 1.7rem (~27px), responsive */
-  text-align: center;                       /* Centre le texte à l’intérieur du bloc */
-  line-height: 1.6;                         /* Espace entre les lignes pour une lecture confortable */
-  text-shadow: none;                        /* Pas d’ombre sur le texte du corps (pour rester clair) */
-  width: 80%;                               /* Prend 80% de la largeur du parchemin */
-  max-width: 650px;                         /* Ne dépasse jamais 650px (même sur très grands écrans) */
-  padding: 1rem;                            /* Espace intérieur pour éviter que le texte touche les bords */
-  box-sizing: border-box;                   /* Le padding est inclus dans la largeur (évite tout débordement) */
+  position: absolute;                                /* Permet de le placer au-dessus de l’image */
+  top: 46%;                                          /* Hauteur du bloc dans le parchemin */
+  left: 50%;                                         /* Centre horizontalement */
+  transform: translate(-50%, -50%);                  /* Centre parfaitement le bloc */
+  color: #3b2a1d;                                    /* Marron foncé, lisible sur le fond parchemin */
+  font-family: Georgia, serif;                       /* Style fantasy/livre ancien */
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);           /* Taille adaptable selon l’écran */
+  text-align: center;                                /* Texte centré */
+  line-height: 1.6;                                  /* Espace vertical entre les lignes */
+  text-shadow: none;                                 /* Pas d’ombre sur ce texte */
+  width: 80%;                                        /* Largeur limitée pour rester dans le parchemin */
+  max-width: 650px;                                  /* Max sur grand écran */
+  padding: 1rem;                                     /* Espace intérieur pour ne pas coller aux bords */
+  box-sizing: border-box;                            /* Inclut le padding dans la largeur */
 }
 
-  .texte-parchemin h2, .texte-parchemin p {
-  opacity: 1;
+.texte-parchemin h2,
+.texte-parchemin p {
+  opacity: 1;                                        /* Assure qu'ils soient bien visibles */
 }
 
+/* === TITRE SUR PARCHEMIN === */
 .titre-parchemin {
-  font-size: clamp(1.6rem, 3.2vw, 2.5rem);   /* Taille du titre : au minimum 1.6rem (~25px), 
-                                               augmente en fonction de la largeur d’écran (3.2%),
-                                               mais ne dépasse jamais 2.5rem (~40px) */
-  font-weight: bold;                         /* Met le texte en gras */
-  color: #f0d864;                            /* Couleur jaune doux (style doré) */
-  text-shadow: 1px 1px 2px #00000066;        /* Légère ombre noire pour lisibilité et relief */
-  white-space: nowrap;                      /* Empêche le retour à la ligne (🌿 reste sur la même ligne que le texte) */
-  margin-bottom: 1rem;                      /* Espace en dessous du titre pour aérer avant le paragraphe */
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);           /* Taille responsive du titre */
+  font-weight: bold;                                 /* En gras */
+  color: #f0d864;                                    /* Jaune doré (style parchemin/fantasy) */
+  text-shadow: 1px 1px 2px #00000066;                /* Légère ombre pour détacher le titre du fond */
+  white-space: nowrap;                               /* Empêche le retour à la ligne (🌿 reste à côté) */
+  margin-bottom: 1rem;                               /* Espace sous le titre */
 }
 
-
-.texte-parchemin {
-  font-size: clamp(1.2rem, 2.2vw, 1.7rem);  /* Texte plus gros sur PC et lisible sur mobile */
-  line-height: 1.6;
-}
-
-  @keyframes apparitionTexte {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* === ANIMATION DE TEXTE (non utilisée ici mais dispo) === */
+@keyframes apparitionTexte {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);                     /* Départ flou en bas */
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);                        /* Arrivée normale */
+  }
+}
 
+/* === BOUTONS === */
 .button-group {
-  display: flex;                /* Active le mode flexbox (alignement horizontal des enfants) */
-  justify-content: center;     /* Centre les boutons horizontalement dans le conteneur */
-  flex-wrap: wrap;             /* Permet aux boutons de passer à la ligne s’ils ne rentrent pas */
-  gap: 1rem;                   /* Espace entre les boutons (horizontal et vertical) */
-  margin-top: 0.5em;           /* Espace au-dessus du groupe de boutons */
-  padding: 0 1rem;             /* Padding horizontal (gauche/droite) à l’intérieur du conteneur */
+  display: flex;                                     /* Active le mode de disposition en ligne */
+  justify-content: center;                           /* Centre horizontalement */
+  flex-wrap: wrap;                                   /* Passe à la ligne si pas assez de place */
+  gap: 1rem;                                         /* Espace entre les boutons */
+  margin-top: 0.5em;                                 /* Petit espace au-dessus */
+  padding: 0 1rem;                                   /* Padding horizontal */
 }
 
 .button-group a {
-  flex: 1 1 calc(42% - 1rem);
-  box-sizing: border-box;
-  animation: boutonGlow 3s ease-in-out infinite;
-  background: linear-gradient(to bottom, #fff8dc, #d4af37);
-  padding: 0.4rem 0.6rem;
-  border-radius: 10px;
-  color: #4a2e00;
+  flex: 1 1 calc(42% - 1rem);                        /* Taille auto avec 2 par ligne max */
+  box-sizing: border-box;                            /* Padding inclus dans la taille */
+  animation: boutonGlow 3s ease-in-out infinite;     /* Effet de lumière pulsée */
+  background: linear-gradient(to bottom, #fff8dc, #d4af37);  /* Dégradé doré */
+  padding: 0.4rem 0.6rem;                            /* Espacement intérieur */
+  border-radius: 10px;                               /* Coins arrondis */
+  color: #4a2e00;                                    /* Marron foncé */
   font-weight: bold;
   text-decoration: none;
   font-size: 0.75em;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);        /* Lumière autour */
   transition: transform 0.2s, box-shadow 0.2s;
   text-align: center;
 }
 
-  .button-group a:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
-  }
+.button-group a:hover {
+  transform: scale(1.05);                            /* Zoom au survol */
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);       /* Lumière plus forte */
+}
 
-  @keyframes boutonGlow {
+@keyframes boutonGlow {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);
+    box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);    /* Début / fin de l'effet lumineux */
   }
   50% {
-    box-shadow: 0 0 15px rgba(255, 223, 150, 1);
+    box-shadow: 0 0 15px rgba(255, 223, 150, 1);      /* Point culminant lumineux */
   }
 }
 
-  @media (max-width: 600px) {
+/* === RESPONSIVE – PETITS ÉCRANS === */
+@media (max-width: 600px) {
   .texte-parchemin {
-    font-size: 0.8em;
-    width: 90%;
+    font-size: 1rem;                                 /* Plus petit texte sur mobile */
+    width: 90%;                                      /* Un peu plus large sur petit écran */
   }
 }
-      /* 🔧 Spécial mobile : si l'écran est très petit */
-@media screen and (max-width: 420px) {
+
+@media (max-width: 420px) {
   .titre-parchemin {
-    font-size: 1.2rem;                   /* Encore plus petit si nécessaire */
-    white-space: normal;                /* Autorise le retour à la ligne 🌿 si trop serré */
+    font-size: 1.2rem;                               /* Réduction supplémentaire pour très petits écrans */
+    white-space: normal;                             /* Autorise le retour à la ligne si nécessaire */
+  }
+}
+
+/* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
+@media screen and (min-width: 1024px) {
+  .texte-parchemin {
+    top: 42%;                                        /* Remonte un peu le bloc sur PC */
+    font-size: clamp(1.4rem, 2vw, 2rem);             /* Texte plus grand sur écran large */
   }
 
-  h1, h2 {
-    font-size: 1.3em;
-    color: #ffd700;
-    text-align: center;
-    font-weight: bold;
+  .titre-parchemin {
+    font-size: clamp(2rem, 3vw, 3rem);               /* Titre encore plus lisible sur PC */
   }
+}
+
 </style>
+
 
 </head>
 
