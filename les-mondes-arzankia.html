@@ -651,6 +651,24 @@
   margin-right: auto;
   text-align: center;
 }
+    @media (max-width: 768px) {
+  .bubble-container {
+    margin-top: 200px !important; /* Augmente l'espace sous le titre */
+    padding-bottom: 80px;
+  }
+
+  .bubble {
+    width: 90px !important;
+    height: 90px !important;
+    font-size: 0.65rem !important;
+  }
+
+  .bubble::before,
+  .bubble::after {
+    width: 110px !important;
+    height: 110px !important;
+  }
+}
 
 /* Responsive mobile */
 @media (max-width: 768px) {
