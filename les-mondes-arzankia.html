@@ -635,7 +635,6 @@
   margin-bottom: -10px;
 }
 
-
     .retour-container {
   display: flex;
   justify-content: center;
@@ -651,6 +650,7 @@
   margin-right: auto;
   text-align: center;
 }
+    
     @media (max-width: 768px) {
   .bubble-container {
     margin-top: 200px !important; /* Augmente l'espace sous le titre */
@@ -669,6 +669,18 @@
     height: 110px !important;
   }
 }
+    @media (max-width: 768px) {
+  h1 {
+    font-size: 1.8em; /* Réduit la taille du titre */
+    padding: 0.5em 0.2em; /* Réduit l'encadrement autour */
+    margin-bottom: 0.5em; /* Moins d’espace sous le titre */
+  }
+
+  .intro-box {
+    padding: 1em; /* Réduit l’espace intérieur */
+  }
+}
+
 
 /* Responsive mobile */
 @media (max-width: 768px) {
