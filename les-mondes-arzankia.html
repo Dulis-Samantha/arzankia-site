@@ -448,6 +448,23 @@
   opacity: 0.2; /* Garde la même opacité lorsqu'on survole */
   transform: none; /* Aucune transformation sur le survol */
 }
+    
+.bubble.hegaia {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  opacity: 0.15 !important;
+  animation: none !important;
+  cursor: default !important;
+  transition: none !important;
+}
+
+.bubble.hegaia:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.15 !important;
+  animation: none !important;
+}
 
 .popup-secret {
   position: fixed;
@@ -503,7 +520,7 @@
   left: 0;
   width: 100%;
   background: rgba(0, 0, 0, 0.5); /* ou autre fond pour lisibilité */
-  padding: 0.8em 0.5em;
+  padding: 0.4em 0.5em; /* Réduction de la hauteur */
   text-align: center;
   z-index: 1000;
   color: #fff;
