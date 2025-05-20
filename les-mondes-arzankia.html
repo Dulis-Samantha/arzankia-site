@@ -522,23 +522,34 @@
 .btn-retour:hover {
   transform: scale(1.05);
 }
-    @media (max-width: 768px) {
-  .bubble {
-    width: 100px !important;
-    height: 100px !important;
-    font-size: 0.7rem !important;
+   @media (max-width: 768px) {
+  .bubble-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 2rem 1rem;
+    margin-top: 140px;
+    margin-bottom: 90px;
   }
 
-  .bubble::after,
-  .bubble::before {
-    width: 120px !important;
-    height: 120px !important;
+  .bubble {
+    position: static !important;
+    width: 90px !important;
+    height: 90px !important;
+    font-size: 0.65rem !important;
   }
 
   .bubble .label {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  .bubble::before,
+  .bubble::after {
+    display: none !important;
   }
 }
+
 .fenetre-secret-hegaia {
   display: none;
   position: absolute;
