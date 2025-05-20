@@ -10,9 +10,7 @@
 body {
   margin: 0;                                             /* Enlève les marges autour du body */
   padding: 0;                                            /* Enlève les espacements internes */
-  background: url('ptikitis.png') center top no-repeat;  /* Image de fond centrée en haut */
   background-color: #001d26;                             /* Couleur de fond si l’image ne charge pas */
-  background-size: cover;                                /* L’image couvre tout l’écran */
   font-family: Georgia, serif;                           /* Police classique pour ambiance fantasy */
   color: #fff8e6;                                        /* Couleur texte par défaut (beige clair) */
   text-shadow: 1px 1px 4px #000;                         /* Légère ombre sur le texte général */
@@ -75,6 +73,16 @@ body {
   margin-bottom: 1rem;                               /* Espace sous le titre */
   
 }
+  
+  .ptikitis-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  max-height: 500px; /* ou autre hauteur selon ton image */
+  object-fit: contain;
+}
+
 
 /* === ANIMATION DE TEXTE (non utilisée ici mais dispo) === */
 @keyframes apparitionTexte {
