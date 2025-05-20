@@ -442,7 +442,17 @@
   opacity: 0.28 !important;
   animation: none !important;
 }
-   
+    
+   .bubble-hegaia {
+  opacity: 0.2; /* Rend la bulle presque invisible */
+  pointer-events: none; /* Empêche toute interaction si souhaité */
+}
+
+.bubble-hegaia:hover {
+  opacity: 0.2; /* Garde la même opacité lorsqu'on survole */
+  transform: none; /* Aucune transformation sur le survol */
+}
+
 .popup-secret {
   position: fixed;
   bottom: 80px;
