@@ -563,143 +563,114 @@
   }
 }
 
-
-
-  </style>
+</style>
 </head>
 <body>
 
- <div class="intro-box">
-  <h1>🌍 Les Mondes d’Arzankia</h1>
-  <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
-  
-</div>
-
-  <div class="bubble-container"> 
-
-<a href="monde_fees.html" class="bubble fee flotter1" style="top: 15%; left: 10%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Fées</span>
+  <!-- Bloc d’introduction -->
+  <div class="intro-box">
+    <h1>🌍 Les Mondes d’Arzankia</h1>
+    <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
   </div>
-</a>
 
-<a href="monde_ptikitis.html" class="bubble ptikiti flotter4" style="top: 20%; left: 25%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Ptikitis</span>
+  <!-- Bulles flottantes -->
+  <div class="bubble-container">
+
+    <a href="monde_fees.html" class="bubble fee flotter1" style="top: 15%; left: 10%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Fées</span></div>
+    </a>
+
+    <a href="monde_ptikitis.html" class="bubble ptikiti flotter4" style="top: 20%; left: 25%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Ptikitis</span></div>
+    </a>
+
+    <a href="monde_ames.html" class="bubble ames flotter2" style="top: 22%; left: 42%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Mondes des Âmes perdues</span></div>
+    </a>
+
+    <a href="monde_yakkas.html" class="bubble yakkas flotter3" style="top: 27%; left: 58%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Yakkas</span></div>
+    </a>
+
+    <a href="monde_sirènes.html" class="bubble sirenes flotter3" style="top: 20%; left: 10%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Sirènes</span></div>
+    </a>
+
+    <a href="monde_quacks.html" class="bubble quack flotter4" style="top: 30%; left: 72%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Quacks</span></div>
+    </a>
+
+    <a href="monde_cites_d_or.html" class="bubble cite flotter2" style="top: 55%; left: 15%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Cités d’or</span></div>
+    </a>
+
+    <a href="monde_foret_enchante.html" class="bubble foret flotter3" style="top: 50%; left: 30%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde de la Forêt enchantée</span></div>
+    </a>
+
+    <a href="monde_atlantides.html" class="bubble atlantides flotter4" style="top: 60%; left: 45%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde d'Atlantides</span></div>
+    </a>
+
+    <a href="monde_geants.html" class="bubble geant flotter3" style="top: 48%; left: 62%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Géants</span></div>
+    </a>
+
+    <a href="monde_arenyth.html" class="bubble arenyth flotter1" style="top: 58%; left: 72%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde d'Arenyth</span></div>
+    </a>
+
+    <a href="monde_artistes.html" class="bubble artiste flotter2" style="top: 65%; left: 5%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Artistes</span></div>
+    </a>
+
+    <a href="monde_creatures_legendaires.html" class="bubble creature flotter3" style="top: 35%; left: 38%;" target="_blank">
+      <div class="bubble-inner"><span class="label">Monde des Créatures légendaires</span></div>
+    </a>
+
+    <!-- Bulle secrète Hégaïa -->
+    <div class="bubble hegaia flotter2" style="top: 72%; left: 40%;" onclick="reveleSecretHegaia()">
+      <div class="bubble-inner"><span class="label"></span></div>
+    </div>
+
+  </div> <!-- FIN .bubble-container -->
+
+  <!-- Fenêtre texte secret Hégaïa -->
+  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
+    <span id="texte-hegaia-tape"></span>
   </div>
-</a>
 
-<a href="monde_ames.html" class="bubble ames flotter2" style="top: 22%; left: 42%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Mondes des Âmes perdues</span>
-  </div>
-</a>
+  <!-- Script apparition texte -->
+  <script>
+    function reveleSecretHegaia() {
+      const fenetre = document.getElementById("texte-hegaia-secret");
+      const span = document.getElementById("texte-hegaia-tape");
+      const texte = "🌿 Le voile s’est levé… Tu viens d’ouvrir un passage secret d'Arzankia.";
 
-<a href="monde_yakkas.html" class="bubble yakkas flotter3" style="top: 27%; left: 58%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Yakkas</span>
-  </div>
-</a>
+      fenetre.style.display = "block";
+      span.textContent = "";
 
-<a href="monde_sirènes.html" class="bubble sirenes flotter3" style="top: 20%; left: 10%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Sirènes</span>
-  </div>
-</a>
+      let i = 0;
+      function type() {
+        if (i < texte.length) {
+          span.textContent += texte.charAt(i);
+          i++;
+          setTimeout(type, 50);
+        }
+      }
+      type();
 
-<a href="monde_quacks.html" class="bubble quack flotter4" style="top: 30%; left: 72%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Quacks</span>
-  </div>
-</a>
-
-<a href="monde_cites_d_or.html" class="bubble cite flotter2" style="top: 55%; left: 15%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Cités d’or</span>
-  </div>
-</a>
-
-<a href="monde_foret_enchante.html" class="bubble foret flotter3" style="top: 50%; left: 30%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde de la Forêt enchantée</span>
-  </div>
-</a>
-
-<a href="monde_atlantides.html" class="bubble atlantides flotter4" style="top: 60%; left: 45%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde d'Atlantides</span>
-  </div>
-</a>
-
-<a href="monde_geants.html" class="bubble geant flotter3" style="top: 48%; left: 62%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Géants</span>
-  </div>
-</a>
-
-<a href="monde_arenyth.html" class="bubble arenyth flotter1" style="top: 58%; left: 72%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde d'Arenyth</span>
-  </div>
-</a>
-
-<a href="monde_artistes.html" class="bubble artiste flotter2" style="top: 65%; left: 5%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Artistes</span>
-  </div>
-</a>
-
-
-<a href="monde_creatures_legendaires.html" class="bubble creature flotter3" style="top: 35%; left: 38%;" target="_blank">
-  <div class="bubble-inner">
-    <span class="label">Monde des Créatures légendaires</span>
-  </div>
-</a>
-
-<div class="bubble hegaia flotter2" style="top: 72%; left: 40%;" onclick="reveleSecretHegaia()">
-  <div class="bubble-inner">
-    <span class="label"></span>
-  </div>
-</div>
-
-
-
-<!-- Fenêtre texte secret Hégaïa -->
-<div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
-  <span id="texte-hegaia-tape"></span>
-</div>
-  
-<script>
-function reveleSecretHegaia() {
-  const fenetre = document.getElementById("texte-hegaia-secret");
-  const span = document.getElementById("texte-hegaia-tape");
-  const texte = "🌿 Le voile s’est levé… Tu viens d’ouvrir un passage secret d'Arzankia.";
-
-  fenetre.style.display = "block";
-  span.textContent = "";
-
-  let i = 0;
-  function type() {
-    if (i < texte.length) {
-      span.textContent += texte.charAt(i);
-      i++;
-      setTimeout(type, 50);
+      setTimeout(() => {
+        window.open("monde_hegaia.html", "_blank");
+      }, 5000);
     }
-  }
-  type();
+  </script>
 
-  setTimeout(() => {
-    window.open("monde_hegaia.html", "_blank");
-  }, 5000);
-}
-    
-</script>
-    
-    <!-- Boutons de retour sous les bulles -->
-<div class="retour-container">
-  <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
-  <a href="les-coulisses-arzankia.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
-</div>
+  <!-- Boutons de retour -->
+  <div class="retour-container">
+    <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
+    <a href="les-coulisses-arzankia.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
+  </div>
 
 </body>
 </html>
