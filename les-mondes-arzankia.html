@@ -53,7 +53,7 @@
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 0.5rem;
+  margin-top: 160px;
   padding-bottom: 60px; /* pour aérer le bas */
 }
 
@@ -472,6 +472,49 @@
 .popup-secret.show {
   display: block;
 }
+    .footer-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+.footer-buttons a {
+  display: inline-block;
+  margin: 0 1em;
+  background-color: #ffffffcc;
+  color: #333;
+  padding: 0.7em 1.4em;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  transition: all 0.3s ease;
+}
+
+.footer-buttons a:hover {
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 0 15px #fff;
+}
+    .header-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* ou autre fond pour lisibilité */
+  padding: 1em 0.5em;
+  text-align: center;
+  z-index: 1000;
+  color: #fff;
+  backdrop-filter: blur(6px); /* pour un effet flouté élégant */
+}
+
+
 
 .btn-retour {
   display: inline-block;
@@ -567,11 +610,16 @@
 </head>
 <body>
 
-  <!-- Bloc d’introduction -->
+ <body>
   <div class="intro-box">
     <h1>🌍 Les Mondes d’Arzankia</h1>
     <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
   </div>
+   <div class="header-box">
+  <h1>🌍 Les Mondes d’Arzankia</h1>
+  <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
+</div>
+
 
   <!-- Bulles flottantes -->
   <div class="bubble-container">
@@ -639,6 +687,11 @@
   <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
     <span id="texte-hegaia-tape"></span>
   </div>
+   
+    <div class="footer-buttons">
+    <a href="index.html">← Retour à l’accueil</a>
+    <a href="coulisses.html">← Retour aux coulisses d'Arzankia</a>
+  </div>
 
   <!-- Script apparition texte -->
   <script>
@@ -665,12 +718,5 @@
       }, 5000);
     }
   </script>
-
-  <!-- Boutons de retour -->
-  <div class="retour-container">
-    <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
-    <a href="les-coulisses-arzankia.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
-  </div>
-
 </body>
 </html>
