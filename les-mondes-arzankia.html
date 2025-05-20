@@ -634,14 +634,22 @@
   z-index: 999;
   text-align: center;
 }
-    .bubble.hegaia {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.04));
-  border: 1px dashed rgba(255, 255, 255, 0.07);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  opacity: 0.28;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  .bubble.hegaia {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2) !important; /* ombre douce blanche */
+  opacity: 0.5 !important;
+  animation: none !important;
+  transition: none !important;
+  cursor: default !important;
 }
+    
+.bubble.hegaia:hover {
+  transform: none !important;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2) !important;
+  opacity: 0.5 !important;
+}
+
     .hegaia-alone {
   justify-content: center;
   margin-top: -10px;
@@ -694,16 +702,17 @@
   }
 }
     
-    @media (max-width: 768px) {
-  .header-box {
-    padding: 0.2em 0.2em !important;
-  }
+    .header-box {
+  padding: 0.3em 0.5em;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
 
-  .header-box h1 {
-    font-size: 1.2rem !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+.header-box h1 {
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0.2em 0;
+}
 
   .header-box p {
     font-size: 0.85rem !important;
