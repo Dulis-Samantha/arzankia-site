@@ -4,200 +4,160 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Ptikitis</title>
-<style>
-/* === STYLES GÉNÉRAUX === */
-/* === STYLES GÉNÉRAUX === */
-body {
-  margin: 0;                                             /* Enlève les marges autour du body */
-  padding: 0;                                            /* Enlève les espacements internes */
-  background-color: #001d26;                             /* Couleur de fond si l’image ne charge pas */
-  font-family: Georgia, serif;                           /* Police classique pour ambiance fantasy */
-  color: #fff8e6;                                        /* Couleur texte par défaut (beige clair) */
-  text-shadow: 1px 1px 4px #000;                         /* Légère ombre sur le texte général */
-}
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('ptikitis.png') center top no-repeat;
+      background-color: #001d26;
+      background-size: cover;
+      font-family: Georgia, serif;
+      color: #fff8e6;
+      text-shadow: 1px 1px 4px #000;
 
-.arenyth-image,
+ .sirene-image,
 .parchemin-image {
-  display: block;                                    /* Affiche l’image comme un bloc */
-  width: 100%;                                       /* Prend toute la largeur disponible */
-  height: auto;                                      /* Garde les proportions de l’image */
-  margin: 0;                                         /* Supprime les marges */
-}
-
-.parchemin-wrapper {
-  position: relative;                                /* Pour positionner les éléments à l’intérieur */
-  width: 100vw;                                      /* Largeur égale à la fenêtre */
-  max-width: none;                                   /* Pas de limite */
-  margin: 0 auto;                                    /* Centré horizontalement */
-}
-
-.parchemin-image {
-  width: 100%;                                       /* Largeur pleine */
-  height: auto;                                      /* Garde les proportions */
-  display: block;                                    /* Évite les bugs d’espacement */
-}
-
-/* === TEXTE SUR PARCHEMIN === */
-.texte-parchemin {
-  position: absolute;                                /* Permet de le placer au-dessus de l’image */
-  top: 35%;                                          /* Hauteur du bloc dans le parchemin */
-  left: 50%;                                         /* Centre horizontalement */
-  transform: translate(-50%, -50%);                  /* Centre parfaitement le bloc */
-  color: #3b2a1d;                                    /* Marron foncé, lisible sur le fond parchemin */
-  font-family: Georgia, serif;                       /* Style fantasy/livre ancien */
-  font-size: clamp(1.3rem, 2vw, 1.7rem);           /* Taille adaptable selon l’écran */
-  text-align: center;                                /* Texte centré */
-  line-height: 1.6;                                  /* Espace vertical entre les lignes */
-  text-shadow: none;                                 /* Pas d’ombre sur ce texte */
-  width: 75%;                                        /* Largeur limitée pour rester dans le parchemin */
-  max-width: 700px;                                  /* Max sur grand écran */
-  padding: 1rem;                                     /* Espace intérieur pour ne pas coller aux bords */
-  box-sizing: border-box;                            /* Inclut le padding dans la largeur */
-  text-align: center;
-}
-
-.texte-parchemin h2,
-.texte-parchemin p {
-  opacity: 1;                                        /* Assure qu'ils soient bien visibles */
-}
-
-/* === TITRE SUR PARCHEMIN === */
- .titre-parchemin {
- display: inline-block;                              /* Nécessaire pour centrer correctement */
-  font-size: clamp(1.6rem, 3.2vw, 2.5rem);           /* Taille responsive du titre */
-  font-weight: bold;                                 /* En gras */
-  color: #f0d864;                                    /* Jaune doré (style parchemin/fantasy) */
-  text-shadow: 1px 1px 2px #00000066;                /* Légère ombre pour détacher le titre du fond */
-  text-align: center;                                /* Centre le texte à l’intérieur du bloc */
-  white-space: normal;                               /* Autorise le retour à la ligne si besoin */
-  margin-bottom: 1rem;                               /* Espace sous le titre */
-  
-}
-  
- .ptikitis-image {
   display: block;
+  width: 100%;
+  height: auto;
+  margin: 0; /* Supprime les marges */
+}
+
+
+ .parchemin-wrapper {
+  position: relative;
   width: 100vw;
-  height: 60vh;         /* tu peux tester 70vh ou 100vh si tu veux une grande bannière */
-  object-fit: cover;
-  margin: 0;
+  max-width: none;
+  margin: 0 auto;
 }
 
 
-/* === ANIMATION DE TEXTE (non utilisée ici mais dispo) === */
-@keyframes apparitionTexte {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);                     /* Départ flou en bas */
+  .parchemin-image {
+    width: 100%;
+    height: auto;
+    display: block;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);                        /* Arrivée normale */
-  }
+
+.texte-parchemin {
+  position: absolute;                        /* Position sur l'image */
+  top: 48% !important;                       /* Légèrement plus bas que le centre */
+  left: 50% !important;                      /* Centré horizontalement */
+  transform: translate(-50%, -52%) !important; /* Centre verticalement en fonction de top */
+  color: #3b2a1d;                            /* Couleur du texte */
+  font-family: Georgia, serif;              /* Police élégante */
+  font-size: 0.8em !important;                /* Taille correcte et cohérente */
+  text-align: center;                       /* Alignement centré */
+  line-height: 1.6;                         /* Bonne lisibilité */
+  text-shadow: none;                        /* Pas d'ombre parasite */
+  width: 65% !important;                    /* Bien contenu dans le parchemin */
 }
 
-/* === BOUTONS === */
+  .texte-parchemin h2, .texte-parchemin p {
+  opacity: 1;
+}
+
+ .texte-parchemin h2 {
+  animation-delay: 0.3s;           /* Délai avant le début de l’animation d’apparition (0.3 seconde) */
+  margin-top: -0.5em;              /* Espace entre le haut du parchemin et le titre */
+  margin-bottom: 0.8em;            /* Espace en bas du titre (avant le paragraphe) */
+  font-size: 1.1em;                /* Taille du titre réduite (1.4 fois la taille du texte normal) */
+  color: #d4af37;                  /* Couleur dorée pour le texte */
+  text-shadow: 1px 1px 2px #000;   /* Légère ombre noire pour donner du relief au texte */
+}
+
+  .texte-parchemin p {
+    animation-delay: 1s;
+  }
+
+  @keyframes apparitionTexte {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 .button-group {
-  display: flex;                                     /* Active le mode de disposition en ligne */
-  justify-content: center;                           /* Centre horizontalement */
-  flex-wrap: wrap;                                   /* Passe à la ligne si pas assez de place */
-  gap: 1rem;                                         /* Espace entre les boutons */
-  margin-top: 0.5em;                                 /* Petit espace au-dessus */
-  padding: 0 1rem;                                   /* Padding horizontal */
+  display: flex;                /* Active le mode flexbox (alignement horizontal des enfants) */
+  justify-content: center;     /* Centre les boutons horizontalement dans le conteneur */
+  flex-wrap: wrap;             /* Permet aux boutons de passer à la ligne s’ils ne rentrent pas */
+  gap: 1rem;                   /* Espace entre les boutons (horizontal et vertical) */
+  margin-top: 0.5em;           /* Espace au-dessus du groupe de boutons */
+  padding: 0 1rem;             /* Padding horizontal (gauche/droite) à l’intérieur du conteneur */
 }
 
 .button-group a {
-  flex: 1 1 calc(42% - 1rem);                        /* Taille auto avec 2 par ligne max */
-  box-sizing: border-box;                            /* Padding inclus dans la taille */
-  animation: boutonGlow 3s ease-in-out infinite;     /* Effet de lumière pulsée */
-  background: linear-gradient(to bottom, #fff8dc, #d4af37);  /* Dégradé doré */
-  padding: 0.4rem 0.6rem;                            /* Espacement intérieur */
-  border-radius: 10px;                               /* Coins arrondis */
-  color: #4a2e00;                                    /* Marron foncé */
+  flex: 1 1 calc(42% - 1rem);
+  box-sizing: border-box;
+  animation: boutonGlow 3s ease-in-out infinite;
+  background: linear-gradient(to bottom, #fff8dc, #d4af37);
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+  color: #4a2e00;
   font-weight: bold;
   text-decoration: none;
   font-size: 0.75em;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);        /* Lumière autour */
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
   transition: transform 0.2s, box-shadow 0.2s;
   text-align: center;
 }
 
-.button-group a:hover {
-  transform: scale(1.05);                            /* Zoom au survol */
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);       /* Lumière plus forte */
-}
+  .button-group a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
+  }
 
-@keyframes boutonGlow {
+  @keyframes boutonGlow {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);    /* Début / fin de l'effet lumineux */
+    box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);
   }
   50% {
-    box-shadow: 0 0 15px rgba(255, 223, 150, 1);      /* Point culminant lumineux */
+    box-shadow: 0 0 15px rgba(255, 223, 150, 1);
   }
 }
 
-/* === RESPONSIVE – PETITS ÉCRANS === */
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
   .texte-parchemin {
-    font-size: 1rem;                                 /* Plus petit texte sur mobile */
-    width: 90%;                                      /* Un peu plus large sur petit écran */
+    font-size: 1em;
+    width: 90%;
   }
 }
 
-@media (max-width: 420px) {
-  .titre-parchemin {
-    font-size: 1.2rem;                               /* Réduction supplémentaire pour très petits écrans */
-    white-space: normal;                             /* Autorise le retour à la ligne si nécessaire */
+  h1, h2 {
+    font-size: 1.3em;
+    color: #ffd700;
+    text-align: center;
+    font-weight: bold;
   }
-}
-
-/* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
-@media screen and (min-width: 1024px) {
-  .texte-parchemin {
-    top: 42%;                                        /* Remonte un peu le bloc sur PC */
-    font-size: clamp(1.4rem, 2vw, 2rem);             /* Texte plus grand sur écran large */
-  }
-
-  .titre-parchemin {
-    font-size: clamp(2rem, 3vw, 3rem);               /* Titre encore plus lisible sur PC */
-  }
-}
-
 </style>
-
 
 </head>
 
 <body>
 
-  <!-- Image des Ptikitis en haut -->
-  <img class="ptikitis-image" src="ptikitis.png">
-  
-<!-- Parchemin avec titre + texte -->
+  <!-- Image ptikitis en haut -->
+ <img class="ptikitis-image" src="ptikitis.png" alt="Sirène">
+
+  <!-- Image du parchemin avec texte -->
 <div class="parchemin-wrapper">
   <img class="parchemin-image" src="parchemin_vert.png" alt="Parchemin">
-
- <div class="texte-parchemin">
-  <div class="titre-parchemin">
-    <span>🌿 Bienvenue au Monde des Ptikitis 🌿</span>
+  <div class="texte-parchemin">
+      <h2>🌿 Bienvenue au Monde des Ptikitis 🌿</h2>
+      <p>
+        Un monde peuplé de créatures malicieuses qui vivent cachées dans les herbes géantes. Ici, tout est gigantesque à leurs yeux, et la magie naturelle pulse dans chaque feuille.
+      </p>
+    </div>
   </div>
-
-  <p>
-    Un monde peuplé de créatures malicieuses</br> 
-    qui vivent cachées dans les herbes géantes.</br>    
-    Ici, tout est gigantesque à leurs yeux,</br> 
-    et la magie naturelle pulse dans chaque feuille.
-  </p>
-</div>
-
-</div>
-
 
   <!-- Boutons dorés -->
   <div class="button-group">
-    <a href="extrait_ptikitis.html">📖 Extrait du livre</a>
-    <a href="entree-ptikitis.html">✨ Entrée du monde</a>
+    <a href="extrait_sirene.html">📖 Extrait du livre</a>
+   <a href="entree_sirene.png" target="_blank">✨ Entrée du monde</a>
     <a href="chanson-camidjo.html">🎵 Chanson de Camidjo</a>
-     <a href="ci_raphael.html">✨ Les Héros d’Arzankia : Raphaël</a>
+    <a href="ci_raphael.html">✨ Les Héros d’Arzankia : Raphaël</a>
     <a href="les-mondes-arzankia.html">← Retour aux Mondes</a>
   </div>
 
