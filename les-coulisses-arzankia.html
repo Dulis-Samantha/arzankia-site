@@ -84,6 +84,16 @@
   margin-top: 1.2rem;
   animation: glowHint 3s ease-in-out infinite;
 }
+    #message-secret::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
     
     .button-container {
       display: flex;
@@ -140,14 +150,30 @@
       Bienvenue dans les coulisses du monde d’Arzankia. Ici, tu découvriras les secrets de la création, les inspirations, les anecdotes autour des personnages, des lieux, et des symboles magiques.
     </p>
    
-    <p class="secret-hint">
-  Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.
-</p>
+    <p id="message-secret" class="secret-hint"></p>
+
     <div class="button-container">
       <a href="les-heros-arzankia.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
       <a href="les-mondes-arzankia.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
       <a href="index.html" class="btn">← Retour à l’accueil</a>
     </div>
   </div>
+  
+  <script>
+  const message = "Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.";
+  const target = document.getElementById("message-secret");
+  let index = 0;
+
+  function writeText() {
+    if (index < message.length) {
+      target.innerHTML += message.charAt(index);
+      index++;
+      setTimeout(writeText, 40); // Vitesse d'affichage (40 ms par lettre)
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", writeText);
+</script>
+
 </body>
 </html>
