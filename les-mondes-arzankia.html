@@ -526,6 +526,38 @@
   transition: all 0.3s ease-in-out;
 }
 
+    .retour-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .retour-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  .btn-retour {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+}
+
+
 
   </style>
 </head>
@@ -631,10 +663,12 @@
   <span id="texte-hegaia-tape"></span>
 </div>
 
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
-    <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
-   <a href="les-coulisses-arzankia.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
-  </div>
+  <!-- Boutons de retour sous les bulles -->
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 60px; padding-bottom: 40px;">
+  <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
+  <a href="les-coulisses-arzankia.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
+</div>
+
   
 <script>
 function reveleSecretHegaia() {
@@ -659,8 +693,14 @@ function reveleSecretHegaia() {
     window.open("monde_hegaia.html", "_blank");
   }, 5000);
 }
-  
     
 </script>
+    
+    <!-- Boutons de retour sous les bulles -->
+<div class="retour-container">
+  <a href="index.html" class="btn-retour">← Retour à l’accueil</a>
+  <a href="les-coulisses-arzankia.html" class="btn-retour">← Retour aux coulisses d'Arzankia</a>
+</div>
+
 </body>
 </html>
