@@ -619,6 +619,12 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+    .hegaia-alone {
+  justify-content: center;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
 
     .retour-container {
   display: flex;
@@ -680,12 +686,13 @@
     <a href="monde_creatures_legendaires.html" class="bubble creature flotter3"><div class="bubble-inner"><span class="label">Créatures légendaires</span></div></a>
     <a href="monde_arenyth.html" class="bubble arenyth flotter4"><div class="bubble-inner"><span class="label">Arenyth</span></div></a>
   </div>
+  
    <!-- Bulle secrète Hégaïa -->
-  <div class="bubble hegaia flotter2" style="top: 60%; left: 35%;" onclick="reveleSecretHegaia()">
-    <div class="bubble-inner"><span class="label"></span></div>
+<div class="bubble-row hegaia-alone">
+  <div class="bubble hegaia flotter2" onclick="reveleSecretHegaia()">
+    <div class="bubble-inner"><span class="label"> </span></div>
   </div>
 </div>
-
    
     <div class="footer-buttons">
     <a href="index.html">← Retour à l’accueil</a>
