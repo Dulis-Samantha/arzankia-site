@@ -47,8 +47,39 @@
     .retour a:hover {
       text-decoration: underline;
     }
+
+    /* ✅ STYLES du bouton et paragraphe caché */
+    #explicationCoquillage {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      margin-top: 1em;
+    }
+
+    #explicationCoquillage.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .coquillage-button {
+      background-color: #f0f8ff;
+      border: 2px solid #99ccff;
+      padding: 0.6em 1em;
+      font-family: 'Georgia', serif;
+      font-size: 1em;
+      color: #003366;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #99ccff;
+      transition: background-color 0.3s ease;
+    }
+
+    .coquillage-button:hover {
+      background-color: #e0f0ff;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>🌊 Bienvenue dans le Monde des Sirènes</h1>
@@ -68,17 +99,40 @@ Quand je suis passé de l’autre côté… j’étais sur l’île de Zouppioc�
   </div>
   
   <p><strong>Veux-tu savoir pourquoi on entend la mer lorsque l'on colle notre oreille contre un coquillage ?</strong></p>
-<button onclick="document.getElementById('explicationCoquillage').style.display='block'">Clique ici</button>
+<button id="toggleButton" class="coquillage-button" onclick="toggleExplication()">🐚 Clique ici</button>
 
-<p id="explicationCoquillage" style="display:none; margin-top:1em;">
+<p id="explicationCoquillage">
   En réalité, nous n'entendons pas la mer. La coquille des mollusques agit comme une caisse de résonance en amplifiant les sons autour de nous.
 </p>
+
 
   <img src="entree_sirene.png" alt="Entrée du Monde des Sirènes" class="image-entree">
 
   <div class="retour">
     <a href="3.les_heros.html">← Retour aux héros</a>
   </div>
+
+ <script>
+function toggleExplication() {
+  const texte = document.getElementById('explicationCoquillage');
+  const bouton = document.getElementById('toggleButton');
+
+  if (texte.classList.contains('show')) {
+    texte.classList.remove('show');
+    setTimeout(() => {
+      texte.style.display = 'none';
+      bouton.textContent = '🐚 Clique ici';  // ✅ ici la correction
+    }, 300); // correspond à une disparition rapide
+  } else {
+    texte.style.display = 'block';
+    setTimeout(() => {
+      texte.classList.add('show');
+      bouton.textContent = '🐚 Refermer';
+    }, 10); // permet l'animation
+  }
+}
+</script>
+
 
 </body>
 </html>
