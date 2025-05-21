@@ -3,108 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <title>Fiche Héros</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    .back-button {
-  display: block;
-  text-align: center;
-  margin-top: 3em;
-}
-
-.back-button a {
-  background-color: #ffffffcc;
-  color: #333;
-  padding: 0.7em 1.4em;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  transition: all 0.3s ease;
-}
-
-.back-button a:hover {
-  background-color: #fff;
-  color: #000;
-  box-shadow: 0 0 15px #fff;
-}
-
     body {
-      background: url('fond_heros.png') no-repeat center center fixed;
+      background: url('fond_test_magicien.png') no-repeat center center fixed;
       background-size: cover;
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
-      padding: 3em;
+      padding: 2em;
       text-align: center;
     }
+
     .card {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2em;
-      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 2.5em 2em;
+      border-radius: 20px;
       max-width: 600px;
       margin: auto;
-      box-shadow: 0 0 20px #ffd700;
+      box-shadow: 0 0 25px #ffd700;
+      border: 2px solid #fff2b0;
+      animation: apparition 1s ease-in-out both;
     }
-    h1 {
+
+    @keyframes apparition {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    h1#prenom {
+      font-size: 2.7em;
       color: #ffd700;
-      font-size: 2.5em;
+      margin-bottom: 0.3em;
+      animation: fadeIn 1.2s ease-out;
     }
+
     .type {
-      font-size: 1.8em;
-      margin-top: 0.5em;
-      color: #b8dfff;
+      font-size: 1.6em;
+      color: #a2e0f8;
+      margin-bottom: 1em;
     }
+
     .description {
       font-size: 1.2em;
-      margin-top: 1.5em;
+      margin-bottom: 2em;
+    }
+
+    .test-element-button a {
+      background: linear-gradient(90deg, #a2e0f8, #6dbbe9);
+      color: #002a3a;
+      padding: 0.8em 1.5em;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 14px #a2e0f8;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .test-element-button a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #a2e0f8;
+    }
+
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 3em;
+    }
+
+    .back-button a {
+      background-color: #ffffffcc;
+      color: #333;
+      padding: 0.7em 1.4em;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .back-button a:hover {
+      background-color: #fff;
+      color: #000;
+      box-shadow: 0 0 15px #fff;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 1em;
+      }
+      .card {
+        padding: 2em 1.2em;
+      }
+      h1#prenom {
+        font-size: 2em;
+      }
+      .type {
+        font-size: 1.3em;
+      }
+      .description {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="card">
-    <h1 id="prenom"></h1>
+    <h1 id="prenom">...</h1>
     <div class="type" id="type"></div>
     <p class="description" id="description"></p>
-  
-    <div class="test-element-button" style="margin-top: 2em;">
-  <a href="test.element_predilection_magicien.html" style="
-    background-color: #a2e0f8;
-    color: #000;
-    padding: 0.8em 1.5em;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 0 12px #a2e0f8;
-    display: inline-block;
-    transition: all 0.3s ease;
-  " onmouseover="this.style.boxShadow='0 0 20px #a2e0f8'" onmouseout="this.style.boxShadow='0 0 12px #a2e0f8'">
-    🔮 Découvre ton élément de prédilection
-  </a>
-</div>
 
+    <div class="test-element-button">
+      <a href="test.element_predilection_magicien.html">🔮 Découvre ton élément de prédilection</a>
+    </div>
+  </div>
+
+  <div class="back-button">
+    <a href="2.les_coulisses.html">← Retour aux Coulisses d’Arzankia</a>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const prenom = params.get('prenom');
-
-    const type = window.location.pathname
-      .split("_")[1]
-      .replace(".html", "")
-      .toLowerCase();
+    const type = window.location.pathname.split("_")[1].replace(".html", "").toLowerCase();
 
     const descriptions = {
-
-      magicien: "✨ Tu es un Magicien : tu ressens la magie qui t’entoure et la fais rayonner.",
-
+      magicien: "✨ Tu es un Magicien : tu ressens la magie qui t’entoure et la fais rayonner."
     };
 
     document.getElementById("prenom").textContent = prenom;
     document.getElementById("type").textContent = type.charAt(0).toUpperCase() + type.slice(1);
     document.getElementById("description").textContent = descriptions[type];
   </script>
-  <div class="back-button">
-  <a href="2.les_coulisses.html"">← Retour aux Coulisses d’Arzankia</a>
-</div>
-
 </body>
 </html>
