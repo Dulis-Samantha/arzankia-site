@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Résultat du test magique</title>
+  <title>Résultat du test : Magicien : Quel est ton élément de prédilection ?</title>
   <style>
     body {
       font-family: 'Georgia', serif;
@@ -26,6 +26,11 @@
       box-shadow: 0 0 15px #a2e0f8;
       margin: 1em auto;
       display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .portrait:hover {
+      transform: scale(1.05);
     }
 
     .bloc-info {
@@ -68,19 +73,35 @@
       box-shadow: 0 0 20px #ffd678;
     }
 
-    #share-links {
-      margin-top: 2em;
+    .btn-share {
+      display: inline-block;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      margin: 0.5em;
+      font-weight: bold;
+      text-decoration: none;
     }
 
-    #share-links a {
-      text-decoration: none;
-      margin: 0 1em;
+    .btn-share.twitter { background-color: #1da1f2; color: #fff; }
+    .btn-share.facebook { background-color: #1877f2; color: #fff; }
+    .btn-share.whatsapp { background-color: #25d366; color: #fff; }
+
+    #share-links {
+      margin-top: 2em;
     }
 
     #share-links p {
       font-weight: bold;
       color: #a2e0f8;
     }
+    .result-title {
+  font-size: 2.6em;
+  font-weight: bold;
+  color: #ffd678;
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 10px rgba(255, 214, 120, 0.5);
+}
+
   </style>
 </head>
 <body>
@@ -93,15 +114,15 @@
     const profils = {
       eau: {
         nom: "Tu es comme Cassandre, une Magicienne de l’Eau",
-        image: "img/photo_cassandre.png",
+        image: "photo_cassandre.png",
         personnalite: "Apaisante, sensible et intuitive. Tu ressens ce que les autres taisent.",
-        pouvoirs: " Vision des reflets, contrôle des marées, mémoire liquide.",
+        pouvoirs: "Vision des reflets, contrôle des marées, mémoire liquide.",
         lieu: "Les sources oubliées et les grottes aquatiques.",
         citation: "« Le silence de l’eau cache des secrets profonds. »"
       },
       feu: {
         nom: "Tu es comme Andréa, un Magicien du Feu",
-        image: "img/photo_andrea.png",
+        image: "photo_andrea.png",
         personnalite: "Passionné, audacieux et toujours en mouvement.",
         pouvoirs: "Flammes, explosion d’énergie, feu intérieur.",
         lieu: "Les cratères endormis et les forges anciennes.",
@@ -109,7 +130,7 @@
       },
       air: {
         nom: "Tu es comme Amandine, une Magicienne de l’Air",
-        image: "img/photo_amandine.png",
+        image: "photo_amandine.png",
         personnalite: "Curieuse, rêveuse, rapide d’esprit.",
         pouvoirs: "Contrôle des vents, lévitation, souffle de vérité.",
         lieu: "Les cimes brumeuses, les hauteurs oubliées.",
@@ -126,8 +147,11 @@
     const profil = profils[element];
 
     if (profil) {
+      const message = encodeURIComponent(`✨ Je suis comme ${noms[element]} dans le monde d'Arzankia ! Et toi, quel est ton élément magique ? 🔮`);
+      const url = encodeURIComponent(window.location.href);
+
       document.getElementById("resultat").innerHTML = `
-        <h1>${profil.nom}</h1>
+        <h1 class="result-title">${profil.nom}</h1>
         <img src="${profil.image}" alt="${profil.nom}" class="portrait">
         <div class="bloc-info">
           <p><strong>Personnalité :</strong> ${profil.personnalite}</p>
@@ -138,23 +162,16 @@
 
         <div id="share-links">
           <p>🔗 Partage ton résultat :</p>
-          <a id="twitter-share" target="_blank">🐦 Twitter</a>
-          <a id="facebook-share" target="_blank">📘 Facebook</a>
-          <a id="whatsapp-share" target="_blank">📱 WhatsApp</a>
+          <a href="https://twitter.com/intent/tweet?text=${message}&url=${url}" target="_blank" class="btn-share twitter">🐦 Twitter</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" class="btn-share facebook">📘 Facebook</a>
+          <a href="https://api.whatsapp.com/send?text=${message}%20${url}" target="_blank" class="btn-share whatsapp">📱 WhatsApp</a>
         </div>
 
         <div>
-          <a href="test.element_predilection_magicien.html" class="btn">🔄 Rejouer le test</a>
+          <a href="test_element_predilection_magicien.html" class="btn">🔄 Rejouer le test</a>
           <a href="2.les_coulisses.html" class="btn">⬅️ Retour aux Coulisses</a>
         </div>
       `;
-
-      const message = encodeURIComponent(`✨ Je suis comme ${noms[element]} dans le monde d'Arzankia ! Et toi, quel est ton élément magique ? 🔮`);
-      const url = encodeURIComponent(window.location.href);
-
-      document.getElementById("twitter-share").href = `https://twitter.com/intent/tweet?text=${message}&url=${url}`;
-      document.getElementById("facebook-share").href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-      document.getElementById("whatsapp-share").href = `https://api.whatsapp.com/send?text=${message}%20${url}`;
     } else {
       document.getElementById("resultat").innerHTML = `<p style="color: red;">Résultat inconnu.</p>`;
     }
