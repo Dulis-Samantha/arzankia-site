@@ -102,11 +102,13 @@
 <div id="bulle-magique" style="display: none; opacity: 0; transition: opacity 1s; text-align:center; margin-top: 2em; font-style: italic; color: #ffd;">
 </div>
 
-<!-- Bouton poisson -->
-<div style="text-align: center; margin-top: 2em;">
+<!-- Bouton poisson repositionné -->
+<div style="text-align: right; padding-right: 2em; margin-top: 2em;">
   <button id="poisson-secret" style="background: none; border: none; cursor: pointer;">
-    <img src="poisson_secret.png" alt="Passage secret" title="Un indice glisse entre les vagues..." style="width: 60px; opacity: 0.6;">
+    <img src="poisson_secret.png" alt="Passage secret" title="Un indice glisse entre les vagues..." style="width: 100px; opacity: 0.7; transition: opacity 0.3s;">
   </button>
+</div>
+
 </div>
 <script>
   const bulle = document.getElementById("bulle-magique");
@@ -131,9 +133,14 @@
     setTimeout(type, 50);
   }
 
-  document.getElementById("poisson-secret").addEventListener("click", function () {
-    typeText(bulle, text, 40);
+document.getElementById("poisson-secret").addEventListener("click", function () {
+  typeText(bulle, text, 40, function () {
+    setTimeout(function () {
+      window.location.href = "9.entree_Sirenes.html";
+    }, 5000); // redirige après 5 secondes
   });
+});
+
 </script>
 
 </body>
