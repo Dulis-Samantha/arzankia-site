@@ -153,9 +153,9 @@
     <p id="message-secret" class="secret-hint"></p>
 
     <div class="button-container">
-      <a href="les-heros-arzankia.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
-      <a href="les-mondes-arzankia.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
-      <a href="index.html" class="btn">← Retour à l’accueil</a>
+      <a href="3.les_heros.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
+      <a href="3.les_mondes.html" target="_blank" class="btn">🌍 Les Mondes d’Arzankia</a>
+      <a href="1.accueil.html" class="btn">← Retour à l’accueil</a>
     </div>
   </div>
   
