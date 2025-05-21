@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résultat du test magique</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #0b1f2e, #18344a);
+      color: #fff;
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      color: #a2e0f8;
+      font-size: 2.2em;
+      margin-bottom: 0.5em;
+    }
+
+    .portrait {
+      max-width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #a2e0f8;
+      margin: 1em auto;
+      display: block;
+    }
+
+    .bloc-info {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 1.5em;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      margin-top: 1em;
+    }
+
+    .bloc-info p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 0.8em 0;
+    }
+
+    .citation {
+      font-style: italic;
+      color: #ffd678;
+      margin-top: 2em;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="resultat"></div>
+
+  <script>
+    const element = new URLSearchParams(window.location.search).get("element");
+
+    const profils = {
+      eau: {
+        nom: "Tu es comme Cassandre, une Magicienne de l’Eau",
+        image: "img/photo_cassandre.png",
+        personnalite: "Apaisante, sensible et intuitive. Tu ressens ce que les autres taisent.",
+        pouvoirs: "Guérison, contrôle des marées, mémoire liquide.",
+        lieu: "Les sources oubliées et les grottes aquatiques.",
+        citation: "« Le silence de l’eau cache des secrets profonds. »"
+      },
+      feu: {
+        nom: "Tu es comme Andréa, un Magicien du Feu",
+        image: "img/photo_andrea.png",
+        personnalite: "Passionné, audacieux et toujours en mouvement.",
+        pouvoirs: "Flammes, explosion d’énergie, feu intérieur.",
+        lieu: "Les cratères endormis et les forges anciennes.",
+        citation: "« Là où le feu brûle, le cœur parle. »"
+      },
+      air: {
+        nom: "Tu es comme Amandine, une Magicienne de l’Air",
+        image: "img/photo_amandine.png",
+        personnalite: "Curieuse, rêveuse, rapide d’esprit.",
+        pouvoirs: "Contrôle des vents, lévitation, souffle de vérité.",
+        lieu: "Les cimes brumeuses, les hauteurs oubliées.",
+        citation: "« Le vent ne se voit pas… mais il décide du chemin. »"
+      }
+    };
+
+    const profil = profils[element];
+
+    if (profil) {
+      document.getElementById("resultat").innerHTML = `
+        <h1>${profil.nom}</h1>
+        <img src="${profil.image}" alt="${profil.nom}" class="portrait">
+        <div class="bloc-info">
+          <p><strong>Personnalité :</strong> ${profil.personnalite}</p>
+          <p><strong>Pouvoirs :</strong> ${profil.pouvoirs}</p>
+          <p><strong>Lieu sacré :</strong> ${profil.lieu}</p>
+        </div>
+        <p class="citation">${profil.citation}</p>
+      `;
+    } else {
+      document.getElementById("resultat").innerHTML = `<p style="color: red;">Résultat inconnu.</p>`;
+    }
+  </script>
+
+</body>
+</html>
