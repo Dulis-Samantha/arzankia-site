@@ -427,6 +427,22 @@
       opacity: 0.85;
     }
 
+    .bubble.pan {
+  background-color: #000; /* fond noir */
+  background-image: radial-gradient(#ffffff 1px, transparent 1px);
+  background-size: 10px 10px; /* espacement des points */
+  background-repeat: repeat;
+  border: 2px solid white;
+  animation: scintiller 4s infinite linear;
+}
+@keyframes scintiller {
+  0% { background-position: 0 0; }
+  100% { background-position: 10px 10px; }
+}
+
+
+
+
 .bubble.hegaia {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.04)); /* Fond très doux mais visible */
   opacity: 0.65;                                     /* Opacité augmentée pour qu’elle soit visible mais discrète */
@@ -759,6 +775,8 @@
     <a href="8.monde_Yakkas.html" class="bubble yakkas flotter4"><div class="bubble-inner"><span class="label">Yakkas</span></div></a>
     <a href="8.monde_Sirenes.html" class="bubble sirenes flotter1"><div class="bubble-inner"><span class="label">Sirènes</span></div></a>
     <a href="8.monde_Quacks.html" class="bubble quack flotter2"><div class="bubble-inner"><span class="label">Quacks</span></div></a>
+    <a href="8.monde_Pan.html" class="bubble pan flotter1"><div class="bubble-inner"><span class="label">Monde des Pans</span></div></a>
+
   </div>
 
   <div class="bubble-row">
