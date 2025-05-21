@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Résultat du test : Magicien : Quel est ton élément de prédilection ?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: 'Georgia', serif;
-      background: linear-gradient(to bottom, #0b1f2e, #18344a);
+      background: url("fond_magique.jpg") no-repeat center top fixed;
+      background-size: cover;
       color: #fff;
       padding: 2em;
       max-width: 800px;
       margin: auto;
       text-align: center;
     }
+
 
     h1 {
       color: #a2e0f8;
@@ -101,6 +105,37 @@
   margin-bottom: 0.5em;
   text-shadow: 0 0 10px rgba(255, 214, 120, 0.5);
 }
+    .fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    @media (max-width: 480px) {
+  .portrait {
+    max-width: 140px;
+  }
+  .result-title {
+    font-size: 1.8em;
+  }
+}
+.btn:hover {
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1.05);
+  }
+}
+
+
 
   </style>
 </head>
@@ -151,9 +186,10 @@
       const url = encodeURIComponent(window.location.href);
 
       document.getElementById("resultat").innerHTML = `
-        <h1 class="result-title">${profil.nom}</h1>
-        <img src="${profil.image}" alt="${profil.nom}" class="portrait">
-        <div class="bloc-info">
+        <h1 class="result-title fade-in">${profil.nom}</h1>
+        <img src="${profil.image}" alt="${profil.nom}" class="portrait fade-in">
+        <div class="bloc-info fade-in">
+
           <p><strong>Personnalité :</strong> ${profil.personnalite}</p>
           <p><strong>Pouvoirs :</strong> ${profil.pouvoirs}</p>
           <p><strong>Lieu sacré :</strong> ${profil.lieu}</p>
