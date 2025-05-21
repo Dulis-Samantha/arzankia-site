@@ -98,5 +98,43 @@
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
   </div>
+  <!-- Bulle magique -->
+<div id="bulle-magique" style="display: none; opacity: 0; transition: opacity 1s; text-align:center; margin-top: 2em; font-style: italic; color: #ffd;">
+</div>
+
+<!-- Bouton poisson -->
+<div style="text-align: center; margin-top: 2em;">
+  <button id="poisson-secret" style="background: none; border: none; cursor: pointer;">
+    <img src="poisson_secret.png" alt="Passage secret" title="Un indice glisse entre les vagues..." style="width: 60px; opacity: 0.6;">
+  </button>
+</div>
+<script>
+  const bulle = document.getElementById("bulle-magique");
+  const text = "Le voile s’est levé… Tu viens d’ouvrir un passage secret d’Arzankia.";
+
+  function typeText(element, text, speed, callback) {
+    element.style.display = "block";
+    element.style.opacity = "1";
+    const span = document.createElement("span");
+    element.innerHTML = "";
+    element.appendChild(span);
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        span.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      } else if (callback) {
+        callback();
+      }
+    }
+    setTimeout(type, 50);
+  }
+
+  document.getElementById("poisson-secret").addEventListener("click", function () {
+    typeText(bulle, text, 40);
+  });
+</script>
+
 </body>
 </html>
