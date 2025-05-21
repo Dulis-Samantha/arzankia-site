@@ -12,163 +12,145 @@
       max-width: 800px;
       margin: auto;
     }
-    h1 { text-align: center; color: #a2e0f8; }
-    .question { margin-bottom: 2em; }
+
+    h1 {
+      text-align: center;
+      color: #a2e0f8;
+      margin-bottom: 2em;
+    }
+
+    .question {
+      margin-bottom: 2em;
+      padding: 1em;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+
     .options label {
       display: block;
-      margin: 0.5em 0;
+      margin: 0.6em 0;
       cursor: pointer;
     }
+
     .btn {
+      display: block;
+      margin: 2em auto;
       background-color: #ffc860;
       color: #000;
-      padding: 0.6em 1.2em;
+      padding: 0.8em 1.6em;
       border: none;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 8px;
-      margin-top: 1em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ffc86066;
+      transition: all 0.3s ease;
     }
-    .result {
+
+    .btn:hover {
+      box-shadow: 0 0 18px #ffc860cc;
+    }
+
+    #result {
       margin-top: 2em;
       padding: 1.5em;
       background: rgba(255,255,255,0.1);
       border-radius: 10px;
     }
-    function showResult() {
-  const form = document.forms['quiz-form'];
-  const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
-  const score = { air: 0, feu: 0, eau: 0 };
 
-  for (let q of questions) {
-    const val = form[q].value;
-    if (!val) {
-      alert("Merci de répondre à toutes les questions !");
-      return;
+    .back-link {
+      display: inline-block;
+      background-color: #ffffff33;
+      color: #fff;
+      padding: 0.6em 1.2em;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
     }
-    score[val]++;
-  }
 
-  const element = Object.keys(score).reduce((a, b) => score[a] >= score[b] ? a : b);
-
-  // Redirige vers la page de résultat dédiée
-  window.location.href = `test.resultat_element_magicien.html?element=${element}`;
-}
-
+    .back-link:hover {
+      box-shadow: 0 0 15px #fff;
+    }
   </style>
 </head>
+
 <body>
+  <h1>Quel est ton élément de prédilection ?</h1>
 
-<h1>Quel est ton élément de prédilection ?</h1>
-
-<form id="quiz-form">
-  <div class="question">
-    <p>1. Un grimoire ancien s’ouvre tout seul. Que fais-tu ?</p>
-    <div class="options">
-      <label><input type="radio" name="q1" value="eau"> Je laisse faire, puis j’effleure les mots calmement.</label>
-      <label><input type="radio" name="q1" value="air"> J’observe les pages tournées par le vent, fasciné.</label>
-      <label><input type="radio" name="q1" value="feu"> Je le saisis et tente de le contrôler.</label>
+  <form id="quiz-form">
+    <div class="question">
+      <p>1. Un grimoire ancien s’ouvre tout seul. Que fais-tu ?</p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="eau"> Je laisse faire, puis j’effleure les mots calmement.</label>
+        <label><input type="radio" name="q1" value="air"> J’observe les pages tournées par le vent, fasciné.</label>
+        <label><input type="radio" name="q1" value="feu"> Je le saisis et tente de le contrôler.</label>
+      </div>
     </div>
+
+    <div class="question">
+      <p>2. Une tempête approche. Quelle est ta première réaction ?</p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="feu"> Je veux défier les éléments : je suis prêt.</label>
+        <label><input type="radio" name="q2" value="eau"> Je prépare un abri et écoute les sons du vent.</label>
+        <label><input type="radio" name="q2" value="air"> Je monte en hauteur pour la sentir venir.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>3. Tu trouves un animal blessé. Que fais-tu ?</p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="feu"> Je l’encourage à se relever, avec force.</label>
+        <label><input type="radio" name="q3" value="air"> Je lui parle doucement pour le rassurer.</label>
+        <label><input type="radio" name="q3" value="eau"> Je nettoie ses plaies et l’hydrate.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>4. Un feu magique éclate au milieu du village.</p>
+      <div class="options">
+        <label><input type="radio" name="q4" value="eau"> Je canalise l’eau des environs pour l’éteindre.</label>
+        <label><input type="radio" name="q4" value="feu"> Je saute dans l’action et tente de le contenir moi-même.</label>
+        <label><input type="radio" name="q4" value="air"> Je souffle dessus pour le disperser.</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>5. Une fleur rare pousse devant toi, brillante d’énergie.</p>
+      <div class="options">
+        <label><input type="radio" name="q5" value="eau"> Je l’arrose et la protège doucement.</label>
+        <label><input type="radio" name="q5" value="air"> Je l’effleure sans la cueillir, la nature parle par le vent.</label>
+        <label><input type="radio" name="q5" value="feu"> Je la touche pour absorber sa puissance.</label>
+      </div>
+    </div>
+
+    <button type="button" class="btn" onclick="showResult()">✨ Découvre ta magie</button>
+  </form>
+
+  <div id="result"></div>
+
+  <div style="text-align: center; margin-top: 2em;">
+    <a href="2.les_coulisses.html" class="back-link">⬅️ Retour aux Coulisses d’Arzankia</a>
   </div>
 
-  <div class="question">
-    <p>2. Une tempête approche. Quelle est ta première réaction ?</p>
-    <div class="options">
-      <label><input type="radio" name="q2" value="feu"> Je veux défier les éléments : je suis prêt.</label>
-      <label><input type="radio" name="q2" value="eau"> Je prépare un abri et écoute les sons du vent.</label>
-      <label><input type="radio" name="q2" value="air"> Je monte en hauteur pour la sentir venir.</label>
-    </div>
-  </div>
+  <script>
+    function showResult() {
+      const form = document.forms['quiz-form'];
+      const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+      const score = { air: 0, feu: 0, eau: 0 };
 
-  <div class="question">
-    <p>3. Tu trouves un animal blessé. Que fais-tu ?</p>
-    <div class="options">
-      <label><input type="radio" name="q3" value="feu"> Je l’encourage à se relever, avec force.</label>
-      <label><input type="radio" name="q3" value="air"> Je lui parle doucement pour le rassurer.</label>
-      <label><input type="radio" name="q3" value="eau"> Je nettoie ses plaies et l’hydrate.</label>
-    </div>
-  </div>
+      for (let q of questions) {
+        const val = form[q].value;
+        if (!val) {
+          alert("Merci de répondre à toutes les questions !");
+          return;
+        }
+        score[val]++;
+      }
 
-  <div class="question">
-    <p>4. Un feu magique éclate au milieu du village.</p>
-    <div class="options">
-      <label><input type="radio" name="q4" value="eau"> Je canalise l’eau des environs pour l’éteindre.</label>
-      <label><input type="radio" name="q4" value="feu"> Je saute dans l’action et tente de le contenir moi-même.</label>
-      <label><input type="radio" name="q4" value="air"> Je souffle dessus pour le disperser.</label>
-    </div>
-  </div>
-
-  <div class="question">
-    <p>5. Une fleur rare pousse devant toi, brillante d’énergie.</p>
-    <div class="options">
-      <label><input type="radio" name="q5" value="eau"> Je l’arrose et la protège doucement.</label>
-      <label><input type="radio" name="q5" value="air"> Je l’effleure sans la cueillir, la nature parle par le vent.</label>
-      <label><input type="radio" name="q5" value="feu"> Je la touche pour absorber sa puissance.</label>
-    </div>
-  </div>
-
-  <button type="button" class="btn" onclick="showResult()">Découvre ta magie</button>
-</form>
-
-<div id="result" class="result"></div>
-
-<div style="margin-top: 1em;">
-  <a href="2.les_coulisses.html" style="
-    background-color: #ffffff33;
-    color: #fff;
-    padding: 0.6em 1.2em;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 0 8px rgba(255,255,255,0.3);
-    transition: all 0.3s ease;
-  " onmouseover="this.style.boxShadow='0 0 15px #fff'" onmouseout="this.style.boxShadow='0 0 8px rgba(255,255,255,0.3)'">
-    ⬅️ Retour aux Coulisses d’Arzankia
-  </a>
-</div>
-
-
-<script>
-function showResult() {
-  const form = document.forms['quiz-form'];
-  const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
-  const score = { air: 0, feu: 0, eau: 0 };
-  for (let q of questions) {
-  const val = form[q].value;
-  if (!val) {
-    alert("Merci de répondre à toutes les questions !");
-    return;
-  }
-  score[val]++;
-}
-
-  const element = Object.keys(score).reduce((a, b) => score[a] >= score[b] ? a : b);
-
-  const fiches = {
-    air: `
-      <h2>Magicien de l’Air</h2>
-      <p><strong>Personnalité :</strong> Curieux, rêveur et libre.</p>
-      <p><strong>Pouvoirs :</strong> Contrôle des vents, lévitation, messages invisibles.</p>
-      <p><strong>Symbole :</strong> Plume blanche – <em>« L’invisible est souvent plus puissant que l’évident. »</em></p>
-    `,
-    feu: `
-      <h2>Magicien du Feu</h2>
-      <p><strong>Personnalité :</strong> Passionné, impulsif, intense.</p>
-      <p><strong>Pouvoirs :</strong> Flammes, énergie brute, force vitale.</p>
-      <p><strong>Symbole :</strong> Flamme dorée – <em>« Là où le feu brûle, le cœur parle. »</em></p>
-    `,
-    eau: `
-      <h2>Magicien de l’Eau</h2>
-      <p><strong>Personnalité :</strong> Apaisant, adaptable, sensible.</p>
-      <p><strong>Pouvoirs :</strong> Guérison, marées, mémoire liquide.</p>
-      <p><strong>Symbole :</strong> Goutte bleue – <em>« Le silence de l’eau cache des secrets profonds. »</em></p>
-    `
-  };
-
-  window.location.href = `test.resultat_element_predilection_magicien.html?element=${element}`;
-}
-</script>
-
-
+      const element = Object.keys(score).reduce((a, b) => score[a] >= score[b] ? a : b);
+      window.location.href = `test.resultat_element_predilection_magicien.html?element=${element}`;
+    }
+  </script>
 </body>
 </html>
