@@ -77,6 +77,17 @@
     .coquillage-button:hover {
       background-color: #e0f0ff;
     }
+    
+  #voileTexte {
+    animation: scintille 1.5s infinite alternate;
+  }
+
+  @keyframes scintille {
+    from { text-shadow: 0 0 5px #a4ebf3; }
+    to { text-shadow: 0 0 12px #ffffff; }
+  }
+
+
   </style>
 </head>
 
@@ -96,6 +107,8 @@ C’est alors qu’un symbole s’est dessiné sur le tronc : un oublion. Quand 
 
 
   <img src="entree_sirene.png" alt="Entrée du Monde des Sirènes" class="image-entree">
+  <div id="voileTexte" style="margin-top: 2rem; font-size: 1.3em; font-style: italic; color: #a4ebf3;"></div>
+
   
   <!-- Question en gras et centrée -->
 <p style="text-align: center; font-weight: bold; margin-top: 2rem;">
@@ -142,6 +155,28 @@ function toggleExplication() {
   }
 }
 </script>
+  <script>
+function ecrireTexte(texte, elementId, delay = 100) {
+  const element = document.getElementById(elementId);
+  let i = 0;
+  function taper() {
+    if (i < texte.length) {
+      element.textContent += texte.charAt(i);
+      i++;
+      setTimeout(taper, delay);
+    }
+  }
+  taper();
+}
+
+// ⏳ Lancer l'effet 1 seconde après le chargement (modifiable)
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    ecrireTexte("✨ Le voile s’est ouvert...", "voileTexte", 120);
+  }, 1000); // délai initial avant début d'apparition
+});
+</script>
+
 
 
 </body>
