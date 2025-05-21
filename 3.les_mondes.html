@@ -427,14 +427,13 @@
       opacity: 0.85;
     }
 
-    .bubble.pan {
-  background-color: #000; /* fond noir */
-  background-image: radial-gradient(#ffffff 1px, transparent 1px);
-  background-size: 10px 10px; /* espacement des points */
-  background-repeat: repeat;
-  border: 2px solid white;
-  animation: scintiller 4s infinite linear;
+.bubble.pan {
+  background: linear-gradient(145deg, #d0eaff, #ffffff); /* dégradé bleu ciel doux */
+  border: 2px solid #a0cfff;
+  box-shadow: 0 0 10px rgba(160, 207, 255, 0.6); /* halo léger */
+  color: #003366; /* texte bien lisible sur fond clair */
 }
+    
 @keyframes scintiller {
   0% { background-position: 0 0; }
   100% { background-position: 10px 10px; }
