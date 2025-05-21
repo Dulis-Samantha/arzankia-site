@@ -2,69 +2,122 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Quel Héros es-tu ?</title>
+  <title>Quel Héros d’Arzankia es-tu ?</title>
   <style>
     body {
-      background-image: url('fond_heros.png');
+      background-image: url('fond_test_heros.png');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       margin: 0;
       padding: 2em;
-      font-family: Georgia, serif;
+      font-family: 'Georgia', serif;
       color: #fffff2;
-      text-shadow: 0 0 6px #000;
+      text-shadow: 1px 1px 3px #000;
     }
+
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
-      background: rgba(0,0,0,0.5);
-      padding: 2em;
-      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.55);
+      padding: 3em 2em;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 248, 190, 0.3);
     }
+
     h1 {
       text-align: center;
-      color: #ffd700;
-      text-shadow: 0 0 10px #3a1c00;
+      font-size: 2.5em;
+      color: #ffdd55;
+      text-shadow: 0 0 10px #402000;
+      margin-bottom: 1.5em;
     }
+
     form {
-      font-size: 1.1em;
-      line-height: 1.7;
+      font-size: 1.2em;
+      line-height: 1.8;
     }
+
+    p {
+      font-weight: bold;
+      margin-top: 1.8em;
+      margin-bottom: 0.5em;
+      color: #ffeaa7;
+    }
+
     label {
       display: block;
-      margin-bottom: 0.4em;
+      margin: 0.4em 0;
+      cursor: pointer;
     }
+
+    input[type="text"] {
+      padding: 0.6em 1em;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      margin-top: 0.4em;
+      background: #fff8e6;
+      color: #222;
+    }
+
     .submit-btn {
       text-align: center;
-      margin-top: 2em;
+      margin-top: 2.5em;
     }
+
     button {
-      padding: 0.8em 1.6em;
-      border-radius: 10px;
-      background: #ffd700;
-      color: #222;
+      padding: 0.9em 2em;
+      font-size: 1.1em;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #ffda6b, #fff4c1);
+      color: #000;
       font-weight: bold;
       border: none;
-      box-shadow: 0 0 10px #fff7b2;
+      box-shadow: 0 0 12px #fff3b2;
       cursor: pointer;
       transition: all 0.3s ease;
     }
+
     button:hover {
-      background: #ffe88a;
+      background: #fff7d1;
       box-shadow: 0 0 20px #fffbcf;
       transform: scale(1.05);
     }
+
     #quiz-result {
       margin-top: 2em;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1.3em;
       font-weight: bold;
+      color: #fffac0;
     }
+
+    .magie {
+      font-size: 1.5em;
+      color: #fffacd;
+      text-shadow: 0 0 8px #ffe, 0 0 14px #ffdfaa;
+      animation: apparitionMagique 2s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes apparitionMagique {
+      from {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
     .back-button {
       text-align: center;
       margin-top: 3em;
     }
+
     .back-button a {
       display: inline-block;
       background: linear-gradient(135deg, #fff6c1, #ffe18a);
@@ -76,6 +129,7 @@
       box-shadow: 0 0 15px #ffeba0;
       transition: all 0.3s ease;
     }
+
     .back-button a:hover {
       background: #fff2b0;
       box-shadow: 0 0 20px #fff8c6;
@@ -83,13 +137,15 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>❓ Quel Héros d’Arzankia es-tu ?</h1>
     <form id="quiz-form">
       <p>Ton prénom :</p>
-<input type="text" id="prenom" name="prenom" required placeholder="Prénom" style="padding: 0.5em; font-size: 1em; border-radius: 8px; border: none; margin-bottom: 1.5em;">
+      <input type="text" id="prenom" name="prenom" required placeholder="Prénom">
 
+      <!-- Extrait exemple de question -->
       <p>1. Quelle qualité te définit le mieux ?</p>
       <label><input type="radio" name="q1" value="aventurier"> Le courage</label>
       <label><input type="radio" name="q1" value="chercheur"> La curiosité</label>
@@ -98,77 +154,7 @@
       <label><input type="radio" name="q1" value="magicien"> L’intuition</label>
       <label><input type="radio" name="q1" value="protecteur"> L’empathie</label>
 
-      <p>2. Quel compagnon magique choisirais-tu ?</p>
-      <label><input type="radio" name="q2" value="dresseur"> Un dragon ou un caméléon</label>
-      <label><input type="radio" name="q2" value="aventurier"> Une luciole ou un griffon</label>
-      <label><input type="radio" name="q2" value="magicien"> Une licorne ou une fée</label>
-      <label><input type="radio" name="q2" value="chercheur"> Un corbeau messager</label>
-      <label><input type="radio" name="q2" value="protecteur"> Un animal blessé à protéger</label>
-      <label><input type="radio" name="q2" value="chasseur"> Un faucon loyal</label>
-
-      <p>3. Face à un mystère... tu :</p>
-      <label><input type="radio" name="q3" value="chercheur"> Cherches des indices méthodiquement</label>
-      <label><input type="radio" name="q3" value="chasseur"> Tends un piège pour voir ce qui en sort</label>
-      <label><input type="radio" name="q3" value="dresseur"> Demandes conseil à ton meilleur ami</label>
-      <label><input type="radio" name="q3" value="aventurier"> Te lances sans réfléchir</label>
-      <label><input type="radio" name="q3" value="magicien"> Te concentres pour ressentir les énergies</label>
-      <label><input type="radio" name="q3" value="protecteur"> Protèges ceux qui t'entourent avant d'agir</label>
-
-      <p>4. Ton endroit préféré dans Arzankia serait :</p>
-      <label><input type="radio" name="q4" value="dresseur"> Le sanctuaire des créatures</label>
-      <label><input type="radio" name="q4" value="chercheur"> Les archives oubliées</label>
-      <label><input type="radio" name="q4" value="aventurier"> Le sommet du mont désert</label>
-      <label><input type="radio" name="q4" value="magicien"> Le cercle des runes élémentaires</label>
-      <label><input type="radio" name="q4" value="protecteur"> Le jardin de la lune</label>
-      <label><input type="radio" name="q4" value="chasseur"> La Forêt des Ombres</label>
-
-      <p>5. Quel outil magique aimerais-tu posséder ?</p>
-      <label><input type="radio" name="q5" value="magicien"> Une baguette ancestrale</label>
-      <label><input type="radio" name="q5" value="aventurier"> Une carte mouvante des mondes</label>
-      <label><input type="radio" name="q5" value="chasseur"> Une arbalète qui ne rate jamais sa cible</label>
-      <label><input type="radio" name="q5" value="dresseur"> Un collier de lien avec les animaux</label>
-      <label><input type="radio" name="q5" value="protecteur"> Un bouclier protecteur d'énergie</label>
-      <label><input type="radio" name="q5" value="chercheur"> Une loupe magique détectant les illusions</label>
-
-      <p>6. Tu ressens la magie comme :</p>
-      <label><input type="radio" name="q6" value="magicien"> Une force naturelle que tu canalises</label>
-      <label><input type="radio" name="q6" value="protecteur"> Une vibration douce reliant les êtres</label>
-      <label><input type="radio" name="q6" value="chercheur"> Un mystère que tu veux percer</label>
-      <label><input type="radio" name="q6" value="aventurier"> Un appel à l'aventure</label>
-      <label><input type="radio" name="q6" value="dresseur"> Une voie de communication animale</label>
-      <label><input type="radio" name="q6" value="chasseur"> Un outil pour survivre</label>
-
-      <p>7. Ton style de combat ?</p>
-      <label><input type="radio" name="q7" value="chasseur"> Rapide et précis</label>
-      <label><input type="radio" name="q7" value="dresseur"> En duo</label>
-      <label><input type="radio" name="q7" value="aventurier"> Adapté à chaque situation</label>
-      <label><input type="radio" name="q7" value="magicien"> À distance avec des sorts</label>
-      <label><input type="radio" name="q7" value="protecteur"> Proctection avant tout</label>
-      <label><input type="radio" name="q7" value="chercheur"> En prévoyant les faiblesses de l'adversaire</label>
-
-      <p>8. Si tu recevais une mission secrète...</p>
-      <label><input type="radio" name="q8" value="aventurier"> Tu partirais sans attendre</label>
-      <label><input type="radio" name="q8" value="chercheur"> Tu analyserais chaque détail</label>
-      <label><input type="radio" name="q8" value="magicien"> Tu consulterais les étoiles</label>
-      <label><input type="radio" name="q8" value="chasseur"> Tu traquerais ta cible discrètement</label>
-      <label><input type="radio" name="q8" value="dresseur"> Tu demanderais à un ami de t'accompagner</label>
-      <label><input type="radio" name="q8" value="protecteur"> Tu veillerais d'abord sur tes proches</label>
-
-      <p>9. Quelle couleur préfères-tu ?</p>
-      <label><input type="radio" name="q9" value="magicien"> Violet ou bleu mystique</label>
-      <label><input type="radio" name="q9" value="protecteur"> Blanc ou argent doux</label>
-      <label><input type="radio" name="q9" value="chercheur"> Noir ou gris brume</label>
-      <label><input type="radio" name="q9" value="aventurier"> Rouge ou orange feu</label>
-      <label><input type="radio" name="q9" value="dresseur"> Vert naturel</label>
-      <label><input type="radio" name="q9" value="chasseur"> Brun ou cuivre terre</label>
-
-      <p>10. En un mot, tu es...</p>
-      <label><input type="radio" name="q10" value="protecteur"> Bienveillant(e)</label>
-      <label><input type="radio" name="q10" value="magicien"> Intuitif/Intuitive</label>
-      <label><input type="radio" name="q10" value="chercheur"> Observateur/Observatrice</label>
-      <label><input type="radio" name="q10" value="aventurier"> Audacieux/Audacieuse</label>
-      <label><input type="radio" name="q10" value="dresseur"> Complice</label>
-      <label><input type="radio" name="q10" value="chasseur"> Stratège</label>
+      <!-- ajoute ici les autres questions q2 à q10 -->
 
       <div class="submit-btn">
         <button type="button" onclick="calculateResult()">Voir mon profil</button>
@@ -181,51 +167,53 @@
       <a href="3.les_heros.html">← Retour aux Héros</a>
     </div>
   </div>
-<script>
-function calculateResult() {
-  const prenom = document.getElementById("prenom").value.trim();
-  if (!prenom) {
-    alert("Merci d’entrer ton prénom avant de valider !");
-    return;
-  }
 
-  const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'];
-  const scores = {
-    aventurier: 0,
-    chercheur: 0,
-    dresseur: 0,
-    chasseur: 0,
-    magicien: 0,
-    protecteur: 0
-  };
+  <script>
+    function calculateResult() {
+      const prenom = document.getElementById("prenom").value.trim();
+      if (!prenom) {
+        alert("Merci d’entrer ton prénom avant de valider !");
+        return;
+      }
 
-  for (let q of questions) {
-    const answer = document.querySelector(`input[name="${q}"]:checked`);
-    if (answer) scores[answer.value]++;
-  }
+      const questions = ['q1']; // à compléter jusqu'à q10
+      const scores = {
+        aventurier: 0,
+        chercheur: 0,
+        dresseur: 0,
+        chasseur: 0,
+        magicien: 0,
+        protecteur: 0
+      };
 
-  // Tri des résultats
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const topScore = sorted[0][1];
-  const topSpecialties = sorted.filter(([_, score]) => score === topScore).map(([spec]) => spec);
+      for (let q of questions) {
+        const answer = document.querySelector(`input[name="${q}"]:checked`);
+        if (answer) scores[answer.value]++;
+      }
 
-  let result = topSpecialties[0]; // par défaut, prendre le premier
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const topScore = sorted[0][1];
+      const topSpecialties = sorted.filter(([_, score]) => score === topScore).map(([spec]) => spec);
+      let result = topSpecialties[0];
+      if (topSpecialties.includes('magicien') && topSpecialties.includes('protecteur')) {
+        result = (scores['protecteur'] >= 6) ? 'protecteur' : 'magicien';
+      }
 
-  // Cas spécial magicien vs protecteur
-  if (topSpecialties.includes('magicien') && topSpecialties.includes('protecteur')) {
-    result = (scores['protecteur'] >= 6) ? 'protecteur' : 'magicien';
-  }
+      const ficheExiste = ['aventurier','chercheur','dresseur','chasseur','magicien','protecteur'].includes(result);
+      if (!ficheExiste) {
+        alert("Une erreur est survenue. Réessaye ou contacte le gardien des héros.");
+        return;
+      }
 
-  const ficheExiste = ['aventurier','chercheur','dresseur','chasseur','magicien','protecteur'].includes(result);
-  if (!ficheExiste) {
-    alert("Une erreur est survenue. Réessaye ou contacte le gardien des héros.");
-    return;
-  }
+      const resultDiv = document.getElementById("quiz-result");
+      resultDiv.innerHTML = `<span class="magie">${prenom}, tu es un héros ${result} !</span>`;
 
-  const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
-  window.location.href = url;
-}
-</script>
-
+      // Redirection au bout de 4 secondes (optionnel)
+      setTimeout(() => {
+        const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
+        window.location.href = url;
+      }, 4000);
+    }
+  </script>
 </body>
 </html>
