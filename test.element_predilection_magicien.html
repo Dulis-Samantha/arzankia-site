@@ -35,6 +35,26 @@
       background: rgba(255,255,255,0.1);
       border-radius: 10px;
     }
+    function showResult() {
+  const form = document.forms['quiz-form'];
+  const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+  const score = { air: 0, feu: 0, eau: 0 };
+
+  for (let q of questions) {
+    const val = form[q].value;
+    if (!val) {
+      alert("Merci de répondre à toutes les questions !");
+      return;
+    }
+    score[val]++;
+  }
+
+  const element = Object.keys(score).reduce((a, b) => score[a] >= score[b] ? a : b);
+
+  // Redirige vers la page de résultat dédiée
+  window.location.href = `test.resultat_element_magicien.html?element=${element}`;
+}
+
   </style>
 </head>
 <body>
@@ -91,6 +111,42 @@
 </form>
 
 <div id="result" class="result"></div>
+  <div style="margin-top: 2em;">
+  <a href="test.element_predilection_magicien.html" style="
+    background-color: #ffc860;
+    color: #000;
+    padding: 0.6em 1.2em;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ffd678;
+    transition: all 0.3s ease;
+  " onmouseover="this.style.boxShadow='0 0 20px #ffd678'" onmouseout="this.style.boxShadow='0 0 10px #ffd678'">
+    🔄 Rejouer le test
+  </a>
+</div>
+  <div id="share-links" style="margin-top: 2em;">
+  <p style="font-weight:bold; color:#a2e0f8;">🔗 Partage ton résultat :</p>
+  <a id="twitter-share" target="_blank" style="margin-right: 1em; text-decoration:none;">🐦 Twitter</a>
+  <a id="facebook-share" target="_blank" style="margin-right: 1em; text-decoration:none;">📘 Facebook</a>
+  <a id="whatsapp-share" target="_blank" style="text-decoration:none;">📱 WhatsApp</a>
+</div>
+
+<div style="margin-top: 1em;">
+  <a href="2.les_coulisses.html" style="
+    background-color: #ffffff33;
+    color: #fff;
+    padding: 0.6em 1.2em;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+  " onmouseover="this.style.boxShadow='0 0 15px #fff'" onmouseout="this.style.boxShadow='0 0 8px rgba(255,255,255,0.3)'">
+    ⬅️ Retour aux Coulisses d’Arzankia
+  </a>
+</div>
+
 
 <script>
 function showResult() {
@@ -129,9 +185,10 @@ function showResult() {
     `
   };
 
-  document.getElementById('result').innerHTML = fiches[element];
+  window.location.href = `test.resultat_element_predilection_magicien.html?element=${element}`;
 }
 </script>
+
 
 </body>
 </html>
