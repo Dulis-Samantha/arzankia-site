@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -114,17 +113,35 @@
       <label><input type="radio" name="element3" value="air"> Voler dans les airs</label>
     </div>
     <div class="question">
-      <p>4. Face à une bête immense...</p>
+      <p>4. Tu découvres une carte au trésor. Le chemin passe par...</p>
+      <label><input type="radio" name="element4" value="terre"> Une grotte et des racines profondes</label>
+      <label><input type="radio" name="element4" value="eau"> Une rivière aux reflets mystiques</label>
+      <label><input type="radio" name="element4" value="air"> Une falaise balayée par les vents</label>
+    </div>
+    <div class="question">
+      <p>5. Pour te sentir libre, tu préfères :</p>
+      <label><input type="radio" name="element5" value="terre"> Marcher pieds nus dans la mousse</label>
+      <label><input type="radio" name="element5" value="eau"> Flotter sur un lac au lever du soleil</label>
+      <label><input type="radio" name="element5" value="air"> Être porté par le vent d’un sommet</label>
+    </div>
+    <div class="question">
+      <p>6. Ton animal totem t’emmène dans son monde. Il t’emmène vers...</p>
+      <label><input type="radio" name="element6" value="terre"> Une forêt dense et silencieuse</label>
+      <label><input type="radio" name="element6" value="eau"> Une cité engloutie lumineuse</label>
+      <label><input type="radio" name="element6" value="air"> Un royaume suspendu dans les nuages</label>
+    </div>
+    <div class="question">
+      <p>7. Face à une bête immense...</p>
       <label><input type="radio" name="taille1" value="gros"> Tu es fasciné(e)</label>
       <label><input type="radio" name="taille1" value="petit"> Tu préfères les petites créatures</label>
     </div>
     <div class="question">
-      <p>5. Tu observes les animaux et...</p>
+      <p>8. Tu observes les animaux et...</p>
       <label><input type="radio" name="taille2" value="gros"> Tu rêves d’apprivoiser un prédateur</label>
       <label><input type="radio" name="taille2" value="petit"> Tu suis les petits rongeurs</label>
     </div>
     <div class="question">
-      <p>6. Ton compagnon idéal...</p>
+      <p>9. Ton compagnon idéal...</p>
       <label><input type="radio" name="taille3" value="gros"> Imposant et protecteur</label>
       <label><input type="radio" name="taille3" value="petit"> Discret mais rusé</label>
     </div>
@@ -138,7 +155,7 @@
 
   <script>
     function calculateAnimalResult() {
-      const elements = ['element1', 'element2', 'element3'].map(q => document.querySelector(`input[name="${q}"]:checked`)?.value);
+      const elements = ['element1', 'element2', 'element3', 'element4', 'element5', 'element6'].map(q => document.querySelector(`input[name="${q}"]:checked`)?.value);
       const tailles = ['taille1', 'taille2', 'taille3'].map(q => document.querySelector(`input[name="${q}"]:checked`)?.value);
 
       if (elements.includes(undefined) || tailles.includes(undefined)) {
