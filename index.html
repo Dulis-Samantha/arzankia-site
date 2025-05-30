@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Bienvenue dans les mondes d'Arzankia</title>
+  <title>Ouverture du portail magique</title>
   <style>
     body {
       margin: 0;
@@ -10,7 +10,7 @@
       font-family: 'Georgia', serif;
       color: #ffe066;
       overflow: hidden;
-      background: #000;
+      background-color: #001133; /* Bleu foncé */
     }
 
     .fond-mondes {
@@ -18,27 +18,25 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 1.5s ease-in;
+    }
+
+    .fond-mondes.visible {
       opacity: 1;
     }
 
-    .intro-fixe {
+    .rideau-gauche, .rideau-droit {
       position: absolute;
-      z-index: 4;
-      width: 100%;
-      text-align: center;
-      top: 20%;
-      font-size: 1.2em;
-      line-height: 1.6em;
-      padding: 0 10vw;
-      box-sizing: border-box;
-      animation: fadeout 1s ease-out 2.5s forwards;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: #281f43;
+      z-index: 3;
     }
 
-    @keyframes fadeout {
-      to { opacity: 0; }
-    }
-      .rideau-gauche {
+    .rideau-gauche {
       left: 0;
       animation: ouvrir-gauche 2s ease-out forwards;
     }
@@ -56,73 +54,77 @@
       to { transform: translateX(100%); }
     }
 
-    .rideau-gauche, .rideau-droit {
-      position: absolute;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      background-color: #281f43;
-      z-index: 5;
+    .rideau-gauche.fermer {
+      animation: fermer-gauche 2s ease-in forwards;
     }
 
-    .rideau-gauche {
-      left: -50%;
-      animation: fermer-gauche 1.5s ease-out forwards;
-      animation-delay: 3s;
-    }
-
-    .rideau-droit {
-      right: -50%;
-      animation: fermer-droit 1.5s ease-out forwards;
-      animation-delay: 3s;
+    .rideau-droit.fermer {
+      animation: fermer-droit 2s ease-in forwards;
     }
 
     @keyframes fermer-gauche {
-      to { left: 0; }
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
     }
 
     @keyframes fermer-droit {
-      to { right: 0; }
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
     }
 
-    .texte-magique {
+    .intro-fixe {
       position: absolute;
-      z-index: 3;
-      top: 45%;
+      z-index: 2;
       width: 100%;
       text-align: center;
+      top: 25%;
       font-size: 1.5em;
-      white-space: normal;
-      padding: 0 5vw;
+      line-height: 1.6em;
+      padding: 0 10vw;
+      box-sizing: border-box;
       opacity: 0;
-      animation: apparition 1s ease-in forwards;
-      animation-delay: 0.5s;
+      animation: fadein 1s ease-in forwards;
+      animation-delay: 2s;
+      color: #ffe066;
+      text-shadow: 1px 1px 3px black;
     }
 
-    @keyframes apparition {
+    @keyframes fadein {
       to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="fond-mondes"></div>
+  <!-- Fond magique (devient visible à l’ouverture du rideau) -->
+  <div class="fond-mondes" id="fond"></div>
 
+  <!-- Texte d’introduction -->
   <div class="intro-fixe">
     <h1>✨ Bienvenue sur le site officiel</h1>
     <h2>Les Héros d'Arzankia</h2>
+    <p>Ici commence ton aventure…</p>
   </div>
 
-  <div class="rideau-gauche"></div>
-  <div class="rideau-droit"></div>
-
-  <div class="texte-magique">
-    ✨ Ici commence ton aventure...
-  </div>
+  <!-- Rideaux -->
+  <div class="rideau-gauche" id="gauche"></div>
+  <div class="rideau-droit" id="droit"></div>
 
   <script>
+    // 1. Rendre le fond visible juste après ouverture du rideau
+    setTimeout(() => {
+      document.getElementById("fond").classList.add("visible");
+    }, 2000); // après ouverture du rideau
+
+    // 2. Fermer les rideaux après 5 secondes
+    setTimeout(() => {
+      document.getElementById("gauche").classList.add("fermer");
+      document.getElementById("droit").classList.add("fermer");
+    }, 5000); // ouverture (2s) + affichage (3s)
+
+    // 3. Rediriger après la fermeture (2s plus tard)
     setTimeout(() => {
       window.location.href = "1.accueil.html";
-    }, 4700); // 3s attente + 1.5s fermeture + marge
+    }, 7000);
   </script>
 </body>
 </html>
