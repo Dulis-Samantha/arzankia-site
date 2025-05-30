@@ -17,6 +17,18 @@
       text-shadow: 1px 1px 4px #000;
     }
 
+    .shake {
+      animation: shakeEffect 0.4s ease;
+    }
+
+    @keyframes shakeEffect {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+
     .container {
       max-width: 900px;
       margin: auto;
@@ -117,6 +129,11 @@
       font-size: 1.5em;
       margin-top: 1em;
     }
+
+    #estebanInfo {
+      display: none;
+      margin-top: 2em;
+    }
   </style>
 </head>
 <body>
@@ -126,13 +143,13 @@
     <div class="parchemin">
       <em>« Certains liens sont si puissants qu’ils n’ont pas besoin de mots pour être compris. »<br>– Archives de la Tour de l’Aube</em>
     </div>
-<div class="parchemin" style="margin-top: 3em;">
-  <p><strong>💫 Déverrouille le portrait d'Esteban</strong></p>
-  <p>Pour faire apparaître le véritable portrait d’Esteban, tu devras répondre à 6 questions liées à sa vie, ses liens et ses secrets.</p>
-  <p>Seras-tu capable de toutes les retrouver ?</p>
-</div>
 
-    <!-- Quiz -->
+    <div class="parchemin" style="margin-top: 3em;">
+      <p><strong>💫 Déverrouille le portrait d'Esteban</strong></p>
+      <p>Pour faire apparaître le véritable portrait d’Esteban, tu devras répondre à 6 questions liées à sa vie, ses liens et ses secrets.</p>
+      <p>Seras-tu capable de toutes les retrouver ?</p>
+    </div>
+
     <div class="quiz">
       <div id="q1" class="question">
         <p>Quel est l’âge d’Esteban lorsqu'il voit Raphaël pour la première fois ?</p>
@@ -172,11 +189,18 @@
       </div>
       <img id="estebanFinal" src="photo_esteban.png" alt="Esteban final">
       <div id="success-message">
-        ✨ Bravo ! Tu as retrouvé Esteban ! ✨
+        ✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨
+      </div>
+      <div id="estebanInfo" class="parchemin">
+        <p><strong>Âge :</strong> 13 ans</p>
+        <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
+        <p><strong>Clé d’accès :</strong> Os de dinosaure</p>
+        <p><strong>Spécialisation :</strong> Dresseur - lien Mililou Dragonne</p>
+        <p><strong>Statut :</strong> En formation Niv I</p>
+        <br>
       </div>
     </div>
 
-    <!-- Bouton retour -->
     <div class="back-button">
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
@@ -187,18 +211,37 @@
 
     function checkAnswer(questionId, isCorrect) {
       const question = document.getElementById(questionId);
-      if (question && isCorrect) {
+
+      if (isCorrect) {
         correctAnswers++;
         question.style.display = 'none';
-      } else if (question) {
-        alert("Ce n’est pas la bonne réponse !");
+      } else {
+        alert("❌ Mauvaise réponse ! Le quiz redémarre…");
+        resetQuiz();
         return;
       }
 
       if (correctAnswers === 6) {
         document.getElementById("estebanFinal").style.display = "block";
         document.getElementById("success-message").style.display = "block";
+        document.getElementById("estebanInfo").style.display = "block";
       }
+    }
+
+    function resetQuiz() {
+      correctAnswers = 0;
+      document.body.classList.add("shake");
+
+      const allQuestions = document.querySelectorAll(".question");
+      allQuestions.forEach(q => q.style.display = "block");
+
+      document.getElementById("estebanFinal").style.display = "none";
+      document.getElementById("success-message").style.display = "none";
+      document.getElementById("estebanInfo").style.display = "none";
+
+      setTimeout(() => {
+        document.body.classList.remove("shake");
+      }, 500);
     }
   </script>
 </body>
