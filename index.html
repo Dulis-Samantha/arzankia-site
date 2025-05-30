@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenue dans les mondes d'Arzankia</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Georgia', serif;
+      color: #ffe066;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .fond-mondes {
+      background: url('fond_index.png') center/cover no-repeat fixed;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+      animation: fondu 2s ease-in 7.2s forwards;
+    }
+
+    @keyframes fondu {
+      to { opacity: 1; }
+    }
+
+    .intro-fixe {
+      position: absolute;
+      z-index: 4;
+      width: 100%;
+      text-align: center;
+      top: 20%;
+      font-size: 1.2em;
+      line-height: 1.6em;
+      padding: 0 10vw;
+      box-sizing: border-box;
+      animation: fadeout 1s ease-out 7s forwards;
+    }
+
+    @keyframes fadeout {
+      to { opacity: 0; }
+    }
+
+    .rideau-gauche, .rideau-droit {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: #281f43;
+      z-index: 3;
+    }
+
+    .rideau-gauche {
+      left: 0;
+      animation: rideau-gauche 2s ease-out forwards;
+      animation-delay: 7.2s;
+    }
+
+    .rideau-droit {
+      right: 0;
+      animation: rideau-droit 2s ease-out forwards;
+      animation-delay: 7.2s;
+    }
+
+    @keyframes rideau-gauche {
+      to { transform: translateX(-100%); }
+    }
+
+    @keyframes rideau-droit {
+      to { transform: translateX(100%); }
+    }
+
+    .texte-magique {
+      position: absolute;
+      z-index: 2;
+      top: 45%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.5em;
+      white-space: normal;
+      padding: 0 5vw;
+      opacity: 0;
+      animation: apparition 2s ease-in forwards;
+      animation-delay: 7.2s;
+    }
+
+    @keyframes apparition {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="fond-mondes"></div>
+
+  <div class="intro-fixe">
+    <h1>✨ Bienvenue sur le site officiel</h1>
+    <h2>Les Héros d'Arzankia</h2>
+    <p>Ici commence ton aventure…</p>
+  </div>
+
+  <div class="rideau-gauche"></div>
+  <div class="rideau-droit"></div>
+
+  <div class="texte-magique">
+    ✨ Ouverture du portail magique...
+  </div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "1.accueil.html";
+    }, 10000);
+  </script>
+</body>
+</html>
