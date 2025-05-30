@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paola – Héros d’Arzankia</title>
+  <title>Esteban – Héros d’Arzankia</title>
   <style>
     body {
       margin: 0;
@@ -41,7 +41,7 @@
     .parchemin {
       background: url('parchemin_fond.png') center center no-repeat;
       background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85); /* voile lisible */
+      background-color: rgba(255, 248, 230, 0.85);
       padding: 4em 2em;
       margin: auto;
       max-width: 800px;
@@ -74,16 +74,57 @@
       box-shadow: 0 0 20px #fff8c6;
       transform: scale(1.05);
     }
+
+    .quiz {
+      margin-top: 3em;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2em;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .question {
+      margin-bottom: 1.5em;
+    }
+
+    .question p {
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    .question button {
+      margin: 0.5em;
+      padding: 0.5em 1em;
+      font-family: Georgia, serif;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+      background-color: #ffe18a;
+      cursor: pointer;
+    }
+
+    #estebanFinal {
+      display: none;
+      margin-top: 2em;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      max-width: 100%;
+    }
+
+    #success-message {
+      display: none;
+      color: #ffd700;
+      font-size: 1.5em;
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🌟 Estéban </h1>
 
-    <!-- Image du héros -->
-    <img src="photo_esteban.png" alt="Portrait d'estéban" class="image-hero">
+    <img src="photo_esteban.png" alt="Portrait d'Esteban" class="image-hero">
 
-    <!-- Texte sur parchemin -->
     <div class="parchemin">
       <p><strong>Âge :</strong> 13 ans</p>
       <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
@@ -94,10 +135,74 @@
       <em>« Certains liens sont si puissants qu’ils n’ont pas besoin de mots pour être compris. »<br>– Archives de la Tour de l’Aube</em>
     </div>
 
+    <!-- Quiz -->
+    <div class="quiz">
+      <div id="q1" class="question">
+        <p>Quel est l’âge d’Esteban lorsqu'il voit Raphaël pour la première fois ?</p>
+        <button onclick="checkAnswer('q1', true)">13 ans</button>
+        <button onclick="checkAnswer('q1', false)">12 ans</button>
+        <button onclick="checkAnswer('q1', false)">14 ans</button>
+      </div>
+      <div id="q2" class="question">
+        <p>De quel monde vient Esteban ?</p>
+        <button onclick="checkAnswer('q2', false)">Monde des Quacks</button>
+        <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button>
+        <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button>
+      </div>
+      <div id="q3" class="question">
+        <p>Comment s'appelle sa dragonne ?</p>
+        <button onclick="checkAnswer('q3', false)">Zyra</button>
+        <button onclick="checkAnswer('q3', true)">Mililou</button>
+        <button onclick="checkAnswer('q3', false)">Brisella</button>
+      </div>
+      <div id="q4" class="question">
+        <p>Qui est le frère d'Esteban ?</p>
+        <button onclick="checkAnswer('q4', false)">Kelyan</button>
+        <button onclick="checkAnswer('q4', true)">Antony</button>
+        <button onclick="checkAnswer('q4', false)">Nino</button>
+      </div>
+      <div id="q5" class="question">
+        <p>Qui est le meilleur ami d'Esteban ?</p>
+        <button onclick="checkAnswer('q5', true)">Kelyan</button>
+        <button onclick="checkAnswer('q5', false)">Antony</button>
+        <button onclick="checkAnswer('q5', false)">Nino</button>
+      </div>
+      <div id="q6" class="question">
+        <p>Quelle est la clé d'Esteban ?</p>
+        <button onclick="checkAnswer('q6', false)">Boussole</button>
+        <button onclick="checkAnswer('q6', false)">Montre à gousset</button>
+        <button onclick="checkAnswer('q6', true)">Os de dinosaure</button>
+      </div>
+      <img id="estebanFinal" src="photo_esteban.png" alt="Esteban final">
+      <div id="success-message">
+        ✨ Bravo ! Tu as retrouvé Esteban ! ✨
+      </div>
+    </div>
+
     <!-- Bouton retour -->
     <div class="back-button">
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
   </div>
+
+  <script>
+    let correctAnswers = 0;
+
+    function checkAnswer(questionId, isCorrect) {
+      const question = document.getElementById(questionId);
+      if (question && isCorrect) {
+        correctAnswers++;
+        question.style.display = 'none';
+      } else if (question) {
+        alert("Ce n’est pas la bonne réponse !");
+        return;
+      }
+
+      if (correctAnswers === 6) {
+        document.getElementById("estebanFinal").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
