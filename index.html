@@ -19,6 +19,13 @@
       width: 100%;
       height: 100%;
       z-index: 0;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+      animation: fondu 2s ease-in 7.2s forwards;
+    }
+
+    @keyframes fondu {
+      to { opacity: 1; }
     }
 
     .intro-fixe {
@@ -33,13 +40,14 @@
       box-sizing: border-box;
     }
 
-    .rideau-gauche, .rideau-droit {
+    .rideau {
       position: absolute;
       top: 0;
       width: 50%;
       height: 100%;
       background-color: #281f43;
       z-index: 5;
+      transform: translateX(0);
     }
 
     .rideau-gauche {
@@ -60,11 +68,12 @@
       to { transform: translateX(100%); }
     }
 
-    .rideau-gauche.fermer {
+    /* Fermeture */
+    .fermer-gauche {
       animation: fermer-gauche 2s ease-in forwards;
     }
 
-    .rideau-droit.fermer {
+    .fermer-droit {
       animation: fermer-droit 2s ease-in forwards;
     }
 
@@ -98,6 +107,7 @@
   </style>
 </head>
 <body>
+
   <div class="fond-mondes"></div>
 
   <div class="intro-fixe">
@@ -106,24 +116,28 @@
     <p>Ici commence ton aventure…</p>
   </div>
 
-  <div class="rideau-gauche" id="gauche"></div>
-  <div class="rideau-droit" id="droit"></div>
+  <div class="rideau rideau-gauche" id="gauche"></div>
+  <div class="rideau rideau-droit" id="droit"></div>
 
   <div class="texte-magique">
     ✨ Ouverture du portail magique...
   </div>
 
   <script>
-    // Après 5s, on referme les rideaux
+    // Réouverture des rideaux après 5s
     setTimeout(() => {
-      document.getElementById("gauche").classList.add("fermer");
-      document.getElementById("droit").classList.add("fermer");
-    }, 5000); // 2s ouverture + 3s pause
+      const gauche = document.getElementById("gauche");
+      const droit = document.getElementById("droit");
+      gauche.classList.remove("rideau-gauche");
+      droit.classList.remove("rideau-droit");
+      gauche.classList.add("fermer-gauche");
+      droit.classList.add("fermer-droit");
+    }, 5000); // ouverture (2s) + affichage (3s)
 
-    // Après 8s, on redirige vers l’accueil
+    // Redirection après 8s
     setTimeout(() => {
       window.location.href = "1.accueil.html";
-    }, 8000); // 2s ouverture + 3s pause + 2s fermeture + marge
+    }, 8000);
   </script>
 </body>
 </html>
