@@ -1,1 +1,170 @@
 
+<!-- test.element_predilection_dresseur.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Dresseur - Animal de Prédilection</title>
+  <style>
+    body {
+      background: url('texture_creatures.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Georgia', serif;
+      color: white;
+      padding: 2rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .container {
+      background-color: rgba(0,0,0,0.7);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    button {
+      display: block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Quel est ton animal de prédilection ?</h1>
+  <form id="dresseurForm">
+    <div class="question">
+      <p>1. Tu dois te ressourcer. Où vas-tu ?</p>
+      <label><input type="radio" name="element1" value="terre"> Forêt</label><br>
+      <label><input type="radio" name="element1" value="eau"> Cascade</label><br>
+      <label><input type="radio" name="element1" value="air"> Sommet</label>
+    </div>
+    <div class="question">
+      <p>2. Tu entends un bruit mystérieux…</p>
+      <label><input type="radio" name="element2" value="terre"> Vibration du sol</label><br>
+      <label><input type="radio" name="element2" value="eau"> Remous à la surface</label><br>
+      <label><input type="radio" name="element2" value="air"> Mouvement dans le ciel</label>
+    </div>
+    <div class="question">
+      <p>3. Ton pouvoir élémentaire serait...</p>
+      <label><input type="radio" name="element3" value="terre"> Contrôler la nature</label><br>
+      <label><input type="radio" name="element3" value="eau"> Respirer sous l'eau</label><br>
+      <label><input type="radio" name="element3" value="air"> Voler dans les airs</label>
+    </div>
+
+    <div class="question">
+      <p>4. Face à une bête immense...</p>
+      <label><input type="radio" name="taille1" value="gros"> Tu es fasciné.e</label><br>
+      <label><input type="radio" name="taille1" value="petit"> Tu préfères les petites créatures</label>
+    </div>
+    <div class="question">
+      <p>5. Tu observes les animaux et...</p>
+      <label><input type="radio" name="taille2" value="gros"> Tu rêves d'apprivoiser un prédateur</label><br>
+      <label><input type="radio" name="taille2" value="petit"> Tu suis les petits rongeurs</label>
+    </div>
+    <div class="question">
+      <p>6. Ton compagnon idéal...</p>
+      <label><input type="radio" name="taille3" value="gros"> Imposant et protecteur</label><br>
+      <label><input type="radio" name="taille3" value="petit"> Discret mais rusé</label>
+    </div>
+
+    <button type="submit">Voir mon animal</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('dresseurForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const getVal = name => [...document.getElementsByName(name)].find(r => r.checked)?.value;
+
+    const elements = [getVal('element1'), getVal('element2'), getVal('element3')];
+    const tailles = [getVal('taille1'), getVal('taille2'), getVal('taille3')];
+
+    const element = elements.sort((a,b) => elements.filter(v => v === a).length - elements.filter(v => v === b).length).pop();
+    const taille = tailles.sort((a,b) => tailles.filter(v => v === a).length - tailles.filter(v => v === b).length).pop();
+
+    if (!element || !taille) return alert("Merci de répondre à toutes les questions !");
+
+    window.location.href = `test.resultat_element_predilection_dresseur.html?element=${element}&taille=${taille}`;
+  });
+</script>
+</body>
+</html>
+
+<!-- test.resultat_element_predilection_dresseur.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ton animal de prédilection</title>
+  <style>
+    body {
+      background: url('texture_creatures.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Georgia', serif;
+      color: white;
+      text-align: center;
+      padding: 3rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .result {
+      background: rgba(0,0,0,0.7);
+      padding: 2rem;
+      border-radius: 1rem;
+      display: inline-block;
+    }
+    img {
+      max-width: 300px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="result" id="resultBox">
+  <h1 id="animalName"></h1>
+  <p id="animalDesc"></p>
+  <img id="animalImg" src="" alt="animal">
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const element = params.get('element');
+  const taille = params.get('taille');
+
+  const data = {
+    terre: {
+      gros: { name: "L'Ours", img: "ours.png", desc: "Force tranquille, gardien de la nature profonde." },
+      petit: { name: "Le Hérisson", img: "herisson.png", desc: "Discret mais courageux, il avance toujours avec sagesse." }
+    },
+    eau: {
+      gros: { name: "Le Requin", img: "requin.png", desc: "Rapide et redoutable, il veille sur les abysses." },
+      petit: { name: "La Méduse", img: "meduse.png", desc: "Gracieuse et insaisissable, elle flotte entre deux mondes." }
+    },
+    air: {
+      gros: { name: "L'Aérodactylus", img: "aerodactylus.png", desc: "Vol ancestral et regard perçant, il traverse les cieux d'Arzankia." },
+      petit: { name: "La Chauve-souris", img: "chauve_souris.png", desc: "Silencieuse et vive, elle veille dans l'ombre." }
+    }
+  };
+
+  const animal = data[element]?.[taille];
+
+  if (animal) {
+    document.getElementById('animalName').textContent = animal.name;
+    document.getElementById('animalDesc').textContent = animal.desc;
+    document.getElementById('animalImg').src = animal.img;
+    document.getElementById('animalImg').alt = animal.name;
+  } else {
+    document.getElementById('resultBox').innerHTML = "<p>Erreur : animal introuvable</p>";
+  }
+</script>
+</body>
+</html>
