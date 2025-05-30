@@ -207,42 +207,61 @@
   </div>
 
   <script>
-    let correctAnswers = 0;
+  let correctAnswers = 0;
 
-    function checkAnswer(questionId, isCorrect) {
-      const question = document.getElementById(questionId);
+  function checkAnswer(questionId, isCorrect) {
+    const question = document.getElementById(questionId);
 
-      if (isCorrect) {
-        correctAnswers++;
-        question.style.display = 'none';
-      } else {
-        alert("❌ Mauvaise réponse ! Le quiz redémarre…");
-        resetQuiz();
-        return;
-      }
-
-      if (correctAnswers === 6) {
-        document.getElementById("estebanFinal").style.display = "block";
-        document.getElementById("success-message").style.display = "block";
-        document.getElementById("estebanInfo").style.display = "block";
-      }
+    if (isCorrect) {
+      correctAnswers++;
+      question.style.display = 'none';
+    } else {
+      alert("❌ Mauvaise réponse ! Le quiz redémarre…");
+      resetQuiz();
+      return;
     }
 
-    function resetQuiz() {
-      correctAnswers = 0;
-      document.body.classList.add("shake");
+    if (correctAnswers === 6) {
+      document.getElementById("estebanFinal").style.display = "block";
+      document.getElementById("success-message").style.display = "block";
+      document.getElementById("estebanInfo").style.display = "block";
+
+      // Sauvegarde la réussite localement
+      localStorage.setItem("quizEstebanDone", "true");
+    }
+  }
+
+  function resetQuiz() {
+    correctAnswers = 0;
+    document.body.classList.add("shake");
+
+    const allQuestions = document.querySelectorAll(".question");
+    allQuestions.forEach(q => q.style.display = "block");
+
+    document.getElementById("estebanFinal").style.display = "none";
+    document.getElementById("success-message").style.display = "none";
+    document.getElementById("estebanInfo").style.display = "none";
+
+    // Supprime la réussite enregistrée
+    localStorage.removeItem("quizEstebanDone");
+
+    setTimeout(() => {
+      document.body.classList.remove("shake");
+    }, 500);
+  }
+
+  // Si le quiz a déjà été validé, on l’affiche automatiquement
+  window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("quizEstebanDone") === "true") {
+      document.getElementById("estebanFinal").style.display = "block";
+      document.getElementById("success-message").style.display = "block";
+      document.getElementById("estebanInfo").style.display = "block";
 
       const allQuestions = document.querySelectorAll(".question");
-      allQuestions.forEach(q => q.style.display = "block");
-
-      document.getElementById("estebanFinal").style.display = "none";
-      document.getElementById("success-message").style.display = "none";
-      document.getElementById("estebanInfo").style.display = "none";
-
-      setTimeout(() => {
-        document.body.classList.remove("shake");
-      }, 500);
+      allQuestions.forEach(q => q.style.display = "none");
     }
-  </script>
+  });
+</script>
+
 </body>
 </html>
