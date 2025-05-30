@@ -21,7 +21,7 @@
       z-index: 0;
       opacity: 0;
       transition: opacity 2s ease-in;
-      animation: fondu 2s ease-in 7.2s forwards;
+      animation: fondu 2s ease-in 6s forwards;
     }
 
     @keyframes fondu {
@@ -38,7 +38,7 @@
       line-height: 1.6em;
       padding: 0 10vw;
       box-sizing: border-box;
-      animation: fadeout 1s ease-out 7s forwards;
+      animation: fadeout 1s ease-out 3s forwards;
     }
 
     @keyframes fadeout {
@@ -57,13 +57,13 @@
     .rideau-gauche {
       left: 0;
       animation: rideau-gauche 2s ease-out forwards;
-      animation-delay: 7.2s;
+      animation-delay: 3s;
     }
 
     .rideau-droit {
       right: 0;
       animation: rideau-droit 2s ease-out forwards;
-      animation-delay: 7.2s;
+      animation-delay: 3s;
     }
 
     @keyframes rideau-gauche {
@@ -84,8 +84,8 @@
       white-space: normal;
       padding: 0 5vw;
       opacity: 0;
-      animation: apparition 2s ease-in forwards;
-      animation-delay: 7.2s;
+      animation: apparition 1s ease-in forwards;
+      animation-delay: 0.5s;
     }
 
     @keyframes apparition {
@@ -110,9 +110,10 @@
   </div>
 
   <script>
+    // Redirection après 6 secondes (3 sec de texte + 2 sec animation + marge)
     setTimeout(() => {
       window.location.href = "1.accueil.html";
-    }, 10000);
+    }, 6000);
   </script>
 </body>
 </html>
