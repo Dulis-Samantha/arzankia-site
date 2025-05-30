@@ -17,18 +17,6 @@
       text-shadow: 1px 1px 4px #000;
     }
 
-    .shake {
-      animation: shakeEffect 0.4s ease;
-    }
-
-    @keyframes shakeEffect {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-10px); }
-      50% { transform: translateX(10px); }
-      75% { transform: translateX(-6px); }
-      100% { transform: translateX(0); }
-    }
-
     .container {
       max-width: 900px;
       margin: auto;
@@ -41,13 +29,6 @@
       color: #ffd700;
       text-shadow: 0 0 10px #3a1c00;
       margin-bottom: 1em;
-    }
-
-    .image-hero {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
-      margin-bottom: 2em;
     }
 
     .parchemin {
@@ -115,7 +96,7 @@
       cursor: pointer;
     }
 
-    #estebanFinal {
+    #estebanFinal, #estebanInfo {
       display: none;
       margin-top: 2em;
       border-radius: 12px;
@@ -128,11 +109,6 @@
       color: #ffd700;
       font-size: 1.5em;
       margin-top: 1em;
-    }
-
-    #estebanInfo {
-      display: none;
-      margin-top: 2em;
     }
   </style>
 </head>
@@ -187,17 +163,24 @@
         <button onclick="checkAnswer('q6', false)">Montre à gousset</button>
         <button onclick="checkAnswer('q6', true)">Os de dinosaure</button>
       </div>
+
       <img id="estebanFinal" src="photo_esteban.png" alt="Esteban final">
-      <div id="success-message">
-        ✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨
-      </div>
+
       <div id="estebanInfo" class="parchemin">
         <p><strong>Âge :</strong> 13 ans</p>
         <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
         <p><strong>Clé d’accès :</strong> Os de dinosaure</p>
         <p><strong>Spécialisation :</strong> Dresseur - lien Mililou Dragonne</p>
         <p><strong>Statut :</strong> En formation Niv I</p>
-        <br>
+      </div>
+
+      <div id="success-message">✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨</div>
+
+      <!-- 🔁 Bouton Rejouer -->
+      <div id="replay-button" style="display: none; margin-top: 1.5em;">
+        <button onclick="restartQuiz()" style="padding: 0.7em 1.5em; background-color: #ffe18a; border: none; border-radius: 8px; font-family: Georgia, serif; font-size: 1em; cursor: pointer; box-shadow: 0 0 10px #ffd700;">
+          🔁 Rejouer le quiz
+        </button>
       </div>
     </div>
 
@@ -207,61 +190,56 @@
   </div>
 
   <script>
-  let correctAnswers = 0;
+    let correctAnswers = 0;
+    const quizEstebanDone = localStorage.getItem("quizEstebanDone");
 
-  function checkAnswer(questionId, isCorrect) {
-    const question = document.getElementById(questionId);
+    document.addEventListener("DOMContentLoaded", function () {
+      if (quizEstebanDone === "true") {
+        document.getElementById("estebanFinal").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("estebanInfo").style.display = "block";
+        document.getElementById("replay-button").style.display = "block";
+        const allQuestions = document.querySelectorAll(".question");
+        allQuestions.forEach(q => q.style.display = "none");
+      }
+    });
 
-    if (isCorrect) {
-      correctAnswers++;
-      question.style.display = 'none';
-    } else {
-      alert("❌ Mauvaise réponse ! Le quiz redémarre…");
-      resetQuiz();
-      return;
+    function checkAnswer(questionId, isCorrect) {
+      const question = document.getElementById(questionId);
+      if (isCorrect) {
+        correctAnswers++;
+        question.style.display = "none";
+      } else {
+        alert("❌ Mauvaise réponse ! Le quiz redémarre…");
+        resetQuiz();
+        return;
+      }
+
+      if (correctAnswers === 6) {
+        document.getElementById("estebanFinal").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("estebanInfo").style.display = "block";
+        document.getElementById("replay-button").style.display = "block";
+        localStorage.setItem("quizEstebanDone", "true");
+      }
     }
 
-    if (correctAnswers === 6) {
-      document.getElementById("estebanFinal").style.display = "block";
-      document.getElementById("success-message").style.display = "block";
-      document.getElementById("estebanInfo").style.display = "block";
-
-      // Sauvegarde la réussite localement
-      localStorage.setItem("quizEstebanDone", "true");
-    }
-  }
-
-  function resetQuiz() {
-    correctAnswers = 0;
-    document.body.classList.add("shake");
-
-    const allQuestions = document.querySelectorAll(".question");
-    allQuestions.forEach(q => q.style.display = "block");
-
-    document.getElementById("estebanFinal").style.display = "none";
-    document.getElementById("success-message").style.display = "none";
-    document.getElementById("estebanInfo").style.display = "none";
-
-    // Supprime la réussite enregistrée
-    localStorage.removeItem("quizEstebanDone");
-
-    setTimeout(() => {
-      document.body.classList.remove("shake");
-    }, 500);
-  }
-
-  // Si le quiz a déjà été validé, on l’affiche automatiquement
-  window.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("quizEstebanDone") === "true") {
-      document.getElementById("estebanFinal").style.display = "block";
-      document.getElementById("success-message").style.display = "block";
-      document.getElementById("estebanInfo").style.display = "block";
-
+    function resetQuiz() {
+      correctAnswers = 0;
       const allQuestions = document.querySelectorAll(".question");
-      allQuestions.forEach(q => q.style.display = "none");
-    }
-  });
-</script>
+      allQuestions.forEach(q => q.style.display = "block");
 
+      document.getElementById("estebanFinal").style.display = "none";
+      document.getElementById("success-message").style.display = "none";
+      document.getElementById("estebanInfo").style.display = "none";
+      document.getElementById("replay-button").style.display = "none";
+
+      localStorage.removeItem("quizEstebanDone");
+    }
+
+    function restartQuiz() {
+      resetQuiz();
+    }
+  </script>
 </body>
 </html>
