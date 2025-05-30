@@ -10,21 +10,22 @@
       font-family: 'Georgia', serif;
       color: #ffe066;
       overflow: hidden;
-      background-color: #001133; /* Bleu foncé */
+      background: url('fond_index.png') center/cover no-repeat fixed;
     }
 
-    .fond-mondes {
-      background: url('fond_index.png') center/cover no-repeat fixed;
+    /* Calque bleu foncé au-dessus du fond */
+    .calque-bleu {
+      background-color: #001133;
       position: absolute;
       width: 100%;
       height: 100%;
-      z-index: 1;
-      opacity: 0;
+      z-index: 0;
+      opacity: 1;
       transition: opacity 1.5s ease-in;
     }
 
-    .fond-mondes.visible {
-      opacity: 1;
+    .calque-bleu.fade-out {
+      opacity: 0;
     }
 
     .rideau-gauche, .rideau-droit {
@@ -95,8 +96,8 @@
   </style>
 </head>
 <body>
-  <!-- Fond magique (devient visible à l’ouverture du rideau) -->
-  <div class="fond-mondes" id="fond"></div>
+  <!-- Calque bleu foncé par-dessus le fond image -->
+  <div class="calque-bleu" id="calque"></div>
 
   <!-- Texte d’introduction -->
   <div class="intro-fixe">
@@ -110,18 +111,18 @@
   <div class="rideau-droit" id="droit"></div>
 
   <script>
-    // 1. Rendre le fond visible juste après ouverture du rideau
+    // 1. Faire disparaître le calque bleu après ouverture du rideau
     setTimeout(() => {
-      document.getElementById("fond").classList.add("visible");
-    }, 2000); // après ouverture du rideau
+      document.getElementById("calque").classList.add("fade-out");
+    }, 2000); // juste après ouverture
 
     // 2. Fermer les rideaux après 5 secondes
     setTimeout(() => {
       document.getElementById("gauche").classList.add("fermer");
       document.getElementById("droit").classList.add("fermer");
-    }, 5000); // ouverture (2s) + affichage (3s)
+    }, 5000);
 
-    // 3. Rediriger après la fermeture (2s plus tard)
+    // 3. Rediriger après la fermeture
     setTimeout(() => {
       window.location.href = "1.accueil.html";
     }, 7000);
