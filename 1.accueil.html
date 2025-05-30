@@ -311,6 +311,29 @@
   color: #ffe066;
   text-shadow: 2px 2px 4px #000;
 }
+.hero {
+  animation: fadeIn 1.2s ease-in;
+  text-align: center;
+  padding: 2em;
+  color: #fff8e6;
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  color: #ffd700;
+  text-shadow: 0 0 10px #3a1c00;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffc400; }
+  to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffc400; }
+}
 
 </style>
 
@@ -341,24 +364,15 @@
   
   <main>
    <section class="hero">
-  <h1>🌌 Bienvenue à Arzankia</h1>
+ <h1>🌌 Bienvenue à Arzankia</h1>
+<p>L’aventure ne fait que commencer…</p>
 
-  <p style="margin-top: 1.2rem;">
-    Les dessous du livre...
-  </p>
+<p><em>Explore ces pages secrètes pour découvrir des contenus inédits,</em><br>
+des mystères oubliés, des souvenirs d’anciens héros…</p>
 
-  <p style="margin-top: 1rem; font-style: italic; color: #ffeeaa;">
-    Parcours les pages pour découvrir des contenus BONUS,<br>
-    Des anecdotes indédites...
-  </p>
+<p><strong>Quizz magiques, illustrations cachées, anecdotes et révélations t’attendent.</strong></p>
 
-  <p style="margin-top: 1.5rem;">
-    Des illustrations, quizzs, et autres divertissements...
-  </p>
-
-  <p style="margin-top: 2rem; font-weight: bold; font-size: 1.3rem; color: #ffd;">
-    L'aventure continue ici...
-  </p>
+<p><strong>✨ Les dessous du livre t’appellent… ✨</strong></p>
 </section>
  
   </main>
