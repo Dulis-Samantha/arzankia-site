@@ -19,6 +19,7 @@
       width: 100%;
       height: 100%;
       z-index: 0;
+      opacity: 1;
     }
 
     .intro-fixe {
@@ -31,6 +32,11 @@
       line-height: 1.6em;
       padding: 0 10vw;
       box-sizing: border-box;
+      animation: fadeout 1s ease-out 2.5s forwards;
+    }
+
+    @keyframes fadeout {
+      to { opacity: 0; }
     }
 
     .rideau-gauche, .rideau-droit {
@@ -43,39 +49,23 @@
     }
 
     .rideau-gauche {
-      left: 0;
-      animation: ouvrir-gauche 2s ease-out forwards;
+      left: -50%;
+      animation: fermer-gauche 1.5s ease-out forwards;
+      animation-delay: 3s;
     }
 
     .rideau-droit {
-      right: 0;
-      animation: ouvrir-droit 2s ease-out forwards;
-    }
-
-    @keyframes ouvrir-gauche {
-      to { transform: translateX(-100%); }
-    }
-
-    @keyframes ouvrir-droit {
-      to { transform: translateX(100%); }
-    }
-
-    .rideau-gauche.fermer {
-      animation: fermer-gauche 2s ease-in forwards;
-    }
-
-    .rideau-droit.fermer {
-      animation: fermer-droit 2s ease-in forwards;
+      right: -50%;
+      animation: fermer-droit 1.5s ease-out forwards;
+      animation-delay: 3s;
     }
 
     @keyframes fermer-gauche {
-      from { transform: translateX(-100%); }
-      to { transform: translateX(0); }
+      to { left: 0; }
     }
 
     @keyframes fermer-droit {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
+      to { right: 0; }
     }
 
     .texte-magique {
@@ -89,7 +79,7 @@
       padding: 0 5vw;
       opacity: 0;
       animation: apparition 1s ease-in forwards;
-      animation-delay: 2s;
+      animation-delay: 0.5s;
     }
 
     @keyframes apparition {
@@ -106,24 +96,17 @@
     <p>Ici commence ton aventure…</p>
   </div>
 
-  <div class="rideau-gauche" id="gauche"></div>
-  <div class="rideau-droit" id="droit"></div>
+  <div class="rideau-gauche"></div>
+  <div class="rideau-droit"></div>
 
   <div class="texte-magique">
     ✨ Ouverture du portail magique...
   </div>
 
   <script>
-    // Après 5s, on referme les rideaux
-    setTimeout(() => {
-      document.getElementById("gauche").classList.add("fermer");
-      document.getElementById("droit").classList.add("fermer");
-    }, 5000); // 2s ouverture + 3s pause
-
-    // Après 8s, on redirige vers l’accueil
     setTimeout(() => {
       window.location.href = "1.accueil.html";
-    }, 8000); // 2s ouverture + 3s pause + 2s fermeture + marge
+    }, 4700); // 3s attente + 1.5s fermeture + marge
   </script>
 </body>
 </html>
