@@ -279,10 +279,15 @@
       resultDiv.innerHTML = `<span class="magie">${prenom}, tu es un héros ${result} !</span>`;
 
       // Redirection au bout de 4 secondes (optionnel)
-      setTimeout(() => {
-        const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
-        window.location.href = url;
-      }, 4000);
+   setTimeout(() => {
+  if (result === "dresseur") {
+    window.location.href = `test.element_predilection_dresseur.html?prenom=${encodeURIComponent(prenom)}`;
+  } else {
+    const url = `fiche_${result}.html?prenom=${encodeURIComponent(prenom)}`;
+    window.location.href = url;
+  }
+}, 4000);
+
     }
   </script>
 </body>
