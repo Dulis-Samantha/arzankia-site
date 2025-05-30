@@ -19,13 +19,6 @@
       width: 100%;
       height: 100%;
       z-index: 0;
-      opacity: 0;
-      transition: opacity 2s ease-in;
-      animation: fondu 2s ease-in 6s forwards;
-    }
-
-    @keyframes fondu {
-      to { opacity: 1; }
     }
 
     .intro-fixe {
@@ -38,11 +31,6 @@
       line-height: 1.6em;
       padding: 0 10vw;
       box-sizing: border-box;
-      animation: fadeout 1s ease-out 3s forwards;
-    }
-
-    @keyframes fadeout {
-      to { opacity: 0; }
     }
 
     .rideau-gauche, .rideau-droit {
@@ -51,32 +39,48 @@
       width: 50%;
       height: 100%;
       background-color: #281f43;
-      z-index: 3;
+      z-index: 5;
     }
 
     .rideau-gauche {
       left: 0;
-      animation: rideau-gauche 2s ease-out forwards;
-      animation-delay: 3s;
+      animation: ouvrir-gauche 2s ease-out forwards;
     }
 
     .rideau-droit {
       right: 0;
-      animation: rideau-droit 2s ease-out forwards;
-      animation-delay: 3s;
+      animation: ouvrir-droit 2s ease-out forwards;
     }
 
-    @keyframes rideau-gauche {
+    @keyframes ouvrir-gauche {
       to { transform: translateX(-100%); }
     }
 
-    @keyframes rideau-droit {
+    @keyframes ouvrir-droit {
       to { transform: translateX(100%); }
+    }
+
+    .rideau-gauche.fermer {
+      animation: fermer-gauche 2s ease-in forwards;
+    }
+
+    .rideau-droit.fermer {
+      animation: fermer-droit 2s ease-in forwards;
+    }
+
+    @keyframes fermer-gauche {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes fermer-droit {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
     }
 
     .texte-magique {
       position: absolute;
-      z-index: 2;
+      z-index: 3;
       top: 45%;
       width: 100%;
       text-align: center;
@@ -85,7 +89,7 @@
       padding: 0 5vw;
       opacity: 0;
       animation: apparition 1s ease-in forwards;
-      animation-delay: 0.5s;
+      animation-delay: 2s;
     }
 
     @keyframes apparition {
@@ -102,18 +106,24 @@
     <p>Ici commence ton aventure…</p>
   </div>
 
-  <div class="rideau-gauche"></div>
-  <div class="rideau-droit"></div>
+  <div class="rideau-gauche" id="gauche"></div>
+  <div class="rideau-droit" id="droit"></div>
 
   <div class="texte-magique">
     ✨ Ouverture du portail magique...
   </div>
 
   <script>
-    // Redirection après 6 secondes (3 sec de texte + 2 sec animation + marge)
+    // Après 5s, on referme les rideaux
+    setTimeout(() => {
+      document.getElementById("gauche").classList.add("fermer");
+      document.getElementById("droit").classList.add("fermer");
+    }, 5000); // 2s ouverture + 3s pause
+
+    // Après 8s, on redirige vers l’accueil
     setTimeout(() => {
       window.location.href = "1.accueil.html";
-    }, 6000);
+    }, 8000); // 2s ouverture + 3s pause + 2s fermeture + marge
   </script>
 </body>
 </html>
