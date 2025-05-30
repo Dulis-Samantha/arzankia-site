@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Ton animal de prédilection</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ton animal de prédilection</title>
   <style>
     body {
       font-family: 'Georgia', serif;
@@ -116,22 +116,22 @@
           citation: "« L’instinct guide ceux qui savent écouter la Terre. »"
         },
         petit: {
-          nom: "le Hérisson",
-          image: "test_herisson.png",
+          nom: "test_le Hérisson",
+          image: "herisson.png",
           description: "Discret mais courageux, il avance toujours avec sagesse.",
           citation: "« La prudence est une force, quand on connaît les chemins. »"
         }
       },
       eau: {
         gros: {
-          nom: "le Requin",
-          image: "test_requin.png",
+          nom: "test_le Requin",
+          image: "requin.png",
           description: "Rapide et redoutable, il veille sur les abysses.",
           citation: "« La profondeur de l’eau révèle la vraie nature. »"
         },
         petit: {
-          nom: "la Méduse",
-          image: "test_meduse.png",
+          nom: "test_la Méduse",
+          image: "meduse.png",
           description: "Gracieuse et insaisissable, elle flotte entre deux mondes.",
           citation: "« La beauté flue, libre et silencieuse. »"
         }
@@ -149,10 +149,42 @@
           description: "Silencieuse et vive, elle veille dans l’ombre.",
           citation: "« Dans le silence de la nuit, tout s’entend. »"
         }
+      },
+      mix: {
+        pegasse: {
+          nom: "le Pégasse",
+          image: "test_pegasse.png",
+          description: "Symbole d'équilibre et d’envol, il unit ciel et terre avec grâce.",
+          citation: "« Là où l’imagination galope, les mondes se rejoignent. »"
+        },
+        grenouille: {
+          nom: "la Grenouille",
+          image: "grenouille.png",
+          description: "Agile et adaptable, elle relie la fraîcheur des rivières à la stabilité du sol.",
+          citation: "« À mi-chemin entre l’eau et la terre, elle bondit entre deux mondes. »"
+        },
+        cincle: {
+          nom: "le Cincle Cascadeur",
+          image: "test_cincle.png",
+          description: "Vif et déterminé, il plonge entre les airs et les flots.",
+          citation: "« Il vole et il nage, libre comme l’écume portée par le vent. »"
+        }
       }
     };
 
-    const animal = animaux[element]?.[taille];
+    const mixKey = `${element}-${taille}`;
+
+    let animal;
+
+    if ((element === "terre" && taille === "air") || (element === "air" && taille === "terre")) {
+      animal = animaux.mix.pegasse;
+    } else if ((element === "terre" && taille === "eau") || (element === "eau" && taille === "terre")) {
+      animal = animaux.mix.grenouille;
+    } else if ((element === "eau" && taille === "air") || (element === "air" && taille === "eau")) {
+      animal = animaux.mix.cincle;
+    } else {
+      animal = animaux[element]?.[taille];
+    }
 
     if (animal) {
       document.getElementById("resultat").innerHTML = `
