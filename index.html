@@ -38,6 +38,23 @@
     @keyframes fadeout {
       to { opacity: 0; }
     }
+      .rideau-gauche {
+      left: 0;
+      animation: ouvrir-gauche 2s ease-out forwards;
+    }
+
+    .rideau-droit {
+      right: 0;
+      animation: ouvrir-droit 2s ease-out forwards;
+    }
+
+    @keyframes ouvrir-gauche {
+      to { transform: translateX(-100%); }
+    }
+
+    @keyframes ouvrir-droit {
+      to { transform: translateX(100%); }
+    }
 
     .rideau-gauche, .rideau-droit {
       position: absolute;
