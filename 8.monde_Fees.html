@@ -91,44 +91,34 @@
     }
 
     /* === BOUTONS === */
-    .button-group {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5em;
-      padding: 0 1rem;
-    }
+  .button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
 
-    .button-group a {
-      flex: 1 1 calc(42% - 1rem);
-      box-sizing: border-box;
-      animation: boutonGlow 3s ease-in-out infinite;
-      background: linear-gradient(to bottom, #fff8dc, #d4af37);
-      padding: 0.4rem 0.6rem;
-      border-radius: 10px;
-      color: #4a2e00;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 0.75em;
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
-    }
+.button-group a {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  color: #4a2e00;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(255, 223, 100, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 180px;
+  text-align: center;
+}
 
-    .button-group a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
-    }
+.button-group a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 223, 100, 1);
+}
 
-    @keyframes boutonGlow {
-      0%, 100% {
-        box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);
-      }
-      50% {
-        box-shadow: 0 0 15px rgba(255, 223, 150, 1);
-      }
-    }
 
     /* === RESPONSIVE – PETITS ÉCRANS === */
     @media (max-width: 600px) {
@@ -157,16 +147,70 @@
     margin-top: 1.5rem; /* Ajoute un espace au-dessus du titre */
   }
 }
-    
+    @media screen and (min-width: 1024px) {
+  .layout-desktop {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 2rem 1rem;
+    max-width: 1400px;
+    margin: auto;
+  }
+
+  .Fees-image {
+    max-width: 40%;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  }
+
+  .parchemin-wrapper {
+    position: relative;
+    width: 55%;
+    max-width: 800px;
+  }
+
+  .parchemin-image {
+    width: 100%;
+    max-height: none;
+    border-radius: 15px;
+  }
+
+  .texte-parchemin {
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+    padding: 1.5rem 2rem;
+  }
+
+  .button-group {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .button-group a {
+    flex: 0 0 auto;
+    min-width: 200px;
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .button-group a {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    min-width: 160px;
+  }
+}
+
   </style>
 </head>
 
 <body>
 
-  <!-- Image de l'Arène en haut -->
-  <img class="Fees-image" src="monde_Fees.jpg" alt="Illustration du Fée-Brol">
+  <div class="layout-desktop">
+  <img class="Fees-image" src="monde_Fees.jpg" alt="Illustration du Monde des Fées">
 
-  <!-- Parchemin avec titre + texte -->
   <div class="parchemin-wrapper">
     <img class="parchemin-image" src="parchemin_bleu.nuit.png" alt="Parchemin">
 
@@ -175,10 +219,13 @@
         <span>🌿 Bienvenue au Monde des Fées 🌿</span>
       </div>
       <p>
-        Un monde où chaque battement d’aile fait danser la lumière et où les secrets murmurent dans le parfum des pétales. »
+        Un monde où chaque battement d’aile fait danser la lumière<br>
+        et où les secrets murmurent dans le parfum des pétales. »
       </p>
     </div>
   </div>
+</div>
+
 
   <!-- Boutons dorés -->
   <div class="button-group">
