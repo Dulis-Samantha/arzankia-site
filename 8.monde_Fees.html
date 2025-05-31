@@ -50,7 +50,7 @@
       transform: translate(-50%, -50%);
       color: #ffe79a;
       font-family: Georgia, serif;
-      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
       text-align: center;
       line-height: 1.6;
       width: 75%;
@@ -65,7 +65,7 @@
     }
 
     .titre-parchemin {
-  font-size: clamp(1.3rem, 2.5vw, 2rem); /* réduit un peu */
+  font-size: clamp(1rem, 1.4vw, 1.3rem); /* réduit un peu */
   font-weight: bold;
   color: #ffe79a;
   text-align: center;
@@ -187,6 +187,17 @@
   font-size: clamp(1.2rem, 1.8vw, 1.7rem); /* plus doux sur grand écran */
   margin-bottom: 0.8rem;
 }
+      .parchemin h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .parchemin h2 {
+    font-size: 1.2rem;
+  }
+}
+
 
   </style>
 </head>
