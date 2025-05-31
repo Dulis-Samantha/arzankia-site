@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extrait du livre – Monde des Fées</title>
   <style>
     body {
@@ -20,13 +21,13 @@
     }
 
     .bloc-flex {
-      display: block;
+      display: flex;
+      flex-direction: column; /* mobile : image au-dessus */
     }
 
     .image-demie-hauteur {
       display: block;
       width: 100%;
-      max-width: 100%;
       height: auto;
       object-fit: contain;
       border-radius: 12px;
@@ -55,27 +56,10 @@
       margin: 0;
     }
 
-    @media (max-width: 768px) {
-      .image-demie-hauteur {
-        max-height: 50vh;
-        object-fit: cover;
-        border-radius: 0;
-      }
-
-      .texte-dessous h2 {
-        font-size: 1.3rem;
-      }
-
-      .texte-dessous p {
-        font-size: 1rem;
-        line-height: 1.6;
-      }
-    }
-
     /* ==== VERSION PC UNIQUEMENT ==== */
     @media (min-width: 769px) {
       .bloc-flex {
-        display: flex;
+        flex-direction: row; /* image à gauche */
         gap: 2rem;
         align-items: flex-start;
       }
