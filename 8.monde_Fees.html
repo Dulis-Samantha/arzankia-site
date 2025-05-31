@@ -65,13 +65,13 @@
     }
 
     .titre-parchemin {
-  font-size: clamp(1rem, 1.4vw, 1.3rem); /* réduit un peu */
-  font-weight: bold;
-  color: #ffe79a;
-  text-align: center;
-  white-space: normal;
-  margin-bottom: 1rem;
-}
+      font-size: clamp(1rem, 1.4vw, 1.3rem);
+      font-weight: bold;
+      color: #ffe79a;
+      text-align: center;
+      white-space: normal;
+      margin-bottom: 1rem;
+    }
 
     /* === BOUTONS === */
     .button-group {
@@ -103,43 +103,43 @@
     }
 
     /* === RESPONSIVE – PETITS ÉCRANS === */
-   @media (max-width: 600px) {
-  .texte-parchemin {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    width: 90%;
-    padding: 1rem 0.5rem;
-    text-align: center;
-  }
+    @media (max-width: 600px) {
+      .texte-parchemin {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        width: 90%;
+        padding: 1rem 0.5rem;
+        text-align: center;
+      }
 
-  .titre-parchemin {
-    font-size: 1.1rem;
-    line-height: 1.3;
-    padding: 0 0.5rem;
-    margin-bottom: 0.8rem;
-  }
+      .titre-parchemin {
+        font-size: 1.1rem;
+        line-height: 1.3;
+        padding: 0 0.5rem;
+        margin-bottom: 0.8rem;
+      }
 
-  .button-group {
-    position: fixed;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    justify-content: center;
-    flex-wrap: wrap;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 0.5rem 1rem;
-    z-index: 999;
-    gap: 0.5rem;
-  }
+      .button-group {
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 0.5rem 1rem;
+        z-index: 999;
+        gap: 0.5rem;
+      }
 
-  .button-group a {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
-    min-width: auto;
-    border-radius: 25px;
-    box-shadow: 0 0 8px rgba(255, 223, 100, 0.6);
-  }
-}
+      .button-group a {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        min-width: auto;
+        border-radius: 25px;
+        box-shadow: 0 0 8px rgba(255, 223, 100, 0.6);
+      }
+    }
 
     /* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
     @media screen and (min-width: 1024px) {
@@ -178,26 +178,17 @@
         top: 48%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: clamp(1.1rem, 1.5vw, 1.6rem);
-        padding: 1.5rem;
-        width: 80%;
+        font-size: 1.05rem;
+        line-height: 1.5;
+        padding: 1.2rem;
+        width: 75%;
       }
 
-    .titre-parchemin {
-  font-size: clamp(1.2rem, 1.8vw, 1.7rem); /* plus doux sur grand écran */
-  margin-bottom: 0.8rem;
-}
-      .parchemin h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-@media (max-width: 768px) {
-  .parchemin h2 {
-    font-size: 1.2rem;
-  }
-}
-
+      .titre-parchemin {
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+      }
+    }
   </style>
 </head>
 
