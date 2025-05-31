@@ -60,17 +60,45 @@
     a.retour:hover {
       background: #c09c2c;
     }
+    @media (max-width: 600px) {
+  .image-demie-hauteur {
+    height: 50vh;
+    width: 100vw;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+  }
+
+  .texte-dessous {
+    height: 50vh;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(#fdf6ed, #e0f2f8); /* ou ton fond dégradé */
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .texte-dessous h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #1d4c72;
+  }
+}
+
   </style>
 </head>
 <body>
 
-  <!-- Image d’illustration de l’extrait -->
-  <img src="extrait_Fees.png" alt="L'apparition de la fée perdue" class="extrait-image">
+<img src="extrait_Fees.png" alt="Illustration" class="image-demie-hauteur">
 
-  <h1>Extrait du livre – Monde des Fées</h1>
-
+<div class="texte-dessous">
+  <h2>Extrait du livre – Monde des Fées</h2>
   <p>
-Une douce lumière dorée s’échappa des doigts de Philibert. La sphère 
+   Une douce lumière dorée s’échappa des doigts de Philibert. La sphère 
 vibra une seconde… puis disparut, ne laissant derrière elle qu’un 
 nuage de poussière argentée, flottant un instant avant de se 
 dissiper dans l’air. 
@@ -79,8 +107,8 @@ petite fée, plus lumineuse que jamais, jaillit dans les airs en
 tournoyant joyeusement. Ses ailes de feu rouge étincelaient à la 
 lumière du jour. Elle était chez elle. 
   </p>
-
- <a href="8.monde_Fees.html" class="retour">← Retour au Monde des Fées</a>
+  </p>
+</div>
 
 
 </body>
