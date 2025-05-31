@@ -65,14 +65,13 @@
     }
 
     .titre-parchemin {
-      display: inline-block;
-      font-size: clamp(1.6rem, 3.2vw, 2.5rem);
-      font-weight: bold;
-      color: #ffe79a;
-      text-align: center;
-      white-space: normal;
-      margin-bottom: 1rem;
-    }
+  font-size: clamp(1.3rem, 2.5vw, 2rem); /* réduit un peu */
+  font-weight: bold;
+  color: #ffe79a;
+  text-align: center;
+  white-space: normal;
+  margin-bottom: 1rem;
+}
 
     /* === BOUTONS === */
     .button-group {
@@ -160,10 +159,11 @@
         width: 80%;
       }
 
-      .titre-parchemin {
-        font-size: clamp(1.5rem, 2vw, 2rem);
-        margin-bottom: 1rem;
-      }
+    .titre-parchemin {
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem); /* plus doux sur grand écran */
+  margin-bottom: 0.8rem;
+}
+
 
       .button-group {
         margin-top: 1rem;
