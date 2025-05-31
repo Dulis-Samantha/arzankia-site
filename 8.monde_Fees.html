@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-   <meta name="robots" content="noindex">
+  <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Fées</title>
 
@@ -39,22 +39,20 @@
       width: 100%;
       height: auto;
       display: block;
-      max-height: 80vh; /* Ajouté pour éviter dépassement sur mobile */
+      max-height: 80vh;
+      border-radius: 15px;
     }
 
-    /* === TEXTE SUR PARCHEMIN === */
     .texte-parchemin {
       position: absolute;
       top: 42%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #ffe79a; /* très lisible sur fond sombre */
-      text-shadow: 1px 1px 2px #000; /* Optionnel, améliore le contraste */
+      color: #ffe79a;
       font-family: Georgia, serif;
       font-size: clamp(1.3rem, 2vw, 1.7rem);
       text-align: center;
       line-height: 1.6;
-      text-shadow: none;
       width: 75%;
       max-width: 700px;
       padding: 1rem;
@@ -66,59 +64,44 @@
       opacity: 1;
     }
 
-    /* === TITRE SUR PARCHEMIN === */
     .titre-parchemin {
       display: inline-block;
       font-size: clamp(1.6rem, 3.2vw, 2.5rem);
       font-weight: bold;
-      color: #ffe79a; /* très lisible sur fond sombre */
-      text-shadow: 1px 1px 2px #000; /* Optionnel, améliore le contraste */
+      color: #ffe79a;
       text-align: center;
       white-space: normal;
       margin-bottom: 1rem;
     }
 
-    /* === ANIMATION DE TEXTE (non utilisée ici mais dispo) === */
-    @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* === BOUTONS === */
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
     }
 
-    /* === BOUTONS === */
-  .button-group {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-}
+    .button-group a {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: linear-gradient(145deg, #ffe9af, #f2c94c);
+      color: #4a2e00;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 30px;
+      box-shadow: 0 0 10px rgba(255, 223, 100, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-width: 180px;
+      text-align: center;
+    }
 
-.button-group a {
-  display: inline-block;
-  padding: 0.7rem 1.5rem;
-  background: linear-gradient(145deg, #ffe9af, #f2c94c);
-  color: #4a2e00;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  border-radius: 30px;
-  box-shadow: 0 0 10px rgba(255, 223, 100, 0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  min-width: 180px;
-  text-align: center;
-}
-
-.button-group a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 18px rgba(255, 223, 100, 1);
-}
-
+    .button-group a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(255, 223, 100, 1);
+    }
 
     /* === RESPONSIVE – PETITS ÉCRANS === */
     @media (max-width: 600px) {
@@ -136,102 +119,87 @@
     }
 
     /* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
- @media screen and (min-width: 1024px) {
-  .texte-parchemin {
-    top: 47%;
-    font-size: clamp(1.4rem, 2vw, 2rem);
-  }
-
-  .titre-parchemin {
-    font-size: clamp(2rem, 3vw, 3rem);
-    margin-top: 1.5rem; /* Ajoute un espace au-dessus du titre */
-  }
-}
     @media screen and (min-width: 1024px) {
-  .layout-desktop {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 3rem;
-    padding: 2rem 1rem;
-    max-width: 1400px;
-    margin: auto;
-  }
+      .layout-fees {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 3rem;
+        padding: 2rem 1rem;
+        max-width: 1400px;
+        margin: auto;
+      }
 
-  .Fees-image {
-    max-width: 40%;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-  }
+      .zone-gauche {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
 
-  .parchemin-wrapper {
-    position: relative;
-    width: 55%;
-    max-width: 800px;
-  }
+      .Fees-image {
+        max-width: 420px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+      }
 
-  .parchemin-image {
-    width: 100%;
-    max-height: none;
-    border-radius: 15px;
-  }
+      .parchemin-wrapper {
+        width: 480px;
+      }
 
-  .texte-parchemin {
-    top: 48%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: clamp(1.2rem, 1.6vw, 2rem);
-    padding: 1.5rem 2rem;
-  }
+      .parchemin-image {
+        width: 100%;
+      }
 
-  .button-group {
-    justify-content: center;
-    margin-top: 2rem;
-  }
+      .texte-parchemin {
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(1.1rem, 1.5vw, 1.6rem);
+        padding: 1.5rem;
+        width: 80%;
+      }
 
-  .button-group a {
-    flex: 0 0 auto;
-    min-width: 200px;
-    font-size: 1rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .button-group a {
-    font-size: 0.95rem;
-    padding: 0.6rem 1.2rem;
-    min-width: 160px;
-  }
-}
+      .titre-parchemin {
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        margin-bottom: 1rem;
+      }
 
+      .button-group {
+        margin-top: 1rem;
+      }
+
+      .button-group a {
+        flex: 0 0 auto;
+        min-width: 160px;
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="layout-desktop">
-  <img class="Fees-image" src="monde_Fees.jpg" alt="Illustration du Monde des Fées">
+  <div class="layout-fees">
+    <div class="zone-gauche">
+      <img class="Fees-image" src="6c68e276-5c72-4f63-9a41-996471d0c33c.png" alt="Fée lumineuse">
 
-  <div class="parchemin-wrapper">
-    <img class="parchemin-image" src="parchemin_bleu.nuit.png" alt="Parchemin">
-
-    <div class="texte-parchemin">
-      <div class="titre-parchemin">
-        <span>🌿 Bienvenue au Monde des Fées 🌿</span>
+      <div class="button-group">
+        <a href="7.extrait_fees.html">📖 Extrait du livre</a>
+        <a href="9.entree_Fees.html">✨ Entrée du monde</a>
+        <a href="3.les_mondes.html">← Retour aux Mondes</a>
       </div>
-      <p>
-        Un monde où chaque battement d’aile fait danser la lumière<br>
-        et où les secrets murmurent dans le parfum des pétales. »
-      </p>
     </div>
-  </div>
-</div>
 
-
-  <!-- Boutons dorés -->
-  <div class="button-group">
-    <a href="7.extrait_fees.html">📖 Extrait du livre</a>
-    <a href="9.entree_Fees.html">✨ Entrée du monde</a>
-    <a href="3.les_mondes.html">← Retour aux Mondes</a>
+    <div class="parchemin-wrapper">
+      <img class="parchemin-image" src="parchemin_bleu.nuit.png" alt="Parchemin féerique">
+      <div class="texte-parchemin">
+        <div class="titre-parchemin">🌿 Bienvenue au Monde des Fées 🌿</div>
+        <p>Un monde où chaque battement d’aile fait danser la lumière<br>
+          et où les secrets murmurent dans le parfum des pétales. »</p>
+      </div>
+    </div>
   </div>
 
 </body>
