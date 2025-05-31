@@ -13,13 +13,6 @@
       padding: 2rem 1rem;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #fbe7ff;
-      margin-bottom: 3rem;
-    }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -35,12 +28,18 @@
       }
     }
 
+    .zone-gauche {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
     .illustration {
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       border-radius: 20px;
       box-shadow: 0 0 25px rgba(255, 192, 255, 0.3);
-      margin: 0 auto;
     }
 
     .extrait {
@@ -56,81 +55,83 @@
       margin-bottom: 1.2rem;
     }
 
-   .retour {
-  display: inline-block;
-  margin: 2rem auto 0;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  color: #3a003a;
-  background: linear-gradient(135deg, #ffd1f5, #ffe6fa);
-  border: 2px solid #e9bde0;
-  border-radius: 20px;
-  text-decoration: none;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(255, 192, 255, 0.3);
-  transition: all 0.2s ease;
-}
+    .extrait h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #fbe7ff;
+      margin-bottom: 2rem;
+    }
 
-.retour:hover {
-  background: linear-gradient(135deg, #f5c1ea, #ffeef8);
-  transform: scale(1.04);
-  box-shadow: 0 0 12px rgba(255, 192, 255, 0.5);
-}
+    .retour {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      color: #3a003a;
+      background: linear-gradient(135deg, #ffd1f5, #ffe6fa);
+      border: 2px solid #e9bde0;
+      border-radius: 20px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(255, 192, 255, 0.3);
+      transition: all 0.2s ease;
+    }
 
-@media screen and (max-width: 480px) {
-  h1 {
-    font-size: 1.1rem;
-    white-space: nowrap;
-    margin: 0.5rem auto;
-  }
-}
-@media screen and (min-width: 1024px) {
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-  }
-}
+    .retour:hover {
+      background: linear-gradient(135deg, #f5c1ea, #ffeef8);
+      transform: scale(1.04);
+      box-shadow: 0 0 12px rgba(255, 192, 255, 0.5);
+    }
 
-@media screen and (max-width: 600px) {
-  .extrait {
-    text-align: left;
-  }
-}
+    @media screen and (max-width: 600px) {
+      .extrait {
+        text-align: left;
+      }
+      .extrait h1 {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        margin: 1rem 0;
+      }
+    }
 
-.zone-gauche {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
+    @media screen and (min-width: 1024px) {
+      .extrait h1 {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="extrait">
-    <h1>✨ Entrée du Monde des Fées ✨</h1>
+  <div class="container">
+    <div class="zone-gauche">
+      <img src="entre_Fees.jpg" alt="Arbre magique - Monde des Fées" class="illustration">
+      <a href="8.monde_Fees.html" class="retour">← Retour au Monde des Fées</a>
+    </div>
 
-    <p>Maman sortit sa pierre violette, celle qu’elle gardait précieusement,  
-    et posa sa main contre l’écorce. Ses doigts glissèrent lentement sur le bois,  
-    comme une caresse. Au moment où elle retira sa main, un silence étrange s’installa.  
-    Les fleurs de coton, suspendues dans les airs, cessèrent de tomber…  
-    comme si le temps s’était arrêté.</p>
-    
-    <p>Puis, une rafale soudaine fit frémir les branches du saule.  
-    Les fleurs éclatèrent en une pluie de minuscules particules lumineuses,  
-    tourbillonnant dans les airs. Elles se mirent à briller d’un éclat doux et nacré,  
-    avant de se regrouper en formant de petites fées, légères comme des plumes,  
-    qui se mirent à danser autour de l’arbre enchanté.</p>
+    <div class="extrait">
+      <h1>✨ Entrée du Monde des Fées ✨</h1>
 
-    <p>Peu à peu, un visage apparut sur le tronc.  
-    Les traits étaient doux, anciens, faits d’écorce et de lumière. Le saule pleureur… nous sourit.</p>
+      <p>Maman sortit sa pierre violette, celle qu’elle gardait précieusement,  
+      et posa sa main contre l’écorce. Ses doigts glissèrent lentement sur le bois,  
+      comme une caresse. Au moment où elle retira sa main, un silence étrange s’installa.  
+      Les fleurs de coton, suspendues dans les airs, cessèrent de tomber…  
+      comme si le temps s’était arrêté.</p>
+      
+      <p>Puis, une rafale soudaine fit frémir les branches du saule.  
+      Les fleurs éclatèrent en une pluie de minuscules particules lumineuses,  
+      tourbillonnant dans les airs. Elles se mirent à briller d’un éclat doux et nacré,  
+      avant de se regrouper en formant de petites fées, légères comme des plumes,  
+      qui se mirent à danser autour de l’arbre enchanté.</p>
 
-    <p>Dans un craquement tendre, une porte en écorce se dessina dans le bois.  
-    Derrière elle, un monde s’ouvrait : <strong>le Monde des Fées</strong>. »</p>
+      <p>Peu à peu, un visage apparut sur le tronc.  
+      Les traits étaient doux, anciens, faits d’écorce et de lumière.  
+      Le saule pleureur… nous sourit.</p>
+
+      <p>Dans un craquement tendre, une porte en écorce se dessina dans le bois.  
+      Derrière elle, un monde s’ouvrait : <strong>le Monde des Fées</strong>. »</p>
+    </div>
   </div>
-</div>
-
 
 </body>
 </html>
