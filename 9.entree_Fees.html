@@ -7,48 +7,64 @@
   <style>
     body {
       margin: 0;
-      padding: 2rem 1rem;
       background-color: #100b1f;
       color: #fff0f8;
       font-family: 'Georgia', serif;
-      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media screen and (min-width: 768px) {
+      .container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
     }
 
     .illustration {
       width: 100%;
-      max-width: 800px;
+      max-width: 400px;
       border-radius: 20px;
-      display: block;
-      margin: 0 auto 2rem;
       box-shadow: 0 0 25px rgba(255, 192, 255, 0.3);
+      margin: 0 auto;
     }
 
     .extrait {
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 1.5rem 2rem;
+      flex: 1;
       font-size: 1.2rem;
       line-height: 1.9;
-      color: #ffeafd;
       background-color: rgba(255, 255, 255, 0.03);
       border-left: 4px solid #ffd6ff;
       border-radius: 15px;
+      padding: 1.5rem 2rem;
       font-style: italic;
+      color: #ffeafd;
       text-align: justify;
     }
 
+    .extrait p {
+      margin-bottom: 1.2rem;
+    }
+
     .retour {
-      display: inline-block;
-      margin-top: 2.5rem;
+      display: block;
+      width: fit-content;
+      margin: 3rem auto 0;
       padding: 0.8rem 1.5rem;
       font-size: 1.1rem;
       color: #3a003a;
       background-color: #ffe6fa;
-      border: none;
       border-radius: 30px;
       text-decoration: none;
-      transition: background-color 0.3s, transform 0.2s;
       box-shadow: 0 0 10px rgba(255, 192, 255, 0.4);
+      transition: background-color 0.3s, transform 0.2s;
     }
 
     .retour:hover {
@@ -58,36 +74,37 @@
   </style>
 </head>
 <body>
- <h1>✨ Bienvenue dans le Monde des Fées ✨</h1>
-  <img src="entre_Fees.jpg" alt="Arbre magique - Monde des Fées" class="illustration">
+ <h1>✨ Emtrée du monde des Fées ✨</h1>
+  <div class="container">
+    <img src="entre_Fees.jpg" alt="Arbre magique - Monde des Fées" class="illustration">
 
-<div class="extrait">
-  « Nous nous avançâmes lentement vers le tronc du grand saule.<br><br>
+    <div class="extrait">
+      <p>« Nous nous avançâmes lentement vers le tronc du grand saule.</p>
+      <p>Elle sortit sa pierre violette, celle qu’elle gardait précieusement,  
+      et posa sa main contre l’écorce. Ses doigts glissèrent lentement sur le bois,  
+      comme une caresse.</p>
 
-  Elle sortit sa pierre violette, celle qu’elle gardait précieusement,  
-  et posa sa main contre l’écorce. Ses doigts glissèrent lentement sur le bois,  
-  comme une caresse.<br><br>
+      <p>Au moment où elle retira sa main, un silence étrange s’installa.  
+      Les fleurs de coton, suspendues dans les airs, cessèrent de tomber…  
+      comme si le temps s’était arrêté.</p>
 
-  Au moment où elle retira sa main, un silence étrange s’installa.  
-  Les fleurs de coton, suspendues dans les airs, cessèrent de tomber…  
-  comme si le temps s’était arrêté.<br><br>
+      <p>Puis, une rafale soudaine fit frémir les branches du saule.  
+      Les fleurs éclatèrent en une pluie de minuscules particules lumineuses,  
+      tourbillonnant dans les airs.</p>
 
-  Puis, une rafale soudaine fit frémir les branches du saule.  
-  Les fleurs éclatèrent en une pluie de minuscules particules lumineuses,  
-  tourbillonnant dans les airs.<br><br>
+      <p>Elles se mirent à briller d’un éclat doux et nacré,  
+      avant de se regrouper en formant de petites fées, légères comme des plumes,  
+      qui se mirent à danser autour de l’arbre enchanté.</p>
 
-  Elles se mirent à briller d’un éclat doux et nacré,  
-  avant de se regrouper en formant de petites fées, légères comme des plumes,  
-  qui se mirent à danser autour de l’arbre enchanté.<br><br>
+      <p>Peu à peu, un visage apparut sur le tronc.  
+      Les traits étaient doux, anciens, faits d’écorce et de lumière.</p>
 
-  Peu à peu, un visage apparut sur le tronc.  
-  Les traits étaient doux, anciens, faits d’écorce et de lumière.<br><br>
+      <p>Le saule pleureur… nous sourit.</p>
 
-  Le saule pleureur… nous sourit.<br><br>
-
-  Dans un craquement tendre, une porte en écorce se dessina dans le bois.  
-  Derrière elle, un monde s’ouvrait : <strong>le Monde des Fées</strong>. »
-</div>
+      <p>Dans un craquement tendre, une porte en écorce se dessina dans le bois.  
+      Derrière elle, un monde s’ouvrait : <strong>le Monde des Fées</strong>. »</p>
+    </div>
+  </div>
 
   <a href="8.monde_Fees.html" class="retour">← Retour au Monde des Fées</a>
 
