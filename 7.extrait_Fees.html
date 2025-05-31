@@ -9,107 +9,72 @@
       font-family: Georgia, serif;
       background: linear-gradient(to bottom, #cde9f6, #fef8e5);
       color: #3b2a1d;
-      padding: 2em;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contenu {
       max-width: 800px;
       margin: auto;
+      padding: 1.5em;
+    }
+
+    .image-demie-hauteur {
+      display: block;
+      width: 100%;
+      max-height: 50vh;
+      object-fit: cover;
       border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1.5em;
     }
 
-   img.extrait-image {
-  width: 100%;
-  max-width: 500px; /* réduit la taille sur PC */
-  display: block;
-  margin: auto;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  margin-bottom: 2em;
-}
+    .texte-dessous {
+      padding: 1.5rem;
+      background: linear-gradient(#fdf6ed, #e0f2f8);
+      border-radius: 12px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    }
 
-@media (max-width: 768px) {
-  img.extrait-image {
-    max-width: 90vw; /* sur mobile : image plus grande */
-  }
-}
-
-
-    h1 {
+    .texte-dessous h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
       text-align: center;
-      color: #00779e;
-      font-size: 2em;
-      margin-bottom: 1em;
+      color: #1d4c72;
     }
 
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
+    .texte-dessous p {
+      font-size: 1.15rem;
+      line-height: 1.7;
       text-align: justify;
+      margin: 0;
     }
 
-    a.retour {
-      display: inline-block;
-      margin-top: 2em;
-      background: #d4af37;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      color: #3b2a1d;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    @media (max-width: 768px) {
+      .texte-dessous h2 {
+        font-size: 1.3rem;
+      }
+
+      .texte-dessous p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
     }
-
-    a.retour:hover {
-      background: #c09c2c;
-    }
-    @media (max-width: 600px) {
-  .image-demie-hauteur {
-    height: 50vh;
-    width: 100vw;
-    object-fit: cover;
-    border-radius: 0;
-    display: block;
-  }
-
-  .texte-dessous {
-    height: 50vh;
-    padding: 1.2rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(#fdf6ed, #e0f2f8); /* ou ton fond dégradé */
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  .texte-dessous h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #1d4c72;
-  }
-}
-
   </style>
 </head>
 <body>
 
-<img src="extrait_Fees.png" alt="Illustration" class="image-demie-hauteur">
+  <div class="contenu">
+    <img src="extrait_Fees.png" alt="Illustration" class="image-demie-hauteur">
 
-<div class="texte-dessous">
-  <h2>Extrait du livre – Monde des Fées</h2>
-  <p>
-   Une douce lumière dorée s’échappa des doigts de Philibert. La sphère 
-vibra une seconde… puis disparut, ne laissant derrière elle qu’un 
-nuage de poussière argentée, flottant un instant avant de se 
-dissiper dans l’air. 
-Un silence profond s’installa. Puis, soudain, elle apparut. La 
-petite fée, plus lumineuse que jamais, jaillit dans les airs en 
-tournoyant joyeusement. Ses ailes de feu rouge étincelaient à la 
-lumière du jour. Elle était chez elle. 
-  </p>
-  </p>
-</div>
-
+    <div class="texte-dessous">
+      <h2>Extrait du livre – Monde des Fées</h2>
+      <p>
+        Une douce lumière dorée s’échappa des doigts de Philibert. La sphère vibra une seconde… puis disparut, ne laissant derrière elle qu’un nuage de poussière argentée, flottant un instant avant de se dissiper dans l’air.
+        Un silence profond s’installa. Puis, soudain, elle apparut. La petite fée, plus lumineuse que jamais, jaillit dans les airs en tournoyant joyeusement. Ses ailes de feu rouge étincelaient à la lumière du jour. Elle était chez elle.
+      </p>
+    </div>
+  </div>
 
 </body>
 </html>
