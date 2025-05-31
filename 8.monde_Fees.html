@@ -176,6 +176,28 @@
         padding: 0.6rem 1.2rem;
       }
     }
+        @media (max-width: 600px) {
+  .button-group {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.5rem 1rem;
+    z-index: 999;
+    gap: 0.5rem;
+  }
+
+  .button-group a {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    min-width: auto;
+    border-radius: 25px;
+    box-shadow: 0 0 8px rgba(255, 223, 100, 0.6);
+  }
+}
   </style>
 </head>
 
