@@ -22,7 +22,7 @@
   article.blog-post {
     max-width: 800px;
     margin: 3rem auto;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.75); /* au lieu de 0.6 */
     backdrop-filter: blur(8px);
     padding: 2rem;
     border-radius: 1rem;
@@ -249,6 +249,34 @@
   width: 100%;
 }
 
+@media screen and (max-width: 600px) {
+  .blog-box {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .blog-post h3 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .blog-post p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  .button-retour {
+    display: block;
+    margin: 2rem auto 0 auto;
+    width: fit-content;
+    font-size: 1rem;
+    padding: 0.6em 1.2em;
+  }
+}
 
 </style>
 
