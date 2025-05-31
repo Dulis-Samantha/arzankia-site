@@ -19,14 +19,14 @@
       padding: 1.5em;
     }
 
-    .container-flex {
+    /* --- VERSION MOBILE (par défaut) --- */
+    .bloc {
       display: block;
     }
 
     .image-demie-hauteur {
       display: block;
       width: 100%;
-      max-width: 100%;
       height: auto;
       object-fit: contain;
       border-radius: 12px;
@@ -55,11 +55,12 @@
       margin: 0;
     }
 
+    /* --- VERSION PC UNIQUEMENT --- */
     @media (min-width: 769px) {
-      .container-flex {
+      .bloc {
         display: flex;
-        gap: 2rem;
         align-items: flex-start;
+        gap: 2rem;
       }
 
       .image-demie-hauteur {
@@ -69,17 +70,6 @@
 
       .texte-dessous {
         width: 55%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .texte-dessous h2 {
-        font-size: 1.3rem;
-      }
-
-      .texte-dessous p {
-        font-size: 1rem;
-        line-height: 1.6;
       }
     }
 
@@ -104,7 +94,7 @@
 <body>
 
   <div class="contenu">
-    <div class="container-flex">
+    <div class="bloc">
       <img src="extrait_Fees.png" alt="Illustration" class="image-demie-hauteur">
 
       <div class="texte-dessous">
