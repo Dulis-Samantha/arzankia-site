@@ -126,10 +126,6 @@
     z-index: 1000;
   }
 
-  .logo {
-    height: 55px;
-  }
-
   .nav-desktop {
     display: flex;
     gap: 1.2rem;
@@ -147,11 +143,6 @@
   .nav-desktop a:hover {
     color: #fff6cc;
     text-shadow: 0 0 8px #ffd700;
-  }
-
-  /* === MENU TOGGLE MOBILE === */
-  .menu-toggle {
-    display: none;
   }
 
   /* === MESSAGE SECRET + CLIGNOTEMENT === */
@@ -191,6 +182,7 @@
   .avis-invite a:hover {
     text-shadow: 0 0 10px #ffef99;
     color: #fff6cc;
+    cursor: url('etoile.png'), pointer;
   }
 
   /* === ANIMATIONS === */
@@ -209,7 +201,29 @@
     to   { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffc400; }
   }
 
-  /* === RESPONSIVE (fusionné proprement) === */
+  /* === TITRE AVEC LOGO === */
+  .titre-arzankia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 2.5em;
+    color: #ffd700;
+    text-shadow: 0 0 10px #3a1c00;
+    animation: glow 2s ease-in-out infinite alternate;
+    margin: 0 auto;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+
+  .logo-titre {
+    height: 60px;
+    width: auto;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+  }
+
+  /* === RESPONSIVE MOBILE === */
   @media (max-width: 768px) {
     .resume-arzankia {
       padding: 1.5rem 1rem;
@@ -227,24 +241,13 @@
       font-size: 1.1rem;
     }
 
-    .menu-toggle {
-      display: block;
-      font-size: 2rem;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      padding: 1rem;
-      z-index: 2000;
-    }
-
     .hero {
       max-width: 95vw;
       padding: 1.5rem 1rem;
       margin: 2rem auto;
       font-size: 1rem;
       border-radius: 16px;
+      text-align: center;
     }
 
     .hero h1 {
@@ -257,81 +260,46 @@
       line-height: 1.6;
     }
 
-    .logo {
-      height: 40px;
-    }
-
     header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
- 
-  .nav-desktop {
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-    margin-top: 0;       /* plus de décalage vertical */
-    margin-left: auto;   /* pousse le menu à droite */
-  }
-
-  .nav-desktop a {
-    font-size: 1rem;
-    text-shadow: 1px 1px 2px #000;
-  }
-}
-
-  @media (min-width: 769px) {
-    .nav-desktop {
       flex-direction: row;
       justify-content: flex-end;
-      margin-right: 2rem;
+      align-items: center;
+    }
+
+    .nav-desktop {
+      display: flex;
+      gap: 1rem;
+      margin-right: 1rem;
+    }
+
+    .nav-desktop a {
+      font-size: 1rem;
+    }
+
+    .logo-titre {
+      height: 50px;
+      margin-bottom: 0.5rem;
     }
   }
-
-  .avis-invite a:hover {
-  text-shadow: 0 0 10px #ffef99;
-  color: #fff6cc;
-  cursor: url('etoile.png'), pointer; /* une petite étoile personnalisée */
-}
-.header-centered {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
-  background: rgba(40, 20, 80, 0.6);
-}
-
-.nav-centered {
-  margin-top: 0.5rem;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-centered a {
-  color: #ffe066;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1rem;
-  text-shadow: 1px 1px 2px #000;
-}
-
 </style>
 
 </head>
 <body>
 
-<header class="header-centered">
-<img src="logo.jpg" alt="Logo Arzankia" class="logo" aria-label="Logo du site Les Héros d'Arzankia">
-  <nav class="nav-centered">
+<header>
+  <div class="nav-desktop">
     <a href="2.les_coulisses.html">Les coulisses</a>
     <a href="2.autrice.html">A propos</a>
-  </nav>
+  </div>
 </header>
-
   
   <main>
    <section class="hero">
- <h1>🌌 Bienvenue à Arzankia</h1>
+<h1 class="titre-arzankia">
+ <img src="logo.jpg" alt="Logo Arzankia" class="logo-titre" style="margin-right: 0.5rem;">
+  Bienvenue à Arzankia
+</h1>
+     
 <p>L’aventure continue ici…</p>
 <p id="message-secret" class="secret-hint"></p>
 
