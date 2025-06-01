@@ -1,414 +1,201 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Les Héros d’Arzankia – Roman jeunesse fantasy dès 10 ans</title>
-  <meta name="description" content="Les Héros d’Arzankia est un roman jeunesse mêlant magie, aventure et créatures fantastiques. Pour enfants dès 10 ans. Tome I : Raphaël.">
-  <meta name="keywords" content="Les Héros d’Arzankia, roman jeunesse, livre enfants, fantasy, magie, dès 10 ans, Samantha Dulis, Arzankia, littérature jeunesse">
-  <meta name="author" content="Samantha DULIS">
-  <meta property="og:url" content="https://www.arzankia.fr">
-  <meta property="og:title" content="Commandez Les Héros d’Arzankia – Tome I : Raphaël">
-  <meta property="og:description" content="Découvrez un roman jeunesse magique et engageant. Commandez votre exemplaire dès maintenant.">
-  <meta property="og:image" content="https://www.arzankia.fr/images/couverture.jpg">
-  <meta property="og:type" content="website">
-  <meta name="google-site-verification" content="Mqb2lecdJnOy00N17cIbabdBJJ8Ux5vp8Xh_Za7FWYo" />
-<style>
-  body {
-    margin: 0;
-    font-family: Georgia, serif;
-    background-image: url('couverture.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    color: white;
-  }
-
-  /* === RESUME ARZANKIA === */
-  .resume-arzankia {
-    max-width: 800px;
-    margin: 3rem auto;
-    padding: 2rem 2.5rem;
-    background: rgba(0, 0, 0, 0.45);
-    border-radius: 20px;
-    font-family: 'Georgia', serif;
-    color: #ffffff;
-    text-align: center;
-    line-height: 1.8;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
-  }
-
-  .resume-arzankia p {
-    font-size: 1.2rem;
-    line-height: 1.9;
-    margin-bottom: 1.2rem;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
-  }
-
-  .resume-arzankia h2 {
-    font-size: 2.2rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .resume-arzankia h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #ffdd88;
-  }
-
-  .resume-arzankia .clef {
-    font-size: 1.3rem;
-    color: #ffeea8;
-    font-weight: bold;
-    font-style: italic;
-  }
-
-  /* === HERO SECTION === */
-  .hero {
-    font-size: 0.88rem;
-    max-width: 90vw;
-    margin: 1rem auto;
-    padding: 1rem 0.8rem 1rem;
-    text-align: center;
-    line-height: 1.9;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 20px rgba(255, 255, 200, 0.08);
-    animation: fadeIn 1.2s ease-in;
-    color: #fff8e6; 
-  }
-
-  .hero h1 {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
-    color: #ffd700;
-    text-shadow: 0 0 10px #3a1c00;
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  .hero p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    padding: 0 0.3rem;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px black;
-    margin-top: 1rem;
-    margin-bottom: 0;
-  }
-
-  /* === BOUTON GLOW === */
-  .button-glow {
-    animation: glow 2.5s ease-in-out infinite;
-    background-color: #fff9c4;
-    color: #333;
-    padding: 0.8rem 1.5rem;
-    border-radius: 12px;
-    font-weight: bold;
-    box-shadow: 0 0 6px rgba(255, 255, 150, 0.4);
-    font-family: 'Georgia', serif;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    margin-top: 2rem;
-  }
-
-  /* === HEADER + NAV === */
-header {
-  background: rgba(40, 20, 80, 0.6);
-  padding: 0.7rem 1rem;
-  display: flex;
-  justify-content: center; /* au lieu de space-between */
-  align-items: center;
-  flex-direction: row;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-  .nav-desktop {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    width: 100%;
-    margin: 0;
-  }
-
-  .nav-desktop a {
-    font-size: 0.95rem;
-    text-align: center;
-    padding: 0.3rem 0;
-    color: #ffe066;
-    text-decoration: none;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px #000;
-    transition: all 0.3s ease;
-  }
-
-  .nav-desktop a:hover {
-    color: #fff6cc;
-    text-shadow: 0 0 8px #ffd700;
-  }
-
-  /* === MESSAGE SECRET + CLIGNOTEMENT === */
-  .secret-hint {
-    font-style: italic;
-    color: #ffe9a8;
-    text-align: center;
-    margin-top: 1.2rem;
-    animation: glowHint 3s ease-in-out infinite;
-  }
-
-  #message-secret::after {
-    content: "|";
-    animation: blink 1s infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  /* === AVIS INVITE === */
-.avis-invite {
-  margin: 3rem auto 0 auto;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #ffeeaa;
-  text-shadow: 1px 1px 2px #000;
-  max-width: 900px;
-  padding: 1rem 1rem 0;
-  line-height: 1.8;
-}
-
-  .avis-invite a {
-    color: #ffe066;
-    text-decoration: underline;
-    font-weight: bold;
-  }
-
-  .avis-invite a:hover {
-    text-shadow: 0 0 10px #ffef99;
-    color: #fff6cc;
-    cursor: url('etoile.png'), pointer;
-  }
-  @media (max-width: 768px) {
-  .avis-invite {
-    font-size: 0.9rem;
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
-}
-
-  /* === ANIMATIONS === */
-  @keyframes menuSlideDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    0%   { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes glow {
-    from { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffc400; }
-    to   { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffc400; }
-  }
-
-  /* === TITRE AVEC LOGO === */
-  .titre-arzankia {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    font-size: 2.5em;
-    color: #ffd700;
-    text-shadow: 0 0 10px #3a1c00;
-    animation: glow 2s ease-in-out infinite alternate;
-    margin: 0 auto;
-    text-align: center;
-    flex-wrap: wrap;
-  }
-
-  .logo-titre {
-    height: 60px;
-    width: auto;
-    border-radius: 10px;
-    margin-right: 0.5rem;
-  }
-
-  /* === RESPONSIVE MOBILE === */
-  @media (max-width: 768px) {
-    .resume-arzankia {
-      padding: 1.5rem 1rem;
-    }
-
-    .resume-arzankia h2 {
-      font-size: 1.8rem;
-    }
-
-    .resume-arzankia h3 {
-      font-size: 1.3rem;
-    }
-
-    .resume-arzankia p {
-      font-size: 1.1rem;
-    }
-
-    .hero {
-      max-width: 95vw;
-      padding: 1.5rem 1rem;
-      margin: 2rem auto;
-      font-size: 1rem;
-      border-radius: 16px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 1.8rem;
-      line-height: 1.3;
-    }
-
-    .hero p {
-      font-size: 1rem;
-      line-height: 1.6;
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background-image: url('couverture.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: white;
     }
 
     header {
-      flex-direction: row;
-      justify-content: flex-end;
+      background: rgba(40, 20, 80, 0.6);
+      padding: 0.7rem 1rem;
+      display: flex;
+      justify-content: center;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .nav-desktop {
       display: flex;
-      gap: 1rem;
-      margin-right: 1rem;
+      gap: 1.5rem;
     }
 
     .nav-desktop a {
-      font-size: 1rem;
+      font-size: 0.95rem;
+      color: #ffe066;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .nav-desktop a:hover {
+      color: #fff6cc;
+      text-shadow: 0 0 8px #ffd700;
+    }
+
+    .hero {
+      max-width: 85vw;
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      text-align: center;
+      line-height: 1.6;
+      color: #fff8e6;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 20px rgba(255, 255, 200, 0.08);
+    }
+
+    .hero h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      font-size: 1.4rem;
+      color: #ffd700;
+      text-shadow: 0 0 10px #3a1c00;
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
     .logo-titre {
-      height: 50px;
-      margin-bottom: 0.5rem;
+      height: 45px;
+      width: auto;
+      border-radius: 10px;
     }
-  }
- @media (max-width: 768px) {
-  .hero {
-    max-width: 90vw;
-    padding: 1rem 1rem 1.2rem;
-    margin: 1rem auto;
-    font-size: 0.9rem;
-    border-radius: 14px;
-    background-color: rgba(0, 0, 0, 0.3); /* moins opaque */
-  }
 
-  .hero h1 {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
+    .hero p {
+      font-size: 0.95rem;
+      margin: 0.8rem 0;
+      padding: 0 0.5rem;
+      text-shadow: 1px 1px 2px black;
+    }
 
-  .hero p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 0.6rem;
-  }
+    .secret-hint {
+      font-style: italic;
+      font-weight: bold;
+      color: #ffd700;
+      animation: glowHint 2.5s ease-in-out infinite;
+      text-shadow: 0 0 4px #fff7cc, 0 0 10px #ffd700;
+    }
 
-  .logo-titre {
-    height: 45px;
-    margin-bottom: 0.4rem;
-  }
+    #message-secret::after {
+      content: "|";
+      animation: blink 1s infinite;
+    }
 
-  .secret-hint {
-    font-style: italic;
-    font-weight: bold;
-    color: #ffd700;
-    text-align: center;
-    margin-top: 1rem;
-    animation: glowHint 2.5s ease-in-out infinite;
-    text-shadow: 0 0 4px #fff7cc, 0 0 10px #ffd700;
-  }
+    .avis-invite {
+      max-width: 90vw;
+      margin: 2rem auto;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #ffeeaa;
+      text-shadow: 1px 1px 2px #000;
+    }
 
-  .nav-desktop {
-    justify-content: center;
-  }
+    .avis-invite a {
+      color: #ffe066;
+      text-decoration: underline;
+      font-weight: bold;
+    }
 
-  .nav-desktop a {
-    font-size: 0.95rem;
-  }
-}
+    .avis-invite a:hover {
+      text-shadow: 0 0 10px #ffef99;
+      color: #fff6cc;
+      cursor: url('etoile.png'), pointer;
+    }
 
-@keyframes glowHint {
-  0%   { text-shadow: 0 0 3px #fff7cc, 0 0 8px #ffd700; }
-  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
-}
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffc400; }
+      to   { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffc400; }
+    }
 
+    @keyframes glowHint {
+      0%   { text-shadow: 0 0 4px #fff7cc, 0 0 8px #ffd700; }
+      100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
+    }
 
-@keyframes glowHint {
-  0% { text-shadow: 0 0 4px #fff7cc, 0 0 8px #ffd700; }
-  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
-}
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
 
-</style>
+    @media (min-width: 769px) {
+      .hero {
+        max-width: 700px;
+      }
 
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .avis-invite {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <div class="nav-desktop">
+      <a href="2.les_coulisses.html">Les coulisses</a>
+      <a href="2.autrice.html">A propos</a>
+    </div>
+  </header>
 
-<header>
-  <div class="nav-desktop">
-    <a href="2.les_coulisses.html">Les coulisses</a>
-    <a href="2.autrice.html">A propos</a>
-  </div>
-</header>
-  
   <main>
-   <section class="hero">
-<h1 class="titre-arzankia">
- <img src="logo.jpg" alt="Logo Arzankia" class="logo-titre" style="margin-right: 0.5rem;">
-  Bienvenue à Arzankia
-</h1>
-     
-<p>L’aventure continue ici…</p>
-
-<p><em>Explore ces pages secrètes pour découvrir des contenus inédits...</p>
-
-<p><strong>Quizz magiques, illustrations, anecdotes et révélations t’attendent.</strong></p>
-
-<p id="message-secret" class="secret-hint"></p>
-
-</section>
- 
+    <section class="hero">
+      <h1>
+        <img src="logo.jpg" alt="Logo Arzankia" class="logo-titre">
+        Bienvenue à Arzankia
+      </h1>
+      <p>L’aventure continue ici…</p>
+      <p><em>Explore ces pages secrètes pour découvrir des contenus inédits...</em></p>
+      <p><strong>Quizz magiques, illustrations, anecdotes et révélations t’attendent.</strong></p>
+      <p id="message-secret" class="secret-hint"></p>
+    </section>
   </main>
-    <script>
-  const message = "✨Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.✨";
-  const target = document.getElementById("message-secret");
-  let index = 0;
 
-  function writeText() {
-    if (index < message.length) {
-      target.innerHTML += message.charAt(index);
-      index++;
-      setTimeout(writeText, 70); // 70 ms = plus lent
-    }
-  }
-
-  window.addEventListener("DOMContentLoaded", writeText);
-</script>
+  <p class="avis-invite">
   
-<p class="avis-invite">
-  Tu souhaites en savoir plus sur la saga <strong>Les Héros d’Arzankia</strong><br>
-  et partager ton avis ?<br>
-  Rends-toi sur la page<br>
-  <a href="https://www.arzankia.fr/" target="_blank">www.arzankia.fr</a>
-</p>
+    Tu souhaites en savoir plus sur la saga<br>
+    <strong>Les Héros d’Arzankia ?</strong><br>
+    Rends toi sur la page <a href="https://www.arzankia.fr/" target="_blank">www.arzankia.fr</a> et dépose ton avis d'aventurier.<br>
+    
+  </p>
 
+  <script>
+    const message = "✨Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.✨";
+    const target = document.getElementById("message-secret");
+    let index = 0;
+
+    function writeText() {
+      if (index < message.length) {
+        target.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(writeText, 70);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", writeText);
+  </script>
 </body>
 </html>
