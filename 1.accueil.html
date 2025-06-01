@@ -293,7 +293,69 @@ header {
       margin-bottom: 0.5rem;
     }
   }
+  @media (max-width: 768px) {
+  .hero {
+    max-width: 92vw;
+    padding: 1.2rem 1rem 1.5rem;
+    margin: 1.2rem auto;
+    font-size: 0.95rem;
+    border-radius: 14px;
+  }
 
+  .hero h1 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.7rem;
+  }
+
+  .logo-titre {
+    height: 48px;
+    margin-bottom: 0.4rem;
+  }
+
+  .secret-hint {
+    font-style: italic;
+    font-weight: bold;
+    color: #ffd700;
+    text-align: center;
+    margin-top: 1rem;
+    animation: glowHint 2.5s ease-in-out infinite;
+    text-shadow: 0 0 4px #fff7cc, 0 0 12px #ffd700;
+  }
+
+  .nav-desktop {
+    justify-content: center;
+  }
+
+  .nav-desktop a {
+    font-size: 0.95rem;
+  }
+}
+  .secret-hint {
+  font-style: italic;
+  font-weight: bold;
+  color: #ffd700;
+  text-align: center;
+  margin-top: 1rem;
+  animation: glowHint 2.5s ease-in-out infinite;
+  text-shadow: 0 0 4px #fff7cc, 0 0 12px #ffd700;
+}
+
+@keyframes glowHint {
+  0% { text-shadow: 0 0 4px #fff7cc, 0 0 8px #ffd700; }
+  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
+}
+
+
+@keyframes glowHint {
+  0%   { text-shadow: 0 0 3px #fff7cc, 0 0 8px #ffd700; }
+  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
+}
 </style>
 
 </head>
