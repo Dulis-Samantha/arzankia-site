@@ -173,36 +173,53 @@
     <div id="reveal">
       ✨ <strong>Hello, c'est Fanfan.</strong><br>
       Je sais que Raphaël n'a pas encore visité mon monde, mais si tu cherches un peu,  
-      et que tu affines ton œil, tu trouveras son passage et pourras découvrir à quoi il ressemble... Rendez vous sur la page des mondes d'Arzankia ;)
+      et que tu affines ton œil, tu trouveras son passage et pourras découvrir à quoi il ressemble...</p> 
+      Rendez vous sur la page des mondes d'Arzankia !</p>
     </div>
 
     <!-- Bouton retour déplacé ici -->
     <div class="back-button">
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
+    
+<script>
+  const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
+  let selectedCorrect = [];
 
-
-  <script>
-    const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
-    let selectedCorrect = [];
-
+  function resetGame() {
+    selectedCorrect = [];
     document.querySelectorAll('.word').forEach(wordEl => {
-      wordEl.addEventListener('click', () => {
-        const word = wordEl.getAttribute('data-word');
-        if (wordEl.classList.contains('selected')) return;
-
-        if (correctWords.includes(word)) {
-          wordEl.classList.add('selected', 'correct');
-          selectedCorrect.push(word);
-        } else {
-          wordEl.classList.add('selected', 'wrong');
-        }
-
-        if (selectedCorrect.length === correctWords.length) {
-          document.getElementById('reveal').style.display = 'block';
-        }
-      });
+      wordEl.classList.remove('selected', 'correct', 'wrong');
     });
-  </script>
+    document.getElementById('reveal').style.display = 'none';
+
+    // Optionnel : animation de secousse
+    const grid = document.getElementById('wordGrid');
+    grid.classList.add('shake');
+    setTimeout(() => grid.classList.remove('shake'), 400);
+  }
+
+  document.querySelectorAll('.word').forEach(wordEl => {
+    wordEl.addEventListener('click', () => {
+      const word = wordEl.getAttribute('data-word');
+
+      if (wordEl.classList.contains('selected')) return;
+
+      if (correctWords.includes(word)) {
+        wordEl.classList.add('selected', 'correct');
+        selectedCorrect.push(word);
+      } else {
+        wordEl.classList.add('selected', 'wrong');
+        setTimeout(resetGame, 500); // Recommence après erreur
+        return;
+      }
+
+      if (selectedCorrect.length === correctWords.length) {
+        document.getElementById('reveal').style.display = 'block';
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
