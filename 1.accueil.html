@@ -115,17 +115,16 @@
   }
 
   /* === HEADER + NAV === */
-  header {
-    background: rgba(40, 20, 80, 0.6);
-    padding: 0.5rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
+header {
+  background: rgba(40, 20, 80, 0.6);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center; /* au lieu de space-between */
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
   .nav-desktop {
     display: flex;
     gap: 1.2rem;
@@ -165,13 +164,16 @@
   }
 
   /* === AVIS INVITE === */
-  .avis-invite {
-    margin-top: 3rem;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #ffeeaa;
-    text-shadow: 1px 1px 2px #000;
-  }
+.avis-invite {
+  margin: 4rem auto 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffeeaa;
+  text-shadow: 1px 1px 2px #000;
+  max-width: 900px;
+  padding: 1rem 1rem 0;
+  line-height: 1.8;
+}
 
   .avis-invite a {
     color: #ffe066;
@@ -281,6 +283,7 @@
       margin-bottom: 0.5rem;
     }
   }
+
 </style>
 
 </head>
@@ -329,7 +332,8 @@ des mystères oubliés, des souvenirs d’anciens héros…</p>
 </script>
   
 <p class="avis-invite">
-  Tu souhaites en savoir plus sur la saga <strong>Les Héros d’Arzankia</strong> et souhaites partager ton avis ?<br>
+  Tu souhaites en savoir plus sur la saga <strong>Les Héros d’Arzankia</strong><br>
+  et souhaites partager ton avis ?<br>
   Direction <a href="https://www.arzankia.fr/" target="_blank">www.arzankia.fr</a> !
 </p>
 
