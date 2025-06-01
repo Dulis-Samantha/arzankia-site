@@ -355,6 +355,22 @@
   height: 60px;
   padding-left: 1rem;
 }
+     .secret-hint {
+  font-style: italic;
+  color: #ffe9a8;
+  text-align: center;
+  margin-top: 1.2rem;
+  animation: glowHint 3s ease-in-out infinite;
+}
+    #message-secret::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
 </style>
 
@@ -374,9 +390,9 @@
 
   <!-- Menu mobile -->
   <nav class="nav-links" id="mobileMenu">
-    <a href="2.les_coulisses.html">Les coulisses d'Arzankia</a>
-    <a href="2.autrice.html">A propos de l’autrice</a>
-    <a href="#avis"> Lire les Avis</a>
+    <a href="2.les_coulisses.html">Les coulisses</a>
+    <a href="2.autrice.html">A propos</a>
+    <a href="#avis"> Les Avis</a>
   </nav>
 </header>
   
@@ -384,6 +400,7 @@
    <section class="hero">
  <h1>🌌 Bienvenue à Arzankia</h1>
 <p>L’aventure continue ici…</p>
+<p id="message-secret" class="secret-hint"></p>
 
 <p><em>Explore ces pages secrètes pour découvrir des contenus inédits,</em><br>
 des mystères oubliés, des souvenirs d’anciens héros…</p>
@@ -394,6 +411,21 @@ des mystères oubliés, des souvenirs d’anciens héros…</p>
 </section>
  
   </main>
+    <script>
+  const message = "Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.";
+  const target = document.getElementById("message-secret");
+  let index = 0;
+
+  function writeText() {
+    if (index < message.length) {
+      target.innerHTML += message.charAt(index);
+      index++;
+      setTimeout(writeText, 70); // 70 ms = plus lent
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", writeText);
+</script>
 
   <script>
   const scriptURL = "https://script.google.com/macros/s/AKfycbw89FagCkM7NZVohhKHSySc_EE8nYLafotmae2RQmwxu--n7JvHZwl5Ih3yqHP0RN7fsg/exec";
