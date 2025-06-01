@@ -83,13 +83,13 @@
       text-shadow: 1px 1px 2px black;
     }
 
-    .secret-hint {
-      font-style: italic;
-      font-weight: bold;
-      color: #ffd700;
-      animation: glowHint 2.5s ease-in-out infinite;
-      text-shadow: 0 0 4px #fff7cc, 0 0 10px #ffd700;
-    }
+     .secret-hint {
+    font-style: italic;
+    color: #ffe9a8;
+    text-align: center;
+    margin-top: 1.2rem;
+    animation: glowHint 3s ease-in-out infinite;
+  }
 
     #message-secret::after {
       content: "|";
@@ -123,10 +123,10 @@
       to   { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffc400; }
     }
 
-    @keyframes glowHint {
-      0%   { text-shadow: 0 0 4px #fff7cc, 0 0 8px #ffd700; }
-      100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
-    }
+   @keyframes glowHint {
+  0%   { text-shadow: 0 0 3px #fff7cc, 0 0 8px #ffd700; }
+  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
+}
 
     @keyframes blink {
       0%, 100% { opacity: 1; }
