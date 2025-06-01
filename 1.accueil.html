@@ -293,28 +293,29 @@ header {
       margin-bottom: 0.5rem;
     }
   }
-  @media (max-width: 768px) {
+ @media (max-width: 768px) {
   .hero {
-    max-width: 92vw;
-    padding: 1.2rem 1rem 1.5rem;
-    margin: 1.2rem auto;
-    font-size: 0.95rem;
+    max-width: 90vw;
+    padding: 1rem 1rem 1.2rem;
+    margin: 1rem auto;
+    font-size: 0.9rem;
     border-radius: 14px;
+    background-color: rgba(0, 0, 0, 0.3); /* moins opaque */
   }
 
   .hero h1 {
-    font-size: 1.7rem;
-    line-height: 1.3;
+    font-size: 1.6rem;
+    line-height: 1.2;
   }
 
   .hero p {
     font-size: 0.95rem;
     line-height: 1.5;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.6rem;
   }
 
   .logo-titre {
-    height: 48px;
+    height: 45px;
     margin-bottom: 0.4rem;
   }
 
@@ -325,7 +326,7 @@ header {
     text-align: center;
     margin-top: 1rem;
     animation: glowHint 2.5s ease-in-out infinite;
-    text-shadow: 0 0 4px #fff7cc, 0 0 12px #ffd700;
+    text-shadow: 0 0 4px #fff7cc, 0 0 10px #ffd700;
   }
 
   .nav-desktop {
@@ -336,26 +337,18 @@ header {
     font-size: 0.95rem;
   }
 }
-  .secret-hint {
-  font-style: italic;
-  font-weight: bold;
-  color: #ffd700;
-  text-align: center;
-  margin-top: 1rem;
-  animation: glowHint 2.5s ease-in-out infinite;
-  text-shadow: 0 0 4px #fff7cc, 0 0 12px #ffd700;
+
+@keyframes glowHint {
+  0%   { text-shadow: 0 0 3px #fff7cc, 0 0 8px #ffd700; }
+  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
 }
+
 
 @keyframes glowHint {
   0% { text-shadow: 0 0 4px #fff7cc, 0 0 8px #ffd700; }
   100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
 }
 
-
-@keyframes glowHint {
-  0%   { text-shadow: 0 0 3px #fff7cc, 0 0 8px #ffd700; }
-  100% { text-shadow: 0 0 10px #fff7cc, 0 0 20px #ffd700; }
-}
 </style>
 
 </head>
@@ -376,19 +369,18 @@ header {
 </h1>
      
 <p>L’aventure continue ici…</p>
+
+<p><em>Explore ces pages secrètes pour découvrir des contenus inédits...</p>
+
+<p><strong>Quizz magiques, illustrations, anecdotes et révélations t’attendent.</strong></p>
+
 <p id="message-secret" class="secret-hint"></p>
 
-<p><em>Explore ces pages secrètes pour découvrir des contenus inédits,</em><br>
-des mystères oubliés, des souvenirs d’anciens héros…</p>
-
-<p><strong>Quizz magiques, illustrations cachées, anecdotes et révélations t’attendent.</strong></p>
-
-<p><strong>✨ Les dessous du livre t’appellent… ✨</strong></p>
 </section>
  
   </main>
     <script>
-  const message = "Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.";
+  const message = "✨Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.✨";
   const target = document.getElementById("message-secret");
   let index = 0;
 
