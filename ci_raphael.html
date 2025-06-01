@@ -53,21 +53,28 @@
       box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
     }
 
-    .back-button {
-      margin-top: 3em;
-    }
+  .back-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em; /* Espace entre les boutons */
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
 
-    .back-button a {
-      display: inline-block;
-      background: linear-gradient(135deg, #fff6c1, #ffe18a);
-      color: #3a2f00;
-      font-weight: bold;
-      text-decoration: none;
-      padding: 1em 2em;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #ffeba0;
-      transition: all 0.3s ease;
-    }
+.back-button a {
+  background-color: #fff8cc;
+  color: #333;
+  padding: 0.8em 1.4em;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  text-align: center;
+  width: 80%;
+  max-width: 320px;
+}
 
     .back-button a:hover {
       background: #fff2b0;
@@ -75,28 +82,24 @@
       transform: scale(1.05);
     }
 
-<style>
-.monde-button {
-  display: inline-block;
-  padding: 0.8em 1.5em;
-  margin-top: 2em;
-  background: linear-gradient(to right, #ffd700, #ffa500);
-  color: #1b0f2f;
-  text-decoration: none;
-  font-weight: bold;
+button, .button {
+  display: block;
+  margin: 1em auto; /* espace entre chaque bouton */
+  padding: 0.8em 1.6em;
+  border: none;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-  transition: all 0.3s ease;
-  font-family: Georgia, serif;
-  font-size: 1.1em;
+  background: #fff8cc;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  text-decoration: none;
 }
 
-.monde-button:hover {
-  background: linear-gradient(to right, #fff4b2, #ffcc70);
-  box-shadow: 0 0 15px #ffd700;
-  color: #000;
+.button-container {
+  margin-bottom: 2em; /* espace avec le bas de la page */
 }
-</style>
 
   </style>
 </head>
@@ -119,11 +122,11 @@
     </div>
 
     <!-- Bouton retour -->
-    <div class="back-button">
-      <a href="8.monde_Ptikitis.html" class="monde-button">✨ Découvre mon monde</a>
-       <a href="10.grimoire.html" class="monde-button">✨ Découvre mon grimoire</a>
-      <a href="3.les_heros.html">← Retour aux héros</a>
-    </div>
+ <div class="back-button">
+  <a href="8.monde_Ptikitis.html">✨ Découvre mon monde</a>
+  <a href="10.grimoire.html">✨ Découvre mon grimoire</a>
+  <a href="3.les_heros.html">← Retour aux héros</a>
+</div>
   </div>
 </body>
 </html>
