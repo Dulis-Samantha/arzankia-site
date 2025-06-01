@@ -293,22 +293,41 @@
   color: #fff6cc;
   cursor: url('etoile.png'), pointer; /* une petite étoile personnalisée */
 }
+.header-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  background: rgba(40, 20, 80, 0.6);
+}
+
+.nav-centered {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-centered a {
+  color: #ffe066;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  text-shadow: 1px 1px 2px #000;
+}
 
 </style>
 
 </head>
 <body>
 
-<header>
+<header class="header-centered">
 <img src="logo.jpg" alt="Logo Arzankia" class="logo" aria-label="Logo du site Les Héros d'Arzankia">
-  
-  <!-- Menu classique (visible sur desktop uniquement) -->
-  <div class="nav-desktop">
+  <nav class="nav-centered">
     <a href="2.les_coulisses.html">Les coulisses</a>
     <a href="2.autrice.html">A propos</a>
-
-  </div>
+  </nav>
 </header>
+
   
   <main>
    <section class="hero">
