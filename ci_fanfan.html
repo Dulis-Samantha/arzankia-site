@@ -189,24 +189,23 @@
 <script>
   const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
   let selectedCorrect = [];
+  let gameCompleted = false;
 
   function resetGame() {
     selectedCorrect = [];
+    gameCompleted = false;
     document.querySelectorAll('.word').forEach(wordEl => {
       wordEl.classList.remove('selected', 'correct', 'wrong');
     });
     document.getElementById('reveal').style.display = 'none';
-
-    // Optionnel : animation de secousse
-    const grid = document.getElementById('wordGrid');
-    grid.classList.add('shake');
-    setTimeout(() => grid.classList.remove('shake'), 400);
+    document.getElementById('reset-btn').style.display = 'none';
   }
 
   document.querySelectorAll('.word').forEach(wordEl => {
     wordEl.addEventListener('click', () => {
-      const word = wordEl.getAttribute('data-word');
+      if (gameCompleted) return;
 
+      const word = wordEl.getAttribute('data-word');
       if (wordEl.classList.contains('selected')) return;
 
       if (correctWords.includes(word)) {
@@ -214,16 +213,22 @@
         selectedCorrect.push(word);
       } else {
         wordEl.classList.add('selected', 'wrong');
-        setTimeout(resetGame, 500); // Recommence après erreur
+        setTimeout(resetGame, 400); // On relance après une courte pause
         return;
       }
 
       if (selectedCorrect.length === correctWords.length) {
+        gameCompleted = true;
         document.getElementById('reveal').style.display = 'block';
+        document.getElementById('reset-btn').style.display = 'inline-block';
       }
     });
   });
+
+  // Bouton de redémarrage
+  document.getElementById('reset-btn').addEventListener('click', resetGame);
 </script>
+
 
 </body>
 </html>
