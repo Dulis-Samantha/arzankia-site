@@ -70,6 +70,7 @@
 
   /* === HERO SECTION === */
   .hero {
+    font-size: 0.95rem;
     max-width: 900px;
     margin: 3rem auto;
     padding: 2.5rem 2rem;
@@ -84,14 +85,16 @@
   }
 
   .hero h1 {
-    font-size: 2.5em;
+    font-size: 1.6rem;
     color: #ffd700;
     text-shadow: 0 0 10px #3a1c00;
     animation: glow 2s ease-in-out infinite alternate;
   }
 
   .hero p {
-    font-size: 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 0 0.3rem;
     color: #ffffff;
     text-shadow: 1px 1px 2px black;
     margin-top: 1rem;
@@ -117,24 +120,30 @@
   /* === HEADER + NAV === */
 header {
   background: rgba(40, 20, 80, 0.6);
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   display: flex;
   justify-content: center; /* au lieu de space-between */
   align-items: center;
+  flex-direction: row;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
   .nav-desktop {
     display: flex;
-    gap: 1.2rem;
+    gap: 1.5rem;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
   }
 
   .nav-desktop a {
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 0.3rem 0;
     color: #ffe066;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem;
     text-shadow: 1px 1px 2px #000;
     transition: all 0.3s ease;
   }
