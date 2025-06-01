@@ -189,21 +189,17 @@
 
 /* Menu déroulant stylisé */
 .nav-links {
-  display: none;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  background-color: rgba(40, 20, 80, 0.8);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 0 15px rgba(200, 180, 255, 0.3);
-  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  position: static;
+  opacity: 1;
+  transform: none;
+  padding: 1rem;
+  gap: 1rem;
   text-align: center;
-  position: absolute;
-  top: 100%;
-  right: 1rem;
-  z-index: 1000;
-  animation: menuSlideDown 0.6s ease-out;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 /* Apparition au clic */
@@ -242,6 +238,7 @@
   cursor: pointer;
   z-index: 1001;
   transition: background 0.3s ease;
+  display: none !important;
 }
 
 .menu-toggle:hover {
@@ -354,6 +351,10 @@
   }
 }
 
+.logo {
+  height: 60px;
+  padding-left: 1rem;
+}
 
 </style>
 
@@ -362,7 +363,7 @@
 <body>
 
 <header>
-  <h1 style="padding-left: 1rem;">Accueil – Arzankia</h1>
+<img src="logo.jpg" alt="Logo Arzankia" class="logo">
   
   <!-- Menu classique (visible sur desktop uniquement) -->
   <div class="nav-desktop">
@@ -370,9 +371,6 @@
     <a href="2.autrice.html">A propos de l’autrice</a>
     <a href="#avis">Lire les Avis</a>
   </div>
-
-  <!-- Bouton burger (visible uniquement sur mobile) -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
   <!-- Menu mobile -->
   <nav class="nav-links" id="mobileMenu">
@@ -396,12 +394,7 @@ des mystères oubliés, des souvenirs d’anciens héros…</p>
 </section>
  
   </main>
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('active');
-  }
-</script>
+
   <script>
   const scriptURL = "https://script.google.com/macros/s/AKfycbw89FagCkM7NZVohhKHSySc_EE8nYLafotmae2RQmwxu--n7JvHZwl5Ih3yqHP0RN7fsg/exec";
     document.getElementById("formAvis").addEventListener("submit", function(event) {
