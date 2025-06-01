@@ -124,7 +124,11 @@
 
 /* Bande de navigation visible uniquement sur PC */
 .nav-desktop {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 @media (min-width: 769px) {
@@ -146,34 +150,8 @@
   .nav-desktop a:hover {
     color: #ffd700;
   }
-
-  .menu-toggle {
-    display: none;
-  }
 }
 
-
-  /* Version DESKTOP (min-width : 769px) */
-  @media (min-width: 769px) {
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #f0e6ff;
-      font-weight: bold;
-      font-size: 1.1rem;
-      text-shadow: 1px 1px 2px #000;
-    }
-
-    .nav-links a:hover {
-      color: #ffd700;
-    }
-  }
 
 /* Animation magique d'ouverture */
 @keyframes menuSlideDown {
@@ -187,65 +165,6 @@
   }
 }
 
-/* Menu déroulant stylisé */
-.nav-links {
-  display: flex;
-  flex-direction: column;
-  position: static;
-  opacity: 1;
-  transform: none;
-  padding: 1rem;
-  gap: 1rem;
-  text-align: center;
-  background: none;
-  box-shadow: none;
-  backdrop-filter: none;
-}
-
-/* Apparition au clic */
-.nav-links.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Liens du menu */
-.nav-links a {
-  display: block;
-  color: #f5eaff;
-  text-decoration: none;
-  margin: 1rem 0;
-  font-family: 'Georgia', serif;
-  font-size: 1.2rem;
-  text-shadow: 1px 1px 2px #000;
-}
-
-.nav-links a:hover {
-  color: #ffe066;
-  text-shadow: 0 0 10px #ffe066, 0 0 20px #ffef99;
-  transform: translateX(5px);
-  transition: 0.2s ease;
-}
-
-/* Bouton menu (burger) */
-.menu-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 0.6rem;
-  border: none;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1001;
-  transition: background 0.3s ease;
-  display: none !important;
-}
-
-.menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-
  .hero {
   max-width: 900px;
   margin: 3rem auto;
@@ -257,10 +176,10 @@
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #ffe066;
-  text-shadow: 2px 2px 4px black;
+  font-size: 2.5em;
+  color: #ffd700;
+  text-shadow: 0 0 10px #3a1c00;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .hero p {
@@ -303,11 +222,6 @@
   box-shadow: 0 0 20px rgba(255, 255, 200, 0.08);
 }
 
-.hero h1 {
-  font-size: 2.6rem;
-  color: #ffe066;
-  text-shadow: 2px 2px 4px #000;
-}
 .hero {
   animation: fadeIn 1.2s ease-in;
   text-align: center;
@@ -315,12 +229,7 @@
   color: #fff8e6;
 }
 
-.hero h1 {
-  font-size: 2.5em;
-  color: #ffd700;
-  text-shadow: 0 0 10px #3a1c00;
-  animation: glow 2s ease-in-out infinite alternate;
-}
+
 
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(20px); }
@@ -371,6 +280,38 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+  @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+@media (min-width: 769px) {
+  .nav-desktop {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 2rem;
+  }
+}
+  .avis-invite {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffeeaa;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.avis-invite a {
+  color: #ffe066;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.avis-invite a:hover {
+  text-shadow: 0 0 10px #ffef99;
+  color: #fff6cc;
+}
 
 </style>
 
@@ -383,17 +324,11 @@
   
   <!-- Menu classique (visible sur desktop uniquement) -->
   <div class="nav-desktop">
-    <a href="2.les_coulisses.html">Les coulisses d'Arzankia</a>
-    <a href="2.autrice.html">A propos de l’autrice</a>
-    <a href="#avis">Lire les Avis</a>
-  </div>
-
-  <!-- Menu mobile -->
-  <nav class="nav-links" id="mobileMenu">
     <a href="2.les_coulisses.html">Les coulisses</a>
     <a href="2.autrice.html">A propos</a>
-    <a href="#avis"> Les Avis</a>
-  </nav>
+   <a href="https://www.arzankia.fr/" target="_blank" rel="noopener noreferrer">Les Avis</a>
+
+  </div>
 </header>
   
   <main>
@@ -426,42 +361,11 @@ des mystères oubliés, des souvenirs d’anciens héros…</p>
 
   window.addEventListener("DOMContentLoaded", writeText);
 </script>
+  
+<p class="avis-invite">
+  Tu as aimé <strong>Les Héros d’Arzankia</strong> et souhaites partager ton avis ?<br>
+  Direction <a href="https://www.arzankia.fr/" target="_blank">www.arzankia.fr</a> !
+</p>
 
-  <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbw89FagCkM7NZVohhKHSySc_EE8nYLafotmae2RQmwxu--n7JvHZwl5Ih3yqHP0RN7fsg/exec";
-    document.getElementById("formAvis").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const nom = document.getElementById("nom").value;
-      const note = document.querySelector('input[name="note"]:checked').value;
-      const message = document.getElementById("message").value;
-      fetch(scriptURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nom, note, message })
-      }).then(res => res.text()).then(() => {
-        document.getElementById("confirmationAvis").style.display = "block";
-        document.getElementById("formAvis").reset();
-        chargerAvis();
-      });
-    });
-    function chargerAvis() {
-      fetch(scriptURL)
-        .then(res => res.json())
-        .then(data => {
-          const conteneur = document.getElementById("listeAvis");
-          conteneur.innerHTML = "<h3>Avis des lecteurs :</h3>";
-          data.reverse().forEach(avis => {
-            const bloc = document.createElement("div");
-            bloc.style.marginBottom = "1rem";
-            bloc.style.padding = "1rem";
-            bloc.style.background = "rgba(255,255,255,0.07)";
-            bloc.style.borderRadius = "8px";
-            bloc.innerHTML = `<strong>${avis.nom}</strong> ${avis.note}<br><em>"${avis.message}"</em>`;
-            conteneur.appendChild(bloc);
-          });
-        });
-    }
-    chargerAvis();
-  </script>
 </body>
 </html>
