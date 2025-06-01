@@ -41,7 +41,7 @@
     .parchemin {
       background: url('parchemin_fond.png') center center no-repeat;
       background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85); /* voile lisible */
+      background-color: rgba(255, 248, 230, 0.85);
       padding: 4em 2em;
       margin: auto;
       max-width: 800px;
@@ -74,6 +74,52 @@
       box-shadow: 0 0 20px #fff8c6;
       transform: scale(1.05);
     }
+
+    /* Styles pour le jeu */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1em;
+      max-width: 800px;
+      margin: 3em auto 1em auto;
+    }
+
+    .word {
+      padding: 0.8em;
+      background: #ffffff10;
+      border: 2px solid #ffffff30;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 1em;
+    }
+
+    .word.correct.selected {
+      background: #228855cc;
+      border-color: #66ffcc;
+    }
+
+    .word.wrong.selected {
+      background: #883333aa;
+      border-color: #ff6666;
+    }
+
+    #reveal {
+      margin: 2em auto;
+      padding: 1.5em;
+      background: rgba(255, 223, 150, 0.1);
+      border: 1px solid #ffd70088;
+      border-radius: 10px;
+      font-size: 1.1em;
+      max-width: 700px;
+      display: none;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -89,7 +135,7 @@
       <p><strong>Monde d’origine :</strong> Monde d'Hégaia</p>
       <p><strong>Clé d’accès :</strong> Chevalière</p>
       <p><strong>Spécialisation :</strong> Cherceuse</p>
-      <p><strong>Statut :</strong> En formation- niv2</p>
+      <p><strong>Statut :</strong> En formation - niv2</p>
       <br>
       <em>« Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin. »<br>– Archives de la Tour de l’Aube</em>
     </div>
@@ -98,6 +144,63 @@
     <div class="back-button">
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
+
+    <!-- Grille de mots -->
+    <h2 style="margin-top: 3em;">🧩 Retrouve les 5 mots-clés pour percer le mystère de Fanfan</h2>
+    <div class="grid" id="wordGrid">
+      <!-- Mots corrects -->
+      <div class="word" data-word="Hegaia">Hegaia</div>
+      <div class="word" data-word="Fidèle">Fidèle</div>
+      <div class="word" data-word="Chercheuse">Chercheuse</div>
+      <div class="word" data-word="Chevalière">Chevalière</div>
+      <div class="word" data-word="Corse">Corse</div>
+
+      <!-- Mots brouilleurs -->
+      <div class="word" data-word="Magicienne">Magicienne</div>
+      <div class="word" data-word="Dresseuse">Dresseuse</div>
+      <div class="word" data-word="Aventurière">Aventurière</div>
+      <div class="word" data-word="Princesse">Princesse</div>
+      <div class="word" data-word="Zouppi">Zouppi</div>
+      <div class="word" data-word="Timide">Timide</div>
+      <div class="word" data-word="Blonde">Blonde</div>
+      <div class="word" data-word="Bateau">Bateau</div>
+      <div class="word" data-word="Ptikiti">Ptikiti</div>
+      <div class="word" data-word="Air">Air</div>
+      <div class="word" data-word="Forêt">Forêt</div>
+      <div class="word" data-word="Licorne">Licorne</div>
+      <div class="word" data-word="Sirène">Sirène</div>
+      <div class="word" data-word="Fée">Fée</div>
+      <div class="word" data-word="Triste">Triste</div>
+    </div>
+
+    <div id="reveal">
+      ✨ <strong>Hello, c'est Fanfan.</strong><br>
+      Je sais que Raphaël n'a pas encore visité mon monde, mais si tu cherches un peu,  
+      et que tu affines ton œil, tu trouveras son passage et pourras découvrir à quoi il ressemble...
+    </div>
   </div>
+
+  <script>
+    const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
+    let selectedCorrect = [];
+
+    document.querySelectorAll('.word').forEach(wordEl => {
+      wordEl.addEventListener('click', () => {
+        const word = wordEl.getAttribute('data-word');
+        if (wordEl.classList.contains('selected')) return;
+
+        if (correctWords.includes(word)) {
+          wordEl.classList.add('selected', 'correct');
+          selectedCorrect.push(word);
+        } else {
+          wordEl.classList.add('selected', 'wrong');
+        }
+
+        if (selectedCorrect.length === correctWords.length) {
+          document.getElementById('reveal').style.display = 'block';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
