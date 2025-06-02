@@ -10,19 +10,34 @@
       background: linear-gradient(to bottom, #cde9f6, #fef8e5);
       color: #3b2a1d;
       padding: 2em;
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
       border-radius: 12px;
     }
 
-    img.extrait-image {
+    .extrait-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+    .image-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+    .extrait-image {
       width: 100%;
-      max-width: 700px;
-      display: block;
-      margin: auto;
+      max-width: 100%;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      margin-bottom: 2em;
+    }
+
+    .extrait-texte {
+      font-size: 1.2em;
+      line-height: 1.6;
+      text-align: justify;
     }
 
     h1 {
@@ -30,12 +45,6 @@
       color: #00779e;
       font-size: 2em;
       margin-bottom: 1em;
-    }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
-      text-align: justify;
     }
 
     a.retour {
@@ -53,34 +62,55 @@
     a.retour:hover {
       background: #c09c2c;
     }
+
+    /* Version bureau : image à gauche, texte à droite */
+    @media (min-width: 768px) {
+      .image-text-wrapper {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .extrait-image {
+        width: 50%;
+      }
+
+      .extrait-texte {
+        width: 50%;
+        padding-left: 2em;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Image d’illustration de l’extrait -->
-  <img src="extrait_arenyth.png" alt="La fille mystérieuse" class="extrait-image">
+  <div class="extrait-container">
+    <h1>Extrait du livre – Monde d'Arenyth</h1>
 
-  <h1>Extrait du livre – Monde d'Arenyth</h1>
+    <div class="image-text-wrapper">
+      <img src="extrait_arenyth.png" alt="La fille mystérieuse" class="extrait-image">
 
-  <p>
-Zouppimaître leva lentement les mains vers le ciel, implorant 
-la magie des anciens. En réponse, la foule se mit à taper des pieds 
-en cadence, faisant vibrer les estrades comme un tambour sacré. 
-Autour de l’arène, les Magiciens se prirent les mains, formant 
-quatre immenses cercles vivants, un pour chaque élément. 
-L’énergie montait. L’air lui-même semblait frissonner. 
-Puis, soudain, un éclair de lumière jaillit : un flash aveuglant 
-envahit toute l’arène. 
-Au cœur de ce halo, la jeune fille s’éleva doucement dans les 
-airs, portée par une force invisible. 
-Et là… un phénomène incroyable se produisit. 
-Des éclairs d’électricité pure jaillirent des mains des 
-Magiciens. Ils ne fonçaient pas au hasard : ils convergeaient tous 
-vers elle, comme attirés, absorbés, aspirés.
-  </p>
+      <div class="extrait-texte">
+        <p>
+        Zouppimaître leva lentement les mains vers le ciel, implorant 
+        la magie des anciens. En réponse, la foule se mit à taper des pieds 
+        en cadence, faisant vibrer les estrades comme un tambour sacré. 
+        Autour de l’arène, les Magiciens se prirent les mains, formant 
+        quatre immenses cercles vivants, un pour chaque élément. 
+        L’énergie montait. L’air lui-même semblait frissonner. 
+        Puis, soudain, un éclair de lumière jaillit : un flash aveuglant 
+        envahit toute l’arène. 
+        Au cœur de ce halo, la jeune fille s’éleva doucement dans les 
+        airs, portée par une force invisible. 
+        Et là… un phénomène incroyable se produisit. 
+        Des éclairs d’électricité pure jaillirent des mains des 
+        Magiciens. Ils ne fonçaient pas au hasard : ils convergeaient tous 
+        vers elle, comme attirés, absorbés, aspirés.
+        </p>
+      </div>
+    </div>
 
- <a href="8.monde_Arenyth.html" class="retour">← Retour au Monde d'Arenyth</a>
-
+    <a href="8.monde_Arenyth.html" class="retour">← Retour au Monde d'Arenyth</a>
+  </div>
 
 </body>
 </html>
