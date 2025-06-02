@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Entrée du Monde d'Arenyth</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background-color: #100b1f;
+      color: #fff0f8;
+      font-family: 'Georgia', serif;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media screen and (min-width: 768px) {
+      .container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+
+    .zone-gauche {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .illustration {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 192, 255, 0.3);
+    }
+
+    .extrait {
+      flex: 1;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: #ffeafd;
+      padding: 0 1rem;
+      text-align: justify;
+    }
+
+    .extrait p {
+      margin-bottom: 1.2rem;
+    }
+
+    .extrait h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #fbe7ff;
+      margin-bottom: 2rem;
+    }
+
+   .bouton-retour {
+  display: inline-block;
+  margin-top: 2em;
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  color: #3b2a1d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  transition: all 0.2s ease-in-out;
+}
+
+.bouton-retour:hover {
+  background: #c09c2c;
+  color: #fff8e6;
+  box-shadow: 0 0 16px rgba(255, 223, 100, 1);
+}
+
+
+    @media screen and (max-width: 600px) {
+      .extrait {
+        text-align: left;
+      }
+      .extrait h1 {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        margin: 1rem 0;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .extrait h1 {
+        font-size: 2rem;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="zone-gauche">
+      <img src="entree_arenyth.png" alt="Le télésiège Magique - Monde d'arenyth" class="illustration">
+      <a href="8.monde_Arenyth.html" class="bouton-retour">← Retour au Monde d'Arenyth</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
