@@ -17,16 +17,6 @@
       color: white;
     }
 
-    header {
-      background: rgba(40, 20, 80, 0.6);
-      padding: 0.7rem 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
 
     .nav-desktop {
       display: flex;
@@ -150,16 +140,46 @@
         font-size: 1.1rem;
       }
     }
+    .button-section {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem auto 1rem;
+  flex-wrap: wrap;
+}
+
+.magic-button {
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  color: #4a2e00;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 223, 100, 0.6);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  min-width: 160px;
+}
+
+.magic-button:hover {
+  background: #c09c2c;
+  color: #fff8e6;
+  box-shadow: 0 0 18px rgba(255, 223, 100, 1);
+}
+    @media (min-width: 1024px) {
+  .button-section {
+    max-width: 700px;
+    margin: 2rem auto;
+  }
+}
+
+
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="nav-desktop">
-      <a href="2.les_coulisses.html">Les coulisses</a>
-      <a href="2.autrice.html">A propos</a>
-    </div>
-  </header>
+
 
   <main>
     <section class="hero">
@@ -173,6 +193,12 @@
       <p id="message-secret" class="secret-hint"></p>
     </section>
   </main>
+
+  <div class="button-section">
+  <a href="2.les_coulisses.html" class="magic-button">✨ Les Coulisses</a>
+  <a href="2.autrice.html" class="magic-button">📚 À propos</a>
+  </div>
+
 
   <p class="avis-invite">
   
