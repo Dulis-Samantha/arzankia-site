@@ -48,21 +48,21 @@
       margin-bottom: 1em;
     }
 
-    a.retour {
-      display: inline-block;
-      margin-top: 2em;
-      background: #d4af37;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      color: #3b2a1d;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-    }
-
-    a.retour:hover {
-      background: #c09c2c;
-    }
+   .bouton-retour {
+  display: block;
+  width: fit-content;
+  margin: 2em auto 1em;
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  color: #3b2a1d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
 
     /* Bureau : image à gauche, texte à droite */
     @media (min-width: 768px) {
@@ -101,7 +101,7 @@
       </div>
     </div>
 
-    <a href="8.monde_Ames.html" class="retour">← Retour au Monde des Ames Perdues</a>
+    <a href="8.monde_Ames.html" class="bouton-retour">← Retour au Monde des Ames Perdues</a>
   </div>
 
 </body>
