@@ -20,7 +20,7 @@
       text-shadow: 1px 1px 4px #000;
     }
 
-    .Ames-image,
+    .Fees-image,
     .parchemin-image {
       display: block;
       width: 100%;
@@ -39,21 +39,20 @@
       width: 100%;
       height: auto;
       display: block;
-      max-height: 80vh; /* Ajouté pour éviter dépassement sur mobile */
+      max-height: 80vh;
+      border-radius: 15px;
     }
 
-    /* === TEXTE SUR PARCHEMIN === */
     .texte-parchemin {
       position: absolute;
       top: 42%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #3b2a1d;
+      color: #ffe79a;
       font-family: Georgia, serif;
-      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
       text-align: center;
       line-height: 1.6;
-      text-shadow: none;
       width: 75%;
       max-width: 700px;
       padding: 1rem;
@@ -65,125 +64,161 @@
       opacity: 1;
     }
 
-    /* === TITRE SUR PARCHEMIN === */
     .titre-parchemin {
-      display: inline-block;
-      font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+      font-size: clamp(1rem, 1.4vw, 1.3rem);
       font-weight: bold;
-      color: #f0d864;
-      text-shadow: 1px 1px 2px #00000066;
+      color: #ffe79a;
       text-align: center;
       white-space: normal;
       margin-bottom: 1rem;
-    }
-
-    /* === ANIMATION DE TEXTE (non utilisée ici mais dispo) === */
-    @keyframes apparitionTexte {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* === BOUTONS === */
     .button-group {
       display: flex;
       justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5em;
-      padding: 0 1rem;
     }
 
     .button-group a {
-      flex: 1 1 calc(42% - 1rem);
-      box-sizing: border-box;
-      animation: boutonGlow 3s ease-in-out infinite;
-      background: linear-gradient(to bottom, #fff8dc, #d4af37);
-      padding: 0.4rem 0.6rem;
-      border-radius: 10px;
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: linear-gradient(145deg, #ffe9af, #f2c94c);
       color: #4a2e00;
-      font-weight: bold;
       text-decoration: none;
-      font-size: 0.75em;
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-      transition: transform 0.2s, box-shadow 0.2s;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 30px;
+      box-shadow: 0 0 10px rgba(255, 223, 100, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-width: 180px;
       text-align: center;
     }
 
     .button-group a:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
-    }
-
-    @keyframes boutonGlow {
-      0%, 100% {
-        box-shadow: 0 0 10px rgba(255, 223, 100, 0.7);
-      }
-      50% {
-        box-shadow: 0 0 15px rgba(255, 223, 150, 1);
-      }
+      box-shadow: 0 0 18px rgba(255, 223, 100, 1);
     }
 
     /* === RESPONSIVE – PETITS ÉCRANS === */
-    @media (max-width: 600px) {
-      .texte-parchemin {
-        font-size: 1rem;
-        width: 90%;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .titre-parchemin {
-        font-size: 1.2rem;
-        white-space: normal;
-      }
-    }
-
-    /* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
- @media screen and (min-width: 1024px) {
+  @media (max-width: 600px) {
   .texte-parchemin {
-    top: 47%;
-    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    width: 85%;
+    padding: 0.8rem 0.5rem;
+    top: 46%;
+    transform: translate(-50%, -50%);
   }
 
   .titre-parchemin {
-    font-size: clamp(2rem, 3vw, 3rem);
-    margin-top: 1.5rem; /* Ajoute un espace au-dessus du titre */
+    font-size: 1rem;
+    line-height: 1.3;
+    padding: 0 0.5rem;
+    margin-bottom: 0.6rem;
+     text-align: center;
+  }
+
+  .button-group {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.5rem 1rem;
+    z-index: 999;
+    gap: 0.5rem;
+  }
+
+  .button-group a {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    min-width: auto;
+    border-radius: 25px;
+    box-shadow: 0 0 8px rgba(255, 223, 100, 0.6);
   }
 }
-    
+
+
+    /* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
+    @media screen and (min-width: 1024px) {
+      .layout-fees {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 3rem;
+        padding: 2rem 1rem;
+        max-width: 1400px;
+        margin: auto;
+      }
+
+      .zone-gauche {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .Fees-image {
+        max-width: 420px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+      }
+
+      .parchemin-wrapper {
+        width: 480px;
+      }
+
+      .parchemin-image {
+        width: 100%;
+      }
+
+      .texte-parchemin {
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.05rem;
+        line-height: 1.5;
+        padding: 1.2rem;
+        width: 75%;
+      }
+
+      .titre-parchemin {
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Image de l'Arène en haut -->
-  <img class="Ames-image" src="monde_Ames.png" alt="Illustration du monde d'Arenyth">
+  <div class="layout-fees">
+    <div class="zone-gauche">
+      <img class="Fees-image" src="monde_Ames.png" alt="Domaine des Ames Perdues">
 
-  <!-- Parchemin avec titre + texte -->
-  <div class="parchemin-wrapper">
-    <img class="parchemin-image" src="parchemin_vert.png" alt="Parchemin">
-
-    <div class="texte-parchemin">
-      <div class="titre-parchemin">
-        <span>🌿 Bienvenue au Monde des Ames Perdues 🌿</span>
+      <div class="button-group">
+        <a href="7.extrait_Ames.html">📖 Extrait du livre</a>
+        <a href="9.entree_Ames.html">✨ Entrée du monde</a>
+        <a href="3.les_mondes.html">← Retour aux Mondes</a>
       </div>
-      <p>
-        Un monde où les secrets murmurent encore à travers les bulles, et chaque souffle de brume révèle une âme oubliée… »
-      </p>
     </div>
-  </div>
 
-  <!-- Boutons dorés -->
-  <div class="button-group">
-    <a href="7.extrait_Ames.html">📖 Extrait du livre</a>
-    <a href="9.entree_Ames.html">✨ Entrée du monde</a>
-    <a href="3.les_mondes.html">← Retour aux Mondes</a>
+    <div class="parchemin-wrapper">
+      <img class="parchemin-image" src="parchemin_ames.png" alt="Parchemin féerique">
+      <div class="texte-parchemin">
+        <div class="titre-parchemin">🌿 Bienvenue au Monde des Ames Perdues 🌿</div>
+       <p>
+    Ce monde accueille les âmes égarées des différents royaumes d’Arzankia.<br>
+    Pour les libérer, il suffit de les ramener dans leur monde d’origine.<br>
+    Ainsi, les âmes perdues peuvent retrouver leur corps… et leur destinée.
+  </p>
+
+    </div>
   </div>
 
 </body>
