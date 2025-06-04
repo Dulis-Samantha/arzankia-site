@@ -92,17 +92,12 @@
   box-shadow: 0 0 16px rgba(255, 223, 100, 1);
 }
 
-
-    @media screen and (max-width: 600px) {
-      .extrait {
-        text-align: left;
-      }
       .extrait h1 {
         font-size: 1.2rem;
-        white-space: nowrap;
         margin: 1rem 0;
+        white-space: normal;
       }
-    }
+
 
     @media screen and (min-width: 1024px) {
       .extrait h1 {
@@ -114,17 +109,11 @@
     flex-direction: column;
     align-items: center;
   }
-
   .titre-mobile {
     font-size: 1.3rem !important;
     margin-bottom: 1rem;
     padding: 0 1rem;
     text-align: center;
-  }
-
-  .extrait-texte {
-    width: 100%;
-    padding: 0 1rem;
   }
 
   .extrait-texte h1 {
@@ -140,19 +129,49 @@
   }
 }
 
+/* === Ajustements responsive mobile spécifiques === */
+
+  .galerie-ames {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .galerie-ames img {
+    max-width: 90%;
+  }
+
+  .extrait-texte {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .extrait-texte h1 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .extrait-texte p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
 
   </style>
 </head>
 <body>
-<h1 class="titre-mobile">🌫️ Entrée des Âmes 🌫️</h1>
-  <h1 style="text-align: center; font-size: 2rem; color: #fbe7ff; margin-bottom: 1.5rem;">🌫️ Entrée des Âmes 🌫️</h1>
 
-  <div class="zone-gauche" style="flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
-  
-    <img src="entree_ames_mortes.jpg" alt="Entrée des Ames Mortes - Monde des Ames mortes" class="illustration">
-    <img src="entree_ames_perdues.jpg" alt="Entrée des Ames Perdues - Monde des Ames perdues" class="illustration">
-    <img src="entree_ames_volees.jpg" alt="Entrée des Ames Volées - Monde des Ames volées" class="illustration">
-    
+  <h1 class="titre-galerie">🌫️ Entrée des Âmes 🌫️</h1>
+
+  <div class="galerie-ames">
+   
+    <img src="entree_ames_mortes.jpg" alt="Entrée des Âmes Mortes" class="illustration">
+    <img src="entree_ames_perdues.jpg" alt="Entrée des Âmes Perdues" class="illustration">
+    <img src="entree_ames_volees.jpg" alt="Entrée des Âmes Volées" class="illustration">
   </div>
 
   <div class="zone-gauche">
