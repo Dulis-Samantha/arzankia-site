@@ -64,20 +64,21 @@
   text-shadow: 0 0 10px rgba(255, 240, 248, 0.5);
 }
 
-  .bouton-retour {
-    display: inline-block;
-    margin-top: 2em;
-    background: linear-gradient(145deg, #ffe9af, #f2c94c);
-    padding: 0.6em 1.2em;
-    border-radius: 12px;
-    color: #3b2a1d;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-    transition: all 0.2s ease-in-out;
-    text-align: center;
-  }
+ .bouton-retour {
+  display: block;
+  width: fit-content;
+  margin: 2em auto 1em;
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  color: #3b2a1d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
 
   .bouton-retour:hover {
     background: #c09c2c;
@@ -105,6 +106,15 @@
   .galerie-ames img {
     max-width: 90%;
   }
+  
+  .illustration-caption {
+  text-align: center;
+  font-style: italic;
+  color: #fff0f8;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
 
   /* === Responsive mobile === */
 @media screen and (max-width: 600px) {
@@ -226,10 +236,8 @@
     <img src="entree_ames_mortes.jpg" alt="Entrée du Monde des Âmes Mortes" class="illustration">
     <img src="entree_ames_perdues.jpg" alt="Entrée du Monde des Âmes Perdues" class="illustration">
     <img src="entree_ames_volees.jpg" alt="Entrée du Monde des Âmes Volées" class="illustration">
+    <p class="illustration-caption">Illustration des trois mondes des Âmes</p>
   </div>
-
-  <div class="extrait-container">
-    <img src="illustration_ames.jpg" alt="Illustration des trois mondes des Âmes">
 
     <div class="texte">
       <h2>📖 Extrait du livre – Monde des Âmes Perdues</h2>
