@@ -2,114 +2,149 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Extrait du livre – Monde des Fées</title>
+  <meta name="robots" content="noindex">
+  <title>Extrait du livre – Monde d'Arenyth</title>
   <style>
     body {
       font-family: Georgia, serif;
       background: linear-gradient(to bottom, #cde9f6, #fef8e5);
       color: #3b2a1d;
-      margin: 0;
-      padding: 0;
-    }
-
-    .contenu {
+      padding: 2em;
       max-width: 1000px;
       margin: auto;
-      padding: 1.5em;
+      border-radius: 12px;
     }
 
-    .bloc-flex {
+    .extrait-container {
       display: flex;
-      flex-direction: column; /* mobile : image au-dessus */
+      flex-direction: column;
+      gap: 2em;
     }
 
-    .image-demie-hauteur {
-      display: block;
+    .image-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+    .extrait-image {
       width: 100%;
-      height: auto;
-      object-fit: contain;
+      max-width: 100%;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      margin-bottom: 1.5em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
-    .texte-dessous {
-      padding: 1.5rem;
-      background: linear-gradient(#fdf6ed, #e0f2f8);
-      border-radius: 12px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .texte-dessous h2 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: #1d4c72;
-    }
-
-    .texte-dessous p {
-      font-size: 1.15rem;
+    .extrait-texte p {
+      font-size: 1.1em;
       line-height: 1.7;
       text-align: justify;
-      margin: 0;
+      margin-bottom: 1.5em;
     }
+h1 {
+  text-align: center;
+  color: #00779e;
+  font-size: 2em;
+  margin-bottom: 1em;
+}
 
-    /* ==== VERSION PC UNIQUEMENT ==== */
-    @media (min-width: 769px) {
-      .bloc-flex {
-        flex-direction: row; /* image à gauche */
-        gap: 2rem;
+   .bouton-retour {
+  display: block;
+  width: fit-content;
+  margin: 2em auto 1em;
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  color: #3b2a1d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
+    
+     .bouton-retour:hover {
+    background: #c09c2c;
+    color: #fff8e6;
+    box-shadow: 0 0 16px rgba(255, 223, 100, 1);
+  }
+
+    /* Bureau : image à gauche, texte à droite */
+    @media (min-width: 768px) {
+      .image-text-wrapper {
+        flex-direction: row;
         align-items: flex-start;
       }
 
-      .image-demie-hauteur {
-        width: 45%;
-        margin-bottom: 0;
+      .extrait-image {
+        width: 30%;
       }
 
-      .texte-dessous {
+      .extrait-texte {
         width: 55%;
+        padding-left: 2em;
       }
     }
+    /* Mobile : image au-dessus du texte */
+@media (max-width: 767px) {
+  .image-text-wrapper {
+    flex-direction: column;
+  }
 
-    .retour {
-      display: inline-block;
-      background: #d4af37;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      color: #3b2a1d;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-      transition: background 0.3s ease;
-    }
+  .extrait-image {
+    order: 1;
+    margin-bottom: 1em;
+  }
 
-    .retour:hover {
-      background: #c09c2c;
-    }
+  .extrait-texte {
+    order: 2;
+    max-width: 95%;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 1em;
+    border-radius: 12px;
+  }
+
+  .extrait-texte p {
+    font-size: 1.05em;
+    line-height: 1.9;
+    margin-bottom: 1.2em;
+    text-align: justify;
+    text-indent: 1em;
+  }
+
+  h1 {
+    font-size: 1em;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+  }
+}
 
   </style>
 </head>
 <body>
 
-  <div class="contenu">
-    <div class="bloc-flex">
-      <img src="extrait_Fees.png" alt="Illustration" class="image-demie-hauteur">
+  <div class="extrait-container">
+    <h1>✨La fée rouge plume✨</h1>
 
-      <div class="texte-dessous">
-        <h2>Extrait du livre – Monde des Fées</h2>
-        <p>
-          Une douce lumière dorée s’échappa des doigts de Philibert. La sphère vibra une seconde… puis disparut, ne laissant derrière elle qu’un nuage de poussière argentée, flottant un instant avant de se dissiper dans l’air.
-          Un silence profond s’installa. Puis, soudain, elle apparut. La petite fée, plus lumineuse que jamais, jaillit dans les airs en tournoyant joyeusement. Ses ailes de feu rouge étincelaient à la lumière du jour. Elle était chez elle.
-        </p>
+    <div class="image-text-wrapper">
+      <img src="extrait_Fees.png" alt="Illustration" class="extrait-image">
+
+<div class="extrait-texte">
+  <p>Une douce lumière dorée s’échappa des doigts de Philibert.</p>
+  </p>La sphère vibra une seconde… puis disparut, ne laissant derrière elle qu’un nuage de poussière argentée,flottant un instant avant de se dissiper dans l’air.</p>
+  </p>Un silence profond s’installa. Puis, soudain, elle apparut. </p>
+  </p>La petite fée, plus lumineuse que jamais, jaillit dans les airs en tournoyant joyeusement.</p>
+  </p>Ses ailes de feu rouge étincelaient à la lumière du jour. Elle était chez elle.</p>   
+</div>
+
+
       </div>
     </div>
-  </div>
-
-  <div style="text-align: center; margin-top: 2rem;">
-    <a href="8.monde_Fees.html" class="retour">← Retour au Monde des Fées</a>
+    <a href="8.monde_Fees.html" class="bouton-retour">← Retour au Monde des Fées</a>      
   </div>
 
 </body>
