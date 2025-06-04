@@ -86,6 +86,22 @@
         padding-left: 2em;
       }
     }
+    /* Mobile : image au-dessus du texte */
+@media (max-width: 767px) {
+  .image-text-wrapper {
+    flex-direction: column;
+  }
+
+  .extrait-image {
+    order: 1;
+    margin-bottom: 1em;
+  }
+
+  .extrait-texte {
+    order: 2;
+  }
+}
+
   </style>
 </head>
 <body>
