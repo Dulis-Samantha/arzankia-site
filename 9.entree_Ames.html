@@ -104,28 +104,51 @@
         font-size: 2rem;
       }
     }
+    
 @media screen and (max-width: 600px) {
-  .zone-gauche {
-    flex-direction: column;
-    align-items: center;
+  .titre-galerie {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
-  .titre-mobile {
-    font-size: 1.3rem !important;
+
+  h1.titre-mobile {
+    font-size: 1.1rem; /* plus petit qu’avant */
     margin-bottom: 1rem;
     padding: 0 1rem;
     text-align: center;
   }
+}
+
+
+  h1.titre-mobile {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    line-height: 1.3;
+  }
+
+  .extrait-texte {
+    width: 100%;
+    padding: 0 1rem;
+  }
 
   .extrait-texte h1 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    text-align: center;
     margin-bottom: 1rem;
-    white-space: normal;
   }
 
   .extrait-texte p {
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1.2em;
+    text-align: left;
+  }
+
+  .bouton-retour {
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
   }
 }
 
@@ -144,6 +167,14 @@
   .galerie-ames img {
     max-width: 90%;
   }
+    
+    .titre-galerie {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fbe7ff;
+  margin-bottom: 1.5rem;
+}
+
 
   .extrait-texte {
     width: 100%;
@@ -174,10 +205,6 @@
     <img src="entree_ames_volees.jpg" alt="Entrée des Âmes Volées" class="illustration">
   </div>
 
-  <div class="zone-gauche">
-    <a href="8.monde_Ames.html" class="bouton-retour">← Retour au Monde des Ames Perdues</a>
-  </div>
-
   <div class="extrait-texte">
     <h1>📖 Extrait du monde des Âmes Perdues</h1>
 
@@ -198,8 +225,11 @@
     <p>— Et celui-ci, c’est le Monde des Âmes Perdues. C’est là que nous allons.</p>
 
     <p>Nous nous approchâmes de la base de l’arbre. Une vieille plateforme en bois grinça sous nos pas : un monte-charge rudimentaire. Philibert m’aida à grimper. Il tira sur la corde pour nous élever lentement jusqu’à une cabane perchée dans les branches.</p>
-  </div>
-
+ 
+<div style="text-align: center;">
+  <a href="8.monde_Ames.html" class="bouton-retour">← Retour au Monde des Ames Perdues</a>
+</div>
+    
 </body>
 
 </html>
