@@ -99,28 +99,55 @@
   }
 
   /* === Responsive mobile === */
-  @media screen and (max-width: 600px) {
-    .titre-galerie {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
+@media screen and (max-width: 600px) {
 
-    .extrait-texte h1 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .extrait-texte p {
-      font-size: 1rem;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .bouton-retour {
-      font-size: 0.9rem;
-      padding: 0.5em 1em;
-    }
+  .titre-galerie {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: center;
   }
+
+  .zone-gauche {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .illustration {
+    width: 90%;
+    max-width: 320px;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  }
+
+  .extrait-texte {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .extrait-texte h1 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .extrait-texte p {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 1.2em;
+  }
+
+  .bouton-retour {
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
+    margin: 2rem auto 1rem;
+    display: block;
+    width: fit-content;
+    text-align: center;
+  }
+}
+
 
   /* === Responsive desktop (images côte à côte) === */
   @media screen and (min-width: 768px) {
@@ -154,29 +181,20 @@
     <img src="entree_ames_volees.jpg" alt="Entrée des Âmes Volées" class="illustration">
   </div>
 
-  <div class="extrait-texte">
-    <h1>📖 Extrait du monde des Âmes Perdues</h1>
+  <div class="extrait-container">
+  <img src="illustration_ames.jpg" alt="La chute incroyable">
+  
+  <div class="texte">
+    <h1>📖 Extrait du livre – Monde des Âmes Perdues</h1>
 
-    <p>Philibert s’arrêta devant trois immenses arbres, reliés entre eux par d’étranges passerelles en bois suspendues. Leurs troncs étaient si épais qu’on aurait pu y creuser une maison entière. Une atmosphère étrange flottait autour d’eux, comme si le vent lui-même retenait son souffle.</p>
+    <p>Philibert sortit son sou percé de sa poche, le fit tournoyer entre ses doigts, puis le lança dans les airs.</p>
+    <p>Au moment où il le rattrapa, une lueur éclatante se répandit dans toute la pièce, enveloppant les murs d’une lumière dorée.</p>
+    <p>Soudain, le plancher se déroba sous nos pieds. Nous fûmes aspirés comme dans un terrier de lapin géant, glissant à toute allure dans un tunnel en spirale.</p>
+    <p>La descente était raide, si rapide que mes cris se mélangeaient aux courants d’air. Chaque virage me faisait bondir le cœur mais j’essayais tant bien que mal de garder les yeux ouverts.</p>
+    <p>Enfin, après un dernier tourbillon, nous fûmes projetés à la sortie de la galerie. Devant nous se dressait un immense portail, ancien, couvert de racines et de symboles gravés.</p>
+  </div>
 
-    <p>— Ce sont trois mondes différents, me dit Philibert en désignant les arbres, mais ils fonctionnent à peu près de la même manière.</p>
-
-    <p>Il montra celui de gauche, dont l’écorce semblait sombre, presque bleutée.</p>
-
-    <p>— Celui-ci, c’est le Monde des Âmes Mortes. C’est le mien.</p>
-
-    <p>Il désigna ensuite l’arbre de droite, plus tordu, au feuillage plus pâle.</p>
-
-    <p>— Là, c’est le Monde des Âmes Volées.</p>
-
-    <p>Et enfin, il posa la main sur le tronc du milieu, recouvert de mousses argentées.</p>
-
-    <p>— Et celui-ci, c’est le Monde des Âmes Perdues. C’est là que nous allons.</p>
-
-    <p>Nous nous approchâmes de la base de l’arbre. Une vieille plateforme en bois grinça sous nos pas : un monte-charge rudimentaire. Philibert m’aida à grimper. Il tira sur la corde pour nous élever lentement jusqu’à une cabane perchée dans les branches.</p>
- 
-<div style="text-align: center;">
-  <a href="8.monde_Ames.html" class="bouton-retour">← Retour au Monde des Ames Perdues</a>
+  <a href="8.monde_Ames.html" class="bouton-retour">← Retour au Monde des Âmes Perdues</a>
 </div>
     
 </body>
