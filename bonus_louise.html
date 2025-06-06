@@ -36,6 +36,43 @@
       box-shadow: 0 0 20px rgba(173, 239, 255, 0.3);
     }
 
+    .extrait-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.extrait-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(173, 239, 255, 0.3);
+}
+
+.extrait-texte {
+  max-width: 700px;
+  font-style: italic;
+  font-size: 1.2em;
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* Version PC : image à gauche, texte à droite */
+@media screen and (min-width: 768px) {
+  .extrait-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .extrait-texte {
+    margin-left: 2rem;
+  }
+}
+
     .retour {
       margin-top: 3em;
     }
@@ -79,9 +116,6 @@
     .coquillage-button:hover {
       background-color: #e0f0ff;
     }
-    
-
-
 
   </style>
 </head>
@@ -90,19 +124,20 @@
 
   <h1>🌊 Bienvenue dans le Monde des Sirènes</h1>
 
-  <p style="font-style: italic; line-height: 1.7;">
-« Comme Raphaël n’est pas passé par mon arbre, tu n’as pas eu la chance de le découvrir...<br><br>
+<div class="extrait-container">
+  <div class="extrait-image">
+    <img src="entree_sirene.png" alt="Entrée du Monde des Sirènes" class="image-entree">
+  </div>
 
-Mais puisque tu as l’œil affûté d’un Chercheur, je vais te révéler ce que j’ai vu. Lorsque je me suis approché de mon arbre, un murmure marin s’est élevé, semblable au chant des vagues qu’on entend lorsqu’on colle l’oreille contre un coquillage.<br><br>
-
-En posant ma main sur l’écorce, celle-ci s’est couverte de coquillages aux mille et une couleurs. Dans un frémissement léger, les coquillages se sont détachés un à un, tombant au sol pour se désagréger en grains de sable étincelants.<br><br>
-
-C’est alors qu’un symbole s’est dessiné sur le tronc : un oublion. Quand je suis passé de l’autre côté... j’étais sur l’île de Zouppiocéan. »
-</p>
-
-
-  <img src="entree_sirene.png" alt="Entrée du Monde des Sirènes" class="image-entree">
-
+  <div class="extrait-texte">
+    <p>
+      « Comme Raphaël n’est pas passé par mon arbre, tu n’as pas eu la chance de le découvrir...<br><br>
+      Mais puisque tu as l’œil affûté d’un Chercheur, je vais te révéler ce que j’ai vu. Lorsque je me suis approché de mon arbre, un murmure marin s’est élevé, semblable au chant des vagues qu’on entend lorsqu’on colle l’oreille contre un coquillage.<br><br>
+      En posant ma main sur l’écorce, celle-ci s’est couverte de coquillages aux mille et une couleurs. Dans un frémissement léger, les coquillages se sont détachés un à un, tombant au sol pour se désagréger en grains de sable étincelants.<br><br>
+      C’est alors qu’un symbole s’est dessiné sur le tronc : un oublion. Quand je suis passé de l’autre côté... j’étais sur l’île de Zouppiocéan. »
+    </p>
+  </div>
+</div>
   
   <!-- Question en gras et centrée -->
 <p style="text-align: center; font-weight: bold; margin-top: 2rem;">
