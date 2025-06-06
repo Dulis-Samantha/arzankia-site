@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+   <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrée du Monde des Sirènes</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2em 1em;
+      background: linear-gradient(to bottom, #011827, #04364a);
+      font-family: Georgia, serif;
+      color: #e0faff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      color: #a4ebf3;
+      margin-bottom: 1.5em;
+    }
+
+    .texte-intro {
+      max-width: 800px;
+      margin: 0 auto 2em;
+      font-size: 1.2em;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .image-entree {
+      max-width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(173, 239, 255, 0.3);
+    }
+
+    .retour {
+      margin-top: 3em;
+    }
+
+    .retour a {
+      text-decoration: none;
+      color: #ccf;
+      font-weight: bold;
+    }
+
+    .retour a:hover {
+      text-decoration: underline;
+    }
+
+    /* ✅ STYLES du bouton et paragraphe caché */
+    #explicationCoquillage {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      margin-top: 1em;
+    }
+
+    #explicationCoquillage.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .coquillage-button {
+      background-color: #f0f8ff;
+      border: 2px solid #99ccff;
+      padding: 0.6em 1em;
+      font-family: 'Georgia', serif;
+      font-size: 1em;
+      color: #003366;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #99ccff;
+      transition: background-color 0.3s ease;
+    }
+
+    .coquillage-button:hover {
+      background-color: #e0f0ff;
+    }
+    
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <h1>🌊 Bienvenue dans le Monde des Sirènes</h1>
+
+  <p style="font-style: italic; line-height: 1.7;">
+« Comme Raphaël n’est pas passé par mon arbre, tu n’as pas eu la chance de le découvrir...<br><br>
+
+Mais puisque tu as l’œil affûté d’un Chercheur, je vais te révéler ce que j’ai vu. Lorsque je me suis approché de mon arbre, un murmure marin s’est élevé, semblable au chant des vagues qu’on entend lorsqu’on colle l’oreille contre un coquillage.<br><br>
+
+En posant ma main sur l’écorce, celle-ci s’est couverte de coquillages aux mille et une couleurs. Dans un frémissement léger, les coquillages se sont détachés un à un, tombant au sol pour se désagréger en grains de sable étincelants.<br><br>
+
+C’est alors qu’un symbole s’est dessiné sur le tronc : un oublion. Quand je suis passé de l’autre côté... j’étais sur l’île de Zouppiocéan. »
+</p>
+
+
+  <img src="entree_sirene.png" alt="Entrée du Monde des Sirènes" class="image-entree">
+
+  
+  <!-- Question en gras et centrée -->
+<p style="text-align: center; font-weight: bold; margin-top: 2rem;">
+  Veux-tu savoir pourquoi on entend la mer lorsque l'on colle notre oreille contre un coquillage ?
+</p>
+
+<!-- Bouton interactif -->
+<div style="text-align: center; margin: 1rem 0;">
+  <button id="toggleButton" onclick="toggleExplication()" class="coquillage-button">
+    🐚 Clique ici
+  </button>
+</div>
+
+<!-- Texte caché qui apparaîtra -->
+<div id="explicationCoquillage">
+  <p style="max-width: 700px; margin: 0 auto; font-style: italic;">
+    Ce que tu entends, ce n’est pas la mer elle-même, mais le bruit amplifié de ton environnement. Le coquillage agit comme une caisse de résonance : il capte les sons ambiants et les fait vibrer dans sa forme incurvée, créant ce murmure qui rappelle le chant des vagues. Étonnant, non ?
+  </p>
+</div>
+
+  <div class="retour">
+    <a href="3.les_heros.html">← Retour aux héros</a>
+  </div>
+
+ <script>
+function toggleExplication() {
+  const texte = document.getElementById('explicationCoquillage');
+  const bouton = document.getElementById('toggleButton');
+
+  if (texte.classList.contains('show')) {
+    texte.classList.remove('show');
+    setTimeout(() => {
+      texte.style.display = 'none';
+      bouton.textContent = '🐚 Clique ici';  // ✅ ici la correction
+    }, 300); // correspond à une disparition rapide
+  } else {
+    texte.style.display = 'block';
+    setTimeout(() => {
+      texte.classList.add('show');
+      bouton.textContent = '🐚 Refermer';
+    }, 10); // permet l'animation
+  }
+}
+</script>
+  <script>
+function ecrireTexte(texte, elementId, delay = 100) {
+  const element = document.getElementById(elementId);
+  let i = 0;
+  function taper() {
+    if (i < texte.length) {
+      element.textContent += texte.charAt(i);
+      i++;
+      setTimeout(taper, delay);
+    }
+  }
+  taper();
+}
+
+// ⏳ Lancer l'effet 1 seconde après le chargement (modifiable)
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    ecrireTexte("✨ Le voile s’est ouvert...", "voileTexte", 120);
+  }, 1000); // délai initial avant début d'apparition
+});
+</script>
+
+
+
+</body>
+</html>
