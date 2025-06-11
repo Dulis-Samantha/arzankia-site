@@ -17,6 +17,11 @@
       text-shadow: 1px 1px 4px #000;
     }
 
+    .fond-esteban {
+      background: url('photo_esteban.png') center top no-repeat !important;
+      background-size: cover !important;
+    }
+
     .container {
       max-width: 900px;
       margin: auto;
@@ -112,6 +117,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>🌟 Estéban </h1>
@@ -133,30 +139,35 @@
         <button onclick="checkAnswer('q1', false)">12 ans</button>
         <button onclick="checkAnswer('q1', false)">14 ans</button>
       </div>
+
       <div id="q2" class="question">
         <p>De quel monde vient Esteban ?</p>
         <button onclick="checkAnswer('q2', false)">Monde des Quacks</button>
         <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button>
         <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button>
       </div>
+
       <div id="q3" class="question">
         <p>Comment s'appelle sa dragonne ?</p>
         <button onclick="checkAnswer('q3', false)">Zyra</button>
         <button onclick="checkAnswer('q3', true)">Mililou</button>
         <button onclick="checkAnswer('q3', false)">Brisella</button>
       </div>
+
       <div id="q4" class="question">
         <p>Qui est le frère d'Esteban ?</p>
         <button onclick="checkAnswer('q4', false)">Kelyan</button>
         <button onclick="checkAnswer('q4', true)">Antony</button>
         <button onclick="checkAnswer('q4', false)">Nino</button>
       </div>
+
       <div id="q5" class="question">
         <p>Qui est le meilleur ami d'Esteban ?</p>
         <button onclick="checkAnswer('q5', true)">Kelyan</button>
         <button onclick="checkAnswer('q5', false)">Antony</button>
         <button onclick="checkAnswer('q5', false)">Nino</button>
       </div>
+
       <div id="q6" class="question">
         <p>Quelle est la clé d'Esteban ?</p>
         <button onclick="checkAnswer('q6', false)">Boussole</button>
@@ -176,7 +187,6 @@
 
       <div id="success-message">✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨</div>
 
-      <!-- 🔁 Bouton Rejouer -->
       <div id="replay-button" style="display: none; margin-top: 1.5em;">
         <button onclick="restartQuiz()" style="padding: 0.7em 1.5em; background-color: #ffe18a; border: none; border-radius: 8px; font-family: Georgia, serif; font-size: 1em; cursor: pointer; box-shadow: 0 0 10px #ffd700;">
           🔁 Rejouer le quiz
@@ -199,6 +209,7 @@
         document.getElementById("success-message").style.display = "block";
         document.getElementById("estebanInfo").style.display = "block";
         document.getElementById("replay-button").style.display = "block";
+        document.body.classList.add("fond-esteban");
         const allQuestions = document.querySelectorAll(".question");
         allQuestions.forEach(q => q.style.display = "none");
       }
@@ -220,6 +231,7 @@
         document.getElementById("success-message").style.display = "block";
         document.getElementById("estebanInfo").style.display = "block";
         document.getElementById("replay-button").style.display = "block";
+        document.body.classList.add("fond-esteban");
         localStorage.setItem("quizEstebanDone", "true");
       }
     }
@@ -234,6 +246,7 @@
       document.getElementById("estebanInfo").style.display = "none";
       document.getElementById("replay-button").style.display = "none";
 
+      document.body.classList.remove("fond-esteban");
       localStorage.removeItem("quizEstebanDone");
     }
 
