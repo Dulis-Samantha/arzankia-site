@@ -29,7 +29,7 @@
 }
 
     body {
-      background: url('fond_protecteur.png') no-repeat center center fixed;
+      background: url('fond-marinsombre.png') no-repeat center center fixed;
       background-size: cover;
       font-family: Georgia, serif;
       color: #fff8e6;
@@ -58,6 +58,18 @@
       font-size: 1.2em;
       margin-top: 1.5em;
     }
+        .image-hero {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
+      margin-bottom: 2em;
+    }
+     .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2em;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -66,6 +78,14 @@
     <div class="type" id="type"></div>
     <p class="description" id="description"></p>
   </div>
+  
+  <div class="container">
+    <h1>🌟 PROCTECTEUR </h1>
+
+    <!-- Image du héros -->
+    <img src="fond_prctecteur.png" alt="symbole : Les ailes d'Anges" class="image-hero">
+
+    </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
