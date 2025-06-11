@@ -2,33 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Les Héros d’Arzankia</title>
   <style>
-    .back-button {
-  display: block;
-  text-align: center;
-  margin-top: 3em;
-}
-
-.back-button a {
-  background-color: #ffffffcc;
-  color: #333;
-  padding: 0.7em 1.4em;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  transition: all 0.3s ease;
-}
-
-.back-button a:hover {
-  background-color: #fff;
-  color: #000;
-  box-shadow: 0 0 15px #fff;
-}
-
     body {
       background-image: url('fond_heros.png');
       background-size: cover;
@@ -63,170 +40,153 @@
     }
 
     .hero-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
 
-.hero-buttons a {
-  background: linear-gradient(145deg, #7a3e1d, #c1762f); /* dégradé cuivré profond */
-  color: #ffd75e; /* doré lumineux */
-  padding: 0.7em 1em;
-  border-radius: 1rem;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: center;
-  text-shadow: 1px 1px 2px #5a3100;
-  box-shadow:
-    inset 0 0 10px rgba(255, 200, 100, 0.4),
-    0 0 8px rgba(160, 80, 20, 0.5);
-  transition: all 0.3s ease;
-}
-
-.hero-buttons a:hover {
-  background: linear-gradient(145deg, #d48638, #f2a755);
-  color: #fff4c2;
-  box-shadow:
-    0 0 15px rgba(255, 220, 150, 0.6),
-    inset 0 0 10px rgba(255, 220, 150, 0.6);
-  transform: scale(1.05);
-}
-
-    .hero-buttons a::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 245, 225, 0.95);
-      color: #352e18;
+    .hero-buttons a {
+      background: linear-gradient(145deg, #7a3e1d, #c1762f);
+      color: #ffd75e;
       padding: 0.7em 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 8px #ffc76d;
-      white-space: nowrap;
-      font-family: 'Georgia', serif;
-      font-size: 0.95rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 10;
-    }
-
-    .hero-buttons a:hover::after {
-      opacity: 1;
-    }
-
-    .back-button {
-      text-align: center;
-      margin-top: 3em;
-    }
-
-    .back-button a {
-      display: inline-block;
-      background: linear-gradient(135deg, #fff6c1, #ffe18a);
-      color: #3a2f00;
-      font-weight: bold;
+      border-radius: 1rem;
       text-decoration: none;
-      padding: 0.8em 1.6em;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #ffeba0;
+      font-weight: bold;
+      font-size: 1rem;
+      text-align: center;
+      text-shadow: 1px 1px 2px #5a3100;
+      box-shadow:
+        inset 0 0 10px rgba(255, 200, 100, 0.4),
+        0 0 8px rgba(160, 80, 20, 0.5);
       transition: all 0.3s ease;
     }
 
-    .back-button a:hover {
-      background: #fff2b0;
-      box-shadow: 0 0 20px #fff8c6;
+    .hero-buttons a:hover {
+      background: linear-gradient(145deg, #d48638, #f2a755);
+      color: #fff4c2;
+      box-shadow:
+        0 0 15px rgba(255, 220, 150, 0.6),
+        inset 0 0 10px rgba(255, 220, 150, 0.6);
       transform: scale(1.05);
     }
 
     .footer-buttons {
-  background: linear-gradient(to bottom, #fff3c4, #f7e49c);
-  padding: 1em;
-  text-align: center;
-  margin-top: 3em;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      flex-wrap: wrap;
+      background: linear-gradient(to bottom, #fff3c4, #f7e49c);
+      padding: 1em;
+      text-align: center;
+      margin-top: 3em;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
 
-.footer-buttons a {
-  display: inline-block;
-  margin: 0.5em 1em;
-  padding: 0.7em 1.4em;
-  background-color: #fff3c4;
-  color: #000;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  box-shadow: 0 0 8px #a97f00;
-}
+    .footer-buttons a {
+      display: inline-block;
+      margin: 0.5em 1em;
+      padding: 0.7em 1.4em;
+      background-color: #fff3c4;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 8px #a97f00;
+    }
 
-.footer-buttons a:hover {
-  background-color: #ffe678;
-}
+    .footer-buttons a:hover {
+      background-color: #ffe678;
+    }
+
+    #btn-secret {
+      font-size: 1.5em;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      background: #ffe066;
+      color: #3a2f00;
+      border: none;
+      box-shadow: 0 0 10px #ffd700;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #btn-secret:hover {
+      transform: scale(1.1);
+    }
+
+    #bloc-cle-alicia {
+      display: none;
+      text-align: center;
+      margin-top: 2em;
+    }
 
     .quiz-button {
-  text-align: center;
-  margin-top: 3em;
-}
+      text-align: center;
+      margin-top: 3em;
+    }
 
-.quiz-button a {
-  display: inline-block;
-  padding: 1em 2em;
-  background-color: #ffe98a;
-  color: #3a2f00;
-  font-weight: bold;
-  border-radius: 12px;
-  text-decoration: none;
-  box-shadow: 0 0 10px #ffeb9e;
-  max-width: 90vw;
-  word-wrap: break-word;
-  white-space: normal;
-}
+    .quiz-button a {
+      display: inline-block;
+      padding: 1em 2em;
+      background-color: #ffe98a;
+      color: #3a2f00;
+      font-weight: bold;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 0 10px #ffeb9e;
+      max-width: 90vw;
+      word-wrap: break-word;
+      white-space: normal;
+    }
 
-   /* Responsive mobile */
-@media screen and (max-width: 600px) {
-  .container {
-    padding: 1rem;
-  }
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 1rem;
+      }
 
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1.2rem;
-  }
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+      }
 
-  p.intro {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
+      p.intro {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
 
-  .hero-buttons {
-    gap: 0.6rem;
-  }
+      .hero-buttons {
+        gap: 0.6rem;
+      }
 
-  .hero-buttons a {
-    flex: 1 1 100%;
-    text-align: center;
-    padding: 0.9em;
-    font-size: 1rem;
-  }
+      .hero-buttons a {
+        flex: 1 1 100%;
+        text-align: center;
+        padding: 0.9em;
+        font-size: 1rem;
+      }
 
-  .quiz-button a {
-    font-size: 1rem;
-    padding: 1em;
-  }
+      .quiz-button a {
+        font-size: 1rem;
+        padding: 1em;
+      }
 
-  .footer-buttons a {
-    display: block;
-    margin: 0.5em auto;
-    max-width: 90%;
-  }
-}
- 
-</style>
+      .footer-buttons a {
+        display: block;
+        margin: 0.5em auto;
+        max-width: 90%;
+      }
+
+      #btn-secret {
+        margin-top: 1em;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -246,50 +206,40 @@
       <a href="ci_maxime.html">Maxime</a>
       <a href="ci_lizea.html">Lizéa</a>
       <a href="ci_paola.html">Princesse mystérieuse</a>
-    </div> <!-- ✅ fermeture de hero-buttons ici -->
-
+    </div>
 
     <div class="quiz-button">
-  <a href="quel_heros_es_tu.html">
-    🧩 Fais le test : Quel héros es-tu ?
-  </a>
-</div>
+      <a href="quel_heros_es_tu.html">🧩 Fais le test : Quel héros es-tu ?</a>
+    </div>
 
     <div class="footer-buttons">
       <a href="1.accueil.html">← Retour à l’accueil</a>
       <a href="2.les_coulisses.html">← Retour aux Coulisses d’Arzankia</a>
-          <!-- Bouton d'accès secret Alicia -->
-<div id="cle-alicia-zone" style="text-align: center; margin-top: 4em;">
-  <button onclick="ouvrirBlocCleAlicia()" style="font-size: 1.5em; border-radius: 50%; width: 50px; height: 50px; background: #ffe066; color: #3a2f00; border: none; box-shadow: 0 0 10px #ffd700; cursor: pointer;">
-    ?
-  </button>
-
-  <div id="bloc-cle-alicia" style="display: none; margin-top: 2em;">
-    <p style="font-size: 1.1em;">Tape le mot magique pour débloquer la fiche d'Alicia #TomeI.5:</p>
-    <input type="text" id="mot-cle-alicia" placeholder="mot magique..." style="padding: 0.6em 1em; border-radius: 8px; border: none; font-size: 1em;">
-    <button onclick="verifierCleAlicia()" style="padding: 0.6em 1.2em; margin-left: 0.5em; background: #ffe066; color: #000; font-weight: bold; border-radius: 8px; border: none; cursor: pointer;">OK</button>
-  </div>
-</div>
-
-<script>
-  function ouvrirBlocCleAlicia() {
-    document.getElementById("bloc-cle-alicia").style.display = "block";
-    document.querySelector("#cle-alicia-zone button").style.display = "none";
-  }
-
-  function verifierCleAlicia() {
-    const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
-    const mots = ["miroir de poche"];
-    if (mots.includes(valeur)) {
-      window.location.href = "ci_alicia.html";
-    } else {
-      alert("Hmm… ce n’est pas le bon mot magique.");
-    }
-  }
-</script>
+      <button id="btn-secret" onclick="ouvrirBlocCleAlicia()">?</button>
     </div>
 
-  </div> <!-- ✅ fin de .container -->
+    <div id="bloc-cle-alicia">
+      <p style="font-size: 1.1em;">Tape le mot magique pour débloquer la fiche d'Alicia #TomeI.5 :</p>
+      <input type="text" id="mot-cle-alicia" placeholder="mot magique..." style="padding: 0.6em 1em; border-radius: 8px; border: none;">
+      <button onclick="verifierCleAlicia()" style="padding: 0.6em 1.2em; margin-left: 0.5em; background: #ffe066; color: #000; font-weight: bold; border-radius: 8px; border: none; cursor: pointer;">OK</button>
+    </div>
+  </div>
 
+  <script>
+    function ouvrirBlocCleAlicia() {
+      document.getElementById("bloc-cle-alicia").style.display = "block";
+      document.getElementById("btn-secret").style.display = "none";
+    }
+
+    function verifierCleAlicia() {
+      const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
+      const mots = ["miroir de poche", "miroir", "miroire"];
+      if (mots.includes(valeur)) {
+        window.location.href = "ci_alicia.html";
+      } else {
+        alert("Hmm… ce n’est pas le bon mot magique.");
+      }
+    }
+  </script>
 </body>
 </html>
