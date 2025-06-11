@@ -261,18 +261,25 @@
 
   </div> <!-- ✅ fin de .container -->
   
-<!-- Déverrouillage fiche Alicia -->
-<div id="cle-alicia" style="text-align: center; margin-top: 4em;">
-  <img src="b4978818-c7f3-4f2c-9e56-279f468ec4ff.png" alt="Icône Clé" style="width: 60px; border-radius: 50%; box-shadow: 0 0 20px #ffe066; margin-bottom: 1em;" onclick="document.getElementById('bloc-cle-alicia').style.display='block'; this.style.display='none';" />
-  
-  <div id="bloc-cle-alicia" style="display: none;">
-    <p>Tape le mot magique pour débloquer un héros oublié :</p>
+<!-- Bouton d'accès secret Alicia -->
+<div id="cle-alicia-zone" style="text-align: center; margin-top: 4em;">
+  <button onclick="ouvrirBlocCleAlicia()" style="font-size: 1.5em; border-radius: 50%; width: 50px; height: 50px; background: #ffe066; color: #3a2f00; border: none; box-shadow: 0 0 10px #ffd700; cursor: pointer;">
+    ?
+  </button>
+
+  <div id="bloc-cle-alicia" style="display: none; margin-top: 2em;">
+    <p style="font-size: 1.1em;">Tape le mot magique pour débloquer un héros oublié :</p>
     <input type="text" id="mot-cle-alicia" placeholder="mot magique..." style="padding: 0.6em 1em; border-radius: 8px; border: none; font-size: 1em;">
     <button onclick="verifierCleAlicia()" style="padding: 0.6em 1.2em; margin-left: 0.5em; background: #ffe066; color: #000; font-weight: bold; border-radius: 8px; border: none; cursor: pointer;">OK</button>
   </div>
 </div>
 
 <script>
+  function ouvrirBlocCleAlicia() {
+    document.getElementById("bloc-cle-alicia").style.display = "block";
+    document.querySelector("#cle-alicia-zone button").style.display = "none";
+  }
+
   function verifierCleAlicia() {
     const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
     const mots = ["miroir", "miroire", "miroir de poche"];
@@ -283,6 +290,7 @@
     }
   }
 </script>
+
 
 </body>
 </html>
