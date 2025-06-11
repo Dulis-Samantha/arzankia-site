@@ -268,7 +268,7 @@
   </button>
 
   <div id="bloc-cle-alicia" style="display: none; margin-top: 2em;">
-    <p style="font-size: 1.1em;">Tape le mot magique pour débloquer un héros oublié :</p>
+    <p style="font-size: 1.1em;">Tape le mot magique pour débloquer la fiche d'Alicia #TomeI.5:</p>
     <input type="text" id="mot-cle-alicia" placeholder="mot magique..." style="padding: 0.6em 1em; border-radius: 8px; border: none; font-size: 1em;">
     <button onclick="verifierCleAlicia()" style="padding: 0.6em 1.2em; margin-left: 0.5em; background: #ffe066; color: #000; font-weight: bold; border-radius: 8px; border: none; cursor: pointer;">OK</button>
   </div>
@@ -282,7 +282,7 @@
 
   function verifierCleAlicia() {
     const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
-    const mots = ["miroir", "miroire", "miroir de poche"];
+    const mots = ["miroir de poche"];
     if (mots.includes(valeur)) {
       window.location.href = "ci_alicia.html";
     } else {
