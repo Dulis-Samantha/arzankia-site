@@ -126,7 +126,7 @@
   <div class="container">
     <h1>🌟 Estéban </h1>
 
-    <div class="parchemin" style="margin-top: 3em;">
+    <div id="intro-quiz" class="parchemin" style="margin-top: 3em;">
       <p><strong>💫 Déverrouille le portrait d'Esteban</strong></p>
       <p>Pour faire apparaître le véritable portrait d’Esteban, tu devras répondre à 6 questions liées à sa vie, ses liens et ses secrets.</p>
       <p>Seras-tu capable de toutes les retrouver ?</p>
@@ -207,15 +207,19 @@
     const quizEstebanDone = localStorage.getItem("quizEstebanDone");
 
     document.addEventListener("DOMContentLoaded", function () {
-      if (quizEstebanDone === "true") {
-        document.getElementById("estebanFinal").style.display = "block";
-        document.getElementById("success-message").style.display = "block";
-        document.getElementById("estebanInfo").style.display = "block";
-        document.getElementById("replay-button").style.display = "block";
-        document.body.classList.add("fond-esteban");
-        const allQuestions = document.querySelectorAll(".question");
-        allQuestions.forEach(q => q.style.display = "none");
-      }
+  if (quizEstebanDone === "true") {
+  document.getElementById("estebanFinal").style.display = "block";
+  document.getElementById("success-message").style.display = "block";
+  document.getElementById("estebanInfo").style.display = "block";
+  document.getElementById("replay-button").style.display = "block";
+  document.body.classList.add("fond-esteban");
+
+  // Masquer le bloc d'intro
+  document.getElementById("intro-quiz").style.display = "none";
+
+  const allQuestions = document.querySelectorAll(".question");
+  allQuestions.forEach(q => q.style.display = "none");
+}
     });
 
     function checkAnswer(questionId, isCorrect) {
@@ -229,14 +233,18 @@
         return;
       }
 
-      if (correctAnswers === 6) {
-        document.getElementById("estebanFinal").style.display = "block";
-        document.getElementById("success-message").style.display = "block";
-        document.getElementById("estebanInfo").style.display = "block";
-        document.getElementById("replay-button").style.display = "block";
-        document.body.classList.add("fond-esteban");
-        localStorage.setItem("quizEstebanDone", "true");
-      }
+     if (correctAnswers === 6) {
+  document.getElementById("estebanFinal").style.display = "block";
+  document.getElementById("success-message").style.display = "block";
+  document.getElementById("estebanInfo").style.display = "block";
+  document.getElementById("replay-button").style.display = "block";
+  document.body.classList.add("fond-esteban");
+
+  // Masquer le bloc d'intro
+  document.getElementById("intro-quiz").style.display = "none";
+
+  localStorage.setItem("quizEstebanDone", "true");
+}
     }
 
     function resetQuiz() {
