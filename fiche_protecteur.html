@@ -65,6 +65,12 @@
     .btn:hover {
       transform: scale(1.05);
     }
+    .texte-animé, .texte-symbole {
+  font-size: 1.2em;
+  color: #fffce6; /* couleur crème très lisible sur fond bleu */
+  text-shadow: 1px 1px 3px #000; /* pour renforcer le contraste */
+}
+
     
   </style>
 </head>
@@ -77,8 +83,10 @@
     <h1>🌟 PROTECTEUR </h1>
       </div>
   
-     <div class="description">
-    <p>Tu veilles sur les autres avec une force douce et une grande loyauté.</p>
+    </div>
+     <p id="description" class="texte-animé"></p>
+     <p>Tu veilles sur les autres avec une force douce et une grande loyauté.</p>
+     <p><span id="symbole" class="texte-symbole">Symbole : Les Ailes D’Ange</span></p>
      <p> Symbole : Les Ailes D'Ange</p>
     <img src="fond_protecteur.png" alt="symbole : Les ailes d'Anges" class="image-hero">
     </div>
@@ -92,13 +100,22 @@
       .replace(".html", "")
       .toLowerCase();
 
-    const descriptions = {
-    
-    };
-
     document.getElementById("prenom").textContent = prenom;
-    document.getElementById("type").textContent = type.charAt(0).toUpperCase() + type.slice(1);
-    document.getElementById("description").textContent = descriptions[type];
+    
+      // Animation du texte lettre par lettre
+  const texte = "Tu veilles sur les autres avec une force douce et une grande loyauté.";
+  const container = document.getElementById("description");
+  let index = 0;
+
+  function afficherLettre() {
+    if (index < texte.length) {
+      container.innerHTML += texte.charAt(index);
+      index++;
+      setTimeout(afficherLettre, 50); // Vitesse réglable
+    }
+  }
+  // Lancer l'animation après chargement de la page
+  window.onload = afficherLettre;
   </script>
   <a href="2.les_coulisses.html" target="_blank" class="btn">🌟 Les Coulisses d'Arzankia</a>
 </div>
