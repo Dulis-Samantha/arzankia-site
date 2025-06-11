@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paola – Héros d’Arzankia</title>
+  <title>Alicia – Héros d’Arzankia</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: url('photo_Alicia.png') center top no-repeat;
       background-color: #1b0f2f;
-      background-size: cover;
       font-family: Georgia, serif;
       color: #fff8e6;
       text-shadow: 1px 1px 4px #000;
@@ -31,17 +30,53 @@
       margin-bottom: 1em;
     }
 
-    .image-hero {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
-      margin-bottom: 2em;
+    /* FLIP */
+    .flip-container {
+      perspective: 1200px;
+      width: 100%;
+      max-width: 400px;
+      height: 500px;
+      margin: 2em auto;
     }
 
+    .flipper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s ease;
+      transform-style: preserve-3d;
+    }
+
+    .flip-container.clicked .flipper {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
+    }
+
+    .front img, .back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+    }
+
+    /* Parchemin */
     .parchemin {
       background: url('parchemin_fond.png') center center no-repeat;
       background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85); /* voile lisible */
+      background-color: rgba(255, 248, 230, 0.85);
       padding: 4em 2em;
       margin: auto;
       max-width: 800px;
@@ -77,11 +112,21 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🌟 Alicia </h1>
 
-    <!-- Image du héros -->
-    <img src="photo_Alicia.png" alt="Portrait d'Alicia" class="image-hero">
+  <div class="container">
+    <h1>🌟 Alicia</h1>
+
+    <!-- Effet de retournement sur image -->
+    <div class="flip-container" onclick="this.classList.toggle('clicked')">
+      <div class="flipper">
+        <div class="front">
+          <img src="photo_Alicia.png" alt="Portrait d'Alicia recto">
+        </div>
+        <div class="back">
+          <img src="photo_alicia.png" alt="Portrait d'Alicia verso">
+        </div>
+      </div>
+    </div>
 
     <!-- Texte sur parchemin -->
     <div class="parchemin">
@@ -99,5 +144,6 @@
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
   </div>
+
 </body>
 </html>
