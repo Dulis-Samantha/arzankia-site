@@ -70,6 +70,23 @@
       padding: 2em;
       text-align: center;
     }
+     .btn {
+      background-color: #ffffcc;
+      color: #000;
+      text-decoration: none;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
     
   </style>
 </head>
@@ -106,7 +123,7 @@
     document.getElementById("description").textContent = descriptions[type];
   </script>
   <div class="back-button">
-  <a href="2.les_coulisses.html">← Retour aux Coulisses d’Arzankia</a>
+  <a href="2.les_coulisses.html" target="_blank" class="btn">🌟 Les Coulisses d'Arzankia</a>
 </div>
 
 </body>
