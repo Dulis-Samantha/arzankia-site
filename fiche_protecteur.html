@@ -83,17 +83,19 @@
   <div class="card">
     <h1 id="prenom"></h1>
   </div>
-  
-  <div class="container">
-    <h1>🌟 PROTECTEUR </h1>
-  
-    </div>
-    <p id="description" class="texte-animé"></p>
-<p><span id="symbole" class="texte-symbole">Symbole : Les Ailes D’Ange</span></p>
-<img src="fond_protecteur.png" alt="symbole : Les ailes d'Anges" class="image-hero">
-<a href="2.les_coulisses.html" target="_blank" class="btn">🌟 Les Coulisses d'Arzankia</a>
-    </div>
 
+  <div class="container">
+    <h1>🌟 PROTECTEUR</h1>
+
+    <p id="description" class="texte-animé"></p>
+    <p><span id="symbole" class="texte-symbole"></span></p> <!-- VIDE pour animation -->
+
+    <img src="fond_protecteur.png" alt="symbole : Les ailes d'Anges" class="image-hero">
+
+    <a href="2.les_coulisses.html" target="_blank" class="btn">🌟 Les Coulisses d'Arzankia</a>
+  </div>
+</body>
+  
   <script>
     const params = new URLSearchParams(window.location.search);
     const prenom = params.get('prenom');
@@ -120,5 +122,5 @@
   // Lancer l'animation après chargement de la page
   window.onload = afficherLettre;
   </script>
-</body>
+
 </html>
