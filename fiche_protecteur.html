@@ -6,7 +6,7 @@
   <title>Fiche Héros</title>
   <style>
 
-  body {
+ body {
   background: url('fond_bleu_nuage.png') no-repeat center center fixed;
   background-size: cover;
   font-family: Georgia, serif;
@@ -60,17 +60,16 @@ h1 {
 }
 
 .btn {
+  display: inline-block;
   background-color: #ffffcc;
   color: #000;
   text-decoration: none;
   padding: 0.9rem 1.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border-radius: 0.8rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
+  margin-top: 2em;
   opacity: 0;
   animation: apparitionDouce 1s ease-out forwards;
   animation-delay: 1.8s;
@@ -80,7 +79,9 @@ h1 {
   transform: scale(1.05);
 }
 
-.texte-animé, .texte-symbole {
+.texte-animé,
+.texte-symbole,
+#prenom {
   font-size: 1.6em;
   font-weight: bold;
   color: #fffdf2;
@@ -88,20 +89,19 @@ h1 {
   line-height: 1.5em;
   margin: 1.5em auto;
   max-width: 90%;
+  min-height: 2em; /* empêche les sauts */
   opacity: 0;
   animation: apparitionDouce 1s ease-out forwards;
-}
-
-#prenom {
-  opacity: 0;
-  animation: apparitionDouce 1.2s ease-out forwards;
-  animation-delay: 0.2s;
 }
 
 .container h1 {
   opacity: 0;
   animation: apparitionDouce 1s ease-out forwards;
   animation-delay: 0.4s;
+}
+
+#prenom {
+  animation-delay: 0.2s;
 }
 
 #description {
@@ -123,7 +123,7 @@ h1 {
     transform: translateY(0);
   }
 }
-    
+
   </style>
 </head>
 <body>
