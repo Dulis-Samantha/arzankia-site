@@ -261,22 +261,28 @@
 
   </div> <!-- ✅ fin de .container -->
   
-  <div style="text-align: center; margin-top: 3em;">
-  <button onclick="afficherQuestion()" style="font-size: 1.2em; border-radius: 50%; padding: 0.4em 0.6em; background-color: #fff3c4; color: #3a2f00; border: none; box-shadow: 0 0 10px #ffd700; cursor: pointer;">
-    ?
-  </button>
+<!-- Déverrouillage fiche Alicia -->
+<div id="cle-alicia" style="text-align: center; margin-top: 4em;">
+  <img src="b4978818-c7f3-4f2c-9e56-279f468ec4ff.png" alt="Icône Clé" style="width: 60px; border-radius: 50%; box-shadow: 0 0 20px #ffe066; margin-bottom: 1em;" onclick="document.getElementById('bloc-cle-alicia').style.display='block'; this.style.display='none';" />
+  
+  <div id="bloc-cle-alicia" style="display: none;">
+    <p>Tape le mot magique pour débloquer un héros oublié :</p>
+    <input type="text" id="mot-cle-alicia" placeholder="mot magique..." style="padding: 0.6em 1em; border-radius: 8px; border: none; font-size: 1em;">
+    <button onclick="verifierCleAlicia()" style="padding: 0.6em 1.2em; margin-left: 0.5em; background: #ffe066; color: #000; font-weight: bold; border-radius: 8px; border: none; cursor: pointer;">OK</button>
+  </div>
 </div>
 
 <script>
-  function afficherQuestion() {
-    const reponse = prompt("Quel est ma clé ?").toLowerCase().trim();
-    const motsClefs = ["miroir", "miroire", "miroir de poche"];
-    if (motsClefs.includes(reponse)) {
+  function verifierCleAlicia() {
+    const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
+    const mots = ["miroir", "miroire", "miroir de poche"];
+    if (mots.includes(valeur)) {
       window.location.href = "ci_alicia.html";
     } else {
-      alert("Hmm... ce n’est pas la bonne clé.");
+      alert("Hmm… ce n’est pas le bon mot magique.");
     }
   }
 </script>
+
 </body>
 </html>
