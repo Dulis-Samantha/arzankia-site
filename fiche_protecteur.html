@@ -74,8 +74,26 @@
   margin: 1.5em auto;
   max-width: 90%;
 }
+@keyframes apparitionDouce {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+#prenom, .image-hero {
+  opacity: 0;
+  animation: apparitionDouce 1.2s ease-out forwards;
+}
 
+/* Délai pour que ça arrive progressivement */
+.image-hero {
+  animation-delay: 1s;
+}
     
   </style>
 </head>
