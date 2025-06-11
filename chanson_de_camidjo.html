@@ -75,13 +75,11 @@
   </style>
 </head>
 <body>
-  
-   <div class="bloc-contenu">
+  <div class="bloc-contenu">
     <h2>🎧 Camidjo – Le Créateur</h2>
     <p>Camidjo est le rêveur à l’origine de ce monde. Sa voix résonne encore entre les murs peints de son imagination.</p>
-
   </div>
-  
+
   <img class="Artistes-image" src="monde_Artiste.png" alt="Illustration du Monde des Artistes">
 
   <h1>🎵 Les chansons de Camidjo</h1>
@@ -91,22 +89,51 @@
     <audio controls src="camidjo_pensee.mp3"></audio>
   </div>
 
-  <div class="chanson">
-    <p>🎶 Façon de faire</p>
-    <audio controls src="camidjo_facon_de_faire.mp3"></audio>
+  <p><strong>As-tu quelque chose à me dire ?</strong></p>
+  <button onclick="demanderMot()" style="font-size: 1.5em; padding: 1em; border-radius: 50%; background: #ffe066; border: none; box-shadow: 0 0 15px #fff; cursor: pointer;">
+    🎧
+  </button>
+
+  <div id="zoneMot" style="margin-top: 2em; display: none;">
+    <p>Tape le mot magique pour débloquer le contenu :</p>
+    <input type="text" id="mot" placeholder="mot magique..." style="padding: 0.5em; border-radius: 10px;">
+    <button onclick="verifierMot()" style="padding: 0.5em 1em; margin-left: 0.5em; border-radius: 10px; background: #ffd700; border: none; cursor: pointer;">OK</button>
   </div>
 
-  <div class="chanson">
-    <p>🎶 J'en ai ma clac</p>
-    <audio controls src="camidjo_ma_clac.mp3"></audio>
-  </div>
+  <div id="contenuSecret" style="display: none; margin-top: 3em;">
+    <div class="chanson">
+      <p>🎶 J'en ai ma clac</p>
+      <audio controls src="camidjo_ma_clac.mp3"></audio>
+    </div>
 
-  <div class="chanson">
-    <p>🎶 Poussière</p>
-    <audio controls src="camidjo_poussiere.mp3"></audio>
+    <div class="chanson">
+      <p>🎶 Poussière</p>
+      <audio controls src="camidjo_poussiere.mp3"></audio>
+    </div>
+
+    <div class="chanson">
+      <p>🎶 Façon de faire</p>
+      <audio controls src="camidjo_facon_de_faire.mp3"></audio>
+    </div>
   </div>
 
   <a href="8.monde_Artistes.html" class="retour">← Retour au Monde des Artistes</a>
 
+  <script>
+    function demanderMot() {
+      document.getElementById('zoneMot').style.display = 'block';
+    }
+
+    function verifierMot() {
+      const mot = document.getElementById('mot').value.trim().toLowerCase();
+      if (mot === 'camidjo') {
+        document.getElementById('contenuSecret').style.display = 'block';
+        document.getElementById('zoneMot').style.display = 'none';
+      } else {
+        alert("Mot incorrect... Essaie encore !");
+      }
+    }
+  </script>
 </body>
+
 </html>
