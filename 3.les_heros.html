@@ -260,5 +260,23 @@
     </div>
 
   </div> <!-- ✅ fin de .container -->
+  
+  <div style="text-align: center; margin-top: 3em;">
+  <button onclick="afficherQuestion()" style="font-size: 1.2em; border-radius: 50%; padding: 0.4em 0.6em; background-color: #fff3c4; color: #3a2f00; border: none; box-shadow: 0 0 10px #ffd700; cursor: pointer;">
+    ?
+  </button>
+</div>
+
+<script>
+  function afficherQuestion() {
+    const reponse = prompt("Quel est ma clé ?").toLowerCase().trim();
+    const motsClefs = ["miroir", "miroire", "miroir de poche"];
+    if (motsClefs.includes(reponse)) {
+      window.location.href = "ci_alicia.html";
+    } else {
+      alert("Hmm... ce n’est pas la bonne clé.");
+    }
+  }
+</script>
 </body>
 </html>
