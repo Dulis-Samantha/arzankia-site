@@ -94,8 +94,6 @@
 
     <a href="2.les_coulisses.html" target="_blank" class="btn">🌟 Les Coulisses d'Arzankia</a>
   </div>
-</body>
-  
   <script>
     const params = new URLSearchParams(window.location.search);
     const prenom = params.get('prenom');
@@ -119,8 +117,24 @@
       setTimeout(afficherLettre, 50); // Vitesse réglable
     }
   }
-  // Lancer l'animation après chargement de la page
-  window.onload = afficherLettre;
-  </script>
+    // Animation du symbole
+const symboleTexte = "Symbole : Les Ailes D’Ange";
+const symboleElement = document.getElementById("symbole");
+let indexSymbole = 0;
+function afficherSymbole() {
+  if (indexSymbole < symboleTexte.length) {
+    symboleElement.innerHTML += symboleTexte.charAt(indexSymbole);
+    indexSymbole++;
+    setTimeout(afficherSymbole, 40);
+  }
+}
 
+// Lancer les animations après chargement
+window.onload = () => {
+  afficherLettre();
+  setTimeout(afficherSymbole, texte.length * 50 + 300);
+};
+
+  </script>
+</body>
 </html>
