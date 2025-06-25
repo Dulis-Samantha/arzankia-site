@@ -1,139 +1,153 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les Coulisses d’Arzankia</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+<!DOCTYPE html> <!-- Déclare que le document utilise le standard HTML5 -->
+<html lang="fr"> <!-- Indique que la langue principale du document est le français -->
 
+<head>
+  <meta charset="UTF-8"> <!-- Permet l’utilisation des caractères spéciaux (accents, etc.) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rendu adaptatif sur mobile -->
+  <title>Les Coulisses d’Arzankia</title> <!-- Titre affiché dans l'onglet du navigateur -->
+
+  <style>
     body {
-      font-family: 'Georgia', serif;
-      background-image: url('fond_coulisse_arzankia.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      color: #fffff2;
-      text-shadow: 0 0 6px #000000aa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Georgia', serif; /* Définit une police élégante de style roman */
+      margin: 0;                     /* Supprime les marges extérieures par défaut */
+      padding: 0;                    /* Supprime les espacements intérieurs par défaut */
+      background-image: url('fond_coulisse_arzankia.png'); /* Image de fond de la page */
+      background-size: cover;       /* Redimensionne l’image pour qu’elle remplisse l’écran */
+      background-repeat: no-repeat; /* Empêche l’image de se répéter */
+      background-attachment: fixed; /* Fixe l’image même quand on scrolle */
+      background-position: center;  /* Centre l’image à l’horizontale et verticale */
+      color: #fffff2;               /* Couleur ivoire très pâle pour le texte */
+      text-shadow: 0 0 6px #000000aa; /* Ajoute une ombre noire légère pour améliorer la lisibilité du texte sur l’image */
     }
 
     .logo-magique {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 60px;
-      height: 60px;
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Star_icon_stylized.svg/1024px-Star_icon_stylized.svg.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: flotti 4s ease-in-out infinite;
-      z-index: 1000;
+      position: fixed;         /* Fige l’élément en haut à gauche de l’écran */
+      top: 20px; left: 20px;   /* Position à 20px du haut et de la gauche */
+      width: 60px; height: 60px; /* Taille fixe de l’élément */
+      background-image: url('...'); /* Image utilisée comme logo */
+      background-size: contain; /* Redimensionne pour contenir l’image entière */
+      background-repeat: no-repeat; /* Empêche la répétition de l’image */
+      animation: flotti 4s ease-in-out infinite; /* Fait flotter l’élément de haut en bas */
+      z-index: 1000;          /* L’élément est au-dessus de tous les autres */
     }
 
     @keyframes flotti {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      0%, 100% { transform: translateY(0); }   /* Position initiale et finale */
+      50% { transform: translateY(-6px); }     /* L’élément monte de 6px à mi-chemin */
+    }
+
+    @keyframes glowHint {
+      0%, 100% { text-shadow: 0 0 6px #ffd700; } /* Ombre dorée douce */
+      50% { text-shadow: 0 0 15px #fffbe0, 0 0 10px #ffd700; } /* Halo plus intense */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); } /* Commence invisible et plus bas */
+      to { opacity: 1; transform: translateY(0); }       /* Devient visible en remontant */
     }
 
     .blog-box {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      max-width: 700px;
-      border-radius: 1.5rem;
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: #ffffff;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 1s ease-out;
-      text-align: justify;
+      background-color: rgba(0, 0, 0, 0.6); /* Fond noir semi-transparent */
+      padding: 2rem;                       /* Espacement interne sur tous les côtés (32px) */
+      margin: 2rem auto;                   /* Marge externe de 32px + centrage horizontal */
+      max-width: 700px;                    /* Limite la largeur maximale de la boîte */
+      border-radius: 1.5rem;               /* Coins arrondis de 24px */
+      font-size: 1.2rem;                   /* Taille de texte légèrement agrandie (~19px) */
+      line-height: 1.8;                    /* Espacement vertical entre les lignes */
+      color: #ffffff;                      /* Texte blanc */
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4); /* Ombre douce autour du bloc */
+      animation: fadeIn 1s ease-out;       /* Apparition animée fluide */
+      text-align: justify;                 /* Justifie le texte pour des bords droits nets */
     }
 
     .blog-box h2 {
-      font-size: 1.6rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      color: #ffd700;
-      text-align: center;
+      font-size: 1.6rem;       /* Taille de police du sous-titre (~25px) */
+      font-weight: bold;       /* Met le texte en gras */
+      margin-bottom: 1.5rem;   /* Espace sous le titre (~24px) */
+      color: #ffd700;          /* Doré lumineux */
+      text-align: center;      /* Centre le texte horizontalement */
     }
 
     .blog-box p {
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
+      margin-bottom: 1.2rem;   /* Espace entre les paragraphes (~19px) */
     }
 
-    .blog-box p:nth-child(2) { animation-delay: 0.5s; }
-    .blog-box p:nth-child(3) { animation-delay: 1.2s; }
-    .blog-box p:nth-child(4) { animation-delay: 2s; }
+    .secret-hint {
+      font-style: italic;                         /* Texte en italique */
+      color: #ffe9a8;                             /* Jaune pâle */
+      text-align: center;                         /* Centrage du message */
+      margin-top: 1.2rem;                         /* Espace au-dessus du message */
+      animation: glowHint 3s ease-in-out infinite;/* Animation de clignotement lumineux */
+    }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    #message-secret::after {
+      content: "|";        /* Ajoute une barre clignotante comme un curseur */
+      animation: blink 1s infinite; /* Fait apparaître/disparaître le curseur */
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-      align-items: center;
+      display: flex;            /* Active Flexbox */
+      flex-direction: column;  /* Les éléments s'empilent verticalement */
+      gap: 1rem;                /* Espace de 16px entre chaque bouton */
+      margin-top: 2rem;         /* Espace au-dessus du conteneur (~32px) */
+      align-items: center;      /* Centre les boutons horizontalement */
     }
 
     .button-container .btn {
-      background-color: #ffffcc;
-      color: #000;
-      text-decoration: none;
-      padding: 0.9rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 0.8rem;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease;
-      width: 100%;
-      max-width: 300px;
-      text-align: center;
+      background-color: #ffffcc;                   /* Fond jaune clair */
+      color: #000;                                 /* Texte noir */
+      text-decoration: none;                       /* Supprime le soulignement */
+      padding: 0.9rem 1.5rem;                       /* Espacement interne haut/bas 14px, gauche/droite 24px */
+      font-size: 1rem;                              /* Taille normale du texte (~16px) */
+      border-radius: 0.8rem;                        /* Coins arrondis (~12px) */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);      /* Ombre portée douce en dessous */
+      transition: transform 0.2s ease;              /* Animation douce lors du hover */
+      width: 100%;                                  /* Largeur complète dans le conteneur */
+      max-width: 300px;                             /* Limite maximale de largeur */
+      text-align: center;                           /* Centre le texte dans le bouton */
     }
 
     .button-container .btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.05);                       /* Grossissement léger au survol */
     }
 
     @media screen and (max-width: 768px) {
       .blog-box {
-        padding: 1.5rem;
-        font-size: 1.1rem;
-        line-height: 1.7;
+        padding: 1.5rem;        /* Réduction des marges intérieures (24px) */
+        margin: 1.2rem;         /* Réduction des marges extérieures */
+        font-size: 1.1rem;      /* Texte légèrement réduit (~17.5px) */
+        line-height: 1.7;       /* Moins d’espacement vertical */
       }
 
       .blog-box h2 {
-        font-size: 1.4rem;
+        font-size: 1.4rem;      /* Titre plus petit (~22px) */
       }
 
       .button-container .btn {
-        font-size: 0.95rem;
-        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;     /* Texte du bouton un peu réduit */
+        padding: 0.8rem 1.2rem; /* Espacement réduit sur mobile */
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="logo-magique"></div>
+  <h1 style="display:none;">Les Coulisses d’Arzankia</h1> <!-- Titre masqué, utile pour le référencement SEO -->
+
+  <div class="logo-magique"></div> <!-- Icône flottante magique -->
 
   <div class="blog-box">
-    <h1 style="display:none;">Les Coulisses d’Arzankia</h1>
     <h2>🔍 Les Coulisses d’Arzankia</h2>
-
-    <p>Bienvenue dans les coulisses du monde d’Arzankia.<br>Ici, les secrets prennent vie…</p>
+  <p>Bienvenue dans les coulisses du monde d’Arzankia.<br>Ici, les secrets prennent vie…</p>
     <p>Tu y découvriras tout ce qu’il faut savoir sur les <strong>mondes d’Arzankia</strong>,<br>les <strong>héros</strong> qui les traversent,</p>
     <p>…ainsi que des <em>anecdotes inédites</em>, des <em>révélations cachées</em>,<br>et des fragments d’histoire que peu connaissent.</p>
+    
+    <p id="message-secret" class="secret-hint"></p> <!-- Zone pour le message tapé -->
 
     <div class="button-container">
       <a href="3.les_heros.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
@@ -141,5 +155,21 @@
       <a href="1.accueil.html" class="btn">← Retour à l’accueil</a>
     </div>
   </div>
+
+  <script>
+    const message = "Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.";
+    const target = document.getElementById("message-secret");
+    let index = 0;
+
+    function writeText() {
+      if (index < message.length) {
+        target.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(writeText, 70); // Simule une écriture lettre par lettre
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", writeText); // Lance le script une fois la page chargée
+  </script>
 </body>
 </html>
