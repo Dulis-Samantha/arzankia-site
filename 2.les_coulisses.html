@@ -77,7 +77,19 @@
       margin-bottom: 1.2rem;
     }
     
- 
+ .blog-box p {
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.blog-box p:nth-child(2) { animation-delay: 0.5s; }
+.blog-box p:nth-child(3) { animation-delay: 1.2s; }
+.blog-box p:nth-child(4) { animation-delay: 2s; }
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(20px); }
+}
 
     
     .button-container {
@@ -132,11 +144,19 @@
   <div class="blog-box">
     <h2>🔍 Les Coulisses d’Arzankia</h2>
     <p>
-      Bienvenue dans les coulisses du monde d’Arzankia. Ici, les secrets prennent vie.
-Tu y découvriras tout ce qu’il faut savoir sur les mondes d’Arzankia, les héros qui les traversent…
-…ainsi que des anecdotes inédites, des révélations cachées, et des fragments d’histoire que peu connaissent.
+  Bienvenue dans les coulisses du monde d’Arzankia.<br>
+  Ici, les secrets prennent vie…
+</p>
 
-    </p>
+<p>
+  Tu y découvriras tout ce qu’il faut savoir sur les <strong>mondes d’Arzankia</strong>,<br>
+  les <strong>héros</strong> qui les traversent,
+</p>
+
+<p>
+  …ainsi que des <em>anecdotes inédites</em>, des <em>révélations cachées</em>,<br>
+  et des fragments d’histoire que peu connaissent.
+</p>
 
 
     <div class="button-container">
