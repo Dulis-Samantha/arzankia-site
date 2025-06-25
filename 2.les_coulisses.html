@@ -2,16 +2,17 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Coulisses d’Arzankia</title>
   <style>
     html, body {
-  height: 100%;
-}
-    body {
-      font-family: 'Georgia', serif;
+      height: 100%;
       margin: 0;
       padding: 0;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
       background-image: url('fond_coulisse_arzankia.png');
       background-size: cover;
       background-repeat: no-repeat;
@@ -19,9 +20,11 @@
       background-position: center;
       color: #fffff2;
       text-shadow: 0 0 6px #000000aa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Logo magique flottant */
     .logo-magique {
       position: fixed;
       top: 20px;
@@ -40,24 +43,9 @@
       50% { transform: translateY(-6px); }
     }
 
-    @keyframes glowHint {
-  0%, 100% {
-    text-shadow: 0 0 6px #ffd700;
-  }
-  50% {
-    text-shadow: 0 0 15px #fffbe0, 0 0 10px #ffd700;
-  }
-}
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .blog-box {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 2rem;
-      margin: 2rem auto;
       max-width: 700px;
       border-radius: 1.5rem;
       font-size: 1.2rem;
@@ -78,23 +66,19 @@
 
     .blog-box p {
       margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
     }
-    
- .blog-box p {
-  opacity: 0;
-  animation: fadeIn 1.5s ease forwards;
-}
 
-.blog-box p:nth-child(2) { animation-delay: 0.5s; }
-.blog-box p:nth-child(3) { animation-delay: 1.2s; }
-.blog-box p:nth-child(4) { animation-delay: 2s; }
+    .blog-box p:nth-child(2) { animation-delay: 0.5s; }
+    .blog-box p:nth-child(3) { animation-delay: 1.2s; }
+    .blog-box p:nth-child(4) { animation-delay: 2s; }
 
-@keyframes fadeIn {
-  to { opacity: 1; transform: none; }
-  from { opacity: 0; transform: translateY(20px); }
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    
     .button-container {
       display: flex;
       flex-direction: column;
@@ -121,11 +105,9 @@
       transform: scale(1.05);
     }
 
-    /* Responsive */
     @media screen and (max-width: 768px) {
       .blog-box {
         padding: 1.5rem;
-        margin: 1.2rem;
         font-size: 1.1rem;
         line-height: 1.7;
       }
@@ -139,38 +121,19 @@
         padding: 0.8rem 1.2rem;
       }
     }
-    .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 2rem;
-}
   </style>
 </head>
+
 <body>
-  
   <div class="logo-magique"></div>
-  
-  <div class="wrapper">
+
   <div class="blog-box">
     <h1 style="display:none;">Les Coulisses d’Arzankia</h1>
     <h2>🔍 Les Coulisses d’Arzankia</h2>
-    <p>
-  Bienvenue dans les coulisses du monde d’Arzankia.<br>
-  Ici, les secrets prennent vie…
-</p>
 
-<p>
-  Tu y découvriras tout ce qu’il faut savoir sur les <strong>mondes d’Arzankia</strong>,<br>
-  les <strong>héros</strong> qui les traversent,
-</p>
-
-<p>
-  …ainsi que des <em>anecdotes inédites</em>, des <em>révélations cachées</em>,<br>
-  et des fragments d’histoire que peu connaissent.
-</p>
-
+    <p>Bienvenue dans les coulisses du monde d’Arzankia.<br>Ici, les secrets prennent vie…</p>
+    <p>Tu y découvriras tout ce qu’il faut savoir sur les <strong>mondes d’Arzankia</strong>,<br>les <strong>héros</strong> qui les traversent,</p>
+    <p>…ainsi que des <em>anecdotes inédites</em>, des <em>révélations cachées</em>,<br>et des fragments d’histoire que peu connaissent.</p>
 
     <div class="button-container">
       <a href="3.les_heros.html" target="_blank" class="btn">🌟 Les Héros d’Arzankia</a>
@@ -178,8 +141,5 @@
       <a href="1.accueil.html" class="btn">← Retour à l’accueil</a>
     </div>
   </div>
-  </div>
-
-
 </body>
 </html>
