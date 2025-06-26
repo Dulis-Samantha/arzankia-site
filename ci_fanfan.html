@@ -130,7 +130,7 @@
     <img src="photo_fanfan.png" alt="Portrait de fanfan" class="image-hero">
 
     <!-- Texte sur parchemin -->
-    <div class="parchemin">
+    <div class="parchemin" id="fanfan-details" style="display: none;">
       <p><strong>Âge :</strong> 15 ans</p>
       <p><strong>Monde d’origine :</strong> Monde d'Hégaia</p>
       <p><strong>Clé d’accès :</strong> Chevalière</p>
@@ -186,48 +186,49 @@
       <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
     
-<script>
-  const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
-  let selectedCorrect = [];
-  let gameCompleted = false;
+ <script>
+      const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
+      let selectedCorrect = [];
+      let gameCompleted = false;
 
-  function resetGame() {
-    selectedCorrect = [];
-    gameCompleted = false;
-    document.querySelectorAll('.word').forEach(wordEl => {
-      wordEl.classList.remove('selected', 'correct', 'wrong');
-    });
-    document.getElementById('reveal').style.display = 'none';
-    document.getElementById('reset-btn').style.display = 'none';
-  }
-
-  document.querySelectorAll('.word').forEach(wordEl => {
-    wordEl.addEventListener('click', () => {
-      if (gameCompleted) return;
-
-      const word = wordEl.getAttribute('data-word');
-      if (wordEl.classList.contains('selected')) return;
-
-      if (correctWords.includes(word)) {
-        wordEl.classList.add('selected', 'correct');
-        selectedCorrect.push(word);
-      } else {
-        wordEl.classList.add('selected', 'wrong');
-        setTimeout(resetGame, 400); // On relance après une courte pause
-        return;
+      function resetGame() {
+        selectedCorrect = [];
+        gameCompleted = false;
+        document.querySelectorAll('.word').forEach(wordEl => {
+          wordEl.classList.remove('selected', 'correct', 'wrong');
+        });
+        document.getElementById('reveal').style.display = 'none';
+        const details = document.getElementById('fanfan-details');
+        details.style.display = 'none';
+        details.classList.remove('show');
       }
 
-      if (selectedCorrect.length === correctWords.length) {
-        gameCompleted = true;
-        document.getElementById('reveal').style.display = 'block';
-        document.getElementById('reset-btn').style.display = 'inline-block';
-      }
-    });
-  });
+      document.querySelectorAll('.word').forEach(wordEl => {
+        wordEl.addEventListener('click', () => {
+          if (gameCompleted) return;
+          const word = wordEl.getAttribute('data-word');
+          if (wordEl.classList.contains('selected')) return;
 
-  // Bouton de redémarrage
-  document.getElementById('reset-btn').addEventListener('click', resetGame);
-</script>
+          if (correctWords.includes(word)) {
+            wordEl.classList.add('selected', 'correct');
+            selectedCorrect.push(word);
+          } else {
+            wordEl.classList.add('selected', 'wrong');
+            setTimeout(resetGame, 400);
+            return;
+          }
+
+          if (selectedCorrect.length === correctWords.length) {
+            gameCompleted = true;
+            document.getElementById('reveal').style.display = 'block';
+
+            const details = document.getElementById('fanfan-details');
+            details.style.display = 'block';
+            setTimeout(() => details.classList.add('show'), 10);
+          }
+        });
+      });
+    </script>
 
 
 </body>
