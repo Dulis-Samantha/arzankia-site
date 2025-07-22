@@ -28,8 +28,8 @@
 
   <div id="definition" class="definition"></div>
 
-  <script>
-    const text = "ZOUPPIS
+<script>
+  const text = `ZOUPPIS
 ✧
 Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
 Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
@@ -37,22 +37,21 @@ Lors de grandes assemblées, ils se défiaient amicalement, organisant des conco
 Mais un jour, la magie commença à effrayer les hommes. Les murmures se firent menaces : on accusa les druides de sorcellerie, on les chassa, on les traqua… certains furent même brûlés vifs pour avoir osé protéger leur savoir.
 Conscients de la fin imminente de leur ordre, les derniers druides tinrent une ultime grande réunion. 
 Ce jour-là, ils unirent leurs forces pour créer un lieu merveilleux : un monde invisible aux yeux des humains, façonné par leurs rituels et leur volonté farouche de préserver la connaissance.
-✧
-";
+✧`;
 
-    let i = 0;
-    const speed = 40; // vitesse d'apparition (en ms)
+  let i = 0;
+  const speed = 40; // vitesse d'apparition (en ms)
 
-    function writeText() {
-      if (i < text.length) {
-        document.getElementById("definition").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(writeText, speed);
-      }
+  function writeText() {
+    if (i < text.length) {
+      document.getElementById("definition").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(writeText, speed);
     }
+  }
 
-    window.onload = writeText;
-  </script>
+  window.onload = writeText;
+</script>
 
 </body>
 </html>
