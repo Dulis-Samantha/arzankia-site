@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
+  <meta charset="UTF-8">
   <title>Lexique du Grimoire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -15,42 +13,36 @@
       background-attachment: fixed;
       font-family: 'Georgia', serif;
       color: #4b2e00;
-      font-size: 24px;
+      font-size: 22px;
       line-height: 1.6;
+      text-align: center;
       overflow-y: auto;
     }
 
     .retour {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 1.1rem;
+      display: inline-block;
+      margin-bottom: 30px;
+      font-size: 1rem;
       color: #4b2e00;
       text-decoration: none;
-      background-color: rgba(255, 255, 255, 0.5);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.4);
+      padding: 8px 14px;
+      border-radius: 10px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .retour:hover {
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-
-    .link-list {
-      max-width: 800px;
-      margin: 80px auto 40px auto;
-      text-align: center;
+      background-color: rgba(255, 255, 255, 0.7);
     }
 
     .link-list a {
-      display: block;
-      margin: 20px 0;
-      font-size: 1.6rem;
+      display: inline-block;
+      margin: 15px 0;
+      font-size: 1.7rem;
       color: #4b2e00;
       text-decoration: none;
       text-shadow: 1px 1px 1px #fff6dd;
+      opacity: 1;
       transition: transform 0.2s, color 0.2s;
     }
 
@@ -61,13 +53,13 @@
 
     @media screen and (max-width: 600px) {
       body {
-        font-size: 20px;
+        font-size: 18px;
         padding: 30px 10px;
       }
 
       .link-list a {
         font-size: 1.3rem;
-        margin: 15px 0;
+        margin: 12px 0;
       }
 
       .retour {
@@ -81,27 +73,65 @@
 
   <a href="1.accueil.html" class="retour">← Retour</a>
 
-  <div class="link-list">
-    <a href="definition_grimoire.html">LE MANUEL OU GRIMOIRE</a>
-    <a href="definition_cle.html">CLÉ D'ARZANKIA</a>
-    <a href="definition_arzanskan.html">ARZANSKÂN</a>
-    <a href="definition_zouppis.html">ZOUPPIS</a>
-    <a href="definition_nouveau_monde.html">LES NOUVEAUX MONDES</a>
-    <a href="definition_fusion.html">LA FUSION DES MONDES</a>
-    <a href="definition_chercheur.html">CHERCHEUR</a>
-    <a href="definition_protecteur.html">PROTECTEUR</a>
-    <a href="definition_magicien.html">MAGICIEN</a>
-    <a href="definition_chasseur.html">CHASSEUR</a>
-    <a href="definition_dresseur.html">DRESSEUR</a>
-    <a href="definition_aventurier.html">AVENTURIER</a>
-    <a href="definition_apprentissage.html">APPRENTISSAGE</a>
-    <a href="definition_quete.html">QUÊTE DE RAPHAËL</a>
-    <a href="definition_symbole.html">LES SYMBOLES</a>
-    <a href="definition_quetes_secondaires.html">QUÊTES SECONDAIRES</a>
-    <a href="definition_creatures.html">CRÉATURES RENCONTRÉES</a>
-    <a href="definition_eliade.html">ELIADE</a>
-    <a href="definition_trinergia.html">TRINERGIA</a>
-  </div>
+  <div class="link-list" id="lexiqueContainer"></div>
+
+  <script>
+    const lexique = [
+      ["LE MANUEL OU GRIMOIRE", "definition_grimoire.html"],
+      ["CLÉ D'ARZANKIA", "definition_cle.html"],
+      ["ARZANSKÂN", "definition_arzanskan.html"],
+      ["ZOUPPIS", "definition_zouppis.html"],
+      ["LES NOUVEAUX MONDES", "definition_nouveau_monde.html"],
+      ["LA FUSION DES MONDES", "definition_fusion.html"],
+      ["CHERCHEUR", "definition_chercheur.html"],
+      ["PROTECTEUR", "definition_protecteur.html"],
+      ["MAGICIEN", "definition_magicien.html"],
+      ["CHASSEUR", "definition_chasseur.html"],
+      ["DRESSEUR", "definition_dresseur.html"],
+      ["AVENTURIER", "definition_aventurier.html"],
+      ["APPRENTISSAGE", "definition_apprentissage.html"],
+      ["QUÊTE DE RAPHAËL", "definition_quete.html"],
+      ["LES SYMBOLES", "definition_symbole.html"],
+      ["QUÊTES SECONDAIRES", "definition_quetes_secondaires.html"],
+      ["CRÉATURES RENCONTRÉES", "definition_creatures.html"],
+      ["ELIADE", "definition_eliade.html"],
+      ["TRINERGIA", "definition_trinergia.html"]
+    ];
+
+    const container = document.getElementById("lexiqueContainer");
+    let indexMot = 0;
+    let indexLettre = 0;
+    let currentLink;
+
+    function afficherLettreParLettre() {
+      if (indexMot >= lexique.length) return;
+
+      const [texte, lien] = lexique[indexMot];
+
+      // Crée le lien si pas encore créé
+      if (!currentLink) {
+        currentLink = document.createElement("a");
+        currentLink.href = lien;
+        container.appendChild(currentLink);
+        container.appendChild(document.createElement("br"));
+      }
+
+      // Ajoute une lettre
+      if (indexLettre < texte.length) {
+        currentLink.innerHTML += texte.charAt(indexLettre);
+        indexLettre++;
+        setTimeout(afficherLettreParLettre, 30);
+      } else {
+        // Passe au mot suivant
+        indexMot++;
+        indexLettre = 0;
+        currentLink = null;
+        setTimeout(afficherLettreParLettre, 200);
+      }
+    }
+
+    window.onload = afficherLettreParLettre;
+  </script>
 
 </body>
 </html>
