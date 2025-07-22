@@ -27,22 +27,24 @@
       height: auto;
       display: block;
     }
+     
 .texte-sur-parchemin {
   position: absolute;
   top: 10%;
   left: 10%;
   right: 10%;
   bottom: 10%;
-  display: block; /* plus besoin de flex */
-  justify-content: center;     /* Centre verticalement */
-  align-items: center;         /* Centre horizontalement */
+  height: 80%; /* <- Ajout important */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   line-height: 1.6;
   text-shadow: 0 0 3px #fff6dd;
-  z-index: 10;
   pointer-events: none;
-  text-align: center;
 }
+
    .texte-sur-parchemin a {
   color: #FFD700;
   text-shadow: 1px 1px 4px #4b2e00;
