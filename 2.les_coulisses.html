@@ -73,18 +73,6 @@
       margin-bottom: 1.2rem;   /* Espace entre les paragraphes (~19px) */
     }
 
-    .secret-hint {
-      font-style: italic;                         /* Texte en italique */
-      color: #ffe9a8;                             /* Jaune pâle */
-      text-align: center;                         /* Centrage du message */
-      margin-top: 1.2rem;                         /* Espace au-dessus du message */
-      animation: glowHint 3s ease-in-out infinite;/* Animation de clignotement lumineux */
-    }
-
-    #message-secret::after {
-      content: "|";        /* Ajoute une barre clignotante comme un curseur */
-      animation: blink 1s infinite; /* Fait apparaître/disparaître le curseur */
-    }
 
     @keyframes blink {
       0%, 100% { opacity: 1; }
@@ -157,20 +145,5 @@
     </div>
   </div>
 
-  <script>
-    const message = "Certains passages secrets te mèneront à des endroits cachés du site... Ouvre bien l’œil, aventurier d’Arzankia.";
-    const target = document.getElementById("message-secret");
-    let index = 0;
-
-    function writeText() {
-      if (index < message.length) {
-        target.innerHTML += message.charAt(index);
-        index++;
-        setTimeout(writeText, 70); // Simule une écriture lettre par lettre
-      }
-    }
-
-    window.addEventListener("DOMContentLoaded", writeText); // Lance le script une fois la page chargée
-  </script>
 </body>
 </html>
