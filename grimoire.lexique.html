@@ -27,23 +27,25 @@
       height: auto;
       display: block;
     }
-     
 .texte-sur-parchemin {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  bottom: 10%;
-  height: 80%; /* <- Ajout important */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  line-height: 1.6;
-  text-shadow: 0 0 3px #fff6dd;
-  pointer-events: none;
+  position: absolute;          /* Positionne ce bloc par-dessus l'image (dans son parent relatif) */
+  top: 15%;                    /* Espace de 10% depuis le haut du parent */
+  left: 10%;                   /* Espace de 10% depuis la gauche du parent */
+  right: 10%;                  /* Espace de 10% depuis la droite du parent */
+  bottom: 10%;                 /* Espace de 10% depuis le bas du parent */
+  height: 80%;                 /* Hauteur explicite du bloc texte, nécessaire pour centrer verticalement */
+  
+  display: flex;               /* Active le système Flexbox pour l’alignement */
+  flex-direction: column;     /* Aligne les éléments enfants verticalement (en colonne) */
+  justify-content: center;    /* Centre les éléments enfants verticalement dans le bloc */
+  align-items: center;        /* Centre les éléments enfants horizontalement */
+  
+  font-size: 1.5rem;           /* Taille du texte (1.5 fois la taille de base) */
+  line-height: 2;           /* Espace vertical entre les lignes de texte */
+  text-shadow: 0 0 3px #fff6dd; /* Ombre claire autour du texte pour donner un effet lumineux */
+  pointer-events: auto;       /* Autorise les clics sur les liens à l’intérieur du bloc */
 }
+
 
  .texte-sur-parchemin a {
   color: #f5d442;
