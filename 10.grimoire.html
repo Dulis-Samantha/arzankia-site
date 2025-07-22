@@ -2,234 +2,42 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Grimoire de Raphaël</title>
+  <title>Grimoire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
     body {
       margin: 0;
       padding: 0;
       background: url('grimoire.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Georgia', serif;
-      color: #4b2e00;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      font-family: 'Georgia', serif;
     }
 
-    h1 {
-      margin-top: 20px;
-      font-size: 2rem;
-      text-shadow: 1px 1px #fff6dd;
+    a.title {
+      font-size: 3rem;
+      color: #fff6dd;
+      text-decoration: none;
+      text-shadow: 2px 2px 6px #000;
+      padding: 20px 40px;
+      border: 3px solid #fff6dd;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
     }
 
-    .buttons {
-      margin: 20px;
-      display: flex;
-      gap: 20px;
-    }
-
-    .buttons button {
-      background-color: #d7c7a3;
-      border: 2px solid #a67c52;
-      padding: 10px 20px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      border-radius: 10px;
-      box-shadow: 2px 2px 8px #00000055;
-      transition: background 0.3s;
-    }
-
-    .buttons button:hover {
-      background-color: #f5ecd7;
-    }
-
-    .definition-box {
-      background: rgba(255, 248, 220, 0.95);
-      border: 5px solid #a67c52;
-      border-radius: 20px;
-      padding: 30px;
-      width: 80%;
-      max-width: 700px;
-      min-height: 200px;
-      font-size: 1.4rem;
-      line-height: 1.8;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-      text-shadow: 1px 1px #fff6dd;
-      display: none;
-      white-space: pre-wrap;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    a.title:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-  <h1>📖 Grimoire de Raphaël</h1>
-
-  <div class="buttons">
-   
- <div class="buttons">
-  <button onclick="afficherDefinition('ZOUPPIS')">ZOUPPIS</button>
-  <button onclick="afficherDefinition('DISPARITION_FEMELLES')">LA DISPARITION DES FEMELLES</button>
-  <button onclick="afficherDefinition('APPARITION_NOUVEAUX_MONDES')">L'APPARITION DE NOUVEAUX MONDES</button>
-  <button onclick="afficherDefinition('FUSION_DES_MONDES')">LA FUSION DES MONDES</button>
-  <button onclick="afficherDefinition('CHERCHEUR')">CHERCHEUR</button>
-  <button onclick="afficherDefinition('PROTECTEUR')">PROTECTEUR</button>
-  <button onclick="afficherDefinition('MAGICIEN')">MAGICIEN</button>
-  <button onclick="afficherDefinition('CHASSEUR')">CHASSEUR</button>
-  <button onclick="afficherDefinition('DRESSEUR')">DRESSEUR</button>
-  <button onclick="afficherDefinition('AVENTURIER')">AVENTURIER</button>
-</div>
-   
-  </div>
-
-  <div id="definitionBox" class="definition-box fade-in"></div>
-
-  <script>
-    const definitions = {
-   
-      ZOUPPIS: `ZOUPPIS :
-Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour partager le mystère de leurs potions magiques. Lors de grandes assemblées, 
-ils organisaient des concours où les idées les plus originales étaient récompensées.
-Mais un jour, la magie commença à faire peur. Peu à peu, les druides furent rejetés, traqués… parfois mêmes brûlés vifs s’ils étaient découverts.
-Avant de disparaître, ils tinrent une dernière grande réunion.
-Ce jour-là, ils créèrent un lieu merveilleux, un monde invisible aux yeux des humains 
- Le tout premier monde magique 
-Là-bas, ils pourraient se retrouver en paix, à l’abri de la peur et de la haine. Ils y firent naître des êtres éternels, chargés de garder leur savoir 
- Les Zouppis 
-Ces petits gardiens devinrent les protecteurs de la mémoire des druides. Les druides finirent par s’éteindre… mais le monde des Zouppis, lui, continua d’exister.
- On l’appelle Brocéliande.`,
-      
-      DISPARITION_FEMELLES: `LA DISPARITION DES FEMELLES :
-Les femelles Zouppis ont mystérieusement disparu il y a trente-sept ans 
-Depuis, les Zouppis ne peuvent plus se reproduire.
-Jusqu’à ce jour, ce mystère n’a pas été résolu
-Personne ne sait où elles sont passées.
-Des Aventuriers courageux explorent sans cesse les mondes afin de les retrouver.`,
-    
-      
-      APPARITION_NOUVEAUX_MONDES: `L'APPARITION DE NOUVEAUX MONDES :
-Dans leur monde caché, les Zouppis observaient les humains abandonner peu à peu la magie…
-Ils cessaient simplement d’y croire, et avec elle disparaissaient les rêves.
-Puis vinrent les guerres.
-Les hommes naissaient pour mourir, emportant avec eux l’espoir comme une flamme soufflée trop tôt.
-Voyant l’humanité sombrer, les Zouppis prirent une grande décision : grâce à leur magie, ils commencèrent à matérialiser les rêves d’enfants, leur offrant des mondes merveilleux, taillés sur mesure.
-C’est ainsi que naquirent les nouveaux mondes…
-Des mondes qu’ils appelèrent Arzankia`,
-
-  FUSION_DES_MONDES: `LA FUSION DES MONDES :
-Si un monde existant est de nouveau imaginé par un enfant, les deux mondes fusionnent afin de ne faire qu'un...
-Ce monde s’agrandi pour faire un espace dédier à l’imagination du nouveau créateur et ces nouvelles espèces. Plus un monde est imaginé, plus il est grand 
-Chaque créateur dispose d’un manuel pour explorer son monde. Celui-ci est mis à jour à chaque fois que son monde s’agrandi
-Il existe des mondes immenses dont la traversée peut prendre plusieurs jours et des mondes tout petit et difficilement accessible...`,
-
-       CHERCHEUR: `CHERCHEUR :
-Spécialisation pour un Voyageur dont l’apprentissage a révélé le
-Don de Translation 
-Le Chercheur est capable de déplacer des objets fantastiques d’un monde à un autre.
-Avec l’expérience, sa capacité évolue : il peut transporter des objets de plus en plus volumineux ou complexes.
-C’est en rapportant ces objets aux Zouppis que sa clé évolue.
-Symbole du Chercheur : La loupe`,
-
-        PROTECTEUR: `PROTECTEUR :
-Spécialisation attribuée à un Voyageur ayant créé un monde dans le but de veiller au bien-être d’une autre personne que lui-même.
-Il obtient la capacité de manipuler la magie blanche 
-Au fil du temps, les Protecteurs sont devenus de plus en plus rares, jusqu’à disparaître entièrement…
-La dernière Protectrice connue se nommait Yahya 
-créatrice du Monde des Cénamous.
-Symbole du Protecteur les ailes d’ange.`,
-
-        MAGICIEN: `MAGICIEN :
-Spécialisation pour un Voyageur dont le monde imaginé lui a révélé une âme de sage.
-Il y a quatre types de Magicien :
-Magicien d’eau
-Magicien de Feu
-Magicien d’air
-Magicien de Terre
-Le Magicien peut se servir des objets pour créer de la magie.
-En fonction de la magie rapportée aux Zouppis, la clé du Magicien évoluera.
-Symbole des magiciens :
-la fiole`,
-
-        CHASSEUR: `CHASSEUR :
-Spécialisation attribuée à un Voyageur dont l’apprentissage a révélé le Don de Combat.
-Il existe trois catégories distinctes de Chasseurs
-Les Chasseurs Terrestres
-Il magne des armes de contact telles que le fléau d’arme, le katana ou la dague.
-Les Chasseurs Aquatiques
-Ils utilisent des armes liées à l’eau, comme le harpon, le trident ou la lance.
-Les Chasseurs Aériens
-Ils sont équipés d’armes à distance légères comme la sarbacane, l’arbalète ou la fronde.
-Le Chasseur développe une maîtrise exceptionnelle
-de son arme de prédilection 
-Il combat des créatures dans le but de prélever des ingrédients essentiels aux Zouppis, qui en ont besoin pour la préparation de leurs potions.
-Chaque élément rapporté fait évoluer la Clé du Chasseur, révélant ainsi son potentiel.
-Symbole du Chasseur : le bouclier.`,
-
-        DRESSEUR: `DRESSEUR :
-
-Spécialisation pour un Voyageur dont l’apprentissage a révélé le Don de Traque.
-Chaque Dresseur a un animal de prédilection, qui évolue grâce à sa clé magique.
-Il existe trois types de Dresseurs :
-Les Dresseurs de Terre
-Ils capturent, apprivoisent et étudie les bêtes terrestres.
-Les Dresseurs d’Eau
-Ils capturent, apprivoisent et étudie les créatures aquatiques.
-Les Dresseurs d’Air
-Ils capturent, apprivoisent et étudie les êtres volants.
-Le Dresseur parvient à apprivoiser ses bêtes pour récupérer leurs poils, plumes ou autres ingrédients.
-Ces éléments sont précieux pour les Zouppis, pour la fabrication de leurs potions.
-Quand le Dresseur ramène des ingrédients,
-sa clé évolue 
-Symbole du Dresseur : le lasso.`,
-    
-        AVENTURIER: `AVENTURIER :
-Spécialisation pour un Voyageur dont l’apprentissage a révélé le Don de Découverte.
-Il peut voyager de monde en monde sans l’aide des Zouppis.
-Il sent la présence d’objets fantastiques autour de lui.
-Ce don est essentiel pour trouver des trésors cachés ou des ingrédients difficiles à localiser.
-Sa collaboration est très appréciée des zouppis.
-Sa clé évolue en fonction des mondes parcourus.
-Symbole de l’Aventurier : la boussole.`,
-    };
-
-    let currentTimeout;
-
-    function afficherDefinition(mot) {
-      const box = document.getElementById("definitionBox");
-      box.style.display = "block";
-      box.textContent = ""; // on efface le texte précédent
-
-      const texte = definitions[mot];
-      let i = 0;
-
-      // On arrête tout ancien affichage en cours
-      if (currentTimeout) {
-        clearTimeout(currentTimeout);
-      }
-
-      function ecrireLettre() {
-        if (i < texte.length) {
-          box.textContent += texte.charAt(i);
-          i++;
-          currentTimeout = setTimeout(ecrireLettre, 35);
-        }
-      }
-
-      ecrireLettre();
-    }
-  </script>
+  <a class="title" href="grimoire.lexique.html">📖 Grimoire de Raphaël</a>
 
 </body>
 </html>
