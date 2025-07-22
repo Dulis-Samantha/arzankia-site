@@ -42,7 +42,11 @@
   
   font-size: 1.3rem;           /* Taille du texte (1.5 fois la taille de base) */
   line-height: 1.3;           /* Espace vertical entre les lignes de texte */
-  text-shadow: 0 0 3px #fff6dd; /* Ombre claire autour du texte pour donner un effet lumineux */
+  text-shadow:
+  2px 2px 4px #3a2700,   /* ombre principale plus forte */
+  0 0 8px #f9e199,       /* halo lumineux plus large */
+  1px 1px 1px #000;      /* petite ombre noire pour accent final */
+
   pointer-events: auto;       /* Autorise les clics sur les liens à l’intérieur du bloc */
 }
 
