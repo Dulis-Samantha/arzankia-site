@@ -2,47 +2,44 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Grimoire de Raphaël</title>
+  <title>Lexique du Grimoire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-image: url('feuille_grimoire.png'); /* ton image ici */
+      background: url('b69f20ef-c0f6-4ae3-8e3b-d123775494c0.png') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Georgia', serif;
-    }
-
-    .container {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      padding: 50px;
+      height: 100vh;
     }
 
-    .lexique-btn {
-      background-color: rgba(255, 255, 255, 0.8);
-      border: 2px solid #8b6f47;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 10px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
+    .link-list a {
+      display: block;
+      margin: 15px 0;
+      font-size: 2rem;
+      color: #4b2e00;
+      text-decoration: none;
+      text-shadow: 1px 1px 1px #fff6dd;
+      transition: transform 0.2s, color 0.2s;
     }
 
-    .lexique-btn:hover {
-      background-color: #f0e6d2;
+    .link-list a:hover {
+      transform: scale(1.05);
+      color: goldenrod;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <button class="lexique-btn" onclick="window.location.href='definition_zouppis.html'">ZOUPPIS</button>
-    <button class="lexique-btn" onclick="window.location.href='definition_dresseur.html'">DRESSEUR</button>
-    <button class="lexique-btn" onclick="window.location.href='definition_aventurier.html'">AVENTURIER</button>
-    <!-- Ajoute autant de mots que tu veux ici -->
+  <div class="link-list">
+    <a href="definition_zouppis.html">ZOUPPIS</a>
+    <a href="definition_dresseur.html">DRESSEUR</a>
+    <a href="definition_aventurier.html">AVENTURIER</a>
   </div>
 
 </body>
