@@ -11,8 +11,11 @@
       margin: 0;
       padding: 40px 20px;
       background-image: url('feuille_grimoire.png');
-      background-size: cover;
-      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: contain;
+      background-color: #caa76b; /* couleur autour de l'image */
+
       font-family: 'Georgia', serif;
       color: #4b2e00;
       font-size: 22px;
@@ -20,6 +23,13 @@
       text-align: center;
       overflow-y: auto;
     }
+    
+    .contenu {
+  max-width: 700px;
+  margin: 0 auto;
+  padding-top: 200px; /* pour bien descendre sous l’image */
+}
+
 
     .retour {
       display: inline-block;
@@ -72,10 +82,11 @@
   </style>
 </head>
 <body>
-
-  <div class="link-list" id="lexiqueContainer"></div>
-
+<div class="contenu">
+  <div id="lexiqueContainer"></div>
+</div>
   <script>
+   
     const lexique = [
       ["LE MANUEL OU GRIMOIRE", "definition_grimoire.html"],
       ["CLÉ D'ARZANKIA", "definition_cle.html"],
@@ -97,7 +108,7 @@
       ["ELIADE", "definition_eliade.html"],
       ["TRINERGIA", "definition_trinergia.html"]
     ];
-
+  
     const container = document.getElementById("lexiqueContainer");
     let indexMot = 0;
     let indexLettre = 0;
