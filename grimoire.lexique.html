@@ -65,60 +65,60 @@
     <div class="texte-sur-parchemin" id="lexiqueContainer"></div>
   </div>
 
-  <script>
-    const lexique = [
-      ["LE MANUEL OU GRIMOIRE", "definition_grimoire.html"],
-      ["CLÉ D'ARZANKIA", "definition_cle.html"],
-      ["ARZANSKÂN", "definition_arzanskan.html"],
-      ["ZOUPPIS", "definition_zouppis.html"],
-      ["LES NOUVEAUX MONDES", "definition_nouveau_monde.html"],
-      ["LA FUSION DES MONDES", "definition_fusion.html"],
-      ["CHERCHEUR", "definition_chercheur.html"],
-      ["PROTECTEUR", "definition_protecteur.html"],
-      ["MAGICIEN", "definition_magicien.html"],
-      ["CHASSEUR", "definition_chasseur.html"],
-      ["DRESSEUR", "definition_dresseur.html"],
-      ["AVENTURIER", "definition_aventurier.html"],
-      ["APPRENTISSAGE", "definition_apprentissage.html"],
-      ["QUÊTE DE RAPHAËL", "definition_quete.html"],
-      ["LES SYMBOLES", "definition_symbole.html"],
-      ["QUÊTES SECONDAIRES", "definition_quetes_secondaires.html"],
-      ["CRÉATURES RENCONTRÉES", "definition_creatures.html"],
-      ["ELIADE", "definition_eliade.html"],
-      ["TRINERGIA", "definition_trinergia.html"]
-    ];
+ <script>
+  const lexique = [
+    ["LE MANUEL OU GRIMOIRE", "definition_grimoire.html"],
+    ["CLÉ D'ARZANKIA", "definition_cle.html"],
+    ["ARZANSKÂN", "definition_arzanskan.html"],
+    ["ZOUPPIS", "definition_zouppis.html"],
+    ["LES NOUVEAUX MONDES", "definition_nouveau_monde.html"],
+    ["LA FUSION DES MONDES", "definition_fusion.html"],
+    ["CHERCHEUR", "definition_chercheur.html"],
+    ["PROTECTEUR", "definition_protecteur.html"],
+    ["MAGICIEN", "definition_magicien.html"],
+    ["CHASSEUR", "definition_chasseur.html"],
+    ["DRESSEUR", "definition_dresseur.html"],
+    ["AVENTURIER", "definition_aventurier.html"],
+    ["APPRENTISSAGE", "definition_apprentissage.html"],
+    ["QUÊTE DE RAPHAËL", "definition_quete.html"],
+    ["LES SYMBOLES", "definition_symbole.html"],
+    ["QUÊTES SECONDAIRES", "definition_quetes_secondaires.html"],
+    ["CRÉATURES RENCONTRÉES", "definition_creatures.html"],
+    ["ELIADE", "definition_eliade.html"],
+    ["TRINERGIA", "definition_trinergia.html"]
+  ];
 
-    const container = document.getElementById("lexiqueContainer");
-    let indexMot = 0;
-    let indexLettre = 0;
-    let currentLink;
+  const container = document.getElementById("lexiqueContainer");
+  let indexMot = 0;
+  let indexLettre = 0;
+  let currentLink;
 
-    function afficherLettreParLettre() {
-      if (indexMot >= lexique.length) return;
+  function afficherLettreParLettre() {
+    if (indexMot >= lexique.length) return;
 
-      const [texte, lien] = lexique[indexMot];
+    const [texte, lien] = lexique[indexMot];
 
-      if (!currentLink) {
-        currentLink = document.createElement("a");
-        currentLink.href = lien;
-        currentLink.innerHTML = "";
-        container.appendChild(currentLink);
-      }
-
-      if (indexLettre < texte.length) {
-        currentLink.innerHTML += texte.charAt(indexLettre);
-        indexLettre++;
-        setTimeout(afficherLettreParLettre, 35);
-      } else {
-        indexMot++;
-        indexLettre = 0;
-        currentLink = null;
-        setTimeout(afficherLettreParLettre, 200);
-      }
+    if (!currentLink) {
+      currentLink = document.createElement("a");
+      currentLink.href = lien;
+      container.appendChild(currentLink);
     }
 
-    window.onload = afficherLettreParLettre;
-  </script>
+    if (indexLettre < texte.length) {
+      currentLink.innerHTML += texte.charAt(indexLettre);
+      indexLettre++;
+      setTimeout(afficherLettreParLettre, 35);
+    } else {
+      // Retour à la ligne après chaque mot
+      container.appendChild(document.createElement("br"));
+      indexMot++;
+      indexLettre = 0;
+      currentLink = null;
+      setTimeout(afficherLettreParLettre, 200);
+    }
+  }
 
+  window.onload = afficherLettreParLettre;
+</script>
 </body>
 </html>
