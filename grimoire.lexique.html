@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Lexique du Grimoire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -39,11 +41,11 @@
       font-size: 1.5rem;
       line-height: 1.6;
       text-shadow: 0 0 3px #fff6dd;
-      pointer-events: none; /* Pour ne pas bloquer les clics sous le texte */
+      pointer-events: none;
     }
 
     .texte-sur-parchemin a {
-      pointer-events: auto; /* permet aux liens de rester cliquables */
+      pointer-events: auto;
       color: #FFD700;
       text-decoration: none;
       margin: 10px 0;
@@ -53,9 +55,9 @@
     }
 
     .texte-sur-parchemin a:hover {
-        color: #ffe46b;
-        transform: scale(1.05);
-        text-shadow: 0 0 10px #fffbc4, 0 0 20px #fce97c;
+      color: #ffe46b;
+      transform: scale(1.05);
+      text-shadow: 0 0 10px #fffbc4, 0 0 20px #fce97c;
     }
   </style>
 </head>
@@ -67,29 +69,27 @@
   </div>
 
   <script>
-    
-    <div class="link-list">
-    <a href="definition_grimoire.html">LE MANUEL OU GRIMOIRE</a>
-    <a href="definition_cle.html">CLÉ D'ARZANKIA</a>
-    <a href="definition_arzanskan.html">ARZANSKÂN</a>
-    <a href="definition_zouppis.html">ZOUPPIS</a>
-    <a href="definition_nouveau_monde.html">LES NOUVEAUX MONDES</a>
-    <a href="definition_fusion.html">LA FUSION DES MONDES</a>
-    <a href="definition_chercheur.html">CHERCHEUR</a>
-    <a href="definition_protecteur.html">PROTECTEUR</a>
-    <a href="definition_magicien.html">MAGICIEN</a>
-    <a href="definition_chasseur.html">CHASSEUR</a>
-    <a href="definition_dresseur.html">DRESSEUR</a>
-    <a href="definition_aventurier.html">AVENTURIER</a>
-    <a href="definition_apprentissage.html">APPRENTISSAGE</a>
-    <a href="definition_quete.html">QUÊTE DE RAPHAËL</a>
-    <a href="definition_symbole.html">LES SYMBOLES</a>
-    <a href="definition_quetes_secondaires.html">QUÊTES SECONDAIRES</a>
-    <a href="definition_creatures.html">CRÉATURES RENCONTRÉES</a>
-    <a href="definition_eliade.html">ELIADE</a>
-    <a href="definition_trinergia.html">TRINERGIA</a>
-      
-  </div>
+    const lexique = [
+      ["LE MANUEL OU GRIMOIRE", "definition_grimoire.html"],
+      ["CLÉ D'ARZANKIA", "definition_cle.html"],
+      ["ARZANSKÂN", "definition_arzanskan.html"],
+      ["ZOUPPIS", "definition_zouppis.html"],
+      ["LES NOUVEAUX MONDES", "definition_nouveau_monde.html"],
+      ["LA FUSION DES MONDES", "definition_fusion.html"],
+      ["CHERCHEUR", "definition_chercheur.html"],
+      ["PROTECTEUR", "definition_protecteur.html"],
+      ["MAGICIEN", "definition_magicien.html"],
+      ["CHASSEUR", "definition_chasseur.html"],
+      ["DRESSEUR", "definition_dresseur.html"],
+      ["AVENTURIER", "definition_aventurier.html"],
+      ["APPRENTISSAGE", "definition_apprentissage.html"],
+      ["QUÊTE DE RAPHAËL", "definition_quete.html"],
+      ["LES SYMBOLES", "definition_symbole.html"],
+      ["QUÊTES SECONDAIRES", "definition_quetes_secondaires.html"],
+      ["CRÉATURES RENCONTRÉES", "definition_creatures.html"],
+      ["ELIADE", "definition_eliade.html"],
+      ["TRINERGIA", "definition_trinergia.html"]
+    ];
 
     const container = document.getElementById("lexiqueContainer");
     let indexMot = 0;
