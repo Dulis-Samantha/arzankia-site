@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Grimoire de Raphaël</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('feuille_grimoire.png'); /* ton image ici */
+      background-size: cover;
+      font-family: 'Georgia', serif;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 50px;
+    }
+
+    .lexique-btn {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 2px solid #8b6f47;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .lexique-btn:hover {
+      background-color: #f0e6d2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <button class="lexique-btn" onclick="window.location.href='definition_zouppis.html'">ZOUPPIS</button>
+    <button class="lexique-btn" onclick="window.location.href='definition_dresseur.html'">DRESSEUR</button>
+    <button class="lexique-btn" onclick="window.location.href='definition_aventurier.html'">AVENTURIER</button>
+    <!-- Ajoute autant de mots que tu veux ici -->
+  </div>
+
+</body>
+</html>
