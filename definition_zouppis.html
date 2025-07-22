@@ -4,50 +4,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Zouppis</title>
+  <title>Définition de Zouppis</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
   <style>
-   
-      body {
-  margin: 0;
-  padding: 40px;
-  background-image: url('feuille_grimoire.png');
-  background-size: cover;
-  font-family: 'Georgia', serif;
-  font-size: 24px;
-  line-height: 1.6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  color: #4b2e00;
- text-shadow:
-  2px 2px 4px #3a2700,   /* ombre principale plus forte */
-  0 0 8px #f9e199,       /* halo lumineux plus large */
-  1px 1px 1px #000;      /* petite ombre noire pour accent final */
-
-
-}
-
-
-    .definition {
-      white-space: pre-wrap;
+    body {
+      margin: 0;
+      background-color: #caa76b;
+      font-family: 'Georgia', serif;
+      color: #4b2e00;
       text-align: center;
-      max-width: 800px;
-      text-shadow: 0 0 6px #fff6dd;
+      overflow-y: auto;
     }
 
-    .hidden {
-      visibility: hidden;
+    .parchemin-wrapper {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .parchemin-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .texte-sur-parchemin {
+      position: absolute;
+      top: 15%;
+      left: 10%;
+      right: 10%;
+      bottom: 10%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      font-family: 'IM Fell English SC', serif;
+      text-shadow:
+        2px 2px 4px #3a2700,
+        0 0 8px #f9e199,
+        1px 1px 1px #000;
+      pointer-events: auto;
+    }
+
+    .titre-lexique {
+      font-family: 'Cinzel', serif; /* Alternative web-safe à Algerian */
+      font-size: 2.6rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
     }
   </style>
 </head>
 <body>
 
-  <div id="definition" class="definition"></div>
+  <div class="parchemin-wrapper">
+    <img src="feuille_grimoire.png" alt="Parchemin" class="parchemin-img">
+    <div class="texte-sur-parchemin">
+      <div class="titre-lexique">ZOUPPIS</div>
+      <div id="lexiqueContainer"></div>
+    </div>
+  </div>
 
   <script>
-    const text = `ZOUPPIS
-✧
+    const texte = `✧
 Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
 Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
 ✧
@@ -56,18 +82,27 @@ Conscients de la fin imminente de leur ordre, les derniers druides tinrent une u
 Ce jour-là, ils unirent leurs forces pour créer un lieu merveilleux : un monde invisible aux yeux des humains, façonné par leurs rituels et leur volonté farouche de préserver la connaissance.
 ✧`;
 
-    let i = 0;
-    const speed = 40;
+    const container = document.getElementById("lexiqueContainer");
+    let indexLettre = 0;
 
-    function writeText() {
-      if (i < text.length) {
-        document.getElementById("definition").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(writeText, speed);
+    function afficherLettreParLettre() {
+      if (indexLettre < texte.length) {
+        const span = document.createElement("span");
+        const lettre = texte.charAt(indexLettre);
+
+        if (lettre === "\n") {
+          container.appendChild(document.createElement("br"));
+        } else {
+          span.textContent = lettre;
+          container.appendChild(span);
+        }
+
+        indexLettre++;
+        setTimeout(afficherLettreParLettre, 35);
       }
     }
 
-    window.onload = writeText;
+    window.onload = afficherLettreParLettre;
   </script>
 
 </body>
