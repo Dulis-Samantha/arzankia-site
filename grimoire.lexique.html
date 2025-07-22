@@ -1,92 +1,72 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
+  <meta charset="UTF-8">
   <title>Lexique du Grimoire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      padding: 40px 20px;
-      background-image: url('feuille_grimoire.png');
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: contain;
-      background-color: #caa76b; /* couleur autour de l'image */
-
+      background-color: #caa76b;
       font-family: 'Georgia', serif;
       color: #4b2e00;
-      font-size: 22px;
-      line-height: 1.6;
       text-align: center;
       overflow-y: auto;
     }
-    
-    .contenu {
-  max-width: 700px;
-  margin: 0 auto;
-  padding-top: 200px; /* pour bien descendre sous l’image */
-}
 
+    .parchemin-wrapper {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto;
+    }
 
-    .retour {
-      display: inline-block;
-      margin-bottom: 30px;
-      font-size: 1rem;
-      color: #4b2e00;
+    .parchemin-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .texte-sur-parchemin {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      bottom: 10%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      line-height: 1.6;
+      text-shadow: 0 0 3px #fff6dd;
+      pointer-events: none; /* Pour ne pas bloquer les clics sous le texte */
+    }
+
+    .texte-sur-parchemin a {
+      pointer-events: auto; /* permet aux liens de rester cliquables */
+      color: #FFD700;
       text-decoration: none;
-      background-color: rgba(255, 255, 255, 0.4);
-      padding: 8px 14px;
-      border-radius: 10px;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      margin: 10px 0;
+      font-weight: bold;
+      text-shadow: 0 0 6px #fff6cc, 0 0 10px #f9d857;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
     }
 
-    .retour:hover {
-      background-color: rgba(255, 255, 255, 0.7);
-    }
-
-    .link-list a {
-      display: inline-block;
-      margin: 15px 0;
-      font-size: 1.7rem;
-      color: #4b2e00;
-      text-decoration: none;
-      text-shadow: 1px 1px 1px #fff6dd;
-      opacity: 1;
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .link-list a:hover {
-      transform: scale(1.05);
-      color: goldenrod;
-    }
-
-    @media screen and (max-width: 600px) {
-      body {
-        font-size: 18px;
-        padding: 30px 10px;
-      }
-
-      .link-list a {
-        font-size: 1.3rem;
-        margin: 12px 0;
-      }
-
-      .retour {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-      }
+    .texte-sur-parchemin a:hover {
+        color: #ffe46b;
+        transform: scale(1.05);
+        text-shadow: 0 0 10px #fffbc4, 0 0 20px #fce97c;
     }
   </style>
 </head>
 <body>
-<div class="contenu">
-  <div id="lexiqueContainer"></div>
-</div>
+
+  <div class="parchemin-wrapper">
+    <img src="feuille_grimoire.png" alt="Parchemin" class="parchemin-img">
+    <div class="texte-sur-parchemin" id="lexiqueContainer"></div>
+  </div>
+
   <script>
-   
     const lexique = [
       ["LE MANUEL OU GRIMOIRE", "definition_grimoire.html"],
       ["CLÉ D'ARZANKIA", "definition_cle.html"],
@@ -100,15 +80,8 @@
       ["CHASSEUR", "definition_chasseur.html"],
       ["DRESSEUR", "definition_dresseur.html"],
       ["AVENTURIER", "definition_aventurier.html"],
-      ["APPRENTISSAGE", "definition_apprentissage.html"],
-      ["QUÊTE DE RAPHAËL", "definition_quete.html"],
-      ["LES SYMBOLES", "definition_symbole.html"],
-      ["QUÊTES SECONDAIRES", "definition_quetes_secondaires.html"],
-      ["CRÉATURES RENCONTRÉES", "definition_creatures.html"],
-      ["ELIADE", "definition_eliade.html"],
-      ["TRINERGIA", "definition_trinergia.html"]
     ];
-  
+
     const container = document.getElementById("lexiqueContainer");
     let indexMot = 0;
     let indexLettre = 0;
@@ -119,21 +92,18 @@
 
       const [texte, lien] = lexique[indexMot];
 
-      // Crée le lien si pas encore créé
       if (!currentLink) {
         currentLink = document.createElement("a");
         currentLink.href = lien;
+        currentLink.innerHTML = "";
         container.appendChild(currentLink);
-        container.appendChild(document.createElement("br"));
       }
 
-      // Ajoute une lettre
       if (indexLettre < texte.length) {
         currentLink.innerHTML += texte.charAt(indexLettre);
         indexLettre++;
-        setTimeout(afficherLettreParLettre, 30);
+        setTimeout(afficherLettreParLettre, 35);
       } else {
-        // Passe au mot suivant
         indexMot++;
         indexLettre = 0;
         currentLink = null;
@@ -143,6 +113,6 @@
 
     window.onload = afficherLettreParLettre;
   </script>
-  <a href="1.accueil.html" class="retour">← Retour</a>
+
 </body>
 </html>
