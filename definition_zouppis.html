@@ -10,38 +10,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      background-color: #caa76b;
       font-family: 'Georgia', serif;
       color: #4b2e00;
       text-align: center;
       overflow-y: auto;
+      background-image: url('feuille_grimoire.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .parchemin-wrapper {
-      position: relative;
       max-width: 800px;
       margin: 40px auto;
-    }
-
-    .parchemin-img {
-      width: 100%;
-      height: auto;
-      display: block;
+      padding: 60px 40px;
+      background-color: rgba(255, 255, 255, 0.1); /* optionnel : ajoute une légère lisibilité */
     }
 
     .texte-sur-parchemin {
-      position: absolute;
-      top: 15%;
-      left: 10%;
-      right: 10%;
-      bottom: 10%;
-      height: 80%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
       font-size: 1.1rem;
       line-height: 1.6;
       font-family: 'IM Fell English SC', serif;
@@ -53,7 +43,7 @@
     }
 
     .titre-lexique {
-      font-family: 'Cinzel', serif; /* Alternative web-safe à Algerian */
+      font-family: 'Cinzel', serif;
       font-size: 2.6rem;
       font-weight: bold;
       text-transform: uppercase;
@@ -65,7 +55,6 @@
 <body>
 
   <div class="parchemin-wrapper">
-    <img src="feuille_grimoire.png" alt="Parchemin" class="parchemin-img">
     <div class="texte-sur-parchemin">
       <div class="titre-lexique">ZOUPPIS</div>
       <div id="lexiqueContainer"></div>
