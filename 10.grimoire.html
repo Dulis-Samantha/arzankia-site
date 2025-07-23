@@ -4,126 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Grimoire magique</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
-
+  <title>Grimoire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #2a1c0f;
-      font-family: 'IM Fell English SC', serif;
+      background: url('grimoire.png') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      font-family: 'Georgia', serif;
     }
 
-    #grimoire {
-      width: 800px;
-      height: 500px;
+    a.title {
+      font-size: 3rem;
+      color: #fff6dd;
+      text-decoration: none;
+      text-shadow: 2px 2px 6px #000;
+      padding: 20px 40px;
+      border: 3px solid #fff6dd;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
     }
 
-    .page {
-  background: url('feuille_grimoire.png') no-repeat center center;
-  background-size: cover;
-  padding: 50px 60px;
-  box-sizing: border-box;
-  color: #3b2200;
-  font-size: 1.2em;
-  line-height: 1.6;
-  border-radius: 10px;
-  overflow-y: auto;
-  text-shadow: 0 0 2px #fff8e1;
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-    .page h2 {
-      margin-top: 0;
-      color: #5c3c0b;
-      text-shadow: 0 0 2px #fff;
+    a.title:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
     }
   </style>
 </head>
-
 <body>
-  <div id="grimoire">
-    
-     <div class="page"><h2>GRIMOIRE ou MANUEL</h2><p>
-✧
-Pour accompagner ses explorations, chaque créateur reçoit un manuel magique, véritable grimoire vivant lié à son monde. 
-Bien plus qu’un simple livre, c’est un guide enchanté qui ne révèle ses secrets qu’à son véritable propriétaire.
-✧
-Ce livre unique s’actualise en temps réel : à chaque nouvelle extension de monde, à chaque créature rencontrée, à chaque lieu découvert, il s’enrichit et dévoile de nouvelles pages. 
-✧
-Atlas, journal de bord, bestiaire, et recueil de sorts, il renferme des détails précieux sur les espèces rencontrées, leurs habitudes, leurs légendes et les ingrédients qu’elles peuvent offrir.
-✧
-Le manuel devient ainsi le reflet vivant du monde de son créateur : un lien intime et évolutif. Il accompagne le Voyageur dans ses quêtes, l’avertissant de dangers invisibles.
-✧
-</p></div>
-    
-      <div class="page"><h2>CLE D’ARZANKIA</h2><p>
-✧
-La Clé est bien plus qu’un simple outil : c’est un sésame vivant, façonné par la magie ancienne pour permettre aux Voyageurs de franchir la frontière entre leur monde et celui des rêves. 
-Sans elle, l’accès est impossible : l’entrée vers Arzankia demeure close, invisible et impénétrable.
-✧
-Chaque Clé est unique et profondément liée à son porteur. Elle se façonne et évolue au fil de ses aventures, absorbant la mémoire de ses quêtes, les ingrédients trouvés et les secrets révélés. 
-Certains disent qu’elle pulse d’une vie propre, réagissant aux émotions de son Voyageur, guidant ses pas ou l’avertissant des dangers.
-✧
-Plus le Voyageur accomplit de quêtes, plus sa Clé évolue : elle se pare de nouvelles gravures, s’illumine de symboles révélateurs, et lui donne accès à des mondes plus profonds ou plus dangereux.
-✧
-</p></div>
-    
-    <div class="page"><h2>ARZANSKÂN</h2><p>
-✧
-Sceau mystique gravé dans la peau, l’Arzanskân est un artefact ancien hérité des Anciens
-il ressemble à une montre magique vivante, palpitant au rythme de son porteur. Sa forme est celle d’un cercle lumineux tracé sur la chair, dont la lueur décline peu à peu à mesure que l’énergie vitale du Voyageur s’épuise.
-✧
-Véritable outil de survie, l’Arzanskân est indispensable pour les Voyageurs inexpérimentés 
-il leur permet de surveiller et de maîtriser leur énergie, les empêchant de s’égarer dans les mondes magiques jusqu’à l’épuisement total.
-✧
-Invisible aux yeux des humains ordinaires, il ne se révèle qu’à ceux qui connaissent la magie des mondes d’Arzankia : les Aventuriers, les Zouppis, et d’autres initiés capables de lire ses nuances et d’en interpréter la lueur.
-✧
-</p></div>
-    
-    <div class="page"><h2>ZOUPPIS</h2><p>
-✧
-Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
-Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
-✧
-Mais un jour, la magie commença à effrayer les hommes. Les murmures se firent menaces : on accusa les druides de sorcellerie, on les chassa, on les traqua… certains furent même brûlés vifs pour avoir osé protéger leur savoir.
-Conscients de la fin imminente de leur ordre, les derniers druides tinrent une ultime grande réunion. 
-Ce jour-là, ils unirent leurs forces pour créer un lieu merveilleux : un monde invisible aux yeux des humains, façonné par leurs rituels et leur volonté farouche de préserver la connaissance.
-✧
-Le tout premier monde magique 
-Ils bâtirent ce refuge pour pouvoir se retrouver en paix, loin de la peur et de la haine.
-Là, ils firent naître de petites créatures éternelles, façonnées pour garder vivante la mémoire des druides.
-✧
 
- Les Zouppis 
-Ces petits gardiens devinrent les protecteurs des savoirs anciens : experts en potions, en plantes rares, en traditions oubliées. 
-Même lorsque les druides disparurent peu à peu de la surface du monde, les Zouppis continuèrent d’exister, préservant leur héritage et veillant sur leurs secrets.
-✧
-Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu sous le nom de Brocéliande : une terre de brumes et de mystères, refuge des Zouppis, et mémoire vivante d’un savoir ancien qui refuse de s’éteindre.
-✧
-</p></div>
-   
-  
-    
-  </div>
+  <a class="title" href="grimoire.lexique.html">📖 Grimoire de Raphaël</a>
 
- <script>
-  $('#grimoire').turn({
-    width: 800,
-    height: 500,
-    autoCenter: true,
-    display: 'single'  // <-- clé ici !
-  });
-</script>
 </body>
 </html>
