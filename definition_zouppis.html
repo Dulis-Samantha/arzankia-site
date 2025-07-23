@@ -17,7 +17,7 @@
       color: #4b2e00;
       text-align: center;
       overflow-y: auto;
-      background-image: url('feuille_grimoire.png');
+      background-image: url('feuille_grimoire.png'); /* ton image de parchemin */
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -26,9 +26,9 @@
 
     .parchemin-wrapper {
       max-width: 800px;
-      margin: 40px auto;
+      margin: 60px auto;
       padding: 60px 40px;
-      background-color: rgba(255, 255, 255, 0.1); /* optionnel : ajoute une légère lisibilité */
+      background-color: rgba(255, 255, 255, 0.05); /* optionnel : voile léger */
     }
 
     .texte-sur-parchemin {
@@ -48,7 +48,44 @@
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 2px;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
+    }
+
+    /* Apparition magique du texte */
+    .apparition-magique {
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: apparition 1.8s ease-out forwards;
+      white-space: pre-wrap;
+    }
+
+    @keyframes apparition {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Effet de poussière magique légère */
+    .apparition-magique::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(255,255,200,0.3) 0%, transparent 70%);
+      background-size: 5px 5px;
+      animation: scintillement 2s ease-out forwards;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes scintillement {
+      0%   { opacity: 1; transform: scale(1); }
+      80%  { opacity: 0.6; transform: scale(1.05); }
+      100% { opacity: 0; transform: scale(1.1); }
     }
   </style>
 </head>
@@ -62,7 +99,9 @@
   </div>
 
   <script>
-    const texte = `✧
+    window.onload = function () {
+      const texte = `
+✧
 Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
 Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
 ✧
@@ -70,39 +109,24 @@ Mais un jour, la magie commença à effrayer les hommes. Les murmures se firent 
 Conscients de la fin imminente de leur ordre, les derniers druides tinrent une ultime grande réunion. 
 Ce jour-là, ils unirent leurs forces pour créer un lieu merveilleux : un monde invisible aux yeux des humains, façonné par leurs rituels et leur volonté farouche de préserver la connaissance.
 ✧
-Le tout premier monde magique 
+Le tout premier monde magique. 
 Ils bâtirent ce refuge pour pouvoir se retrouver en paix, loin de la peur et de la haine.
 Là, ils firent naître de petites créatures éternelles, façonnées pour garder vivante la mémoire des druides.
 ✧
- Les Zouppis 
+Les Zouppis. 
 Ces petits gardiens devinrent les protecteurs des savoirs anciens : experts en potions, en plantes rares, en traditions oubliées. 
 Même lorsque les druides disparurent peu à peu de la surface du monde, les Zouppis continuèrent d’exister, préservant leur héritage et veillant sur leurs secrets.
 ✧
 Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu sous le nom de Brocéliande : une terre de brumes et de mystères, refuge des Zouppis, et mémoire vivante d’un savoir ancien qui refuse de s’éteindre.
 ✧
-`;
+      `;
 
-    const container = document.getElementById("lexiqueContainer");
-    let indexLettre = 0;
-
-    function afficherLettreParLettre() {
-      if (indexLettre < texte.length) {
-        const span = document.createElement("span");
-        const lettre = texte.charAt(indexLettre);
-
-        if (lettre === "\n") {
-          container.appendChild(document.createElement("br"));
-        } else {
-          span.textContent = lettre;
-          container.appendChild(span);
-        }
-
-        indexLettre++;
-        setTimeout(afficherLettreParLettre, 35);
-      }
-    }
-
-    window.onload = afficherLettreParLettre;
+      const container = document.getElementById("lexiqueContainer");
+      const paragraphe = document.createElement("p");
+      paragraphe.className = "apparition-magique";
+      paragraphe.innerText = texte.trim();
+      container.appendChild(paragraphe);
+    };
   </script>
 
 </body>
