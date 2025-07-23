@@ -1,45 +1,62 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Grimoire</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Grimoire magique</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: url('grimoire.png') no-repeat center center fixed;
-      background-size: cover;
+      background: #2a1c0f;
+      font-family: 'IM Fell English SC', serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-family: 'Georgia', serif;
     }
 
-    a.title {
-      font-size: 3rem;
-      color: #fff6dd;
-      text-decoration: none;
-      text-shadow: 2px 2px 6px #000;
-      padding: 20px 40px;
-      border: 3px solid #fff6dd;
-      border-radius: 15px;
-      background-color: rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
+    #grimoire {
+      width: 800px;
+      height: 500px;
     }
 
-    a.title:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
+    .page {
+      background: url('https://i.imgur.com/zKQjHkW.png') no-repeat center center; /* texture parchemin */
+      background-size: cover;
+      padding: 40px;
+      box-sizing: border-box;
+      color: #3b2200;
+      font-size: 1.2em;
+      line-height: 1.6;
+      border-radius: 10px;
+    }
+
+    .page h2 {
+      margin-top: 0;
+      color: #5c3c0b;
+      text-shadow: 0 0 2px #fff;
     }
   </style>
 </head>
+
 <body>
+  <div id="grimoire">
+    <div class="page"><h2>Zouppis</h2><p>Êtres anciens, gardiens des mondes d’Arzankia. Ils maîtrisent la Mémoire des Anciens et guident les enfants vers leur destinée...</p></div>
+    <div class="page"><h2>Éléphantus d’eau</h2><p>Créature majestueuse aux quatre défenses. Il vit dans un lac profond, craint les humains et se nourrit de Nénuphares Géants. Son péché mignon est la Pomme-Éclair, un fruit rare produit après la pluie magique sur les Tonnerrobois...</p></div>
+    <div class="page"><h2>Tonnerrobois</h2><p>Arbres géants et millénaires de la Forêt Enchantée. Lorsqu’une pluie enchantée les touche, ils relâchent des fruits lumineux et crépitants, appelés Pommes-Éclair...</p></div>
+    <div class="page"><h2>Arzanskân</h2><p>Symbole lumineux en forme de cercle magique qui s’illumine sur le poignet de chaque héros d’Arzankia. Il reflète leur niveau d’énergie vitale et magique, et réagit aux émotions puissantes...</p></div>
+  </div>
 
-  <a class="title" href="grimoire.lexique.html">📖 Grimoire de Raphaël</a>
-
+  <script>
+    $('#grimoire').turn({
+      width: 800,
+      height: 500,
+      autoCenter: true
+    });
+  </script>
 </body>
 </html>
