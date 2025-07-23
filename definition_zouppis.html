@@ -50,17 +50,18 @@
       margin-bottom: 25px;
     }
 
-    .texte-aleatoire span {
-      opacity: 0;
-      display: inline;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      transform: translateY(10px);
-    }
+   .texte-aleatoire span {
+  opacity: 0;
+  display: inline-block;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(10px);
+}
 
     .texte-aleatoire span.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
   </style>
 </head>
 <body>
@@ -107,20 +108,17 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
         const mots = paragraphe.trim().split(/\s+/);
         const positions = mots.map((_, i) => i);
         const melange = positions.sort(() => Math.random() - 0.5);
+        
+const spans = mots.map(mot => {
+  const span = document.createElement("span");
+  span.textContent = mot;
+  return span;
+});
 
-        const spans = mots.map(mot => {
-          const span = document.createElement("span");
-          span.innerHTML = mot + "&nbsp;";
-          return span;
-        });
-
-        spans.forEach(span => p.appendChild(span));
-
-        melange.forEach((index, i) => {
-          setTimeout(() => {
-            spans[index].classList.add("visible");
-          }, indexParagraphe * 3000 + i * 60); // décalage entre paragraphes
-        });
+spans.forEach((span, idx) => {
+  p.appendChild(span);
+  p.append(" "); // Ajoute un vrai espace après chaque mot
+});
       });
     };
   </script>
