@@ -52,7 +52,7 @@
 
     .texte-aleatoire span {
       opacity: 0;
-      display: inline-block;
+      display: inline;
       transition: opacity 0.6s ease, transform 0.6s ease;
       transform: translateY(10px);
     }
@@ -110,7 +110,7 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
 
         const spans = mots.map(mot => {
           const span = document.createElement("span");
-          span.textContent = mot + " ";
+          span.innerHTML = mot + "&nbsp;";
           return span;
         });
 
