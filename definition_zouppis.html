@@ -50,18 +50,44 @@
       margin-bottom: 25px;
     }
 
-   .texte-aleatoire span {
-  opacity: 0;
-  display: inline-block;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transform: translateY(10px);
-}
+    .texte-aleatoire span {
+      opacity: 0;
+      display: inline-block;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(10px);
+      position: relative;
+    }
 
     .texte-aleatoire span.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
+    /* Poussière magique */
+    .sparkle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px #fff7cc;
+      animation: sparkle 0.8s ease-out forwards;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+      }
+    }
   </style>
 </head>
 <body>
@@ -96,8 +122,6 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
 ✧`;
 
       const container = document.getElementById("lexiqueContainer");
-
-      // Découper en paragraphes
       const paragraphes = texte.trim().split('\n').filter(p => p.trim() !== '');
 
       paragraphes.forEach((paragraphe, indexParagraphe) => {
@@ -108,17 +132,34 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
         const mots = paragraphe.trim().split(/\s+/);
         const positions = mots.map((_, i) => i);
         const melange = positions.sort(() => Math.random() - 0.5);
-        
-const spans = mots.map(mot => {
-  const span = document.createElement("span");
-  span.textContent = mot;
-  return span;
-});
 
-spans.forEach((span, idx) => {
-  p.appendChild(span);
-  p.append(" "); // Ajoute un vrai espace après chaque mot
-});
+        const spans = mots.map(mot => {
+          const span = document.createElement("span");
+          span.textContent = mot;
+          return span;
+        });
+
+        spans.forEach(span => {
+          p.appendChild(span);
+          p.append(" ");
+        });
+
+        melange.forEach((index, i) => {
+          setTimeout(() => {
+            const mot = spans[index];
+            mot.classList.add("visible");
+
+            // Ajouter une étincelle magique
+            const sparkle = document.createElement("div");
+            sparkle.className = "sparkle";
+            mot.appendChild(sparkle);
+
+            // Supprimer l’étincelle après l’animation
+            setTimeout(() => {
+              sparkle.remove();
+            }, 800);
+          }, indexParagraphe * 3000 + i * 60);
+        });
       });
     };
   </script>
