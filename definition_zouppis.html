@@ -9,6 +9,7 @@
   <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
+
   <style>
     html, body {
       height: 100%;
@@ -17,7 +18,7 @@
       color: #4b2e00;
       text-align: center;
       overflow-y: auto;
-      background-image: url('feuille_grimoire.png'); /* ton image de parchemin */
+      background-image: url('feuille_grimoire.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -28,7 +29,7 @@
       max-width: 800px;
       margin: 60px auto;
       padding: 60px 40px;
-      background-color: rgba(255, 255, 255, 0.05); /* optionnel : voile léger */
+      background-color: rgba(255, 255, 255, 0.05);
     }
 
     .texte-sur-parchemin {
@@ -39,7 +40,6 @@
         2px 2px 4px #3a2700,
         0 0 8px #f9e199,
         1px 1px 1px #000;
-      pointer-events: auto;
     }
 
     .titre-lexique {
@@ -51,23 +51,22 @@
       margin-bottom: 25px;
     }
 
-    /* Apparition magique du texte */
+    /* Apparition progressive douce */
     .apparition-magique {
       position: relative;
       opacity: 0;
-      transform: translateY(20px);
-      animation: apparition 1.8s ease-out forwards;
+      animation: apparition-fade 4s ease-out forwards;
       white-space: pre-wrap;
     }
 
-    @keyframes apparition {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes apparition-fade {
+      0%   { opacity: 0; transform: translateY(20px); }
+      50%  { opacity: 0.3; transform: translateY(10px); }
+      75%  { opacity: 0.6; transform: translateY(5px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Effet de poussière magique légère */
+    /* Effet magique scintillant */
     .apparition-magique::after {
       content: "";
       position: absolute;
@@ -77,7 +76,7 @@
       height: 100%;
       background-image: radial-gradient(circle, rgba(255,255,200,0.3) 0%, transparent 70%);
       background-size: 5px 5px;
-      animation: scintillement 2s ease-out forwards;
+      animation: scintillement 2.5s ease-out forwards;
       pointer-events: none;
       z-index: 2;
     }
