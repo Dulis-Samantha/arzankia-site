@@ -9,7 +9,6 @@
   <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
-
   <style>
     html, body {
       height: 100%;
@@ -51,42 +50,16 @@
       margin-bottom: 25px;
     }
 
-   .apparition-magique {
-  position: relative;
-  opacity: 0;
-  animation: apparition-fade 6s ease-out forwards;
-  white-space: pre-wrap;
-}
+    .texte-aleatoire span {
+      opacity: 0;
+      display: inline-block;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(10px);
+    }
 
-@keyframes apparition-fade {
-  0%   { opacity: 0; transform: translateY(20px); }
-  25%  { opacity: 0.2; transform: translateY(15px); }
-  50%  { opacity: 0.4; transform: translateY(10px); }
-  75%  { opacity: 0.7; transform: translateY(5px); }
-  100% { opacity: 1;   transform: translateY(0); }
-}
-
-
-    /* Effet magique scintillant */
-   .apparition-magique::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(circle, rgba(255,255,200,0.3) 0%, transparent 70%);
-  background-size: 5px 5px;
-  animation: scintillement 2.5s ease-out forwards;
-  pointer-events: none;
-  z-index: 2;
-}
-
-
-    @keyframes scintillement {
-      0%   { opacity: 1; transform: scale(1); }
-      80%  { opacity: 0.6; transform: scale(1.05); }
-      100% { opacity: 0; transform: scale(1.1); }
+    .texte-aleatoire span.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -100,8 +73,8 @@
   </div>
 
   <script>
-  window.onload = function () {
-    const texte = `
+    window.onload = function () {
+      const texte = `
 ✧
 Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
 Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
@@ -122,32 +95,30 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
 ✧
       `;
 
-         const container = document.getElementById("lexiqueContainer");
-    const wrapper = document.createElement("p");
-    wrapper.className = "texte-aleatoire apparition-magique";
-    container.appendChild(wrapper);
+      const container = document.getElementById("lexiqueContainer");
+      const wrapper = document.createElement("p");
+      wrapper.className = "texte-aleatoire";
+      container.appendChild(wrapper);
 
-    const mots = texte.trim().split(/\\s+/);
-    const positions = mots.map((_, i) => i);
-    const melange = positions.sort(() => Math.random() - 0.5);
+      const mots = texte.trim().split(/\s+/);
+      const positions = mots.map((_, i) => i);
+      const melange = positions.sort(() => Math.random() - 0.5);
 
-    const spans = mots.map(mot => {
-      const span = document.createElement("span");
-      span.textContent = mot + " ";
-      span.style.opacity = 0;
-      span.style.transition = "opacity 0.5s ease";
-      return span;
-    });
+      const spans = mots.map(mot => {
+        const span = document.createElement("span");
+        span.textContent = mot + " ";
+        return span;
+      });
 
-    spans.forEach(span => wrapper.appendChild(span));
+      spans.forEach(span => wrapper.appendChild(span));
 
-    melange.forEach((index, i) => {
-      setTimeout(() => {
-        spans[index].style.opacity = 1;
-      }, i * 80); // vitesse d’apparition ajustable
-    });
-  };
-</script>
+      melange.forEach((index, i) => {
+        setTimeout(() => {
+          spans[index].classList.add("visible");
+        }, i * 80); // temps entre chaque mot
+      });
+    };
+  </script>
 
 </body>
 </html>
