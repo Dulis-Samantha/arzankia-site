@@ -296,16 +296,17 @@ Il en existe plusieurs variétés, mais la plus prisée est la Muguëtinne blanc
 
       const dureeTotale = ordreFinal.length * 90 + 1000;
       setTimeout(() => {
-        document.getElementById("titreLexique").classList.add("visible");
-        // Afficher l’image après le texte et le titre
-setTimeout(() => {
+  document.getElementById("titreLexique").classList.add("visible");
+
+  // Afficher l’image en même temps que le titre
   const imageContainer = document.getElementById("imageMuguetinne");
   if (imageContainer) {
     imageContainer.style.display = "flex";
     const img = imageContainer.querySelector("img");
     img.style.animation = "apparitionMagique 2.5s ease-out forwards";
   }
-      }, dureeTotale);
+}, dureeTotale);
+
     };
   </script>
   <a href="grimoire_ingredients_mondes.html" class="btn-retour-discret" title="Retour">↩</a>
