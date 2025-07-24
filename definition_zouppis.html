@@ -24,12 +24,26 @@
     }
 
     .titre-lexique {
-      font-family: 'Cinzel', serif;
-      font-size: 2.6rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
+  font-family: 'Cinzel', serif;
+  font-size: 2.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.titre-lexique.visible {
+  opacity: 1;
+  animation: glitterTitle 2s infinite alternate;
+}
+
+@keyframes glitterTitle {
+  0% { text-shadow: 0 0 6px #fff7cc, 0 0 10px #ffd700; }
+  50% { text-shadow: 0 0 12px #fffbe6, 0 0 20px #ffeb3b; }
+  100% { text-shadow: 0 0 6px #fff7cc, 0 0 10px #ffd700; }
+}
+
 
     @keyframes glitter {
       0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
@@ -86,7 +100,7 @@
 <body>
 
   <div class="parchemin-wrapper">
-    <div class="titre-lexique">ZOUPPIS</div>
+    <div class="titre-lexique" id="titreLexique">ZOUPPIS</div>
     <div class="texte-aleatoire" id="lexiqueContainer"></div>
   </div>
 
@@ -150,6 +164,13 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
         const y = (Math.random() - 0.5) * 60;
         const angle = (Math.random() - 0.5) * 20;
         span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+
+        // Attendre la fin des apparitions pour afficher le titre
+const dureeTotale = ordreFinal.length * 90 + 1000;
+setTimeout(() => {
+  document.getElementById("titreLexique").classList.add("visible");
+}, dureeTotale);
+
 
         setTimeout(() => {
           span.classList.add("visible");
