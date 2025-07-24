@@ -18,13 +18,14 @@
       text-align: center;
     }
 
-    .parchemin-wrapper {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 60px 40px;
-    }
+   .parchemin-wrapper {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
 
-    ..titre-lexique {
+    .titre-lexique {
   font-family: 'Cinzel', serif;
   font-size: 2.6rem;
   font-weight: bold;
@@ -64,6 +65,22 @@
       50% { transform: translateY(-3px); }
       100% { transform: translateY(0); }
     }
+    @media (max-width: 600px) {
+  .parchemin-wrapper {
+    padding: 40px 16px;
+  }
+
+  .titre-lexique {
+    font-size: 2rem;
+  }
+
+  .texte-aleatoire p {
+    font-size: 1rem;
+    line-height: 1.6;
+     margin-bottom: 1em;
+  }
+}
+
 
     .texte-aleatoire span {
       opacity: 0;
@@ -78,6 +95,10 @@
       transform: translate(0, 0) rotate(0);
       animation: glitter 1.8s infinite ease-in-out, floatMagic 3s infinite ease-in-out;
     }
+
+    .texte-aleatoire {
+  overflow-wrap: break-word;
+}
 
     .sparkle {
       position: absolute;
@@ -107,10 +128,10 @@
 </head>
 <body>
 
-  <div class="parchemin-wrapper">
-    <div class="titre-lexique" id="titreLexique">ZOUPPIS</div>
-    <div class="texte-aleatoire" id="lexiqueContainer"></div>
-  </div>
+<main class="parchemin-wrapper">
+  <h1 class="titre-lexique" id="titreLexique">ZOUPPIS</h1>
+  <div class="texte-aleatoire" id="lexiqueContainer"></div>
+</main>
 
   <script>
     window.onload = function () {
@@ -173,13 +194,6 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
         const angle = (Math.random() - 0.5) * 20;
         span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
 
-        // Attendre la fin des apparitions pour afficher le titre
-const dureeTotale = ordreFinal.length * 90 + 1000;
-setTimeout(() => {
-  document.getElementById("titreLexique").classList.add("visible");
-}, dureeTotale);
-
-
         setTimeout(() => {
           span.classList.add("visible");
 
@@ -201,6 +215,14 @@ setTimeout(() => {
               extra.style.animationDuration = "1.2s";
               span.appendChild(extra);
               setTimeout(() => extra.remove(), 1200);
+
+              
+        // Attendre la fin des apparitions pour afficher le titre
+const dureeTotale = ordreFinal.length * 90 + 1000;
+setTimeout(() => {
+  document.getElementById("titreLexique").classList.add("visible");
+}, dureeTotale);
+              
             }
           }
         }, i * 90);
