@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Définition de Loupe</title>
+
+  <!-- Polices Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-image: url('page_grimoire.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'IM Fell English SC', serif;
+      color: #4b2e00;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .parchemin-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 16px;
+      box-sizing: border-box;
+      min-height: calc(var(--vh, 1vh) * 100);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .titre-lexique {
+      font-family: 'Uncial Antiqua', cursive;
+      font-size: 3.2rem;
+      font-weight: normal;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, #f5d76e, #fff6cc, #ffe680);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:
+        0 0 10px rgba(255, 246, 200, 0.8),
+        0 0 20px rgba(255, 225, 100, 0.6),
+        0 0 30px rgba(255, 215, 0, 0.4);
+      margin-bottom: 25px;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 2s ease-in-out;
+    }
+
+    .titre-lexique.visible {
+      opacity: 1;
+      animation: glitterTitle 2s infinite alternate, zoomIn 1.5s ease-out forwards, floatMagic 3s infinite ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.6); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes glitterTitle {
+      0% { text-shadow: 0 0 6px #fff7cc, 0 0 12px #ffd700, 0 0 20px #ffecb3; }
+      50% { text-shadow: 0 0 12px #fffbe6, 0 0 25px #ffe066, 0 0 30px #ffcc00; }
+      100% { text-shadow: 0 0 6px #fff7cc, 0 0 12px #ffd700, 0 0 20px #ffecb3; }
+    }
+
+    @keyframes floatMagic {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+      100% { transform: translateY(0); }
+    }
+
+    .texte-aleatoire span {
+      opacity: 0;
+      display: inline-block;
+      transform: translate(0px, 0px) rotate(0deg);
+      transition: transform 1s ease-out, opacity 1.2s ease-out;
+      position: relative;
+    }
+
+    .texte-aleatoire span.visible {
+      opacity: 1;
+      transform: translate(0, 0) rotate(0);
+      animation: glitter 1.8s infinite ease-in-out, floatMagic 3s infinite ease-in-out;
+    }
+
+    @keyframes glitter {
+      0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+      50% { text-shadow: 0 0 8px #fffbe6, 0 0 12px #ffd700; }
+      100% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+    }
+
+    .texte-aleatoire {
+      overflow-wrap: break-word;
+    }
+
+    .sparkle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px #fff7cc;
+      animation: sparkle 0.8s ease-out forwards;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .parchemin-wrapper {
+        padding: 40px 16px;
+      }
+
+      .titre-lexique {
+        font-size: 2.2rem;
+      }
+
+      .texte-aleatoire p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1em;
+      }
+    }
+    .btn-retour-discret {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.4rem;
+  color: #ffe8b3;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid #d6b65c;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 38px;
+  text-decoration: none;
+  box-shadow: 0 0 6px #d6b65c88;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.btn-retour-discret:hover {
+  background: rgba(255, 236, 190, 0.1);
+  box-shadow: 0 0 12px #ffd700aa;
+  transform: scale(1.1);
+}
+
+  </style>
+
+  <!-- SCRIPT POUR GÉRER LA HAUTEUR MOBILE -->
+  <script>
+    function setFullHeight() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    window.addEventListener('resize', setFullHeight);
+    window.addEventListener('orientationchange', setFullHeight);
+    window.addEventListener('load', setFullHeight);
+  </script>
+</head>
+
+<body>
+  <main class="parchemin-wrapper">
+    <h1 class="titre-lexique" id="titreLexique">LOUPE</h1>
+    <div class="texte-aleatoire" id="lexiqueContainer"></div>
+  </main>
+
+  <script>
+    window.onload = function () {
+      const texte = `
+✧
+La Loupe est bien plus qu’un simple instrument grossissant. Entre les mains d’un Chercheur, elle devient un véritable artefact magique : elle met en lumière les flux d’énergie et met à nu la vérité dissimulée sous les illusions. 
+✧
+Son verre, taillé dans un cristal d’Orichalque, pulse d’une lumière douce quand elle détecte quelque chose de significatif.
+✧
+La Loupe est un guide, capable de réagir aux intuitions de son porteur. Elle peut s’illuminer pour attirer l’attention sur un indice oublié ou vibrer faiblement quand un danger approche.
+✧
+Chaque Loupe est unique. Elle évolue avec l’expérience de son Chercheur. C’est le prolongement même de l’œil du Chercheur, la clé de sa mission : déplacer et protéger les trésors d’Arzankia, toujours avec respect et savoir.
+✧
+
+`;
+
+      const motsPrioritaires = ["cristal", "énergie", "artefact", "intuitions", "magique"];
+      const container = document.getElementById("lexiqueContainer");
+      const lignes = texte.trim().split('\n');
+      const allSpans = [];
+
+      lignes.forEach(ligne => {
+        const p = document.createElement("p");
+        container.appendChild(p);
+        ligne.trim().split(/\s+/).forEach(mot => {
+          const cleanMot = mot.replace(/[^\wÀ-ÿœŒ’-]/g, "");
+          const span = document.createElement("span");
+          span.textContent = mot;
+          span.dataset.motclean = cleanMot.toLowerCase();
+          p.appendChild(span);
+          p.append(" ");
+          allSpans.push(span);
+        });
+      });
+
+      const premiers = [], restants = [];
+      allSpans.forEach(span => {
+        if (motsPrioritaires.includes(span.dataset.motclean)) {
+          premiers.push(span);
+        } else {
+          restants.push(span);
+        }
+      });
+
+      const melange = restants.sort(() => Math.random() - 0.5);
+      const ordreFinal = [...premiers, ...melange.filter(span => !premiers.includes(span))];
+
+      ordreFinal.forEach((span, i) => {
+        const x = (Math.random() - 0.5) * 80;
+        const y = (Math.random() - 0.5) * 60;
+        const angle = (Math.random() - 0.5) * 20;
+        span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+
+        setTimeout(() => {
+          span.classList.add("visible");
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+          span.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 800);
+
+          if (Math.random() < 0.3) {
+            for (let j = 0; j < 2; j++) {
+              const extra = document.createElement("div");
+              extra.className = "sparkle";
+              extra.style.top = `${Math.random() * 100}%`;
+              extra.style.left = `${Math.random() * 100}%`;
+              extra.style.width = "3px";
+              extra.style.height = "3px";
+              extra.style.animationDuration = "1.2s";
+              span.appendChild(extra);
+              setTimeout(() => extra.remove(), 1200);       
+            }
+          }
+        }, i * 90);
+      });
+
+      const dureeTotale = ordreFinal.length * 90 + 1000;
+      setTimeout(() => {
+        document.getElementById("titreLexique").classList.add("visible");
+      }, dureeTotale);
+    };
+  </script>
+  <a href="grimoire_accesoires_magiques.html" class="btn-retour-discret" title="Retour">↩</a>
+</body>
+</html>
