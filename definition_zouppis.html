@@ -131,7 +131,7 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
 
         const mots = paragraphe.trim().split(/\s+/);
         const positions = mots.map((_, i) => i);
-        const melange = positions.sort(() => Math.random() - 0.5);
+        const melange = mots.map((_, i) => i).sort(() => Math.random() - 0.5);
 
         const spans = mots.map(mot => {
           const span = document.createElement("span");
