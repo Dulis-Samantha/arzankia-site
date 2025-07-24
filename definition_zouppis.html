@@ -3,42 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
   <title>Définition de Zouppis</title>
-
-  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
   <style>
     html, body {
-      height: 100%;
       margin: 0;
-      font-family: 'Georgia', serif;
-      color: #4b2e00;
-      text-align: center;
-      overflow-y: auto;
       background-image: url('feuille_grimoire.png');
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: center;
-      background-attachment: fixed;
+      font-family: 'IM Fell English SC', serif;
+      color: #4b2e00;
+      text-align: center;
     }
 
     .parchemin-wrapper {
       max-width: 800px;
       margin: 60px auto;
       padding: 60px 40px;
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    .texte-sur-parchemin {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      font-family: 'IM Fell English SC', serif;
-      text-shadow:
-        2px 2px 4px #3a2700,
-        0 0 8px #f9e199,
-        1px 1px 1px #000;
     }
 
     .titre-lexique {
@@ -46,14 +28,13 @@
       font-size: 2.6rem;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 2px;
       margin-bottom: 25px;
     }
 
     .texte-aleatoire span {
       opacity: 0;
       display: inline-block;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
       transform: translateY(10px);
       position: relative;
     }
@@ -63,7 +44,6 @@
       transform: translateY(0);
     }
 
-    /* Poussière magique */
     .sparkle {
       position: absolute;
       top: 50%;
@@ -93,15 +73,13 @@
 <body>
 
   <div class="parchemin-wrapper">
-    <div class="texte-sur-parchemin">
-      <div class="titre-lexique">ZOUPPIS</div>
-      <div id="lexiqueContainer"></div>
-    </div>
+    <div class="titre-lexique">ZOUPPIS</div>
+    <div class="texte-aleatoire" id="lexiqueContainer"></div>
   </div>
 
   <script>
-    window.onload = function () {
-      const texte = `
+window.onload = function () {
+  const texte = `
 ✧
 Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
 Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
@@ -121,47 +99,61 @@ Même lorsque les druides disparurent peu à peu de la surface du monde, les Zou
 Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu sous le nom de Brocéliande : une terre de brumes et de mystères, refuge des Zouppis, et mémoire vivante d’un savoir ancien qui refuse de s’éteindre.
 ✧`;
 
-      const container = document.getElementById("lexiqueContainer");
-      const paragraphes = texte.trim().split('\n').filter(p => p.trim() !== '');
+  const motsPrioritaires = ["magique", "merveilleux", "refuge", "druides", "Zouppis"];
 
-      paragraphes.forEach((paragraphe, indexParagraphe) => {
-        const p = document.createElement("p");
-        p.className = "texte-aleatoire";
-        container.appendChild(p);
+  const container = document.getElementById("lexiqueContainer");
+  const lignes = texte.trim().split('\n');
+  const allSpans = [];
 
-        const mots = paragraphe.trim().split(/\s+/);
-        const melange = mots.map((_, i) => i).sort(() => Math.random() - 0.5);
+  lignes.forEach(ligne => {
+    const p = document.createElement("p");
+    container.appendChild(p);
 
-        const spans = mots.map(mot => {
-          const span = document.createElement("span");
-          span.textContent = mot;
-          return span;
-        });
+    const mots = ligne.trim().split(/\s+/);
 
-        spans.forEach(span => {
-          p.appendChild(span);
-          p.append(" ");
-        });
+    mots.forEach(mot => {
+      const cleanMot = mot.replace(/[^\wÀ-ÿœŒ’-]/g, ""); // nettoyage ponctuation
+      const span = document.createElement("span");
+      span.textContent = mot;
+      span.dataset.motclean = cleanMot.toLowerCase();
+      p.appendChild(span);
+      p.append(" ");
+      allSpans.push(span);
+    });
+  });
 
-        melange.forEach((index, i) => {
-          setTimeout(() => {
-            const mot = spans[index];
-            mot.classList.add("visible");
+  // Séparer les mots prioritaires et les autres
+  const premiers = [];
+  const restants = [];
 
-            // Ajouter une étincelle magique
-            const sparkle = document.createElement("div");
-            sparkle.className = "sparkle";
-            mot.appendChild(sparkle);
+  allSpans.forEach(span => {
+    if (motsPrioritaires.includes(span.dataset.motclean)) {
+      premiers.push(span);
+    } else {
+      restants.push(span);
+    }
+  });
 
-            // Supprimer l’étincelle après l’animation
-            setTimeout(() => {
-              sparkle.remove();
-            }, 800);
-          }, indexParagraphe * 3000 + i * 60);
-        });
-      });
-    };
-  </script>
+  // Mélanger les restants
+  const melange = restants.sort(() => Math.random() - 0.5);
+
+  // Liste finale dans l'ordre d’apparition
+  const ordreFinal = [...premiers, ...melange];
+
+  // Apparition animée
+  ordreFinal.forEach((span, i) => {
+    setTimeout(() => {
+      span.classList.add("visible");
+
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      span.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 800);
+    }, i * 90);
+  });
+};
+</script>
+
 
 </body>
 </html>
