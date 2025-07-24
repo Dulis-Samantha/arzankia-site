@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Définition de Zouppis</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
+  <!-- Polices Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
   <style>
     html, body {
@@ -34,19 +36,26 @@
     }
 
     .titre-lexique {
-      font-family: 'Cinzel', serif;
-      font-size: 2.6rem;
-      font-weight: bold;
+      font-family: 'Uncial Antiqua', cursive;
+      font-size: 3.2rem;
+      font-weight: normal;
       text-transform: uppercase;
+      background: linear-gradient(45deg, #f5d76e, #fff6cc, #ffe680);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:
+        0 0 10px rgba(255, 246, 200, 0.8),
+        0 0 20px rgba(255, 225, 100, 0.6),
+        0 0 30px rgba(255, 215, 0, 0.4);
       margin-bottom: 25px;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
       transform: scale(0.6);
+      transition: opacity 2s ease-in-out;
     }
 
     .titre-lexique.visible {
       opacity: 1;
-      animation: glitterTitle 2s infinite alternate, zoomIn 1.5s ease-out forwards;
+      animation: glitterTitle 2s infinite alternate, zoomIn 1.5s ease-out forwards, floatMagic 3s infinite ease-in-out;
     }
 
     @keyframes zoomIn {
@@ -55,15 +64,9 @@
     }
 
     @keyframes glitterTitle {
-      0% { text-shadow: 0 0 6px #fff7cc, 0 0 10px #ffd700; }
-      50% { text-shadow: 0 0 12px #fffbe6, 0 0 20px #ffeb3b; }
-      100% { text-shadow: 0 0 6px #fff7cc, 0 0 10px #ffd700; }
-    }
-
-    @keyframes glitter {
-      0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
-      50% { text-shadow: 0 0 8px #fffbe6, 0 0 12px #ffd700; }
-      100% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+      0% { text-shadow: 0 0 6px #fff7cc, 0 0 12px #ffd700, 0 0 20px #ffecb3; }
+      50% { text-shadow: 0 0 12px #fffbe6, 0 0 25px #ffe066, 0 0 30px #ffcc00; }
+      100% { text-shadow: 0 0 6px #fff7cc, 0 0 12px #ffd700, 0 0 20px #ffecb3; }
     }
 
     @keyframes floatMagic {
@@ -84,6 +87,12 @@
       opacity: 1;
       transform: translate(0, 0) rotate(0);
       animation: glitter 1.8s infinite ease-in-out, floatMagic 3s infinite ease-in-out;
+    }
+
+    @keyframes glitter {
+      0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+      50% { text-shadow: 0 0 8px #fffbe6, 0 0 12px #ffd700; }
+      100% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
     }
 
     .texte-aleatoire {
@@ -121,7 +130,7 @@
       }
 
       .titre-lexique {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .texte-aleatoire p {
