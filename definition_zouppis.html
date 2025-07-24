@@ -28,6 +28,7 @@
   background-repeat: no-repeat;
   background-position: center;
   box-sizing: border-box;
+    overflow: hidden;
 }
 
 
@@ -195,11 +196,13 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
       const ordreFinal = [...premiers, ...melange.filter(span => !premiers.includes(span))];
 
 
-      ordreFinal.forEach((span, i) => {
-        const x = (Math.random() - 0.5) * 80;
-        const y = (Math.random() - 0.5) * 60;
-        const angle = (Math.random() - 0.5) * 20;
-        span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+    ordreFinal.forEach((span, i) => {
+  const isMobile = window.innerWidth < 600;
+  const x = (Math.random() - 0.5) * (isMobile ? 20 : 80);
+  const y = (Math.random() - 0.5) * (isMobile ? 15 : 60);
+  const angle = (Math.random() - 0.5) * 20;
+
+  span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
 
         setTimeout(() => {
           span.classList.add("visible");
