@@ -163,11 +163,10 @@
   box-shadow: 0 0 12px #ffd700aa;
   transform: scale(1.1);
 }
-   .illustration-muguetinne {
+  .illustration-muguetinne {
   margin-top: 30px;
   display: flex;
   justify-content: center;
-  animation: apparitionMagique 2.5s ease-out forwards;
 }
 
 .illustration-muguetinne img {
@@ -196,6 +195,9 @@
     transform: scale(1) rotate(0);
     filter: blur(0);
   }
+}
+.float-glow {
+  animation: apparitionMagique 2.5s ease-out forwards, floatMagic 4s infinite ease-in-out, glitter 3s infinite ease-in-out;
 }
 
 
@@ -303,7 +305,7 @@ Il en existe plusieurs variétés, mais la plus prisée est la Muguëtinne blanc
   if (imageContainer) {
     imageContainer.style.display = "flex";
     const img = imageContainer.querySelector("img");
-    img.style.animation = "apparitionMagique 2.5s ease-out forwards";
+    img.classList.add("float-glow");
   }
 }, dureeTotale);
 
