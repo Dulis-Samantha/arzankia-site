@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grimoire de Raphaël</title>
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('grimoire_accessoires.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Uncial Antiqua', cursive;
+      color: #f5e7d0;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      text-shadow: 2px 2px 6px #000;
+      background-color: rgba(0,0,0,0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .button-container {
+      margin-top: 60px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    .magic-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #d6b65c;
+      border-radius: 12px;
+      color: #fffbe6;
+      padding: 14px 24px;
+      font-size: 1.2em;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 10px #d6b65c88;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-width: 250px;
+    }
+
+    .magic-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #f5d472;
+    }
+
+    .return-button {
+      margin: 60px 0 30px;
+      font-size: 1.1em;
+      padding: 12px 30px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+        margin-top: 20px;
+      }
+
+      .magic-button, .return-button {
+        font-size: 1em;
+        padding: 12px 16px;
+        min-width: auto;
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 Les Accessoires magiques</h1>
+
+  <div class="button-container">
+    <a href="definition_grimoire.html" class="magic-button">📖 Grimoire ou Manuel</a>
+    <a href="definition_cle.html" class="magic-button">🔑 Clé d'Arzankia</a>
+    <a href="definition_arzanskan.html" class="magic-button">💠 Arzanskân</a>
+    <a href="definition_boussole.html" class="magic-button">🧭 Boussole magique</a>
+    <a href="definition_loupe.html" class="magic-button">🔍 Loupe enchantée</a>
+    <a href="definition_bouclier.html" class="magic-button">🛡️ Bouclier mystique</a>
+    <a href="definition_lasso.html" class="magic-button">🪢 Lasso doré</a>
+    <a href="definition_aile.html" class="magic-button">🪽 Les ailes d’anges</a>
+  </div>
+
+  <!-- Bouton retour -->
+  <a href="10.grimoire.html" class="magic-button return-button">⬅ Retour</a>
+
+</body>
+</html>
