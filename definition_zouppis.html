@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
   <style>
+    
     html, body {
       margin: 0;
       background-image: url('feuille_grimoire.png');
@@ -23,7 +24,7 @@
       padding: 60px 40px;
     }
 
-    .titre-lexique {
+    ..titre-lexique {
   font-family: 'Cinzel', serif;
   font-size: 2.6rem;
   font-weight: bold;
@@ -31,11 +32,18 @@
   margin-bottom: 25px;
   opacity: 0;
   transition: opacity 2s ease-in-out;
+  transform: scale(0.6); /* position de départ pour zoom */
 }
 
 .titre-lexique.visible {
   opacity: 1;
-  animation: glitterTitle 2s infinite alternate;
+  animation: glitterTitle 2s infinite alternate, zoomIn 1.5s ease-out forwards;
+
+}
+
+    @keyframes zoomIn {
+  0% { transform: scale(0.6); }
+  100% { transform: scale(1); }
 }
 
 @keyframes glitterTitle {
