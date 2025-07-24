@@ -186,7 +186,8 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
       });
 
       const melange = restants.sort(() => Math.random() - 0.5);
-      const ordreFinal = [...premiers, ...melange];
+      const ordreFinal = [...premiers, ...melange.filter(span => !premiers.includes(span))];
+
 
       ordreFinal.forEach((span, i) => {
         const x = (Math.random() - 0.5) * 80;
@@ -214,20 +215,18 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
               extra.style.height = "3px";
               extra.style.animationDuration = "1.2s";
               span.appendChild(extra);
-              setTimeout(() => extra.remove(), 1200);
-
-              
-        // Attendre la fin des apparitions pour afficher le titre
-const dureeTotale = ordreFinal.length * 90 + 1000;
-setTimeout(() => {
-  document.getElementById("titreLexique").classList.add("visible");
-}, dureeTotale);
-              
+              setTimeout(() => extra.remove(), 1200);       
             }
           }
         }, i * 90);
       });
-    };
+    
+         // Attendre la fin des apparitions pour afficher le titre
+const dureeTotale = ordreFinal.length * 90 + 1000;
+setTimeout(() => {
+  document.getElementById("titreLexique").classList.add("visible");
+}, dureeTotale);
+      };
   </script>
 
 </body>
