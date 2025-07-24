@@ -31,18 +31,29 @@
       margin-bottom: 25px;
     }
 
-    .texte-aleatoire span {
-      opacity: 0;
-      display: inline-block;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      transform: translateY(10px);
-      position: relative;
-    }
+    /* Effet magique de scintillement */
+@keyframes glitter {
+  0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+  50% { text-shadow: 0 0 8px #fffbe6, 0 0 12px #ffd700; }
+  100% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+}
 
-    .texte-aleatoire span.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Apparition magique avec mouvement */
+.texte-aleatoire span {
+  opacity: 0;
+  display: inline-block;
+  transform: translate(0px, 0px) rotate(0deg);
+  transition: transform 1s ease-out, opacity 1.2s ease-out;
+  position: relative;
+}
+
+/* Appliqué à l’apparition */
+.texte-aleatoire span.visible {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0);
+  animation: glitter 1.8s infinite ease-in-out;
+}
+
 
     .sparkle {
       position: absolute;
@@ -141,15 +152,23 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
   const ordreFinal = [...premiers, ...melange];
 
   // Apparition animée
-  ordreFinal.forEach((span, i) => {
-    setTimeout(() => {
-      span.classList.add("visible");
+ ordreFinal.forEach((span, i) => {
+  // Départ avec mouvement aléatoire
+  const x = (Math.random() - 0.5) * 80;
+  const y = (Math.random() - 0.5) * 60;
+  const angle = (Math.random() - 0.5) * 20;
+  span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
 
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      span.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 800);
-    }, i * 90);
+  setTimeout(() => {
+    span.classList.add("visible");
+
+    // Ajoute une étincelle scintillante
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    span.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  }, i * 90);
+});
   });
 };
 </script>
