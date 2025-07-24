@@ -47,13 +47,20 @@
   position: relative;
 }
 
-/* Appliqué à l’apparition */
+
+    /* Effet de flottement magique continu */
+@keyframes floatMagic {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+    
+    /* Appliqué à l’apparition */
 .texte-aleatoire span.visible {
   opacity: 1;
   transform: translate(0, 0) rotate(0);
-  animation: glitter 1.8s infinite ease-in-out;
+  animation: glitter 1.8s infinite ease-in-out, floatMagic 3s infinite ease-in-out;
 }
-
 
     .sparkle {
       position: absolute;
@@ -167,6 +174,21 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
     sparkle.className = "sparkle";
     span.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 800);
+
+    // Paillettes supplémentaires autour des mots visibles
+if (Math.random() < 0.3) { // 30% des mots
+  for (let j = 0; j < 2; j++) {
+    const sparkle2 = document.createElement("div");
+    sparkle2.className = "sparkle";
+    sparkle2.style.top = `${Math.random() * 100}%`;
+    sparkle2.style.left = `${Math.random() * 100}%`;
+    sparkle2.style.width = "3px";
+    sparkle2.style.height = "3px";
+    span.appendChild(sparkle2);
+    setTimeout(() => sparkle2.remove(), 1000);
+  }
+}
+
   }, i * 90);
 });
   });
