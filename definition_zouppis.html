@@ -31,36 +31,31 @@
       margin-bottom: 25px;
     }
 
-    /* Effet magique de scintillement */
-@keyframes glitter {
-  0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
-  50% { text-shadow: 0 0 8px #fffbe6, 0 0 12px #ffd700; }
-  100% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
-}
+    @keyframes glitter {
+      0% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+      50% { text-shadow: 0 0 8px #fffbe6, 0 0 12px #ffd700; }
+      100% { text-shadow: 0 0 3px #fff2cc, 0 0 6px #ffd; }
+    }
 
-/* Apparition magique avec mouvement */
-.texte-aleatoire span {
-  opacity: 0;
-  display: inline-block;
-  transform: translate(0px, 0px) rotate(0deg);
-  transition: transform 1s ease-out, opacity 1.2s ease-out;
-  position: relative;
-}
+    @keyframes floatMagic {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+      100% { transform: translateY(0); }
+    }
 
+    .texte-aleatoire span {
+      opacity: 0;
+      display: inline-block;
+      transform: translate(0px, 0px) rotate(0deg);
+      transition: transform 1s ease-out, opacity 1.2s ease-out;
+      position: relative;
+    }
 
-    /* Effet de flottement magique continu */
-@keyframes floatMagic {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
-  100% { transform: translateY(0px); }
-}
-    
-    /* Appliqué à l’apparition */
-.texte-aleatoire span.visible {
-  opacity: 1;
-  transform: translate(0, 0) rotate(0);
-  animation: glitter 1.8s infinite ease-in-out, floatMagic 3s infinite ease-in-out;
-}
+    .texte-aleatoire span.visible {
+      opacity: 1;
+      transform: translate(0, 0) rotate(0);
+      animation: glitter 1.8s infinite ease-in-out, floatMagic 3s infinite ease-in-out;
+    }
 
     .sparkle {
       position: absolute;
@@ -96,8 +91,8 @@
   </div>
 
   <script>
-window.onload = function () {
-  const texte = `
+    window.onload = function () {
+      const texte = `
 ✧
 Il y a bien longtemps, sur Terre, les druides se réunissaient en secret pour percer les mystères de la nature et partager leurs formules de potions magiques. 
 Lors de grandes assemblées, ils se défiaient amicalement, organisant des concours où les idées les plus originales et puissantes étaient célébrées et transmises.
@@ -117,84 +112,72 @@ Même lorsque les druides disparurent peu à peu de la surface du monde, les Zou
 Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu sous le nom de Brocéliande : une terre de brumes et de mystères, refuge des Zouppis, et mémoire vivante d’un savoir ancien qui refuse de s’éteindre.
 ✧`;
 
-  const motsPrioritaires = ["magique", "merveilleux", "refuge", "druides", "Zouppis"];
+      const motsPrioritaires = ["magique", "merveilleux", "refuge", "druides", "Zouppis"];
+      const container = document.getElementById("lexiqueContainer");
+      const lignes = texte.trim().split('\n');
+      const allSpans = [];
 
-  const container = document.getElementById("lexiqueContainer");
-  const lignes = texte.trim().split('\n');
-  const allSpans = [];
+      lignes.forEach(ligne => {
+        const p = document.createElement("p");
+        container.appendChild(p);
 
-  lignes.forEach(ligne => {
-    const p = document.createElement("p");
-    container.appendChild(p);
+        ligne.trim().split(/\s+/).forEach(mot => {
+          const cleanMot = mot.replace(/[^\wÀ-ÿœŒ’-]/g, "");
+          const span = document.createElement("span");
+          span.textContent = mot;
+          span.dataset.motclean = cleanMot.toLowerCase();
+          p.appendChild(span);
+          p.append(" ");
+          allSpans.push(span);
+        });
+      });
 
-    const mots = ligne.trim().split(/\s+/);
+      const premiers = [], restants = [];
 
-    mots.forEach(mot => {
-      const cleanMot = mot.replace(/[^\wÀ-ÿœŒ’-]/g, ""); // nettoyage ponctuation
-      const span = document.createElement("span");
-      span.textContent = mot;
-      span.dataset.motclean = cleanMot.toLowerCase();
-      p.appendChild(span);
-      p.append(" ");
-      allSpans.push(span);
-    });
-  });
+      allSpans.forEach(span => {
+        if (motsPrioritaires.includes(span.dataset.motclean)) {
+          premiers.push(span);
+        } else {
+          restants.push(span);
+        }
+      });
 
-  // Séparer les mots prioritaires et les autres
-  const premiers = [];
-  const restants = [];
+      const melange = restants.sort(() => Math.random() - 0.5);
+      const ordreFinal = [...premiers, ...melange];
 
-  allSpans.forEach(span => {
-    if (motsPrioritaires.includes(span.dataset.motclean)) {
-      premiers.push(span);
-    } else {
-      restants.push(span);
-    }
-  });
+      ordreFinal.forEach((span, i) => {
+        const x = (Math.random() - 0.5) * 80;
+        const y = (Math.random() - 0.5) * 60;
+        const angle = (Math.random() - 0.5) * 20;
+        span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
 
-  // Mélanger les restants
-  const melange = restants.sort(() => Math.random() - 0.5);
+        setTimeout(() => {
+          span.classList.add("visible");
 
-  // Liste finale dans l'ordre d’apparition
-  const ordreFinal = [...premiers, ...melange];
+          // Étincelle centrale
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+          span.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 800);
 
-  // Apparition animée
- ordreFinal.forEach((span, i) => {
-  // Départ avec mouvement aléatoire
-  const x = (Math.random() - 0.5) * 80;
-  const y = (Math.random() - 0.5) * 60;
-  const angle = (Math.random() - 0.5) * 20;
-  span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
-
-  setTimeout(() => {
-    span.classList.add("visible");
-
-    // Ajoute une étincelle scintillante
-    const sparkle = document.createElement("div");
-    sparkle.className = "sparkle";
-    span.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 800);
-
-    // Paillettes supplémentaires autour des mots visibles
-if (Math.random() < 0.3) { // 30% des mots
-  for (let j = 0; j < 2; j++) {
-    const sparkle2 = document.createElement("div");
-    sparkle2.className = "sparkle";
-    sparkle2.style.top = `${Math.random() * 100}%`;
-    sparkle2.style.left = `${Math.random() * 100}%`;
-    sparkle2.style.width = "3px";
-    sparkle2.style.height = "3px";
-    span.appendChild(sparkle2);
-    setTimeout(() => sparkle2.remove(), 1000);
-  }
-}
-
-  }, i * 90);
-});
-  });
-};
-</script>
-
+          // Étincelles supplémentaires aléatoires
+          if (Math.random() < 0.3) {
+            for (let j = 0; j < 2; j++) {
+              const extra = document.createElement("div");
+              extra.className = "sparkle";
+              extra.style.top = `${Math.random() * 100}%`;
+              extra.style.left = `${Math.random() * 100}%`;
+              extra.style.width = "3px";
+              extra.style.height = "3px";
+              extra.style.animationDuration = "1.2s";
+              span.appendChild(extra);
+              setTimeout(() => extra.remove(), 1200);
+            }
+          }
+        }, i * 90);
+      });
+    };
+  </script>
 
 </body>
 </html>
