@@ -10,38 +10,19 @@
     
     html, body {
       margin: 0;
+      background-image: url('feuille_grimoire.png');
       background-size: cover;
       background-position: center;
       font-family: 'IM Fell English SC', serif;
       color: #4b2e00;
       text-align: center;
-      filter: sepia(0.08) contrast(1.03) brightness(0.98);
-      background: radial-gradient(
-    ellipse at center,
-    #e7cfa1 0%,       /* centre clair */
-    #d4b277 40%,      /* teinte parchemin intermédiaire */
-    #b59058 100%      /* bords plus foncés */
-}
-     background-attachment: fixed;
-  background-size: cover;
-  font-family: 'IM Fell English SC', serif;
-  color: #4b2e00;
-  text-align: center;
-  filter: sepia(0.06) contrast(1.03) brightness(1);
-}
+    }
 
-.parchemin-wrapper {
+   .parchemin-wrapper {
   max-width: 800px;
   margin: 60px auto;
   padding: 60px 20px;
-  background-image: url('feuille_grimoire.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent; /* bon pour laisser le fond du body passer */
-  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.2); /* ombre intérieure effet vieilli */
   box-sizing: border-box;
-  overflow: hidden;
 }
 
     .titre-lexique {
@@ -208,13 +189,11 @@ Ce monde, premier de tous les mondes magiques, est encore aujourd’hui connu so
       const ordreFinal = [...premiers, ...melange.filter(span => !premiers.includes(span))];
 
 
-    ordreFinal.forEach((span, i) => {
-  const isMobile = window.innerWidth < 600;
-  const x = (Math.random() - 0.5) * (isMobile ? 20 : 80);
-  const y = (Math.random() - 0.5) * (isMobile ? 15 : 60);
-  const angle = (Math.random() - 0.5) * 20;
-
-  span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+      ordreFinal.forEach((span, i) => {
+        const x = (Math.random() - 0.5) * 80;
+        const y = (Math.random() - 0.5) * 60;
+        const angle = (Math.random() - 0.5) * 20;
+        span.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
 
         setTimeout(() => {
           span.classList.add("visible");
