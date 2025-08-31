@@ -39,7 +39,7 @@
       text-shadow:0 0 10px #3a1c00;
       margin:0.2rem 0 0.4rem;
       letter-spacing:0.5px;
-      text-align:center; /* centrage forcé */
+      text-align:center;
     }
 
     .archives{
@@ -47,7 +47,7 @@
       font-style:italic;
       opacity:0.95;
       line-height:1.35;
-      text-align:center; /* centrage forcé */
+      text-align:center;
     }
 
     .hero-layout{
@@ -76,18 +76,18 @@
       font-size:1rem;
       line-height:1.5;
       max-width:800px;
-      margin:0 auto;
+      margin:0 auto 1.5rem; /* ajout marge bas pour séparer des boutons */
     }
 
     .parchemin p{ margin:0.25rem 0; }
 
-    /* les boutons collés à la description */
-    .parchemin .back-button{
+    /* Boutons sous le cadre */
+    .back-button{
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:1em;
-      margin-top:1.2rem;
+      margin:1rem auto 2rem;
     }
 
     .back-button a{
@@ -130,6 +130,15 @@
         font-size:1.1rem;
         line-height:1.7;
       }
+
+      .back-button{
+        flex-direction:row;  /* en ligne sur PC */
+        justify-content:center;
+      }
+      .back-button a{
+        width:auto;
+        min-width:220px;
+      }
     }
   </style>
 </head>
@@ -137,19 +146,21 @@
 <body>
   <div class="container">
     <h1>Raphaël</h1>
-    <p class="archives">« Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. » — Archives de la Tour de l’Aube</p>
+    <p class="archives">« Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. » — Archives de la Tour de l’Aube —</p>
 
     <section class="hero-layout">
       <img src="photo_raphael.webp" alt="Portrait de Raphaël" class="image-hero" />
 
-      <div class="parchemin">
-        <p><strong>Âge :</strong> 12 ans</p>
-        <p><strong>Monde d’origine :</strong> Monde des Ptikitis</p>
-        <p><strong>Clé d’accès :</strong> Canneya</p>
-        <p><strong>Spécialisation :</strong> Aventurier</p>
-        <p><strong>Statut :</strong> En formation</p>
+      <div>
+        <div class="parchemin">
+          <p><strong>Âge :</strong> 12 ans</p>
+          <p><strong>Monde d’origine :</strong> Monde des Ptikitis</p>
+          <p><strong>Clé d’accès :</strong> Canneya</p>
+          <p><strong>Spécialisation :</strong> Aventurier</p>
+          <p><strong>Statut :</strong> En formation</p>
+        </div>
 
-        <!-- Boutons directement sous la description -->
+        <!-- Boutons EN DEHORS du cadre -->
         <div class="back-button">
           <a href="8.monde_Ptikitis.html">✨ Découvre mon monde</a>
           <a href="10.grimoire.html">✨ Découvre mon grimoire</a>
