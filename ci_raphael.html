@@ -1,132 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Raphaël – Héros d’Arzankia</title>
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-color: #1b0f2f;
-      background-size: cover;
-      font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
+    :root{
+      --or:#ffd700;
+      --fond:#1b0f2f;
+      --texte:#fff8e6;
+      --ombre:#000;
+      --parch-texte:#3b2a1d;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2em;
-      text-align: center;
+    /* ===== Base (mobile-first) ===== */
+    body{
+      margin:0;
+      padding:0;
+      background:url('fond_etoile_perso.webp') center top no-repeat;
+      background-color:var(--fond);
+      background-size:cover;
+      font-family:Georgia, serif;
+      color:var(--texte);
+      text-shadow:1px 1px 4px var(--ombre);
     }
 
-    h1 {
-      font-size: 2.5em;
-      color: #ffd700;
-      text-shadow: 0 0 10px #3a1c00;
-      margin-bottom: 1em;
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:1.5rem;
+      text-align:center;
     }
 
-    .image-hero {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
-      margin-bottom: 2em;
+    h1{
+      font-size:2.3rem;
+      color:var(--or);
+      text-shadow:0 0 10px #3a1c00;
+      margin:0.2rem 0 0.4rem;
+      letter-spacing:0.5px;
     }
 
-    .parchemin {
-      background: url('parchemin_fond.png') center center no-repeat;
-      background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85); /* voile lisible */
-      padding: 4em 2em;
-      margin: auto;
-      max-width: 800px;
-      color: #3b2a1d;
-      font-size: 1.1em;
-      line-height: 1.7;
-      text-shadow: none;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
+    .archives{
+      margin:0 0 1rem;
+      font-style:italic;
+      opacity:0.95;
+      line-height:1.35;
     }
 
-  .back-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1em; /* Espace entre les boutons */
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
-.back-button a {
-  background-color: #fff8cc;
-  color: #333;
-  padding: 0.8em 1.4em;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  font-size: 1rem;
-  text-align: center;
-  width: 80%;
-  max-width: 320px;
-}
-
-    .back-button a:hover {
-      background: #fff2b0;
-      box-shadow: 0 0 20px #fff8c6;
-      transform: scale(1.05);
+    /* Bloc portrait + description */
+    .hero-layout{
+      display:block;         /* mobile: empilé */
+      margin-top:0.5rem;
     }
 
-button, .button {
-  display: block;
-  margin: 1em auto; /* espace entre chaque bouton */
-  padding: 0.8em 1.6em;
-  border: none;
-  border-radius: 12px;
-  background: #fff8cc;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  font-weight: bold;
-  font-size: 1rem;
-  color: #333;
-  text-align: center;
-  text-decoration: none;
-}
+    .image-hero{
+      width:100%;
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 0 20px rgba(255,248,230,0.5);
+      margin:0.8rem 0 1.2rem;
+      max-width:650px;
+    }
 
-.button-container {
-  margin-bottom: 2em; /* espace avec le bas de la page */
-}
+    .parchemin{
+      background:url('parchemin_fond.png') center center no-repeat;
+      background-size:contain;
+      background-color:rgba(255,248,230,0.85); /* voile lisible */
+      color:var(--parch-texte);
+      text-shadow:none;
+      border-radius:16px;
+      box-shadow:0 0 30px rgba(255,240,200,0.5);
 
+      /* mobile = version "compressée" */
+      padding:1.1rem 1rem;
+      font-size:1rem;
+      line-height:1.5;
+      max-width:800px;
+      margin:0 auto;
+    }
+
+    .parchemin p{ margin:0.25rem 0; }
+    .parchemin em{ display:block; margin-top:0.6rem; }
+
+    /* Boutons du bas */
+    .back-button{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:1em;
+      margin:2rem 0;
+    }
+
+    .back-button a{
+      background-color:#fff8cc;
+      color:#333;
+      padding:0.8em 1.4em;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:bold;
+      box-shadow:0 0 10px rgba(0,0,0,0.3);
+      font-size:1rem;
+      text-align:center;
+      width:80%;
+      max-width:320px;
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .back-button a:hover{
+      background:#fff2b0;
+      box-shadow:0 0 20px #fff8c6;
+      transform:scale(1.05);
+    }
+
+    /* ===== Desktop / grands écrans ===== */
+    @media (min-width: 900px){
+      .container{ padding:2rem; text-align:left; }
+
+      .archives{
+        font-size:1.1rem;
+        margin-bottom:1.2rem;
+        max-width:75ch;
+      }
+
+      .hero-layout{
+        display:flex;               /* côte à côte */
+        align-items:flex-start;
+        gap:2rem;
+      }
+
+      .image-hero{
+        width:42%;
+        max-width:none;
+        margin:0;
+      }
+
+      .parchemin{
+        flex:1;
+        padding:2.2rem 2rem;        /* plus “respirant” sur PC */
+        font-size:1.1rem;
+        line-height:1.7;
+      }
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Raphaël </h1>
+    <h1>Raphaël</h1>
+    <p class="archives">« Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. » — Archives de la Tour de l’Aube</p>
 
-    <!-- Image du héros -->
-    <img src="photo_raphael.webp" alt="Portrait de Raphaël" class="image-hero">
+    <!-- Portrait + Description -->
+    <section class="hero-layout">
+      <!-- Image du héros (PC: à gauche | Mobile: au-dessus) -->
+      <img src="photo_raphael.webp" alt="Portrait de Raphaël" class="image-hero" />
 
-    <!-- Texte sur parchemin -->
-    <div class="parchemin">
-      <p><strong>Âge :</strong> 12 ans</p>
-      <p><strong>Monde d’origine :</strong> Monde des Ptikitis</p>
-      <p><strong>Clé d’accès :</strong> Canneya</p>
-      <p><strong>Spécialisation :</strong> Aventurier</p>
-      <p><strong>Statut :</strong> En formation</p>
-      <br>
-      <em>« Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. »<br>– Archives de la Tour de l’Aube</em>
+      <!-- Description sur parchemin (PC: à droite | Mobile: en dessous, compressée) -->
+      <div class="parchemin">
+        <p><strong>Âge :</strong> 12 ans</p>
+        <p><strong>Monde d’origine :</strong> Monde des Ptikitis</p>
+        <p><strong>Clé d’accès :</strong> Canneya</p>
+        <p><strong>Spécialisation :</strong> Aventurier</p>
+        <p><strong>Statut :</strong> En formation</p>
+      </div>
+    </section>
+
+    <!-- Boutons -->
+    <div class="back-button">
+      <a href="8.monde_Ptikitis.html">✨ Découvre mon monde</a>
+      <a href="10.grimoire.html">✨ Découvre mon grimoire</a>
+      <a href="3.les_heros.html">← Retour aux héros</a>
     </div>
-
-    <!-- Bouton retour -->
- <div class="back-button">
-  <a href="8.monde_Ptikitis.html">✨ Découvre mon monde</a>
-  <a href="10.grimoire.html">✨ Découvre mon grimoire</a>
-  <a href="3.les_heros.html">← Retour aux héros</a>
-</div>
   </div>
 </body>
 </html>
