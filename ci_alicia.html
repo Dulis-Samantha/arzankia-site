@@ -46,9 +46,7 @@
       line-height:1.4;
       text-align:center;
     }
-    .archives q {
-      font-style:italic;
-    }
+    .archives q { font-style:italic; }
     .archives .signature {
       display:block;
       margin-top:0.4rem;
@@ -56,40 +54,40 @@
       opacity:0.8;
     }
 
-    /* === Flip 3D === */
-    .flip-container {
-      perspective:1000px;
+    /* ===== Flip 3D (mobile-friendly) ===== */
+    .flip-container{
       width:100%;
       max-width:400px;
-      margin:0 auto 1.2rem;
+      margin:0 auto 1.5rem;
       cursor:pointer;
-    }
-    .flipper {
       position:relative;
-      width:100%;
-      transform-style:preserve-3d;
-      transition:transform 0.8s;
+      aspect-ratio:3/4;            /* ✅ donne une vraie hauteur en mobile */
+      perspective:1000px;
     }
-    .flip-container.clicked .flipper {
-      transform:rotateY(180deg);
-    }
-    .front, .back {
+    .flipper{
       position:absolute;
-      width:100%;
+      inset:0;                     /* remplit le conteneur */
+      transform-style:preserve-3d;
+      transition:transform .8s;
+    }
+    .flip-container.clicked .flipper{ transform:rotateY(180deg); }
+
+    .front,.back{
+      position:absolute;
+      inset:0;
       backface-visibility:hidden;
     }
-    .front img, .back img {
+    .front img,.back img{
       width:100%;
-      height:auto;
+      height:100%;
+      object-fit:cover;
       border-radius:12px;
       box-shadow:0 0 20px rgba(255,248,230,0.5);
       display:block;
     }
-    .back {
-      transform:rotateY(180deg);
-    }
+    .back{ transform:rotateY(180deg); }
 
-    /* === Parchemin === */
+    /* ===== Parchemin ===== */
     .parchemin{
       background:url('parchemin_fond.png') center center no-repeat;
       background-size:contain;
@@ -106,7 +104,7 @@
     }
     .parchemin p{ margin:0.3rem 0; }
 
-    /* === Bouton retour === */
+    /* ===== Bouton retour ===== */
     .back-button{
       display:flex;
       justify-content:center;
@@ -136,7 +134,7 @@
         inset 0 -3px 10px rgba(0,0,0,.08);
     }
 
-    /* === Layout PC === */
+    /* ===== Desktop ===== */
     @media (min-width: 900px){
       .hero-layout{
         display:flex;
@@ -145,8 +143,9 @@
         justify-content:center;
       }
       .flip-container{
-        flex:0 0 30%;   /* largeur fixe à gauche */
+        flex:0 0 30%;
         margin:0;
+        aspect-ratio:auto;         /* on laisse la hauteur s’ajuster en desktop */
       }
       .right-col{
         flex:1;
