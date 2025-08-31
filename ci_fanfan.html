@@ -1,291 +1,88 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fanfan – Héros d’Arzankia</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-color: #1b0f2f;
-      background-size: cover;
-      font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
-    }
+}
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2em 1.5em;
-      text-align: center;
-    }
 
-    h1 {
-      font-size: 2.5em;
-      color: #ffd700;
-      text-shadow: 0 0 10px #3a1c00;
-      margin-bottom: 1em;
-    }
+/* Mobile: on cache le descriptif par défaut et on affiche un bouton pour l'ouvrir */
+.toggle-desc{ display:block; margin:0 auto 1rem; max-width:260px; }
+.toggle-desc button{
+width:100%; padding:.9em 1.2em; border-radius:14px; border:1px solid #d9c889;
+background:linear-gradient(180deg,#fff8cc,#ffe18a 60%,#e2d289);
+font-weight:800; color:#2a2416; text-shadow:0 1px 0 rgba(255,255,255,.55);
+box-shadow:0 10px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.75);
+}
 
-    /* === Flip 3D pour portrait === */
-    .flip-container {
-      perspective: 1000px;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto 1.5rem;
-      cursor: pointer;
-    }
-    .flipper {
-      position: relative;
-      width: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.8s;
-    }
-    .flip-container.clicked .flipper {
-      transform: rotateY(180deg);
-    }
-    .front, .back {
-      position: absolute;
-      width: 100%;
-      backface-visibility: hidden;
-    }
-    .front img, .back img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255,248,230,0.5);
-      display: block;
-    }
-    .back {
-      transform: rotateY(180deg);
-    }
 
-    /* === Parchemin === */
-    .parchemin {
-      background: url('parchemin_fond.png') center center no-repeat;
-      background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85);
-      padding: 1.5em 1em;
-      margin: 1.5rem auto;
-      max-width: 460px;
-      color: #3b2a1d;
-      font-size: 1em;
-      line-height: 1.5;
-      text-shadow: none;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
-      display: none; /* révélé par le jeu */
-    }
-
-    .parchemin.show {
-      display: block;
-      animation: fadeIn 1s forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === Bouton retour === */
-    .back-button {
-      margin: 2em auto;
-    }
-    .back-button a {
-      display: inline-block;
-      background: linear-gradient(135deg, #fff6c1, #ffe18a);
-      color: #3a2f00;
-      font-weight: bold;
-      text-decoration: none;
-      padding: 1em 2em;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #ffeba0;
-      transition: all 0.3s ease;
-    }
-    .back-button a:hover {
-      background: #fff2b0;
-      box-shadow: 0 0 20px #fff8c6;
-      transform: scale(1.05);
-    }
-
-    /* === Jeu === */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1em;
-      max-width: 800px;
-      margin: 3em auto 1em auto;
-    }
-    .word {
-      padding: 0.8em;
-      background: #ffffff10;
-      border: 2px solid #ffffff30;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 1em;
-    }
-    .word.correct.selected {
-      background: #228855cc;
-      border-color: #66ffcc;
-    }
-    .word.wrong.selected {
-      background: #883333aa;
-      border-color: #ff6666;
-    }
-
-    #reveal {
-      margin: 2em auto;
-      padding: 1.5em;
-      background: rgba(255, 223, 150, 0.1);
-      border: 1px solid #ffd70088;
-      border-radius: 10px;
-      font-size: 1.1em;
-      max-width: 700px;
-      display: none;
-      animation: fadeIn 2s forwards;
-    }
-
-    /* === Layout PC === */
-    @media (min-width: 900px){
-      .hero-layout {
-        display: flex;
-        align-items: flex-start;
-        gap: 2rem;
-        justify-content: center;
-      }
-      .flip-container {
-        flex: 0 0 30%;
-        margin: 0;
-      }
-      .right-col {
-        flex: 1;
-        max-width: 400px;
-      }
-    }
-  </style>
+/* Desktop ≥900px : grille 2 colonnes, descriptif visible sans toggle */
+@media (min-width: 900px){
+.hero-layout{ display:flex; align-items:flex-start; gap:2rem; }
+.image-hero{ width:30%; max-width:560px; margin:0; margin-left:130px; }
+.right-col{ flex:1; max-width:400px; }
+.parchemin{ max-width:460px; padding:2rem 1.8rem; font-size:1.05rem; line-height:1.6; }
+.toggle-desc{ display:none; }
+.parchemin[hidden]{ display:block !important; } /* force visible sur desktop */
+}
+</style>
 </head>
+
+
 <body>
-  <div class="container">
-    <h1>Fanfan</h1>
+<div class="container">
+<h1>Fanfan</h1>
 
-    <section class="hero-layout">
-      <!-- Portrait flip recto/verso -->
-      <div class="flip-container" onclick="this.classList.toggle('clicked')">
-        <div class="flipper">
-          <div class="front">
-            <img src="photo_fanfan.webp" alt="Portrait de Fanfan recto">
-          </div>
-          <div class="back">
-            <img src="photo_fanfan2.webp" alt="Portrait de Fanfan verso">
-          </div>
-        </div>
-      </div>
 
-      <!-- Colonne de droite -->
-      <div class="right-col">
-        <div id="fanfan-details" class="parchemin">
-          <p><strong>Âge :</strong> 15 ans</p>
-          <p><strong>Monde d’origine :</strong> Monde d'Hégaïa</p>
-          <p><strong>Clé d’accès :</strong> Chevalière</p>
-          <p><strong>Spécialisation :</strong> Chercheuse</p>
-          <p><strong>Statut :</strong> En formation - niv2</p>
-          <br>
-          <em>« Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin. »<br>– Archives de la Tour de l’Aube</em>
-        </div>
+<p class="archives">
+<q>Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin.</q>
+<span class="signature">— Archives de la Tour de l’Aube —</span>
+</p>
 
-        <div class="back-button">
-          <a href="3.les_heros.html">← Retour aux héros</a>
-        </div>
-      </div>
-    </section>
 
-    <!-- Jeu -->
-    <h2 style="margin-top: 3em;">✨ À quel point connais-tu Fanfan ?</h2>
-    <p><em>Clique sur les 5 mots qui te semblent lui correspondre…</em></p>
+<section class="hero-layout">
+<img src="photo_fanfan.webp" alt="Portrait de Fanfan" class="image-hero" />
 
-    <div class="grid" id="wordGrid">
-      <div class="word" data-word="Zouppi">Zouppi</div>
-      <div class="word" data-word="Chercheuse">Chercheuse</div>
-      <div class="word" data-word="Licorne">Licorne</div>
-      <div class="word" data-word="Timide">Timide</div>
-      <div class="word" data-word="Hegaia">Hegaia</div>
-      <div class="word" data-word="Fée">Fée</div>
-      <div class="word" data-word="Dresseuse">Dresseuse</div>
-      <div class="word" data-word="Fidèle">Fidèle</div>
-      <div class="word" data-word="Sirène">Sirène</div>
-      <div class="word" data-word="Princesse">Princesse</div>
-      <div class="word" data-word="Bateau">Bateau</div>
-      <div class="word" data-word="Ptikiti">Ptikiti</div>
-      <div class="word" data-word="Blonde">Blonde</div>
-      <div class="word" data-word="Forêt">Forêt</div>
-      <div class="word" data-word="Triste">Triste</div>
-      <div class="word" data-word="Chevalière">Chevalière</div>
-      <div class="word" data-word="Air">Air</div>
-      <div class="word" data-word="Magicienne">Magicienne</div>
-      <div class="word" data-word="Corse">Corse</div>
-      <div class="word" data-word="Aventurière">Aventurière</div>
-      <div class="word" data-word="Experte">Experte</div>
-      <div class="word" data-word="Méchante">Méchante</div>
-      <div class="word" data-word="Bretagne">Bretagne</div>
-      <div class="word" data-word="Dragon">Dragon</div>
-    </div>
 
-    <div id="reveal">
-      ✨ <strong>Hello, c'est Fanfan.</strong><br>
-      Je sais, Raphaël n’a pas encore exploré mon monde...
-      Mais si tu ouvres l’œil, tu pourrais découvrir à quoi il ressemble....
-      Un indice ? Son empreinte est discrète, mais bien réelle.<br>
-      🌿 Rendez-vous sur la page des Mondes d’Arzankia pour percer le secret…
-    </div>
-  </div>
+<div class="right-col">
+<!-- Bouton pour révéler le descriptif sur mobile -->
+<div class="toggle-desc">
+<button id="btnToggle" aria-expanded="false" aria-controls="blocDesc">✨ Voir le descriptif</button>
+</div>
 
-  <script>
-    const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
-    let selectedCorrect = [];
-    let gameCompleted = false;
 
-    function resetGame() {
-      selectedCorrect = [];
-      gameCompleted = false;
-      document.querySelectorAll('.word').forEach(wordEl => {
-        wordEl.classList.remove('selected', 'correct', 'wrong');
-      });
-      document.getElementById('reveal').style.display = 'none';
-      const details = document.getElementById('fanfan-details');
-      details.style.display = 'none';
-      details.classList.remove('show');
-    }
+<div id="blocDesc" class="parchemin" hidden>
+<p><strong>Âge :</strong> 15 ans</p>
+<p><strong>Monde d’origine :</strong> Monde d’Hégaïa</p>
+<p><strong>Clé d’accès :</strong> Chevalière</p>
+<p><strong>Spécialisation :</strong> Chercheuse</p>
+<p><strong>Statut :</strong> En formation – niv 2</p>
+</div>
 
-    document.querySelectorAll('.word').forEach(wordEl => {
-      wordEl.addEventListener('click', () => {
-        if (gameCompleted) return;
-        const word = wordEl.getAttribute('data-word');
-        if (wordEl.classList.contains('selected')) return;
 
-        if (correctWords.includes(word)) {
-          wordEl.classList.add('selected', 'correct');
-          selectedCorrect.push(word);
-        } else {
-          wordEl.classList.add('selected', 'wrong');
-          setTimeout(resetGame, 400);
-          return;
-        }
+<nav class="back-button" aria-label="Navigation héros Fanfan">
+<a href="7.monde_Hegaia.html">✨Découvre mon monde</a>
+<a href="10.grimoire.html">✨Découvre mon grimoire</a>
+<a href="3.les_heros.html">← Retour aux héros</a>
+</nav>
+</div>
+</section>
+</div>
 
-        if (selectedCorrect.length === correctWords.length) {
-          gameCompleted = true;
-          document.getElementById('reveal').style.display = 'block';
 
-          const details = document.getElementById('fanfan-details');
-          details.style.display = 'block';
-          setTimeout(() => details.classList.add('show'), 10);
-        }
-      });
-    });
-  </script>
+<script>
+(function(){
+const btn = document.getElementById('btnToggle');
+const desc = document.getElementById('blocDesc');
+if(!btn || !desc) return;
+const open = () => { desc.hidden = false; btn.setAttribute('aria-expanded','true'); btn.textContent = 'Réduire le descriptif'; };
+const close = () => { desc.hidden = true; btn.setAttribute('aria-expanded','false'); btn.textContent = '✨ Voir le descriptif'; };
+// Mobile par défaut: fermé. Sur desktop, on force ouvert au chargement
+const isDesktop = () => window.matchMedia('(min-width: 900px)').matches;
+const syncToViewport = () => {
+if (isDesktop()) { desc.hidden = false; btn.setAttribute('aria-expanded','true'); }
+else { desc.hidden = true; btn.setAttribute('aria-expanded','false'); }
+};
+btn.addEventListener('click', () => { desc.hidden ? open() : close(); });
+window.addEventListener('resize', syncToViewport);
+window.addEventListener('DOMContentLoaded', syncToViewport);
+syncToViewport();
+})();
+</script>
 </body>
 </html>
