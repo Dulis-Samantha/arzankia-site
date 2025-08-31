@@ -135,29 +135,29 @@
     }
 
     /* ===== Desktop ===== */
-    @media (min-width: 900px){
-      .hero-layout{
-        display:flex;
-        align-items:flex-start;
-        gap:2rem;
-        justify-content:center;
-      }
-      .flip-container{
-        flex:0 0 30%;
-        margin:0;
-        aspect-ratio:auto;         /* on laisse la hauteur s’ajuster en desktop */
-      }
-      .right-col{
-        flex:1;
-        max-width:400px;
-      }
-      .parchemin{
-        max-width:460px;
-        padding:2rem 1.8rem;
-        font-size:1.05rem;
-        line-height:1.6;
-      }
-    }
+   @media (min-width: 900px){
+  .hero-layout{
+    display:flex;
+    align-items:flex-start;
+    gap:2rem;
+    justify-content:center;
+  }
+  .flip-container{
+    flex:0 0 30%;
+    margin:0;
+    height:auto;       /* ✅ laisse l’image gérer sa hauteur */
+  }
+  .right-col{
+    flex:1;
+    max-width:400px;
+  }
+  .parchemin{
+    max-width:460px;
+    padding:2rem 1.8rem;
+    font-size:1.05rem;
+    line-height:1.6;
+  }
+}
   </style>
 </head>
 
