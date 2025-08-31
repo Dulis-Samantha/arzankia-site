@@ -17,7 +17,6 @@
       --btn-bg-hover:#fff2b0;
     }
 
-    /* ===== Base (mobile-first) ===== */
     body{
       margin:0;
       padding:0;
@@ -30,7 +29,7 @@
     }
 
     .container{
-      max-width:1100px;
+      max-width:1200px;
       margin:auto;
       padding:1.5rem;
       text-align:center;
@@ -40,22 +39,27 @@
       font-size:2.6rem;
       color:var(--or);
       text-shadow:0 0 10px #3a1c00;
-      margin:0.2rem 0 0.4rem;
-      letter-spacing:0.5px;
+      margin:0.2rem 0 0.3rem;
       text-align:center;
     }
 
     .archives{
-      margin:0 0 1rem;
-      font-style:italic;
-      opacity:0.95;
+      margin:0 0 1.5rem;
       line-height:1.4;
       text-align:center;
     }
+    .archives q {
+      font-style:italic;
+    }
+    .archives .signature {
+      display:block;
+      margin-top:0.4rem;
+      font-size:0.9rem;
+      opacity:0.8;
+    }
 
-    /* zone image + description */
     .hero-layout{
-      display:block;             /* mobile: empilé */
+      display:block;
       margin-top:0.5rem;
     }
 
@@ -65,11 +69,11 @@
       border-radius:12px;
       box-shadow:0 0 20px rgba(255,248,230,0.5);
       margin:0.8rem auto 1.2rem;
-      max-width:700px;           /* limite utile sur mobile grand */
+      max-width:700px;
       display:block;
     }
 
-    .right-col{                   /* colonne de droite (parchemin + boutons) */
+    .right-col{
       max-width:800px;
       margin:0 auto;
     }
@@ -82,25 +86,25 @@
       text-shadow:none;
       border-radius:16px;
       box-shadow:0 0 30px rgba(255,240,200,0.5);
-
-      /* mobile = version “compressée” */
-      padding:1.05rem 1rem;
-      font-size:0.98rem;
-      line-height:1.45;
-      margin:0 auto 1.2rem;
+      padding:1rem;
+      font-size:0.95rem;
+      line-height:1.4;
+      margin:0 auto 1.5rem;
     }
+
     .parchemin p{ margin:0.3rem 0; }
 
-    /* Boutons sous le cadre (identiques) */
+    /* Boutons empilés (même sur PC) */
     .back-button{
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:0.9rem;
+      gap:1rem;
       margin:0 auto 2rem;
       width:100%;
-      max-width:900px;
+      max-width:330px;
     }
+
     .back-button a{
       background-color:var(--btn-bg);
       color:#333;
@@ -111,54 +115,39 @@
       font-size:1rem;
       text-align:center;
       width:100%;
-      max-width:330px;
       box-shadow:0 6px 18px rgba(0,0,0,0.25);
       transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
       display:inline-block;
     }
     .back-button a:hover{
       background:var(--btn-bg-hover);
-      box-shadow:0 10px 24px rgba(255,248,198,0.45);
+      box-shadow:0 0 20px #fff8c6;
       transform:translateY(-2px);
     }
 
-    /* ===== Desktop / grands écrans ===== */
     @media (min-width: 900px){
-      .container{ padding:2rem; }
-
       .hero-layout{
-        display:flex;               /* côte à côte */
+        display:flex;
         align-items:flex-start;
         gap:2rem;
       }
 
       .image-hero{
-        width:50%;                  /* portrait plus grand */
-        max-width:540px;
-        margin:0;                   /* plus d'espace à droite déjà donné par gap */
+        width:55%;          /* portrait plus grand */
+        max-width:560px;
+        margin:0;
       }
 
       .right-col{
         flex:1;
-        max-width:560px;            /* limite colonne droite */
+        max-width:500px;    /* colonne parchemin moins large */
       }
 
       .parchemin{
-        max-width:500px;            /* parchemin plus étroit */
-        margin:0 0 1.2rem 0;
+        max-width:460px;
         padding:2rem 1.8rem;
         font-size:1.05rem;
         line-height:1.6;
-      }
-
-      .back-button{
-        flex-direction:row;         /* en ligne sur PC */
-        justify-content:center;
-        gap:1.2rem;
-      }
-      .back-button a{
-        max-width:none;
-        min-width:230px;
       }
     }
   </style>
@@ -169,15 +158,13 @@
     <h1>Raphaël</h1>
 
     <p class="archives">
-      « Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. »<br>
-      — Archives de la Tour de l’Aube
+      <q>Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié.</q>
+      <span class="signature">— Archives de la Tour de l’Aube</span>
     </p>
 
     <section class="hero-layout">
-      <!-- Image (à gauche sur PC) -->
       <img src="photo_raphael.webp" alt="Portrait de Raphaël" class="image-hero" />
 
-      <!-- Colonne droite : parchemin + boutons (boutons en dehors du cadre) -->
       <div class="right-col">
         <div class="parchemin">
           <p><strong>Âge :</strong> 12 ans</p>
