@@ -1,88 +1,103 @@
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fanfan – Héros d’Arzankia</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('photo_fanfan.png') center top no-repeat;
+      background-color: #1b0f2f;
+      background-size: cover;
+      font-family: Georgia, serif;
+      color: #fff8e6;
+      text-shadow: 1px 1px 4px #000;
+    }
 
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2em;
+      text-align: center;
+    }
 
-/* Mobile: on cache le descriptif par défaut et on affiche un bouton pour l'ouvrir */
-.toggle-desc{ display:block; margin:0 auto 1rem; max-width:260px; }
-.toggle-desc button{
-width:100%; padding:.9em 1.2em; border-radius:14px; border:1px solid #d9c889;
-background:linear-gradient(180deg,#fff8cc,#ffe18a 60%,#e2d289);
-font-weight:800; color:#2a2416; text-shadow:0 1px 0 rgba(255,255,255,.55);
-box-shadow:0 10px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.75);
-}
+    h1 {
+      font-size: 2.5em;
+      color: #ffd700;
+      text-shadow: 0 0 10px #3a1c00;
+      margin-bottom: 1em;
+    }
 
+    .image-hero {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
+      margin-bottom: 2em;
+    }
 
-/* Desktop ≥900px : grille 2 colonnes, descriptif visible sans toggle */
-@media (min-width: 900px){
-.hero-layout{ display:flex; align-items:flex-start; gap:2rem; }
-.image-hero{ width:30%; max-width:560px; margin:0; margin-left:130px; }
-.right-col{ flex:1; max-width:400px; }
-.parchemin{ max-width:460px; padding:2rem 1.8rem; font-size:1.05rem; line-height:1.6; }
-.toggle-desc{ display:none; }
-.parchemin[hidden]{ display:block !important; } /* force visible sur desktop */
-}
-</style>
+    .parchemin {
+      background: url('parchemin_fond.png') center center no-repeat;
+      background-size: contain;
+      background-color: rgba(255, 248, 230, 0.85); /* voile lisible */
+      padding: 4em 2em;
+      margin: auto;
+      max-width: 800px;
+      color: #3b2a1d;
+      font-size: 1.1em;
+      line-height: 1.7;
+      text-shadow: none;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
+    }
+
+    .back-button {
+      margin-top: 3em;
+    }
+
+    .back-button a {
+      display: inline-block;
+      background: linear-gradient(135deg, #fff6c1, #ffe18a);
+      color: #3a2f00;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 1em 2em;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ffeba0;
+      transition: all 0.3s ease;
+    }
+
+    .back-button a:hover {
+      background: #fff2b0;
+      box-shadow: 0 0 20px #fff8c6;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
-
-
 <body>
-<div class="container">
-<h1>Fanfan</h1>
+  <div class="container">
+    <h1>🌟 Fanfan </h1>
 
+    <!-- Image du héros -->
+    <img src="photo_fanfan.png" alt="Portrait de fanfan" class="image-hero">
 
-<p class="archives">
-<q>Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin.</q>
-<span class="signature">— Archives de la Tour de l’Aube —</span>
-</p>
+    <!-- Texte sur parchemin -->
+    <div class="parchemin">
+      <p><strong>Âge :</strong> 15 ans</p>
+      <p><strong>Monde d’origine :</strong> Monde d'Hégaia</p>
+      <p><strong>Clé d’accès :</strong> Chevalière</p>
+      <p><strong>Spécialisation :</strong> Cherceuse</p>
+      <p><strong>Statut :</strong> En formation- niv2</p>
+      <br>
+      <em>« Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin. »<br>– Archives de la Tour de l’Aube</em>
+    </div>
 
-
-<section class="hero-layout">
-<img src="photo_fanfan.webp" alt="Portrait de Fanfan" class="image-hero" />
-
-
-<div class="right-col">
-<!-- Bouton pour révéler le descriptif sur mobile -->
-<div class="toggle-desc">
-<button id="btnToggle" aria-expanded="false" aria-controls="blocDesc">✨ Voir le descriptif</button>
-</div>
-
-
-<div id="blocDesc" class="parchemin" hidden>
-<p><strong>Âge :</strong> 15 ans</p>
-<p><strong>Monde d’origine :</strong> Monde d’Hégaïa</p>
-<p><strong>Clé d’accès :</strong> Chevalière</p>
-<p><strong>Spécialisation :</strong> Chercheuse</p>
-<p><strong>Statut :</strong> En formation – niv 2</p>
-</div>
-
-
-<nav class="back-button" aria-label="Navigation héros Fanfan">
-<a href="7.monde_Hegaia.html">✨Découvre mon monde</a>
-<a href="10.grimoire.html">✨Découvre mon grimoire</a>
-<a href="3.les_heros.html">← Retour aux héros</a>
-</nav>
-</div>
-</section>
-</div>
-
-
-<script>
-(function(){
-const btn = document.getElementById('btnToggle');
-const desc = document.getElementById('blocDesc');
-if(!btn || !desc) return;
-const open = () => { desc.hidden = false; btn.setAttribute('aria-expanded','true'); btn.textContent = 'Réduire le descriptif'; };
-const close = () => { desc.hidden = true; btn.setAttribute('aria-expanded','false'); btn.textContent = '✨ Voir le descriptif'; };
-// Mobile par défaut: fermé. Sur desktop, on force ouvert au chargement
-const isDesktop = () => window.matchMedia('(min-width: 900px)').matches;
-const syncToViewport = () => {
-if (isDesktop()) { desc.hidden = false; btn.setAttribute('aria-expanded','true'); }
-else { desc.hidden = true; btn.setAttribute('aria-expanded','false'); }
-};
-btn.addEventListener('click', () => { desc.hidden ? open() : close(); });
-window.addEventListener('resize', syncToViewport);
-window.addEventListener('DOMContentLoaded', syncToViewport);
-syncToViewport();
-})();
-</script>
+    <!-- Bouton retour -->
+    <div class="back-button">
+      <a href="3.les_heros.html">← Retour aux héros</a>
+    </div>
+  </div>
 </body>
 </html>
