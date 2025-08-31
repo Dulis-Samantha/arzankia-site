@@ -13,8 +13,11 @@
       --texte:#fff8e6;
       --ombre:#000;
       --parch-texte:#3b2a1d;
+      --btn-bg:#fff8cc;
+      --btn-bg-hover:#fff2b0;
     }
 
+    /* ===== Base (mobile-first) ===== */
     body{
       margin:0;
       padding:0;
@@ -34,7 +37,7 @@
     }
 
     h1{
-      font-size:2.3rem;
+      font-size:2.6rem;
       color:var(--or);
       text-shadow:0 0 10px #3a1c00;
       margin:0.2rem 0 0.4rem;
@@ -46,12 +49,13 @@
       margin:0 0 1rem;
       font-style:italic;
       opacity:0.95;
-      line-height:1.35;
+      line-height:1.4;
       text-align:center;
     }
 
+    /* zone image + description */
     .hero-layout{
-      display:block;
+      display:block;             /* mobile: empilé */
       margin-top:0.5rem;
     }
 
@@ -60,8 +64,14 @@
       height:auto;
       border-radius:12px;
       box-shadow:0 0 20px rgba(255,248,230,0.5);
-      margin:0.8rem 0 1.2rem;
-      max-width:650px;
+      margin:0.8rem auto 1.2rem;
+      max-width:700px;           /* limite utile sur mobile grand */
+      display:block;
+    }
+
+    .right-col{                   /* colonne de droite (parchemin + boutons) */
+      max-width:800px;
+      margin:0 auto;
     }
 
     .parchemin{
@@ -72,72 +82,83 @@
       text-shadow:none;
       border-radius:16px;
       box-shadow:0 0 30px rgba(255,240,200,0.5);
-      padding:1.1rem 1rem;
-      font-size:1rem;
-      line-height:1.5;
-      max-width:800px;
-      margin:0 auto 1.5rem; /* ajout marge bas pour séparer des boutons */
+
+      /* mobile = version “compressée” */
+      padding:1.05rem 1rem;
+      font-size:0.98rem;
+      line-height:1.45;
+      margin:0 auto 1.2rem;
     }
+    .parchemin p{ margin:0.3rem 0; }
 
-    .parchemin p{ margin:0.25rem 0; }
-
-    /* Boutons sous le cadre */
+    /* Boutons sous le cadre (identiques) */
     .back-button{
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:1em;
-      margin:1rem auto 2rem;
+      gap:0.9rem;
+      margin:0 auto 2rem;
+      width:100%;
+      max-width:900px;
     }
-
     .back-button a{
-      background-color:#fff8cc;
+      background-color:var(--btn-bg);
       color:#333;
-      padding:0.8em 1.4em;
-      border-radius:12px;
+      padding:0.9em 1.6em;
+      border-radius:14px;
       text-decoration:none;
       font-weight:bold;
-      box-shadow:0 0 10px rgba(0,0,0,0.3);
       font-size:1rem;
       text-align:center;
-      width:80%;
-      max-width:320px;
-      transition:transform .15s ease, box-shadow .15s ease;
+      width:100%;
+      max-width:330px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+      transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+      display:inline-block;
     }
     .back-button a:hover{
-      background:#fff2b0;
-      box-shadow:0 0 20px #fff8c6;
-      transform:scale(1.05);
+      background:var(--btn-bg-hover);
+      box-shadow:0 10px 24px rgba(255,248,198,0.45);
+      transform:translateY(-2px);
     }
 
+    /* ===== Desktop / grands écrans ===== */
     @media (min-width: 900px){
       .container{ padding:2rem; }
 
       .hero-layout{
-        display:flex;
+        display:flex;               /* côte à côte */
         align-items:flex-start;
         gap:2rem;
       }
 
       .image-hero{
-        width:42%;
-        margin:0;
+        width:50%;                  /* portrait plus grand */
+        max-width:540px;
+        margin:0;                   /* plus d'espace à droite déjà donné par gap */
+      }
+
+      .right-col{
+        flex:1;
+        max-width:560px;            /* limite colonne droite */
       }
 
       .parchemin{
-        flex:1;
-        padding:2.2rem 2rem;
-        font-size:1.1rem;
-        line-height:1.7;
+        max-width:500px;            /* parchemin plus étroit */
+        margin:0 0 1.2rem 0;
+        padding:2rem 1.8rem;
+        font-size:1.05rem;
+        line-height:1.6;
       }
 
       .back-button{
-        flex-direction:row;  /* en ligne sur PC */
+        flex-direction:row;         /* en ligne sur PC */
         justify-content:center;
+        gap:1.2rem;
       }
       .back-button a{
-        width:auto;
-        min-width:220px;
+        max-width:none;
+        min-width:230px;
       }
     }
   </style>
@@ -146,15 +167,18 @@
 <body>
   <div class="container">
     <h1>Raphaël</h1>
+
     <p class="archives">
-  « Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. »<br>
-  — Archives de la Tour de l’Aube —
-</p>
+      « Certains aventuriers ignorent encore le chemin… mais le destin, lui, n’a rien oublié. »<br>
+      — Archives de la Tour de l’Aube
+    </p>
 
     <section class="hero-layout">
+      <!-- Image (à gauche sur PC) -->
       <img src="photo_raphael.webp" alt="Portrait de Raphaël" class="image-hero" />
 
-      <div>
+      <!-- Colonne droite : parchemin + boutons (boutons en dehors du cadre) -->
+      <div class="right-col">
         <div class="parchemin">
           <p><strong>Âge :</strong> 12 ans</p>
           <p><strong>Monde d’origine :</strong> Monde des Ptikitis</p>
@@ -163,12 +187,11 @@
           <p><strong>Statut :</strong> En formation</p>
         </div>
 
-        <!-- Boutons EN DEHORS du cadre -->
-        <div class="back-button">
+        <nav class="back-button" aria-label="Navigation héros Raphaël">
           <a href="8.monde_Ptikitis.html">✨ Découvre mon monde</a>
           <a href="10.grimoire.html">✨ Découvre mon grimoire</a>
           <a href="3.les_heros.html">← Retour aux héros</a>
-        </div>
+        </nav>
       </div>
     </section>
   </div>
