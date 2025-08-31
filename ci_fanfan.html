@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fanfan – Héros d’Arzankia</title>
   <style>
-      body {
+    body {
       margin: 0;
       padding: 0;
       background: url('fond_etoile_perso.webp') center top no-repeat;
@@ -18,9 +18,9 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1200px;
       margin: auto;
-      padding: 2em;
+      padding: 2em 1.5em;
       text-align: center;
     }
 
@@ -31,32 +31,70 @@
       margin-bottom: 1em;
     }
 
-    .image-hero {
-      max-width: 100%;
+    /* === Flip 3D pour portrait === */
+    .flip-container {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 1.5rem;
+      cursor: pointer;
+    }
+    .flipper {
+      position: relative;
+      width: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+    .flip-container.clicked .flipper {
+      transform: rotateY(180deg);
+    }
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+    }
+    .front img, .back img {
+      width: 100%;
+      height: auto;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
-      margin-bottom: 2em;
+      box-shadow: 0 0 20px rgba(255,248,230,0.5);
+      display: block;
+    }
+    .back {
+      transform: rotateY(180deg);
     }
 
+    /* === Parchemin === */
     .parchemin {
       background: url('parchemin_fond.png') center center no-repeat;
       background-size: contain;
       background-color: rgba(255, 248, 230, 0.85);
-      padding: 4em 2em;
-      margin: auto;
-      max-width: 800px;
+      padding: 1.5em 1em;
+      margin: 1.5rem auto;
+      max-width: 460px;
       color: #3b2a1d;
-      font-size: 1.1em;
-      line-height: 1.7;
+      font-size: 1em;
+      line-height: 1.5;
       text-shadow: none;
       border-radius: 16px;
       box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
+      display: none; /* révélé par le jeu */
     }
 
+    .parchemin.show {
+      display: block;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === Bouton retour === */
     .back-button {
-      margin-top: 3em;
+      margin: 2em auto;
     }
-
     .back-button a {
       display: inline-block;
       background: linear-gradient(135deg, #fff6c1, #ffe18a);
@@ -68,14 +106,13 @@
       box-shadow: 0 0 15px #ffeba0;
       transition: all 0.3s ease;
     }
-
     .back-button a:hover {
       background: #fff2b0;
       box-shadow: 0 0 20px #fff8c6;
       transform: scale(1.05);
     }
 
-    /* Styles pour le jeu */
+    /* === Jeu === */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -83,7 +120,6 @@
       max-width: 800px;
       margin: 3em auto 1em auto;
     }
-
     .word {
       padding: 0.8em;
       background: #ffffff10;
@@ -93,12 +129,10 @@
       transition: 0.3s;
       font-size: 1em;
     }
-
     .word.correct.selected {
       background: #228855cc;
       border-color: #66ffcc;
     }
-
     .word.wrong.selected {
       background: #883333aa;
       border-color: #ff6666;
@@ -116,37 +150,65 @@
       animation: fadeIn 2s forwards;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* === Layout PC === */
+    @media (min-width: 900px){
+      .hero-layout {
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+        justify-content: center;
+      }
+      .flip-container {
+        flex: 0 0 30%;
+        margin: 0;
+      }
+      .right-col {
+        flex: 1;
+        max-width: 400px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Fanfan </h1>
+    <h1>Fanfan</h1>
 
-    <!-- Image du héros -->
-    <img src="photo_fanfan.webp" alt="Portrait de fanfan" class="image-hero">
+    <section class="hero-layout">
+      <!-- Portrait flip recto/verso -->
+      <div class="flip-container" onclick="this.classList.toggle('clicked')">
+        <div class="flipper">
+          <div class="front">
+            <img src="photo_fanfan.webp" alt="Portrait de Fanfan recto">
+          </div>
+          <div class="back">
+            <img src="photo_fanfan2.webp" alt="Portrait de Fanfan verso">
+          </div>
+        </div>
+      </div>
 
-    <!-- Texte sur parchemin -->
-    <div class="parchemin" id="fanfan-details" style="display: none;">
-      <p><strong>Âge :</strong> 15 ans</p>
-      <p><strong>Monde d’origine :</strong> Monde d'Hégaia</p>
-      <p><strong>Clé d’accès :</strong> Chevalière</p>
-      <p><strong>Spécialisation :</strong> Cherceuse</p>
-      <p><strong>Statut :</strong> En formation - niv2</p>
-      <br>
-      <em>« Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin. »<br>– Archives de la Tour de l’Aube</em>
-    </div>
+      <!-- Colonne de droite -->
+      <div class="right-col">
+        <div id="fanfan-details" class="parchemin">
+          <p><strong>Âge :</strong> 15 ans</p>
+          <p><strong>Monde d’origine :</strong> Monde d'Hégaïa</p>
+          <p><strong>Clé d’accès :</strong> Chevalière</p>
+          <p><strong>Spécialisation :</strong> Chercheuse</p>
+          <p><strong>Statut :</strong> En formation - niv2</p>
+          <br>
+          <em>« Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin. »<br>– Archives de la Tour de l’Aube</em>
+        </div>
 
-    <!-- Intitulé -->
-    <h2 style="margin-top: 3em;">✨ A quel point connais-tu Fanfan ?</h2>
+        <div class="back-button">
+          <a href="3.les_heros.html">← Retour aux héros</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jeu -->
+    <h2 style="margin-top: 3em;">✨ À quel point connais-tu Fanfan ?</h2>
     <p><em>Clique sur les 5 mots qui te semblent lui correspondre…</em></p>
 
-    <!-- Grille de mots mélangés -->
     <div class="grid" id="wordGrid">
-      <!-- Mélange des mots -->
       <div class="word" data-word="Zouppi">Zouppi</div>
       <div class="word" data-word="Chercheuse">Chercheuse</div>
       <div class="word" data-word="Licorne">Licorne</div>
@@ -173,64 +235,57 @@
       <div class="word" data-word="Dragon">Dragon</div>
     </div>
 
-    <!-- Message à révéler -->
     <div id="reveal">
       ✨ <strong>Hello, c'est Fanfan.</strong><br>
       Je sais, Raphaël n’a pas encore exploré mon monde...
       Mais si tu ouvres l’œil, tu pourrais découvrir à quoi il ressemble....
-      Un indice ? Son empreinte est discrète, mais bien réelle.
-  🌿 Rendez-vous sur la page des Mondes d’Arzankia pour percer le secret… </p>
+      Un indice ? Son empreinte est discrète, mais bien réelle.<br>
+      🌿 Rendez-vous sur la page des Mondes d’Arzankia pour percer le secret…
     </div>
+  </div>
 
-    <!-- Bouton retour déplacé ici -->
-    <div class="back-button">
-      <a href="3.les_heros.html">← Retour aux héros</a>
-    </div>
-    
- <script>
-      const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
-      let selectedCorrect = [];
-      let gameCompleted = false;
+  <script>
+    const correctWords = ["Hegaia", "Fidèle", "Chercheuse", "Chevalière", "Corse"];
+    let selectedCorrect = [];
+    let gameCompleted = false;
 
-      function resetGame() {
-        selectedCorrect = [];
-        gameCompleted = false;
-        document.querySelectorAll('.word').forEach(wordEl => {
-          wordEl.classList.remove('selected', 'correct', 'wrong');
-        });
-        document.getElementById('reveal').style.display = 'none';
-        const details = document.getElementById('fanfan-details');
-        details.style.display = 'none';
-        details.classList.remove('show');
-      }
-
+    function resetGame() {
+      selectedCorrect = [];
+      gameCompleted = false;
       document.querySelectorAll('.word').forEach(wordEl => {
-        wordEl.addEventListener('click', () => {
-          if (gameCompleted) return;
-          const word = wordEl.getAttribute('data-word');
-          if (wordEl.classList.contains('selected')) return;
-
-          if (correctWords.includes(word)) {
-            wordEl.classList.add('selected', 'correct');
-            selectedCorrect.push(word);
-          } else {
-            wordEl.classList.add('selected', 'wrong');
-            setTimeout(resetGame, 400);
-            return;
-          }
-
-          if (selectedCorrect.length === correctWords.length) {
-            gameCompleted = true;
-            document.getElementById('reveal').style.display = 'block';
-
-            const details = document.getElementById('fanfan-details');
-            details.style.display = 'block';
-            setTimeout(() => details.classList.add('show'), 10);
-          }
-        });
+        wordEl.classList.remove('selected', 'correct', 'wrong');
       });
-    </script>
+      document.getElementById('reveal').style.display = 'none';
+      const details = document.getElementById('fanfan-details');
+      details.style.display = 'none';
+      details.classList.remove('show');
+    }
 
+    document.querySelectorAll('.word').forEach(wordEl => {
+      wordEl.addEventListener('click', () => {
+        if (gameCompleted) return;
+        const word = wordEl.getAttribute('data-word');
+        if (wordEl.classList.contains('selected')) return;
 
+        if (correctWords.includes(word)) {
+          wordEl.classList.add('selected', 'correct');
+          selectedCorrect.push(word);
+        } else {
+          wordEl.classList.add('selected', 'wrong');
+          setTimeout(resetGame, 400);
+          return;
+        }
+
+        if (selectedCorrect.length === correctWords.length) {
+          gameCompleted = true;
+          document.getElementById('reveal').style.display = 'block';
+
+          const details = document.getElementById('fanfan-details');
+          details.style.display = 'block';
+          setTimeout(() => details.classList.add('show'), 10);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
