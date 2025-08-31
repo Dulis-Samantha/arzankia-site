@@ -56,34 +56,28 @@
       opacity:0.8;
     }
 
-    /* === Effet flip 3D === */
+    /* === Flip 3D === */
     .flip-container {
       perspective:1000px;
       width:100%;
       max-width:400px;
-      margin:1rem auto;
+      margin:0 auto 1.2rem;
       cursor:pointer;
     }
-
     .flipper {
       position:relative;
       width:100%;
-      height:100%;
       transform-style:preserve-3d;
       transition:transform 0.8s;
     }
-
-    /* Quand on clique, la carte se retourne */
     .flip-container.clicked .flipper {
       transform:rotateY(180deg);
     }
-
     .front, .back {
       position:absolute;
       width:100%;
       backface-visibility:hidden;
     }
-
     .front img, .back img {
       width:100%;
       height:auto;
@@ -91,7 +85,6 @@
       box-shadow:0 0 20px rgba(255,248,230,0.5);
       display:block;
     }
-
     .back {
       transform:rotateY(180deg);
     }
@@ -108,7 +101,7 @@
       padding:1rem;
       font-size:0.95rem;
       line-height:1.4;
-      margin:1.5rem auto;
+      margin:0 auto 1.5rem;
       max-width:460px;
     }
     .parchemin p{ margin:0.3rem 0; }
@@ -119,7 +112,6 @@
       justify-content:center;
       margin:1.5rem auto 2rem;
     }
-
     .back-button a{
       background:linear-gradient(180deg, #fff5c7, #f3e3a0 55%, #e2d289);
       border:1px solid #d9c889;
@@ -127,7 +119,6 @@
         0 10px 22px rgba(0,0,0,.28),
         inset 0 1px 0 rgba(255,255,255,.75),
         inset 0 -2px 6px rgba(0,0,0,.08);
-
       color:#2a2416;
       text-decoration:none;
       font-weight:800;
@@ -145,10 +136,33 @@
         inset 0 -3px 10px rgba(0,0,0,.08);
     }
 
+    /* === Layout PC === */
+    @media (min-width: 900px){
+      .hero-layout{
+        display:flex;
+        align-items:flex-start;
+        gap:2rem;
+        justify-content:center;
+      }
+      .flip-container{
+        flex:0 0 30%;   /* largeur fixe à gauche */
+        margin:0;
+      }
+      .right-col{
+        flex:1;
+        max-width:400px;
+      }
+      .parchemin{
+        max-width:460px;
+        padding:2rem 1.8rem;
+        font-size:1.05rem;
+        line-height:1.6;
+      }
+    }
   </style>
 </head>
-<body>
 
+<body>
   <div class="container">
     <h1>Alicia</h1>
 
@@ -157,32 +171,34 @@
       <span class="signature">— Archives de la Tour de l’Aube —</span>
     </p>
 
-    <!-- Effet de retournement sur image -->
-    <div class="flip-container" onclick="this.classList.toggle('clicked')">
-      <div class="flipper">
-        <div class="front">
-          <img src="photo_alicia.webp" alt="Portrait d'Alicia recto">
-        </div>
-        <div class="back">
-          <img src="photo_alicia2.webp" alt="Portrait d'Alicia verso">
+    <section class="hero-layout">
+      <!-- Image recto/verso avec flip -->
+      <div class="flip-container" onclick="this.classList.toggle('clicked')">
+        <div class="flipper">
+          <div class="front">
+            <img src="photo_alicia.webp" alt="Portrait d'Alicia recto">
+          </div>
+          <div class="back">
+            <img src="photo_alicia2.webp" alt="Portrait d'Alicia verso">
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Texte sur parchemin -->
-    <div class="parchemin">
-      <p><strong>Âge :</strong> 12 ans</p>
-      <p><strong>Monde d’origine :</strong> Monde guérisseur</p>
-      <p><strong>Clé d’accès :</strong> Miroir de poche</p>
-      <p><strong>Spécialisation :</strong> Dresseur – Lien Nélicé – Étoiliris</p>
-      <p><strong>Statut :</strong> En formation</p>
-    </div>
+      <!-- Colonne de droite -->
+      <div class="right-col">
+        <div class="parchemin">
+          <p><strong>Âge :</strong> 12 ans</p>
+          <p><strong>Monde d’origine :</strong> Monde guérisseur</p>
+          <p><strong>Clé d’accès :</strong> Miroir de poche</p>
+          <p><strong>Spécialisation :</strong> Dresseur – Lien Nélicé – Étoiliris</p>
+          <p><strong>Statut :</strong> En formation</p>
+        </div>
 
-    <!-- Bouton retour -->
-    <div class="back-button">
-      <a href="3.les_heros.html">← Retour aux héros</a>
-    </div>
+        <div class="back-button">
+          <a href="3.les_heros.html">← Retour aux héros</a>
+        </div>
+      </div>
+    </section>
   </div>
-
 </body>
 </html>
