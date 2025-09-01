@@ -26,18 +26,38 @@
     }
 
     .container{ max-width:1200px; margin:auto; padding:1.5rem; text-align:center; }
+
     h1{ font-size:2.6rem; color:var(--or); text-shadow:0 0 10px #3a1c00; margin:0.2rem 0 0.3rem; }
+    .subtitle{ margin:0 0 1rem; opacity:.95; }
+
     .archives{ margin:0 0 1.5rem; line-height:1.4; }
     .archives q{ font-style:italic; }
     .archives .signature{ display:block; margin-top:0.4rem; font-size:0.9rem; opacity:0.8; }
 
-    .hero-layout{ display:block; margin-top:0.5rem; }
+    /* === Bloc "après-réussite" : photo + parchemin + bouton === */
+    .hero-layout{
+      display:none;           /* caché par défaut */
+      margin-top:0.5rem;
+      align-items:flex-start;
+      gap:2rem;
+    }
+    .hero-layout.show{ display:block; }
+    @media (min-width: 900px){
+      .hero-layout{ display:none; }           /* reste caché tant que pas .show */
+      .hero-layout.show{ display:flex; }      /* en desktop : flex quand visible */
+    }
+
     .image-hero{
       width:100%; max-width:700px; border-radius:12px;
       box-shadow:0 0 20px rgba(255,248,230,0.5);
       margin:0.8rem auto 1.2rem; display:block;
     }
+    @media (min-width: 900px){
+      .image-hero{ width:30%; max-width:560px; margin:0; margin-left:130px; }
+    }
+
     .right-col{ max-width:800px; margin:0 auto; }
+    @media (min-width: 900px){ .right-col{ flex:1; max-width:400px; } }
 
     .parchemin{
       background:url('parchemin_fond.png') center center no-repeat;
@@ -51,18 +71,24 @@
       font-size:0.95rem;
       line-height:1.4;
       margin:0 auto 1.5rem;
-      display:none; /* caché tant que le jeu n’est pas réussi */
+      opacity:0; transform:translateY(10px);
     }
-    .parchemin.show{ display:block; animation:fadeIn 1s forwards; }
+    .parchemin.show{ animation:fadeIn 0.9s forwards; }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
     .parchemin p{ margin:0.3rem 0; }
 
     /* === Jeu === */
-    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1em; max-width:800px; margin:2rem auto; }
-    .word{ padding:.8em; background:#ffffff10; border:2px solid #fff8e6; border-radius:10px; cursor:pointer; transition:.3s; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1em; max-width:800px; margin:1.2rem auto 1.6rem; }
+    .word{
+      padding:.8em; background:#ffffff10; border:2px solid #fff8e6; border-radius:10px;
+      cursor:pointer; transition:.25s;
+      user-select:none;
+    }
     .word.correct.selected{ background:#228855cc; border-color:#66ffcc; }
     .word.wrong.selected{ background:#883333aa; border-color:#ff6666; }
-    #reveal{ display:none; margin:1.5rem auto; max-width:600px; font-style:italic; }
+
+    #reveal{ display:none; margin:1.2rem auto; max-width:600px; font-style:italic; }
+    #status{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; } /* aria-live */
 
     /* Boutons dorés */
     .back-button{
@@ -78,44 +104,23 @@
       box-shadow:0 10px 22px var(--shadow), inset 0 1px 0 rgba(255,255,255,.75), inset 0 -2px 6px rgba(0,0,0,.08);
       color:#2a2416; text-decoration:none; font-weight:800; letter-spacing:.2px;
       text-shadow:0 1px 0 rgba(255,255,255,.55);
+      transition:transform .15s ease, filter .15s ease;
     }
     .back-button a:hover{ transform:translateY(-2px); filter:saturate(1.05); }
-
-    @media (min-width: 900px){
-      .hero-layout{ display:flex; align-items:flex-start; gap:2rem; }
-      .image-hero{ width:30%; max-width:560px; margin:0; margin-left:130px; }
-      .right-col{ flex:1; max-width:400px; }
-      .parchemin{ max-width:460px; padding:2rem 1.8rem; font-size:1.05rem; line-height:1.6; }
-    }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <!-- Titre + citation -->
     <h1>Fanfan</h1>
     <p class="archives">
-      <q>Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin.</q>
+      <q> Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin.</q>
       <span class="signature">— Archives de la Tour de l’Aube —</span>
     </p>
 
-    <section class="hero-layout">
-      <img src="photo_fanfan.webp" alt="Portrait de Fanfan" class="image-hero" />
-      <div class="right-col">
-        <div id="fanfan-details" class="parchemin">
-          <p><strong>Âge :</strong> 15 ans</p>
-          <p><strong>Monde d’origine :</strong> Monde d’Hégaïa</p>
-          <p><strong>Clé d’accès :</strong> Chevalière</p>
-          <p><strong>Spécialisation :</strong> Chercheuse</p>
-          <p><strong>Statut :</strong> En formation – niv 2</p>
-          <br>
-          <em>« Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin. »<br>– Archives de la Tour de l’Aube</em>
-        </div>
-        <nav class="back-button"><a href="3.les_heros.html">← Retour aux héros</a></nav>
-      </div>
-    </section>
-
     <!-- Jeu-questionnaire -->
-    <h2>✨ À quel point connais-tu Fanfan ?</h2>
+    <h2> À quel point connais-tu Fanfan ?</h2>
     <p><em>Clique sur les 5 mots qui lui correspondent vraiment…</em></p>
 
     <div class="grid" id="wordGrid">
@@ -131,53 +136,100 @@
       <div class="word" data-word="Chevalière">Chevalière</div>
       <div class="word" data-word="Licorne">Licorne</div>
       <div class="word" data-word="Corse">Corse</div>
-      
     </div>
 
+    <!-- Un SEUL reveal -->
     <div id="reveal">
       ✨ <strong>Hello, c'est Fanfan.</strong><br>
       Je sais, Raphaël n’a pas encore exploré mon monde…<br>
       Mais si tu ouvres l’œil, tu pourrais découvrir à quoi il ressemble.<br>
       🌿 Rendez-vous sur la page des Mondes d’Arzankia pour percer le secret…
     </div>
+
+    <div id="status" aria-live="polite"></div>
+
+    <!-- Bloc photo + description + bouton (caché tant que le jeu n’est pas réussi) -->
+    <section class="hero-layout" id="heroLayout">
+      <img src="photo_fanfan.webp" alt="Portrait de Fanfan" class="image-hero" />
+      <div class="right-col">
+        <div id="fanfan-details" class="parchemin">
+          <p><strong>Âge :</strong> 15 ans</p>
+          <p><strong>Monde d’origine :</strong> Monde d’Hégaïa</p>
+          <p><strong>Clé d’accès :</strong> Chevalière</p>
+          <p><strong>Spécialisation :</strong> Chercheuse</p>
+          <p><strong>Statut :</strong> En formation – niv 2</p>
+          <br>
+        </div>
+
+        <nav class="back-button">
+          <a href="3.les_heros.html" aria-label="Retour à la liste des héros">← Retour aux héros</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Citation répétée en décor (peut être retirée si redondant) -->
+    <p class="archives" aria-hidden="true">
+      <q>Certaines éclaireuses n’ont pas besoin de lumière pour trouver leur chemin.</q>
+      <span class="signature">— Archives de la Tour de l’Aube —</span>
+    </p>
   </div>
 
   <script>
+    // 5 bonnes réponses (attention: data-word="Hegaia" sans accent)
     const correctWords = ["Hegaia","Fidèle","Chercheuse","Chevalière","Corse"];
-    let selectedCorrect = [], gameCompleted=false;
+    let selectedCorrect = new Set();
+    let gameCompleted = false;
 
-    function resetGame(){
-      selectedCorrect=[]; gameCompleted=false;
-      document.querySelectorAll('.word').forEach(w=>w.classList.remove('selected','correct','wrong'));
-      document.getElementById('fanfan-details').classList.remove('show');
-      document.getElementById('fanfan-details').style.display="none";
-      document.getElementById('reveal').style.display="none";
+    const wordEls = document.querySelectorAll('.word');
+    const heroLayout = document.getElementById('heroLayout');     // bloc photo+parchemin+retour
+    const parch = document.getElementById('fanfan-details');      // parchemin
+    const reveal = document.getElementById('reveal');              // texte "Hello, c'est Fanfan."
+    const status = document.getElementById('status');
+
+    function hideProfile(){
+      if (heroLayout) heroLayout.classList.remove('show');
+      if (parch) parch.classList.remove('show');
+      if (reveal) reveal.style.display = "none";
     }
 
-    document.querySelectorAll('.word').forEach(wordEl=>{
+    function resetGame(){
+      selectedCorrect.clear();
+      gameCompleted = false;
+      wordEls.forEach(w => w.classList.remove('selected','correct','wrong'));
+      hideProfile();
+    }
+
+    function showProfile(){
+      if (heroLayout) heroLayout.classList.add('show');
+      if (parch) setTimeout(()=>parch.classList.add('show'), 20); // lance l'anim du parchemin
+      if (reveal) reveal.style.display = "block";
+      status.textContent = "Fiche de Fanfan déverrouillée.";
+    }
+
+    wordEls.forEach(wordEl=>{
       wordEl.addEventListener('click', ()=>{
         if (gameCompleted) return;
-        const word=wordEl.dataset.word;
+
+        const word = wordEl.dataset.word;
         if (wordEl.classList.contains('selected')) return;
 
         if (correctWords.includes(word)){
           wordEl.classList.add('selected','correct');
-          selectedCorrect.push(word);
+          selectedCorrect.add(word);
+          if (selectedCorrect.size === correctWords.length){
+            gameCompleted = true;
+            showProfile();
+          }
         } else {
           wordEl.classList.add('selected','wrong');
-          setTimeout(resetGame,500);
-          return;
-        }
-
-        if (selectedCorrect.length===correctWords.length){
-          gameCompleted=true;
-          const details=document.getElementById('fanfan-details');
-          details.style.display="block";
-          setTimeout(()=>details.classList.add('show'),10);
-          document.getElementById('reveal').style.display="block";
+          status.textContent = "Oups, mauvaise réponse. On recommence !";
+          setTimeout(resetGame, 500);
         }
       });
     });
+
+    // cache tout au chargement
+    hideProfile();
   </script>
 </body>
 </html>
