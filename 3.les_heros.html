@@ -6,6 +6,16 @@
   <meta name="robots" content="noindex">
   <title>Les Héros d’Arzankia</title>
   <style>
+    /* ===== Thème global ===== */
+    :root{
+      --or:#ffd700;
+      --texte:#fffff2;
+      --fond-noir:rgba(0,0,0,.45);
+      --verre:rgba(255,255,255,.06);
+      --verre-bord:rgba(255,255,255,.12);
+      --verre-ombre:rgba(0,0,0,.35);
+    }
+
     body {
       background-image: url('fond_heros.png');
       background-size: cover;
@@ -14,183 +24,203 @@
       margin: 0;
       padding: 2em;
       font-family: Georgia, serif;
-      color: #fffff2;
+      color: var(--texte);
       text-shadow: 0 0 6px #000;
     }
 
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      background: rgba(0,0,0,0.4);
+      background: var(--fond-noir);
       padding: 2em;
       border-radius: 12px;
+      box-shadow: 0 10px 28px var(--verre-ombre);
     }
 
     h1 {
       text-align: center;
-      color: #ffd700;
+      color: var(--or);
       text-shadow: 0 0 10px #3a1c00;
-      margin-bottom: 2em;
+      margin-bottom: 1.6em;
+      letter-spacing:.3px;
     }
 
     p.intro {
       text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 2em;
+      font-size: 1.1rem;
+      margin: -1em auto 1.4em;
+      max-width: 50ch;
+      opacity:.95;
     }
 
+    /* ===== Grille des héros ===== */
     .hero-buttons {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 1rem;
+      gap: .9rem;
       justify-content: center;
       align-items: center;
-      margin-top: 2rem;
+      margin-top: 1.6rem;
     }
 
     .hero-buttons a {
-      background: linear-gradient(145deg, #7a3e1d, #c1762f);
-      color: #ffd75e;
-      padding: 0.7em 1em;
-      border-radius: 1rem;
+      background: linear-gradient(145deg, #6a341a, #b67032);
+      color: #ffe9b0;
+      padding: 0.65em 1em;
+      border-radius: 14px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
       font-size: 1rem;
       text-align: center;
-      text-shadow: 1px 1px 2px #5a3100;
+      text-shadow: 1px 1px 2px #3d250c;
       box-shadow:
-        inset 0 0 10px rgba(255, 200, 100, 0.4),
-        0 0 8px rgba(160, 80, 20, 0.5);
-      transition: all 0.3s ease;
+        inset 0 0 10px rgba(255, 200, 100, 0.25),
+        0 4px 10px rgba(0,0,0,.35);
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+      border:1px solid rgba(255,255,255,.06);
     }
 
     .hero-buttons a:hover {
-      background: linear-gradient(145deg, #d48638, #f2a755);
-      color: #fff4c2;
+      filter:saturate(1.06);
       box-shadow:
-        0 0 15px rgba(255, 220, 150, 0.6),
-        inset 0 0 10px rgba(255, 220, 150, 0.6);
-      transform: scale(1.05);
+        0 6px 16px rgba(0,0,0,.45),
+        inset 0 0 12px rgba(255, 220, 150, 0.35);
+      transform: translateY(-2px);
     }
 
+    /* ===== Bouton quiz ===== */
+    .quiz-button {
+      text-align: center;
+      margin-top: 2em;
+    }
+    .quiz-button a {
+      display: inline-block;
+      padding: .9em 1.4em;
+      background: linear-gradient(145deg, #8a4a20, #d68a44);
+      color: #fff6cc;
+      font-weight: 800;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(0,0,0,.35);
+      max-width: 90vw;
+      white-space: normal;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    /* ===== Pied de page : SANS cadre jaune ===== */
     .footer-buttons {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1em;
+      gap: .7em;
       flex-wrap: wrap;
-      background: linear-gradient(to bottom, #fff3c4, #f7e49c);
-      padding: 1em;
+      /* on enlève totalement le fond dégradé jaune */
+      background: transparent;
+      padding: .6em;
       text-align: center;
-      margin-top: 3em;
+      margin-top: 2.2em;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      /* et la lueur jaune */
+      box-shadow: none;
     }
 
     .footer-buttons a {
       display: inline-block;
-      margin: 0.5em 1em;
-      padding: 0.7em 1.4em;
-      background-color: #fff3c4;
-      color: #000;
-      font-weight: bold;
-      border-radius: 8px;
+      margin: .3em .4em;
+      padding: .6em 1.1em;
+      /* style "verre fumé" neutre */
+      background: var(--verre);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 0 8px #a97f00;
+      border: 1px solid var(--verre-bord);
+      box-shadow: 0 6px 16px var(--verre-ombre);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: transform .18s ease, filter .18s ease;
     }
 
     .footer-buttons a:hover {
-      background-color: #ffe678;
+      filter: brightness(1.15);
+      transform: translateY(-2px);
     }
 
+    /* Bouton secret : on garde la logique, on neutralise les jaunes criards */
     #btn-secret {
-      font-size: 1.5em;
+      font-size: 1.2em;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      background: #ffe066;
-      color: #3a2f00;
-      border: none;
-      box-shadow: 0 0 10px #ffd700;
+      width: 44px;
+      height: 44px;
+      background: var(--verre);
+      color: #fff;
+      border: 1px solid var(--verre-bord);
+      box-shadow: 0 6px 16px var(--verre-ombre);
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform .18s ease, filter .18s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
-
-    #btn-secret:hover {
-      transform: scale(1.1);
-    }
+    #btn-secret:hover { transform: scale(1.07); filter:brightness(1.15); }
 
     #bloc-cle-alicia {
       display: none;
       text-align: center;
-      margin-top: 2em;
+      margin-top: 1.2em;
     }
 
-    .quiz-button {
-      text-align: center;
-      margin-top: 3em;
-    }
-
-    .quiz-button a {
-      display: inline-block;
-      padding: 1em 2em;
-      background-color: #ffe98a;
-      color: #3a2f00;
-      font-weight: bold;
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 0 10px #ffeb9e;
-      max-width: 90vw;
-      word-wrap: break-word;
-      white-space: normal;
-    }
-
-    @media screen and (max-width: 600px) {
+    /* ===== Responsive : compresser sur mobile ===== */
+    @media (max-width: 600px) {
+      body {
+        padding: .8rem;
+        /* le background-attachment: fixed peut “sauter” sur mobile */
+        background-attachment: scroll;
+      }
       .container {
-        padding: 1rem;
+        padding: .9rem;
+        border-radius: 10px;
       }
-
       h1 {
-        font-size: 1.8rem;
-        margin-bottom: 1.2rem;
+        font-size: 1.6rem;
+        margin-bottom: .9rem;
       }
-
       p.intro {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
+        font-size: .98rem;
+        margin-bottom: 1rem;
       }
-
       .hero-buttons {
-        gap: 0.6rem;
+        gap: .5rem;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        margin-top: 1rem;
       }
-
       .hero-buttons a {
-        flex: 1 1 100%;
-        text-align: center;
-        padding: 0.9em;
-        font-size: 1rem;
+        padding: .6em .8em;
+        font-size: .98rem;
+        border-radius: 12px;
       }
-
       .quiz-button a {
-        font-size: 1rem;
-        padding: 1em;
+        font-size: .98rem;
+        padding: .8em 1em;
+        border-radius: 12px;
       }
-
+      .footer-buttons {
+        gap: .4em;
+        margin-top: 1.2em;
+        padding: .4em;
+      }
       .footer-buttons a {
-        display: block;
-        margin: 0.5em auto;
-        max-width: 90%;
+        margin: .25em .2em;
+        padding: .55em .9em;
+        font-size: .95rem;
+        border-radius: 10px;
       }
-
-      #btn-secret {
-        margin-top: 1em;
-      }
+      #btn-secret { margin-top: .4em; width: 40px; height: 40px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>✨ Les Héros d’Arzankia</h1>
+    <h1>Les Héros d’Arzankia</h1>
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros…</p>
 
     <div class="hero-buttons">
@@ -210,19 +240,20 @@
     </div>
 
     <div class="quiz-button">
-      <a href="quel_heros_es_tu.html">🧩 Fais le test : Quel héros es-tu ?</a>
-    </div>
-
+  <a href="quel_heros_es_tu.html">
+    Fais le test <br>Quel héros es-tu ?
+  </a>
+</div>
     <div class="footer-buttons">
       <a href="1.accueil.html">← Retour à l’accueil</a>
       <a href="2.les_coulisses.html">← Retour aux Coulisses d’Arzankia</a>
-      <button id="btn-secret" onclick="ouvrirBlocCleAlicia()">?</button>
+      <button id="btn-secret" onclick="ouvrirBlocCleAlicia()" aria-label="Débloquer la fiche d’Alicia">?</button>
     </div>
 
     <div id="bloc-cle-alicia">
-      <p style="font-size: 1.1em;">Tape le mot magique pour débloquer la fiche d'Alicia #TomeI.5 :</p>
-      <input type="text" id="mot-cle-alicia" placeholder="mot magique..." style="padding: 0.6em 1em; border-radius: 8px; border: none;">
-      <button onclick="verifierCleAlicia()" style="padding: 0.6em 1.2em; margin-left: 0.5em; background: #ffe066; color: #000; font-weight: bold; border-radius: 8px; border: none; cursor: pointer;">OK</button>
+      <p style="font-size: 1.05em;">Tape le mot magique pour débloquer la fiche d'Alicia #TomeI.5 :</p>
+      <input type="text" id="mot-cle-alicia" placeholder="mot magique…" style="padding:.6em 1em; border-radius: 8px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.35); color:#fff;">
+      <button onclick="verifierCleAlicia()" style="padding:.6em 1.1em; margin-left:.5em; background: var(--verre); color:#fff; font-weight:700; border-radius: 10px; border:1px solid var(--verre-bord); cursor:pointer;">OK</button>
     </div>
   </div>
 
@@ -231,7 +262,6 @@
       document.getElementById("bloc-cle-alicia").style.display = "block";
       document.getElementById("btn-secret").style.display = "none";
     }
-
     function verifierCleAlicia() {
       const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
       const mots = ["miroir de poche", "miroir", "miroire"];
