@@ -41,14 +41,15 @@
       text-align: center;
       color: var(--or);
       text-shadow: 0 0 10px #3a1c00;
-      margin-bottom: 1.6em;
+      margin-bottom: 2.5em;
       letter-spacing:.3px;
     }
+ 
 
     p.intro {
       text-align: center;
       font-size: 1.1rem;
-      margin: -1em auto 1.4em;
+      margin: 0 auto 2em;   
       max-width: 50ch;
       opacity:.95;
     }
@@ -94,18 +95,26 @@
       margin-top: 2em;
     }
     .quiz-button a {
-      display: inline-block;
-      padding: .9em 1.4em;
-      background: linear-gradient(145deg, #8a4a20, #d68a44);
-      color: #fff6cc;
-      font-weight: 800;
-      border-radius: 14px;
-      text-decoration: none;
-      box-shadow: 0 6px 16px rgba(0,0,0,.35);
-      max-width: 90vw;
-      white-space: normal;
-      border:1px solid rgba(255,255,255,.08);
-    }
+  display: inline-block;
+  padding: 1em 1.6em;
+  background: linear-gradient(145deg, #5e2a84, #9b4dca);
+  color: #fff6e6;
+  font-weight: 800;
+  border-radius: 16px;
+  text-decoration: none;
+  text-shadow: 0 1px 2px #2a003d;
+  box-shadow:
+    0 0 12px rgba(155, 77, 202, 0.6),   /* halo violet */
+    0 6px 16px rgba(0,0,0,.35);
+  max-width: 90vw;
+  border: 1px solid rgba(255,255,255,.15);
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.quiz-button a:hover {
+  filter: brightness(1.2);
+  transform: translateY(-3px);
+}
 
     /* ===== Pied de page : SANS cadre jaune ===== */
     .footer-buttons {
