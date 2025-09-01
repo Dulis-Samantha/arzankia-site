@@ -1,103 +1,244 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lizéa – Héros d’Arzankia</title>
+
   <style>
-   body {
-      margin: 0;
-      padding: 0;
-      background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-color: #1b0f2f;
-      background-size: cover;
-      font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
+    :root{
+      --or:#ffd700;
+      --fond:#1b0f2f;
+      --texte:#fff8e6;
+      --ombre:#000;
+      --parch-texte:#3b2a1d;
+      --btn-bg:#fff8cc;
+      --btn-bg-hover:#fff2b0;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2em;
-      text-align: center;
+    body{
+      margin:0;
+      padding:0;
+      background:url('fond_etoile_perso.webp') center top no-repeat;
+      background-color:var(--fond);
+      background-size:cover;
+      font-family:Georgia, serif;
+      color:var(--texte);
+      text-shadow:1px 1px 4px var(--ombre);
     }
 
-    h1 {
-      font-size: 2.5em;
-      color: #ffd700;
-      text-shadow: 0 0 10px #3a1c00;
-      margin-bottom: 1em;
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:1.5rem;
+      text-align:center;
     }
 
-    .image-hero {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 248, 230, 0.5);
-      margin-bottom: 2em;
+    h1{
+      font-size:2.6rem;
+      color:var(--or);
+      text-shadow:0 0 10px #3a1c00;
+      margin:0.2rem 0 0.3rem;
+      text-align:center;
     }
 
-    .parchemin {
-      background: url('parchemin_fond.png') center center no-repeat;
-      background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85); /* voile lisible */
-      padding: 4em 2em;
-      margin: auto;
-      max-width: 800px;
-      color: #3b2a1d;
-      font-size: 1.1em;
-      line-height: 1.7;
-      text-shadow: none;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
+    .archives{
+      margin:0 0 1.5rem;
+      line-height:1.4;
+      text-align:center;
+    }
+    .archives q {
+      font-style:italic;
+    }
+    .archives .signature {
+      display:block;
+      margin-top:0.4rem;
+      font-size:0.9rem;
+      opacity:0.8;
     }
 
-    .back-button {
-      margin-top: 3em;
+    .hero-layout{
+      display:block;
+      margin-top:0.5rem;
     }
 
-    .back-button a {
-      display: inline-block;
-      background: linear-gradient(135deg, #fff6c1, #ffe18a);
-      color: #3a2f00;
-      font-weight: bold;
-      text-decoration: none;
-      padding: 1em 2em;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #ffeba0;
-      transition: all 0.3s ease;
+    .image-hero{
+      width:100%;
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 0 20px rgba(255,248,230,0.5);
+      margin:0.8rem auto 1.2rem;
+      max-width:700px;
+      display:block;
     }
 
-    .back-button a:hover {
-      background: #fff2b0;
-      box-shadow: 0 0 20px #fff8c6;
-      transform: scale(1.05);
+    .right-col{
+      max-width:800px;
+      margin:0 auto;
+    }
+
+    .parchemin{
+      background:url('parchemin_fond.png') center center no-repeat;
+      background-size:contain;
+      background-color:rgba(255,248,230,0.85);
+      color:var(--parch-texte);
+      text-shadow:none;
+      border-radius:16px;
+      box-shadow:0 0 30px rgba(255,240,200,0.5);
+      padding:1rem;
+      font-size:0.95rem;
+      line-height:1.4;
+      margin:0 auto 1.5rem;
+    }
+
+    .parchemin p{ margin:0.3rem 0; }
+
+    /* Boutons empilés (même sur PC) */
+    /* === Boutons – version premium ✨ === */
+.back-button{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+  margin:0 auto 2rem;
+  width:100%;
+  max-width:260px;            /* un poil plus large */
+}
+
+.back-button a{
+  --gold-1:#fff5c7;
+  --gold-2:#f3e3a0;
+  --gold-3:#e2d289;
+  --edge:#d9c889;
+  --shadow:rgba(0,0,0,.28);
+
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+
+  width:100%;
+  padding:0.95em 1.4em;
+  border-radius:15px;
+
+  background:linear-gradient(180deg, var(--gold-1), var(--gold-2) 55%, var(--gold-3));
+  border:1px solid var(--edge);
+  box-shadow:
+    0 10px 22px var(--shadow),
+    inset 0 1px 0 rgba(255,255,255,.75),
+    inset 0 -2px 6px rgba(0,0,0,.08);
+
+  color:#2a2416;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:.2px;
+  text-shadow:0 1px 0 rgba(255,255,255,.55);
+  transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+/* lueur douce derrière le bouton */
+.back-button a::after{
+  content:"";
+  position:absolute;
+  inset:-6px -10px;
+  border-radius:inherit;
+  background:radial-gradient(40% 55% at 50% 0%, rgba(255,255,224,.6), transparent 60%);
+  opacity:.4;
+  pointer-events:none;
+  filter:blur(6px);
+}
+
+/* Hover : remonte un peu + éclat plus fort */
+.back-button a:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(255,248,198,.35),
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 -3px 10px rgba(0,0,0,.08);
+  filter:saturate(1.05);
+}
+
+/* Effet "shimmer" subtil au survol */
+.back-button a:hover::after{
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(255,255,240,.9), transparent 70%),
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,.25) 45%, transparent 60%);
+  animation:shine 1.2s ease forwards;
+}
+
+@keyframes shine{
+  from { background-position:-120% 0, -120% 0; }
+  to   { background-position:0 0, 140% 0; }
+}
+
+/* Active : petit clic */
+.back-button a:active{
+  transform:translateY(0);
+  box-shadow:
+    0 8px 16px var(--shadow),
+    inset 0 1px 0 rgba(255,255,255,.65),
+    inset 0 -1px 6px rgba(0,0,0,.12);
+}
+
+
+    @media (min-width: 900px){
+      .hero-layout{
+        display:flex;
+        align-items:flex-start;
+        gap:2rem;
+      }
+
+      .image-hero{
+        width:30%;          /* portrait plus grand */
+        max-width:560px;
+        margin:0;
+        margin-left:130px; 
+      }
+
+      .right-col{
+        flex:1;
+        max-width:400px;    /* colonne parchemin moins large */
+      }
+
+      .parchemin{
+        max-width:460px;
+        padding:2rem 1.8rem;
+        font-size:1.05rem;
+        line-height:1.6;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Lizéa </h1>
+    <h1>Lizéa</h1>
 
-    <!-- Image du héros -->
-    <img src="photo_lizea.webp" alt="Portrait de Paola" class="image-hero">
+    <p class="archives">
+      <q> Certains porteurs de mystère n’ont pas besoin de révéler leur secret pour rayonner.</q>
+      <span class="signature">— Archives de la Tour de l’Aube —</span>
+    </p>
 
-    <!-- Texte sur parchemin -->
-    <div class="parchemin">
+    <section class="hero-layout">
+     <img src="photo_lizea.webp" alt="Portrait de Paola"class="image-hero" />
+
+      <div class="right-col">
+        <div class="parchemin">
       <p><strong>Âge :</strong> 16 ans</p>
       <p><strong>Monde d’origine :</strong> Monde de la Forêt Enchantée</p>
       <p><strong>Clé d’accès :</strong> Inconnue</p>
       <p><strong>Spécialisation :</strong> Dresseuse - Lien Liacipri Licorne</p>
       <p><strong>Statut :</strong> En formation </p>
-      <br>
-      <em>« Certains porteurs de mystère n’ont pas besoin de révéler leur secret pour rayonner. »<br>– Archives de la Tour de l’Aube</em>
-    </div>
+        </div>
 
-    <!-- Bouton retour -->
-    <div class="back-button">
-      <a href="3.les_heros.html">← Retour aux héros</a>
-    </div>
+        <nav class="back-button" aria-label="Navigation héros Raphaël">
+         
+          <a href="3.les_heros.html">← Retour aux héros</a>
+        </nav>
+      </div>
+    </section>
   </div>
 </body>
 </html>
