@@ -7,104 +7,100 @@
   <title>Ouverture du portail magique</title>
   <style>
     :root{
-      --or:#ffd700;
-      --or-clair:#fff4b3;
-      --ombre-noir:rgba(0,0,0,.7);
+      --or:#f7d55a;
+      --or-clair:#fff3b0;
+      --voile:#001133;
+      --rideau:#281f43;
     }
 
+    html,body{height:100%}
     body{
       margin:0;
-      height:100vh;
       font-family:'Georgia', serif;
       overflow:hidden;
-      background: url('fond_index2.webp') center/cover no-repeat fixed;
+      background:url('fond_index2.webp') center/cover no-repeat fixed;
     }
 
-    /* Calque bleu foncé au-dessus du fond */
+    /* Calque bleu foncé */
     .calque-bleu{
-      background-color:#001133;
-      position:absolute; inset:0;
-      z-index:0;
-      opacity:1;
-      transition:opacity 1.5s ease-in;
+      position:absolute; inset:0; z-index:0;
+      background-color:var(--voile);
+      opacity:1; transition:opacity 1.5s ease-in;
     }
     .calque-bleu.fade-out{ opacity:0; }
 
     /* Rideaux */
     .rideau-gauche,.rideau-droit{
       position:absolute; top:0; width:50%; height:100%;
-      background-color:#281f43;
-      z-index:3;
+      background-color:var(--rideau); z-index:3;
     }
     .rideau-gauche{ left:0; animation:ouvrir-gauche 2s ease-out forwards; }
     .rideau-droit{ right:0; animation:ouvrir-droit 2s ease-out forwards; }
-
     @keyframes ouvrir-gauche{ to{ transform:translateX(-100%);} }
-    @keyframes ouvrir-droit{ to{ transform:translateX(100%);} }
-
+    @keyframes ouvrir-droit{  to{ transform:translateX(100%);}  }
     .rideau-gauche.fermer{ animation:fermer-gauche 2s ease-in forwards; }
-    .rideau-droit.fermer{ animation:fermer-droit 2s ease-in forwards; }
-
+    .rideau-droit.fermer{  animation:fermer-droit  2s ease-in forwards; }
     @keyframes fermer-gauche{ from{transform:translateX(-100%);} to{transform:translateX(0);} }
-    @keyframes fermer-droit{ from{transform:translateX(100%);} to{transform:translateX(0);} }
+    @keyframes fermer-droit{  from{transform:translateX(100%);}  to{transform:translateX(0);} }
 
-    /* Texte d’intro */
+    /* Bloc titres */
     .intro-fixe{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+      position:absolute; inset:0; z-index:2;
+      display:flex; flex-direction:column; align-items:center;
+      text-align:center; gap:0.4em;
       padding:0 8vw;
-      opacity:0;
-      animation:fadein 1s ease-in forwards;
-      animation-delay:2s;
+      opacity:0; animation:fadein 1s ease-in forwards; animation-delay:2s;
+      justify-content:center;
     }
-    @keyframes fadein{ to{ opacity:1; } }
+    @keyframes fadein{ to{opacity:1;} }
 
     .intro-fixe h1{
       margin:0;
-      font-size: clamp(26px,4vw,48px);
-      font-weight:normal;
-      color:var(--or-clair);
-      text-shadow: 2px 2px 6px var(--ombre-noir);
+      font-weight:700;
+      font-size: clamp(28px, 6vw, 60px);
+      color:#fff6da;
+      text-shadow: 0 2px 8px rgba(0,0,0,.65);
     }
 
     .intro-fixe h2{
-      margin-top:.3em;
-      font-size: clamp(32px,6vw,72px);
-      font-weight:bold;
+      margin:0;
+      font-weight:700;
+      font-size: clamp(32px, 7vw, 80px);
+      line-height:1.1;
       color:var(--or);
-      text-shadow:
-        0 0 10px var(--or-clair),
-        0 0 20px var(--or),
-        2px 2px 8px var(--ombre-noir);
-      animation: halo 3s ease-in-out infinite alternate;
+      text-shadow:0 0 12px var(--or-clair),0 0 28px rgba(0,0,0,.55);
+      animation:halo 3s ease-in-out infinite alternate;
+    }
+    @keyframes halo{
+      from{ text-shadow:0 0 10px var(--or-clair), 0 0 24px rgba(0,0,0,.55); }
+      to{   text-shadow:0 0 18px var(--or),       0 0 36px rgba(0,0,0,.65); }
     }
 
-    /* effet pulsant magique */
-    @keyframes halo{
-      from{ text-shadow:0 0 10px var(--or-clair), 0 0 20px var(--or), 2px 2px 8px var(--ombre-noir);}
-      to{   text-shadow:0 0 20px var(--or-clair), 0 0 40px var(--or), 2px 2px 12px var(--ombre-noir);}
+    /* ===== Version mobile ===== */
+    @media (max-width: 700px){
+      body{
+        background-size: 150%;      /* dézoome un peu */
+        background-position: center 20%;
+      }
+      .intro-fixe{
+        justify-content:flex-start;
+        padding-top: 12vh;
+      }
+      .intro-fixe h1{ font-size: clamp(32px, 9vw, 54px); }
+      .intro-fixe h2{ font-size: clamp(36px, 10vw, 64px); }
     }
   </style>
 </head>
 <body>
-  <!-- Calque bleu -->
   <div class="calque-bleu" id="calque"></div>
 
-  <!-- Texte -->
-  <div class="intro-fixe">
+  <div class="intro-fixe" aria-live="polite">
     <h1>Bienvenue sur le site officiel</h1>
     <h2>Les Héros d’Arzankia</h2>
   </div>
 
-  <!-- Rideaux -->
-  <div class="rideau-gauche" id="gauche"></div>
-  <div class="rideau-droit" id="droit"></div>
+  <div class="rideau-gauche" id="gauche" aria-hidden="true"></div>
+  <div class="rideau-droit" id="droit" aria-hidden="true"></div>
 
   <script>
     setTimeout(()=>{ document.getElementById("calque").classList.add("fade-out"); },2000);
