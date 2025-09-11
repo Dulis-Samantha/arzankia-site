@@ -3,107 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ouverture du portail magique</title>
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Georgia', serif;
-      color: #ffe066;
-      overflow: hidden;
+    :root{
+      --or:#ffd700;
+      --or-clair:#fff4b3;
+      --ombre-noir:rgba(0,0,0,.7);
+    }
+
+    body{
+      margin:0;
+      height:100vh;
+      font-family:'Georgia', serif;
+      overflow:hidden;
       background: url('fond_index2.webp') center/cover no-repeat fixed;
     }
 
     /* Calque bleu foncé au-dessus du fond */
-    .calque-bleu {
-      background-color: #001133;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      opacity: 1;
-      transition: opacity 1.5s ease-in;
+    .calque-bleu{
+      background-color:#001133;
+      position:absolute; inset:0;
+      z-index:0;
+      opacity:1;
+      transition:opacity 1.5s ease-in;
+    }
+    .calque-bleu.fade-out{ opacity:0; }
+
+    /* Rideaux */
+    .rideau-gauche,.rideau-droit{
+      position:absolute; top:0; width:50%; height:100%;
+      background-color:#281f43;
+      z-index:3;
+    }
+    .rideau-gauche{ left:0; animation:ouvrir-gauche 2s ease-out forwards; }
+    .rideau-droit{ right:0; animation:ouvrir-droit 2s ease-out forwards; }
+
+    @keyframes ouvrir-gauche{ to{ transform:translateX(-100%);} }
+    @keyframes ouvrir-droit{ to{ transform:translateX(100%);} }
+
+    .rideau-gauche.fermer{ animation:fermer-gauche 2s ease-in forwards; }
+    .rideau-droit.fermer{ animation:fermer-droit 2s ease-in forwards; }
+
+    @keyframes fermer-gauche{ from{transform:translateX(-100%);} to{transform:translateX(0);} }
+    @keyframes fermer-droit{ from{transform:translateX(100%);} to{transform:translateX(0);} }
+
+    /* Texte d’intro */
+    .intro-fixe{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 8vw;
+      opacity:0;
+      animation:fadein 1s ease-in forwards;
+      animation-delay:2s;
+    }
+    @keyframes fadein{ to{ opacity:1; } }
+
+    .intro-fixe h1{
+      margin:0;
+      font-size: clamp(26px,4vw,48px);
+      font-weight:normal;
+      color:var(--or-clair);
+      text-shadow: 2px 2px 6px var(--ombre-noir);
     }
 
-    .calque-bleu.fade-out {
-      opacity: 0;
+    .intro-fixe h2{
+      margin-top:.3em;
+      font-size: clamp(32px,6vw,72px);
+      font-weight:bold;
+      color:var(--or);
+      text-shadow:
+        0 0 10px var(--or-clair),
+        0 0 20px var(--or),
+        2px 2px 8px var(--ombre-noir);
+      animation: halo 3s ease-in-out infinite alternate;
     }
 
-    .rideau-gauche, .rideau-droit {
-      position: absolute;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      background-color: #281f43;
-      z-index: 3;
-    }
-
-    .rideau-gauche {
-      left: 0;
-      animation: ouvrir-gauche 2s ease-out forwards;
-    }
-
-    .rideau-droit {
-      right: 0;
-      animation: ouvrir-droit 2s ease-out forwards;
-    }
-
-    @keyframes ouvrir-gauche {
-      to { transform: translateX(-100%); }
-    }
-
-    @keyframes ouvrir-droit {
-      to { transform: translateX(100%); }
-    }
-
-    .rideau-gauche.fermer {
-      animation: fermer-gauche 2s ease-in forwards;
-    }
-
-    .rideau-droit.fermer {
-      animation: fermer-droit 2s ease-in forwards;
-    }
-
-    @keyframes fermer-gauche {
-      from { transform: translateX(-100%); }
-      to { transform: translateX(0); }
-    }
-
-    @keyframes fermer-droit {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
-
-    .intro-fixe {
-      position: absolute;
-      z-index: 2;
-      width: 100%;
-      text-align: center;
-      top: 25%;
-      font-size: 1.5em;
-      line-height: 1.6em;
-      padding: 0 10vw;
-      box-sizing: border-box;
-      opacity: 0;
-      animation: fadein 1s ease-in forwards;
-      animation-delay: 2s;
-      color: #ffe066;
-      text-shadow: 1px 1px 3px black;
-    }
-
-    @keyframes fadein {
-      to { opacity: 1; }
+    /* effet pulsant magique */
+    @keyframes halo{
+      from{ text-shadow:0 0 10px var(--or-clair), 0 0 20px var(--or), 2px 2px 8px var(--ombre-noir);}
+      to{   text-shadow:0 0 20px var(--or-clair), 0 0 40px var(--or), 2px 2px 12px var(--ombre-noir);}
     }
   </style>
 </head>
 <body>
-  <!-- Calque bleu foncé par-dessus le fond image -->
+  <!-- Calque bleu -->
   <div class="calque-bleu" id="calque"></div>
 
-  <!-- Texte d’introduction -->
+  <!-- Texte -->
   <div class="intro-fixe">
     <h1>Bienvenue sur le site officiel</h1>
-    <h2>Les Héros d'Arzankia</h2>
+    <h2>Les Héros d’Arzankia</h2>
   </div>
 
   <!-- Rideaux -->
@@ -111,21 +107,12 @@
   <div class="rideau-droit" id="droit"></div>
 
   <script>
-    // 1. Faire disparaître le calque bleu après ouverture du rideau
-    setTimeout(() => {
-      document.getElementById("calque").classList.add("fade-out");
-    }, 2000); // juste après ouverture
-
-    // 2. Fermer les rideaux après 5 secondes
-    setTimeout(() => {
+    setTimeout(()=>{ document.getElementById("calque").classList.add("fade-out"); },2000);
+    setTimeout(()=>{
       document.getElementById("gauche").classList.add("fermer");
       document.getElementById("droit").classList.add("fermer");
-    }, 5000);
-
-    // 3. Rediriger après la fermeture
-    setTimeout(() => {
-      window.location.href = "1.accueil.html";
-    }, 7000);
+    },5000);
+    setTimeout(()=>{ window.location.href="1.accueil.html"; },7000);
   </script>
 </body>
 </html>
