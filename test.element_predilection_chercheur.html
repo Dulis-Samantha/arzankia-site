@@ -4,65 +4,97 @@
   <meta charset="UTF-8">
   <title>Mission du Chercheur</title>
   <style>
-    body {
-      background: url('fond_noir_etoile.webp') center/cover no-repeat fixed;
-      color: #fff8e6;
-      font-family: Georgia, serif;
-      padding: 2em;
-      text-align: center;
-      text-shadow: 1px 1px 4px #000;
+    body{
+      margin:0;
+      background:url('fond_noir_etoile.webp') center/cover no-repeat fixed;
+      color:#fff8e6;
+      font-family:Georgia, serif;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      gap:24px;
+      padding:2em 1.2em;
+      text-align:center;
+      text-shadow:1px 1px 4px #000;
     }
 
-    h1 {
-      font-size: 2.6em;
-      color: #ffd700;
-      margin-bottom: 1em;
-      text-shadow: 0 0 8px #d6b65c;
+    h1{
+      font-size:2.6em;
+      color:#ffd700;
+      margin:.2em 0 .1em;
+      text-shadow:0 0 12px rgba(255,215,0,.8), 0 2px 0 #3a2a00;
     }
 
-    .texte-mission {
-      font-size: 1.3em;
-      max-width: 50ch;
-      margin: auto;
-      line-height: 1.6;
+    .surtitre{
+      opacity:.9;
+      font-size:1.05rem;
+      margin-bottom:.8rem;
     }
 
-    .highlight {
-      font-weight: bold;
-      color: #ffd700;
+    .texte-mission{
+      font-size:1.3em;
+      line-height:1.65;
+      max-width:50ch;
+      margin:0 auto 1.2rem;
+    }
+    .texte-mission p{ margin:1rem 0; }
+
+    .highlight{
+      display:inline-block;
+      font-weight:700;
+      color:#ffd700;
+      text-shadow:0 0 8px rgba(255,215,0,.7);
     }
 
-    .grimoire-link {
-      display: inline-block;
-      margin-top: 2em;
-      padding: 0.8em 1.4em;
-      background: linear-gradient(145deg, #ffd65b, #e6b800);
-      color: #2a1c00;
-      font-weight: 700;
-      border-radius: 14px;
-      text-decoration: none;
-      box-shadow: 0 0 14px rgba(255,215,0,0.6), 0 6px 14px rgba(0,0,0,0.4);
-      transition: transform 0.18s ease, filter 0.18s ease;
+    /* Effet « machine à écrire » pour la phrase */
+    .typewriter{
+      display:inline-block;
+      overflow:hidden;
+      white-space:nowrap;
+      border-right:.12em solid #ffd700;   /* curseur */
+      letter-spacing:.02em;
+      animation:typing 2.6s steps(28,end), blink .8s step-end infinite;
+    }
+    @keyframes typing{ from{width:0} to{width:100%} }
+    @keyframes blink{ 50%{border-color:transparent} }
+
+    /* Respect des préférences d’accessibilité */
+    @media (prefers-reduced-motion: reduce){
+      .typewriter{ animation:none; border-right:0 }
     }
 
-    .grimoire-link:hover {
-      filter: brightness(1.1);
-      transform: translateY(-2px);
+    .grimoire-link{
+      display:inline-block;
+      margin-top:1.2em;
+      padding:.9em 1.6em;
+      background:linear-gradient(145deg,#ffd65b,#e6b800);
+      color:#2a1c00;
+      font-weight:800;
+      border-radius:14px;
+      text-decoration:none;
+      box-shadow:0 0 14px rgba(255,215,0,.6), 0 6px 14px rgba(0,0,0,.4);
+      transition:transform .18s ease, filter .18s ease;
     }
+    .grimoire-link:hover{ filter:brightness(1.15); transform:translateY(-3px); }
   </style>
 </head>
 <body>
   <h1>Tu es un Chercheur</h1>
-      <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
- <div class="texte-mission">
-  J’ai une quête pour toi :<br><br>
-  <span class="highlight">
-   – Quête spéciale –<br>
-   Écaille de Pescadrille Bleu
-  </span>.<br><br>
-  Pour la trouver, tu peux te servir du <strong>Grimoire des Héros</strong>.
-</div>
+  <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
 
-  <a href="3.les_heros.html" class="grimoire-link">→ Retour</a>
+  <div class="texte-mission">
+    <p class="typewriter">J’ai une quête pour toi :</p>
+
+    <p class="highlight">
+      – Quête spéciale –<br>
+      Écaille de Pescadrille Bleu
+    </p>
+
+    <p>Pour la trouver, tu peux te servir du <strong>Grimoire des Héros</strong>.</p>
+  </div>
+
+  <a href="3.les_heros.html" class="grimoire-link">← Retour</a>
 </body>
 </html>
