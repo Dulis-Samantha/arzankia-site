@@ -19,74 +19,50 @@
       text-align:center;
       text-shadow:1px 1px 4px #000;
     }
-
     h1{
       font-size:2.6em;
       color:#ffd700;
       margin:.2em 0 .1em;
       text-shadow:0 0 12px rgba(255,215,0,.8), 0 2px 0 #3a2a00;
     }
-
-    .surtitre{
-      opacity:.9;
-      font-size:1.05rem;
-      margin-bottom:.8rem;
-    }
+    .surtitre{ opacity:.9; font-size:1.05rem; margin-bottom:.8rem; }
 
     .texte-mission{
-      font-size:1.3em;
-      line-height:1.65;
-      max-width:50ch;
+      font-size:1.3em; line-height:1.65; max-width:50ch;
       margin:0 auto 1.2rem;
     }
     .texte-mission p{ margin:1rem 0; }
 
-    .highlight{
-      display:inline-block;
-      font-weight:700;
-      color:#ffd700;
-      text-shadow:0 0 8px rgba(255,215,0,.7);
-    }
+    .highlight{ font-weight:700; color:#ffd700; text-shadow:0 0 8px rgba(255,215,0,.7); }
 
-    /* ✨ Apparition magique pour le titre de la quête */
-    .magic{
-      opacity:0;
-      animation: shimmer 3s ease forwards;
-      background:linear-gradient(90deg,#fff8e6,#ffd700,#fff8e6);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-size:200% auto;
-    }
-    @keyframes shimmer{
-      0%{opacity:0; background-position:-200% center; text-shadow:0 0 2px #000;}
-      50%{opacity:1; background-position:100% center; text-shadow:0 0 14px #ffd700,0 0 28px #ffea8a;}
-      100%{opacity:1; background-position:0 center; text-shadow:0 0 8px #d6b65c,0 0 18px #ffd700;}
-    }
-
-    /* 🌟 Scintillement permanent pour "Grimoire des Héros" */
-    .scintille{
+    /* curseur & glow pour le texte tapé */
+    .cursor{
+      display:inline-block; width:.6ch; margin-left:.1ch;
       color:#ffd700;
-      font-weight:bold;
-      animation: sparkle 2.5s infinite;
+      animation:blink .8s step-end infinite;
     }
+    @keyframes blink{ 50%{opacity:0} }
+
+    .typed.glow{
+      text-shadow:0 0 8px #d6b65c, 0 0 18px #ffd700;
+    }
+    .cursor.hide{ visibility:hidden; }
+    
+    .grimoire-link{
+      display:inline-block; margin-top:1.2em; padding:.9em 1.6em;
+      background:linear-gradient(145deg,#ffd65b,#e6b800); color:#2a1c00;
+      font-weight:800; border-radius:14px; text-decoration:none;
+      box-shadow:0 0 14px rgba(255,215,0,.6), 0 6px 14px rgba(0,0,0,.4);
+      transition:transform .18s ease, filter .18s ease;
+    }
+    .grimoire-link:hover{ filter:brightness(1.15); transform:translateY(-3px); }
+
+    /* scintillement permanent pour "Grimoire des Héros" (tu l'avais aimé) */
+    .scintille{ color:#ffd700; font-weight:bold; animation:sparkle 2.5s infinite; }
     @keyframes sparkle{
       0%,100%{ text-shadow:0 0 6px #ffd700,0 0 12px #ffea8a; }
       50%{ text-shadow:0 0 14px #fff,0 0 24px #ffd700; }
     }
-
-    .grimoire-link{
-      display:inline-block;
-      margin-top:1.2em;
-      padding:.9em 1.6em;
-      background:linear-gradient(145deg,#ffd65b,#e6b800);
-      color:#2a1c00;
-      font-weight:800;
-      border-radius:14px;
-      text-decoration:none;
-      box-shadow:0 0 14px rgba(255,215,0,.6),0 6px 14px rgba(0,0,0,.4);
-      transition:transform .18s ease, filter .18s ease;
-    }
-    .grimoire-link:hover{ filter:brightness(1.15); transform:translateY(-3px); }
   </style>
 </head>
 <body>
@@ -97,11 +73,48 @@
     <p>J’ai une quête pour toi :</p>
 
     <p class="highlight">– Quête spéciale –</p>
-    <p class="highlight magic">Écaille de Pescadrille Bleu</p>
+
+    <!-- ligne qui s’écrit lettre par lettre -->
+    <p class="highlight">
+      <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
+    </p>
 
     <p>Pour la trouver, tu peux te servir du <span class="scintille">Grimoire des Héros</span>.</p>
   </div>
 
   <a href="3.les_heros.html" class="grimoire-link">← Retour</a>
+
+  <script>
+    // texte à “taper”
+    const fullText = "Écaille de Pescadrille Bleu";
+    const el = document.getElementById("typedText");
+    const cursor = document.getElementById("typedCursor");
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function typeText(text, speed = 60){
+      if (reduceMotion) {
+        el.textContent = text;
+        el.classList.add('glow');
+        cursor.classList.add('hide');
+        return;
+      }
+      let i = 0;
+      (function step(){
+        el.textContent = text.slice(0, i);
+        if (i++ <= text.length){
+          setTimeout(step, speed);
+        } else {
+          cursor.classList.add('hide');
+          el.classList.add('glow');
+        }
+      })();
+    }
+
+    // démarrer l’animation après un léger délai (pour le rythme)
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => typeText(fullText, 55), 400);
+    });
+  </script>
 </body>
 </html>
