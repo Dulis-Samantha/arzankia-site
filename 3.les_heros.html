@@ -393,15 +393,25 @@
     return (s||"").trim().normalize("NFD").replace(/\p{Diacritic}/gu,'').toLowerCase();
   }
 
-  function ouvrirGrimoire(){
-    const valeur = normalise(inputG.value);
-    if(valeur === "aventurier"){
-      window.location.href = "grimoire_aventurier.html";
-    } else if(valeur === "chercheur"){
-      window.location.href = "grimoire_chercheur.html";
-    } else if(["pescadrille", "pecadrille", "pescadrille bleu"].includes(valeur)){
-  window.location.href = "definition_pescadrille.html";
+  function ouvrirGrimoire() {
+  const valeur = normalise(inputG.value);
+
+  if (valeur === "aventurier") {
+    window.location.href = "grimoire_aventurier.html";
+  } else if (valeur === "chercheur") {
+    window.location.href = "grimoire_chercheur.html";
+  } else if (
+    valeur.includes("pescadrille") ||
+    valeur.includes("pecadrille") ||
+    valeur.includes("ecaille") ||
+    valeur.includes("ecailles") ||
+    valeur.includes("bleu")
+  ) {
+    window.location.href = "definition_pescadrille.html";
+  }
 }
+
+
 
   }
 
