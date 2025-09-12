@@ -5,145 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Mission du Chercheur</title>
 
-  <!-- Polices (Zouppi + Titre élégant) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --doré:#ffd700;
-      --texte:#fff8e6;
-      --noir:rgba(0,0,0,.65);
-      --bord:rgba(255,255,255,.10);
-      --ombre:rgba(0,0,0,.45);
+      --gold:#f4d16a;            /* doré adouci */
+      --text:#fff7e6;            /* blanc chaud */
+      --soft:#fff2db;            /* encore plus doux */
+      --fg-dim:rgba(255,255,255,.85);
+      --card-bg:rgba(10,7,14,.78);
+      --card-border:rgba(255,255,255,.10);
+      --shadow:rgba(0,0,0,.45);
       --maxw:720px;
     }
 
     html,body{height:100%}
     body{
       margin:0;
-      background:url('fond_chercheur.png') center/cover fixed no-repeat;
-      color:var(--texte);
-      font-family:Georgia, serif;
-      text-shadow:0 1px 3px #000;
+      background:url('fond_noir_etoile.webp') center/cover fixed no-repeat;
+      color:var(--text);
+      font-family:"EB Garamond", Georgia, serif;
+      -webkit-font-smoothing:antialiased;
+      text-shadow:0 1px 2px #000;
       display:flex;
       min-height:100vh;
     }
 
+    /* Conteneur */
     .wrap{
       width:100%;
       margin:auto;
-      padding: clamp(14px, 3.5vw, 28px);
-      display:flex;
-      justify-content:center;
-    }
-    .card{
-      width:min(100%, var(--maxw));
-      background:linear-gradient(180deg, rgba(10,6,12,.74), rgba(12,8,14,.74));
-      border:1px solid var(--bord);
-      border-radius:16px;
-      box-shadow:0 10px 28px var(--ombre);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-      padding: clamp(16px, 4.8vw, 36px);
-      min-height:78vh; /* espace pour le bouton sticky */
+      padding:clamp(14px,3.5vw,28px);
+      display:flex; justify-content:center;
     }
 
-    /* Titres & textes fluides */
+    /* Carte */
+    .card{
+      width:min(100%,var(--maxw));
+      background:linear-gradient(180deg,var(--card-bg),rgba(12,8,16,.78));
+      border:1px solid var(--card-border);
+      border-radius:18px;
+      box-shadow:0 10px 28px var(--shadow);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      padding:clamp(18px,4.6vw,36px);
+      min-height:78vh;
+    }
+
+    /* Titre & surtitre */
     h1{
+      font-family:"Cinzel", serif;
       margin:0 0 clamp(8px,2.6vw,14px);
-      font-family:'Cinzel', Georgia, serif;
-      font-weight:800;
-      font-size: clamp(26px, 7vw, 44px);
-      line-height:1.15;
-      color:var(--doré);
+      font-weight:700;
+      font-size:clamp(28px,7.2vw,44px);
+      line-height:1.12;
       text-align:center;
-      text-shadow:0 0 9px rgba(255,215,0,.55), 0 1px 0 #3a2a00;
+      color:var(--gold);
+      text-shadow:0 0 8px rgba(244,209,106,.45), 0 1px 0 #3a2a00;
       letter-spacing:.02em;
     }
     .surtitre{
       text-align:center;
-      font-size: clamp(12px, 3.6vw, 18px);
-      opacity:.95;
-      margin-bottom: clamp(14px, 4vw, 20px);
+      font-size:clamp(13px,3.6vw,18px);
+      color:var(--fg-dim);
+      margin-bottom:clamp(14px,4vw,22px);
     }
 
+    /* Texte courant */
     .texte-mission{
       margin-inline:auto;
-      max-width: 40ch;
-      font-size: clamp(16px, 4.6vw, 20px);
+      max-width:40ch;
+      font-size:clamp(17px,4.8vw,20px);
       line-height:1.65;
       text-align:center;
+      color:var(--text);
     }
-    .texte-mission p{ margin: clamp(12px, 3.6vw, 20px) 0; }
+    .texte-mission p{ margin:clamp(12px,3.6vw,20px) 0 }
 
-    /* ✅ VOIX DE ZOUPPI */
-    .voice-zouppi{
-      font-family:'Uncial Antiqua', cursive;
-      font-size: clamp(17px, 4.8vw, 22px);
-      font-style: italic;
-      color:#ffe07a;
-      text-shadow:0 0 6px rgba(255,215,0,.55);
-      letter-spacing:.01em;
-    }
-    /* Tiret cadratin auto + petite étoile magique */
-    .voice-zouppi::before{
-      content:"— ";
-      color:#ffe07a;
+    /* Citations / narration */
+    .quote{
+      font-style:italic;
+      font-weight:400;
+      color:var(--soft);
+      text-shadow:0 0 2px rgba(0,0,0,.55);
     }
 
-    .mission-focus{
-      font-weight:800;
-      color:var(--doré);
-      font-size: clamp(18px, 5.4vw, 26px);
-      text-shadow:0 0 6px rgba(255,215,0,.50), 0 0 12px rgba(255,215,0,.30);
+    /* Mise en valeur douce (blanc fort) */
+    .emphasis{
+      font-weight:600;
+      color:var(--text);
     }
 
-    /* Effet “tapé” */
+    /* Objet de quête : doré + lueur légère */
+    .quest-object{
+      font-weight:700;
+      color:var(--gold);
+      font-size:clamp(19px,5.4vw,26px);
+      text-shadow:0 0 6px rgba(244,209,106,.45), 0 0 12px rgba(244,209,106,.25);
+    }
+
+    /* Mot “Grimoire des Héros” scintillant discret */
+    .scintille{
+      white-space:nowrap;
+      font-weight:600;
+      animation:spark 3s infinite;
+    }
+    @keyframes spark{
+      0%,100%{ text-shadow:0 0 4px var(--gold) }
+      50%    { text-shadow:0 0 10px #fff }
+    }
+
+    /* Effet “tapé” magique pour l’objet */
     .cursor{
       display:inline-block; width:.6ch; margin-left:.1ch;
-      color:var(--doré); animation:blink .8s step-end infinite;
+      color:var(--gold); animation:blink .8s step-end infinite;
     }
     @keyframes blink{50%{opacity:0}}
-    .typed.glow{ text-shadow:0 0 8px #d6b65c, 0 0 14px var(--doré) }
+    .typed.glow{ text-shadow:0 0 8px var(--gold), 0 0 14px rgba(244,209,106,.65) }
     .cursor.hide{ visibility:hidden }
 
-    /* Scintillement discret (titre de grimoire) */
-    .scintille-light{
-      display:inline; white-space:nowrap;
-      color:var(--texte); font-weight:700;
-      animation:sparkleLight 3s infinite;
-    }
-    @keyframes sparkleLight{
-      0%,100%{ text-shadow:0 0 4px var(--doré) }
-      50%   { text-shadow:0 0 10px #fff }
-    }
-
-    /* Bouton retour collant */
+    /* Bouton retour */
     .bar-fixed{
-      position: sticky; bottom:0;
+      position:sticky; bottom:0;
       display:flex; justify-content:center;
-      padding-top: clamp(12px, 3.6vw, 18px);
-      padding-bottom: max(10px, env(safe-area-inset-bottom)); /* safe areas */
-      margin-top: clamp(10px, 3.2vw, 16px);
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.15));
-      border-bottom-left-radius:14px; border-bottom-right-radius:14px;
+      padding-top:clamp(12px,3.6vw,18px);
+      padding-bottom:max(10px, env(safe-area-inset-bottom));
+      margin-top:clamp(10px,3.2vw,16px);
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.18));
+      border-bottom-left-radius:16px; border-bottom-right-radius:16px;
     }
     .btn{
+      font-family:"Cinzel", serif;
       display:inline-flex; align-items:center; gap:.5em;
       padding:.85em 1.35em;
       background:linear-gradient(145deg,#ffd65b,#e6b800);
-      color:#2a1c00; text-decoration:none; font-weight:800;
+      color:#2a1c00; text-decoration:none; font-weight:700;
       border-radius:12px; box-shadow:0 0 12px rgba(255,215,0,.45), 0 6px 12px rgba(0,0,0,.35);
       transition:transform .18s ease, filter .18s ease;
-      font-size: clamp(15px, 4.6vw, 18px);
+      font-size:clamp(15px,4.6vw,18px);
+      letter-spacing:.02em;
     }
-    .btn:hover{ filter:brightness(1.12); transform:translateY(-2px) }
+    .btn:hover{ filter:brightness(1.1); transform:translateY(-2px) }
 
     /* Accessibilité */
-    @media (prefers-reduced-motion: reduce){
-      .cursor, .scintille-light{ animation:none }
+    @media (prefers-reduced-motion:reduce){
+      .cursor,.scintille{ animation:none }
     }
   </style>
 </head>
@@ -154,21 +161,21 @@
       <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
 
       <div class="texte-mission">
-        <!-- Répliques de Zouppi -->
-        <p class="voice-zouppi">« Oh oh oh&nbsp;! J’ai une quête spéciale pour toi. »</p>
-        <p class="voice-zouppi">« Que ta clé s’active pour recevoir ta quête. »</p>
+        <p class="quote">« Oh oh oh&nbsp;! J’ai une quête spéciale pour toi. </p>
+        <p class="emphasis">Que ta clé s’active pour recevoir ta quête.»</p>
 
-        <!-- Ligne qui s’écrit -->
-        <p class="mission-focus">
+        <!-- Ligne qui s’écrit (objet de quête) -->
+        <p class="quest-object">
           <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
         </p>
 
-        <p class="voice-zouppi">« Bien évidemment, tu peux te servir de ton grimoire&nbsp;: 
-          <span class="scintille-light">le Grimoire des Héros</span>. »</p>
+        <p>«Bien évidemment, tu peux te servir de ton grimoire&nbsp;: le
+          <span class="scintille">Grimoire des Héros.»</span>.
+        </p>
       </div>
 
       <div class="bar-fixed">
-        <a class="btn" href="3.les_heros.html">Retour</a>
+        <a class="btn" href="3.les_heros.html">← Retour</a>
       </div>
     </div>
   </div>
@@ -192,8 +199,8 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      const isMobile = matchMedia('(max-width:600px)').matches;
-      const speed = isMobile ? 48 : 58;   // un peu plus rapide sur mobile
+      const isMobile = window.matchMedia('(max-width: 600px)').matches;
+      const speed = isMobile ? 48 : 58;
       setTimeout(() => typeText(fullText, speed), 450);
     });
   </script>
