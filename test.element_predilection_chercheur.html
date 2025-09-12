@@ -2,124 +2,170 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Mission du Chercheur</title>
   <style>
+    :root{
+      --doré:#ffd700;
+      --texte:#fff8e6;
+      --ombre:#000;
+      --maxw: 820px; /* largeur max du contenu */
+    }
+
+    /* ===== Layout global ===== */
+    html,body{height:100%}
     body{
       margin:0;
       background:url('fond_noir_etoile.webp') center/cover no-repeat fixed;
-      color:#fff8e6;
-      font-family:Georgia, serif;
-      min-height:100vh;
+      color:var(--texte);
+      font-family: Georgia, serif;
+      text-shadow: 0 1px 3px var(--ombre);
+    }
+
+    .page{
+      min-height:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:flex-start;
-      gap:24px;
-      padding:2em 1.2em;
-      text-align:center;
-      text-shadow:1px 1px 4px #000;
+      padding:
+        max(16px, env(safe-area-inset-top))
+        max(14px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(14px, env(safe-area-inset-left));
     }
 
-    /* Titre (garde l'accent doré) */
-    h1{
-      font-size:2.6em;
-      color:#ffd700;
-      margin:.2em 0 .1em;
-      text-shadow:0 0 12px rgba(255,215,0,.8), 0 2px 0 #3a2a00;
+    .wrap{
+      width: min(100%, var(--maxw));
+      margin-inline:auto;
+      padding-inline: clamp(10px, 3vw, 28px);
     }
-    .surtitre{ opacity:.9; font-size:1.05rem; margin-bottom:.8rem; }
+
+    /* ===== Titres & textes (taille fluide) ===== */
+    h1{
+      margin: 0 0 clamp(10px,2.5vw,16px);
+      font-size: clamp(28px, 6.2vw, 56px);
+      line-height: 1.1;
+      color: var(--doré);
+      text-shadow: 0 0 10px rgba(255,215,0,.65), 0 2px 0 #3a2a00;
+      text-align:center;
+    }
+
+    .surtitre{
+      text-align:center;
+      font-size: clamp(12px, 3.6vw, 18px);
+      opacity:.95;
+      margin-bottom: clamp(18px, 4.5vw, 24px);
+    }
 
     .texte-mission{
-      font-size:1.3em; line-height:1.65; max-width:50ch;
-      margin:0 auto 1.2rem;
+      text-align:center;
+      font-size: clamp(16px, 4.3vw, 22px);
+      line-height: 1.65;
+      margin-inline:auto;
     }
-    .texte-mission p{ margin:1rem 0; }
+    .texte-mission p{ margin: clamp(12px, 3.6vw, 20px) 0; }
 
-    /* “– Quête spéciale –” sobre (blanc) */
+    /* Quête “sobre” */
     .subtle{
-      color:#fff8e6;
-      font-weight:700;
+      font-weight: 700;
       letter-spacing:.02em;
-      text-shadow:0 0 4px rgba(0,0,0,.6);
+      text-shadow: 0 0 3px rgba(0,0,0,.5);
     }
 
-    /* Accent fort uniquement sur l’objet de quête */
+    /* Focal : ligne tapée */
     .mission-focus{
-      font-weight:800;
-      color:#ffd700;
-      font-size:1.35em;
-      text-shadow:0 0 8px rgba(255,215,0,.7), 0 0 16px rgba(255,215,0,.45);
+      font-weight: 800;
+      color: var(--doré);
+      font-size: clamp(18px, 5.0vw, 28px);
+      text-shadow: 0 0 7px rgba(255,215,0,.6), 0 0 14px rgba(255,215,0,.35);
     }
 
-    /* Curseur & glow pour le texte tapé */
+    /* Curseur & glow final */
     .cursor{
       display:inline-block; width:.6ch; margin-left:.1ch;
-      color:#ffd700; animation:blink .8s step-end infinite;
+      color:var(--doré);
+      animation: blink .8s step-end infinite;
     }
-    @keyframes blink{50%{opacity:0}}
-    .typed.glow{ text-shadow:0 0 8px #d6b65c, 0 0 18px #ffd700; }
+    @keyframes blink { 50% { opacity: 0 } }
+    .typed.glow{ text-shadow: 0 0 8px #d6b65c, 0 0 16px var(--doré); }
     .cursor.hide{ visibility:hidden; }
 
-    /* Scintillement discret pour “Grimoire des Héros” */
-  .scintille-light {
-  display: inline; /* ✅ reste sur la même ligne */
-  white-space: nowrap; /* ✅ évite que ça coupe en deux mots */
-  color: #fff8e6;
-  font-weight: 700;
-  animation: sparkleLight 3s infinite;
-}
+    /* Scintillement discret du lien “Grimoire des Héros” */
+    .scintille-light{
+      display:inline;              /* évite le saut de ligne */
+      white-space: nowrap;         /* jamais coupé */
+      color:var(--texte);
+      font-weight:700;
+      animation:sparkleLight 3s infinite;
+    }
     @keyframes sparkleLight{
-      0%,100%{ text-shadow:0 0 4px #ffd700; }
-      50%{ text-shadow:0 0 10px #ffffff; }
+      0%,100%{ text-shadow: 0 0 4px var(--doré); }
+      50%   { text-shadow: 0 0 10px #ffffff; }
     }
 
-    /* Bouton */
-    .grimoire-link{
-      display:inline-block; margin-top:1.2em; padding:.9em 1.6em;
-      background:linear-gradient(145deg,#ffd65b,#e6b800); color:#2a1c00;
-      font-weight:800; border-radius:14px; text-decoration:none;
-      box-shadow:0 0 14px rgba(255,215,0,.6), 0 6px 14px rgba(0,0,0,.4);
-      transition:transform .18s ease, filter .18s ease;
+    /* Bouton retour (si tu l’ajoutes plus tard) */
+    .btn{
+      display:inline-block;
+      margin-top: clamp(14px, 4vw, 24px);
+      padding: .85em 1.4em;
+      background: linear-gradient(145deg,#ffd65b,#e6b800);
+      color:#2a1c00;
+      font-weight:800;
+      border-radius:14px;
+      text-decoration:none;
+      box-shadow:0 0 14px rgba(255,215,0,.45), 0 6px 14px rgba(0,0,0,.35);
+      transition: transform .18s ease, filter .18s ease;
+      font-size: clamp(15px, 4.6vw, 20px);
     }
-    .grimoire-link:hover{ filter:brightness(1.15); transform:translateY(-3px); }
+    .btn:hover{ filter:brightness(1.12); transform:translateY(-2px); }
 
-    /* Accessibilité : si l’utilisateur réduit les animations */
+    /* ===== Micro-ajustements mobile ===== */
+    @media (max-width: 420px){
+      /* lueurs plus douces pour éviter l’effet “brouillé” */
+      h1{ text-shadow: 0 0 8px rgba(255,215,0,.55), 0 1px 0 #3a2a00; }
+      .mission-focus{ text-shadow: 0 0 6px rgba(255,215,0,.5), 0 0 10px rgba(255,215,0,.25); }
+      .surtitre{ letter-spacing:.2px }
+    }
+
+    /* Accessibilité : réduit les animations si demandé */
     @media (prefers-reduced-motion: reduce){
-      .cursor{ animation:none }
-      .scintille-light{ animation:none }
+      .cursor, .scintille-light{ animation:none }
     }
   </style>
 </head>
 <body>
-   <h1>Tu es un Chercheur</h1>
-  <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
+  <div class="page">
+    <div class="wrap">
+      <h1>Tu es un Chercheur</h1>
+      <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
 
-  <div class="texte-mission">
-    <p>Oh oh oh ! J’ai une quête spéciale pour toi !</p>
+      <div class="texte-mission">
+        <p>Oh oh oh&nbsp;! J’ai une quête spéciale pour toi&nbsp;:</p>
+        <p class="subtle">Que ta clé s'active pour recevoir ta quête</p>
 
-    <p class="subtle">Que ta clé s'active pour recevoir ta quête :</p>
+        <!-- Ligne tapée lettre par lettre -->
+        <p class="mission-focus">
+          <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
+        </p>
 
-    <!-- Texte qui apparaît lettre par lettre -->
-    <p class="mission-focus">
-      <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
-    </p>
+        <p>Bien évidemment, tu peux te servir de ton grimoire&nbsp;: le
+          <span class="scintille-light">Grimoire des Héros</span>.
+        </p>
 
-    <p>Bien évidemment, tu peux te servir de ton grimoire : le <span class="scintille-light">Grimoire des Héros</span>.</p>
+        <!-- Bouton optionnel
+        <a href="3.les_heros.html" class="btn">← Retour</a>
+        -->
+      </div>
+    </div>
   </div>
 
   <script>
+    // texte à écrire
     const fullText = "Écaille de Pescadrille Bleu";
     const el = document.getElementById("typedText");
     const cursor = document.getElementById("typedCursor");
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function typeText(text, speed=55){
-      if (reduceMotion){
-        el.textContent = text;
-        el.classList.add('glow');
-        cursor.classList.add('hide');
-        return;
-      }
       let i = 0;
       (function step(){
         el.textContent = text.slice(0, i);
@@ -132,8 +178,9 @@
       })();
     }
 
+    // petit délai pour le rythme
     window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => typeText(fullText, 55), 400);
+      setTimeout(() => typeText(fullText, 60), 500);
     });
   </script>
 </body>
