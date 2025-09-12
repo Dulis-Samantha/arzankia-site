@@ -48,21 +48,30 @@
       text-shadow:0 0 8px rgba(255,215,0,.7);
     }
 
-    /* Effet « machine à écrire » pour la phrase */
-    .typewriter{
-      display:inline-block;
-      overflow:hidden;
-      white-space:nowrap;
-      border-right:.12em solid #ffd700;   /* curseur */
-      letter-spacing:.02em;
-      animation:typing 2.6s steps(28,end), blink .8s step-end infinite;
+    /* ✨ Apparition magique pour le titre de la quête */
+    .magic{
+      opacity:0;
+      animation: shimmer 3s ease forwards;
+      background:linear-gradient(90deg,#fff8e6,#ffd700,#fff8e6);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-size:200% auto;
     }
-    @keyframes typing{ from{width:0} to{width:100%} }
-    @keyframes blink{ 50%{border-color:transparent} }
+    @keyframes shimmer{
+      0%{opacity:0; background-position:-200% center; text-shadow:0 0 2px #000;}
+      50%{opacity:1; background-position:100% center; text-shadow:0 0 14px #ffd700,0 0 28px #ffea8a;}
+      100%{opacity:1; background-position:0 center; text-shadow:0 0 8px #d6b65c,0 0 18px #ffd700;}
+    }
 
-    /* Respect des préférences d’accessibilité */
-    @media (prefers-reduced-motion: reduce){
-      .typewriter{ animation:none; border-right:0 }
+    /* 🌟 Scintillement permanent pour "Grimoire des Héros" */
+    .scintille{
+      color:#ffd700;
+      font-weight:bold;
+      animation: sparkle 2.5s infinite;
+    }
+    @keyframes sparkle{
+      0%,100%{ text-shadow:0 0 6px #ffd700,0 0 12px #ffea8a; }
+      50%{ text-shadow:0 0 14px #fff,0 0 24px #ffd700; }
     }
 
     .grimoire-link{
@@ -74,7 +83,7 @@
       font-weight:800;
       border-radius:14px;
       text-decoration:none;
-      box-shadow:0 0 14px rgba(255,215,0,.6), 0 6px 14px rgba(0,0,0,.4);
+      box-shadow:0 0 14px rgba(255,215,0,.6),0 6px 14px rgba(0,0,0,.4);
       transition:transform .18s ease, filter .18s ease;
     }
     .grimoire-link:hover{ filter:brightness(1.15); transform:translateY(-3px); }
@@ -85,14 +94,12 @@
   <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
 
   <div class="texte-mission">
-    <p class="typewriter">J’ai une quête pour toi :</p>
+    <p>J’ai une quête pour toi :</p>
 
-    <p class="highlight">
-      – Quête spéciale –<br>
-      Écaille de Pescadrille Bleu
-    </p>
+    <p class="highlight">– Quête spéciale –</p>
+    <p class="highlight magic">Écaille de Pescadrille Bleu</p>
 
-    <p>Pour la trouver, tu peux te servir du <strong>Grimoire des Héros</strong>.</p>
+    <p>Pour la trouver, tu peux te servir du <span class="scintille">Grimoire des Héros</span>.</p>
   </div>
 
   <a href="3.les_heros.html" class="grimoire-link">← Retour</a>
