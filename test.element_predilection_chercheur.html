@@ -8,164 +8,130 @@
     :root{
       --doré:#ffd700;
       --texte:#fff8e6;
-      --ombre:#000;
-      --maxw: 820px; /* largeur max du contenu */
+      --noir:rgba(0,0,0,.65);
+      --bord:rgba(255,255,255,.10);
+      --ombre:rgba(0,0,0,.45);
+      --maxw:720px;
     }
 
-    /* ===== Layout global ===== */
+    /* Fond */
     html,body{height:100%}
     body{
       margin:0;
-      background:url('fond_noir_etoile.webp') center/cover no-repeat fixed;
+      background:url('fond_noir_etoile.webp') center/cover fixed no-repeat;
       color:var(--texte);
-      font-family: Georgia, serif;
-      text-shadow: 0 1px 3px var(--ombre);
-    }
-
-    .page{
-      min-height:100%;
+      font-family:Georgia, serif;
+      text-shadow:0 1px 3px #000;
       display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:
-        max(16px, env(safe-area-inset-top))
-        max(14px, env(safe-area-inset-right))
-        max(24px, env(safe-area-inset-bottom))
-        max(14px, env(safe-area-inset-left));
+      min-height:100vh;
     }
 
+    /* Carte de lecture */
     .wrap{
-      width: min(100%, var(--maxw));
-      margin-inline:auto;
-      padding-inline: clamp(10px, 3vw, 28px);
+      width:100%;
+      margin:auto;
+      padding: clamp(14px, 3.5vw, 28px);
+      display:flex;
+      justify-content:center;
+    }
+    .card{
+      width:min(100%, var(--maxw));
+      background:linear-gradient(180deg, rgba(10,6,12,.74), rgba(12,8,14,.74));
+      border:1px solid var(--bord);
+      border-radius:16px;
+      box-shadow:0 10px 28px var(--ombre);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      padding: clamp(16px, 4.8vw, 36px);
     }
 
-    /* ===== Titres & textes (taille fluide) ===== */
+    /* Titres & textes fluides */
     h1{
-      margin: 0 0 clamp(10px,2.5vw,16px);
-      font-size: clamp(28px, 6.2vw, 56px);
-      line-height: 1.1;
-      color: var(--doré);
-      text-shadow: 0 0 10px rgba(255,215,0,.65), 0 2px 0 #3a2a00;
+      margin:0 0 clamp(8px,2.6vw,14px);
+      font-size: clamp(26px, 7vw, 44px);
+      line-height:1.15;
+      color:var(--doré);
       text-align:center;
+      text-shadow:0 0 9px rgba(255,215,0,.55), 0 1px 0 #3a2a00;
     }
-
     .surtitre{
       text-align:center;
       font-size: clamp(12px, 3.6vw, 18px);
       opacity:.95;
-      margin-bottom: clamp(18px, 4.5vw, 24px);
+      margin-bottom: clamp(14px, 4vw, 20px);
     }
 
     .texte-mission{
-      text-align:center;
-      font-size: clamp(16px, 4.3vw, 22px);
-      line-height: 1.65;
       margin-inline:auto;
+      max-width: 40ch;                /* ✅ ligne courte et confortable */
+      font-size: clamp(16px, 4.6vw, 20px);
+      line-height:1.65;
+      text-align:center;
     }
     .texte-mission p{ margin: clamp(12px, 3.6vw, 20px) 0; }
 
-    /* Quête “sobre” */
     .subtle{
-      font-weight: 700;
+      font-weight:700;
       letter-spacing:.02em;
-      text-shadow: 0 0 3px rgba(0,0,0,.5);
+      text-shadow:0 0 3px rgba(0,0,0,.55);
     }
 
-    /* Focal : ligne tapée */
     .mission-focus{
-      font-weight: 800;
-      color: var(--doré);
-      font-size: clamp(18px, 5.0vw, 28px);
-      text-shadow: 0 0 7px rgba(255,215,0,.6), 0 0 14px rgba(255,215,0,.35);
+      font-weight:800;
+      color:var(--doré);
+      font-size: clamp(18px, 5.4vw, 26px);
+      text-shadow:0 0 6px rgba(255,215,0,.50), 0 0 12px rgba(255,215,0,.30);
     }
 
-    /* Curseur & glow final */
+    /* Effet “tapé” */
     .cursor{
       display:inline-block; width:.6ch; margin-left:.1ch;
-      color:var(--doré);
-      animation: blink .8s step-end infinite;
+      color:var(--doré); animation:blink .8s step-end infinite;
     }
-    @keyframes blink { 50% { opacity: 0 } }
-    .typed.glow{ text-shadow: 0 0 8px #d6b65c, 0 0 16px var(--doré); }
-    .cursor.hide{ visibility:hidden; }
+    @keyframes blink{50%{opacity:0}}
+    .typed.glow{ text-shadow:0 0 8px #d6b65c, 0 0 14px var(--doré) }
+    .cursor.hide{ visibility:hidden }
 
-    /* Scintillement discret du lien “Grimoire des Héros” */
+    /* Scintillement discret */
     .scintille-light{
-      display:inline;              /* évite le saut de ligne */
-      white-space: nowrap;         /* jamais coupé */
-      color:var(--texte);
-      font-weight:700;
+      display:inline; white-space:nowrap; /* ✅ jamais coupé */
+      color:var(--texte); font-weight:700;
       animation:sparkleLight 3s infinite;
     }
     @keyframes sparkleLight{
-      0%,100%{ text-shadow: 0 0 4px var(--doré); }
-      50%   { text-shadow: 0 0 10px #ffffff; }
+      0%,100%{ text-shadow:0 0 4px var(--doré) }
+      50%   { text-shadow:0 0 10px #fff }
     }
 
-    /* Bouton retour (si tu l’ajoutes plus tard) */
+    /* Bouton retour collant (toujours visible) */
+    .bar-fixed{
+      position: sticky; bottom:0; /* collant dans la carte */
+      display:flex; justify-content:center;
+      padding-top: clamp(12px, 3.6vw, 18px);
+      margin-top: clamp(10px, 3.2vw, 16px);
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.15));
+      border-bottom-left-radius:14px; border-bottom-right-radius:14px;
+    }
     .btn{
-      display:inline-block;
-      margin-top: clamp(14px, 4vw, 24px);
-      padding: .85em 1.4em;
-      background: linear-gradient(145deg,#ffd65b,#e6b800);
-      color:#2a1c00;
-      font-weight:800;
-      border-radius:14px;
-      text-decoration:none;
-      box-shadow:0 0 14px rgba(255,215,0,.45), 0 6px 14px rgba(0,0,0,.35);
-      transition: transform .18s ease, filter .18s ease;
-      font-size: clamp(15px, 4.6vw, 20px);
+      display:inline-flex; align-items:center; gap:.5em;
+      padding:.85em 1.35em;
+      background:linear-gradient(145deg,#ffd65b,#e6b800);
+      color:#2a1c00; text-decoration:none; font-weight:800;
+      border-radius:12px; box-shadow:0 0 12px rgba(255,215,0,.45), 0 6px 12px rgba(0,0,0,.35);
+      transition:transform .18s ease, filter .18s ease;
+      font-size: clamp(15px, 4.6vw, 18px);
     }
-    .btn:hover{ filter:brightness(1.12); transform:translateY(-2px); }
+    .btn:hover{ filter:brightness(1.12); transform:translateY(-2px) }
 
-    /* ===== Micro-ajustements mobile ===== */
-    @media (max-width: 420px){
-      /* lueurs plus douces pour éviter l’effet “brouillé” */
-      h1{ text-shadow: 0 0 8px rgba(255,215,0,.55), 0 1px 0 #3a2a00; }
-      .mission-focus{ text-shadow: 0 0 6px rgba(255,215,0,.5), 0 0 10px rgba(255,215,0,.25); }
-      .surtitre{ letter-spacing:.2px }
-    }
-
-    /* Accessibilité : réduit les animations si demandé */
+    /* Accessibilité */
     @media (prefers-reduced-motion: reduce){
       .cursor, .scintille-light{ animation:none }
     }
-    .grimoire-link {
-  display: inline-block;
-  margin: 2em auto 0;   /* marge plus grande en haut */
-  padding: 0.9em 1.6em;
-  background: linear-gradient(145deg, #ffd65b, #e6b800);
-  color: #2a1c00;
-  font-weight: 700;
-  border-radius: 14px;
-  text-decoration: none;
-  box-shadow: 0 0 14px rgba(255,215,0,0.6), 0 6px 14px rgba(0,0,0,0.4);
-  transition: transform 0.18s ease, filter 0.18s ease;
-  text-align: center;
-}
-
-/* Centrage */
-.grimoire-link-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 2em;
-}
-
-/* Version mobile */
-@media (max-width: 600px) {
-  .grimoire-link {
-    font-size: 1rem;
-    padding: 0.8em 1.4em;
-    border-radius: 12px;
-  }
-}
-
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="wrap">
+  <div class="wrap">
+    <div class="card">
       <h1>Tu es un Chercheur</h1>
       <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
 
@@ -173,7 +139,6 @@
         <p>Oh oh oh&nbsp;! J’ai une quête spéciale pour toi&nbsp;:</p>
         <p class="subtle">Que ta clé s'active pour recevoir ta quête</p>
 
-        <!-- Ligne tapée lettre par lettre -->
         <p class="mission-focus">
           <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
         </p>
@@ -181,22 +146,20 @@
         <p>Bien évidemment, tu peux te servir de ton grimoire&nbsp;: le
           <span class="scintille-light">Grimoire des Héros</span>.
         </p>
+      </div>
 
-        <div class="grimoire-link-container">
-  <a href="3.les_heros.html" class="grimoire-link">← Retour</a>
-</div>
-
+      <div class="bar-fixed">
+        <a class="btn" href="3.les_heros.html">← Retour</a>
       </div>
     </div>
   </div>
 
   <script>
-    // texte à écrire
     const fullText = "Écaille de Pescadrille Bleu";
     const el = document.getElementById("typedText");
     const cursor = document.getElementById("typedCursor");
 
-    function typeText(text, speed=55){
+    function typeText(text, speed=58){
       let i = 0;
       (function step(){
         el.textContent = text.slice(0, i);
@@ -209,9 +172,8 @@
       })();
     }
 
-    // petit délai pour le rythme
     window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => typeText(fullText, 60), 500);
+      setTimeout(() => typeText(fullText, 58), 450);
     });
   </script>
 </body>
