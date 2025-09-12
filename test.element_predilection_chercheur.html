@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Mission du Chercheur</title>
+
+  <!-- Polices (Zouppi + Titre élégant) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --doré:#ffd700;
@@ -14,7 +20,6 @@
       --maxw:720px;
     }
 
-    /* Fond */
     html,body{height:100%}
     body{
       margin:0;
@@ -26,7 +31,6 @@
       min-height:100vh;
     }
 
-    /* Carte de lecture */
     .wrap{
       width:100%;
       margin:auto;
@@ -43,16 +47,20 @@
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
       padding: clamp(16px, 4.8vw, 36px);
+      min-height:78vh; /* espace pour le bouton sticky */
     }
 
     /* Titres & textes fluides */
     h1{
       margin:0 0 clamp(8px,2.6vw,14px);
+      font-family:'Cinzel', Georgia, serif;
+      font-weight:800;
       font-size: clamp(26px, 7vw, 44px);
       line-height:1.15;
       color:var(--doré);
       text-align:center;
       text-shadow:0 0 9px rgba(255,215,0,.55), 0 1px 0 #3a2a00;
+      letter-spacing:.02em;
     }
     .surtitre{
       text-align:center;
@@ -63,17 +71,26 @@
 
     .texte-mission{
       margin-inline:auto;
-      max-width: 40ch;                /* ✅ ligne courte et confortable */
+      max-width: 40ch;
       font-size: clamp(16px, 4.6vw, 20px);
       line-height:1.65;
       text-align:center;
     }
     .texte-mission p{ margin: clamp(12px, 3.6vw, 20px) 0; }
 
-    .subtle{
-      font-weight:700;
-      letter-spacing:.02em;
-      text-shadow:0 0 3px rgba(0,0,0,.55);
+    /* ✅ VOIX DE ZOUPPI */
+    .voice-zouppi{
+      font-family:'Uncial Antiqua', cursive;
+      font-size: clamp(17px, 4.8vw, 22px);
+      font-style: italic;
+      color:#ffe07a;
+      text-shadow:0 0 6px rgba(255,215,0,.55);
+      letter-spacing:.01em;
+    }
+    /* Tiret cadratin auto + petite étoile magique */
+    .voice-zouppi::before{
+      content:"— ";
+      color:#ffe07a;
     }
 
     .mission-focus{
@@ -92,9 +109,9 @@
     .typed.glow{ text-shadow:0 0 8px #d6b65c, 0 0 14px var(--doré) }
     .cursor.hide{ visibility:hidden }
 
-    /* Scintillement discret */
+    /* Scintillement discret (titre de grimoire) */
     .scintille-light{
-      display:inline; white-space:nowrap; /* ✅ jamais coupé */
+      display:inline; white-space:nowrap;
       color:var(--texte); font-weight:700;
       animation:sparkleLight 3s infinite;
     }
@@ -103,11 +120,12 @@
       50%   { text-shadow:0 0 10px #fff }
     }
 
-    /* Bouton retour collant (toujours visible) */
+    /* Bouton retour collant */
     .bar-fixed{
-      position: sticky; bottom:0; /* collant dans la carte */
+      position: sticky; bottom:0;
       display:flex; justify-content:center;
       padding-top: clamp(12px, 3.6vw, 18px);
+      padding-bottom: max(10px, env(safe-area-inset-bottom)); /* safe areas */
       margin-top: clamp(10px, 3.2vw, 16px);
       background: linear-gradient(180deg, transparent, rgba(0,0,0,.15));
       border-bottom-left-radius:14px; border-bottom-right-radius:14px;
@@ -136,16 +154,17 @@
       <div class="surtitre">Esprit curieux • Flair des trésors • Patience d’archiviste</div>
 
       <div class="texte-mission">
-        <p>Oh oh oh&nbsp;! J’ai une quête spéciale pour toi&nbsp;:</p>
-        <p class="subtle">Que ta clé s'active pour recevoir ta quête</p>
+        <!-- Répliques de Zouppi -->
+        <p class="voice-zouppi">« Oh oh oh&nbsp;! J’ai une quête spéciale pour toi. »</p>
+        <p class="voice-zouppi">« Que ta clé s’active pour recevoir ta quête. »</p>
 
+        <!-- Ligne qui s’écrit -->
         <p class="mission-focus">
           <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
         </p>
 
-        <p>Bien évidemment, tu peux te servir de ton grimoire&nbsp;:
-          <span class="scintille-light">Le Grimoire des Héros</span>.
-        </p>
+        <p class="voice-zouppi">« Bien évidemment, tu peux te servir de ton grimoire&nbsp;: 
+          <span class="scintille-light">le Grimoire des Héros</span>. »</p>
       </div>
 
       <div class="bar-fixed">
@@ -159,7 +178,7 @@
     const el = document.getElementById("typedText");
     const cursor = document.getElementById("typedCursor");
 
-    function typeText(text, speed=58){
+    function typeText(text, speed){
       let i = 0;
       (function step(){
         el.textContent = text.slice(0, i);
@@ -173,7 +192,9 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => typeText(fullText, 58), 450);
+      const isMobile = matchMedia('(max-width:600px)').matches;
+      const speed = isMobile ? 48 : 58;   // un peu plus rapide sur mobile
+      setTimeout(() => typeText(fullText, speed), 450);
     });
   </script>
 </body>
