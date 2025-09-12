@@ -131,6 +131,36 @@
     @media (prefers-reduced-motion: reduce){
       .cursor, .scintille-light{ animation:none }
     }
+    .grimoire-link {
+  display: inline-block;
+  margin: 2em auto 0;   /* marge plus grande en haut */
+  padding: 0.9em 1.6em;
+  background: linear-gradient(145deg, #ffd65b, #e6b800);
+  color: #2a1c00;
+  font-weight: 700;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 0 14px rgba(255,215,0,0.6), 0 6px 14px rgba(0,0,0,0.4);
+  transition: transform 0.18s ease, filter 0.18s ease;
+  text-align: center;
+}
+
+/* Centrage */
+.grimoire-link-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+/* Version mobile */
+@media (max-width: 600px) {
+  .grimoire-link {
+    font-size: 1rem;
+    padding: 0.8em 1.4em;
+    border-radius: 12px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -152,9 +182,10 @@
           <span class="scintille-light">Grimoire des Héros</span>.
         </p>
 
-        <!-- Bouton optionnel
-        <a href="3.les_heros.html" class="btn">← Retour</a>
-        -->
+        <div class="grimoire-link-container">
+  <a href="3.les_heros.html" class="grimoire-link">← Retour</a>
+</div>
+
       </div>
     </div>
   </div>
