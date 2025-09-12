@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Mission du Chercheur</title>
   <style>
     body{
@@ -19,6 +19,8 @@
       text-align:center;
       text-shadow:1px 1px 4px #000;
     }
+
+    /* Titre (garde l'accent doré) */
     h1{
       font-size:2.6em;
       color:#ffd700;
@@ -33,21 +35,42 @@
     }
     .texte-mission p{ margin:1rem 0; }
 
-    .highlight{ font-weight:700; color:#ffd700; text-shadow:0 0 8px rgba(255,215,0,.7); }
+    /* “– Quête spéciale –” sobre (blanc) */
+    .subtle{
+      color:#fff8e6;
+      font-weight:700;
+      letter-spacing:.02em;
+      text-shadow:0 0 4px rgba(0,0,0,.6);
+    }
 
-    /* curseur & glow pour le texte tapé */
+    /* Accent fort uniquement sur l’objet de quête */
+    .mission-focus{
+      font-weight:800;
+      color:#ffd700;
+      font-size:1.35em;
+      text-shadow:0 0 8px rgba(255,215,0,.7), 0 0 16px rgba(255,215,0,.45);
+    }
+
+    /* Curseur & glow pour le texte tapé */
     .cursor{
       display:inline-block; width:.6ch; margin-left:.1ch;
-      color:#ffd700;
-      animation:blink .8s step-end infinite;
+      color:#ffd700; animation:blink .8s step-end infinite;
     }
-    @keyframes blink{ 50%{opacity:0} }
-
-    .typed.glow{
-      text-shadow:0 0 8px #d6b65c, 0 0 18px #ffd700;
-    }
+    @keyframes blink{50%{opacity:0}}
+    .typed.glow{ text-shadow:0 0 8px #d6b65c, 0 0 18px #ffd700; }
     .cursor.hide{ visibility:hidden; }
-    
+
+    /* Scintillement discret pour “Grimoire des Héros” */
+    .scintille-light{
+      color:#fff8e6; font-weight:700;
+      animation:sparkleLight 3s infinite;
+    }
+    @keyframes sparkleLight{
+      0%,100%{ text-shadow:0 0 4px #ffd700; }
+      50%{ text-shadow:0 0 10px #ffffff; }
+    }
+
+    /* Bouton */
     .grimoire-link{
       display:inline-block; margin-top:1.2em; padding:.9em 1.6em;
       background:linear-gradient(145deg,#ffd65b,#e6b800); color:#2a1c00;
@@ -57,11 +80,10 @@
     }
     .grimoire-link:hover{ filter:brightness(1.15); transform:translateY(-3px); }
 
-    /* scintillement permanent pour "Grimoire des Héros" (tu l'avais aimé) */
-    .scintille{ color:#ffd700; font-weight:bold; animation:sparkle 2.5s infinite; }
-    @keyframes sparkle{
-      0%,100%{ text-shadow:0 0 6px #ffd700,0 0 12px #ffea8a; }
-      50%{ text-shadow:0 0 14px #fff,0 0 24px #ffd700; }
+    /* Accessibilité : si l’utilisateur réduit les animations */
+    @media (prefers-reduced-motion: reduce){
+      .cursor{ animation:none }
+      .scintille-light{ animation:none }
     }
   </style>
 </head>
@@ -72,28 +94,26 @@
   <div class="texte-mission">
     <p>J’ai une quête pour toi :</p>
 
-    <p class="highlight">– Quête spéciale –</p>
+    <p class="subtle">– Quête spéciale –</p>
 
-    <!-- ligne qui s’écrit lettre par lettre -->
-    <p class="highlight">
+    <!-- Ligne qui s’écrit lettre par lettre -->
+    <p class="mission-focus">
       <span id="typedText" class="typed"></span><span id="typedCursor" class="cursor">|</span>
     </p>
 
-    <p>Pour la trouver, tu peux te servir du <span class="scintille">Grimoire des Héros</span>.</p>
+    <p>Pour la trouver, tu peux te servir du <span class="scintille-light">Grimoire des Héros</span>.</p>
   </div>
 
   <a href="3.les_heros.html" class="grimoire-link">← Retour</a>
 
   <script>
-    // texte à “taper”
     const fullText = "Écaille de Pescadrille Bleu";
     const el = document.getElementById("typedText");
     const cursor = document.getElementById("typedCursor");
-
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function typeText(text, speed = 60){
-      if (reduceMotion) {
+    function typeText(text, speed=55){
+      if (reduceMotion){
         el.textContent = text;
         el.classList.add('glow');
         cursor.classList.add('hide');
@@ -111,7 +131,6 @@
       })();
     }
 
-    // démarrer l’animation après un léger délai (pour le rythme)
     window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => typeText(fullText, 55), 400);
     });
