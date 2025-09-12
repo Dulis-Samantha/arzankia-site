@@ -349,6 +349,20 @@
       <button onclick="verifierCleAlicia()">OK</button>
     </div>
   </div>
+  <!-- ✅ Modale grimoire bien replacée dans .container -->
+<div id="modalGrimoire">
+<div class="card">
+<button class="close" id="closeGrimoire" aria-label="Fermer">✕</button>
+<h3>Le Grimoire des Héros</h3>
+<p>Entre le mot magique pour ouvrir le grimoire :</p>
+<div class="row">
+<input type="text" id="pwdGrimoire" placeholder="aventurier / chercheur">
+<button id="okGrimoire">OK</button>
+</div>
+<div id="msgGrimoire"></div>
+</div>
+</div>
+</div>
 
   <script>
     function ouvrirBlocCleAlicia(){
@@ -404,20 +418,6 @@
     if (e.key === "Escape") modalG.classList.remove("open");
   });
 </script>
-
-  <!-- Modale mot de passe grimoire -->
-<div id="modalGrimoire">
-  <div class="card">
-    <button class="close" id="closeGrimoire" aria-label="Fermer">✕</button>
-    <h3>Le Grimoire des Héros</h3>
-    <p>Entre le mot magique pour ouvrir le grimoire :</p>
-    <div class="row">
-      <input type="text" id="pwdGrimoire" placeholder="aventurier / chercheur">
-      <button id="okGrimoire">OK</button>
-    </div>
-    <div id="msgGrimoire"></div>
-  </div>
-</div>
 
 </body>
 </html>
