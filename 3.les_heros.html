@@ -399,9 +399,10 @@
       window.location.href = "grimoire_aventurier.html";
     } else if(valeur === "chercheur"){
       window.location.href = "grimoire_chercheur.html";
-    } else {
-      msgG.textContent = "Mot magique inconnu…";
-    }
+    } else if(["pescadrille", "pecadrille", "pescadrille bleu"].includes(valeur)){
+  window.location.href = "definition_pescadrille.html";
+}
+
   }
 
   openG.addEventListener("click", () => {
