@@ -61,10 +61,13 @@
     .cursor.hide{ visibility:hidden; }
 
     /* Scintillement discret pour “Grimoire des Héros” */
-    .scintille-light{
-      color:#fff8e6; font-weight:700;
-      animation:sparkleLight 3s infinite;
-    }
+  .scintille-light {
+  display: inline; /* ✅ reste sur la même ligne */
+  white-space: nowrap; /* ✅ évite que ça coupe en deux mots */
+  color: #fff8e6;
+  font-weight: 700;
+  animation: sparkleLight 3s infinite;
+}
     @keyframes sparkleLight{
       0%,100%{ text-shadow:0 0 4px #ffd700; }
       50%{ text-shadow:0 0 10px #ffffff; }
