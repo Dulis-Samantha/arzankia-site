@@ -92,28 +92,27 @@
 @media (max-width: 640px){
   .special .kw{ font-size: 1.03em; }
 }
-
- .glow-letters {
+.glow-gradient {
   display: inline-block;
-  background: linear-gradient(180deg, #fffdf4 0%, #ffeaa0 45%, #e6c05c 100%);
+  background: linear-gradient(
+    90deg,
+    #ffeaa0 0%,
+    #ffffff 25%,
+    #ffeaa0 50%,
+    #e6c05c 75%,
+    #ffeaa0 100%
+  );
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: lettersGlow 3s ease-in-out infinite alternate;
+  animation: shineLetters 4s linear infinite alternate;
+
 }
 
-@keyframes lettersGlow {
-  0% {
-    text-shadow:
-      0 0 6px rgba(255,255,255,0.4),
-      0 0 12px rgba(255,215,0,0.3);
-  }
-  100% {
-    text-shadow:
-      0 0 12px rgba(255,255,255,0.9),
-      0 0 22px rgba(255,215,0,0.7),
-      0 0 35px rgba(255,255,200,0.5);
-  }
+@keyframes shineLetters {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 
@@ -125,7 +124,7 @@
   <div class="bloc">
     <p class="headline">
       <span class="headline-small">Bienvenue dans les coulisses</span><br>
-  <span class="headline-big glow-letters">D'ARZANKIA</span>
+  <span class="headline-big glow-gradient">D'ARZANKIA</span>
 </p>
   </div>
 
