@@ -71,17 +71,18 @@
 
     /* Mots-clés mis en valeur (blanc lumineux, léger doré) */
 .special .kw{
-  font-weight: 700;
-  font-size: 1.06em;              /* un poil plus grand */
-  letter-spacing: .02em;
-  background: linear-gradient(180deg, #ffffff 0%, #fff6cf 55%, #ffe08a 100%);
+  font-weight: 900;               /* encore plus gras */
+  font-size: 1.08em;              /* légèrement plus grand */
+  letter-spacing: .015em;
+  background: linear-gradient(180deg, #ffffff 0%, #fff3b0 40%, #f8d450 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;             /* on voit le dégradé, pas une couleur unie */
+  color: transparent;
   text-shadow:
-    0 0 6px rgba(255,255,255,.55),
-    0 0 14px rgba(255,255,255,.35);
-  white-space: nowrap;            /* évite de couper « d’Arzankia », etc. */
+    0 0 4px rgba(255,255,255,.8),   /* halo blanc vif */
+    0 0 10px rgba(255,255,200,.6),
+    0 0 16px rgba(255,215,0,.4);   /* lueur dorée plus profonde */
+  white-space: nowrap;
 }
 
 /* Optionnel : petite hausse de brillance au survol */
