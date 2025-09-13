@@ -2,153 +2,172 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Les Coulisses d’Arzankia</title>
 
-  <!-- Police de titre (facultatif) -->
+  <!-- (facultatif) titrage élégant + corps lisible -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
+      /* palette Arzankia */
       --or:#ffd700;
       --or-2:#f3c34f;
       --ivoire:#fff8e6;
       --verre:rgba(255,255,255,.08);
       --verre-bord:rgba(255,255,255,.18);
+      --noir:#000;
       --fond-voile: rgba(0,0,0,.58);
-      --ombre: rgba(0,0,0,.38);
-      --maxw: 880px; /* largeur du contenu */
+      --ombre: rgba(0,0,0,.45);
     }
 
-    /* ===== Base ===== */
+    /* ===== base ===== */
     html,body{height:100%}
     body{
       margin:0;
       color:var(--ivoire);
       font-family: Georgia, serif;
-      background: url('fond_coulisse_arzankia.png') center/cover no-repeat fixed;
+      background:url('fond_coulisse_arzankia.png') center/cover no-repeat fixed;
       text-shadow: 0 1px 3px var(--ombre);
       display:flex; align-items:center; justify-content:center;
       padding: 32px 16px;
     }
 
-    /* ===== Carte ===== */
+    /* ===== carte centrale ===== */
     .panel{
-      width:min(var(--maxw),92vw);
+      width:min(960px,92vw);
       background: var(--fond-voile);
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
       border-radius: 24px;
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
       padding: clamp(20px, 4vw, 42px);
-      animation: fadeIn .6s ease-out both;
+      animation: fadeIn .7s ease-out both;
     }
 
+    /* titre invisible SEO */
     h1{position:absolute; left:-9999px}
 
+    /* sous-titre (accroche) */
     .headline{
-      font-family:"Cinzel", serif;
+      font-family: "Cinzel", serif;
       font-weight:700;
       letter-spacing:.3px;
-      font-size: clamp(1.6rem, 1.1rem + 2.4vw, 2.2rem);
-      margin: 0 0 .5rem 0;
+      font-size: clamp(1.6rem, 1.1rem + 2.5vw, 2.2rem);
+      margin: 0 0 .7rem 0;
       text-align:center;
       background: linear-gradient(180deg, #fffdf4 0%, #ffeaa0 45%, #e6c05c 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
       text-shadow: 0 0 12px rgba(255, 215, 0, .25);
     }
 
-    .bloc-intro{
-      max-width: 62ch;
-      margin: 0 auto;
-    }
+    /* ===== bloc d'intro retravaillé ===== */
+    .bloc-intro{ max-width:66ch; margin:0 auto; }
 
     .lead{
       text-align:center;
       line-height:1.8;
-      font-size: clamp(1.08rem, 1rem + .7vw, 1.35rem);
-      margin: 0 0 .75rem 0;
-    }
-    .lead strong{
-      color:var(--or);
-      text-shadow:0 0 6px rgba(255,215,0,.25);
+      font-size: clamp(1.06rem, 1rem + .6vw, 1.35rem);
+      margin: 0 0 .6rem 0;
     }
 
     .points{
-      margin:.25rem auto 0;
-      padding-left:0;
+      margin:.25rem 0 0;
+      padding:0;
       list-style:none;
       display:grid;
-      gap:.35rem;
-      font-size: clamp(1rem, .95rem + .4vw, 1.18rem);
+      gap:.4rem;
+      font-size: clamp(1rem, .96rem + .35vw, 1.18rem);
       line-height:1.7;
     }
+
+    /* puce ✧ stable (flex, pas de grille) */
     .points li{
-      display:grid;
-      grid-template-columns: 1.25em 1fr;
-      align-items:start;
+      display:flex;
+      align-items:flex-start;
       gap:.6em;
     }
     .points li::before{
       content:"✧";
+      flex-shrink:0;
+      margin-top:.15em;
       color:var(--or);
       text-shadow:0 0 8px rgba(255,215,0,.35);
-      opacity:.95;
-      transform: translateY(.05em);
     }
-    .points em{font-style:italic; opacity:.95}
-    .points strong{color:var(--or)}
 
-    /* ===== Boutons ===== */
+    .points strong{
+      color:var(--or);
+      font-weight:700;
+      text-shadow: 0 0 6px rgba(255,215,0,.25);
+    }
+
+    /* ===== boutons ===== */
     .buttons{
-      margin-top: clamp(16px, 3vw, 28px);
+      margin-top: clamp(18px, 3.5vw, 32px);
       display:grid;
       gap:14px;
       justify-items:center;
     }
     .btn{
-      --h:52px;
-      min-height:var(--h);
+      --h: 52px;
+      min-height: var(--h);
       display:inline-grid; place-items:center;
-      width:min(420px, 90%);
-      padding:0 20px;
-      border-radius:14px;
+      width: min(420px, 90%);
+      padding: 0 20px;
+      border-radius: 14px;
       font-size: clamp(1rem, .95rem + .2vw, 1.1rem);
       letter-spacing:.2px;
       text-decoration:none;
-      user-select:none;
       transition: transform .15s ease, box-shadow .15s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
       will-change: transform;
     }
 
-    /* Doré (1 & 2) */
-    .btn-gold{
+    /* boutons dorés (1 & 2) */
+    .btn-gold {
       color:#241a00;
       background: linear-gradient(180deg, #fff6bf 0%, #ffe48a 45%, #f3c34f 100%);
-      border:1px solid #d5a93a;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,.35), 0 6px 16px rgba(0,0,0,.35);
-      position:relative; overflow:hidden;
+      border: 1px solid #d5a93a;
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,.35),
+        0 6px 16px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+      transition: transform .2s ease, box-shadow .3s ease;
     }
-    .btn-gold::before{
+    /* reflet animé */
+    .btn-gold::before {
       content:"";
-      position:absolute; top:0; left:-75%;
+      position:absolute;
+      top:0; left:-75%;
       width:50%; height:100%;
       background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 50%, rgba(255,255,255,0) 100%);
       transform: skewX(-25deg);
     }
-    .btn-gold:hover{
+    /* effet au survol */
+    .btn-gold:hover {
       transform: translateY(-2px);
-      box-shadow: inset 0 2px 10px rgba(255,255,255,.5), 0 10px 22px rgba(0,0,0,.4), 0 0 12px rgba(255,215,0,.4);
+      box-shadow:
+        inset 0 2px 10px rgba(255,255,255,.5),
+        0 10px 22px rgba(0,0,0,.4),
+        0 0 12px rgba(255,215,0,.4);
     }
-    .btn-gold:hover::before{ animation: shimmer .8s forwards }
+    .btn-gold:hover::before { animation: shimmer 0.8s forwards; }
 
-    /* Fantôme (retour) */
+    @keyframes shimmer {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+
+    /* bouton discret (retour) */
     .btn-ghost{
-      color:var(--ivoire);
-      background:var(--verre);
-      border:1px solid var(--verre-bord);
-      box-shadow:0 6px 16px rgba(0,0,0,.25);
+      color: var(--ivoire);
+      background: var(--verre);
+      border: 1px solid var(--verre-bord);
+      box-shadow: 0 6px 16px rgba(0,0,0,.25);
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
     }
@@ -157,23 +176,34 @@
       background: rgba(255,255,255,.12);
       border-color: rgba(255,255,255,.28);
     }
-    .btn:active{ transform: translateY(0) scale(.99) }
+    .btn-ghost:active{ transform: translateY(0) scale(.99) }
+
+    /* petites touches d’accessibilité */
     .btn:focus-visible{
-      outline:none;
-      box-shadow:0 0 0 3px #111, 0 0 0 6px rgba(255,215,0,.55);
+      outline: none;
+      box-shadow: 0 0 0 3px #111, 0 0 0 6px rgba(255,215,0,.55);
     }
 
-    /* ===== Effets & accessibilité ===== */
-    @keyframes shimmer{ 0%{left:-75%} 100%{left:125%} }
+    /* logo flottant (si tu veux) */
+    .logo-magique{
+      position: fixed; top:20px; left:20px; width:60px; height:60px;
+      background:url('...') center/contain no-repeat;
+      animation: flotti 4s ease-in-out infinite;
+      z-index:10;
+    }
+
+    /* animations */
+    @keyframes flotti{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} }
     @keyframes fadeIn{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
+
+    /* motion safe */
     @media (prefers-reduced-motion: reduce){
-      *{ animation:none !important; transition:none !important }
+      *{ animation: none !important; transition: none !important }
     }
 
-    /* ===== Responsive ===== */
-    @media (max-width:640px){
-      .panel{ border-radius:18px; padding:22px 18px }
-      .points{ gap:.25rem }
+    /* responsive */
+    @media (max-width: 640px){
+      .panel{ border-radius:18px }
     }
   </style>
 </head>
@@ -181,9 +211,10 @@
 <body>
   <h1>Les Coulisses d’Arzankia</h1>
 
-  <div class="panel" role="region" aria-label="Présentation">
+  <div class="panel">
     <p class="headline">Bienvenue dans les coulisses du monde d’Arzankia</p>
 
+    <!-- Intro réécrite + puces ✧ stables -->
     <section class="bloc-intro" aria-label="Introduction">
       <p class="lead">
         Ici, les secrets prennent vie…<br>
@@ -197,11 +228,13 @@
       </ul>
     </section>
 
-    <nav class="buttons" aria-label="Navigation">
+    <div class="buttons">
       <a class="btn btn-gold" href="3.les_heros.html" target="_blank" rel="noopener">Les Héros d’Arzankia</a>
       <a class="btn btn-gold" href="3.les_mondes.html" target="_blank" rel="noopener">Les Mondes d’Arzankia</a>
       <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
-    </nav>
+    </div>
   </div>
+
+  <div class="logo-magique" aria-hidden="true"></div>
 </body>
 </html>
