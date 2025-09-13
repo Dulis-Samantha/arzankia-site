@@ -2,423 +2,329 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Bougie Magique - Corrigée</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    background-image: url('fond_autrice.png');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-  }
 
-  article.blog-post {
-    max-width: 800px;
-    margin: 3rem auto;
-    background: rgba(0, 0, 0, 0.75); /* au lieu de 0.6 */
-    backdrop-filter: blur(8px);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 1;
-  }
-  
-.blog-post h2 {
-  font-size: 2.2rem;               /* Grand titre principal */
-  color: #9b84ff;                  /* Violet lumineux */
-  text-align: center;
-  margin-bottom: 2rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-}
+  <!-- Police type machine + ta police actuelle -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Special+Elite&display=swap" rel="stylesheet">
 
-/* Sous-titres dorés */
-.blog-post h3 {
-  font-size: 1.4rem;
-  color: #ffe9b6;
-  text-shadow: 0 0 5px rgba(255, 233, 182, 0.5), 0 0 10px rgba(255, 233, 182, 0.3);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  position: relative;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
+  <style>
+    :root{
+      --violet:#9b84ff;
+      --doré:#ffe9b6;
+      --voile:rgba(0,0,0,.75);
+    }
 
-/* Texte standard */
-.blog-post p {
-  line-height: 1.8;
-  margin-bottom: 1rem;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      background-image: url('fond_autrice.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-  .blog-box {
-  max-width: 700px;
-  margin-left: 15vw;
-  margin-right: 5vw; /* ajuste si besoin */
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  border-radius: 1rem;
-}
+    /* Bandeau “Samantha DULIS …” */
+    .entete-type {
+      max-width: 980px;
+      margin: 2.2rem auto 0 auto;
+      padding: 1.25rem 1.25rem 1.1rem;
+      background: var(--voile);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      box-shadow: 0 0 30px rgba(0,0,0,.3);
+      text-align: center;
+    }
+    .entete-type h1{
+      margin: 0 0 .4rem;
+      font: 700 2rem/1.2 'Special Elite', monospace;
+      letter-spacing: .5px;
+      color:#fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    }
+    .entete-type .sous-titre{
+      font: 400 1.05rem/1.5 'Special Elite', monospace;
+      color: var(--doré);
+      text-shadow: 0 0 5px rgba(255,233,182,.35);
+    }
 
-/* Métadonnées ou petits textes */
-.blog-post .meta {
-  font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 1.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
+    /* Contenu */
+    article.blog-post,
+    .blog-box {
+      max-width: 800px;
+      margin: 1.2rem auto 3rem;
+      background: var(--voile);
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
 
+    .blog-post h2 {
+      font-size: 2.2rem;
+      color: var(--violet);
+      text-align: center;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    }
 
-  .meta {
-    font-size: 0.9rem;
-    color: #999;
-    margin-bottom: 1.5rem;
-  }
+    .blog-post h3 {
+      font-size: 1.4rem;
+      color: var(--doré);
+      text-shadow: 0 0 5px rgba(255, 233, 182, 0.5), 0 0 10px rgba(255, 233, 182, 0.3);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      transition: color .3s ease, text-shadow .3s ease;
+      font-family: 'Special Elite', monospace;
+    }
 
-  .fade-in {
-    opacity: 0;
-    animation: fadeIn ease 1.5s;
-    animation-fill-mode: forwards;
-  }
+    .blog-post p, .blog-post li, .blog-post em, .blog-post strong {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,.7);
+      font-family: 'Special Elite', monospace;
+      letter-spacing: .2px;
+    }
 
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
+    .bloc-texte {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+      transition: transform .3s ease;
+    }
+    .bloc-texte:hover { transform: scale(1.01); }
 
-  a {
-    color: #6a4cc3;
-    text-decoration: none;
-  }
+    .button-retour {
+      display: inline-block;
+      background-color: #7a4ed9;
+      color: white;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 0 12px #b497ff;
+      transition: all .3s ease;
+      margin-top: 2rem;
+      text-decoration: none;
+    }
+    .button-retour:hover {
+      background-color: #a084ff;
+      box-shadow: 0 0 16px #d4c3ff;
+    }
 
-  a:hover {
-    text-decoration: underline;
-  }
+    /* Effet "frappe à la machine" */
+    .tw {
+      white-space: pre-wrap;
+      border-right: 2px solid rgba(255,255,255,.9); /* curseur */
+      animation: clignote .9s steps(1) infinite;
+      overflow: hidden;
+      min-height: 1em;
+    }
+    @keyframes clignote { 50% { border-color: transparent; } }
 
-  .button-retour {
-    display: inline-block;
-    background-color: #7a4ed9;
-    color: white;
-    padding: 0.6em 1.2em;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 0 0 12px #b497ff;
-    transition: all 0.3s ease;
-    margin-top: 2rem;
-  }
+    /* Bougie magique */
+    .bulle-magique {
+      display: none;
+      position: fixed;
+      bottom: 110px;
+      left: 30px;
+      width: 260px;
+      padding: 1em;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1.1em;
+      text-align: center;
+      color: #fff8e6;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+      z-index: 1001;
+      transition: opacity 1s ease-out;
+    }
+    .bougie-secret {
+      position: fixed; bottom: 30px; left: 30px;
+      width: 40px; height: 70px;
+      background: linear-gradient(to bottom, #a56b2c, #6e3b14);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,230,180,.2), 0 0 25px rgba(90,50,20,.3);
+      z-index: 1000; cursor: pointer; overflow: visible;
+    }
+    .flamme {
+      position:absolute; top:-20px; left:50%;
+      width:12px; height:25px;
+      background: radial-gradient(ellipse at center, rgba(255,200,50,.9), rgba(255,100,0,0));
+      transform: translateX(-50%); border-radius:50%;
+      animation: scintille 1s infinite ease-in-out; pointer-events:none;
+    }
+    .fumee {
+      position:absolute; top:-40px; left:50%;
+      width:20px; height:60px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,.25), transparent);
+      transform: translateX(-50%);
+      animation: fumer 3s infinite ease-in-out; pointer-events:none;
+    }
+    @keyframes scintille { 0%{transform:translateX(-50%) scale(1);opacity:.7} 50%{transform:translateX(-50%) scale(1.2);opacity:1} 100%{transform:translateX(-50%) scale(1);opacity:.8}}
+    @keyframes fumer { 0%{opacity:.2; transform:translateY(0) scale(1)} 50%{opacity:.5; transform:translateY(-20px) scale(1.2)} 100%{opacity:0; transform:translateY(-40px) scale(1.5)} }
 
-  .button-retour:hover {
-    background-color: #a084ff;
-    box-shadow: 0 0 16px #d4c3ff;
-  }
-
-  /* Bougie magique */
-  .bulle-magique {
-    display: none;
-    position: fixed;
-    bottom: 110px;
-    left: 30px;
-    width: 260px;
-    padding: 1em;
-    background: rgba(255, 255, 255, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 20px;
-    font-family: 'IM Fell English SC', serif;
-    font-size: 1.1em;
-    text-align: center;
-    color: #fff8e6;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 12px rgba(255,255,255,0.2);
-    z-index: 1001;
-    transition: opacity 1s ease-out;
-  }
-
-  .bougie-secret {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 40px;
-    height: 70px;
-    background: linear-gradient(to bottom, #a56b2c, #6e3b14);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 230, 180, 0.2), 0 0 25px rgba(90, 50, 20, 0.3);
-    z-index: 1000;
-    cursor: pointer;
-    overflow: visible;
-  }
-
-  .flamme {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    width: 12px;
-    height: 25px;
-    background: radial-gradient(ellipse at center, rgba(255, 200, 50, 0.9), rgba(255, 100, 0, 0));
-    transform: translateX(-50%);
-    border-radius: 50%;
-    animation: scintille 1s infinite ease-in-out;
-    pointer-events: none;
-  }
-
-  .fumee {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    width: 20px;
-    height: 60px;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.25), transparent);
-    transform: translateX(-50%);
-    animation: fumer 3s infinite ease-in-out;
-    pointer-events: none;
-  }
-
-  @keyframes scintille {
-    0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
-    50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
-    100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
-  }
-
-  @keyframes fumer {
-    0% { opacity: 0.2; transform: translateY(0) scale(1); }
-    50% { opacity: 0.5; transform: translateY(-20px) scale(1.2); }
-    100% { opacity: 0; transform: translateY(-40px) scale(1.5); }
-  }
-  
-  .titre-magique {
-  font-size: 2.2rem;
-  color: #9b84ff;
-  text-align: center;
-  margin-bottom: 2rem;
-  text-shadow:
-    0 0 5px #9b84ff,
-    0 0 10px #9b84ff,
-    0 0 15px #a07fff,
-    0 0 20px #b095ff;
-  animation: haloMagique 3s ease-in-out infinite;
-}
-
-@keyframes haloMagique {
-  0% {
-    text-shadow:
-      0 0 5px #9b84ff,
-      0 0 10px #9b84ff,
-      0 0 15px #a07fff,
-      0 0 20px #b095ff;
-  }
-  50% {
-    text-shadow:
-      0 0 10px #b49bff,
-      0 0 20px #c4b2ff,
-      0 0 30px #d6c9ff,
-      0 0 40px #e5ddff;
-  }
-  100% {
-    text-shadow:
-      0 0 5px #9b84ff,
-      0 0 10px #9b84ff,
-      0 0 15px #a07fff,
-      0 0 20px #b095ff;
-  }
-}
-
-  .apparition-scroll {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.apparition-scroll.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-  
-.container-centre {
-  display: block;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 4rem 2rem;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-@media screen and (max-width: 600px) {
-  .blog-box {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-
-  .blog-post h3 {
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-  }
-
-  .blog-post p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  ul {
-    padding-left: 1rem;
-  }
-
-  .button-retour {
-    display: block;
-    margin: 2rem auto 0 auto;
-    width: fit-content;
-    font-size: 1rem;
-    padding: 0.6em 1.2em;
-  }
-}
-.bloc-texte {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.bloc-texte:hover {
-  transform: scale(1.01);
-}
-
-@media (max-width: 480px) {
-  .bloc-texte {
-    padding: 1.2rem;
-  }
-}
-
-</style>
-
+    @media (max-width: 600px){
+      .blog-box{ margin:1rem; padding:1.5rem; }
+      .blog-post h3{ font-size:1.2rem; margin-top:1.5rem; }
+      .blog-post p{ font-size:1rem; line-height:1.6; }
+      ul{ padding-left:1rem; }
+      .button-retour{ display:block; margin:2rem auto 0; width:fit-content; font-size:1rem; }
+      .entete-type{ margin:1.2rem; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Bulle info bougie -->
   <div class="bulle-magique" id="bulle-magique"></div>
-  
-<div class="container-centre">
-  <div class="blog-box">
+
+  <!-- Bandeau nom + naissance (tapé) -->
+  <header class="entete-type">
+    <h1 class="tw" data-ty="Samantha DULIS"></h1>
+    <div class="sous-titre tw" data-ty="née le 8 juillet 1980"></div>
+  </header>
+
+  <div class="blog-box blog-post">
 
     <div class="bloc-texte">
-      <h3>- Le déclic d'une maman</h3>
-      <p>J’avais 27 ans quand ma fille Paola est née, et une question m’est alors venue en tête :<br>
-      <em>Quel exemple voudrais-je lui donner ?</em></p>
+      <h3 class="tw" data-ty="- Le déclic d'une maman"></h3>
+      <p class="tw" data-ty="J’avais 27 ans quand ma fille Paola est née, et une question m’est alors venue en tête :
+Quel exemple voudrais-je lui donner ?"></p>
     </div>
 
     <div class="bloc-texte">
-      <h3>- Une confiance à construire</h3>
-      <p>Je n’avais pas fait de grandes études, et je doutais souvent de moi — de ce que j’aurais à lui transmettre, à lui apprendre.<br>
-      Mais avec un peu de recul, j’ai compris que le plus précieux héritage que je pouvais lui offrir, c’était ma force d’avancer malgré les difficultés.</p>
+      <h3 class="tw" data-ty="- Une confiance à construire"></h3>
+      <p class="tw" data-ty="Je n’avais pas fait de grandes études, et je doutais souvent de moi — de ce que j’aurais à lui transmettre, à lui apprendre.
+Mais avec un peu de recul, j’ai compris que le plus précieux héritage que je pouvais lui offrir, c’était ma force d’avancer malgré les difficultés."></p>
     </div>
 
     <div class="bloc-texte">
-      <h3>- Un rêve à réveiller</h3>
-      <p>Je voulais lui montrer que même quand un rêve semble hors de portée, avec de la volonté et du travail, tout devient possible.<br>
-      Alors je me suis posé une autre question :<br>
-      <em>Qu’est-ce qui me paraît impossible, mais que j’ai toujours rêvé d’accomplir ?</em></p>
+      <h3 class="tw" data-ty="- Un rêve à réveiller"></h3>
+      <p class="tw" data-ty="Je voulais lui montrer que même quand un rêve semble hors de portée, avec de la volonté et du travail, tout devient possible.
+Alors je me suis posé une autre question :
+Qu’est-ce qui me paraît impossible, mais que j’ai toujours rêvé d’accomplir ?"></p>
     </div>
 
     <div class="bloc-texte">
-      <h3>- Le pouvoir des histoires</h3>
-      <p>Je me suis revue dans une bibliothèque, impressionnée par les rangées de livres…<br>
-      Et cette petite voix intérieure qui murmurait :<br>
-      <em>“Tu ne seras jamais capable d’écrire une histoire, toi.”</em></p>
+      <h3 class="tw" data-ty="- Le pouvoir des histoires"></h3>
+      <p class="tw" data-ty="Je me suis revue dans une bibliothèque, impressionnée par les rangées de livres…
+Et cette petite voix intérieure qui murmurait :
+“Tu ne seras jamais capable d’écrire une histoire, toi.”"></p>
     </div>
 
     <div class="bloc-texte">
-      <h3>- Le défi d’écrire pour elle</h3>
-      <p>C’est là qu’est né mon défi personnel : <strong>écrire une histoire magique et fantastique pour ma fille</strong>.<br>
-      Malgré les doutes, malgré le manque d’expérience, j’ai décidé de croire en moi.<br>
-      Et très vite, un garçon nommé <strong>Raphaël</strong> faisait ses premiers pas en <strong>Arzankia</strong>.</p>
+      <h3 class="tw" data-ty="- Le défi d’écrire pour elle"></h3>
+      <p class="tw" data-ty="C’est là qu’est né mon défi personnel : écrire une histoire magique et fantastique pour ma fille.
+Malgré les doutes, malgré le manque d’expérience, j’ai décidé de croire en moi.
+Et très vite, un garçon nommé Raphaël faisait ses premiers pas en Arzankia."></p>
     </div>
 
     <div class="bloc-texte">
-      <h3>- 18 ans plus tard…</h3>
-      <p>Il m’aura fallu <strong>18 ans</strong> pour aller au bout de ce rêve.<br>
-      Aujourd’hui, je suis fière de vous présenter le tome I de ma série <strong>Les Héros d’Arzankia</strong>.</p>
+      <h3 class="tw" data-ty="- 18 ans plus tard…"></h3>
+      <p class="tw" data-ty="Il m’aura fallu 18 ans pour aller au bout de ce rêve.
+Aujourd’hui, je suis fière de vous présenter le tome I de ma série Les Héros d’Arzankia."></p>
     </div>
 
     <div class="bloc-texte">
-      <h3>- Et la suite ?</h3>
+      <h3 class="tw" data-ty="- Et la suite ?"></h3>
       <ul>
-        <li>📖 <strong>Le tome II</strong> est en cours de finalisation</li>
-        <li>✍️ <strong>Le tome III</strong> touche à sa fin</li>
-        <li>✨ <strong>Le tome IV</strong> prend vie, doucement, mot après mot…</li>
+        <li class="tw" data-ty="📖 Le tome II est en cours de finalisation"></li>
+        <li class="tw" data-ty="✍️ Le tome III touche à sa fin"></li>
+        <li class="tw" data-ty="✨ Le tome IV prend vie, doucement, mot après mot…"></li>
       </ul>
     </div>
 
-    <p style="text-align: center;">
+    <p style="text-align:center;">
       <a href="1.accueil.html" class="button-retour">← Retour à l’accueil</a>
     </p>
-
   </div>
-</div>
 
-
-  <!-- 🔥 Bougie fixe indépendante du contenu -->
+  <!-- Bougie fixe (passage secret) -->
   <div id="bougie" class="bougie-secret" aria-label="Passage secret">
     <div class="flamme"></div>
     <div class="fumee"></div>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Bougie magique
-    const bougie = document.getElementById("bougie");
-    const bulle = document.getElementById("bulle-magique");
-    const text = "Le voile s’est levé… Tu viens d’ouvrir un passages secrets d’Arzankia.";
+  </div>
 
-    function typeText(element, text, speed, callback) {
-      element.style.display = "block";
-      element.style.opacity = "1";
-      const span = document.createElement("span");
-      element.innerHTML = "";
-      element.appendChild(span);
+  <script>
+    // ---- Utilitaire de frappe générique ----
+    function typewrite(el, text, speed=22, done){
+      el.textContent = "";
       let i = 0;
-      function type() {
-        if (i < text.length) {
-          span.textContent += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        } else if (callback) {
-          callback();
+      function step(){
+        if(i < text.length){
+          el.textContent += text.charAt(i++);
+          setTimeout(step, speed);
+        }else{
+          if(done) done();
         }
       }
-      setTimeout(type, 50);
+      step();
     }
 
-    if (bougie && bulle) {
-      bougie.addEventListener("click", function (e) {
-        e.preventDefault();
-        bulle.offsetHeight;
-        typeText(bulle, text, 80);
-        setTimeout(() => { bulle.style.opacity = "0"; }, 7000);
-        setTimeout(() => {
-          bulle.style.display = "none";
-          window.location.href = "4.derriere_le_voile.html";
-        }, 8000);
-      });
-    }
-
-    // Apparition au scroll
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+    // Tape TOUS les éléments .tw (dans l'ordre du DOM)
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = Array.from(document.querySelectorAll('.tw'));
+      const baseSpeed = 22; // vitesse par défaut
+      function next(k){
+        if(k >= items.length) return;
+        const el = items[k];
+        const txt = el.getAttribute('data-ty') || el.textContent.trim();
+        const isTitle = el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3';
+        const speed = isTitle ? 18 : baseSpeed;
+        typewrite(el, txt, speed, () => next(k+1));
+      }
+      next(0);
     });
 
-    const elements = document.querySelectorAll('.apparition-scroll');
-    elements.forEach(el => observer.observe(el));
-  });
-</script>
+    // ---- Bougie / passage secret ----
+    document.addEventListener("DOMContentLoaded", function () {
+      const bougie = document.getElementById("bougie");
+      const bulle = document.getElementById("bulle-magique");
+      const text = "Le voile s’est levé… Tu viens d’ouvrir un passages secrets d’Arzankia.";
 
+      function typeText(element, text, speed, callback) {
+        element.style.display = "block";
+        element.style.opacity = "1";
+        const span = document.createElement("span");
+        element.innerHTML = "";
+        element.appendChild(span);
+        let i = 0;
+        (function type(){
+          if (i < text.length) {
+            span.textContent += text.charAt(i++);
+            setTimeout(type, speed);
+          } else if (callback) callback();
+        })();
+      }
 
+      if (bougie && bulle) {
+        bougie.addEventListener("click", function (e) {
+          e.preventDefault();
+          bulle.offsetHeight;
+          typeText(bulle, text, 80);
+          setTimeout(() => { bulle.style.opacity = "0"; }, 7000);
+          setTimeout(() => {
+            bulle.style.display = "none";
+            window.location.href = "4.derriere_le_voile.html";
+          }, 8000);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
