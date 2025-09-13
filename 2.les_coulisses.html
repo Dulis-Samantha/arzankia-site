@@ -71,23 +71,6 @@
     text-shadow:0 0 12px rgba(255,215,0,.28);
   }
 
-  /* Effet de lumière qui se balade sur les lettres (titre) */
-  .glow-gradient{
-    display:inline-block;
-    background: linear-gradient(90deg, #ffeaa0 0%, #ffffff 25%, #ffeaa0 50%, #e6c05c 75%, #ffeaa0 100%);
-    background-size:300% 100%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    -webkit-text-fill-color:transparent; /* Safari */
-    animation: shineLetters 4s linear infinite alternate;
-    text-shadow: 0 0 6px rgba(255,255,200,.35), 0 0 14px rgba(255,215,0,.25);
-  }
-  @keyframes shineLetters{
-    0%{ background-position:0% 50% }
-    100%{ background-position:100% 50% }
-  }
-
   /* ===== Intro & phrase spéciale ===== */
   .lead{
     margin:0 0 .8rem;
@@ -106,28 +89,71 @@
     text-shadow:0 0 10px rgba(0,0,0,.6);
   }
 
-  /* Mots-clés renforcés (blanc/doré + halo) */
-  .special .kw{
-    font-weight:900;
-    font-size:1.08em;
-    letter-spacing:.015em;
-    background: linear-gradient(180deg, #ffffff 0%, #fff3b0 40%, #f8d450 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    -webkit-text-fill-color: transparent; /* Safari */
+ /* Effet de lumière qui se balade – titre + mots-clés */
+.glow-gradient, .glow-sweep{
+  display:inline-block;
+  background: linear-gradient(
+    90deg,
+    #ffeaa0 0%,
+    #ffffff 20%,
+    #ffd700 50%,
+    #ffffff 80%,
+    #ffeaa0 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent; /* Safari */
+  animation: shineSweep 3.2s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 6px rgba(255,255,200,.40),
+    0 0 14px rgba(255,215,0,.30);
+}
+
+@keyframes shineSweep{
+  0%{
+    background-position: 0% 50%;
     text-shadow:
-      0 0 4px rgba(255,255,255,.85),
-      0 0 10px rgba(255,255,200,.55),
-      0 0 16px rgba(255,215,0,.35);
-    white-space:nowrap;
+      0 0 6px rgba(255,255,200,.40),
+      0 0 14px rgba(255,215,0,.30);
   }
-  .special .kw:hover{
+  50%{
+    background-position: 50% 50%;
     text-shadow:
-      0 0 8px rgba(255,255,255,.9),
-      0 0 18px rgba(255,255,200,.6),
-      0 0 26px rgba(255,215,0,.5);
+      0 0 12px rgba(255,255,255,.90),
+      0 0 22px rgba(255,215,0,.60);
   }
+  100%{
+    background-position: 100% 50%;
+    text-shadow:
+      0 0 6px rgba(255,255,200,.40),
+      0 0 14px rgba(255,215,0,.30);
+  }
+}
+
+/* Mots-clés renforcés (gros, lisibles, sans italique) – version fusionnée */
+.special .kw{
+  font-weight:900;
+  font-size:1.08em;
+  letter-spacing:.015em;
+  white-space:nowrap;
+  /* brillance par défaut pour rester lisible hors animation */
+  text-shadow:
+    0 0 4px rgba(255,255,255,.85),
+    0 0 10px rgba(255,255,200,.55),
+    0 0 16px rgba(255,215,0,.35);
+}
+
+/* Mobile : éviter les débords si l’écran est étroit */
+@media (max-width: 400px){
+  .special .kw{ white-space: normal; }
+}
+
+/* Accessibilité : réduire les animations si demandé */
+@media (prefers-reduced-motion: reduce){
+  .glow-gradient, .glow-sweep{ animation: none !important; }
+}
 
   /* ===== Boutons ===== */
   .buttons{
@@ -192,12 +218,12 @@
   <!-- Bloc texte -->
   <div class="bloc">
     <p class="lead">Ici, les secrets prennent vie…</p>
-   <p class="special">
+<p class="special">
   Tu y découvriras tout ce qu’il faut savoir sur les
-  <span class="kw glow-gradient">mondes d’Arzankia</span>, sur les
-  <span class="kw glow-gradient">héros</span> qui les traversent, ainsi que des
-  <span class="kw glow-gradient">anecdotes inédites</span> et des
-  <span class="kw glow-gradient">révélations cachées</span>.
+  <span class="kw glow-sweep">mondes d’Arzankia</span>, sur les
+  <span class="kw glow-sweep">héros</span> qui les traversent, ainsi que des
+  <span class="kw glow-sweep">anecdotes inédites</span> et des
+  <span class="kw glow-sweep">révélations cachées</span>.
 </p>
   </div>
 
