@@ -7,121 +7,93 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --or:#ffd700;
-      --ivoire:#fff8e6;
-      --fond-voile: rgba(0,0,0,.65);
+      --or:#ffd700; --ivoire:#fff8e6; --fond-voile: rgba(0,0,0,.65);
     }
 
     body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      font-family:Georgia,serif;
-      background:url('fond_coulisse_arzankia.png') center/cover no-repeat fixed;
-      color:var(--ivoire);
-      text-shadow:0 1px 3px rgba(0,0,0,.5);
-      padding:24px;
-      gap:22px;
+      margin:0; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:Georgia,serif; background:url('fond_coulisse_arzankia.png') center/cover no-repeat fixed;
+      color:var(--ivoire); text-shadow:0 1px 3px rgba(0,0,0,.5); padding:24px; gap:22px;
     }
 
-    /* blocs noirs */
+    /* Blocs noirs */
     .bloc{
-      background:var(--fond-voile);
-      border-radius:20px;
-      padding: clamp(16px, 4vw, 32px);
-      max-width:800px;
-      text-align:center;
-      box-shadow:0 6px 20px rgba(0,0,0,.45);
-      backdrop-filter: blur(4px);
+      background:var(--fond-voile); border-radius:20px; padding:clamp(16px,4vw,32px);
+      max-width:800px; width:min(92vw,800px); text-align:center; box-shadow:0 6px 20px rgba(0,0,0,.45);
+      backdrop-filter:blur(4px);
     }
 
-    .headline{
-      font-family:"Cinzel",serif;
-      font-size:clamp(1.7rem,1.2rem + 2.5vw,2.4rem);
+    /* Titre en 2 lignes : petit + grand */
+    .headline{ margin:0; line-height:1.2; text-align:center; font-family:"Cinzel",serif; }
+    .headline-small{
+      font-size:clamp(1.1rem, 0.9rem + 1.2vw, 1.6rem);
+      font-weight:600; letter-spacing:.06em; color:#ffeaa0;
+      text-shadow:0 0 10px rgba(0,0,0,.6);
+    }
+    .headline-big{
+      display:block;
+      font-size:clamp(1.9rem, 1.3rem + 3vw, 3.2rem);
       font-weight:700;
-      background:linear-gradient(180deg,#fffdf4 0%,#ffeaa0 45%,#e6c05c 100%);
-      -webkit-background-clip:text;
-      color:transparent;
-      text-shadow:0 0 12px rgba(255,215,0,.25);
-      margin:0;
+      background: linear-gradient(180deg,#fffdf4 0%,#ffeaa0 45%,#e6c05c 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 12px rgba(255,215,0,.28);
     }
 
     .lead{ margin:0 0 .8rem; line-height:1.8; font-size:1.15rem; }
-    .points{ list-style:none; padding:0; margin:0; display:grid; gap:.4rem; font-size:1.05rem; }
-    .points li{ display:flex; gap:.6em; justify-content:center; }
-    .points li::before{ content:"✧"; color:var(--or); text-shadow:0 0 6px rgba(255,215,0,.4); }
 
-    .points strong{ color:var(--or); }
-    .points em{ font-style:italic; }
+    /* Phrase spéciale lisible */
+    .special{
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.3rem; line-height:1.8; text-align:center; letter-spacing:.5px;
+      color:#ffeaa0; text-shadow:0 0 10px rgba(0,0,0,.6); margin:0;
+    }
+    .special strong{ color:#ffeaa0; }
+    .special em{ font-style:italic; }
 
-    /* boutons hors bloc */
+    /* Boutons hors bloc */
     .buttons{ display:grid; gap:14px; justify-items:center; margin-top:10px; }
     .btn{
-      min-height:48px;
-      padding:0 20px;
-      border-radius:14px;
-      font-size:1.05rem;
-      text-decoration:none;
-      display:inline-grid; place-items:center;
-      width:min(360px,90%);
-    }
-    .btn-gold{
-      color:#241a00;
-      background:linear-gradient(180deg,#fff6bf 0%,#ffe48a 45%,#f3c34f 100%);
-      border:1px solid #d5a93a;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,.35), 0 6px 16px rgba(0,0,0,.35);
+      min-height:48px; padding:0 20px; border-radius:14px; font-size:1.05rem; text-decoration:none;
+      display:inline-grid; place-items:center; width:min(360px,90%);
       transition:.2s;
     }
-    .btn-gold:hover{ transform:translateY(-2px); box-shadow:inset 0 2px 10px rgba(255,255,255,.5),0 10px 20px rgba(0,0,0,.4); }
-    .btn-ghost{
-      color:var(--ivoire);
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.25);
+    .btn-gold{
+      color:#241a00; background:linear-gradient(180deg,#fff6bf 0%,#ffe48a 45%,#f3c34f 100%);
+      border:1px solid #d5a93a; box-shadow: inset 0 2px 8px rgba(255,255,255,.35), 0 6px 16px rgba(0,0,0,.35);
     }
+    .btn-gold:hover{ transform:translateY(-2px); box-shadow:inset 0 2px 10px rgba(255,255,255,.5),0 10px 20px rgba(0,0,0,.4); }
+    .btn-ghost{ color:var(--ivoire); background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); }
     .btn-ghost:hover{ background:rgba(255,255,255,.18); transform:translateY(-2px); }
-  
-.special{
-  font-family:'Cormorant Garamond', serif;
-  font-size:1.3rem;
-  line-height:1.8;
-  text-align:center;
-  letter-spacing:.5px;
-  color:#ffeaa0;
-  text-shadow:0 0 10px rgba(0,0,0,.6);
-}
-
   </style>
 </head>
 <body>
-<div class="bloc">
-  <p class="headline">
-    <span class="headline-small">Bienvenue dans les coulisses</span><br>
-    <span class="headline-big">d’Arzankia</span>
-  </p>
-</div>
-  
-  <div class="bloc">
-    <p class="lead">Ici, les secrets prennent vie…</p>
-    
-  <div class="bloc">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
-<p class="special" style="font-family:'Cinzel Decorative', serif;">
-  Tu y découvriras tout ce qu’il faut savoir sur les <strong>mondes d’Arzankia</strong>, 
-  sur les <strong>héros</strong> qui les traversent, ainsi que des 
-  <em>anecdotes inédites</em> et des <em>révélations cachées</em>.
-</p>
+  <!-- Bloc titre -->
+  <div class="bloc">
+    <p class="headline">
+      <span class="headline-small">Bienvenue dans les coulisses</span><br>
+      <span class="headline-big">d’Arzankia</span>
+    </p>
   </div>
 
+  <!-- Bloc texte -->
+  <div class="bloc">
+    <p class="lead">Ici, les secrets prennent vie…</p>
+    <p class="special">
+      Tu y découvriras tout ce qu’il faut savoir sur les <strong>mondes d’Arzankia</strong>,
+      sur les <strong>héros</strong> qui les traversent, ainsi que des <em>anecdotes inédites</em>
+      et des <em>révélations cachées</em>.
+    </p>
+  </div>
+
+  <!-- Boutons -->
   <div class="buttons">
-    <a class="btn btn-gold" href="3.les_heros.html" target="_blank">Les Héros d’Arzankia</a>
-    <a class="btn btn-gold" href="3.les_mondes.html" target="_blank">Les Mondes d’Arzankia</a>
+    <a class="btn btn-gold" href="3.les_heros.html" target="_blank" rel="noopener">Les Héros d’Arzankia</a>
+    <a class="btn btn-gold" href="3.les_mondes.html" target="_blank" rel="noopener">Les Mondes d’Arzankia</a>
     <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
   </div>
 
