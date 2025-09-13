@@ -57,17 +57,16 @@
     /* Contenu */
     article.blog-post,
     .blog-box {
-      max-width: 800px;
-      margin: 1.2rem auto 3rem;
-      background: var(--voile);
-      backdrop-filter: blur(8px);
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-      position: relative;
-      z-index: 1;
-    }
-
+  max-width: 800px;
+  margin: 1.2rem auto 3rem;
+  background: none;        /* enlève le gros bloc noir */
+  backdrop-filter: none;   /* enlève l’effet de flou inutile */
+  padding: 0;              /* pas de vide autour */
+  border-radius: 0;        /* plus d’arrondi global */
+  box-shadow: none;        /* plus d’ombre globale */
+  position: relative;
+  z-index: 1;
+}
     .blog-post h2 {
       font-size: 2.2rem;
       color: var(--violet);
