@@ -5,163 +5,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Les Héros d’Arzankia – Roman jeunesse fantasy dès 10 ans</title>
-<style>
-  /* ——— Base ——— */
-  body{
-    margin:0;
-    font-family:Georgia, serif;
-    background-image:url('couverture.png');
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center;
-    color:#fff;
-  }
-
-  /* ——— Cartes translucides ——— */
-  .card{
-    max-width:85vw;
-    margin:1rem auto;
-    padding:1rem;
-    background:rgba(0,0,0,.25);
-    border-radius:12px;
-    text-align:center;
-    line-height:1.6;
-    color:#fff8e6;
-    backdrop-filter:blur(5px);
-    box-shadow:0 0 20px rgba(255,255,200,.08);
-    margin-bottom:1.2rem;            /* + respiration entre les blocs */
-  }
-
-  /* ——— Logo centré en haut ——— */
-  .logo-wrap{
-    display:grid;
-    place-items:center;
-    padding-top:1.2rem;
-  }
-  .logo-top{
-    height:64px; width:auto; border-radius:12px;
-    box-shadow:0 8px 22px rgba(0,0,0,.45);
-  }
-
-  /* ——— Bloc titre ——— */
-  .hero h1{
-    margin:.2rem 0 0;
-    font-size:1.8rem;
-    color:#ffd700;
-    text-shadow:0 0 10px #3a1c00;
-    animation:glow 2s ease-in-out infinite alternate;
-  }
-  .hero p{
-    font-size:1rem;
-    margin:.8rem 0 0;
-    text-shadow:1px 1px 2px #000;
-  }
-
-  /* ——— Bloc “passages secrets” séparé + effet ——— */
-  .secret-card{ position:relative; overflow:hidden; }
-  .secret-card p{
-    margin:0;
-    font-size:1.1rem;                /* + lisible */
-    font-style:italic;
-    color:#ffe9a8;
-    text-shadow:1px 1px 2px #000;
-    max-width:600px;                 /* largeur contenue */
-    margin-inline:auto;              /* centré dans la carte */
-  }
-  .secret-card::after{
-    content:"";
-    position:absolute; inset:-40% -80% -40% -80%;
-    background:radial-gradient(60% 60% at 50% 50%, rgba(255,215,0,.18), transparent 60%);
-    animation:glowSweep 6s linear infinite;
-    pointer-events:none;
-  }
-  /* curseur du texte tapé */
-  #message-secret::after{ content:"|"; animation:blink 1s infinite; }
-
-  /* ——— Boutons ——— */
-  .button-section{
-    display:flex; justify-content:center; gap:1.5rem;
-    margin:2rem auto 1rem; flex-wrap:wrap;
-  }
-  .magic-button{
-    background:linear-gradient(145deg,#ffe9af,#f2c94c);
-    color:#4a2e00; text-decoration:none; font-weight:bold;
-    font-size:1rem; padding:.7rem 1.4rem; border-radius:12px;
-    box-shadow:0 0 12px rgba(255,223,100,.6);
-    transition:all .2s ease-in-out; text-align:center; min-width:160px;
-  }
-  .magic-button:hover{
-    background:#c09c2c; color:#fff8e6; box-shadow:0 0 18px rgba(255,223,100,1);
-  }
-
-  /* ——— Bloc “avis” ——— */
-  .avis-invite{
-    max-width:90vw; margin:2rem auto; text-align:center;
-    font-size:.95rem; line-height:1.6; color:#ffeeaa; text-shadow:1px 1px 2px #000;
-  }
-  .avis-invite a{
-    color:#ffe066; text-decoration:underline; font-weight:bold;
-  }
-  .avis-invite a:hover{
-    text-shadow:0 0 10px #ffef99; color:#fff6cc; cursor:url('etoile.png'), pointer;
-  }
-  /* espace visuel sous “Les Héros d’Arzankia ?” */
-  .avis-invite strong{
-    display:inline-block;
-    margin-bottom:.8rem;
-  }
-
-  /* ——— Animations ——— */
-  @keyframes glow{
-    from{ text-shadow:0 0 5px #ffd700, 0 0 10px #ffc400; }
-    to  { text-shadow:0 0 20px #ffd700, 0 0 30px #ffc400; }
-  }
-  @keyframes glowSweep{
-    0%  { transform:translateX(-40%) translateY(-10%) rotate(0deg); }
-    50% { transform:translateX(40%) translateY(10%) rotate(180deg); }
-    100%{ transform:translateX(120%) translateY(-8%) rotate(360deg); }
-  }
-  @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:0} }
-
-  /* ——— Responsive ——— */
-  @media (min-width:769px){
-    .card{ max-width:700px; }
-    .hero{ margin-top:6rem; }
-    .hero h1{ font-size:2rem; }
-    .avis-invite{ font-size:1.1rem; }
-  }
-  @media (max-width:600px){
-    .logo-top{ height:50px; }         /* logo un peu plus petit */
-    .secret-card p{
-      font-size:1rem;
-      padding:0 .8rem;
+  <style>
+    body{
+      margin:0;
+      font-family:Georgia, serif;
+      background-image:url('couverture.png');
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      background-position:center;
+      color:#fff;
     }
-    .card{ margin-bottom:1rem; }
-  }
-  @media (min-width:1024px){
-    .button-section{ max-width:700px; margin:2rem auto; }
-  }
-</style>
 
+    /* ——— Cartes translucides ——— */
+    .card{
+      max-width:85vw;
+      margin:1rem auto;
+      padding:1rem;
+      background:rgba(0,0,0,.25);
+      border-radius:12px;
+      text-align:center;
+      line-height:1.6;
+      color:#fff8e6;
+      backdrop-filter:blur(5px);
+      box-shadow:0 0 20px rgba(255,255,200,.08);
+      margin-bottom:1.2rem;
+    }
+
+    /* ——— Logo centré en haut ——— */
+    .logo-wrap{
+      display:grid;
+      place-items:center;
+      padding-top:1.2rem;
+    }
+    .logo-top{
+      height:64px; width:auto; border-radius:12px;
+      box-shadow:0 8px 22px rgba(0,0,0,.45);
+    }
+
+    /* ——— Bloc titre ——— */
+    .hero h1{
+      margin:.2rem 0 0;
+      font-size:1.8rem;
+      color:#ffd700;
+      text-shadow:0 0 10px #3a1c00;
+      animation:glow 2s ease-in-out infinite alternate;
+    }
+
+    /* ——— Sous-titre hors bloc ——— */
+    .subtitle {
+      text-align:center;
+      font-size:1.05rem;
+      margin:0.8rem 0 1.2rem;
+      color:#fff8e6;
+      text-shadow:1px 1px 2px #000;
+    }
+    @media (min-width:769px){
+      .subtitle { font-size:1.2rem; }
+    }
+
+    /* ——— Bloc “passages secrets” séparé + effet ——— */
+    .secret-card{ position:relative; overflow:hidden; }
+    .secret-card p{
+      margin:0;
+      font-size:1.1rem;
+      font-style:italic;
+      color:#ffe9a8;
+      text-shadow:1px 1px 2px #000;
+      max-width:600px;
+      margin-inline:auto;
+    }
+    .secret-card::after{
+      content:"";
+      position:absolute; inset:-40% -80% -40% -80%;
+      background:radial-gradient(60% 60% at 50% 50%, rgba(255,215,0,.18), transparent 60%);
+      animation:glowSweep 6s linear infinite;
+      pointer-events:none;
+    }
+    #message-secret::after{ content:"|"; animation:blink 1s infinite; }
+
+    /* ——— Boutons ——— */
+    .button-section{
+      display:flex; justify-content:center; gap:1.5rem;
+      margin:2rem auto 1rem; flex-wrap:wrap;
+    }
+    .magic-button{
+      background:linear-gradient(145deg,#ffe9af,#f2c94c);
+      color:#4a2e00; text-decoration:none; font-weight:bold;
+      font-size:1rem; padding:.7rem 1.4rem; border-radius:12px;
+      box-shadow:0 0 12px rgba(255,223,100,.6);
+      transition:all .2s ease-in-out; text-align:center; min-width:160px;
+    }
+    .magic-button:hover{
+      background:#c09c2c; color:#fff8e6; box-shadow:0 0 18px rgba(255,223,100,1);
+    }
+
+    /* ——— Bloc “avis” ——— */
+    .avis-invite{
+      max-width:90vw; margin:2rem auto; text-align:center;
+      font-size:.95rem; line-height:1.6; color:#ffeeaa; text-shadow:1px 1px 2px #000;
+    }
+    .avis-invite a{
+      color:#ffe066; text-decoration:underline; font-weight:bold;
+    }
+    .avis-invite a:hover{
+      text-shadow:0 0 10px #ffef99; color:#fff6cc; cursor:url('etoile.png'), pointer;
+    }
+    .avis-invite strong{
+      display:inline-block;
+      margin-bottom:.8rem;
+    }
+
+    /* ——— Animations ——— */
+    @keyframes glow{
+      from{ text-shadow:0 0 5px #ffd700, 0 0 10px #ffc400; }
+      to  { text-shadow:0 0 20px #ffd700, 0 0 30px #ffc400; }
+    }
+    @keyframes glowSweep{
+      0%  { transform:translateX(-40%) translateY(-10%) rotate(0deg); }
+      50% { transform:translateX(40%) translateY(10%) rotate(180deg); }
+      100%{ transform:translateX(120%) translateY(-8%) rotate(360deg); }
+    }
+    @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ——— Responsive ——— */
+    @media (min-width:769px){
+      .card{ max-width:700px; }
+      .hero{ margin-top:6rem; }
+      .hero h1{ font-size:2rem; }
+      .avis-invite{ font-size:1.1rem; }
+    }
+    @media (max-width:600px){
+      .logo-top{ height:50px; }
+      .secret-card p{
+        font-size:1rem;
+        padding:0 .8rem;
+      }
+      .card{ margin-bottom:1rem; }
+    }
+    @media (min-width:1024px){
+      .button-section{ max-width:700px; margin:2rem auto; }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- 1) Logo centré -->
+  <!-- Logo -->
   <div class="logo-wrap">
     <img src="logo.jpg" alt="Logo Arzankia" class="logo-top">
   </div>
 
   <main>
-    <!-- 2) Bloc “Bienvenue à Arzankia” -->
+    <!-- Bloc titre -->
     <section class="card hero">
       <h1>Bienvenue à Arzankia</h1>
-      <!-- 3) Sous-titre -->
-      <p>L’aventure continue ici…</p>
     </section>
 
-    <!-- 4) Bloc séparé avec texte animé -->
+    <!-- Sous-titre hors bloc -->
+    <p class="subtitle">L’aventure continue ici…</p>
+
+    <!-- Bloc message secret -->
     <section class="card secret-card">
       <p id="message-secret"></p>
     </section>
@@ -172,7 +176,7 @@
     <a href="2.les_coulisses.html" class="magic-button">Les Coulisses</a>
   </div>
 
-  <!-- Invite avis -->
+  <!-- Bloc avis -->
   <p class="avis-invite">
     Tu souhaites en savoir plus sur la saga<br>
     <strong>Les Héros d’Arzankia ?</strong><br>
