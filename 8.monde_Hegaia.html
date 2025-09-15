@@ -1,113 +1,150 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noindex">
+   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monde d’Hégaïa</title>
-
+  <title>Hégaïa</title>
   <style>
-    /* === STYLES GÉNÉRAUX === */
-    body{
-      margin:0; padding:0;
-      background: url('fond_monde_terre.png') center top no-repeat;
-      background-color:#001d26;
-      background-size:cover;
-      font-family:Georgia, serif;
-      color:#fff8e6;
-      text-shadow:1px 1px 4px #000;
+    body {
+      margin: 0;
+      padding: 2em 1em;
+      background: linear-gradient(to bottom, #011827, #04364a);
+      font-family: Georgia, serif;
+      color: #e0faff;
+      text-align: center;
     }
 
-    .Fees-image,.parchemin-image{
-      display:block; width:100%; height:auto; margin:0;
+    h1 {
+      font-size: 2.2em;
+      color: #a4ebf3;
+      margin-bottom: 1.5em;
     }
 
-    .parchemin-wrapper{
-      position:relative; width:100vw; max-width:none; margin:0 auto;
+    .texte-intro {
+      max-width: 800px;
+      margin: 0 auto 2em;
+      font-size: 1.2em;
+      line-height: 1.7;
+      font-style: italic;
     }
 
-    .parchemin-image{
-      width:100%; max-height:80vh; border-radius:15px;
+    .image-entree {
+      max-width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(173, 239, 255, 0.3);
     }
 
-    .texte-parchemin{
-      position:absolute; top:42%; left:50%; transform:translate(-50%,-50%);
-      color:#ffe79a; font-family:Georgia, serif;
-      font-size:clamp(1rem,1.5vw,1.3rem);
-      text-align:center; line-height:1.6;
-      width:75%; max-width:700px; padding:1rem; box-sizing:border-box;
+    .extrait-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.extrait-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(173, 239, 255, 0.3);
+}
+
+.extrait-texte {
+  max-width: 700px;
+  font-style: italic;
+  font-size: 1.2em;
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* Version PC : image à gauche, texte à droite */
+@media screen and (min-width: 768px) {
+  .extrait-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .extrait-texte {
+    margin-left: 2rem;
+  }
+}
+
+    .retour {
+      margin-top: 3em;
     }
 
-    .titre-parchemin{
-      font-size:clamp(1rem,1.4vw,1.3rem);
-      font-weight:bold; color:#ffe79a; text-align:center; margin-bottom:1rem;
+    .retour a {
+      text-decoration: none;
+      color: #ccf;
+      font-weight: bold;
     }
 
-    /* === BOUTONS === */
-    .button-group{
-      display:flex; justify-content:center; gap:1.5rem; margin-top:2rem; flex-wrap:wrap;
-    }
-    .button-group a{
-      display:inline-block; padding:.7rem 1.5rem;
-      background:linear-gradient(145deg,#ffe9af,#f2c94c);
-      color:#4a2e00; text-decoration:none; font-weight:bold; font-size:1rem;
-      border-radius:30px; box-shadow:0 0 10px rgba(255,223,100,.6);
-      transition:transform .2s ease, box-shadow .2s ease; min-width:180px; text-align:center;
-    }
-    .button-group a:hover{ transform:scale(1.05); box-shadow:0 0 18px rgba(255,223,100,1); }
-
-    /* === RESPONSIVE – PETITS ÉCRANS === */
-    @media (max-width:600px){
-      .texte-parchemin{
-        font-size:.85rem; line-height:1.5; width:85%; padding:.8rem .5rem;
-        top:46%; transform:translate(-50%,-50%);
-      }
-      .titre-parchemin{ font-size:1rem; line-height:1.3; padding:0 .5rem; margin-bottom:.6rem; text-align:center; }
-      .button-group{
-        position:fixed; bottom:10px; left:0; right:0;
-        justify-content:center; flex-wrap:wrap; background:rgba(0,0,0,.4);
-        padding:.5rem 1rem; z-index:999; gap:.5rem;
-      }
-      .button-group a{ font-size:.8rem; padding:.4rem .8rem; min-width:auto; border-radius:25px; box-shadow:0 0 8px rgba(255,223,100,.6); }
+    .retour a:hover {
+      text-decoration: underline;
     }
 
-    /* === RESPONSIVE – GRANDS ÉCRANS (PC) === */
-    @media (min-width:1024px){
-      .layout-fees{
-        display:flex; justify-content:center; align-items:flex-start; gap:3rem;
-        padding:2rem 1rem; max-width:1400px; margin:auto;
-      }
-      .zone-gauche{ display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
-      .Fees-image{ max-width:620px; border-radius:20px; box-shadow:0 0 25px rgba(255,255,255,.15); }
-      .parchemin-wrapper{ width:480px; }
-      .texte-parchemin{ top:48%; left:50%; transform:translate(-50%,-50%); font-size:1.05rem; line-height:1.5; padding:1.2rem; width:75%; }
-      .titre-parchemin{ font-size:1.2rem; margin-bottom:.6rem; }
+    /* ✅ STYLES du bouton et paragraphe caché */
+    #explicationCoquillage {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      margin-top: 1em;
     }
+
+    #explicationCoquillage.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .coquillage-button {
+      background-color: #f0f8ff;
+      border: 2px solid #99ccff;
+      padding: 0.6em 1em;
+      font-family: 'Georgia', serif;
+      font-size: 1em;
+      color: #003366;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #99ccff;
+      transition: background-color 0.3s ease;
+    }
+
+    .coquillage-button:hover {
+      background-color: #e0f0ff;
+    }
+
   </style>
 </head>
 
 <body>
-  <div class="layout-fees">
-    <div class="zone-gauche">
-      <img class="Fees-image" src="monde_Hegaia.png" alt="Monde d’Hégaïa">
-      <div class="button-group">
-        <a href="9.entree_Geants.html">Entrée du monde</a>
-        <a href="3.les_mondes.html">Retour aux Mondes</a>
-      </div>
-    </div>
 
-    <div class="parchemin-wrapper">
-      <img class="parchemin-image" src="parchemin_marron.png" alt="Parchemin">
-      <div class="texte-parchemin">
-        <div class="titre-parchemin">🌿 Bienvenue au Monde d’Hégaïa 🌿</div>
-        <p>
-          «Sous la surface translucide d’Hégaïa s’étend de mystérieuses grottes.<br>
-          Les parois y scintillent de pierres précieuses,<br>
-          mais nul ne les a encore toutes découvertes.»
-          
-        </p>
-      </div>
-    </div>
-  </div> <!-- /layout-fees -->
+  <h1>Salut ! c'est Fanfan. Comment vas -tu ?</h1>
+
+<div class="extrait-container">
+  <div class="extrait-image">
+    <img src="monde_Hegaia.png" alt="Le monde d'hégaïa" class="image-entree">
+  </div>
+
+  <div class="extrait-texte">
+    <p>
+      « Je tenais à te présenter mon monde.<br><br>
+   <p>
+  « Sous la surface translucide d’Hégaïa s’étend tout un réseau de mystérieuses grottes.<br>
+  Les parois y scintillent de pierres précieuses,<br>
+  mais personne ne les a encore toutes découvertes. »
+</p>
+
+    </p>
+  </div>
+
+
+  <div class="retour">
+    <a href="3.les_heros.html">← Retour aux héros</a>
+  </div>
+
 </body>
 </html>
