@@ -8,7 +8,8 @@
   <style>
     body {
       font-family: Georgia, serif;
-      background:url('fond_etoile_perso.webp') center top no-repeat;
+      background: url('fond_etoile_perso.webp') center top no-repeat;
+      background-size: cover;            /* mieux pour l’adaptation écran */
       color: #3b2a1d;
       padding: 2em;
       max-width: 1000px;
@@ -36,39 +37,40 @@
     }
 
     .extrait-texte p {
-      font-size: 1.1em;
-      line-height: 1.7;
+      font-size: 1em;
+      line-height: 1.5;     /* resserré */
       text-align: justify;
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
     }
-h1 {
-  text-align: center;
-  color: #00779e;
-  font-size: 2em;
-  margin-bottom: 1em;
-}
 
-   .bouton-retour {
-  display: block;
-  width: fit-content;
-  margin: 2em auto 1em;
-  background: linear-gradient(145deg, #ffe9af, #f2c94c);
-  padding: 0.6em 1.2em;
-  border-radius: 12px;
-  color: #3b2a1d;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-  transition: all 0.2s ease-in-out;
-  text-align: center;
-}
-    
-     .bouton-retour:hover {
-    background: #c09c2c;
-    color: #fff8e6;
-    box-shadow: 0 0 16px rgba(255, 223, 100, 1);
-  }
+    h1 {
+      text-align: center;
+      color: #00779e;
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .bouton-retour {
+      display: block;
+      width: fit-content;
+      margin: 2em auto 1em;
+      background: linear-gradient(145deg, #ffe9af, #f2c94c);
+      padding: 0.6em 1.2em;
+      border-radius: 12px;
+      color: #3b2a1d;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+      transition: all 0.2s ease-in-out;
+      text-align: center;
+    }
+
+    .bouton-retour:hover {
+      background: #c09c2c;
+      color: #fff8e6;
+      box-shadow: 0 0 16px rgba(255, 223, 100, 1);
+    }
 
     /* Bureau : image à gauche, texte à droite */
     @media (min-width: 768px) {
@@ -76,55 +78,46 @@ h1 {
         flex-direction: row;
         align-items: flex-start;
       }
-
       .extrait-image {
-        width: 30%;
+        flex: 0 0 35%;     /* base fiable avec le gap */
       }
-
       .extrait-texte {
-        width: 55%;
+        flex: 1 1 0;
         padding-left: 2em;
       }
     }
+
     /* Mobile : image au-dessus du texte */
-@media (max-width: 767px) {
-  .image-text-wrapper {
-    flex-direction: column;
-  }
-
-  .extrait-image {
-    order: 1;
-    margin-bottom: 1em;
-  }
-
-  .extrait-texte {
-    order: 2;
-    max-width: 95%;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 1em;
-    border-radius: 12px;
-  }
-
-  .extrait-texte p {
-    font-size: 1.05em;
-    line-height: 1.9;
-    margin-bottom: 1.2em;
-    text-align: justify;
-    text-indent: 1em;
-  }
-
-  h1 {
-    font-size: 1em;
-    line-height: 1.2;
-    text-align: center;
-    margin-bottom: 0.5em;
-    text-transform: uppercase;
-  }
-}
-
-
-
+    @media (max-width: 767px) {
+      .image-text-wrapper {
+        flex-direction: column;
+      }
+      .extrait-image {
+        order: 1;
+        margin-bottom: 1em;
+      }
+      .extrait-texte {
+        order: 2;
+        max-width: 95%;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.4);
+        padding: 1em;
+        border-radius: 12px;
+      }
+      .extrait-texte p {
+        font-size: 1em;
+        line-height: 1.5;   /* même densité que bureau */
+        margin-bottom: 1em;
+        text-indent: 1em;
+      }
+      h1 {
+        font-size: 1em;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 0.5em;
+        text-transform: uppercase;
+      }
+    }
   </style>
 </head>
 <body>
@@ -133,32 +126,23 @@ h1 {
     <h1>✨La ballade en libellule✨</h1>
 
     <div class="image-text-wrapper">
-      <img src="extrait_Ptikitis.webp" alt="Sous les ailes du vent" class="extrait-image">
+      <img src="extrait_Ptikitis.webp" alt="Balade en libellule vers le nénuphar" class="extrait-image">
 
-  
- <div class="extrait-texte">
+      <div class="extrait-texte">
+        <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
+        <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
+        <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
+        <p>— Destination nénuphar, répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
+        <p>Je m’installai à califourchon sur son dos, comme sur un cheval, et Fanfan grimpa derrière moi, passant ses bras autour de ma taille.</p>
+        <p>— C’est parti ! lançai-je dans un souffle excité, au moment du décollage.</p>
+        <p>Le trajet jusqu’au nénuphar fut incroyable. Le vent caressait mon visage, les paysages défilaient sous mes pieds… et cette sensation de voler, de flotter au-dessus du monde…</p>
+        <p>C’était une liberté pure.</p>
+        <p>Une sensation que je n’oublierais jamais.</p>
+      </div>
+    </div>
 
-<p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
-
-<p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
-
-<p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
-
-<p>— Destination nénuphar, répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
-
-<p>Je m’installai à califourchon sur son dos, comme sur un cheval, et Fanfan grimpa derrière moi, passant ses bras autour de ma taille.</p>
-
-<p>— C’est parti ! lançai-je dans un souffle excité, au moment du décollage.</p>
-
-<p>Le trajet jusqu’au nénuphar fut incroyable. Le vent caressait mon visage, les paysages défilaient sous mes pieds… et cette sensation de voler, de flotter au-dessus du monde…</p>
-
-<p>C’était une liberté pure.</p>
-
-<p>Une sensation que je n’oublierais jamais.</p>
-
-
- <a href="8.monde_Ptikitis.html" class="bouton-retour">← Retour au Monde des Ptikitis</a>
-
+    <a href="8.monde_Ptikitis.html" class="bouton-retour">← Monde des Ptikitis</a>
+  </div>
 
 </body>
 </html>
