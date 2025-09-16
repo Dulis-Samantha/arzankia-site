@@ -6,172 +6,146 @@
   <meta name="robots" content="noindex">
   <title>Extrait du livre – Monde des Ptikitis</title>
   <style>
-    body {
+    /* Base */
+    *,*::before,*::after{box-sizing:border-box}
+
+    body{
+      margin:0;
       font-family: Georgia, serif;
       background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-size: cover;            /* mieux pour l’adaptation écran */
-      color: #fff8e6; 
-      padding: 2em;
-      max-width: 1000px;
-      margin: auto;
-      border-radius: 12px;
+      background-size: cover;
+      color:#fff8e6;
+      padding:2em;
+      max-width:1000px;   /* limite sur desktop seulement (on l’annule en mobile) */
+      margin:0 auto;
+      border-radius:12px;
+      text-shadow:1px 1px 3px rgba(0,0,0,.8);
     }
 
- .extrait-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  max-width: 100%; /* élargit la zone sur mobile */
-  margin: auto;
-}
-
-.extrait-container p {
-  font-size: 1em; /* taille standard */
-  line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-  .extrait-container {
-    max-width: 100%;  /* occupe toute la largeur */
-    padding: 1em;
-  }
-
-  .extrait-container p {
-    color: #fff8e6; 
-    font-size: 0.9em; /* police un peu réduite */
-    text-shadow: none; /* optionnel : texte net sur fond clair */
-  }
-}
-
-
-    .image-text-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
+    .extrait-container{
+      display:flex;
+      flex-direction:column;
+      gap:2em;
+      max-width:100%;
+      margin:auto;
     }
 
-    .extrait-image {
-      width: 100%;
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    h1{
+      text-align:center;
+      color:#00779e;
+      font-size:2em;
+      margin:0 0 1em;
     }
 
-    .extrait-texte p {
-      font-size: 1em;
-      line-height: 1.5;     /* resserré */
-      text-align: justify;
-      margin-bottom: 1em;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    .image-text-wrapper{
+      display:flex;
+      flex-direction:column;
+      gap:2em;
     }
 
-    h1 {
-      text-align: center;
-      color: #00779e;
-      font-size: 2em;
-      margin-bottom: 1em;
+    .extrait-image{
+      width:100%;
+      max-width:100%;
+      display:block;
+      border-radius:12px;
+      box-shadow:0 0 10px rgba(0,0,0,.3);
     }
 
-    .bouton-retour {
-      display: block;
-      width: fit-content;
-      margin: 2em auto 1em;
-      background: linear-gradient(145deg, #ffe9af, #f2c94c);
-      padding: 0.6em 1.2em;
-      border-radius: 12px;
-      color: #3b2a1d;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-      transition: all 0.2s ease-in-out;
-      text-align: center;
+    .extrait-texte{
+      flex:1 1 0;
+    }
+    .extrait-texte p{
+      font-size:1em;
+      line-height:1.5;
+      text-align:justify;
+      margin:0 0 1em;
     }
 
-    .bouton-retour:hover {
-      background: #c09c2c;
-      color: #fff8e6;
-      box-shadow: 0 0 16px rgba(255, 223, 100, 1);
+    .bouton-retour{
+      display:block;
+      width:fit-content;
+      margin:2em auto 1em;
+      background:linear-gradient(145deg,#ffe9af,#f2c94c);
+      padding:.6em 1.2em;
+      border-radius:12px;
+      color:#3b2a1d;
+      text-decoration:none;
+      font-weight:bold;
+      font-size:1rem;
+      box-shadow:0 0 10px rgba(212,175,55,.6);
+      transition:.2s ease-in-out;
+      text-align:center;
+    }
+    .bouton-retour:hover{
+      background:#c09c2c;
+      color:#fff8e6;
+      box-shadow:0 0 16px rgba(255,223,100,1);
     }
 
-    /* Bureau : image à gauche, texte à droite */
-    @media (min-width: 768px) {
-      .image-text-wrapper {
-        flex-direction: row;
-        align-items: flex-start;
+    /* Desktop : image à gauche, texte à droite */
+    @media (min-width:768px){
+      .image-text-wrapper{
+        flex-direction:row;
+        align-items:flex-start;
       }
-      .extrait-image {
-        flex: 0 0 35%;     /* base fiable avec le gap */
-      }
-      .extrait-texte {
-        flex: 1 1 0;
-        padding-left: 2em;
-      }
+      .extrait-image{ flex:0 0 35%; }
+      .extrait-texte{ padding-left:2em; }
     }
 
-    /* Mobile : image au-dessus du texte */
-    @media (max-width: 767px) {
-      .image-text-wrapper {
-        flex-direction: column;
+    /* Mobile : largeur totale + bloc texte plus large */
+    @media (max-width:767px){
+      body{
+        max-width:100% !important;
+        padding:1em;
+        border-radius:0;          /* pas d’arrondi collé aux bords */
       }
-      .extrait-image {
-        order: 1;
-        margin-bottom: 1em;
+      .image-text-wrapper{ flex-direction:column; }
+      .extrait-texte{
+        max-width:100%;
+        margin:0 auto;
+        background:rgba(0,0,0,.5);
+        padding:1em 1.2em;
+        border-radius:12px;
       }
-   @media (max-width: 767px) {
-  .extrait-texte {
-    order: 2;
-    max-width: 98%;          /* au lieu de 95%, plus resserré */
-    margin: auto;
-    background: rgba(0, 0, 0, 0.5); /* fond sombre semi-transparent */
-    padding: 1em 1.2em;      /* un peu plus large */
-    border-radius: 12px;
-  }
-
-  .extrait-texte p {
-    font-size: 0.95em;       /* légèrement réduit */
-    line-height: 1.45;       /* texte resserré */
-    margin-bottom: 0.8em;    /* moins d’espace entre les paragraphes */
-    text-align: justify;
-    text-indent: 1em;
-  }
-
-      h1 {
-        font-size: 1em;
-        line-height: 1.2;
-        text-align: center;
-        margin-bottom: 0.5em;
-        text-transform: uppercase;
+      .extrait-texte p{
+        font-size:.95em;
+        line-height:1.45;
+        margin-bottom:.8em;
+        text-shadow:none;         /* texte net */
+        text-indent:1em;
+      }
+      h1{
+        font-size:1.3em;
+        line-height:1.2;
+        margin-bottom:.6em;
+        text-transform:uppercase;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="extrait-container">
-  <h1>✨La ballade en libellule✨</h1>
+  <div class="extrait-container">
+    <h1>✨La ballade en libellule✨</h1>
 
-  <div class="image-text-wrapper">
+    <div class="image-text-wrapper">
+      <video autoplay loop muted playsinline class="extrait-image">
+        <source src="https://raw.githubusercontent.com/Dulis-Samantha/arzankia-site/main/extrait_Ptikitis.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
 
-    <video autoplay loop muted playsinline class="extrait-image">
-      <source src="https://raw.githubusercontent.com/Dulis-Samantha/arzankia-site/main/extrait_Ptikitis.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
-
-    <div class="extrait-texte">
-      <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
-      <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
-      <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
-      <p>— Destination nénuphar ! répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
-      <p>Je m’installai à califourchon sur son dos, comme sur un cheval, et Fanfan grimpa derrière moi, passant ses bras autour de ma taille.</p>
-      <p>— C’est parti ! lançai-je dans un souffle excité, au moment du décollage.</p>
-      <p>Le trajet jusqu’au nénuphar fut incroyable. Le vent caressait mon visage, les paysages défilaient sous mes pieds… et cette sensation de voler, de flotter au-dessus du monde…</p>
-      <p>C’était une liberté pure.</p>
-      <p>Une sensation que je n’oublierais jamais.</p>
+      <div class="extrait-texte">
+        <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
+        <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
+        <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
+        <p>— Destination nénuphar ! répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
+        <p>Je m’installai à califourchon sur son dos, comme sur un cheval, et Fanfan grimpa derrière moi, passant ses bras autour de ma taille.</p>
+        <p>— C’est parti ! lançai-je dans un souffle excité, au moment du décollage.</p>
+        <p>Le trajet jusqu’au nénuphar fut incroyable. Le vent caressait mon visage, les paysages défilaient sous mes pieds… et cette sensation de voler, de flotter au-dessus du monde…</p>
+        <p>C’était une liberté pure.</p>
+        <p>Une sensation que je n’oublierais jamais.</p>
+      </div>
     </div>
-  </div>
-</div>
-
 
     <a href="8.monde_Ptikitis.html" class="bouton-retour">← Monde des Ptikitis</a>
   </div>
