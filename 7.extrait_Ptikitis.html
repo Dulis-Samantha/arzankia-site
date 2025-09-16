@@ -118,20 +118,24 @@
         order: 1;
         margin-bottom: 1em;
       }
-      .extrait-texte {
-        order: 2;
-        max-width: 95%;
-        margin: auto;
-        background: rgba(255, 255, 255, 0.4);
-        padding: 1em;
-        border-radius: 12px;
-      }
-      .extrait-texte p {
-        font-size: 1em;
-        line-height: 1.5;   /* même densité que bureau */
-        margin-bottom: 1em;
-        text-indent: 1em;
-      }
+   @media (max-width: 767px) {
+  .extrait-texte {
+    order: 2;
+    max-width: 85%;          /* au lieu de 95%, plus resserré */
+    margin: auto;
+    background: rgba(0, 0, 0, 0.5); /* fond sombre semi-transparent */
+    padding: 1em 1.2em;      /* un peu plus large */
+    border-radius: 12px;
+  }
+
+  .extrait-texte p {
+    font-size: 0.95em;       /* légèrement réduit */
+    line-height: 1.45;       /* texte resserré */
+    margin-bottom: 0.8em;    /* moins d’espace entre les paragraphes */
+    text-align: justify;
+    text-indent: 1em;
+  }
+
       h1 {
         font-size: 1em;
         line-height: 1.2;
