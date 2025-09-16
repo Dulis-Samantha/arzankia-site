@@ -17,11 +17,31 @@
       border-radius: 12px;
     }
 
-    .extrait-container {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
-    }
+ .extrait-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  max-width: 95%; /* élargit la zone sur mobile */
+  margin: auto;
+}
+
+.extrait-container p {
+  font-size: 1em; /* taille standard */
+  line-height: 1.6;
+}
+
+/* Ajustement spécial pour mobile */
+@media (max-width: 768px) {
+  .extrait-container {
+    max-width: 100%; /* prend toute la largeur */
+    padding: 1em; /* réduit les marges */
+  }
+
+  .extrait-container p {
+    font-size: 0.9em; /* police légèrement réduite */
+  }
+}
+
 
     .image-text-wrapper {
       display: flex;
