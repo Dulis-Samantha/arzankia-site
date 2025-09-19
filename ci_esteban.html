@@ -245,6 +245,49 @@
         line-height:1.6;
       }
     }
+    /* 1) Le parchemin (colonne droite) doit être au-dessus pour capter les clics */
+.right-col{
+  position: relative;
+  z-index: 10;            /* le contenu (quiz) passe devant tout */
+}
+
+/* 2) La carte portrait à gauche ne doit pas bloquer les clics */
+.card-flip{
+  pointer-events: none;   /* elle n'a pas besoin d'être cliquée */
+  z-index: 1;             /* passe derrière le parchemin */
+}
+
+/* 3) Sur desktop, fixe bien les largeurs pour éviter le chevauchement */
+@media (min-width: 900px){
+  .hero-layout{
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    position: relative;
+  }
+  .card-flip{
+    flex: 0 0 30%;
+    max-width: 560px;
+    margin: 0;
+    margin-left: 130px;   /* comme ta page Raphaël */
+  }
+  .right-col{
+    flex: 1;
+    max-width: 400px;
+  }
+  .parchemin{
+    max-width: 460px;
+  }
+}
+
+/* 4) Par sécurité, assure l’image révélée reste dans son cadre */
+.card-back img,
+#estebanFinal{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
   </style>
 </head>
 <body>
