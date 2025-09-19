@@ -6,53 +6,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Esteban – Héros d’Arzankia</title>
   <style>
-       body {
+    :root {
+      --or: #ffd700;
+      --texte: #fff8e6;
+      --fond: #1b0f2f;
+      --ombre: #000;
+      --verre: rgba(255,255,255,0.06);
+      --bord: rgba(255,255,255,0.12);
+    }
+
+    body {
       margin: 0;
       padding: 0;
       background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-color: #1b0f2f;
+      background-color: var(--fond);
       background-size: cover;
       font-family: Georgia, serif;
-      color: #fff8e6;
-      text-shadow: 1px 1px 4px #000;
+      color: var(--texte);
+      text-shadow: 1px 1px 4px var(--ombre);
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
       padding: 2em;
-      text-align: center;
     }
 
     h1 {
+      text-align: center;
       font-size: 2.5em;
-      color: #ffd700;
-      text-shadow: 0 0 10px #3a1c00;
+      color: var(--or);
+      margin-bottom: 1.2em;
+      text-shadow: 0 0 12px #3a1c00;
+    }
+
+    .section {
+      background: var(--verre);
+      border: 1px solid var(--bord);
+      border-radius: 14px;
+      padding: 2em;
+      margin-bottom: 2em;
+      backdrop-filter: blur(5px);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--or);
+      font-size: 1.6em;
       margin-bottom: 1em;
     }
 
-    .parchemin {
-      background: url('parchemin.png') center center no-repeat;
-      background-size: contain;
-      background-color: rgba(255, 248, 230, 0.85);
-      padding: 4em 2em;
-      margin: auto;
-      max-width: 800px;
-      color: #3b2a1d;
-      font-size: 1.1em;
-      line-height: 1.7;
-      text-shadow: none;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255, 240, 200, 0.5);
+    p {
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    /* === Zone du quiz === */
+    .quiz {
+      margin-top: 2em;
+      background: rgba(0,0,0,0.5);
+      padding: 2em;
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .question {
+      margin-bottom: 1.5em;
+    }
+
+    .question p {
+      font-weight: bold;
+      color: var(--or);
+    }
+
+    .question button {
+      margin: 0.5em;
+      padding: 0.6em 1.2em;
+      font-family: Georgia, serif;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+      background-color: #ffe18a;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question button:hover {
+      background: #fff2b0;
+      transform: scale(1.05);
+    }
+
+    #estebanFinal, #estebanInfo {
+      display: none;
+      margin-top: 2em;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.5);
+      max-width: 100%;
+    }
+
+    #success-message {
+      display: none;
+      color: var(--or);
+      font-size: 1.4em;
+      margin-top: 1em;
+      text-align: center;
     }
 
     .back-button {
-  margin-top: 3em;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
-}
+      margin-top: 3em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
+    }
 
     .back-button a {
       display: inline-block;
@@ -71,108 +137,62 @@
       box-shadow: 0 0 20px #fff8c6;
       transform: scale(1.05);
     }
-
-    .quiz {
-      margin-top: 3em;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 2em;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-
-    .question {
-      margin-bottom: 1.5em;
-    }
-
-    .question p {
-      font-weight: bold;
-      color: #ffd700;
-    }
-
-    .question button {
-      margin: 0.5em;
-      padding: 0.5em 1em;
-      font-family: Georgia, serif;
-      font-size: 1em;
-      border-radius: 8px;
-      border: none;
-      background-color: #ffe18a;
-      cursor: pointer;
-    }
-
-    #estebanFinal, #estebanInfo {
-      display: none;
-      margin-top: 2em;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-      max-width: 100%;
-    }
-
-    #success-message {
-      display: none;
-      color: #ffd700;
-      font-size: 1.5em;
-      margin-top: 1em;
-    }
   </style>
 </head>
-
 <body>
   <div class="container">
-    <h1>Esteban </h1>
+    <h1>✨ Esteban ✨</h1>
 
-    <div id="intro-quiz" class="parchemin" style="margin-top: 3em;">
-      <p><strong>💫 Déverrouille le portrait d'Esteban</strong></p>
-      <p>Pour faire apparaître le véritable portrait d’Esteban, tu devras répondre à 6 questions liées à sa vie, ses liens et ses secrets.</p>
-      <p>Seras-tu capable de toutes les retrouver ?</p>
+    <div class="section">
+      <h2>💫 Déverrouille le portrait d’Esteban</h2>
+      <p>
+        Pour faire apparaître le véritable portrait d’Esteban, tu devras répondre à 6 questions liées à sa vie, ses liens et ses secrets.<br>
+        Seras-tu capable de toutes les retrouver ?
+      </p>
     </div>
 
-    <div class="quiz">
+    <div class="section quiz">
+      <!-- === Ton quiz d’Esteban tel quel === -->
       <div id="q1" class="question">
         <p>Quel est l’âge d’Esteban lorsqu'il voit Raphaël pour la première fois ?</p>
         <button onclick="checkAnswer('q1', true)">13 ans</button>
         <button onclick="checkAnswer('q1', false)">12 ans</button>
         <button onclick="checkAnswer('q1', false)">14 ans</button>
       </div>
-
-      <div id="q2" class="question">
+      <div id="q2" class="question"> 
         <p>De quel monde vient Esteban ?</p>
-        <button onclick="checkAnswer('q2', false)">Monde des Quacks</button>
-        <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button>
-        <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button>
+        <button onclick="checkAnswer('q2', false)">Monde des Quacks</button> 
+        <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button> 
+        <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button> 
+      </div> 
+      <div id="q3" class="question"> 
+        <p>Comment s'appelle sa dragonne ?</p> 
+        <button onclick="checkAnswer('q3', false)">Zyra</button> 
+        <button onclick="checkAnswer('q3', true)">Mililou</button> 
+        <button onclick="checkAnswer('q3', false)">Brisella</button> 
+      </div> 
+      <div id="q4" class="question"> 
+        <p>Qui est le frère d'Esteban ?</p> 
+        <button onclick="checkAnswer('q4', false)">Kelyan</button> 
+        <button onclick="checkAnswer('q4', true)">Antony</button> 
+        <button onclick="checkAnswer('q4', false)">Nino</button> 
+      </div> 
+      <div id="q5" class="question"> 
+        <p>Qui est le meilleur ami d'Esteban ?</p> 
+        <button onclick="checkAnswer('q5', true)">Kelyan</button> 
+        <button onclick="checkAnswer('q5', false)">Antony</button> 
+        <button onclick="checkAnswer('q5', false)">Nino</button> 
+      </div> 
+      <div id="q6" class="question"> 
+        <p>Quelle est la clé d'Esteban ?</p> 
+        <button onclick="checkAnswer('q6', false)">Boussole</button> 
+        <button onclick="checkAnswer('q6', false)">Montre à gousset</button> 
+        <button onclick="checkAnswer('q6', true)">Os de dinosaure</button> 
       </div>
-
-      <div id="q3" class="question">
-        <p>Comment s'appelle sa dragonne ?</p>
-        <button onclick="checkAnswer('q3', false)">Zyra</button>
-        <button onclick="checkAnswer('q3', true)">Mililou</button>
-        <button onclick="checkAnswer('q3', false)">Brisella</button>
-      </div>
-
-      <div id="q4" class="question">
-        <p>Qui est le frère d'Esteban ?</p>
-        <button onclick="checkAnswer('q4', false)">Kelyan</button>
-        <button onclick="checkAnswer('q4', true)">Antony</button>
-        <button onclick="checkAnswer('q4', false)">Nino</button>
-      </div>
-
-      <div id="q5" class="question">
-        <p>Qui est le meilleur ami d'Esteban ?</p>
-        <button onclick="checkAnswer('q5', true)">Kelyan</button>
-        <button onclick="checkAnswer('q5', false)">Antony</button>
-        <button onclick="checkAnswer('q5', false)">Nino</button>
-      </div>
-
-      <div id="q6" class="question">
-        <p>Quelle est la clé d'Esteban ?</p>
-        <button onclick="checkAnswer('q6', false)">Boussole</button>
-        <button onclick="checkAnswer('q6', false)">Montre à gousset</button>
-        <button onclick="checkAnswer('q6', true)">Os de dinosaure</button>
-      </div>
-
+    
       <img id="estebanFinal" src="photo_esteban.webp" alt="Esteban final">
 
-      <div id="estebanInfo" class="parchemin">
+      <div id="estebanInfo" class="section" style="background:rgba(255,248,230,0.85);color:#3b2a1d;text-shadow:none;">
         <p><strong>Âge :</strong> 13 ans</p>
         <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
         <p><strong>Clé d’accès :</strong> Os de dinosaure</p>
@@ -184,8 +204,8 @@
 
       <div id="success-message">✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨</div>
 
-      <div id="replay-button" style="display: none; margin-top: 1.5em;">
-        <button onclick="restartQuiz()" style="padding: 0.7em 1.5em; background-color: #ffe18a; border: none; border-radius: 8px; font-family: Georgia, serif; font-size: 1em; cursor: pointer; box-shadow: 0 0 10px #ffd700;">
+      <div id="replay-button" style="display:none; margin-top:1.5em; text-align:center;">
+        <button onclick="restartQuiz()" style="padding:0.7em 1.5em; background-color:#ffe18a; border:none; border-radius:8px; font-family:Georgia, serif; font-size:1em; cursor:pointer; box-shadow:0 0 10px #ffd700;">
           🔁 Rejouer le quiz
         </button>
       </div>
@@ -202,19 +222,15 @@
     const quizEstebanDone = localStorage.getItem("quizEstebanDone");
 
     document.addEventListener("DOMContentLoaded", function () {
-  if (quizEstebanDone === "true") {
-  document.getElementById("estebanFinal").style.display = "block";
-  document.getElementById("success-message").style.display = "block";
-  document.getElementById("estebanInfo").style.display = "block";
-  document.getElementById("replay-button").style.display = "block";
-  document.body.classList.add("fond-esteban");
-
-  // Masquer le bloc d'intro
-  document.getElementById("intro-quiz").style.display = "none";
-
-  const allQuestions = document.querySelectorAll(".question");
-  allQuestions.forEach(q => q.style.display = "none");
-}
+      if (quizEstebanDone === "true") {
+        document.getElementById("estebanFinal").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("estebanInfo").style.display = "block";
+        document.getElementById("replay-button").style.display = "block";
+        document.getElementById("intro-quiz")?.style.display = "none";
+        const allQuestions = document.querySelectorAll(".question");
+        allQuestions.forEach(q => q.style.display = "none");
+      }
     });
 
     function checkAnswer(questionId, isCorrect) {
@@ -228,31 +244,24 @@
         return;
       }
 
-     if (correctAnswers === 6) {
-  document.getElementById("estebanFinal").style.display = "block";
-  document.getElementById("success-message").style.display = "block";
-  document.getElementById("estebanInfo").style.display = "block";
-  document.getElementById("replay-button").style.display = "block";
-  document.body.classList.add("fond-esteban");
-
-  // Masquer le bloc d'intro
-  document.getElementById("intro-quiz").style.display = "none";
-
-  localStorage.setItem("quizEstebanDone", "true");
-}
+      if (correctAnswers === 6) {
+        document.getElementById("estebanFinal").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("estebanInfo").style.display = "block";
+        document.getElementById("replay-button").style.display = "block";
+        document.getElementById("intro-quiz")?.style.display = "none";
+        localStorage.setItem("quizEstebanDone", "true");
+      }
     }
 
     function resetQuiz() {
       correctAnswers = 0;
       const allQuestions = document.querySelectorAll(".question");
       allQuestions.forEach(q => q.style.display = "block");
-
       document.getElementById("estebanFinal").style.display = "none";
       document.getElementById("success-message").style.display = "none";
       document.getElementById("estebanInfo").style.display = "none";
       document.getElementById("replay-button").style.display = "none";
-
-      document.body.classList.remove("fond-esteban");
       localStorage.removeItem("quizEstebanDone");
     }
 
