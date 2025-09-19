@@ -48,29 +48,18 @@
       line-height:1.4;
       text-align:center;
     }
-    .archives q {
-      font-style:italic;
-    }
-    .archives .signature {
+    .archives q { font-style:italic; }
+    .archives .signature{
       display:block;
       margin-top:0.4rem;
       font-size:0.9rem;
       opacity:0.8;
     }
 
+    /* ====== Layout principal (comme Raphaël) ====== */
     .hero-layout{
       display:block;
       margin-top:0.5rem;
-    }
-
-    .image-hero{
-      width:100%;
-      height:auto;
-      border-radius:12px;
-      box-shadow:0 0 20px rgba(255,248,230,0.5);
-      margin:0.8rem auto 1.2rem;
-      max-width:700px;
-      display:block;
     }
 
     .right-col{
@@ -78,7 +67,8 @@
       margin:0 auto;
     }
 
-    .quiz, .parchemin{
+    /* Parchemin / cadre contenu */
+    .parchemin{
       background:url('parchemin_fond.png') center center no-repeat;
       background-size:contain;
       background-color:rgba(255,248,230,0.85);
@@ -90,20 +80,115 @@
       font-size:0.95rem;
       line-height:1.4;
       margin:0 auto 1.5rem;
+      overflow:hidden;
     }
+    .parchemin p{ margin:0.4rem 0; }
 
-    .quiz p{ margin:0.4rem 0; }
+    /* ====== Carte portrait “flip” à gauche ====== */
+    .card-flip{
+      perspective:1000px;
+      width:min(86vw, 700px);
+      aspect-ratio:3/4;
+      margin:.8rem auto 1.2rem;
+      border-radius:12px;
+      box-shadow:0 0 20px rgba(255,248,230,.5);
+    }
+    .card-inner{
+      position:relative;
+      width:100%;
+      height:100%;
+      transition:transform .8s;
+      transform-style:preserve-3d;
+      border-radius:12px;
+    }
+    .card-front, .card-back{
+      position:absolute;
+      inset:0;
+      backface-visibility:hidden;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .card-front{
+      background:rgba(255,248,230,0.85);
+      color:#3b2a1d;
+    }
+    .card-front span{
+      font-size:8rem;
+      font-weight:900;
+      line-height:1;
+      text-shadow:1px 1px 3px #000;
+      filter:drop-shadow(0 3px 8px rgba(0,0,0,.25));
+    }
+    .card-back{
+      transform:rotateY(180deg);
+      background:#000;
+    }
+    .card-back img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    /* état révélé */
+    .revealed .card-inner{ transform:rotateY(180deg); }
 
-    .question button{
-      margin:0.4em;
-      padding:0.5em 1em;
-      border-radius:8px;
+    /* ====== Quiz (dans le parchemin de droite) ====== */
+    .quiz .question{ margin:0 0 1.2em; }
+    .quiz .question p{
+      margin:.2em 0 .6em;
+      font-weight:700;
+      color:#3b2a1d;
+    }
+    .quiz .question button{
+      margin:.25em;
+      padding:.6em 1.1em;
       border:none;
-      background-color:#ffe18a;
+      border-radius:8px;
+      background:#ffe18a;
+      color:#2a2416;
       font-family:Georgia, serif;
       cursor:pointer;
+      transition:transform .15s ease, filter .15s ease;
+    }
+    .quiz .question button:hover{
+      transform:translateY(-1px);
+      filter:saturate(1.05);
     }
 
+    #estebanInfo{
+      display:none;
+      margin-top:1rem;
+      background:rgba(255,248,230,.92);
+      padding:1rem;
+      border-radius:12px;
+      box-shadow:0 0 18px rgba(0,0,0,.15) inset;
+    }
+    #success-message{
+      display:none;
+      color:#7a5b00;
+      font-weight:bold;
+      text-align:center;
+      margin-top:1rem;
+    }
+    #replay-button{
+      display:none;
+      margin-top:1rem;
+      text-align:center;
+    }
+    #replay-button button{
+      padding:.7em 1.5em;
+      background-color:#ffe18a;
+      border:none;
+      border-radius:8px;
+      font-family:Georgia, serif;
+      font-size:1em;
+      cursor:pointer;
+      box-shadow:0 0 10px #ffd700;
+    }
+
+    /* ====== Boutons dorés (mêmes que Raphaël) ====== */
     .back-button{
       display:flex;
       flex-direction:column;
@@ -113,58 +198,47 @@
       width:100%;
       max-width:260px;
     }
-
     .back-button a{
-      --gold-1:#fff5c7;
-      --gold-2:#f3e3a0;
-      --gold-3:#e2d289;
-      --edge:#d9c889;
-      --shadow:rgba(0,0,0,.28);
-
-      position:relative;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.6rem;
-      width:100%;
-      padding:0.95em 1.4em;
-      border-radius:15px;
-
+      --gold-1:#fff5c7; --gold-2:#f3e3a0; --gold-3:#e2d289;
+      --edge:#d9c889;   --shadow:rgba(0,0,0,.28);
+      position:relative; display:inline-flex; align-items:center; justify-content:center;
+      gap:.6rem; width:100%;
+      padding:.95em 1.4em; border-radius:15px;
       background:linear-gradient(180deg, var(--gold-1), var(--gold-2) 55%, var(--gold-3));
       border:1px solid var(--edge);
-      box-shadow:
-        0 10px 22px var(--shadow),
-        inset 0 1px 0 rgba(255,255,255,.75),
-        inset 0 -2px 6px rgba(0,0,0,.08);
-
-      color:#2a2416;
-      text-decoration:none;
-      font-weight:800;
-      letter-spacing:.2px;
+      box-shadow:0 10px 22px var(--shadow),
+                 inset 0 1px 0 rgba(255,255,255,.75),
+                 inset 0 -2px 6px rgba(0,0,0,.08);
+      color:#2a2416; text-decoration:none; font-weight:800; letter-spacing:.2px;
       text-shadow:0 1px 0 rgba(255,255,255,.55);
       transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
     }
+    .back-button a:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(255,248,198,.35),
+                 inset 0 1px 0 rgba(255,255,255,.85),
+                 inset 0 -3px 10px rgba(0,0,0,.08);
+      filter:saturate(1.05);
+    }
 
-    @media (min-width: 900px){
+    /* ——— Desktop : 2 colonnes identiques à Raphaël ——— */
+    @media (min-width:900px){
       .hero-layout{
         display:flex;
         align-items:flex-start;
         gap:2rem;
       }
-
-      .image-hero{
+      .card-flip{
         width:30%;
         max-width:560px;
         margin:0;
-        margin-left:130px;
+        margin-left:130px; /* même recul que l'image de Raphaël */
       }
-
       .right-col{
         flex:1;
         max-width:400px;
       }
-
-      .quiz{
+      .parchemin{
         max-width:460px;
         padding:2rem 1.8rem;
         font-size:1.05rem;
@@ -173,7 +247,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="container">
     <h1>Esteban</h1>
@@ -184,14 +257,23 @@
     </p>
 
     <section class="hero-layout">
-      <img src="photo_esteban.webp" alt="Portrait d’Esteban" class="image-hero" />
+      <!-- Carte portrait à gauche (se retourne à la fin du quiz) -->
+      <div class="card-flip" id="cardFlip">
+        <div class="card-inner" id="estebanCard">
+          <div class="card-front"><span>?</span></div>
+          <div class="card-back">
+            <img src="photo_esteban.webp" alt="Portrait d’Esteban">
+          </div>
+        </div>
+      </div>
 
+      <!-- Colonne droite : parchemin + quiz -->
       <div class="right-col">
-        <div class="quiz">
+        <div class="parchemin quiz">
           <p><strong>💫 Déverrouille le portrait d’Esteban</strong></p>
           <p>Réponds aux 6 questions pour révéler son portrait et ses secrets.</p>
 
-          <!-- === Ton quiz d’Esteban tel quel === -->
+          <!-- === Quiz (inchangé) === -->
           <div id="q1" class="question">
             <p>Quel est l’âge d’Esteban lorsqu'il voit Raphaël pour la première fois ?</p>
             <button onclick="checkAnswer('q1', true)">13 ans</button>
@@ -205,52 +287,52 @@
             <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button>
             <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button>
           </div>
-          
-  <div id="q3" class="question"> 
-    <p>Comment s'appelle sa dragonne ?</p> 
-    <button onclick="checkAnswer('q3', false)">Zyra</button> 
-    <button onclick="checkAnswer('q3', true)">Mililou</button> 
-    <button onclick="checkAnswer('q3', false)">Brisella</button> 
-  </div> 
 
-  <div id="q4" class="question"> 
-    <p>Qui est le frère d'Esteban ?</p> 
-    <button onclick="checkAnswer('q4', false)">Kelyan</button> 
-    <button onclick="checkAnswer('q4', true)">Antony</button> 
-    <button onclick="checkAnswer('q4', false)">Nino</button> 
-  </div> 
+          <div id="q3" class="question">
+            <p>Comment s'appelle sa dragonne ?</p>
+            <button onclick="checkAnswer('q3', false)">Zyra</button>
+            <button onclick="checkAnswer('q3', true)">Mililou</button>
+            <button onclick="checkAnswer('q3', false)">Brisella</button>
+          </div>
 
-  <div id="q5" class="question"> 
-    <p>Qui est le meilleur ami d'Esteban ?</p> 
-    <button onclick="checkAnswer('q5', true)">Kelyan</button> 
-    <button onclick="checkAnswer('q5', false)">Antony</button> 
-    <button onclick="checkAnswer('q5', false)">Nino</button> 
-  </div> 
+          <div id="q4" class="question">
+            <p>Qui est le frère d'Esteban ?</p>
+            <button onclick="checkAnswer('q4', false)">Kelyan</button>
+            <button onclick="checkAnswer('q4', true)">Antony</button>
+            <button onclick="checkAnswer('q4', false)">Nino</button>
+          </div>
 
-  <div id="q6" class="question"> 
-    <p>Quelle est la clé d'Esteban ?</p> 
-    <button onclick="checkAnswer('q6', false)">Boussole</button> 
-    <button onclick="checkAnswer('q6', false)">Montre à gousset</button> 
-    <button onclick="checkAnswer('q6', true)">Os de dinosaure</button> 
-  </div>
+          <div id="q5" class="question">
+            <p>Qui est le meilleur ami d'Esteban ?</p>
+            <button onclick="checkAnswer('q5', true)">Kelyan</button>
+            <button onclick="checkAnswer('q5', false)">Antony</button>
+            <button onclick="checkAnswer('q5', false)">Nino</button>
+          </div>
 
-          <!-- … garde les autres questions ici comme dans ton code … -->
+          <div id="q6" class="question">
+            <p>Quelle est la clé d'Esteban ?</p>
+            <button onclick="checkAnswer('q6', false)">Boussole</button>
+            <button onclick="checkAnswer('q6', false)">Montre à gousset</button>
+            <button onclick="checkAnswer('q6', true)">Os de dinosaure</button>
+          </div>
 
-          <img id="estebanFinal" src="photo_esteban.webp" alt="Esteban final" style="display:none; margin-top:1em; border-radius:12px; box-shadow:0 0 20px #ffd700;">
-
-          <div id="estebanInfo" style="display:none; margin-top:1em;">
+          <!-- Infos + messages -->
+          <div id="estebanInfo">
             <p><strong>Âge :</strong> 13 ans</p>
             <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
             <p><strong>Clé d’accès :</strong> Os de dinosaure</p>
-            <p><strong>Spécialisation :</strong> Dresseur – lien avec Mililou</p>
+            <p><strong>Spécialisation :</strong> Dresseur — lien avec Mililou la dragonne</p>
             <p><strong>Statut :</strong> En formation Niv I</p>
           </div>
 
-          <div id="success-message" style="display:none; margin-top:1em; color:#ffd700; font-weight:bold;">
-            ✨ Bravo ! Tu as débloqué Esteban ! ✨
+          <div id="success-message">✨ Bravo ! Tu as débloqué Esteban ! ✨</div>
+
+          <div id="replay-button">
+            <button onclick="restartQuiz()">🔁 Rejouer le quiz</button>
           </div>
         </div>
 
+        <!-- Boutons bas (mêmes styles que Raphaël) -->
         <nav class="back-button" aria-label="Navigation héros Esteban">
           <a href="8.monde_Yakkas.html">✨Découvre mon monde</a>
           <a href="3.les_heros.html">← Retour aux héros</a>
@@ -261,29 +343,12 @@
 
   <script>
     let correctAnswers = 0;
-    function checkAnswer(questionId, isCorrect) {
-      const q = document.getElementById(questionId);
-      if(isCorrect){
-        correctAnswers++;
-        q.style.display = "none";
-      }else{
-        alert("❌ Mauvaise réponse ! Le quiz redémarre…");
-        resetQuiz();
-        return;
-      }
-      if(correctAnswers===6){
-        document.getElementById("estebanFinal").style.display="block";
-        document.getElementById("estebanInfo").style.display="block";
-        document.getElementById("success-message").style.display="block";
-      }
-    }
-    function resetQuiz(){
-      correctAnswers=0;
-      document.querySelectorAll(".question").forEach(q=>q.style.display="block");
-      document.getElementById("estebanFinal").style.display="none";
-      document.getElementById("estebanInfo").style.display="none";
-      document.getElementById("success-message").style.display="none";
-    }
-  </script>
-</body>
-</html>
+    const STORAGE_KEY = "quizEstebanDone";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Si le quiz a déjà été réussi, on laisse la carte révélée
+      if (localStorage.getItem(STORAGE_KEY) === "true") {
+        document.getElementById("cardFlip").classList.add("revealed");
+        document.querySelectorAll(".question").forEach(q=>q.style.display="none");
+        document.getElementById("estebanInfo").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
