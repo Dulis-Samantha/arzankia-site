@@ -100,6 +100,32 @@
     }
     .quiz-button a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
 
+    /* Rangée bouton test + grimoire */
+.cta-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.9rem;           /* espace entre les deux */
+  flex-wrap:wrap;
+  margin-top:1.2rem;
+}
+
+/* Image du grimoire : plus petite + cliquable */
+.grimoire-button img{
+  height:56px;         /* taille du grimoire (réduction) */
+  width:auto;
+  display:block;
+  cursor:pointer;
+  transition:transform .18s ease, filter .18s ease;
+}
+.grimoire-button img:hover{ transform:translateY(-2px); filter:brightness(1.08); }
+
+/* Un poil plus petit sur mobile */
+@media (max-width:600px){
+  .grimoire-button img{ height:48px; }
+}
+
+
     /* ===== Pied de page ===== */
     .footer-buttons{
       display:flex;
@@ -224,7 +250,12 @@
         <a href="quel_heros_es_tu.html">Fais le test : Quel héros es-tu ?</a>
       </div>
       <div class="grimoire-button">
-        <img src="grimoire_test.png" alt="Le Grimoire des Héros" id="btnGrimoire">
+        <<img src="grimoire_test.png"
+     alt="Le Grimoire des Héros"
+     id="btnGrimoire"
+     role="button"
+     tabindex="0">
+
       </div>
     </div>
 
@@ -321,6 +352,15 @@
       if(e.key==="Enter") ouvrirGrimoire();
       if(e.key==="Escape") modalG.classList.remove("open");
     });
+    // Ouvrir la modale Grimoire aussi au clavier (Entrée/Espace)
+openG.addEventListener("keydown", (e)=>{
+  if(e.key==="Enter" || e.key===" "){
+    e.preventDefault();
+    modalG.classList.add("open");
+    setTimeout(()=>inputG.focus(),100);
+  }
+});
+
   </script>
 </body>
 </html>
