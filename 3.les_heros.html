@@ -91,6 +91,7 @@
       border-radius:14px;
       text-decoration:none;
       text-align:center;
+      white-space:normal;
       line-height:1.35;
       text-shadow:0 1px 1px rgba(255,255,255,.7);
       box-shadow:0 0 14px rgba(255,215,0,.6), 0 6px 14px rgba(0,0,0,.4);
@@ -105,21 +106,21 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:1.4rem;
+      gap:1.4rem;            /* espace entre les deux */
       flex-wrap:wrap;
       margin-top:1.6rem;
     }
 
-    /* ===== Grimoire : grand + lumineux + animé ===== */
+    /* ===== Grimoire : plus grand + lumineux + animé ===== */
     .grimoire-button img{
-      height:78px;
+      height:78px;           /* taille PC */
       width:auto;
       display:block;
       cursor:pointer;
       transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
       filter:drop-shadow(0 0 10px rgba(255,215,0,.45));
       outline:none;
-      animation:grimoirePulse 2.6s infinite ease-in-out;
+      animation:grimoirePulse 2.6s infinite ease-in-out;  /* lueur pulsante */
     }
     .grimoire-button img:hover{
       transform:scale(1.08) rotate(-2deg);
@@ -132,6 +133,9 @@
     @keyframes grimoirePulse{
       0%,100% { filter:drop-shadow(0 0 10px rgba(255,215,0,.45)); }
       50%     { filter:drop-shadow(0 0 18px rgba(255,240,150,.9)); }
+    }
+    @media (max-width:600px){
+      .grimoire-button img{ height:64px; }  /* taille mobile */
     }
 
     /* ===== Pied de page ===== */
@@ -229,19 +233,6 @@
       color: #ffb3b3;
       margin-top: 0.5em;
     }
-
-    /* ===== Spécial mobile ===== */
-    @media (max-width:600px){
-      .quiz-button a{
-        white-space:normal;
-        text-align:center;
-      }
-      .quiz-button a::after{
-        content:"\AQuel héros es-tu ?";
-        white-space:pre;
-      }
-      .grimoire-button img{ height:64px; }
-    }
   </style>
 </head>
 <body>
@@ -268,7 +259,7 @@
 
     <div class="cta-row">
       <div class="quiz-button">
-        <a href="quel_heros_es_tu.html">Fais le test :<br>Quel héros es-tu ?</a>
+        <a href="quel_heros_es_tu.html">Fais le test : Quel héros es-tu ?</a>
       </div>
       <div class="grimoire-button">
         <img
@@ -287,27 +278,28 @@
     </div>
   </div>
 
-  <!-- Modales (inchangées) -->
+  <!-- Modale Alicia -->
   <div id="modalAlicia" aria-hidden="true">
-    <div class="card">
-      <button class="close" id="closeAlicia">✕</button>
-      <h3>Secret d’Alicia</h3>
-      <p>Entre le mot magique pour débloquer sa fiche :</p>
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="aliciaTitle">
+      <button class="close" id="closeAlicia" aria-label="Fermer">✕</button>
+      <h3 id="aliciaTitle">Secret d’Alicia</h3>
+      <p>Entre le nom de son animal pour débloquer sa fiche (#tome 1.5) :</p>
       <div class="row">
-        <input type="text" id="pwdAlicia" />
+        <input type="text" id="pwdAlicia" placeholder="" autocomplete="off" />
         <button id="okAlicia">OK</button>
       </div>
       <div id="msgAlicia"></div>
     </div>
   </div>
 
+  <!-- Modale Grimoire -->
   <div id="modalGrimoire" aria-hidden="true">
-    <div class="card">
-      <button class="close" id="closeGrimoire">✕</button>
-      <h3>Le Grimoire des Héros</h3>
-      <p>Entre le mot magique pour ouvrir le grimoire :</p>
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="grimoireTitle">
+      <button class="close" id="closeGrimoire" aria-label="Fermer">✕</button>
+      <h3 id="grimoireTitle">Le Grimoire des Héros</h3>
+      <p>Entre l'ingrédient pour ouvrir le grimoire :</p>
       <div class="row">
-        <input type="text" id="pwdGrimoire" />
+        <input type="text" id="pwdGrimoire" placeholder="" autocomplete="off" />
         <button id="okGrimoire">OK</button>
       </div>
       <div id="msgGrimoire"></div>
@@ -315,11 +307,12 @@
   </div>
 
   <script>
+    /* Utilitaire : normaliser une chaîne (accents/majuscules) */
     function normalise(s){
       return (s||"").trim().normalize("NFD").replace(/\p{Diacritic}/gu,'').toLowerCase();
     }
 
-    /* === Alicia === */
+    /* ========= Alicia ========= */
     const modalA = document.getElementById("modalAlicia");
     const openA  = document.getElementById("btnAlicia");
     const closeA = document.getElementById("closeAlicia");
@@ -329,7 +322,9 @@
 
     function verifierCleAlicia() {
       const valeur = normalise(inputA.value);
-      if(valeur==="nelice"){
+      /* toutes variantes accentuées de "Nélicé" → "nelice" après normalisation */
+      const autorise = ["nelice"];
+      if(autorise.includes(valeur)){
         window.location.href = "ci_alicia.html";
       } else {
         msgA.textContent = "Hmm… ce n’est pas le bon mot magique.";
@@ -349,7 +344,7 @@
       if(e.key==="Escape") modalA.classList.remove("open");
     });
 
-    /* === Grimoire === */
+    /* ========= Grimoire ========= */
     const modalG = document.getElementById("modalGrimoire");
     const openG  = document.getElementById("btnGrimoire");
     const closeG = document.getElementById("closeGrimoire");
@@ -361,7 +356,13 @@
       const valeur = normalise(inputG.value);
       if(valeur==="aventurier"){ window.location.href="grimoire_aventurier.html"; }
       else if(valeur==="chercheur"){ window.location.href="grimoire_chercheur.html"; }
-      else if(valeur.includes("pescadrille")||valeur.includes("pecadrille")||valeur.includes("ecaille")||valeur.includes("ecailles")||valeur.includes("bleu")){
+      else if(
+        valeur.includes("pescadrille") ||
+        valeur.includes("pecadrille")  ||
+        valeur.includes("ecaille")     ||
+        valeur.includes("ecailles")    ||
+        valeur.includes("bleu")
+      ){
         window.location.href="definition_pescadrille.html";
       } else {
         msgG.textContent="Aucun ingrédient trouvé pour ce mot.";
@@ -379,6 +380,8 @@
       if(e.key==="Enter") ouvrirGrimoire();
       if(e.key==="Escape") modalG.classList.remove("open");
     });
+
+    /* Ouvrir le grimoire au clavier (Entrée/Espace) */
     openG.addEventListener("keydown", (e)=>{
       if(e.key==="Enter" || e.key===" " || e.key==="Spacebar" || e.code==="Space"){
         e.preventDefault();
