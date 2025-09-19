@@ -100,7 +100,7 @@
     }
     .quiz-button a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
 
-    /* ===== Pied de page (sans cadre jaune) ===== */
+    /* ===== Pied de page ===== */
     .footer-buttons{
       display:flex;
       justify-content:center;
@@ -131,175 +131,70 @@
     }
     .footer-buttons a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
 
-    /* ===== Cadre secret Alicia ===== */
-    #bloc-cle-alicia{
-      display:none;
-      text-align:center;
-      margin-top:1.5em;
-      background:rgba(0,0,0,.6);
-      padding:1.2em;
-      border-radius:12px;
-      box-shadow:0 0 10px rgba(255,215,0,.4);
+    /* ===== Modale générique ===== */
+    #modalGrimoire, #modalAlicia {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
     }
-    #bloc-cle-alicia input{
-      padding:.6em 1em;
-      border-radius:8px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.1);
-      color:#fff;
+    #modalGrimoire.open, #modalAlicia.open { display:flex; }
+    #modalGrimoire .card, #modalAlicia .card {
+      background: linear-gradient(180deg, #1a0e22, #100815);
+      border: 1px solid var(--verre-bord);
+      border-radius: 14px;
+      padding: 1.5em;
+      max-width: 92vw;
+      width: 360px;
+      color: var(--texte);
+      box-shadow: 0 12px 28px rgba(0,0,0,.6);
+      text-align: center;
+      position: relative;
     }
-    #bloc-cle-alicia button{
-      padding:.6em 1.1em;
-      margin-left:.5em;
-      background:#ffd65b;
-      color:#2a1c00;
-      font-weight:700;
-      border-radius:10px;
-      border:none;
-      cursor:pointer;
+    #modalGrimoire h3, #modalAlicia h3 { margin:0 0 0.6em; color: var(--or); }
+    #modalGrimoire input, #modalAlicia input {
+      padding: .6em .9em;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.07);
+      color: var(--texte);
+      width: 100%;
     }
-
-    /* ===== Mobile compact ===== */
-    @media (max-width:600px){
-      body{ padding:.6rem; background-attachment:scroll; }
-      .container{ padding:.8rem; border-radius:10px; box-shadow:0 6px 14px rgba(0,0,0,.28); }
-      h1{ font-size:1.5rem; margin-bottom:.7rem; }
-      p.intro{ font-size:.95rem; margin:0 auto 1rem; max-width:38ch; }
-
-      .hero-buttons{
-        gap:.45rem;
-        grid-template-columns:1fr 1fr; /* 2 colonnes fixes */
-        margin-top:.8rem;
-      }
-      .hero-buttons a{
-        padding:.55em .75em;
-        font-size:.98rem;
-        border-radius:12px;
-        box-shadow:0 3px 8px rgba(0,0,0,.28);
-      }
-
-      .quiz-button{ margin-top:1.2rem; }
-      .quiz-button a{
-        padding:.8em 1em;
-        font-size:1rem;
-        border-radius:12px;
-        box-shadow:0 4px 10px rgba(0,0,0,.3);
-        max-width:100%;
-      }
-
-      .footer-buttons{ gap:.35rem; margin-top:1rem; padding:.35rem; }
-      .footer-buttons a{
-        margin:.2em .15em; padding:.5em .8em; font-size:.95rem; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,.26);
-      }
-
-      #bloc-cle-alicia{ margin-top:1rem; padding:.9rem; }
-      #bloc-cle-alicia input{ width:58%; padding:.5em .8em; font-size:.95rem; }
-      #bloc-cle-alicia button{ padding:.5em .8em; font-size:.95rem; border-radius:8px; }
+    #modalGrimoire .row, #modalAlicia .row {
+      display: flex;
+      gap: 8px;
+      margin-top: 1em;
+      justify-content: center;
     }
-
-    /* ===== Ultra-compact (petits téléphones) ===== */
-    @media (max-width:380px){
-      h1{ font-size:1.35rem; }
-      p.intro{ font-size:.9rem; max-width:34ch; }
-      .hero-buttons a{ padding:.5em .65em; font-size:.95rem; }
-      .quiz-button a{ font-size:.96rem; padding:.65em .9em; }
-      .footer-buttons a{ font-size:.92rem; padding:.45em .75em; }
+    #modalGrimoire button, #modalAlicia button {
+      padding: .6em 1em;
+      background: #ffd65b;
+      color: #2a1c00;
+      font-weight: 700;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
     }
-    .cta-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-top: 2em;
-  flex-wrap: wrap;
-}
-
-.cta-row .quiz-button {
-  margin: 0;
-}
-
-.grimoire-button img {
-  height: 90px;
-  cursor: pointer;
-  transition: transform .2s ease, filter .2s ease;
-  filter: drop-shadow(0 0 6px rgba(0,0,0,.6));
-}
-.grimoire-button img:hover {
-  transform: scale(1.07);
-  filter: drop-shadow(0 0 14px rgba(255,215,0,.9));
-}
-
-/* Fenêtre modale */
-#modalGrimoire {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.5);
-  backdrop-filter: blur(6px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-#modalGrimoire.open {
-  display: flex;
-}
-#modalGrimoire .card {
-  background: linear-gradient(180deg, #1a0e22, #100815);
-  border: 1px solid var(--verre-bord);
-  border-radius: 14px;
-  padding: 1.5em;
-  max-width: 92vw;
-  width: 360px;
-  color: var(--texte);
-  box-shadow: 0 12px 28px rgba(0,0,0,.6);
-  text-align: center;
-  position: relative;
-}
-#modalGrimoire h3 {
-  margin-top: 0;
-  margin-bottom: 0.6em;
-  color: var(--or);
-}
-#modalGrimoire input {
-  padding: .6em .9em;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.2);
-  background: rgba(255,255,255,.07);
-  color: var(--texte);
-  width: 100%;
-}
-#modalGrimoire .row {
-  display: flex;
-  gap: 8px;
-  margin-top: 1em;
-  justify-content: center;
-}
-#modalGrimoire button {
-  padding: .6em 1em;
-  background: #ffd65b;
-  color: #2a1c00;
-  font-weight: 700;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-}
-#modalGrimoire .close {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  font-size: 20px;
-  color: #fff8e6;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-#msgGrimoire {
-  min-height: 1.2em;
-  font-size: .95rem;
-  color: #ffb3b3;
-  margin-top: 0.5em;
-}
-
+    #modalGrimoire .close, #modalAlicia .close {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      font-size: 20px;
+      color: #fff8e6;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    #msgGrimoire, #msgAlicia {
+      min-height: 1.2em;
+      font-size: .95rem;
+      color: #ffb3b3;
+      margin-top: 0.5em;
+    }
   </style>
 </head>
 <body>
@@ -321,112 +216,111 @@
       <a href="ci_lizea.html">Lizéa</a>
       <a href="ci_ysaak.html">Ysaak</a>
       <a href="ci_paola.html">Paola</a>
-      <a href="#" onclick="ouvrirBlocCleAlicia()">Alicia</a> <!-- nouveau bouton -->
+      <a href="#" id="btnAlicia">Alicia</a>
     </div>
 
-<div class="cta-row">
-  <!-- Bouton quiz (inchangé) -->
-  <div class="quiz-button">
-    <a href="quel_heros_es_tu.html">Fais le test : Quel héros es-tu ?</a>
-  </div>
-
-  <!-- Bouton grimoire -->
-  <div class="grimoire-button">
-    <img src="grimoire_test.png" alt="Le Grimoire des Héros" id="btnGrimoire">
-  </div>
-</div>
-
+    <div class="cta-row">
+      <div class="quiz-button">
+        <a href="quel_heros_es_tu.html">Fais le test : Quel héros es-tu ?</a>
+      </div>
+      <div class="grimoire-button">
+        <img src="grimoire_test.png" alt="Le Grimoire des Héros" id="btnGrimoire">
+      </div>
+    </div>
 
     <div class="footer-buttons">
       <a href="1.accueil.html">← Retour à l’accueil</a>
       <a href="2.les_coulisses.html">← Retour aux Coulisses d’Arzankia</a>
     </div>
+  </div>
 
-    <!-- Cadre secret Alicia -->
-    <div id="bloc-cle-alicia">
-      <p style="font-size:1.05em;">Tape le mot magique pour débloquer la fiche d'Alicia #Tome I.5 :</p>
-      <input type="text" id="mot-cle-alicia" placeholder="mot magique…">
-      <button onclick="verifierCleAlicia()">OK</button>
+  <!-- Modale Alicia -->
+  <div id="modalAlicia">
+    <div class="card">
+      <button class="close" id="closeAlicia">✕</button>
+      <h3>Secret d’Alicia</h3>
+      <p>Entre le mot magique pour débloquer sa fiche :</p>
+      <div class="row">
+        <input type="text" id="pwdAlicia" placeholder="">
+        <button id="okAlicia">OK</button>
+      </div>
+      <div id="msgAlicia"></div>
     </div>
   </div>
-  <!-- ✅ Modale grimoire bien replacée dans .container -->
-<div id="modalGrimoire">
-<div class="card">
-<button class="close" id="closeGrimoire" aria-label="Fermer">✕</button>
-<h3>Le Grimoire des Héros</h3>
-<p>Entre le mot magique pour ouvrir le grimoire :</p>
-<div class="row">
-<input type="text" id="pwdGrimoire" placeholder="">
-<button id="okGrimoire">OK</button>
-</div>
-<div id="msgGrimoire"></div>
-</div>
-</div>
-</div>
+
+  <!-- Modale Grimoire -->
+  <div id="modalGrimoire">
+    <div class="card">
+      <button class="close" id="closeGrimoire">✕</button>
+      <h3>Le Grimoire des Héros</h3>
+      <p>Entre le mot magique pour ouvrir le grimoire :</p>
+      <div class="row">
+        <input type="text" id="pwdGrimoire" placeholder="">
+        <button id="okGrimoire">OK</button>
+      </div>
+      <div id="msgGrimoire"></div>
+    </div>
+  </div>
 
   <script>
-    function ouvrirBlocCleAlicia(){
-      const bloc = document.getElementById("bloc-cle-alicia");
-      bloc.style.display = "block";
-      bloc.scrollIntoView({behavior:"smooth", block:"center"});
+    function normalise(s){
+      return (s||"").trim().normalize("NFD").replace(/\p{Diacritic}/gu,'').toLowerCase();
     }
 
-    function verifierCleAlicia(){
-      const valeur = document.getElementById("mot-cle-alicia").value.toLowerCase().trim();
+    // === Alicia ===
+    const modalA = document.getElementById("modalAlicia");
+    const openA = document.getElementById("btnAlicia");
+    const closeA = document.getElementById("closeAlicia");
+    const okA = document.getElementById("okAlicia");
+    const inputA = document.getElementById("pwdAlicia");
+    const msgA = document.getElementById("msgAlicia");
+
+    function verifierCleAlicia() {
+      const valeur = normalise(inputA.value);
       const mots = ["miroir de poche","miroir","miroire"];
       if(mots.includes(valeur)){
         window.location.href = "ci_alicia.html";
-      }else{
-        alert("Hmm… ce n’est pas le bon mot magique.");
+      } else {
+        msgA.textContent = "Hmm… ce n’est pas le bon mot magique.";
       }
     }
+
+    openA.addEventListener("click", (e)=>{ e.preventDefault(); modalA.classList.add("open"); setTimeout(()=>inputA.focus(),100); });
+    closeA.addEventListener("click", ()=> modalA.classList.remove("open"));
+    modalA.addEventListener("click", (e)=>{ if(e.target===modalA) modalA.classList.remove("open"); });
+    okA.addEventListener("click", verifierCleAlicia);
+    inputA.addEventListener("keydown", (e)=>{
+      if(e.key==="Enter") verifierCleAlicia();
+      if(e.key==="Escape") modalA.classList.remove("open");
+    });
+
+    // === Grimoire ===
+    const modalG = document.getElementById("modalGrimoire");
+    const openG = document.getElementById("btnGrimoire");
+    const closeG = document.getElementById("closeGrimoire");
+    const okG = document.getElementById("okGrimoire");
+    const inputG = document.getElementById("pwdGrimoire");
+    const msgG = document.getElementById("msgGrimoire");
+
+    function ouvrirGrimoire() {
+      const valeur = normalise(inputG.value);
+      if(valeur==="aventurier"){ window.location.href="grimoire_aventurier.html"; }
+      else if(valeur==="chercheur"){ window.location.href="grimoire_chercheur.html"; }
+      else if(valeur.includes("pescadrille")||valeur.includes("pecadrille")||valeur.includes("ecaille")||valeur.includes("ecailles")||valeur.includes("bleu")){
+        window.location.href="definition_pescadrille.html";
+      } else {
+        msgG.textContent="Aucun ingrédient trouvé pour ce mot.";
+      }
+    }
+
+    openG.addEventListener("click", ()=>{ modalG.classList.add("open"); setTimeout(()=>inputG.focus(),100); });
+    closeG.addEventListener("click", ()=> modalG.classList.remove("open"));
+    modalG.addEventListener("click", (e)=>{ if(e.target===modalG) modalG.classList.remove("open"); });
+    okG.addEventListener("click", ouvrirGrimoire);
+    inputG.addEventListener("keydown", (e)=>{
+      if(e.key==="Enter") ouvrirGrimoire();
+      if(e.key==="Escape") modalG.classList.remove("open");
+    });
   </script>
-  <script>
-  const modalG = document.getElementById("modalGrimoire");
-  const openG = document.getElementById("btnGrimoire");
-  const closeG = document.getElementById("closeGrimoire");
-  const okG = document.getElementById("okGrimoire");
-  const inputG = document.getElementById("pwdGrimoire");
-  const msgG = document.getElementById("msgGrimoire");
-
-  function normalise(s){
-    return (s||"").trim().normalize("NFD").replace(/\p{Diacritic}/gu,'').toLowerCase();
-  }
-
-  function ouvrirGrimoire() {
-  const valeur = normalise(inputG.value);
-
-  if (valeur === "aventurier") {
-    window.location.href = "grimoire_aventurier.html";
-  } else if (valeur === "chercheur") {
-    window.location.href = "grimoire_chercheur.html";
-  } else if (
-    valeur.includes("pescadrille") ||
-    valeur.includes("pecadrille") ||
-    valeur.includes("ecaille") ||
-    valeur.includes("ecailles") ||
-    valeur.includes("bleu")
-  ) {
-     window.location.href = "definition_pescadrille.html";
-  } else {
-    msgG.textContent = "Aucun ingrédient trouvé pour ce mot.";
-  }
-}
-
-  openG.addEventListener("click", () => {
-    modalG.classList.add("open");
-    setTimeout(() => inputG.focus(), 100);
-  });
-  closeG.addEventListener("click", () => modalG.classList.remove("open"));
-  modalG.addEventListener("click", (e) => {
-    if (e.target === modalG) modalG.classList.remove("open");
-  });
-  okG.addEventListener("click", ouvrirGrimoire);
-  inputG.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") ouvrirGrimoire();
-    if (e.key === "Escape") modalG.classList.remove("open");
-  });
-</script>
-
 </body>
 </html>
