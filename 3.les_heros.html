@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Les Héros d’Arzankia</title>
+
   <style>
     /* ===== Thème global ===== */
     :root{
@@ -80,7 +81,7 @@
     }
 
     /* ===== Bouton quiz doré ===== */
-    .quiz-button{ text-align:center; margin-top:2em; }
+    .quiz-button{ text-align:center; }
     .quiz-button a{
       display:inline-block;
       padding:1em 1.6em;
@@ -100,31 +101,42 @@
     }
     .quiz-button a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
 
-    /* Rangée bouton test + grimoire */
-.cta-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.9rem;           /* espace entre les deux */
-  flex-wrap:wrap;
-  margin-top:1.2rem;
-}
+    /* ===== Rangée bouton test + grimoire ===== */
+    .cta-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:1.4rem;            /* espace entre les deux */
+      flex-wrap:wrap;
+      margin-top:1.6rem;
+    }
 
-/* Image du grimoire : plus petite + cliquable */
-.grimoire-button img{
-  height:56px;         /* taille du grimoire (réduction) */
-  width:auto;
-  display:block;
-  cursor:pointer;
-  transition:transform .18s ease, filter .18s ease;
-}
-.grimoire-button img:hover{ transform:translateY(-2px); filter:brightness(1.08); }
-
-/* Un poil plus petit sur mobile */
-@media (max-width:600px){
-  .grimoire-button img{ height:48px; }
-}
-
+    /* ===== Grimoire : plus grand + lumineux + animé ===== */
+    .grimoire-button img{
+      height:78px;           /* taille PC */
+      width:auto;
+      display:block;
+      cursor:pointer;
+      transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
+      filter:drop-shadow(0 0 10px rgba(255,215,0,.45));
+      outline:none;
+      animation:grimoirePulse 2.6s infinite ease-in-out;  /* lueur pulsante */
+    }
+    .grimoire-button img:hover{
+      transform:scale(1.08) rotate(-2deg);
+      filter:drop-shadow(0 0 16px rgba(255,235,120,.85));
+    }
+    #btnGrimoire:focus{
+      outline:2px solid #ffd65b;
+      outline-offset:4px;
+    }
+    @keyframes grimoirePulse{
+      0%,100% { filter:drop-shadow(0 0 10px rgba(255,215,0,.45)); }
+      50%     { filter:drop-shadow(0 0 18px rgba(255,240,150,.9)); }
+    }
+    @media (max-width:600px){
+      .grimoire-button img{ height:64px; }  /* taille mobile */
+    }
 
     /* ===== Pied de page ===== */
     .footer-buttons{
@@ -157,7 +169,7 @@
     }
     .footer-buttons a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
 
-    /* ===== Modale générique ===== */
+    /* ===== Modales ===== */
     #modalGrimoire, #modalAlicia {
       position: fixed;
       inset: 0;
@@ -250,12 +262,13 @@
         <a href="quel_heros_es_tu.html">Fais le test : Quel héros es-tu ?</a>
       </div>
       <div class="grimoire-button">
-        <<img src="grimoire_test.png"
-     alt="Le Grimoire des Héros"
-     id="btnGrimoire"
-     role="button"
-     tabindex="0">
-
+        <img
+          src="grimoire_test.png"
+          alt="Le Grimoire des Héros"
+          id="btnGrimoire"
+          role="button"
+          tabindex="0"
+        >
       </div>
     </div>
 
@@ -266,13 +279,13 @@
   </div>
 
   <!-- Modale Alicia -->
-  <div id="modalAlicia">
-    <div class="card">
-      <button class="close" id="closeAlicia">✕</button>
-      <h3>Secret d’Alicia</h3>
-      <p>Entre le mot magique pour débloquer sa fiche :</p>
+  <div id="modalAlicia" aria-hidden="true">
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="aliciaTitle">
+      <button class="close" id="closeAlicia" aria-label="Fermer">✕</button>
+      <h3 id="aliciaTitle">Secret d’Alicia</h3>
+      <p>Entre le nom de son animal pour débloquer sa fiche (#tome 1.5) :</p>
       <div class="row">
-        <input type="text" id="pwdAlicia" placeholder="">
+        <input type="text" id="pwdAlicia" placeholder="" autocomplete="off" />
         <button id="okAlicia">OK</button>
       </div>
       <div id="msgAlicia"></div>
@@ -280,13 +293,13 @@
   </div>
 
   <!-- Modale Grimoire -->
-  <div id="modalGrimoire">
-    <div class="card">
-      <button class="close" id="closeGrimoire">✕</button>
-      <h3>Le Grimoire des Héros</h3>
+  <div id="modalGrimoire" aria-hidden="true">
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="grimoireTitle">
+      <button class="close" id="closeGrimoire" aria-label="Fermer">✕</button>
+      <h3 id="grimoireTitle">Le Grimoire des Héros</h3>
       <p>Entre le mot magique pour ouvrir le grimoire :</p>
       <div class="row">
-        <input type="text" id="pwdGrimoire" placeholder="">
+        <input type="text" id="pwdGrimoire" placeholder="" autocomplete="off" />
         <button id="okGrimoire">OK</button>
       </div>
       <div id="msgGrimoire"></div>
@@ -294,29 +307,35 @@
   </div>
 
   <script>
+    /* Utilitaire : normaliser une chaîne (accents/majuscules) */
     function normalise(s){
       return (s||"").trim().normalize("NFD").replace(/\p{Diacritic}/gu,'').toLowerCase();
     }
 
-    // === Alicia ===
+    /* ========= Alicia ========= */
     const modalA = document.getElementById("modalAlicia");
-    const openA = document.getElementById("btnAlicia");
+    const openA  = document.getElementById("btnAlicia");
     const closeA = document.getElementById("closeAlicia");
-    const okA = document.getElementById("okAlicia");
+    const okA    = document.getElementById("okAlicia");
     const inputA = document.getElementById("pwdAlicia");
-    const msgA = document.getElementById("msgAlicia");
+    const msgA   = document.getElementById("msgAlicia");
 
     function verifierCleAlicia() {
       const valeur = normalise(inputA.value);
-      const mots = ["nelice","nélicé","Nélicé"];
-      if(mots.includes(valeur)){
+      /* toutes variantes accentuées de "Nélicé" → "nelice" après normalisation */
+      const autorise = ["nelice"];
+      if(autorise.includes(valeur)){
         window.location.href = "ci_alicia.html";
       } else {
         msgA.textContent = "Hmm… ce n’est pas le bon mot magique.";
       }
     }
 
-    openA.addEventListener("click", (e)=>{ e.preventDefault(); modalA.classList.add("open"); setTimeout(()=>inputA.focus(),100); });
+    openA.addEventListener("click", (e)=>{
+      e.preventDefault();
+      modalA.classList.add("open");
+      setTimeout(()=>inputA.focus(),100);
+    });
     closeA.addEventListener("click", ()=> modalA.classList.remove("open"));
     modalA.addEventListener("click", (e)=>{ if(e.target===modalA) modalA.classList.remove("open"); });
     okA.addEventListener("click", verifierCleAlicia);
@@ -325,26 +344,35 @@
       if(e.key==="Escape") modalA.classList.remove("open");
     });
 
-    // === Grimoire ===
+    /* ========= Grimoire ========= */
     const modalG = document.getElementById("modalGrimoire");
-    const openG = document.getElementById("btnGrimoire");
+    const openG  = document.getElementById("btnGrimoire");
     const closeG = document.getElementById("closeGrimoire");
-    const okG = document.getElementById("okGrimoire");
+    const okG    = document.getElementById("okGrimoire");
     const inputG = document.getElementById("pwdGrimoire");
-    const msgG = document.getElementById("msgGrimoire");
+    const msgG   = document.getElementById("msgGrimoire");
 
     function ouvrirGrimoire() {
       const valeur = normalise(inputG.value);
       if(valeur==="aventurier"){ window.location.href="grimoire_aventurier.html"; }
       else if(valeur==="chercheur"){ window.location.href="grimoire_chercheur.html"; }
-      else if(valeur.includes("pescadrille")||valeur.includes("pecadrille")||valeur.includes("ecaille")||valeur.includes("ecailles")||valeur.includes("bleu")){
+      else if(
+        valeur.includes("pescadrille") ||
+        valeur.includes("pecadrille")  ||
+        valeur.includes("ecaille")     ||
+        valeur.includes("ecailles")    ||
+        valeur.includes("bleu")
+      ){
         window.location.href="definition_pescadrille.html";
       } else {
         msgG.textContent="Aucun ingrédient trouvé pour ce mot.";
       }
     }
 
-    openG.addEventListener("click", ()=>{ modalG.classList.add("open"); setTimeout(()=>inputG.focus(),100); });
+    openG.addEventListener("click", ()=>{
+      modalG.classList.add("open");
+      setTimeout(()=>inputG.focus(),100);
+    });
     closeG.addEventListener("click", ()=> modalG.classList.remove("open"));
     modalG.addEventListener("click", (e)=>{ if(e.target===modalG) modalG.classList.remove("open"); });
     okG.addEventListener("click", ouvrirGrimoire);
@@ -352,15 +380,15 @@
       if(e.key==="Enter") ouvrirGrimoire();
       if(e.key==="Escape") modalG.classList.remove("open");
     });
-    // Ouvrir la modale Grimoire aussi au clavier (Entrée/Espace)
-openG.addEventListener("keydown", (e)=>{
-  if(e.key==="Enter" || e.key===" "){
-    e.preventDefault();
-    modalG.classList.add("open");
-    setTimeout(()=>inputG.focus(),100);
-  }
-});
 
+    /* Ouvrir le grimoire au clavier (Entrée/Espace) */
+    openG.addEventListener("keydown", (e)=>{
+      if(e.key==="Enter" || e.key===" " || e.key==="Spacebar" || e.code==="Space"){
+        e.preventDefault();
+        modalG.classList.add("open");
+        setTimeout(()=>inputG.focus(),100);
+      }
+    });
   </script>
 </body>
 </html>
