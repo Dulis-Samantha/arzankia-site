@@ -151,123 +151,110 @@
       </p>
     </div>
 
-    <div class="section quiz">
-      <!-- === Ton quiz d’Esteban tel quel === -->
-      <div id="q1" class="question">
-        <p>Quel est l’âge d’Esteban lorsqu'il voit Raphaël pour la première fois ?</p>
-        <button onclick="checkAnswer('q1', true)">13 ans</button>
-        <button onclick="checkAnswer('q1', false)">12 ans</button>
-        <button onclick="checkAnswer('q1', false)">14 ans</button>
-      </div>
-      <div id="q2" class="question"> 
-        <p>De quel monde vient Esteban ?</p>
-        <button onclick="checkAnswer('q2', false)">Monde des Quacks</button> 
-        <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button> 
-        <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button> 
-      </div> 
-      <div id="q3" class="question"> 
-        <p>Comment s'appelle sa dragonne ?</p> 
-        <button onclick="checkAnswer('q3', false)">Zyra</button> 
-        <button onclick="checkAnswer('q3', true)">Mililou</button> 
-        <button onclick="checkAnswer('q3', false)">Brisella</button> 
-      </div> 
-      <div id="q4" class="question"> 
-        <p>Qui est le frère d'Esteban ?</p> 
-        <button onclick="checkAnswer('q4', false)">Kelyan</button> 
-        <button onclick="checkAnswer('q4', true)">Antony</button> 
-        <button onclick="checkAnswer('q4', false)">Nino</button> 
-      </div> 
-      <div id="q5" class="question"> 
-        <p>Qui est le meilleur ami d'Esteban ?</p> 
-        <button onclick="checkAnswer('q5', true)">Kelyan</button> 
-        <button onclick="checkAnswer('q5', false)">Antony</button> 
-        <button onclick="checkAnswer('q5', false)">Nino</button> 
-      </div> 
-      <div id="q6" class="question"> 
-        <p>Quelle est la clé d'Esteban ?</p> 
-        <button onclick="checkAnswer('q6', false)">Boussole</button> 
-        <button onclick="checkAnswer('q6', false)">Montre à gousset</button> 
-        <button onclick="checkAnswer('q6', true)">Os de dinosaure</button> 
-      </div>
-    
-      <img id="estebanFinal" src="photo_esteban.webp" alt="Esteban final">
-
-      <div id="estebanInfo" class="section" style="background:rgba(255,248,230,0.85);color:#3b2a1d;text-shadow:none;">
-        <p><strong>Âge :</strong> 13 ans</p>
-        <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
-        <p><strong>Clé d’accès :</strong> Os de dinosaure</p>
-        <p><strong>Spécialisation :</strong> Dresseur - lien Mililou Dragonne</p>
-        <p><strong>Statut :</strong> En formation Niv I</p>
-        <br>
-        <em>« Certains liens sont si puissants qu’ils n’ont pas besoin de mots pour être compris. »<br>– Archives de la Tour de l’Aube</em>
-      </div>
-
-      <div id="success-message">✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨</div>
-
-      <div id="replay-button" style="display:none; margin-top:1.5em; text-align:center;">
-        <button onclick="restartQuiz()" style="padding:0.7em 1.5em; background-color:#ffe18a; border:none; border-radius:8px; font-family:Georgia, serif; font-size:1em; cursor:pointer; box-shadow:0 0 10px #ffd700;">
-          🔁 Rejouer le quiz
-        </button>
-      </div>
-    </div>
-
-    <div class="back-button">
-      <a href="3.les_heros.html">← Retour aux héros</a>
-      <a href="8.monde_Yakkas.html">← Découvre mon monde</a>
-    </div>
+<div class="section quiz">
+  <!-- === Quiz Esteban === -->
+  <div id="q1" class="question">
+    <p>Quel est l’âge d’Esteban lorsqu'il voit Raphaël pour la première fois ?</p>
+    <button onclick="checkAnswer('q1', true)">13 ans</button>
+    <button onclick="checkAnswer('q1', false)">12 ans</button>
+    <button onclick="checkAnswer('q1', false)">14 ans</button>
   </div>
 
-  <script>
-    let correctAnswers = 0;
-    const quizEstebanDone = localStorage.getItem("quizEstebanDone");
+  <div id="q2" class="question"> 
+    <p>De quel monde vient Esteban ?</p>
+    <button onclick="checkAnswer('q2', false)">Monde des Quacks</button> 
+    <button onclick="checkAnswer('q2', true)">Monde des Yakkas</button> 
+    <button onclick="checkAnswer('q2', false)">Monde d’Arenyth</button> 
+  </div> 
 
-    document.addEventListener("DOMContentLoaded", function () {
-      if (quizEstebanDone === "true") {
-        document.getElementById("estebanFinal").style.display = "block";
-        document.getElementById("success-message").style.display = "block";
-        document.getElementById("estebanInfo").style.display = "block";
-        document.getElementById("replay-button").style.display = "block";
-        document.getElementById("intro-quiz")?.style.display = "none";
-        const allQuestions = document.querySelectorAll(".question");
-        allQuestions.forEach(q => q.style.display = "none");
-      }
-    });
+  <div id="q3" class="question"> 
+    <p>Comment s'appelle sa dragonne ?</p> 
+    <button onclick="checkAnswer('q3', false)">Zyra</button> 
+    <button onclick="checkAnswer('q3', true)">Mililou</button> 
+    <button onclick="checkAnswer('q3', false)">Brisella</button> 
+  </div> 
 
-    function checkAnswer(questionId, isCorrect) {
-      const question = document.getElementById(questionId);
-      if (isCorrect) {
-        correctAnswers++;
-        question.style.display = "none";
-      } else {
-        alert("❌ Mauvaise réponse ! Le quiz redémarre…");
-        resetQuiz();
-        return;
-      }
+  <div id="q4" class="question"> 
+    <p>Qui est le frère d'Esteban ?</p> 
+    <button onclick="checkAnswer('q4', false)">Kelyan</button> 
+    <button onclick="checkAnswer('q4', true)">Antony</button> 
+    <button onclick="checkAnswer('q4', false)">Nino</button> 
+  </div> 
 
-      if (correctAnswers === 6) {
-        document.getElementById("estebanFinal").style.display = "block";
-        document.getElementById("success-message").style.display = "block";
-        document.getElementById("estebanInfo").style.display = "block";
-        document.getElementById("replay-button").style.display = "block";
-        document.getElementById("intro-quiz")?.style.display = "none";
-        localStorage.setItem("quizEstebanDone", "true");
-      }
-    }
+  <div id="q5" class="question"> 
+    <p>Qui est le meilleur ami d'Esteban ?</p> 
+    <button onclick="checkAnswer('q5', true)">Kelyan</button> 
+    <button onclick="checkAnswer('q5', false)">Antony</button> 
+    <button onclick="checkAnswer('q5', false)">Nino</button> 
+  </div> 
 
-    function resetQuiz() {
-      correctAnswers = 0;
-      const allQuestions = document.querySelectorAll(".question");
-      allQuestions.forEach(q => q.style.display = "block");
-      document.getElementById("estebanFinal").style.display = "none";
-      document.getElementById("success-message").style.display = "none";
-      document.getElementById("estebanInfo").style.display = "none";
-      document.getElementById("replay-button").style.display = "none";
-      localStorage.removeItem("quizEstebanDone");
-    }
+  <div id="q6" class="question"> 
+    <p>Quelle est la clé d'Esteban ?</p> 
+    <button onclick="checkAnswer('q6', false)">Boussole</button> 
+    <button onclick="checkAnswer('q6', false)">Montre à gousset</button> 
+    <button onclick="checkAnswer('q6', true)">Os de dinosaure</button> 
+  </div>
 
-    function restartQuiz() {
+  <!-- Résultats -->
+  <img id="estebanFinal" src="photo_esteban.webp" alt="Esteban final" style="display:none; margin-top:2em; border-radius:12px; box-shadow:0 0 20px #ffd700;">
+
+  <div id="estebanInfo" class="parchemin" style="display:none; margin-top:2em;">
+    <p><strong>Âge :</strong> 13 ans</p>
+    <p><strong>Monde d’origine :</strong> Monde des Yakkas</p>
+    <p><strong>Clé d’accès :</strong> Os de dinosaure</p>
+    <p><strong>Spécialisation :</strong> Dresseur – lien avec Mililou la dragonne</p>
+    <p><strong>Statut :</strong> En formation Niv I</p>
+    <br>
+    <em>« Certains liens sont si puissants qu’ils n’ont pas besoin de mots pour être compris. »<br>– Archives de la Tour de l’Aube</em>
+  </div>
+
+  <div id="success-message" style="display:none; color:#ffd700; font-size:1.5em; margin-top:1em;">
+    ✨ Bravo ! Tu as débloqué le portrait d'Esteban ! ✨
+  </div>
+
+  <div id="replay-button" style="display:none; margin-top:1.5em;">
+    <button onclick="restartQuiz()" style="padding:0.7em 1.5em; background-color:#ffe18a; border:none; border-radius:8px; font-family:Georgia, serif; font-size:1em; cursor:pointer; box-shadow:0 0 10px #ffd700;">
+      🔁 Rejouer le quiz
+    </button>
+  </div>
+</div>
+
+<script>
+  let correctAnswers = 0;
+
+  function checkAnswer(questionId, isCorrect) {
+    const question = document.getElementById(questionId);
+    if (isCorrect) {
+      correctAnswers++;
+      question.style.display = "none";
+    } else {
+      alert("❌ Mauvaise réponse ! Le quiz redémarre…");
       resetQuiz();
+      return;
     }
-  </script>
+
+    if (correctAnswers === 6) {
+      document.getElementById("estebanFinal").style.display = "block";
+      document.getElementById("estebanInfo").style.display = "block";
+      document.getElementById("success-message").style.display = "block";
+      document.getElementById("replay-button").style.display = "block";
+    }
+  }
+
+  function resetQuiz() {
+    correctAnswers = 0;
+    const allQuestions = document.querySelectorAll(".question");
+    allQuestions.forEach(q => q.style.display = "block");
+
+    document.getElementById("estebanFinal").style.display = "none";
+    document.getElementById("estebanInfo").style.display = "none";
+    document.getElementById("success-message").style.display = "none";
+    document.getElementById("replay-button").style.display = "none";
+  }
+
+  function restartQuiz() {
+    resetQuiz();
+  }
+</script>
 </body>
 </html>
