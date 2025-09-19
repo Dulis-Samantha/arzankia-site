@@ -245,49 +245,6 @@
         line-height:1.6;
       }
     }
-    /* 1) Le parchemin (colonne droite) doit être au-dessus pour capter les clics */
-.right-col{
-  position: relative;
-  z-index: 10;            /* le contenu (quiz) passe devant tout */
-}
-
-/* 2) La carte portrait à gauche ne doit pas bloquer les clics */
-.card-flip{
-  pointer-events: none;   /* elle n'a pas besoin d'être cliquée */
-  z-index: 1;             /* passe derrière le parchemin */
-}
-
-/* 3) Sur desktop, fixe bien les largeurs pour éviter le chevauchement */
-@media (min-width: 900px){
-  .hero-layout{
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    position: relative;
-  }
-  .card-flip{
-    flex: 0 0 30%;
-    max-width: 560px;
-    margin: 0;
-    margin-left: 130px;   /* comme ta page Raphaël */
-  }
-  .right-col{
-    flex: 1;
-    max-width: 400px;
-  }
-  .parchemin{
-    max-width: 460px;
-  }
-}
-
-/* 4) Par sécurité, assure l’image révélée reste dans son cadre */
-.card-back img,
-#estebanFinal{
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
   </style>
 </head>
 <body>
@@ -377,7 +334,7 @@
 
         <!-- Boutons bas (mêmes styles que Raphaël) -->
         <nav class="back-button" aria-label="Navigation héros Esteban">
-          <a href="8.monde_Yakkas.html">Découvre mon monde</a>
+          <a href="8.monde_Yakkas.html">✨Découvre mon monde</a>
           <a href="3.les_heros.html">← Retour aux héros</a>
         </nav>
       </div>
@@ -395,3 +352,44 @@
         document.querySelectorAll(".question").forEach(q=>q.style.display="none");
         document.getElementById("estebanInfo").style.display = "block";
         document.getElementById("success-message").style.display = "block";
+        document.getElementById("replay-button").style.display = "block";
+      }
+    });
+
+    function checkAnswer(questionId, isCorrect){
+      const q = document.getElementById(questionId);
+      if(isCorrect){
+        correctAnswers++;
+        q.style.display = "none";
+      }else{
+        alert("❌ Mauvaise réponse ! Le quiz redémarre…");
+        resetQuiz();
+        return;
+      }
+
+      if(correctAnswers === 6){
+        // Retourner la carte (révéler le portrait)
+        document.getElementById("cardFlip").classList.add("revealed");
+        // Afficher infos et messages
+        document.getElementById("estebanInfo").style.display = "block";
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("replay-button").style.display = "block";
+        // Mémoriser
+        localStorage.setItem(STORAGE_KEY, "true");
+      }
+    }
+
+    function resetQuiz(){
+      correctAnswers = 0;
+      document.querySelectorAll(".question").forEach(q=>q.style.display="block");
+      document.getElementById("cardFlip").classList.remove("revealed");
+      document.getElementById("estebanInfo").style.display = "none";
+      document.getElementById("success-message").style.display = "none";
+      document.getElementById("replay-button").style.display = "none";
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    function restartQuiz(){ resetQuiz(); }
+  </script>
+</body>
+</html>
