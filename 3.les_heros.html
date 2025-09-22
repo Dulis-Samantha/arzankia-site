@@ -49,38 +49,37 @@ p.intro {
   margin: 0 auto 1.2em;
   max-width: 50ch;
   opacity: .95;
-  perspective: 800px; /* donne de la profondeur aux rotations */
+  perspective: 800px;
 }
 
-/* Chaque mot */
 p.intro .word {
   display: inline-block;
   opacity: 0;
-  transform: scale(0.3) rotateY(90deg);
-  animation: starZoom 2.2s ease-out forwards;
-  animation-delay: calc(var(--i) * 150ms); /* léger décalage mot par mot */
+  transform: scale(0.3) rotateY(0deg);
+  animation: majoretteZoom 2.2s ease-out forwards;
+  animation-delay: calc(var(--i) * 180ms); /* léger décalage mot par mot */
   margin-right: 0.35em;
   will-change: transform, opacity, text-shadow;
+  backface-visibility: hidden; /* évite le flash en 3D */
 }
 
-/* Animation zoom + rotation */
-@keyframes starZoom {
+@keyframes majoretteZoom {
   0% {
     opacity: 0;
-    transform: scale(0.3) rotateY(90deg);
+    transform: scale(0.3) rotateY(0deg);
     text-shadow: none;
   }
-  60% {
+  40% {
     opacity: 1;
-    transform: scale(1.08) rotateY(-15deg);
-    text-shadow: 0 0 12px rgba(255,215,0,.65);
+    transform: scale(0.8) rotateY(360deg);
   }
-  80% {
-    transform: scale(0.96) rotateY(6deg);
+  70% {
+    transform: scale(1.08) rotateY(720deg); /* 2 tours complets */
+    text-shadow: 0 0 12px rgba(255,215,0,.6);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotateY(0deg);
+    transform: scale(1) rotateY(0deg); /* arrêt net et lisible */
     text-shadow: 0 0 6px rgba(255,215,0,.35);
   }
 }
