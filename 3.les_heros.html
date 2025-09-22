@@ -42,14 +42,30 @@
       margin: 0 0 0.6em;  
       letter-spacing:.3px;
     }
+p.intro {
+  text-align:center;
+  font-size:1.1rem;
+  margin:0 auto 1.2em;
+  max-width:50ch;
+  opacity:.95;
+  animation: zoomIn 1.5s ease-out forwards; /* animation */
+}
 
-    p.intro{
-      text-align:center;
-      font-size:1.1rem;
-      margin: 0 auto 1.2em;
-      max-width:50ch;
-      opacity:.95;
-    }
+/* Animation zoom */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.3); /* petit au départ */
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2); /* un peu trop gros (effet ressort) */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1); /* taille normale */
+  }
+}
+
 
  /* ——— Grille des héros ——— */
 .hero-buttons{
