@@ -43,6 +43,17 @@
       letter-spacing:.3px;
     }
 /* Conteneur d’intro */
+    p.intro {
+  text-align: center;       /* centre le texte */
+  display: flex;            /* flexbox */
+  justify-content: center;  /* centre horizontalement */
+  flex-wrap: wrap;          /* permet aux mots de passer à la ligne si besoin */
+  font-size: 1.2rem;
+  margin: 0 auto 1.2em;
+  max-width: 50ch;
+  opacity: .95;
+  perspective: 800px;
+}
 p.intro .word {
   display:inline-block;
   opacity:0;
