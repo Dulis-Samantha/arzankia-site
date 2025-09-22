@@ -42,52 +42,57 @@
       margin: 0 0 0.6em;  
       letter-spacing:.3px;
     }
+/* Conteneur d’intro */
 p.intro {
-  text-align:center;
-  font-size:1.1rem;
-  margin:0 auto 1.2em;
-  max-width:50ch;
-  opacity:.95;
-  perspective: 600px;
-}p.intro .char {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0 auto 1.2em;
+  max-width: 50ch;
+  opacity: .95;
+  perspective: 800px; /* donne de la profondeur aux rotations */
+}
+
+/* Chaque mot */
+p.intro .word {
   display: inline-block;
   opacity: 0;
-  transform-origin: center;
+  transform: scale(0.3) rotateY(90deg);
+  animation: starZoom 2.2s ease-out forwards;
+  animation-delay: calc(var(--i) * 150ms); /* léger décalage mot par mot */
+  margin-right: 0.35em;
   will-change: transform, opacity, text-shadow;
-  animation: popTwirl .7s cubic-bezier(.2,.8,.2,1) forwards;
-  animation-delay: calc(var(--i) * 60ms); /* décalage lettre par lettre */
 }
 
-/* option: léger scintillement doré pendant l'apparition */
-p.intro .char.glow {
-  text-shadow: 0 0 0 rgba(255,215,0,0);
-}
-
-/* Animation : tourne, zoome, se place avec mini sur-élan */
-@keyframes popTwirl {
+/* Animation zoom + rotation */
+@keyframes starZoom {
   0% {
     opacity: 0;
-    transform: translateY(8px) scale(.3) rotateY(-90deg) rotateZ(-8deg);
-    text-shadow: 0 0 0 rgba(255,215,0,0);
-    filter: drop-shadow(0 0 0 rgba(255,215,0,0));
+    transform: scale(0.3) rotateY(90deg);
+    text-shadow: none;
   }
   60% {
     opacity: 1;
-    transform: translateY(0) scale(1.08) rotateY(10deg) rotateZ(1deg);
-    text-shadow: 0 0 10px rgba(255,215,0,.7);
-    filter: drop-shadow(0 0 12px rgba(255,215,0,.4));
+    transform: scale(1.08) rotateY(-15deg);
+    text-shadow: 0 0 12px rgba(255,215,0,.65);
+  }
+  80% {
+    transform: scale(0.96) rotateY(6deg);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1) rotateY(0) rotateZ(0);
-    text-shadow: 0 0 4px rgba(255,215,0,.35);
-    filter: drop-shadow(0 0 6px rgba(255,215,0,.25));
+    transform: scale(1) rotateY(0deg);
+    text-shadow: 0 0 6px rgba(255,215,0,.35);
   }
 }
 
-/* Accessibilité : pas d’animation si l’utilisateur préfère les mouvements réduits */
+/* Accessibilité : pas d’animation si réduite */
 @media (prefers-reduced-motion: reduce) {
-  p.intro .char { animation: none; opacity: 1; transform: none; text-shadow: none; }
+  p.intro .word {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    text-shadow: none !important;
+  }
 }
 
  /* ——— Grille des héros ——— */
@@ -440,25 +445,25 @@ p.intro .char.glow {
       }
     });
     
-     // Effet magique lettre par lettre pour p.intro
-  (function () {
-    const p = document.querySelector('p.intro');
-    if (!p || p.dataset.split === "1") return; // évite de doubler l'effet
+ // Effet Star Wars magique : zoom global + rotation par mot
+(function () {
+  const p = document.querySelector('p.intro');
+  if (!p || p.dataset.split === "1") return;
 
-    const txt = p.textContent;
-    p.textContent = ""; // on vide pour réinjecter avec des <span>
+  const words = p.textContent.trim().split(/\s+/); // sépare en mots
+  p.textContent = "";
 
-    [...txt].forEach((ch, i) => {
-      const span = document.createElement("span");
-      span.className = "char glow";
-      // conserver les espaces visuellement
-      span.textContent = ch === " " ? "\u00A0" : ch;
-      span.style.setProperty("--i", i);
-      p.appendChild(span);
-    });
+  words.forEach((w, i) => {
+    const span = document.createElement("span");
+    span.className = "word";
+    span.textContent = w;
+    span.style.setProperty("--i", i);
+    p.appendChild(span);
+    p.appendChild(document.createTextNode(" "));
+  });
 
-    p.dataset.split = "1";
-  })();
+  p.dataset.split = "1";
+})();
   </script>
 </body>
 </html>
