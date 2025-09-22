@@ -55,34 +55,37 @@ p.intro {
 p.intro .word {
   display: inline-block;
   opacity: 0;
-  transform: scale(0.3) rotateY(0deg);
-  animation: majoretteZoom 2.2s ease-out forwards;
-  animation-delay: calc(var(--i) * 180ms); /* léger décalage mot par mot */
+  transform: scale(0.3) translateX(0) translateY(0);
+  animation: circleZoom 2.8s ease-out forwards;
+  animation-delay: calc(var(--i) * 200ms); /* décalage mot par mot */
   margin-right: 0.35em;
   will-change: transform, opacity, text-shadow;
-  backface-visibility: hidden; /* évite le flash en 3D */
 }
 
-@keyframes majoretteZoom {
+@keyframes circleZoom {
   0% {
     opacity: 0;
-    transform: scale(0.3) rotateY(0deg);
+    transform: scale(0.3) translate(0,0);
     text-shadow: none;
   }
-  40% {
+  30% {
     opacity: 1;
-    transform: scale(0.8) rotateY(360deg);
+    transform: scale(0.6) translate(40px, -40px) rotate(120deg);
   }
-  70% {
-    transform: scale(1.08) rotateY(720deg); /* 2 tours complets */
+  60% {
+    transform: scale(0.9) translate(-40px, -40px) rotate(240deg);
     text-shadow: 0 0 12px rgba(255,215,0,.6);
+  }
+  90% {
+    transform: scale(1.1) translate(-40px, 40px) rotate(360deg);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotateY(0deg); /* arrêt net et lisible */
+    transform: scale(1) translate(0,0) rotate(0deg);
     text-shadow: 0 0 6px rgba(255,215,0,.35);
   }
 }
+
 
 /* Accessibilité : pas d’animation si réduite */
 @media (prefers-reduced-motion: reduce) {
