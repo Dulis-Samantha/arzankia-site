@@ -43,60 +43,58 @@
       letter-spacing:.3px;
     }
 /* Conteneur d’intro */
-    p.intro {
-  text-align: center;       /* centre le texte */
-  display: flex;            /* flexbox */
-  justify-content: center;  /* centre horizontalement */
-  flex-wrap: wrap;          /* permet aux mots de passer à la ligne si besoin */
+p.intro {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   font-size: 1.2rem;
   margin: 0 auto 1.2em;
   max-width: 50ch;
   opacity: .95;
   perspective: 800px;
 }
+
 p.intro .word {
-  display:inline-block;
-  opacity:0;
-  transform:scale(0.3) translate(0,0);
-  animation: magicCycle 8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 220ms); /* décalage mot par mot */
-  margin-right:0.35em;
-  will-change:transform,opacity,text-shadow;
-  backface-visibility:hidden;
+  display: inline-block;
+  opacity: 0;
+  transform: scale(0.3) translate(0,0);
+  animation: magicOnce 10s ease-in-out forwards; /* 1 seul cycle */
+  animation-delay: calc(var(--i) * 200ms);
+  margin-right: 0.35em;
+  will-change: transform, opacity, text-shadow;
+  backface-visibility: hidden;
 }
 
-/* Cycle complet : apparition → stabilisation → orbite → retour */
-@keyframes magicCycle {
+/* Cycle unique : apparition → stable → orbite → stabilisation finale */
+@keyframes magicOnce {
   0% {
-    opacity:0;
-    transform:scale(0.3) translate(0,0) rotate(0deg);
-    text-shadow:none;
+    opacity: 0;
+    transform: scale(0.3) translate(0,0) rotate(0deg);
+    text-shadow: none;
   }
   20% {
-    opacity:1;
-    transform:scale(1) translate(0,0) rotate(0deg);
-    text-shadow:0 0 6px rgba(255,215,0,.35);
+    opacity: 1;
+    transform: scale(1) translate(0,0) rotate(0deg);
+    text-shadow: 0 0 6px rgba(255,215,0,.35);
   }
-  40% { /* stable quelques secondes */
-    opacity:1;
-    transform:scale(1) translate(0,0) rotate(0deg);
-    text-shadow:0 0 6px rgba(255,215,0,.35);
+  40% { /* stable */
+    transform: scale(1) translate(0,0) rotate(0deg);
   }
-  70% { /* orbite circulaire */
-    transform:scale(1) translate(40px,-40px) rotate(180deg);
-    text-shadow:0 0 12px rgba(255,255,255,.7);
+  70% { /* orbite magique */
+    transform: scale(1) translate(40px,-40px) rotate(180deg);
+    text-shadow: 0 0 12px rgba(255,255,255,.7);
   }
   90% {
-    transform:scale(1) translate(0,0) rotate(360deg);
-    text-shadow:0 0 10px rgba(255,215,0,.6);
+    transform: scale(1) translate(0,0) rotate(360deg);
+    text-shadow: 0 0 10px rgba(255,215,0,.6);
   }
-  100% { /* retour stable */
-    opacity:1;
-    transform:scale(1) translate(0,0) rotate(0deg);
-    text-shadow:0 0 6px rgba(255,215,0,.35);
+  100% { /* figé pour toujours */
+    opacity: 1;
+    transform: scale(1) translate(0,0) rotate(0deg);
+    text-shadow: 0 0 6px rgba(255,215,0,.35);
   }
 }
-
 
 /* Accessibilité : pas d’animation si réduite */
 @media (prefers-reduced-motion: reduce) {
