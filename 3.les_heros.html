@@ -439,6 +439,26 @@ p.intro .char.glow {
         setTimeout(()=>inputG.focus(),100);
       }
     });
+    
+     // Effet magique lettre par lettre pour p.intro
+  (function () {
+    const p = document.querySelector('p.intro');
+    if (!p || p.dataset.split === "1") return; // évite de doubler l'effet
+
+    const txt = p.textContent;
+    p.textContent = ""; // on vide pour réinjecter avec des <span>
+
+    [...txt].forEach((ch, i) => {
+      const span = document.createElement("span");
+      span.className = "char glow";
+      // conserver les espaces visuellement
+      span.textContent = ch === " " ? "\u00A0" : ch;
+      span.style.setProperty("--i", i);
+      p.appendChild(span);
+    });
+
+    p.dataset.split = "1";
+  })();
   </script>
 </body>
 </html>
