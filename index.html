@@ -3,126 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ouverture du portail magique</title>
   <style>
-    body{
-      margin:0; height:100vh; overflow:hidden;
-      font-family: Georgia, serif; color:#ffe066;
-      background:url('fond_index.png') center/cover no-repeat fixed;
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Georgia', serif;
+      color: #ffe066;
+      overflow: hidden;
+      background: url('fond_index.png') center/cover no-repeat fixed;
     }
 
     /* Calque bleu foncé au-dessus du fond */
-    .calque-bleu{
-      position:absolute; inset:0; z-index:0;
-      background-color:#001133; opacity:1; transition:opacity 1.5s ease-in;
+    .calque-bleu {
+      background-color: #001133;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 1;
+      transition: opacity 1.5s ease-in;
     }
-    .calque-bleu.fade-out{ opacity:0; }
+    .calque-bleu.fade-out { opacity: 0; }
 
-    /* Rideaux */
-    .rideau-gauche,.rideau-droit{
-      position:absolute; top:0; width:50%; height:100%; background-color:#281f43; z-index:3;
+    .rideau-gauche, .rideau-droit {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: #281f43;
+      z-index: 3;
     }
-    .rideau-gauche{ left:0; animation:ouvrir-gauche 2s ease-out forwards; }
-    .rideau-droit{ right:0; animation:ouvrir-droit 2s ease-out forwards; }
+    .rideau-gauche { left: 0;  animation: ouvrir-gauche 2s ease-out forwards; }
+    .rideau-droit  { right: 0; animation: ouvrir-droit 2s ease-out forwards; }
 
-    @keyframes ouvrir-gauche{ to{ transform:translateX(-100%);} }
-    @keyframes ouvrir-droit { to{ transform:translateX(100%);} }
+    @keyframes ouvrir-gauche { to { transform: translateX(-100%); } }
+    @keyframes ouvrir-droit  { to { transform: translateX(100%); } }
 
-    .rideau-gauche.fermer{ animation:fermer-gauche 2s ease-in forwards; }
-    .rideau-droit.fermer { animation:fermer-droit  2s ease-in forwards; }
+    .rideau-gauche.fermer { animation: fermer-gauche 2s ease-in forwards; }
+    .rideau-droit.fermer  { animation: fermer-droit  2s ease-in forwards; }
 
-    @keyframes fermer-gauche{ from{transform:translateX(-100%);} to{transform:translateX(0);} }
-    @keyframes fermer-droit { from{transform:translateX(100%);} to{transform:translateX(0);} }
+    @keyframes fermer-gauche { from { transform: translateX(-100%);} to { transform: translateX(0);} }
+    @keyframes fermer-droit  { from { transform: translateX(100%);}  to { transform: translateX(0);} }
 
-    /* Intro */
-    .intro-fixe{
-      position:absolute; z-index:2; inset:0; top:25%;
-      width:100%; text-align:center; font-size:1.5em; line-height:1.6em;
-      padding:0 10vw; box-sizing:border-box; color:#ffe066; text-shadow:1px 1px 3px #000;
-      opacity:0; animation:fadein 1s ease-in forwards; animation-delay:2s;
+    .intro-fixe {
+      position: absolute;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      top: 25%;
+      font-size: 1.5em;
+      line-height: 1.6em;
+      padding: 0 10vw;
+      box-sizing: border-box;
+      opacity: 0;
+      animation: fadein 1s ease-in forwards;
+      animation-delay: 2s;
+      color: #ffe066;
+      text-shadow: 1px 1px 3px black;
     }
-    @keyframes fadein{ to{opacity:1;} }
+    @keyframes fadein { to { opacity: 1; } }
 
-    /* Barre de chargement */
-    .loader{
-      position:absolute; left:50%; bottom:28px; transform:translateX(-50%);
-      z-index:4; width:min(520px,86vw); text-align:center;
-      color:#fff5d6; text-shadow:0 1px 2px #000;
+    /* ======= AJOUT : Barre de chargement (responsive) ======= */
+    .loader {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 4;
+      width: min(560px, 90vw);      /* s’adapte mobile/desktop */
+      text-align: center;
+      color: #fff5d6;
+      text-shadow: 0 1px 2px #000;
+      font-size: 14px;
+      user-select: none;
     }
-    .loader .title{ font-weight:800; letter-spacing:.04em; margin-bottom:10px; }
-    .loader .wrap{
-      height:16px; padding:3px; border-radius:999px;
-      background:rgba(255,255,255,.15); box-shadow:inset 0 0 0 2px rgba(0,0,0,.18), 0 6px 18px rgba(0,0,0,.25);
+    .loader .wrap {
+      height: 14px;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.15);
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,.18), 0 6px 18px rgba(0,0,0,.25);
       backdrop-filter: blur(2px);
     }
-    .loader .bar{
-      height:100%; border-radius:999px;
-      background:linear-gradient(#ffb347,#ffd056);
-      transform:scaleX(0); transform-origin:left; transition:transform .2s ease-out;
+    .loader .bar {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(#ffb347,#ffd056);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .2s ease-out;
     }
-    .loader .pct{ margin-top:8px; font-variant-numeric:tabular-nums; }
+    .loader .pct { margin-top: 8px; font-variant-numeric: tabular-nums; }
+    /* ================================================ */
   </style>
-
-  <!-- Petite aide au navigateur pour préparer la page suivante -->
-  <link rel="prefetch" href="1.accueil.html">
 </head>
 <body>
-  <!-- Calque bleu foncé -->
+  <!-- Calque bleu foncé par-dessus le fond image -->
   <div class="calque-bleu" id="calque"></div>
 
-  <!-- Texte d’intro -->
+  <!-- Texte d’introduction (conservé tel quel) -->
   <div class="intro-fixe">
     <h2>Bienvenue sur le site officiel</h2>
-    <h1>Les Héros d’Arzankia</h1>
+    <h1>Les Héros d'Arzankia</h1>
   </div>
 
   <!-- Rideaux -->
   <div class="rideau-gauche" id="gauche"></div>
   <div class="rideau-droit" id="droit"></div>
 
-  <!-- Loader -->
-  <div class="loader" id="loader" aria-live="polite" aria-busy="true">
-    <div class="title">CHARGEMENT</div>
+  <!-- AJOUT : Loader -->
+  <div class="loader" aria-live="polite" aria-busy="true">
     <div class="wrap"><div class="bar" id="bar"></div></div>
     <div class="pct" id="pct">0%</div>
   </div>
 
   <script>
-  (function(){
-    const calque = document.getElementById('calque');
-    const g = document.getElementById('gauche');
-    const d = document.getElementById('droit');
+    // === AJOUT : progression simple de 0 à 100% synchronisée avec tes timings ===
     const bar = document.getElementById('bar');
     const pct = document.getElementById('pct');
-
-    let p = 0, tick;
+    let p = 0, autoTick = setInterval(()=>{ if(p < 92) setProgress(p+1); }, 70);
 
     function setProgress(v){
       p = Math.max(0, Math.min(100, v));
       bar.style.transform = `scaleX(${p/100})`;
-      pct.textContent = `${Math.round(p)}%`;
+      pct.textContent = Math.round(p) + '%';
     }
 
-    // progression douce pendant l’animation d’ouverture
-    tick = setInterval(()=>{ if(p < 92) setProgress(p + 1); }, 70);
+    // 1. Faire disparaître le calque bleu après ouverture du rideau
+    setTimeout(() => {
+      document.getElementById("calque").classList.add("fade-out");
+      setProgress(35);
+    }, 2000); // juste après ouverture
 
-    // 1) Disparition du calque juste après ouverture
-    setTimeout(()=>{ calque.classList.add('fade-out'); setProgress(35); }, 2000);
-
-    // 2) Fermeture des rideaux
-    setTimeout(()=>{
-      g.classList.add('fermer'); d.classList.add('fermer');
+    // 2. Fermer les rideaux après 5 secondes
+    setTimeout(() => {
+      document.getElementById("gauche").classList.add("fermer");
+      document.getElementById("droit").classList.add("fermer");
       setProgress(75);
     }, 5000);
 
-    // 3) Redirection finale
-    setTimeout(()=>{
-      clearInterval(tick);
+    // 3. Rediriger après la fermeture
+    setTimeout(() => {
+      clearInterval(autoTick);
       setProgress(100);
-      window.location.href = '1.accueil.html';
+      window.location.href = "1.accueil.html";
     }, 7000);
-  })();
   </script>
 </body>
 </html>
