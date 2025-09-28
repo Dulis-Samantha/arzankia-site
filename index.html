@@ -24,7 +24,10 @@
       opacity: 1;
       transition: opacity 1.5s ease-in;
     }
-    .calque-bleu.fade-out { opacity: 0; }
+
+    .calque-bleu.fade-out {
+      opacity: 0;
+    }
 
     .rideau-gauche, .rideau-droit {
       position: absolute;
@@ -34,17 +37,42 @@
       background-color: #281f43;
       z-index: 3;
     }
-    .rideau-gauche { left: 0;  animation: ouvrir-gauche 2s ease-out forwards; }
-    .rideau-droit  { right: 0; animation: ouvrir-droit 2s ease-out forwards; }
 
-    @keyframes ouvrir-gauche { to { transform: translateX(-100%); } }
-    @keyframes ouvrir-droit  { to { transform: translateX(100%); } }
+    .rideau-gauche {
+      left: 0;
+      animation: ouvrir-gauche 2s ease-out forwards;
+    }
 
-    .rideau-gauche.fermer { animation: fermer-gauche 2s ease-in forwards; }
-    .rideau-droit.fermer  { animation: fermer-droit  2s ease-in forwards; }
+    .rideau-droit {
+      right: 0;
+      animation: ouvrir-droit 2s ease-out forwards;
+    }
 
-    @keyframes fermer-gauche { from { transform: translateX(-100%);} to { transform: translateX(0);} }
-    @keyframes fermer-droit  { from { transform: translateX(100%);}  to { transform: translateX(0);} }
+    @keyframes ouvrir-gauche {
+      to { transform: translateX(-100%); }
+    }
+
+    @keyframes ouvrir-droit {
+      to { transform: translateX(100%); }
+    }
+
+    .rideau-gauche.fermer {
+      animation: fermer-gauche 2s ease-in forwards;
+    }
+
+    .rideau-droit.fermer {
+      animation: fermer-droit 2s ease-in forwards;
+    }
+
+    @keyframes fermer-gauche {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes fermer-droit {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
 
     .intro-fixe {
       position: absolute;
@@ -62,26 +90,10 @@
       color: #ffe066;
       text-shadow: 1px 1px 3px black;
     }
-    @keyframes fadein { to { opacity: 1; } }
 
-    /* --- Barre de chargement --- */
-    .loader {
-      position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
-      z-index: 4; width: min(560px, 90vw); text-align: center; color: #fff5d6;
-      text-shadow: 0 1px 2px #000; font-size: 14px; user-select: none;
+    @keyframes fadein {
+      to { opacity: 1; }
     }
-    .loader .wrap {
-      height: 14px; padding: 3px; border-radius: 999px;
-      background: rgba(255,255,255,.15);
-      box-shadow: inset 0 0 0 2px rgba(0,0,0,.18), 0 6px 18px rgba(0,0,0,.25);
-      backdrop-filter: blur(2px);
-    }
-    .loader .bar {
-      height: 100%; border-radius: 999px;
-      background: linear-gradient(#ffb347,#ffd056);
-      transform: scaleX(0); transform-origin: left; transition: transform .2s ease-out;
-    }
-    .loader .pct { margin-top: 8px; font-variant-numeric: tabular-nums; }
   </style>
 </head>
 <body>
@@ -98,112 +110,22 @@
   <div class="rideau-gauche" id="gauche"></div>
   <div class="rideau-droit" id="droit"></div>
 
-  <!-- Loader -->
-  <div class="loader" aria-live="polite" aria-busy="true">
-    <div class="wrap"><div class="bar" id="bar"></div></div>
-    <div class="pct" id="pct">0%</div>
-  </div>
-
   <script>
-  // === Préchargement réel de la page suivante ===
-  (function(){
-    const NEXT_URL = '1.accueil.html';
+    // 1. Faire disparaître le calque bleu après ouverture du rideau
+    setTimeout(() => {
+      document.getElementById("calque").classList.add("fade-out");
+    }, 2000); // juste après ouverture
 
-    // Optionnel : ajoute ici des images de fond CSS de la prochaine page
-    const EXTRA_ASSETS = [
-      // 'fond_accueil.webp',
-      // 'banniere.png'
-    ];
+    // 2. Fermer les rideaux après 5 secondes
+    setTimeout(() => {
+      document.getElementById("gauche").classList.add("fermer");
+      document.getElementById("droit").classList.add("fermer");
+    }, 5000);
 
-    const bar = document.getElementById('bar');
-    const pct = document.getElementById('pct');
-    const calque = document.getElementById('calque');
-    const g = document.getElementById('gauche');
-    const d = document.getElementById('droit');
-
-    let p = 0;
-    function setProgress(v){
-      p = Math.max(0, Math.min(100, v));
-      bar.style.transform = `scaleX(${p/100})`;
-      pct.textContent = Math.round(p) + '%';
-    }
-
-    // Animations existantes
-    setTimeout(()=>{ calque.classList.add('fade-out'); }, 2000);
-    setTimeout(()=>{ g.classList.add('fermer'); d.classList.add('fermer'); }, 5000);
-
-    // 1) Récupère la page suivante et liste ses images à charger
-    async function collectNextImages(url){
-      try{
-        const res = await fetch(url, {credentials:'include'});
-        const html = await res.text();
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-
-        const urls = new Set();
-
-        // <img src / srcset>
-        doc.querySelectorAll('img').forEach(img=>{
-          const base = new URL(url, location.href);
-          if (img.getAttribute('src')) {
-            urls.add(new URL(img.getAttribute('src'), base).href);
-          }
-          if (img.getAttribute('srcset')) {
-            img.getAttribute('srcset').split(',').forEach(part=>{
-              const u = part.trim().split(' ')[0];
-              if (u) urls.add(new URL(u, base).href);
-            });
-          }
-        });
-
-        // + assets ajoutés manuellement (fonds CSS, icônes, etc.)
-        EXTRA_ASSETS.forEach(a=> urls.add(new URL(a, url).href));
-
-        return Array.from(urls);
-      }catch(e){
-        return []; // en cas d’erreur, on n’empêche pas la navigation
-      }
-    }
-
-    function preloadImages(urls, onProgress){
-      if (urls.length === 0) return Promise.resolve();
-      let loaded = 0;
-      const targetStart = 10;   // la barre démarre à 10%
-      const targetEnd   = 95;   // on garde 5% pour la bascule finale
-
-      return new Promise(resolve=>{
-        const bump = ()=> {
-          loaded++;
-          const ratio = loaded / urls.length;
-          const val = targetStart + ratio * (targetEnd - targetStart);
-          onProgress(val);
-          if (loaded >= urls.length) resolve();
-        };
-        urls.forEach(u=>{
-          const im = new Image();
-          im.onload = bump;
-          im.onerror = bump;
-          im.src = u;
-        });
-        // Sécurité : si une image pend trop longtemps, on n’est pas bloqués
-        setTimeout(resolve, 8000);
-      });
-    }
-
-    // Lance le préchargement tout de suite
-    (async function(){
-      setProgress(6); // petit démarrage visuel
-      const list = await collectNextImages(NEXT_URL);
-      await preloadImages(list, setProgress);
-
-      // attends aussi la fin des rideaux (2s ouvrir + 3s attente + 2s fermer ≈ 7s)
-      const curtainsDone = new Promise(r=> setTimeout(r, 7000));
-
-      await curtainsDone;
-      setProgress(100);
-      window.location.href = NEXT_URL;
-    })();
-
-  })();
+    // 3. Rediriger après la fermeture
+    setTimeout(() => {
+      window.location.href = "1.accueil.html";
+    }, 7000);
   </script>
 </body>
 </html>
