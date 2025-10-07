@@ -43,48 +43,40 @@
   /* Grille */
   .grid{
     display:grid;
-    grid-template-columns: 1fr 1.2fr;   /* image un peu moins large que texte */
+    grid-template-columns: 1fr 1fr;
     gap: clamp(18px, 3vw, 32px);
-    align-items: start;                 /* alignement en haut */
+    align-items: start;
   }
 
-  /* Carte image */
+  /* Image */
   .img-card{
     border-radius: var(--radius);
     overflow:hidden;
     box-shadow: 0 14px 30px rgba(0,0,0,.45);
     background: rgba(0,0,0,.25);
-    display:block;
   }
   .img-card img{
     width:100%;
-    height:auto;              /* garde proportions normales */
-    object-fit: contain;      /* pas recadré */
+    height:auto;
     display:block;
+    object-fit: contain;
   }
 
-  /* Bloc texte */
+  /* Texte */
   .glass{
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
     padding: clamp(20px, 2.4vw, 28px);
     border-radius: var(--radius);
     background: rgba(255,255,255,.88);
     box-shadow: 0 12px 28px rgba(0,0,0,.3);
   }
-
-  /* Badge chapitre */
   .chapitre{
-    align-self:flex-end;
-    margin-bottom: .6rem;
+    float:right;
+    margin: 0 0 .6rem .8rem;
     font-size:.9rem; font-style:italic;
     background:#fff; color:#333;
     padding:.3em .8em; border-radius:999px;
     box-shadow:0 2px 6px rgba(0,0,0,.2);
   }
-
-  /* Texte */
   .glass p{
     margin:0 0 1rem;
     font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
@@ -92,6 +84,8 @@
     text-align:left;
     hyphens:auto;
   }
+
+  /* Lettrine */
   .glass p:first-of-type::first-letter{
     float:left;
     font-size:2.8rem;
@@ -102,7 +96,28 @@
     text-shadow:0 0 6px rgba(0,0,0,.12);
   }
 
-  /* Bouton retour */
+  /* Lettrine sur mobile */
+  @media (max-width: 900px){
+    .glass p:first-of-type::first-letter{
+      float:left;
+      font-size:1.8rem;   /* plus compacte */
+      line-height:1.1;
+      margin-right:.2rem;
+      font-weight:bold;
+      color:var(--bleu);
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 900px){
+    .grid{ grid-template-columns:1fr; }
+    .img-card, .glass{ max-width:92%; margin:0 auto; }
+    .img-card{ margin-bottom:14px; }
+    .glass{ padding:16px; border-radius:14px; }
+    .chapitre{ float:none; display:block; text-align:right; margin:0 0 .6rem; font-size:.85rem; }
+    h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
+  }
+
   .btn{
     display:inline-block; margin: clamp(18px,3vw,28px) auto 0; padding:.7rem 1.4rem;
     border-radius:999px; background:linear-gradient(145deg, #ffe9af, #f2c94c);
@@ -111,18 +126,6 @@
     transition: transform .15s ease, box-shadow .15s ease;
   }
   .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.45), 0 0 22px rgba(255,223,100,1) inset; }
-
-  /* Mobile */
-  @media (max-width: 900px){
-    .grid{ grid-template-columns:1fr; }
-    .img-card, .glass{ max-width:92%; margin:0 auto; }
-    .img-card{ margin-bottom:14px; }
-    .glass{ padding:16px; border-radius:14px; }
-    .chapitre{ position:static; margin:0 0 .6rem; font-size:.85rem; }
-    .glass p{ font-size:1rem; line-height:1.55; }
-    .glass p:first-of-type::first-letter{ float:none; font-size:1em; margin:0; }
-    h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
-  }
 </style>
 </head>
 <body>
@@ -130,12 +133,12 @@
     <h1>Le Simorg</h1>
 
     <section class="grid">
-      <!-- Image à gauche -->
+      <!-- Image -->
       <figure class="img-card">
         <img src="extrait_Creatures.webp" alt="Le Simorg face à Raphaël">
       </figure>
 
-      <!-- Texte à droite -->
+      <!-- Texte -->
       <article class="glass">
         <div class="chapitre">Chapitre V · p. 132</div>
         <p>— Regarde… murmura Fanfan.</p>
