@@ -10,22 +10,17 @@
       font-family: Georgia, serif;
       background: url('fond_etoile_perso.webp') center top no-repeat;
       background-size: cover;
-      background-attachment: fixed; /* effet de fond fixe */
+      background-attachment: fixed;
       color: #3b2a1d;
       padding: 2em;
       max-width: 1000px;
       margin: auto;
     }
 
-    /* conteneur principal avec fond transparent */
     .extrait-container {
       display: flex;
       flex-direction: column;
       gap: 2em;
-      background: rgba(255, 255, 255, 0.7); /* bloc clair */
-      border-radius: 16px;
-      padding: 2em;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
 
     .image-text-wrapper {
@@ -41,11 +36,21 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
+    /* Bloc clair uniquement pour le texte */
+    .extrait-texte {
+      max-width: 700px;
+      margin: auto;
+      padding: 1.2em;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    }
+
     .extrait-texte p {
-      font-size: 1.1em;
-      line-height: 1.7;
+      font-size: 1em;
+      line-height: 1.6;
+      margin-bottom: 1em;
       text-align: justify;
-      margin-bottom: 1.2em;
     }
 
     h1 {
