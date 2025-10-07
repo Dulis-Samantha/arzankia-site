@@ -1,158 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
-  <title>Extrait du livre – Monde des Ptikitis</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-size: cover;            /* mieux pour l’adaptation écran */
-      color: #fff8e6; 
-      padding: 2em;
-      max-width: 1000px;
-      margin: auto;
-      border-radius: 12px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Extrait du livre – Monde des Créatures Légendaires</title>
 
- .extrait-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  max-width: 100%; /* élargit la zone sur mobile */
-  margin: auto;
-}
-
-.extrait-container p {
-  font-size: 1em; /* taille standard */
-  line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-  .extrait-container {
-    max-width: 100%;  /* occupe toute la largeur */
-    padding: 1em;
+<style>
+  :root{
+    --or:#ffd674;
+    --bleu:#0b7aa2;
+    --texte:#2a221b;
+    --radius:20px;
   }
 
-  .extrait-container p {
-    color: #fff8e6; 
-    font-size: 0.9em; /* police un peu réduite */
-    text-shadow: none; /* optionnel : texte net sur fond clair */
+  body{
+    margin:0;
+    font-family: Georgia, serif;
+    color:var(--texte);
+    background:url('fond_etoile_perso.webp') center top / cover fixed no-repeat;
+    padding: min(4vw, 40px);
   }
-}
+  .container{ max-width:1160px; margin:0 auto; }
 
+  /* Titre */
+  h1{
+    margin: 0 0 1.2rem;
+    text-align:center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height:1.1;
+    background: linear-gradient(180deg, #1aa0cf, #056081);
+    -webkit-background-clip: text; background-clip:text; color:transparent;
+    text-shadow: 0 2px 18px rgba(0,0,0,.25);
+    position:relative;
+  }
+  h1::after{
+    content:""; display:block; width:140px; height:4px; margin:.6rem auto 0; border-radius:999px;
+    background: radial-gradient(circle, var(--or) 0%, rgba(255,214,116,0) 70%);
+    box-shadow:0 0 14px var(--or); opacity:.9;
+  }
 
-    .image-text-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
+  /* Grille */
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(18px, 3vw, 32px);
+    align-items: start;
+  }
+
+  /* Carte média (image/vidéo) */
+  .img-card{
+    border-radius: var(--radius);
+    overflow:hidden;
+    box-shadow: 0 14px 30px rgba(0,0,0,.45);
+    background: rgba(0,0,0,.25);
+  }
+  /* Media responsive (image OU vidéo) */
+  .img-card img,
+  .img-card video{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit: contain;         /* ne recadre pas */
+    border:0;
+  }
+  /* Option: arrondis internes quand le navigateur ne clippe pas bien la vidéo */
+  .img-card video{ border-radius: var(--radius); }
+
+  /* Texte */
+  .glass{
+    padding: clamp(20px, 2.4vw, 28px);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,.88);
+    box-shadow: 0 12px 28px rgba(0,0,0,.3);
+  }
+  .chapitre{
+    float:right;
+    margin: 0 0 .6rem .8rem;
+    font-size:.9rem; font-style:italic;
+    background:#fff; color:#333;
+    padding:.3em .8em; border-radius:999px;
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+  }
+  .glass p{
+    margin:0 0 1rem;
+    font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
+    line-height:1.7;
+    text-align:left;
+    hyphens:auto;
+  }
+
+  /* Lettrine */
+  .glass p:first-of-type::first-letter{
+    float:left;
+    font-size:2.8rem;
+    line-height:1;
+    margin-right:.35rem;
+    font-weight:bold;
+    color:var(--bleu);
+    text-shadow:0 0 6px rgba(0,0,0,.12);
+  }
+
+  /* Lettrine mobile + layout mobile */
+  @media (max-width: 900px){
+    .grid{ grid-template-columns:1fr; }
+    .img-card, .glass{ max-width:92%; margin:0 auto; }
+    .img-card{ margin-bottom:14px; }
+    .glass{ padding:16px; border-radius:14px; }
+    .chapitre{ float:none; display:block; text-align:right; margin:0 0 .6rem; font-size:.85rem; }
+
+    .glass p:first-of-type::first-letter{
+      font-size:1.8rem;
+      line-height:1.1;
+      margin-right:.2rem;
     }
+    h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
+  }
 
-    .extrait-image {
-      width: 100%;
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-    .extrait-texte p {
-      font-size: 1em;
-      line-height: 1.5;     /* resserré */
-      text-align: justify;
-      margin-bottom: 1em;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }
-
-    h1 {
-      text-align: center;
-      color: #00779e;
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
-
-    .bouton-retour {
-      display: block;
-      width: fit-content;
-      margin: 2em auto 1em;
-      background: linear-gradient(145deg, #ffe9af, #f2c94c);
-      padding: 0.6em 1.2em;
-      border-radius: 12px;
-      color: #3b2a1d;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-      transition: all 0.2s ease-in-out;
-      text-align: center;
-    }
-
-    .bouton-retour:hover {
-      background: #c09c2c;
-      color: #fff8e6;
-      box-shadow: 0 0 16px rgba(255, 223, 100, 1);
-    }
-
-    /* Bureau : image à gauche, texte à droite */
-    @media (min-width: 768px) {
-      .image-text-wrapper {
-        flex-direction: row;
-        align-items: flex-start;
-      }
-      .extrait-image {
-        flex: 0 0 35%;     /* base fiable avec le gap */
-      }
-      .extrait-texte {
-        flex: 1 1 0;
-        padding-left: 2em;
-      }
-    }
-
-    /* Mobile : image au-dessus du texte */
-  @media (max-width:767px){
-      body{
-        max-width:100% !important;
-        padding:1em;
-        border-radius:0;          /* pas d’arrondi collé aux bords */
-      }
-      .image-text-wrapper{ flex-direction:column; }
-      .extrait-texte{
-        max-width:100%;
-        margin:0 auto;
-        background:rgba(0,0,0,.5);
-        padding:1em 1.2em;
-        border-radius:12px;
-      }
-      .extrait-texte p{
-        font-size:.95em;
-        line-height:1.45;
-        margin-bottom:.8em;
-        text-shadow:none;         /* texte net */
-        text-indent:1em;
-      }
-      h1{
-        font-size:1.3em;
-        line-height:1.2;
-        margin-bottom:.6em;
-        text-transform:uppercase;
-      }
-    }
-  </style>
+  .btn{
+    display:inline-block; margin: clamp(18px,3vw,28px) auto 0; padding:.7rem 1.4rem;
+    border-radius:999px; background:linear-gradient(145deg, #ffe9af, #f2c94c);
+    color:#3b2a1d; text-decoration:none; font-weight:700;
+    box-shadow:0 6px 18px rgba(0,0,0,.35), 0 0 16px rgba(255,223,100,.6) inset;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.45), 0 0 22px rgba(255,223,100,1) inset; }
+</style>
 </head>
 <body>
+  <main class="container">
+    <h1>Le Simorg</h1>
 
-<div class="extrait-container">
-  <h1>✨La ballade en libellule✨</h1>
+    <section class="grid">
+      <!-- Média à gauche : VIDEO intégrée -->
+      <figure class="img-card">
+        <video
+          class="media"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          poster="extrait_Creatures.webp"  <!-- facultatif : image d’attente -->
+        >
+          <source src="https://raw.githubusercontent.com/Dulis-Samantha/arzankia-site/main/extrait_Ptikitis.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+        <!--
+        Si tu veux revenir à l'image statique, commente la vidéo ci-dessus et dé-commente la ligne suivante :
+        <img src="extrait_Creatures.webp" alt="Le Simorg face à Raphaël">
+        -->
+      </figure>
 
-  <div class="image-text-wrapper">
-
-    <video autoplay loop muted playsinline class="extrait-image">
-      <source src="https://raw.githubusercontent.com/Dulis-Samantha/arzankia-site/main/extrait_Ptikitis.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
-
-    <div class="extrait-texte">
+      <!-- Texte à droite -->
+      <article class="glass">
+        <div class="chapitre">Extrait Chapitre 23 · p. 132</div>
       <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
       <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
       <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
