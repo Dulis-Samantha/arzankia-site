@@ -1,163 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
-  <title>Extrait du livre – Monde des Créatures Légendaires</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      background: url('fond_etoile_perso.webp') center top no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-      color: #3b2a1d;
-      padding: 2em;
-      max-width: 1000px;
-      margin: auto;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Extrait du livre – Monde des Créatures Légendaires</title>
+
+<style>
+  :root{
+    --or:#ffd674;
+    --or-fonce:#c09c2c;
+    --bleu:#0b7aa2;
+    --texte:#2a221b;
+    --verre:rgba(255,255,255,.18);
+    --verre-bord:rgba(255,255,255,.35);
+    --verre-ombre:rgba(0,0,0,.35);
+    --radius:20px;
+  }
+
+  /* ——— Page ——— */
+  body{
+    margin:0;
+    font-family: Georgia, serif;
+    color:var(--texte);
+    background:url('fond_etoile_perso.webp') center top / cover fixed no-repeat;
+    padding: min(4vw, 40px);
+  }
+  .container{
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  /* ——— Titre ——— */
+  h1{
+    margin: 0 0 1.2rem;
+    text-align:center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing:.5px;
+    line-height:1.1;
+    background: linear-gradient(180deg, #1aa0cf, #056081);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 18px rgba(0,0,0,.25);
+    position: relative;
+  }
+  h1::after{
+    content:"";
+    display:block;
+    width: 140px;
+    height: 4px;
+    margin: .6rem auto 0;
+    border-radius: 999px;
+    background: radial-gradient(circle, var(--or) 0%, rgba(255,214,116,.0) 70%);
+    box-shadow: 0 0 14px var(--or);
+    opacity:.9;
+  }
+
+  /* ——— Grille image + texte ——— */
+  .grid{
+    display: grid;
+    gap: clamp(18px, 3vw, 32px);
+    align-items: start;
+  }
+  @media (min-width: 900px){
+    .grid{
+      grid-template-columns: 1fr 1.2fr;
     }
+  }
 
-    .extrait-container {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
-    }
+  /* ——— Carte image ——— */
+  .img-card{
+    background: rgba(0,0,0,.25);
+    padding: clamp(8px,1.2vw,12px);
+    border-radius: calc(var(--radius) + 4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,.45);
+    backdrop-filter: blur(2px);
+  }
+  .img-card img{
+    display:block;
+    width: 100%;
+    height:auto;
+    border-radius: var(--radius);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
 
-    .image-text-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
-    }
+  /* ——— Panneau de texte en “verre” ——— */
+  .glass{
+    position: relative;
+    padding: clamp(16px, 2.4vw, 26px) clamp(18px, 2.8vw, 32px);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.22));
+    box-shadow: 0 12px 28px var(--verre-ombre), inset 0 0 0 1px var(--verre-bord);
+    overflow:hidden;
+  }
+  /* petites étoiles douces */
+  .glass::before, .glass::after{
+    content:"";
+    position:absolute; inset:-20%;
+    background-image:
+      radial-gradient(white .8px, transparent 1px),
+      radial-gradient(white .8px, transparent 1px),
+      radial-gradient(white .8px, transparent 1px);
+    background-size: 120px 120px, 180px 180px, 240px 240px;
+    background-position: 0 0, 40px 60px, 80px 20px;
+    opacity:.25;
+    animation: twinkle 14s linear infinite;
+    pointer-events:none;
+  }
+  .glass::after{
+    animation-duration: 22s;
+    opacity:.18;
+  }
+  @keyframes twinkle {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-40px); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .glass::before, .glass::after{ animation: none; }
+  }
 
-    .extrait-image {
-      width: 100%;
-      max-width: 750px;  /* image plus grande */
-      margin: auto;
-      display: block;
-      border-radius: 16px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    }
+  .glass p{
+    margin: 0 0 1rem;
+    font-size: clamp(1rem, 1.2vw + .6rem, 1.15rem);
+    line-height: 1.7;
+    text-align: justify;
+  }
 
-    /* Bloc clair uniquement pour le texte */
-    .extrait-texte {
-      max-width: 700px;
-      margin: auto;
-      padding: 1.2em;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.25);
-    }
+  /* ——— Bouton retour ——— */
+  .btn{
+    display:inline-block;
+    margin: clamp(18px,3vw,28px) auto 0;
+    padding: .7rem 1.4rem;
+    border-radius: 999px;
+    background: linear-gradient(145deg, var(--or), #f2c94c);
+    color:#3b2a1d;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow: 0 6px 18px rgba(0,0,0,.35), 0 0 16px rgba(255,223,100,.6) inset;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,.45), 0 0 22px rgba(255,223,100,1) inset; }
+  .btn:active{ transform: translateY(0); }
 
-    .extrait-texte p {
-      font-size: 1em;
-      line-height: 1.6;
-      margin-bottom: 1em;
-      text-align: justify;
-    }
-
-    /* Titre */
-    h1 {
-      text-align: center;
-      color: #00779e;
-      font-size: 2.6em;   /* grand sur PC */
-      margin-bottom: 1em;
-      text-shadow: 0 0 8px rgba(0,0,0,0.3);
-    }
-
-    /* Bouton retour */
-    .bouton-retour {
-      display: block;
-      width: fit-content;
-      margin: 2em auto 1em;
-      background: linear-gradient(145deg, #ffe9af, #f2c94c);
-      padding: 0.6em 1.2em;
-      border-radius: 12px;
-      color: #3b2a1d;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-      transition: all 0.2s ease-in-out;
-      text-align: center;
-    }
-    
-    .bouton-retour:hover {
-      background: #c09c2c;
-      color: #fff8e6;
-      box-shadow: 0 0 16px rgba(255, 223, 100, 1);
-    }
-
-    /* Bureau : image à gauche, texte à droite */
-    @media (min-width: 768px) {
-      .image-text-wrapper {
-        flex-direction: row;
-        align-items: flex-start;
-      }
-
-      .extrait-image {
-        width: 30%;
-      }
-
-      .extrait-texte {
-        width: 65%;
-        padding-left: 2em;
-      }
-    }
-
-    /* Mobile : image au-dessus du texte */
-    @media (max-width: 767px) {
-      .image-text-wrapper {
-        flex-direction: column;
-      }
-
-      .extrait-image {
-        order: 1;
-        margin-bottom: 1em;
-        max-width: 95%; /* prend presque toute la largeur */
-      }
-
-      .extrait-texte {
-        order: 2;
-        max-width: 85%; /* texte plus resserré */
-        margin: auto;
-        padding: 1em;
-      }
-
-      .extrait-texte p {
-        font-size: 1em;
-        line-height: 1.5;
-        margin-bottom: 1.2em;
-        text-align: justify;
-        text-indent: 1em;
-      }
-
-      h1 {
-        font-size: 1.8em; /* titre adapté au mobile */
-        line-height: 1.3;
-        margin-bottom: 0.8em;
-        text-align: center;
-        text-transform: uppercase;
-      }
-    }
-  </style>
+  /* ——— Ajustements mobile ——— */
+  @media (max-width: 899px){
+    .img-card{ max-width: 640px; margin: 0 auto; }
+    .glass{ max-width: 760px; margin: 0 auto; }
+  }
+</style>
 </head>
 <body>
-
-  <div class="extrait-container">
+  <main class="container">
     <h1>Le Simorg</h1>
 
-    <div class="image-text-wrapper">
-      <img src="extrait_Creatures.webp" alt="Le Simorg" class="extrait-image">
+    <section class="grid">
+      <!-- Image -->
+      <figure class="img-card">
+        <img src="extrait_Creatures.webp" alt="Le Simorg face à Raphaël">
+      </figure>
 
-      <div class="extrait-texte">
-        <p>Le Simorg apparut dans le ciel, fonçant sur moi. Il était gigantesque. Plus grand encore qu’un dragon adulte.</p>  
-        <p>Son envergure faisait de l’ombre à toute la cime. Un hibou légendaire aux plumes irisées, aux yeux dorés, et au bec recourbé comme une faux d’argent.</p>  
-        <p>— Raphaël, descends !!! hurla Maxime.</p>  
-      </div>
-    </div>
-  </div>
+      <!-- Texte -->
+      <article class="glass">
+        <p>Le Simorg apparut dans le ciel, fonçant sur moi. Il était gigantesque. Plus grand encore qu’un dragon adulte.</p>
+        <p>Son envergure faisait de l’ombre à toute la cime. Un hibou légendaire aux plumes irisées, aux yeux dorés, et au bec recourbé comme une faux d’argent.</p>
+        <p>— Raphaël, descends !!! hurla Maxime.</p>
+      </article>
+    </section>
 
-  <a href="8.monde_Creatures.html" class="bouton-retour">← Retour au Monde des Créatures Légendaires</a>
-
+    <p style="text-align:center">
+      <a class="btn" href="8.monde_Creatures.html">← Retour au Monde des Créatures Légendaires</a>
+    </p>
+  </main>
 </body>
 </html>
