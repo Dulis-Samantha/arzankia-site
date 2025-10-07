@@ -4,22 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
- <title>Extrait du livre – Monde des Créatures Légendaires</title>
+  <title>Extrait du livre – Monde des Créatures Légendaires</title>
   <style>
     body {
       font-family: Georgia, serif;
-      background: linear-gradient(to bottom, #cde9f6, #fef8e5);
+      background: url('fond_etoile_perso.webp') center top no-repeat;
+      background-size: cover;
+      background-attachment: fixed; /* effet de fond fixe */
       color: #3b2a1d;
       padding: 2em;
       max-width: 1000px;
       margin: auto;
-      border-radius: 12px;
     }
 
+    /* conteneur principal avec fond transparent */
     .extrait-container {
       display: flex;
       flex-direction: column;
       gap: 2em;
+      background: rgba(255, 255, 255, 0.7); /* bloc clair */
+      border-radius: 16px;
+      padding: 2em;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
 
     .image-text-wrapper {
@@ -39,36 +45,37 @@
       font-size: 1.1em;
       line-height: 1.7;
       text-align: justify;
-      margin-bottom: 1.5em;
+      margin-bottom: 1.2em;
     }
-h1 {
-  text-align: center;
-  color: #00779e;
-  font-size: 2em;
-  margin-bottom: 1em;
-}
 
-   .bouton-retour {
-  display: block;
-  width: fit-content;
-  margin: 2em auto 1em;
-  background: linear-gradient(145deg, #ffe9af, #f2c94c);
-  padding: 0.6em 1.2em;
-  border-radius: 12px;
-  color: #3b2a1d;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-  transition: all 0.2s ease-in-out;
-  text-align: center;
-}
+    h1 {
+      text-align: center;
+      color: #00779e;
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .bouton-retour {
+      display: block;
+      width: fit-content;
+      margin: 2em auto 1em;
+      background: linear-gradient(145deg, #ffe9af, #f2c94c);
+      padding: 0.6em 1.2em;
+      border-radius: 12px;
+      color: #3b2a1d;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+      transition: all 0.2s ease-in-out;
+      text-align: center;
+    }
     
-     .bouton-retour:hover {
-    background: #c09c2c;
-    color: #fff8e6;
-    box-shadow: 0 0 16px rgba(255, 223, 100, 1);
-  }
+    .bouton-retour:hover {
+      background: #c09c2c;
+      color: #fff8e6;
+      box-shadow: 0 0 16px rgba(255, 223, 100, 1);
+    }
 
     /* Bureau : image à gauche, texte à droite */
     @media (min-width: 768px) {
@@ -82,49 +89,45 @@ h1 {
       }
 
       .extrait-texte {
-        width: 55%;
+        width: 65%;
         padding-left: 2em;
       }
     }
+
     /* Mobile : image au-dessus du texte */
-@media (max-width: 767px) {
-  .image-text-wrapper {
-    flex-direction: column;
-  }
+    @media (max-width: 767px) {
+      .image-text-wrapper {
+        flex-direction: column;
+      }
 
-  .extrait-image {
-    order: 1;
-    margin-bottom: 1em;
-  }
+      .extrait-image {
+        order: 1;
+        margin-bottom: 1em;
+      }
 
-  .extrait-texte {
-    order: 2;
-    max-width: 95%;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 1em;
-    border-radius: 12px;
-  }
+      .extrait-texte {
+        order: 2;
+        max-width: 95%;
+        margin: auto;
+        padding: 1em;
+      }
 
-  .extrait-texte p {
-    font-size: 1.05em;
-    line-height: 1.9;
-    margin-bottom: 1.2em;
-    text-align: justify;
-    text-indent: 1em;
-  }
+      .extrait-texte p {
+        font-size: 1.05em;
+        line-height: 1.9;
+        margin-bottom: 1.2em;
+        text-align: justify;
+        text-indent: 1em;
+      }
 
-  h1 {
-    font-size: 1em;
-    line-height: 1.2;
-    text-align: center;
-    margin-bottom: 0.5em;
-    text-transform: uppercase;
-  }
-}
-
-
-
+      h1 {
+        font-size: 1.2em;
+        line-height: 1.3;
+        text-align: center;
+        margin-bottom: 0.8em;
+        text-transform: uppercase;
+      }
+    }
   </style>
 </head>
 <body>
@@ -133,24 +136,20 @@ h1 {
     <h1>Le Simorg</h1>
 
     <div class="image-text-wrapper">
-     <img src="extrait_Creatures.webp" alt="Le Simorg" class="extrait-image">
+      <img src="extrait_Creatures.webp" alt="Le Simorg" class="extrait-image">
 
-   <div class="extrait-texte">
-      <p>Le Simorg apparut dans le ciel, fonçant sur moi.</p>  
-      <p>Il était gigantesque.</p>  
-      <p>Plus grand encore qu’un dragon adulte.</p>  
-      <p>Son envergure faisait de l’ombre à toute la cime.</p>  
-      <p>Un hibou légendaire aux plumes irisées, aux yeux dorés,</p>  
-      <p>et au bec recourbé comme une faux d’argent.</p>  
-
-      <p>— Raphaël, descends !!! hurla Maxime.</p>  
-    </div>
-
-
+      <div class="extrait-texte">
+        <p>Le Simorg apparut dans le ciel, fonçant sur moi.</p>  
+        <p>Il était gigantesque.</p>  
+        <p>Plus grand encore qu’un dragon adulte.</p>  
+        <p>Son envergure faisait de l’ombre à toute la cime.</p>  
+        <p>Un hibou légendaire aux plumes irisées, aux yeux dorés, et au bec recourbé comme une faux d’argent.</p>  
+        <p>— Raphaël, descends !!! hurla Maxime.</p>  
       </div>
     </div>
-   <a href="8.monde_Creatures.html" class="bouton-retour">← Retour au Monde des Créatures Légendaires</a>
   </div>
+
+  <a href="8.monde_Creatures.html" class="bouton-retour">← Retour au Monde des Créatures Légendaires</a>
 
 </body>
 </html>
