@@ -14,7 +14,6 @@
     --radius:20px;
   }
 
-  /* Page */
   body{
     margin:0;
     font-family: Georgia, serif;
@@ -41,37 +40,37 @@
     box-shadow:0 0 14px var(--or); opacity:.9;
   }
 
-  /* Grille double page */
+  /* Grille */
   .grid{
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr;   /* image un peu moins large que texte */
     gap: clamp(18px, 3vw, 32px);
-    align-items: stretch;              /* même hauteur */
+    align-items: start;                 /* alignement en haut */
   }
 
-  /* Carte image (page gauche) */
+  /* Carte image */
   .img-card{
-    display:flex;                      /* pour égaliser hauteur */
     border-radius: var(--radius);
     overflow:hidden;
     box-shadow: 0 14px 30px rgba(0,0,0,.45);
     background: rgba(0,0,0,.25);
+    display:block;
   }
   .img-card img{
     width:100%;
-    height:100%;
-    object-fit: cover;                 /* recadrage propre */
+    height:auto;              /* garde proportions normales */
+    object-fit: contain;      /* pas recadré */
     display:block;
   }
 
-  /* Panneau texte (page droite) */
+  /* Bloc texte */
   .glass{
     display:flex;
     flex-direction:column;
-    justify-content:flex-start;        /* contenu en haut */
+    justify-content:flex-start;
     padding: clamp(20px, 2.4vw, 28px);
     border-radius: var(--radius);
-    background: rgba(255,255,255,.88); /* plus clair & net */
+    background: rgba(255,255,255,.88);
     box-shadow: 0 12px 28px rgba(0,0,0,.3);
   }
 
@@ -90,11 +89,9 @@
     margin:0 0 1rem;
     font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
     line-height:1.7;
-    text-align:left;                   /* plus joli que justifié */
-    hyphens:auto;                      /* césures si justifié */
+    text-align:left;
+    hyphens:auto;
   }
-
-  /* Lettrine uniquement au 1er paragraphe */
   .glass p:first-of-type::first-letter{
     float:left;
     font-size:2.8rem;
@@ -105,7 +102,7 @@
     text-shadow:0 0 6px rgba(0,0,0,.12);
   }
 
-  /* Bouton retour (facultatif si tu le gardes ailleurs) */
+  /* Bouton retour */
   .btn{
     display:inline-block; margin: clamp(18px,3vw,28px) auto 0; padding:.7rem 1.4rem;
     border-radius:999px; background:linear-gradient(145deg, #ffe9af, #f2c94c);
@@ -123,7 +120,7 @@
     .glass{ padding:16px; border-radius:14px; }
     .chapitre{ position:static; margin:0 0 .6rem; font-size:.85rem; }
     .glass p{ font-size:1rem; line-height:1.55; }
-    .glass p:first-of-type::first-letter{ float:none; font-size:1em; margin:0; } /* pas de lettrine sur mobile */
+    .glass p:first-of-type::first-letter{ float:none; font-size:1em; margin:0; }
     h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
   }
 </style>
@@ -133,34 +130,32 @@
     <h1>Le Simorg</h1>
 
     <section class="grid">
-      <!-- Page gauche : image -->
+      <!-- Image à gauche -->
       <figure class="img-card">
         <img src="extrait_Creatures.webp" alt="Le Simorg face à Raphaël">
       </figure>
 
-      <!-- Page droite : texte -->
-   <article class="glass">
-  <div class="chapitre">Chapitre V · p. 132</div>
-
-  <p>— Regarde… murmura Fanfan.</p>
-  <p>Elle était figée devant un arbre gigantesque. Tout en haut, un nid immense avait été construit dans sa cime, formé de branches épaisses et de feuilles entrelacées. Et là, suspendues à une brindille… quelques plumes blanches, longues et brillantes.</p>
-  <p>— Le Simorg est là, souffla Maxime. Et ces plumes… ce sont les siennes. Il est parti chasser. Si tu veux une plume, c’est maintenant ou jamais. Enfin moi, j’dis ça…</p>
-  <p>Je le fixai, incrédule.</p>
-  <p>— Tu veux que je monte là-haut ? Sérieusement ?</p>
-  <p>— J’ai pas le droit de le chasser, Raphaël. C’est une créature sacrée. Personne ne peut lever la main sur lui.</p>
-  <p>— Quoi ?! Et tu m’en parles que maintenant ?!</p>
-  <p>Fanfan fit un pas vers l’arbre, les sourcils froncés, prête à grimper.</p>
-  <p>— Non ! m’écriai-je. J’y vais !</p>
-  <p>Je me retournai vers le tronc, pris une grande inspiration, et commençai l’ascension.</p>
-  <p>L’arbre était gigantesque. Ses branches, épaisses comme des troncs, formaient un dédale suspendu dans le ciel. Mon cœur tambourinait à chaque mètre. J’arrivai enfin jusqu’au nid. Une plume, longue, blanche et brillante, reposait sur le bord. Elle vibrait légèrement, comme si elle respirait.</p>
-  <p>Je tendis la main… et la saisis.</p>
-  <p>Mais à peine mes doigts l’avaient-ils fermement agrippée qu’un hurlement strident fendit l’air. Le vent se leva. Les feuilles frémirent.</p>
-  <p>— Il revient… murmura Fanfan en contrebas.</p>
-  <p>Le Simorg apparut dans le ciel, fonçant sur moi. Il était gigantesque. Plus grand encore qu’un dragon adulte.</p>
-  <p>Son envergure faisait de l’ombre à toute la cime. Un hibou légendaire aux plumes irisées, aux yeux dorés, et au bec recourbé comme une faux d’argent.</p>
-  <p>— Raphaël, descends !!! hurla Maxime.</p>
-</article>
-
+      <!-- Texte à droite -->
+      <article class="glass">
+        <div class="chapitre">Chapitre V · p. 132</div>
+        <p>— Regarde… murmura Fanfan.</p>
+        <p>Elle était figée devant un arbre gigantesque. Tout en haut, un nid immense avait été construit dans sa cime, formé de branches épaisses et de feuilles entrelacées. Et là, suspendues à une brindille… quelques plumes blanches, longues et brillantes.</p>
+        <p>— Le Simorg est là, souffla Maxime. Et ces plumes… ce sont les siennes. Il est parti chasser. Si tu veux une plume, c’est maintenant ou jamais. Enfin moi, j’dis ça…</p>
+        <p>Je le fixai, incrédule.</p>
+        <p>— Tu veux que je monte là-haut ? Sérieusement ?</p>
+        <p>— J’ai pas le droit de le chasser, Raphaël. C’est une créature sacrée. Personne ne peut lever la main sur lui.</p>
+        <p>— Quoi ?! Et tu m’en parles que maintenant ?!</p>
+        <p>Fanfan fit un pas vers l’arbre, les sourcils froncés, prête à grimper.</p>
+        <p>— Non ! m’écriai-je. J’y vais !</p>
+        <p>Je me retournai vers le tronc, pris une grande inspiration, et commençai l’ascension.</p>
+        <p>L’arbre était gigantesque. Ses branches, épaisses comme des troncs, formaient un dédale suspendu dans le ciel. Mon cœur tambourinait à chaque mètre. J’arrivai enfin jusqu’au nid. Une plume, longue, blanche et brillante, reposait sur le bord. Elle vibrait légèrement, comme si elle respirait.</p>
+        <p>Je tendis la main… et la saisis.</p>
+        <p>Mais à peine mes doigts l’avaient-ils fermement agrippée qu’un hurlement strident fendit l’air. Le vent se leva. Les feuilles frémirent.</p>
+        <p>— Il revient… murmura Fanfan en contrebas.</p>
+        <p>Le Simorg apparut dans le ciel, fonçant sur moi. Il était gigantesque. Plus grand encore qu’un dragon adulte.</p>
+        <p>Son envergure faisait de l’ombre à toute la cime. Un hibou légendaire aux plumes irisées, aux yeux dorés, et au bec recourbé comme une faux d’argent.</p>
+        <p>— Raphaël, descends !!! hurla Maxime.</p>
+      </article>
     </section>
 
     <p style="text-align:center">
