@@ -85,8 +85,8 @@
     hyphens:auto;
   }
 
-  /* Lettrine */
-  .glass p:first-of-type::first-letter{
+  /* Lettrine manuelle */
+  .lettrine {
     float:left;
     font-size:2.8rem;
     line-height:1;
@@ -95,16 +95,11 @@
     color:var(--bleu);
     text-shadow:0 0 6px rgba(0,0,0,.12);
   }
-
-  /* Lettrine sur mobile */
   @media (max-width: 900px){
-    .glass p:first-of-type::first-letter{
-      float:left;
-      font-size:1.8rem;   /* plus compacte */
+    .lettrine {
+      font-size:1.8rem;
       line-height:1.1;
       margin-right:.2rem;
-      font-weight:bold;
-      color:var(--bleu);
     }
   }
 
@@ -141,7 +136,8 @@
       <!-- Texte -->
       <article class="glass">
         <div class="chapitre">Extrait Chapitre 29 · p. 332</div>
-        <p>«— Regarde… murmura Fanfan.</p>
+        
+        <p>«— <span class="lettrine">R</span>egarde… murmura Fanfan.</p>
         <p>Elle était figée devant un arbre gigantesque. Tout en haut, un nid immense avait été construit dans sa cime, formé de branches épaisses et de feuilles entrelacées. Et là, suspendues à une brindille… quelques plumes blanches, longues et brillantes.</p>
         <p>— Le Simorg est là, souffla Maxime. Et ces plumes… ce sont les siennes. Il est parti chasser. Si tu veux une plume, c’est maintenant ou jamais. Enfin moi, j’dis ça…</p>
         <p>Je le fixai, incrédule.</p>
