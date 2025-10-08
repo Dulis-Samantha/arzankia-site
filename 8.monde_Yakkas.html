@@ -87,23 +87,26 @@
       box-shadow:0 0 18px rgba(255,223,100,1);
     }
 
-    /* === MOBILE === */
+    /* === MOBILE (boutons sous le bloc, non fixes) === */
     @media (max-width: 600px){
-      .container{ padding: 1rem 0.6rem 6.5rem; }
+      .container{ padding: 1rem 0.6rem 1.5rem; } /* plus de réserve bas */
       .texte-monde{ font-size:.95rem; padding:0.9rem; }
+
       .button-group{
-        position: fixed;
-        bottom:10px; left:0; right:0;
-        justify-content:center;
-        background: rgba(0,0,0,.4);
-        padding:.5rem 1rem;
-        z-index:999;
-        gap:.5rem;
+        position: static;          /* plus de position:fixed */
+        bottom:auto; left:auto; right:auto;
+        background: transparent;   /* pas de fond semi-opaque */
+        padding: 0;
+        gap: .6rem;
+        margin: 1rem auto 0;       /* espace au-dessus des boutons */
+        justify-content: center;
+        flex-wrap: wrap;
+        z-index: auto;
       }
       .button-group a{
-        font-size:.85rem;
-        padding:.45rem .9rem;
-        min-width:auto;
+        font-size:.95rem;
+        padding:.6rem 1rem;
+        min-width: 48%;            /* 2 boutons par ligne si besoin */
         border-radius:25px;
         box-shadow:0 0 8px rgba(255,223,100,.6);
       }
