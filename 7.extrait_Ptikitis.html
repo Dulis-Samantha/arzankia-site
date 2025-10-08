@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Extrait du livre – Monde des Créatures Légendaires</title>
+<title>Extrait du livre – La ballade en libellule</title>
 
 <style>
   :root{
@@ -86,16 +86,27 @@
     hyphens:auto;
   }
 
-  /* Lettrine */
-  .glass p:first-of-type::first-letter{
-    float:left;
+  /* LETTRINE ROBUSTE (grille, pas de float) — narration (sans tiret) */
+  .p-dc{
+    display:grid;
+    grid-template-columns: auto auto 1fr; /* ponctuation | lettre | reste */
+    column-gap:.35rem;
+    align-items:start;
+  }
+  .p-dc .punc{
+    font-size:1rem;
+    line-height:1.7;              /* même leading que le paragraphe */
+    white-space:nowrap;           /* garde le guillemet collé au texte */
+  }
+  .p-dc .dc{
     font-size:2.8rem;
     line-height:1;
-    margin-right:.35rem;
-    font-weight:bold;
+    font-weight:700;
     color:var(--bleu);
     text-shadow:0 0 6px rgba(0,0,0,.12);
+    transform:translateY(.06em);  /* micro-alignement vertical */
   }
+  .p-dc .rest{ line-height:1.7; }
 
   /* Mobile */
   @media (max-width: 900px){
@@ -105,11 +116,8 @@
     .glass{ padding:16px; border-radius:14px; }
     .chapitre{ float:none; display:block; text-align:right; margin:0 0 .6rem; font-size:.85rem; }
 
-    .glass p:first-of-type::first-letter{
-      font-size:1.8rem;
-      line-height:1.1;
-      margin-right:.2rem;
-    }
+    .p-dc{ column-gap:.28rem; }
+    .p-dc .dc{ font-size:1.9rem; transform:translateY(.04em); }
     h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
   }
 
@@ -140,7 +148,14 @@
       <!-- Texte à droite -->
       <article class="glass">
         <div class="chapitre">Extrait Chapitre 23 · p. 132</div>
-        <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
+
+        <!-- 1er paragraphe avec lettrine en grille (narration, sans tiret) -->
+        <p class="p-dc">
+          <span class="punc">«&#8239;</span>
+          <span class="dc">E</span>
+          <span class="rest">n balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</span>
+        </p>
+
         <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
         <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
         <p>— Destination nénuphar ! répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
