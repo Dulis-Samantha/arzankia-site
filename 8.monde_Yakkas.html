@@ -30,7 +30,7 @@
       text-align:center;
       font-size: clamp(1.6rem, 3.5vw, 2.4rem);
       font-weight:700;
-      margin: 1.5rem auto 1rem;
+      margin: 1.5rem auto;
       color:#ffe79a;
       text-shadow: 0 0 8px rgba(0,0,0,.75), 0 0 18px rgba(255,231,154,.25);
     }
@@ -41,50 +41,15 @@
       width:100%;
       max-width: 950px;
       height:auto;
-      margin: 0 auto 0.6rem; /* réduit pour coller le ruban */
+      margin: 0 auto 1.2rem;
       border-radius: 18px;
       box-shadow: 0 0 25px rgba(255,255,255,.15);
     }
 
-    /* === BANDEAU / RUBAN === */
-    .ribbon-wrap{ text-align:center; }
-
-    .chapitre.ribbon{
-      position: relative;
-      display: inline-block;
-      margin: .3rem auto 1.1rem;   /* espace entre l'image et le texte */
-      padding: .55em 1.4em;
-      font-size: 1rem;
-      font-style: italic;
-      letter-spacing: .2px;
-      color: #3b2a1d;
-      background: linear-gradient(180deg, #fff7d6, #f5e1a8 55%, #ecd596);
-      border: 1px solid rgba(121,89,12,.25);
-      border-radius: 999px;
-      box-shadow:
-        0 10px 20px rgba(0,0,0,.25),
-        inset 0 1px 0 rgba(255,255,255,.85),
-        inset 0 -1px 0 rgba(163,122,23,.25);
-      color:#2a221b;
-      text-shadow:none;
-    }
-    .chapitre.ribbon::before,
-    .chapitre.ribbon::after{
-      content:"";
-      position: absolute;
-      top: 52%;
-      width: 26px;
-      height: 14px;
-      background: linear-gradient(180deg, #d9b862, #a8811a);
-      box-shadow: 0 3px 8px rgba(0,0,0,.18);
-    }
-    .chapitre.ribbon::before{ left: -18px; border-radius: 4px 0 0 4px; transform: translateY(-50%) skewX(-18deg); }
-    .chapitre.ribbon::after{ right: -18px; border-radius: 0 4px 4px 0; transform: translateY(-50%) skewX(18deg); }
-
     /* === TEXTE EXPLICATIF === */
     .texte-monde{
       max-width:800px;
-      margin: 0.6rem auto 1.2rem; /* rapproché du ruban */
+      margin: 1.2rem auto;
       padding: 1rem 1.2rem;
       font-size: clamp(1rem, 1.4vw, 1.2rem);
       line-height:1.6;
@@ -126,18 +91,6 @@
     @media (max-width: 600px){
       .container{ padding: 1rem 0.6rem 6.5rem; }
       .texte-monde{ font-size:.95rem; padding:0.9rem; }
-
-      .chapitre.ribbon{
-        margin: .2rem auto .9rem;
-        padding: .45em 1.1em;
-        font-size: .9rem;
-      }
-      .chapitre.ribbon::before,
-      .chapitre.ribbon::after{
-        width: 20px; height: 12px;
-        left: -14px; right: -14px;
-      }
-
       .button-group{
         position: fixed;
         bottom:10px; left:0; right:0;
@@ -165,12 +118,6 @@
 
     <!-- IMAGE -->
     <img class="Fees-image" src="monde_Yakkas.webp" alt="Monde des Yakkas">
-
-    <!-- BANDEAU EXTR.
-         Remplace le libellé par celui que tu veux afficher. -->
-    <div class="ribbon-wrap">
-      <div class="chapitre ribbon">Extrait Chapitre 2 · p. 23</div>
-    </div>
 
     <!-- TEXTE -->
     <div class="texte-monde">
