@@ -14,6 +14,7 @@
     --radius:20px;
   }
 
+  /* BASE */
   body{
     margin:0;
     font-family: Georgia, serif;
@@ -23,7 +24,7 @@
   }
   .container{ max-width:1160px; margin:0 auto; }
 
-  /* Titre */
+  /* TITRE */
   h1{
     margin: 0 0 1.2rem;
     text-align:center;
@@ -40,7 +41,7 @@
     box-shadow:0 0 14px var(--or); opacity:.9;
   }
 
-  /* Grille */
+  /* GRILLE */
   .grid{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -48,7 +49,7 @@
     align-items: start;
   }
 
-  /* Image */
+  /* IMAGE */
   .img-card{
     border-radius: var(--radius);
     overflow:hidden;
@@ -62,33 +63,29 @@
     object-fit: contain;
   }
 
-  /* Bloc texte */
+  /* BLOC TEXTE (panneau glass) */
   .glass{
     position: relative;
     padding: clamp(20px, 2.4vw, 28px);
     border-radius: var(--radius);
     background: rgba(255,255,255,.88);
     box-shadow: 0 12px 28px rgba(0,0,0,.3);
-    text-align: center;              /* pour centrer le ruban */
+    text-align: center; /* centrer uniquement le ruban */
   }
-
-  /* Texte des paragraphes à gauche */
   .glass p{
     margin:0 0 1rem;
     font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
     line-height:1.7;
-    text-align:left;
+    text-align:left; /* le texte reste aligné à gauche */
     hyphens:auto;
   }
 
-  /* Ruban "Extrait Chapitre" (comme Ptikitis) */
+  /* RUBAN "Extrait Chapitre" */
   .ribbon-wrap{ text-align:center; }
-  .chapitre{ float:none; background:transparent; box-shadow:none; padding:0; margin:0; } /* reset */
-
   .chapitre.ribbon{
     position: relative;
     display: inline-block;
-    margin: -12px auto 1.1rem;       /* chevauche légèrement le haut du panneau */
+    margin: -12px auto 1.1rem;     /* chevauche légèrement le haut du panneau */
     padding: .55em 1.4em;
     font-size: 1rem;
     font-style: italic;
@@ -123,23 +120,43 @@
     transform: translateY(-50%) skewX(18deg);
   }
 
-  /* Lettrine */
-  .lettrine {
-    float:left;
+  /* LETTRINE + GUILLEMETS (grille robuste) */
+  .p-dc{
+    display:grid;
+    grid-template-columns: auto auto 1fr; /* guillemet ouvrant | lettrine | reste */
+    column-gap:.35rem;
+    align-items:start;
+  }
+  .p-dc .punc{
+    font-size:1rem;
+    line-height:1.7;
+    white-space:nowrap; /* « colle à la lettrine */
+  }
+  .p-dc .dc{
     font-size:2.8rem;
     line-height:1;
-    margin-right:.35rem;
-    font-weight:bold;
+    font-weight:700;
     color:var(--bleu);
     text-shadow:0 0 6px rgba(0,0,0,.12);
+    transform:translateY(.06em);
+  }
+  .p-dc .rest{ line-height:1.7; }
+
+  /* guillemet fermant en fin d’extrait */
+  .p-quote-close{
+    text-align:right;
+    margin:.4rem 0 0;
+    font-size:1.4rem;
+    opacity:.7;
   }
 
-  /* Mobile */
+  /* MOBILE */
   @media (max-width: 900px){
     .grid{ grid-template-columns:1fr; }
     .img-card, .glass{ max-width:92%; margin:0 auto; }
     .img-card{ margin-bottom:14px; }
     .glass{ padding:16px; border-radius:14px; }
+
     .chapitre.ribbon{
       margin: -8px auto .9rem;
       padding: .45em 1.1em;
@@ -150,14 +167,13 @@
       width: 20px; height: 12px;
       left: -14px; right: -14px;
     }
-    .lettrine {
-      font-size:1.8rem;
-      line-height:1.1;
-      margin-right:.2rem;
-    }
+
+    .p-dc{ column-gap:.28rem; }
+    .p-dc .dc{ font-size:1.9rem; transform:translateY(.04em); }
     h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
   }
 
+  /* BOUTON RETOUR */
   .btn{
     display:inline-block; margin: clamp(18px,3vw,28px) auto 0; padding:.7rem 1.4rem;
     border-radius:999px; background:linear-gradient(145deg, #ffe9af, #f2c94c);
@@ -181,21 +197,30 @@
       <!-- Texte -->
       <article class="glass">
         <div class="ribbon-wrap">
-          <div class="chapitre ribbon">Extrait — Monde des Yakkas</div>
+          <div class="chapitre ribbon">Extrait Chapitre 23 · p. 132</div>
         </div>
 
-        <p><span class="lettrine">J</span>’étais là. À dos de dragon. Une vague de puissance me traversa tout entier. Je n’en revenais pas. Moi, Raphaël, j’étais en train de voler sur le dos d’un dragon !</p>
+        <!-- 1er paragraphe : guillemet ouvrant + lettrine -->
+        <p class="p-dc">
+          <span class="punc">«&#8239;</span>
+          <span class="dc">J</span>
+          <span class="rest">’étais là. À dos de dragon. Une vague de puissance me traversa tout entier. Je n’en revenais pas. Moi, Raphaël, j’étais en train de voler sur le dos d’un dragon !</span>
+        </p>
+
         <p>— Waooouuuh ! m’écriai-je, incapable de retenir ma joie.</p>
         <p>Estéban leva le pouce en me voyant. Il s’approcha à dos de sa propre monture et me lança mes premiers conseils de vol :</p>
         <p>— Quand tu penches à droite, il tourne à droite. À gauche, pareil. Pour descendre, tu te penches un peu en avant. Et pour monter, tu donnes une petite tape juste devant sa queue.</p>
         <p>— Quoi ?! m’écriai-je. Il est hors de question que je tape un dragon ! T’es fou ?!</p>
         <p>— Mais non, t’inquiète ! C’est comme ça que je l’ai dressé. Il ne prendra pas ça pour une attaque, c’est un signal ! Allez, suis-moi !</p>
         <p>Estéban tapota le dos de son dragon, et la bête prit de la hauteur. Je l’imitai avec un peu d’hésitation… et mon dragon s’envola vers le ciel, ses ailes battant l’air avec puissance.</p>
+
+        <!-- guillemet fermant -->
+        <p class="p-quote-close">»</p>
       </article>
     </section>
 
     <p style="text-align:center">
-       <a href="8.monde_Yakkas.html" class="btn">← Retour</a> 
+      <a href="8.monde_Yakkas.html" class="btn">← Retour</a>
     </p>
   </main>
 </body>
