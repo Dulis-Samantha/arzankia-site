@@ -77,24 +77,35 @@
     padding:.3em .8em; border-radius:999px;
     box-shadow:0 2px 6px rgba(0,0,0,.2);
   }
+  .glass p{
+    margin:0 0 1rem;
+    font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
+    line-height:1.7;
+    text-align:left;
+    hyphens:auto;
+  }
 
-  /* Lettrine manuelle */
-  .lettrine {
-    float:left;
+  /* LETTRINE ROBUSTE (grille, pas de float) */
+  .p-dc{
+    display:grid;
+    grid-template-columns: auto auto 1fr; /* ponctuation | lettre | reste */
+    column-gap:.35rem;
+    align-items:start;
+  }
+  .p-dc .punc{
+    font-size:1rem;
+    line-height:1.7;   /* même leading que le paragraphe */
+    white-space:nowrap; /* garde « — groupés */
+  }
+  .p-dc .dc{
     font-size:2.8rem;
     line-height:1;
-    margin-right:.35rem;
-    font-weight:bold;
+    font-weight:700;
     color:var(--bleu);
     text-shadow:0 0 6px rgba(0,0,0,.12);
+    transform:translateY(.06em); /* micro-alignement vertical */
   }
-  @media (max-width: 900px){
-    .lettrine {
-      font-size:1.8rem;
-      line-height:1.1;
-      margin-right:.2rem;
-    }
-  }
+  .p-dc .rest{ line-height:1.7; }
 
   /* Mobile */
   @media (max-width: 900px){
@@ -104,6 +115,9 @@
     .glass{ padding:16px; border-radius:14px; }
     .chapitre{ float:none; display:block; text-align:right; margin:0 0 .6rem; font-size:.85rem; }
     h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
+
+    .p-dc{ column-gap:.28rem; }
+    .p-dc .dc{ font-size:1.9rem; transform:translateY(.04em); }
   }
 
   .btn{
@@ -118,7 +132,7 @@
 </head>
 <body>
   <main class="container">
-    <h1>Le Simorg</h1>
+    <h1>Entrée du monde des Ptikitis</h1>
 
     <section class="grid">
       <!-- Image -->
@@ -130,18 +144,24 @@
       <article class="glass">
         <div class="chapitre">Extrait Chapitre 2 · p. 21</div>
 
-<p>«&nbsp;—&nbsp;<span class="lettrine">J</span>e fis lentement le tour de son tronc, tentant de localiser la voix. L’écho venait de l’intérieur. Pris de panique, je trébuchai sur une racine et me rattrapai in extremis au tronc.</p>
-<p>Lorsque mes doigts effleurèrent l’écorce, des spirales de lumière jaillirent, s’enroulant autour du tronc en emportant avec elles l’écho mystérieux. Une lueur éclatante m’aveugla et lorsque je rouvris les yeux… l’arbre n’était plus le même.</p>
-<p>De minuscules cabanes en bois avaient poussé partout, accrochées aux branches. Pas plus grandes que des nichoirs à oiseaux. C’était incroyable. Il y en avait des dizaines, peut-être une cinquantaine.</p>
-<p>— Eh ! C’est par ici !</p>
-<p>La voix était désormais claire, ce n’était plus un écho. Au pied du tronc, un rideau de feuilles frémissait. La voix venait de derrière. Je me penchai, écartai le feuillage…</p>
-<p>De l’autre côté, une minuscule créature sautillait en agitant les bras.</p>
-<p>— Eh ! Enfin tu as trouvé ! Allez, viens !»</p>
-  </article>
+        <!-- 1er paragraphe avec lettrine en grille -->
+        <p class="p-dc">
+          <span class="punc">«&#8239;—&#8239;</span>
+          <span class="dc">J</span>
+          <span class="rest">e fis lentement le tour de son tronc, tentant de localiser la voix. L’écho venait de l’intérieur. Pris de panique, je trébuchai sur une racine et me rattrapai in extremis au tronc.</span>
+        </p>
+
+        <p>Lorsque mes doigts effleurèrent l’écorce, des spirales de lumière jaillirent, s’enroulant autour du tronc en emportant avec elles l’écho mystérieux. Une lueur éclatante m’aveugla et lorsque je rouvris les yeux… l’arbre n’était plus le même.</p>
+        <p>De minuscules cabanes en bois avaient poussé partout, accrochées aux branches. Pas plus grandes que des nichoirs à oiseaux. C’était incroyable. Il y en avait des dizaines, peut-être une cinquantaine.</p>
+        <p>— Eh ! C’est par ici !</p>
+        <p>La voix était désormais claire, ce n’était plus un écho. Au pied du tronc, un rideau de feuilles frémissait. La voix venait de derrière. Je me penchai, écartai le feuillage…</p>
+        <p>De l’autre côté, une minuscule créature sautillait en agitant les bras.</p>
+        <p>— Eh ! Enfin tu as trouvé ! Allez, viens !»</p>
+      </article>
     </section>
 
     <p style="text-align:center">
-    <a href="8.monde_Ptikitis.html" class="btn">← Retour</a> 
+      <a href="8.monde_Ptikitis.html" class="btn">← Retour</a> 
     </p>
   </main>
 </body>
