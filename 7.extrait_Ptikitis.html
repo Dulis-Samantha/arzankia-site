@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Extrait du livre – La ballade en libellule</title>
+<title>Extrait du livre – Monde des Créatures Légendaires</title>
 
 <style>
   :root{
@@ -63,30 +63,63 @@
     border-radius: var(--radius);
   }
 
-  /* Texte */
+  /* Bloc texte */
   .glass{
+    position: relative;
     padding: clamp(20px, 2.4vw, 28px);
     border-radius: var(--radius);
     background: rgba(255,255,255,.88);
     box-shadow: 0 12px 28px rgba(0,0,0,.3);
-  }
-  .chapitre{
-    float:right;
-    margin: 0 0 .6rem .8rem;
-    font-size:.9rem; font-style:italic;
-    background:#fff; color:#333;
-    padding:.3em .8em; border-radius:999px;
-    box-shadow:0 2px 6px rgba(0,0,0,.2);
+    text-align: center;            /* pour centrer le ruban */
   }
   .glass p{
     margin:0 0 1rem;
     font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
     line-height:1.7;
-    text-align:left;
+    text-align: justify;
     hyphens:auto;
   }
 
-  /* LETTRINE ROBUSTE (grille, pas de float) — narration (sans tiret) */
+  /* Cartouche "ruban" fantasy centré */
+  .chapitre.ribbon{
+    position: relative;
+    display: inline-block;
+    margin: -12px auto 1.1rem;     /* chevauche légèrement le haut du panneau */
+    padding: .55em 1.4em;
+    font-size: 1rem;
+    font-style: italic;
+    letter-spacing: .2px;
+    color: #3b2a1d;
+    background: linear-gradient(180deg, #fff7d6, #f5e1a8 55%, #ecd596);
+    border: 1px solid rgba(121,89,12,.25);
+    border-radius: 999px;
+    box-shadow:
+      0 10px 20px rgba(0,0,0,.25),
+      inset 0 1px 0 rgba(255,255,255,.85),
+      inset 0 -1px 0 rgba(163,122,23,.25);
+  }
+  .chapitre.ribbon::before,
+  .chapitre.ribbon::after{
+    content:"";
+    position: absolute;
+    top: 52%;
+    width: 26px;
+    height: 14px;
+    background: linear-gradient(180deg, #d9b862, #a8811a);
+    box-shadow: 0 3px 8px rgba(0,0,0,.18);
+  }
+  .chapitre.ribbon::before{
+    left: -18px;
+    border-radius: 4px 0 0 4px;
+    transform: translateY(-50%) skewX(-18deg);
+  }
+  .chapitre.ribbon::after{
+    right: -18px;
+    border-radius: 0 4px 4px 0;
+    transform: translateY(-50%) skewX(18deg);
+  }
+
+  /* LETTRINE ROBUSTE (grille, sans tiret) */
   .p-dc{
     display:grid;
     grid-template-columns: auto auto 1fr; /* ponctuation | lettre | reste */
@@ -95,8 +128,8 @@
   }
   .p-dc .punc{
     font-size:1rem;
-    line-height:1.7;              /* même leading que le paragraphe */
-    white-space:nowrap;           /* garde le guillemet collé au texte */
+    line-height:1.7;
+    white-space:nowrap;            /* garde « collé */
   }
   .p-dc .dc{
     font-size:2.8rem;
@@ -104,7 +137,7 @@
     font-weight:700;
     color:var(--bleu);
     text-shadow:0 0 6px rgba(0,0,0,.12);
-    transform:translateY(.06em);  /* micro-alignement vertical */
+    transform:translateY(.06em);
   }
   .p-dc .rest{ line-height:1.7; }
 
@@ -114,7 +147,17 @@
     .img-card, .glass{ max-width:92%; margin:0 auto; }
     .img-card{ margin-bottom:14px; }
     .glass{ padding:16px; border-radius:14px; }
-    .chapitre{ float:none; display:block; text-align:right; margin:0 0 .6rem; font-size:.85rem; }
+
+    .chapitre.ribbon{
+      margin: -8px auto .9rem;
+      padding: .45em 1.1em;
+      font-size: .9rem;
+    }
+    .chapitre.ribbon::before,
+    .chapitre.ribbon::after{
+      width: 20px; height: 12px;
+      left: -14px; right: -14px;
+    }
 
     .p-dc{ column-gap:.28rem; }
     .p-dc .dc{ font-size:1.9rem; transform:translateY(.04em); }
@@ -147,7 +190,7 @@
 
       <!-- Texte à droite -->
       <article class="glass">
-        <div class="chapitre">Extrait Chapitre 23 · p. 132</div>
+        <div class="chapitre ribbon">Extrait Chapitre 23 · p. 132</div>
 
         <!-- 1er paragraphe avec lettrine en grille (narration, sans tiret) -->
         <p class="p-dc">
