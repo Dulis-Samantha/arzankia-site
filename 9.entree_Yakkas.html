@@ -69,7 +69,7 @@
     border-radius: var(--radius);
     background: rgba(255,255,255,.88);
     box-shadow: 0 12px 28px rgba(0,0,0,.3);
-    text-align: center;
+    text-align:center; /* pour centrer le ruban */
   }
   .glass p{
     margin:0 0 1rem;
@@ -107,6 +107,37 @@
   .chapitre.ribbon::before{ left: -18px; border-radius: 4px 0 0 4px; transform: translateY(-50%) skewX(-18deg); }
   .chapitre.ribbon::after{ right: -18px; border-radius: 0 4px 4px 0; transform: translateY(-50%) skewX(18deg); }
 
+  /* Lettrine + guillemets (grille robuste) */
+  .p-dc{
+    display:grid;
+    grid-template-columns:auto auto 1fr; /* « | lettre | reste */
+    column-gap:.35rem;
+    align-items:start;
+  }
+  .p-dc .punc{
+    font-size:1rem;
+    line-height:1.7;
+    white-space:nowrap; /* garde « collé */
+  }
+  .p-dc .dc{
+    font-size:2.8rem;
+    line-height:1;
+    font-weight:700;
+    color:var(--bleu);
+    text-shadow:0 0 6px rgba(0,0,0,.12);
+    transform:translateY(.06em);
+  }
+  .p-dc .rest{
+    line-height:1.7;
+    text-align: justify;
+  }
+  .p-quote-close{
+    text-align:right;
+    margin:.3rem 0 0;
+    font-size:1.4rem;
+    opacity:.7;
+  }
+
   /* Mobile */
   @media (max-width: 900px){
     .grid{ grid-template-columns:1fr; }
@@ -114,7 +145,10 @@
     .img-card{ margin-bottom:14px; }
     .glass{ padding:16px; border-radius:14px; }
     .chapitre.ribbon{ margin: -8px auto .9rem; padding: .45em 1.1em; font-size: .9rem; }
+    .chapitre.ribbon::before, .chapitre.ribbon::after{ width: 20px; height: 12px; left: -14px; right: -14px; }
     h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
+    .p-dc{ column-gap:.28rem; }
+    .p-dc .dc{ font-size:1.9rem; transform:translateY(.04em); }
   }
 
   .btn{
@@ -141,12 +175,21 @@
       <article class="glass">
         <div class="chapitre ribbon">Extrait Chapitre 2 · p. 23</div>
 
-        <p>La téléportation nous déposa au cœur d’une vaste prairie silencieuse. Autour de nous, rien d’autre que de l’herbe à perte de vue, ondulant doucement sous une brise légère.</p>
+        <!-- 1er paragraphe avec lettrine + guillemet ouvrant -->
+        <p class="p-dc">
+          <span class="punc">«&#8239;</span>
+          <span class="dc">L</span>
+          <span class="rest">a téléportation nous déposa au cœur d’une vaste prairie silencieuse. Autour de nous, rien d’autre que de l’herbe à perte de vue, ondulant doucement sous une brise légère.</span>
+        </p>
+
         <p>— Bienvenue dans la Prairie d’Air, annonça Binbin. Il y a, tout autour de toi, des escaliers invisibles qui mènent aux Portes des Mondes Aériens. Mais tant qu’on ne te les a pas révélés… tu ne peux pas les voir.</p>
         <p>Il tendit la main vers moi.</p>
         <p>— Donne-moi ta clé, s’il te plaît, mon garçon.</p>
         <p>Je la sortis de ma sacoche et lui remis ma Canneya. Aussitôt qu’il l’eut en main, des pierres apparurent dans les airs, comme invoquées par un souffle invisible. Elles se mirent à léviter lentement, les unes après les autres, formant un escalier suspendu, qui montait vers le ciel. Tout au bout, je vis se dessiner une grande arche lumineuse, flottant dans le vide.</p>
         <p>— Voilà ton passage, dit Binbin. C’est la porte vers le Monde des Yakkas.</p>
+
+        <!-- guillemet fermant -->
+        <p class="p-quote-close">»</p>
       </article>
     </section>
 
