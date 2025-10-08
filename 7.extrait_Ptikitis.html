@@ -48,24 +48,20 @@
     align-items: start;
   }
 
-  /* Carte média (image/vidéo) */
+  /* Carte vidéo */
   .img-card{
     border-radius: var(--radius);
     overflow:hidden;
     box-shadow: 0 14px 30px rgba(0,0,0,.45);
     background: rgba(0,0,0,.25);
   }
-  /* Media responsive (image OU vidéo) */
-  .img-card img,
   .img-card video{
     width:100%;
     height:auto;
     display:block;
-    object-fit: contain;         /* ne recadre pas */
-    border:0;
+    object-fit: contain;
+    border-radius: var(--radius);
   }
-  /* Option: arrondis internes quand le navigateur ne clippe pas bien la vidéo */
-  .img-card video{ border-radius: var(--radius); }
 
   /* Texte */
   .glass{
@@ -101,7 +97,7 @@
     text-shadow:0 0 6px rgba(0,0,0,.12);
   }
 
-  /* Lettrine mobile + layout mobile */
+  /* Mobile */
   @media (max-width: 900px){
     .grid{ grid-template-columns:1fr; }
     .img-card, .glass{ max-width:92%; margin:0 auto; }
@@ -117,6 +113,7 @@
     h1{ font-size:1.8rem; line-height:1.2; margin-bottom:.7rem; }
   }
 
+  /* Bouton retour */
   .btn{
     display:inline-block; margin: clamp(18px,3vw,28px) auto 0; padding:.7rem 1.4rem;
     border-radius:999px; background:linear-gradient(145deg, #ffe9af, #f2c94c);
@@ -129,48 +126,69 @@
 </head>
 <body>
   <main class="container">
-    <h1>Le Simorg</h1>
+    <h1>La ballade en libellule</h1>
 
     <section class="grid">
-      <!-- Média à gauche : VIDEO intégrée -->
+      <!-- Vidéo à gauche -->
       <figure class="img-card">
-        <video
-          class="media"
-          autoplay
-          loop
-          muted
-          playsinline
-          preload="metadata"
-          poster="extrait_Creatures.webp"  <!-- facultatif : image d’attente -->
-        >
+        <video id="extraitVideo" autoplay muted playsinline preload="auto">
           <source src="https://raw.githubusercontent.com/Dulis-Samantha/arzankia-site/main/extrait_Ptikitis.mp4" type="video/mp4" />
           Votre navigateur ne supporte pas la vidéo HTML5.
         </video>
-        <!--
-        Si tu veux revenir à l'image statique, commente la vidéo ci-dessus et dé-commente la ligne suivante :
-        <img src="extrait_Creatures.webp" alt="Le Simorg face à Raphaël">
-        -->
       </figure>
 
       <!-- Texte à droite -->
       <article class="glass">
         <div class="chapitre">Extrait Chapitre 23 · p. 132</div>
-      <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
-      <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
-      <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
-      <p>— Destination nénuphar ! répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
-      <p>Je m’installai à califourchon sur son dos, comme sur un cheval, et Fanfan grimpa derrière moi, passant ses bras autour de ma taille.</p>
-      <p>— C’est parti ! lançai-je dans un souffle excité, au moment du décollage.</p>
-      <p>Le trajet jusqu’au nénuphar fut incroyable. Le vent caressait mon visage, les paysages défilaient sous mes pieds… et cette sensation de voler, de flotter au-dessus du monde…</p>
-      <p>C’était une liberté pure.</p>
-      <p>Une sensation que je n’oublierais jamais.</p>
-    </div>
-  </div>
-</div>
+        <p>En balayant les alentours du regard… je repérai une énorme libellule posée au sol, ses ailes translucides vibrant doucement dans l’air.</p>
+        <p>Je saisis la main de Fanfan et l’entraînai vers notre futur moyen de transport.</p>
+        <p>— Tu peux nous emmener faire un tour ? demandai-je à l’insecte volant.</p>
+        <p>— Destination nénuphar ! répondit-il d’une voix légère, en nous invitant d’un frémissement d’ailes à monter à bord.</p>
+        <p>Je m’installai à califourchon sur son dos, comme sur un cheval, et Fanfan grimpa derrière moi, passant ses bras autour de ma taille.</p>
+        <p>— C’est parti ! lançai-je dans un souffle excité, au moment du décollage.</p>
+        <p>Le trajet jusqu’au nénuphar fut incroyable. Le vent caressait mon visage, les paysages défilaient sous mes pieds… et cette sensation de voler, de flotter au-dessus du monde…</p>
+        <p>C’était une liberté pure.</p>
+        <p>Une sensation que je n’oublierais jamais.</p>
+      </article>
+    </section>
 
+    <p style="text-align:center">
+      <a class="btn" href="8.monde_Ptikitis.html">← Monde des Ptikitis</a>
+    </p>
+  </main>
 
-    <a href="8.monde_Ptikitis.html" class="bouton-retour">← Monde des Ptikitis</a>
-  </div>
+  <!-- Script: joue 2 fois puis fige sur la dernière image -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const v = document.getElementById('extraitVideo');
+      if (!v) return;
 
+      let ends = 0;
+
+      function tryPlay() {
+        const p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(()=>{});
+      }
+
+      if (isNaN(v.duration) || !isFinite(v.duration)) {
+        v.addEventListener('loadedmetadata', tryPlay, { once: true });
+      } else {
+        tryPlay();
+      }
+
+      v.addEventListener('ended', () => {
+        ends += 1;
+        if (ends < 2) {
+          v.currentTime = 0;
+          tryPlay();
+        } else {
+          const eps = 0.05;
+          const onSeeked = () => { v.pause(); v.removeEventListener('seeked', onSeeked); };
+          v.addEventListener('seeked', onSeeked);
+          try { v.currentTime = Math.max(0, v.duration - eps); } catch(e) { v.pause(); }
+        }
+      });
+    });
+  </script>
 </body>
-</html> 
+</html>
