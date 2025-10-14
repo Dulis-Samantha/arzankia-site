@@ -2,117 +2,142 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <title>Monde des Artistes – Arzankia</title>
 
 <style>
-  /* === Thème global === */
-  :root {
-    --or: #ffd674;
-    --clair: #fff8e6;
-    --noir: rgba(0, 0, 0, 0.5);
-    --radius: 20px;
+  :root{
+    --or:#ffd674;
+    --ivoire:#fff8e6;
+    --encre:#2a221b;
+    --verre:rgba(10,0,20,.45);
+    --bord:rgba(255,214,116,.55);
+    --ray:28px;
   }
 
-  body {
-    margin: 0;
-    font-family: Georgia, serif;
-    color: var(--clair);
-    background: url('fond_monde_terre.png') center/cover fixed no-repeat;
-    text-align: center;
-    padding: min(6vw, 60px) 1rem;
+  /* ===== Fond + voile dégradé pour lisibilité ===== */
+  body{
+    margin:0; font-family:Georgia, serif; color:var(--ivoire);
+    background:url('fond_monde_terre.png') center/cover no-repeat fixed;
+    min-height:100svh; display:flex; align-items:center; justify-content:center;
+    padding:clamp(16px,3vw,48px);
+    position:relative; isolation:isolate;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    color: var(--or);
-    margin-bottom: 1rem;
-    text-shadow: 0 0 8px #000;
+  .wrap{ max-width:1100px; width:100%; text-align:center; }
+
+  /* ===== Titre ===== */
+  h1{
+    margin:0 0 .8rem; line-height:1.1;
+    font-size:clamp(2.1rem,6vw,4rem); color:var(--or);
+    text-shadow:0 3px 0 rgba(0,0,0,.35), 0 0 24px rgba(255,214,116,.25);
+  }
+  .soustitre{
+    font-size:clamp(.9rem,2.4vw,1.05rem);
+    letter-spacing:.06em; opacity:.9; margin-bottom:1.4rem;
   }
 
-  p {
-    font-size: 1.4rem;
-    line-height: 1.8;
-    background: var(--noir);
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: var(--radius);
-    backdrop-filter: blur(3px);
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    margin-bottom: 2.5rem;
+  /* ===== Cartouche de présentation ===== */
+  .cartouche{
+    margin:0 auto 2rem; max-width:880px;
+    background:var(--verre); border:1px solid var(--bord);
+    border-radius:var(--ray); padding:clamp(16px,3.2vw,26px);
+    box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 40px rgba(255,255,255,.04);
+    backdrop-filter:blur(6px);
+  }
+  .citation{
+    font-size:clamp(1.05rem,2.6vw,1.4rem); line-height:1.75; margin:0;
+  }
+  .guil{ color:var(--or); font-size:1.6em; vertical-align:-.2em; }
+
+  /* ===== Grille des actions ===== */
+  .grille{
+    display:grid; gap:1rem; margin:0 auto; max-width:980px;
+    grid-template-columns: repeat(12, 1fr);
   }
 
-  /* === Boutons === */
-  .boutons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.2rem;
+  /* liens génériques */
+  .btn{
+    grid-column: span 4;
+    display:flex; align-items:center; justify-content:center; gap:.6rem;
+    text-decoration:none; color:var(--ivoire);
+    padding:14px 18px; border-radius:999px;
+    border:1px solid var(--bord); background:rgba(0,0,0,.35);
+    transition:.25s ease; font-size:1.05rem;
+    box-shadow:0 4px 18px rgba(0,0,0,.25);
   }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.35); }
 
-  a {
-    text-decoration: none;
-    color: var(--clair);
-    font-size: 1.1rem;
-    padding: 0.8rem 1.4rem;
-    border-radius: var(--radius);
-    transition: all 0.3s ease;
-    background: rgba(0,0,0,0.45);
-    border: 1px solid var(--or);
+  /* ===== Boutons boutiques (accentués) ===== */
+  .shop{
+    grid-column: span 4;
+    position:relative; overflow:hidden; font-weight:700;
+    background:linear-gradient(180deg, rgba(255,214,116,.18), rgba(255,214,116,.06));
+    border:1px solid var(--or);
   }
-
-  a:hover {
-    background: var(--or);
-    color: #2a221b;
-    box-shadow: 0 0 10px var(--or);
+  .shop::after{
+    content:""; position:absolute; inset:-200% -20%; transform:rotate(12deg);
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    animation:shine 3.2s linear infinite;
   }
+  @keyframes shine{ 0%{transform:translateX(-60%) rotate(12deg);} 100%{transform:translateX(60%) rotate(12deg);} }
 
-  /* === Styles spéciaux pour les boutiques === */
-  .boutique {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: bold;
+  /* pastille icône */
+  .ico{
+    width:32px; height:32px; border-radius:50%;
+    display:grid; place-items:center; flex:0 0 auto;
+    background:radial-gradient(circle at 30% 30%, #ffecb3, #f3c86a);
+    color:#5a2e00; box-shadow:inset 0 0 8px rgba(0,0,0,.25), 0 0 12px rgba(255,214,116,.35);
+    font-size:18px;
   }
+  .ico.purple{ background:radial-gradient(circle at 30% 30%, #e8d9ff, #b58cff); color:#2a103f; }
 
-  .camidjo::before {
-    content: "🎵";
-    font-size: 1.3rem;
+  /* variantes “simples” */
+  .outline{ background:rgba(0,0,0,.28); font-weight:600; }
+  .outline:hover{ background:rgba(0,0,0,.45); }
+
+  /* responsive */
+  @media (max-width:900px){
+    .btn, .shop{ grid-column: span 6; }
   }
-
-  .loupboutart::before {
-    content: "🎨";
-    font-size: 1.3rem;
-  }
-
-  @media (max-width: 600px) {
-    p {
-      font-size: 1.1rem;
-      padding: 1rem;
-    }
-    a {
-      font-size: 1rem;
-      padding: 0.7rem 1.1rem;
-    }
+  @media (max-width:560px){
+    .btn, .shop{ grid-column: span 12; }
   }
 </style>
 </head>
-
 <body>
-  <h1>Bienvenue au monde des Artistes</h1>
+  <main class="wrap">
+    <h1>Bienvenue au monde des Artistes</h1>
+    <div class="soustitre">Création • Harmonie • Lumière</div>
 
-  <p>
-    « Ici, les notes dansent,<br>
-    les couleurs vibrent,<br>
-    et d’étranges créatures laissent exprimer leur talent à la lumière… »
-  </p>
+    <section class="cartouche">
+      <p class="citation">
+        <span class="guil">«</span> Ici, les notes dansent,<br>
+        les couleurs vibrent,<br>
+        et d’étranges créatures laissent exprimer leur talent à la lumière… <span class="guil">»</span>
+      </p>
+    </section>
 
-  <div class="boutons">
-    <a href="9.entree_Artistes.html">Entrée du monde</a>
-    <a href="chanson_de_camidjo.html" class="boutique camidjo">Camidjo</a>
-    <a href="loup_bout_art.html" class="boutique loupboutart">Loup-Bout'Art</a>
-    <a href="3.les_mondes.html">← Retour aux Mondes</a>
-  </div>
+    <nav class="grille">
+      <!-- simple -->
+      <a class="btn outline" href="9.entree_Artistes.html">Entrée du monde</a>
+
+      <!-- boutiques mises en avant -->
+      <a class="btn shop" href="chanson_de_camidjo.html">
+        <span class="ico">🎵</span> Camidjo
+      </a>
+      <a class="btn shop" href="loup_bout_art.html">
+        <span class="ico purple">🎨</span> Loup-Bout'Art
+      </a>
+
+      <!-- retour -->
+      <a class="btn outline" href="3.les_mondes.html">← Retour aux Mondes</a>
+    </nav>
+  </main>
 </body>
 </html>
