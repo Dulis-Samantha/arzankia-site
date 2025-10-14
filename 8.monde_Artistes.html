@@ -187,7 +187,7 @@
   </main>
 
 <script>
-/* === 3 pinceaux arc-en-ciel — rubans colorés (pas de blanc) qui s'estompent doucement === */
+/* === 3 pinceaux arc-en-ciel réels (aucun blanc), traces saturées qui s’estompent === */
 (function(){
   const c = document.querySelector('.fx-canvas');
   const ctx = c.getContext('2d');
@@ -205,15 +205,18 @@
   }
   resize(); addEventListener('resize', resize);
 
-  // 3 pinceaux, trajectoires/teintes différentes
+  /* 3 pinceaux : vitesses, amplitudes, phases différentes */
   const brushes = [
-    { sX:0.90, sY:1.25, phaseX:0.6, phaseY:0.0, ampX:0.42, ampY:0.30, yMin:0.18, yMax:0.90, width:2.0, offset:1.4, hueShift:0,    speed:0.0075 },
-    { sX:1.10, sY:0.80, phaseX:1.3, phaseY:0.9, ampX:0.35, ampY:0.36, yMin:0.25, yMax:0.85, width:2.0, offset:1.2, hueShift:35,   speed:0.0090 },
-    { sX:0.75, sY:1.45, phaseX:2.2, phaseY:1.7, ampX:0.48, ampY:0.26, yMin:0.22, yMax:0.88, width:1.8, offset:1.0, hueShift:-25,  speed:0.0066 }
+    { sX:0.95, sY:1.18, phaseX:0.6, phaseY:0.0, ampX:0.44, ampY:0.28, yMin:0.20, yMax:0.92, width:2.8, offset:1.30, speed:0.0075, hueShift:  0 },
+    { sX:1.18, sY:0.82, phaseX:1.3, phaseY:0.9, ampX:0.36, ampY:0.34, yMin:0.25, yMax:0.87, width:2.6, offset:1.20, speed:0.0090, hueShift: 30 },
+    { sX:0.78, sY:1.42, phaseX:2.2, phaseY:1.7, ampX:0.49, ampY:0.26, yMin:0.22, yMax:0.90, width:2.4, offset:1.15, speed:0.0066, hueShift:-25 }
   ];
 
-  const baseHues = [0, 30, 55, 120, 210, 275]; // rouge → violet (saturé)
-  const fade = 0.017;                          // atténuation lente (la trace reste)
+  /* Palette arc-en-ciel dense (aucun blanc) */
+  const baseHues = [0, 18, 36, 54, 72, 96, 120, 160, 200, 240, 280, 320];
+
+  /* L’“évaporation” rend la trace durable mais pas permanente */
+  const fade = 0.012;  // plus petit = trace qui reste plus longtemps
 
   let t = Math.random()*1000;
   for(const b of brushes){ b.prev = { x: W*0.5, y: H*0.6 }; }
@@ -225,11 +228,11 @@
 
     const hues = baseHues.map(h => (h + b.hueShift + 360) % 360);
 
-    // Ruban arc-en-ciel (plusieurs filets colorés côte à côte)
+    // ⚠️ Uniquement des couleurs saturées, pas de blanc :
     for(let i=0;i<hues.length;i++){
       const k = (i - (hues.length-1)/2) * (b.offset * dpr);
-      ctx.strokeStyle = `hsl(${hues[i]} 92% 62%)`;
-      ctx.globalAlpha  = 0.95;
+      ctx.strokeStyle = `hsl(${hues[i]} 95% 58%)`; // saturé & lumineux
+      ctx.globalAlpha  = 0.9;
       ctx.lineWidth    = b.width * dpr;
       ctx.beginPath();
       ctx.moveTo(b.prev.x + nx*k, b.prev.y + ny*k);
@@ -237,22 +240,12 @@
       ctx.stroke();
     }
 
-    // Scintillement doux au bout (halo, sans trait blanc)
-    ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
-    const r = 5 * dpr;
-    const g = ctx.createRadialGradient(curr.x, curr.y, 0, curr.x, curr.y, r*3);
-    g.addColorStop(0, 'rgba(255,255,255,0.8)');
-    g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(curr.x, curr.y, r*3, 0, Math.PI*2); ctx.fill();
-    ctx.restore();
-
+    // (Plus de halo/liseré blanc ici -> c'est ce qui te donnait les traits blancs)
     b.prev = curr;
   }
 
   function step(){
-    // Évaporation légère pour adoucir les anciennes traces
+    // Efface TRÈS légèrement (vers transparent), ne blanchit pas
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = `rgba(0,0,0,${fade})`;
     ctx.fillRect(0,0,W,H);
@@ -263,7 +256,7 @@
       const tt = t * b.speed;
       const px = 0.5 + b.ampX * Math.sin(b.sX*tt + b.phaseX);
       const py = 0.5 + b.ampY * Math.sin(b.sY*tt + b.phaseY);
-      const y = Math.min(b.yMax, Math.max(b.yMin, py));
+      const y  = Math.min(b.yMax, Math.max(b.yMin, py)); // évite de couper le titre
       const curr = { x: px * W, y: y * H };
       drawBrush(b, curr);
     }
