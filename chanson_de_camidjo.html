@@ -7,8 +7,8 @@
   <title>Chansons de Camidjo</title>
 
   <style>
-    /* ===== Thème existant ===== */
-    body {
+    /* ===== Style de ta page ===== */
+    body{
       background: url("fond_artistes.png") no-repeat center center fixed;
       background-size: cover;
       background-position: center;
@@ -21,69 +21,57 @@
       min-height: 100vh;
       box-sizing: border-box;
     }
-    h1 { color: #f0d864; margin-bottom: 1rem; }
-    .chanson {
-      margin: 1.5rem auto;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      border-radius: 12px;
-      max-width: 600px;
-    }
-    audio { width: 100%; margin-top: 0.5rem; }
-    a.retour {
-      display: inline-block;
-      margin-top: 2rem;
-      background: #f0d864;
-      color: #3b2a1d;
-      text-decoration: none;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(240, 216, 100, 0.6);
-    }
-    a.retour:hover { background: #ffe066; }
-    .bloc-contenu {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 15px;
-    }
-    .bloc-contenu h2 { color: #ffe066; margin-bottom: 0.5rem; }
-    .bloc-contenu p { font-size: 1.1rem; line-height: 1.7; }
-    .Artistes-image {
-      width: 100%;
-      height: auto;
-      max-width: 600px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-      display: block;
-      margin: 2rem auto;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.4em; }
-      h2, h3 { font-size: 1.4em; }
-      .bloc-contenu { padding: 1.5rem 1rem; }
-      .chanson p { font-size: 1.1em; }
-      .retour { font-size: 1em; }
-    }
-    #contenuSecret { animation: fadeIn 1s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .bouton.invisible { display: none; }
+    h1{ color:#f0d864; margin-bottom:1rem; }
 
-    /* ===== UI chasse aux notes ===== */
-    .header-notes{
-      max-width: 1000px;
-      margin: 1rem auto 1.5rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: .8rem;
-      align-items: center;
+    .bloc-contenu{
+      max-width:800px; margin:auto; padding:2rem;
+      background-color:rgba(0,0,0,.4); border-radius:15px;
     }
-    @media (max-width:700px){ .header-notes{ grid-template-columns: 1fr; } }
+    .bloc-contenu h2{ color:#ffe066; margin-bottom:.5rem; }
+    .bloc-contenu p{ font-size:1.1rem; line-height:1.7; }
+
+    .Artistes-image{
+      width:100%; height:auto; max-width:600px; border-radius:20px;
+      box-shadow:0 0 25px rgba(255,255,255,.15);
+      display:block; margin:2rem auto;
+    }
+
+    .chanson{
+      margin:1.5rem auto; max-width:600px;
+      background: rgba(255,255,255,.1);
+      padding:1rem; border-radius:12px;
+    }
+    audio{ width:100%; margin-top:.5rem; }
+
+    a.retour{
+      display:inline-block; margin-top:2rem; background:#f0d864;
+      color:#3b2a1d; text-decoration:none; padding:.6rem 1rem;
+      border-radius:10px; font-weight:bold;
+      box-shadow:0 0 10px rgba(240,216,100,.6);
+    }
+    a.retour:hover{ background:#ffe066; }
+
+    @media (max-width:600px){
+      h1{ font-size:1.4em; }
+      h2, h3{ font-size:1.4em; }
+      .bloc-contenu{ padding:1.5rem 1rem; }
+      .chanson p{ font-size:1.1em; }
+      .retour{ font-size:1em; }
+    }
+
+    #contenuSecret{ animation: fadeIn 1s ease; }
+    @keyframes fadeIn{
+      from{ opacity:0; transform:translateY(20px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+    .bouton.invisible{ display:none; }
+
+    /* ===== UI compteur / reset ===== */
+    .header-notes{
+      max-width:1000px; margin:1rem auto 1.5rem;
+      display:grid; grid-template-columns:1fr auto; gap:.8rem; align-items:center;
+    }
+    @media (max-width:700px){ .header-notes{ grid-template-columns:1fr; } }
 
     .badge-notes{
       display:inline-flex; align-items:center; gap:.5rem;
@@ -94,55 +82,52 @@
       font-variant-numeric: tabular-nums;
     }
     .reset-notes{
-      background: transparent; color:#ffe066; border:1px dashed #ffe066;
+      background:transparent; color:#ffe066; border:1px dashed #ffe066;
       padding:.45rem .7rem; border-radius:10px; cursor:pointer;
     }
-    .reset-notes:hover{ background: rgba(255,224,102,.12); }
+    .reset-notes:hover{ background:rgba(255,224,102,.12); }
 
+    /* ===== Overlay plein écran pour les notes ===== */
     .zone-notes{
-      position: relative;
-      height: clamp(380px, 52vh, 560px);
-      max-width: 1000px;
-      margin: 1rem auto 0;
-      border-radius: 16px;
+      position: fixed;        /* prend tout l'écran */
+      inset: 0;               /* top:0; right:0; bottom:0; left:0 */
+      width: 100%;
+      height: 100%;
+      z-index: 30;            /* au-dessus du décor */
+      pointer-events: none;   /* ne bloque pas les clics du site */
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,.25);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        rgba(0,0,0,.35);
-      box-shadow: inset 0 0 60px rgba(0,0,0,.35), 0 16px 40px rgba(0,0,0,.35);
     }
-
-    /* Notes dorées */
+    /* Chaque note reste cliquable malgré pointer-events:none du parent */
     .note{
       position:absolute;
+      pointer-events: auto;
       width: clamp(26px, 3.5vw, 40px);
-      aspect-ratio:1/1;
-      cursor:pointer;
-      transform-origin:center;
+      aspect-ratio: 1/1;
+      cursor: pointer;
+      transform-origin: center;
       animation: flotter var(--duree, 10s) linear forwards, wiggle 2.4s ease-in-out infinite;
       filter: drop-shadow(0 6px 10px rgba(0,0,0,.45));
       will-change: transform, opacity;
-      touch-action: manipulation;
-      background: none; border: none; padding: 0;
+      background:none; border:none; padding:0;
     }
     .note svg{ width:100%; height:100%; display:block; }
     .note:active{ transform: scale(1.08); }
     .note.collected{ animation: pop .35s ease forwards; }
 
+    /* Mouvement global : remonte de l'endroit d'apparition jusqu'au-dessus de l'écran */
     @keyframes flotter{
-      from{ transform: translate(var(--x,0), 110% ) rotate(-8deg); opacity:.0; }
-      10%{ opacity:1; }
-      to  { transform: translate(calc(var(--x,0) + var(--drift, 0px)), -20%) rotate(8deg); opacity:0; }
+      from{ transform: translateY(0) rotate(-8deg); opacity:0; }
+      10% { opacity:1; }
+      to  { transform: translateY(-120vh) rotate(8deg); opacity:0; }
     }
     @keyframes wiggle{
-      0%,100%{ transform: translateY(0) rotate(-2deg) }
-      50%{ transform: translateY(-6px) rotate(2deg) }
+      0%,100%{ transform: translateY(0) rotate(-2deg); }
+      50%    { transform: translateY(-6px) rotate(2deg); }
     }
     @keyframes pop{
-      0%{ transform: scale(1); opacity:1; }
-      70%{ transform: scale(1.6); opacity:1; filter: drop-shadow(0 12px 24px rgba(0,0,0,.5)); }
-      100%{ transform: scale(.6); opacity:0; }
+      0%  { transform: scale(1);   opacity:1; }
+      70% { transform: scale(1.6); opacity:1; filter: drop-shadow(0 12px 24px rgba(0,0,0,.5)); }
+      100%{ transform: scale(.6);  opacity:0; }
     }
 
     /* Cartes de pistes à déverrouiller (reprend ton style .chanson) */
@@ -168,7 +153,7 @@
     <audio controls crossorigin="anonymous" src="camidjo_pensee.mp3"></audio>
   </div>
 
-  <!-- UI chasse aux notes -->
+  <!-- Compteur + reset -->
   <div class="header-notes" aria-live="polite">
     <div style="text-align:left">
       <strong>Ramasse les notes dorées</strong><br>
@@ -180,6 +165,7 @@
     </div>
   </div>
 
+  <!-- Overlay plein écran pour les notes -->
   <div id="zoneNotes" class="zone-notes" aria-label="Zone de collecte des notes"></div>
 
   <!-- Pistes déverrouillables par paliers -->
@@ -218,7 +204,7 @@
     /* ========= CONFIG ========= */
     const STORAGE_KEY = 'camidjo_notes_count';
     const BASE_SPAWN_MS = [900, 1500];     // cadence de base
-    const MAX_NOTES_ON_SCREEN = 12;
+    const MAX_NOTES_ON_SCREEN = 14;
     const NOTE_LIFETIME = [9000, 13000];
     const MAGIC_WORD = 'camidjo';          // mot magique pour tout déverrouiller
     /* ========================== */
@@ -232,7 +218,7 @@
     updateCounter(0);
     refreshLocks();
 
-    /* ====== Web Audio API : analyse et “boost refrain” ====== */
+    /* ====== Web Audio API : analyse + boost refrain ====== */
     let audioCtx   = null;
     let analyser   = null;
     let sourceNode = null;
@@ -267,13 +253,11 @@
         if (!analyser) return;
         analyser.getByteFrequencyData(freqData);
 
-        // énergie basses + médiums
-        const lowEnd  = bandEnergy(freqData, 0.02, 0.18);
-        const midBand = bandEnergy(freqData, 0.18, 0.45);
+        const lowEnd  = bandEnergy(freqData, 0.02, 0.18); // ~20–180 Hz
+        const midBand = bandEnergy(freqData, 0.18, 0.45); // ~180–4.5 kHz
         let energy    = (lowEnd * 0.6) + (midBand * 0.4);
         energy = Math.min(1.2, energy);
 
-        // lissage (EMA)
         const alpha = 0.18;
         energyEMA = energyEMA === 0 ? energy : (alpha * energy + (1 - alpha) * energyEMA);
 
@@ -296,7 +280,7 @@
     function scheduleSpawnByEnergy(){
       if (spawnTimer || !activeAudio || activeAudio.paused || activeAudio.ended) return;
 
-      // Plus l’énergie est haute (refrain), plus le facteur est petit => spawn rapide
+      // Plus l'énergie est haute, plus l'intervalle est court (boost refrain)
       const chorusBoost = map(energyEMA, 0.1, 0.9, 1.15, 0.45, true);
       const vol = typeof activeAudio.volume === 'number' ? activeAudio.volume : 1;
       const volBoost = map(vol, 0.0, 1.0, 1.15, 0.85, true);
@@ -341,7 +325,7 @@
       });
     }
 
-    // Brancher les lecteurs actuels et futurs
+    // Brancher lecteurs actuels + futurs
     document.querySelectorAll('audio').forEach(wireAudio);
     const mo = new MutationObserver(muts=>{
       muts.forEach(m=>{
@@ -353,22 +337,24 @@
     });
     mo.observe(document.body, { childList:true, subtree:true });
 
-    /* ====== Gestion des notes ====== */
+    /* ====== Apparition des notes PARTOUT ÉCRAN ====== */
     function spawnNote(){
       const n = document.createElement('button');
       n.type = 'button';
       n.className = 'note';
       n.setAttribute('aria-label', 'Ramasser une note');
 
-      const left     = rand(6, 94);
-      const drift    = rand(-80, 80);
-      const duration = rand(NOTE_LIFETIME[0], NOTE_LIFETIME[1]);
+      // Position aléatoire n'importe où sur l'écran
+      const leftPct   = rand(2, 98);   // évite bord extrême
+      const bottomPct = rand(0, 90);   // laisse un peu de marge en haut
 
-      n.style.left = left + '%';
-      n.style.bottom = '-10%';
-      n.style.setProperty('--x', '0px');
-      n.style.setProperty('--drift', drift + 'px');
+      const duration = rand(NOTE_LIFETIME[0], NOTE_LIFETIME[1]);
+      n.style.left   = leftPct + '%';
+      n.style.bottom = bottomPct + '%';
       n.style.setProperty('--duree', duration + 'ms');
+
+      // légère dérive horizontale (facultatif)
+      n.style.animation = `flotter var(--duree) linear forwards, wiggle 2.4s ease-in-out infinite`;
 
       n.innerHTML = noteSVG(['quarter','eighth','beamed'][rand(0,2)]);
 
@@ -383,7 +369,7 @@
       n.addEventListener('click', collect, {passive:true});
       n.addEventListener('touchend', collect, {passive:true});
 
-      const killer = setTimeout(()=>{ if (n && !grabbed) n.remove(); }, duration + 150);
+      const killer = setTimeout(()=>{ if (n && !grabbed) n.remove(); }, duration + 300);
       n.addEventListener('remove', ()=> clearTimeout(killer));
 
       zoneNotes.appendChild(n);
@@ -396,7 +382,6 @@
       localStorage.setItem(STORAGE_KEY, String(notesCount));
       refreshLocks();
     }
-
     function refreshLocks(){
       const cards = tracksWrap ? tracksWrap.querySelectorAll('.track') : [];
       cards.forEach(card=>{
@@ -405,7 +390,6 @@
         else card.classList.add('locked');
       });
     }
-
     resetBtn?.addEventListener('click', ()=>{
       if (confirm('Réinitialiser la progression (notes et déblocages) ?')){
         localStorage.removeItem(STORAGE_KEY);
@@ -458,7 +442,6 @@
         alert("Mot incorrect... Essaie encore !");
       }
     }
-    // Expose global pour les boutons inline
     window.demanderMot = demanderMot;
     window.verifierMot = verifierMot;
   </script>
