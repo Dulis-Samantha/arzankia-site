@@ -149,6 +149,23 @@
     h1{ font-size: 1.8rem; }
     .bloc-contenu p{ font-size: 1.05rem; }
   }
+  /* Titre mobile : une seule ligne, centré, taille fluide */
+@media (max-width: 480px){
+  h1{
+    /* taille qui s’adapte à la largeur du viewport */
+    font-size: clamp(1.15rem, 6.6vw, 1.45rem);
+    line-height: 1.05;
+    white-space: nowrap;      /* interdit le retour à la ligne */
+    text-align: center;
+    margin: 1rem 0 .6rem;
+  }
+}
+
+/* Très petits écrans (ex. 320px) : encore un chouïa plus petit */
+@media (max-width: 360px){
+  h1{ font-size: clamp(1.05rem, 6.2vw, 1.35rem); }
+}
+
 </style>
 </head>
 <body>
