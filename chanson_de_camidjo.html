@@ -7,7 +7,6 @@
   <title>Chansons de Camidjo</title>
 
   <style>
-    /* ===== Style de ta page ===== */
     body{
       background: url("fond_artistes.png") no-repeat center center fixed;
       background-size: cover;
@@ -59,19 +58,30 @@
       .retour{ font-size:1em; }
     }
 
-    #contenuSecret{ animation: fadeIn 1s ease; }
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(20px); }
-      to  { opacity:1; transform:translateY(0); }
-    }
-    .bouton.invisible{ display:none; }
-
-    /* ===== UI compteur / reset ===== */
+    /* ===== Compteur ===== */
     .header-notes{
-      max-width:1000px; margin:1rem auto 1.5rem;
-      display:grid; grid-template-columns:1fr auto; gap:.8rem; align-items:center;
+      max-width:1000px;
+      margin:2rem auto 1.5rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:1rem;
     }
-    @media (max-width:700px){ .header-notes{ grid-template-columns:1fr; } }
+
+    .note-info {
+      text-align:center;
+      font-size:1.3rem;
+      color:#ffe066;
+      font-weight:bold;
+      text-shadow:0 0 10px rgba(255,223,100,.6);
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow{
+      from{ text-shadow:0 0 10px rgba(255,223,100,.5), 0 0 20px rgba(255,223,100,.4); }
+      to  { text-shadow:0 0 15px rgba(255,230,130,.8), 0 0 30px rgba(255,223,100,.8); }
+    }
 
     .badge-notes{
       display:inline-flex; align-items:center; gap:.5rem;
@@ -87,17 +97,16 @@
     }
     .reset-notes:hover{ background:rgba(255,224,102,.12); }
 
-    /* ===== Overlay plein écran pour les notes ===== */
+    /* ===== Notes dorées partout ===== */
     .zone-notes{
-      position: fixed;        /* prend tout l'écran */
-      inset: 0;               /* top:0; right:0; bottom:0; left:0 */
+      position: fixed;
+      inset: 0;
       width: 100%;
       height: 100%;
-      z-index: 30;            /* au-dessus du décor */
-      pointer-events: none;   /* ne bloque pas les clics du site */
+      z-index: 30;
+      pointer-events: none;
       overflow: hidden;
     }
-    /* Chaque note reste cliquable malgré pointer-events:none du parent */
     .note{
       position:absolute;
       pointer-events: auto;
@@ -111,10 +120,8 @@
       background:none; border:none; padding:0;
     }
     .note svg{ width:100%; height:100%; display:block; }
-    .note:active{ transform: scale(1.08); }
     .note.collected{ animation: pop .35s ease forwards; }
 
-    /* Mouvement global : remonte de l'endroit d'apparition jusqu'au-dessus de l'écran */
     @keyframes flotter{
       from{ transform: translateY(0) rotate(-8deg); opacity:0; }
       10% { opacity:1; }
@@ -130,7 +137,6 @@
       100%{ transform: scale(.6);  opacity:0; }
     }
 
-    /* Cartes de pistes à déverrouiller (reprend ton style .chanson) */
     .track.locked .player{ display:none; }
     .track .goal{ color:#ffe066; font-variant-numeric: tabular-nums; }
   </style>
@@ -147,58 +153,45 @@
 
   <h1>🎵 Chansons de Camidjo</h1>
 
-  <!-- Piste accessible dès le départ -->
+  <!-- 1ère chanson toujours disponible -->
   <div class="chanson">
     <p>🎶 Pensée pour elle</p>
     <audio controls crossorigin="anonymous" src="camidjo_pensee.mp3"></audio>
   </div>
 
-  <!-- Compteur + reset -->
+  <!-- Phrase magique centrée -->
   <div class="header-notes" aria-live="polite">
-    <div style="text-align:left">
-      <strong>Ramasse les notes dorées</strong><br>
-      Quand tu atteins un palier, une nouvelle chanson se déverrouille.
+    <div class="note-info">
+      ✨ Ramasse les notes dorées ✨<br>
+      <span style="font-size:1rem; font-weight:normal;">Quand tu atteins un palier, une nouvelle chanson se déverrouille.</span>
     </div>
     <div>
       <span class="badge-notes">Notes ramassées : <span id="notesCount">0</span></span>
-      <button id="resetNotes" class="reset-notes" type="button" title="Réinitialiser la progression">Réinitialiser</button>
+      <button id="resetNotes" class="reset-notes" type="button">Réinitialiser</button>
     </div>
   </div>
 
-  <!-- Overlay plein écran pour les notes -->
   <div id="zoneNotes" class="zone-notes" aria-label="Zone de collecte des notes"></div>
 
-  <!-- Pistes déverrouillables par paliers -->
+  <!-- Chansons à débloquer -->
   <div id="tracksWrap">
-    <article class="chanson track locked" data-id="facon" data-unlock="5">
-      <p>🎶 Façon de faire <small>(déverrouillage à <span class="goal">5</span> notes)</small></p>
+    <article class="chanson track locked" data-unlock="100">
+      <p>🎶 Façon de faire <small>(déverrouillage à <span class="goal">100</span> notes)</small></p>
       <div class="player"><audio controls crossorigin="anonymous" src="camidjo_facon_de_faire.mp3"></audio></div>
     </article>
 
-    <article class="chanson track locked" data-id="clac" data-unlock="12">
-      <p>🎶 J’en ai ma clac <small>(à <span class="goal">12</span> notes)</small></p>
+    <article class="chanson track locked" data-unlock="200">
+      <p>🎶 J’en ai ma clac <small>(à <span class="goal">200</span> notes)</small></p>
       <div class="player"><audio controls crossorigin="anonymous" src="camidjo_ma_clac.mp3"></audio></div>
     </article>
 
-    <article class="chanson track locked" data-id="poussiere" data-unlock="20">
-      <p>🎶 Poussière <small>(à <span class="goal">20</span> notes)</small></p>
+    <article class="chanson track locked" data-unlock="300">
+      <p>🎶 Poussière <small>(à <span class="goal">300</span> notes)</small></p>
       <div class="player"><audio controls crossorigin="anonymous" src="camidjo_poussiere.mp3"></audio></div>
     </article>
   </div>
 
-  <!-- Mot magique (optionnel) -->
-  <button onclick="demanderMot()" style="font-size: 1.5em; padding: 1em; border-radius: 50%; background: #ffe066; border: none; box-shadow: 0 0 15px #fff; cursor: pointer;">
-    🎧
-  </button>
-
-  <div id="zoneMot" style="margin-top: 2em; display: none;">
-    <p>Tape le mot magique pour débloquer le contenu #TomeI.5 :</p>
-    <input type="text" id="mot" placeholder="mot magique..." style="padding: 0.5em; border-radius: 10px;">
-    <button onclick="verifierMot()" style="padding: 0.5em 1em; margin-left: 0.5em; border-radius: 10px; background: #ffd700; border: none; cursor: pointer;">OK</button>
-  </div>
-
   <a href="8.monde_Artistes.html" class="retour">← Retour au Monde des Artistes</a>
-  <a href="pensee_pour_elle.html" class="bouton invisible">← Chanson du livre</a>
 
   <script>
     /* ========= CONFIG ========= */
