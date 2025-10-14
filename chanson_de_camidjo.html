@@ -100,6 +100,77 @@
   @keyframes pop{ 0%{transform:scale(1);opacity:1;} 70%{transform:scale(1.6);opacity:1;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5));} 100%{transform:scale(.6);opacity:0;} }
 
   .sr-only{ position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+  /* ===== Mobile fine-tuning (≤ 480px) ===== */
+@media (max-width: 480px){
+  body{
+    padding: 1.2rem;
+  }
+
+  /* Titre principal trop gros */
+  h1{
+    font-size: 1.6rem;          /* avant ~2rem+ */
+    line-height: 1.15;
+    margin: 1rem 0 .6rem;
+  }
+
+  /* Bloc d’intro plus compact */
+  .bloc-contenu{
+    max-width: 100%;
+    padding: 1.1rem 1rem;
+    border-radius: 14px;
+  }
+  .bloc-contenu h2{ font-size: 1.35rem; margin-bottom: .3rem; }
+  .bloc-contenu h3{ font-size: 1.05rem; letter-spacing: .02em; margin: .2rem 0 .4rem; }
+  .bloc-contenu p { font-size: 1rem; line-height: 1.5; }
+
+  /* Carte chanson + image */
+  .chanson{
+    max-width: 100%;
+    padding: .8rem;
+    margin: 1rem auto;
+    border-radius: 12px;
+  }
+  .Artistes-image{
+    margin: 1.2rem auto;
+    border-radius: 16px;
+  }
+  audio{ margin-top: .35rem; }
+
+  /* Bandeau “Ramasse les notes dorées” plus discret */
+  .note-info{
+    font-size: 1.05rem;
+    text-shadow: 0 0 8px rgba(255,223,100,.45);
+    animation-duration: 3.2s;   /* glow plus doux */
+  }
+  .note-info small{ font-size: .9rem; }
+
+  /* Compteur & boutons : un peu plus compacts */
+  .badge-notes{
+    padding: .35rem .7rem;
+    transform: scale(.97);
+  }
+  .reset-notes{
+    padding: .4rem .65rem;
+    font-size: .95rem;
+  }
+
+  /* Grille boutique en 1 colonne full width */
+  .shop{
+    grid-template-columns: 1fr !important;
+    gap: .9rem;
+  }
+  .card{
+    max-width: 100%;
+    padding: .9rem;
+    border-radius: 14px;
+  }
+}
+
+/* Option : fluidifier aussi sur tablettes (≤ 768px) */
+@media (max-width: 768px){
+  h1{ font-size: 1.8rem; }
+  .bloc-contenu p{ font-size: 1.05rem; }
+}
 </style>
 </head>
 <body>
