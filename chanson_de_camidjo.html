@@ -1,120 +1,156 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex" />
   <title>Chansons de Camidjo</title>
+
   <style>
- body {
-  background: url("fond_artistes.png") no-repeat center center fixed;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #fff8e6;
-  font-family: Georgia, serif;
-  text-align: center;
-  padding: 2rem;
-  margin: 0;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
+    /* ===== Thème existant ===== */
+    body {
+      background: url("fond_artistes.png") no-repeat center center fixed;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff8e6;
+      font-family: Georgia, serif;
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 { color: #f0d864; margin-bottom: 1rem; }
+    .chanson {
+      margin: 1.5rem auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 600px;
+    }
+    audio { width: 100%; margin-top: 0.5rem; }
+    a.retour {
+      display: inline-block;
+      margin-top: 2rem;
+      background: #f0d864;
+      color: #3b2a1d;
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(240, 216, 100, 0.6);
+    }
+    a.retour:hover { background: #ffe066; }
+    .bloc-contenu {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+    }
+    .bloc-contenu h2 { color: #ffe066; margin-bottom: 0.5rem; }
+    .bloc-contenu p { font-size: 1.1rem; line-height: 1.7; }
+    .Artistes-image {
+      width: 100%;
+      height: auto;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+      display: block;
+      margin: 2rem auto;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.4em; }
+      h2, h3 { font-size: 1.4em; }
+      .bloc-contenu { padding: 1.5rem 1rem; }
+      .chanson p { font-size: 1.1em; }
+      .retour { font-size: 1em; }
+    }
+    #contenuSecret { animation: fadeIn 1s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .bouton.invisible { display: none; }
 
-h1 {
-  color: #f0d864;
-  margin-bottom: 1rem;
-}
+    /* ===== UI chasse aux notes ===== */
+    .header-notes{
+      max-width: 1000px;
+      margin: 1rem auto 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .8rem;
+      align-items: center;
+    }
+    @media (max-width:700px){ .header-notes{ grid-template-columns: 1fr; } }
 
-.chanson {
-  margin: 1.5rem auto;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 12px;
-  max-width: 600px;
-}
+    .badge-notes{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.4rem .8rem; border-radius:999px;
+      background: linear-gradient(120deg,#ffef9f,#ffd76a,#ffb84d);
+      color:#3b2d16; border:1px solid rgba(0,0,0,.25);
+      box-shadow: 0 2px 10px rgba(0,0,0,.25), inset 0 1px 0 #fff8;
+      font-variant-numeric: tabular-nums;
+    }
+    .reset-notes{
+      background: transparent; color:#ffe066; border:1px dashed #ffe066;
+      padding:.45rem .7rem; border-radius:10px; cursor:pointer;
+    }
+    .reset-notes:hover{ background: rgba(255,224,102,.12); }
 
-audio {
-  width: 100%;
-  margin-top: 0.5rem;
-}
+    .zone-notes{
+      position: relative;
+      height: clamp(380px, 52vh, 560px);
+      max-width: 1000px;
+      margin: 1rem auto 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.25);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        rgba(0,0,0,.35);
+      box-shadow: inset 0 0 60px rgba(0,0,0,.35), 0 16px 40px rgba(0,0,0,.35);
+    }
 
-a.retour {
-  display: inline-block;
-  margin-top: 2rem;
-  background: #f0d864;
-  color: #3b2a1d;
-  text-decoration: none;
-  padding: 0.6rem 1rem;
-  border-radius: 10px;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(240, 216, 100, 0.6);
-}
+    /* Notes dorées */
+    .note{
+      position:absolute;
+      width: clamp(26px, 3.5vw, 40px);
+      aspect-ratio:1/1;
+      cursor:pointer;
+      transform-origin:center;
+      animation: flotter var(--duree, 10s) linear forwards, wiggle 2.4s ease-in-out infinite;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.45));
+      will-change: transform, opacity;
+      touch-action: manipulation;
+      background: none; border: none; padding: 0;
+    }
+    .note svg{ width:100%; height:100%; display:block; }
+    .note:active{ transform: scale(1.08); }
+    .note.collected{ animation: pop .35s ease forwards; }
 
-a.retour:hover {
-  background: #ffe066;
-}
+    @keyframes flotter{
+      from{ transform: translate(var(--x,0), 110% ) rotate(-8deg); opacity:.0; }
+      10%{ opacity:1; }
+      to  { transform: translate(calc(var(--x,0) + var(--drift, 0px)), -20%) rotate(8deg); opacity:0; }
+    }
+    @keyframes wiggle{
+      0%,100%{ transform: translateY(0) rotate(-2deg) }
+      50%{ transform: translateY(-6px) rotate(2deg) }
+    }
+    @keyframes pop{
+      0%{ transform: scale(1); opacity:1; }
+      70%{ transform: scale(1.6); opacity:1; filter: drop-shadow(0 12px 24px rgba(0,0,0,.5)); }
+      100%{ transform: scale(.6); opacity:0; }
+    }
 
-.bloc-contenu {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
-}
-
-.bloc-contenu h2 {
-  color: #ffe066;
-  margin-bottom: 0.5rem;
-}
-
-.bloc-contenu p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.Artistes-image {
-  width: 100%;
-  height: auto;
-  max-width: 600px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-  display: block;
-  margin: 2rem auto;
-}
-@media (max-width: 600px) {
-  h1 {
-    font-size: 1.4em;
-  }
-
-  h2, h3 {
-    font-size: 1.4em;
-  }
-
-  .bloc-contenu {
-    padding: 1.5rem 1rem;
-  }
-
-  .chanson p {
-    font-size: 1.1em;
-  }
-
-  .retour {
-    font-size: 1em;
-  }
-}
-#contenuSecret {
-  animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-    .bouton.invisible {
-  display: none;
-}
-
+    /* Cartes de pistes à déverrouiller (reprend ton style .chanson) */
+    .track.locked .player{ display:none; }
+    .track .goal{ color:#ffe066; font-variant-numeric: tabular-nums; }
   </style>
 </head>
+
 <body>
   <div class="bloc-contenu">
     <h2>🎧 Camidjo</h2>
@@ -126,57 +162,305 @@ a.retour:hover {
 
   <h1>🎵 Chansons de Camidjo</h1>
 
+  <!-- Piste accessible dès le départ -->
   <div class="chanson">
     <p>🎶 Pensée pour elle</p>
-    <audio controls src="camidjo_pensee.mp3"></audio>
+    <audio controls crossorigin="anonymous" src="camidjo_pensee.mp3"></audio>
   </div>
 
+  <!-- UI chasse aux notes -->
+  <div class="header-notes" aria-live="polite">
+    <div style="text-align:left">
+      <strong>Ramasse les notes dorées</strong><br>
+      Quand tu atteins un palier, une nouvelle chanson se déverrouille.
+    </div>
+    <div>
+      <span class="badge-notes">Notes ramassées : <span id="notesCount">0</span></span>
+      <button id="resetNotes" class="reset-notes" type="button" title="Réinitialiser la progression">Réinitialiser</button>
+    </div>
+  </div>
+
+  <div id="zoneNotes" class="zone-notes" aria-label="Zone de collecte des notes"></div>
+
+  <!-- Pistes déverrouillables par paliers -->
+  <div id="tracksWrap">
+    <article class="chanson track locked" data-id="facon" data-unlock="5">
+      <p>🎶 Façon de faire <small>(déverrouillage à <span class="goal">5</span> notes)</small></p>
+      <div class="player"><audio controls crossorigin="anonymous" src="camidjo_facon_de_faire.mp3"></audio></div>
+    </article>
+
+    <article class="chanson track locked" data-id="clac" data-unlock="12">
+      <p>🎶 J’en ai ma clac <small>(à <span class="goal">12</span> notes)</small></p>
+      <div class="player"><audio controls crossorigin="anonymous" src="camidjo_ma_clac.mp3"></audio></div>
+    </article>
+
+    <article class="chanson track locked" data-id="poussiere" data-unlock="20">
+      <p>🎶 Poussière <small>(à <span class="goal">20</span> notes)</small></p>
+      <div class="player"><audio controls crossorigin="anonymous" src="camidjo_poussiere.mp3"></audio></div>
+    </article>
+  </div>
+
+  <!-- Mot magique (optionnel) -->
   <button onclick="demanderMot()" style="font-size: 1.5em; padding: 1em; border-radius: 50%; background: #ffe066; border: none; box-shadow: 0 0 15px #fff; cursor: pointer;">
     🎧
   </button>
 
   <div id="zoneMot" style="margin-top: 2em; display: none;">
-    <p>Tape le mot magique pour débloquer le contenu #TomeI.5:</p>
+    <p>Tape le mot magique pour débloquer le contenu #TomeI.5 :</p>
     <input type="text" id="mot" placeholder="mot magique..." style="padding: 0.5em; border-radius: 10px;">
     <button onclick="verifierMot()" style="padding: 0.5em 1em; margin-left: 0.5em; border-radius: 10px; background: #ffd700; border: none; cursor: pointer;">OK</button>
   </div>
 
-  <div id="contenuSecret" style="display: none; margin-top: 3em;">
-    <div class="chanson">
-      <p>🎶 Façon de faire</p>
-      <audio controls src="camidjo_facon_de_faire.mp3"></audio>
-    </div>
-
-    <div class="chanson">
-      <p>🎶 J'en ai ma clac</p>
-      <audio controls src="camidjo_ma_clac.mp3"></audio>
-    </div>
-
-    <div class="chanson">
-      <p>🎶 Poussière</p>
-      <audio controls src="camidjo_poussiere.mp3"></audio>
-    </div>
-  </div>
-
-
   <a href="8.monde_Artistes.html" class="retour">← Retour au Monde des Artistes</a>
-  <a href="pensee_pour_elle.html" class="bouton.invisible">← Chanson du livre</a>
+  <a href="pensee_pour_elle.html" class="bouton invisible">← Chanson du livre</a>
 
   <script>
+    /* ========= CONFIG ========= */
+    const STORAGE_KEY = 'camidjo_notes_count';
+    const BASE_SPAWN_MS = [900, 1500];     // cadence de base
+    const MAX_NOTES_ON_SCREEN = 12;
+    const NOTE_LIFETIME = [9000, 13000];
+    const MAGIC_WORD = 'camidjo';          // mot magique pour tout déverrouiller
+    /* ========================== */
+
+    const notesCountEl = document.getElementById('notesCount');
+    const zoneNotes     = document.getElementById('zoneNotes');
+    const resetBtn      = document.getElementById('resetNotes');
+    const tracksWrap    = document.getElementById('tracksWrap');
+
+    let notesCount = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    updateCounter(0);
+    refreshLocks();
+
+    /* ====== Web Audio API : analyse et “boost refrain” ====== */
+    let audioCtx   = null;
+    let analyser   = null;
+    let sourceNode = null;
+    let freqData   = null;
+    let energyEMA  = 0;
+    let activeAudio = null;
+    let spawnTimer  = null;
+    let rafId       = null;
+
+    async function attachAnalyserTo(audioEl){
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (!audioEl.crossOrigin) audioEl.crossOrigin = 'anonymous';
+
+      if (sourceNode) try { sourceNode.disconnect(); } catch(e){}
+      if (analyser)   try { analyser.disconnect(); } catch(e){}
+
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048;
+      analyser.smoothingTimeConstant = 0.75;
+
+      sourceNode = audioCtx.createMediaElementSource(audioEl);
+      sourceNode.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      freqData = new Uint8Array(analyser.frequencyBinCount);
+      energyEMA = 0;
+
+      cancelAnimationFrame(rafId);
+      const analyze = ()=>{
+        if (!analyser) return;
+        analyser.getByteFrequencyData(freqData);
+
+        // énergie basses + médiums
+        const lowEnd  = bandEnergy(freqData, 0.02, 0.18);
+        const midBand = bandEnergy(freqData, 0.18, 0.45);
+        let energy    = (lowEnd * 0.6) + (midBand * 0.4);
+        energy = Math.min(1.2, energy);
+
+        // lissage (EMA)
+        const alpha = 0.18;
+        energyEMA = energyEMA === 0 ? energy : (alpha * energy + (1 - alpha) * energyEMA);
+
+        scheduleSpawnByEnergy();
+        rafId = requestAnimationFrame(analyze);
+      };
+      rafId = requestAnimationFrame(analyze);
+    }
+
+    function bandEnergy(arr, fracStart, fracEnd){
+      const n = arr.length;
+      const i0 = Math.max(0, Math.floor(n * fracStart));
+      const i1 = Math.min(n-1, Math.floor(n * fracEnd));
+      let sum = 0, count = 0;
+      for (let i = i0; i <= i1; i++){ sum += arr[i]; count++; }
+      if (!count) return 0;
+      return (sum / count) / 255;
+    }
+
+    function scheduleSpawnByEnergy(){
+      if (spawnTimer || !activeAudio || activeAudio.paused || activeAudio.ended) return;
+
+      // Plus l’énergie est haute (refrain), plus le facteur est petit => spawn rapide
+      const chorusBoost = map(energyEMA, 0.1, 0.9, 1.15, 0.45, true);
+      const vol = typeof activeAudio.volume === 'number' ? activeAudio.volume : 1;
+      const volBoost = map(vol, 0.0, 1.0, 1.15, 0.85, true);
+
+      const factor = Math.max(0.35, Math.min(2.0, chorusBoost * volBoost));
+      const delay = rand(BASE_SPAWN_MS[0] * factor, BASE_SPAWN_MS[1] * factor);
+
+      spawnTimer = setTimeout(()=>{
+        spawnTimer = null;
+        if (activeAudio && !activeAudio.paused && !activeAudio.ended){
+          if (zoneNotes.querySelectorAll('.note:not(.collected)').length < MAX_NOTES_ON_SCREEN){
+            spawnNote();
+          }
+          scheduleSpawnByEnergy();
+        }
+      }, delay);
+    }
+
+    function wireAudio(a){
+      if (!a || a.__wired) return;
+      a.__wired = true;
+      if (!a.crossOrigin) a.crossOrigin = 'anonymous';
+
+      a.addEventListener('play', async ()=>{
+        try { await audioCtx?.resume(); } catch(e){}
+        if (activeAudio && activeAudio !== a && !activeAudio.paused) activeAudio.pause();
+        activeAudio = a;
+        await attachAnalyserTo(a);
+        scheduleSpawnByEnergy();
+      });
+
+      ['pause','ended'].forEach(ev=>{
+        a.addEventListener(ev, ()=>{
+          if (activeAudio === a){ clearTimeout(spawnTimer); spawnTimer = null; }
+        });
+      });
+
+      a.addEventListener('timeupdate', ()=>{
+        if (activeAudio === a && !a.paused && !a.ended){
+          scheduleSpawnByEnergy();
+        }
+      });
+    }
+
+    // Brancher les lecteurs actuels et futurs
+    document.querySelectorAll('audio').forEach(wireAudio);
+    const mo = new MutationObserver(muts=>{
+      muts.forEach(m=>{
+        m.addedNodes.forEach(node=>{
+          if (node.tagName === 'AUDIO') wireAudio(node);
+          if (node.querySelectorAll){ node.querySelectorAll('audio').forEach(wireAudio); }
+        });
+      });
+    });
+    mo.observe(document.body, { childList:true, subtree:true });
+
+    /* ====== Gestion des notes ====== */
+    function spawnNote(){
+      const n = document.createElement('button');
+      n.type = 'button';
+      n.className = 'note';
+      n.setAttribute('aria-label', 'Ramasser une note');
+
+      const left     = rand(6, 94);
+      const drift    = rand(-80, 80);
+      const duration = rand(NOTE_LIFETIME[0], NOTE_LIFETIME[1]);
+
+      n.style.left = left + '%';
+      n.style.bottom = '-10%';
+      n.style.setProperty('--x', '0px');
+      n.style.setProperty('--drift', drift + 'px');
+      n.style.setProperty('--duree', duration + 'ms');
+
+      n.innerHTML = noteSVG(['quarter','eighth','beamed'][rand(0,2)]);
+
+      let grabbed = false;
+      const collect = ()=>{
+        if (grabbed) return;
+        grabbed = true;
+        n.classList.add('collected');
+        updateCounter(1);
+        setTimeout(()=> n.remove(), 320);
+      };
+      n.addEventListener('click', collect, {passive:true});
+      n.addEventListener('touchend', collect, {passive:true});
+
+      const killer = setTimeout(()=>{ if (n && !grabbed) n.remove(); }, duration + 150);
+      n.addEventListener('remove', ()=> clearTimeout(killer));
+
+      zoneNotes.appendChild(n);
+    }
+
+    /* ====== Compteur & déblocage ====== */
+    function updateCounter(delta){
+      notesCount = Math.max(0, notesCount + delta);
+      notesCountEl.textContent = notesCount;
+      localStorage.setItem(STORAGE_KEY, String(notesCount));
+      refreshLocks();
+    }
+
+    function refreshLocks(){
+      const cards = tracksWrap ? tracksWrap.querySelectorAll('.track') : [];
+      cards.forEach(card=>{
+        const need = parseInt(card.dataset.unlock || '0', 10);
+        if (notesCount >= need) card.classList.remove('locked');
+        else card.classList.add('locked');
+      });
+    }
+
+    resetBtn?.addEventListener('click', ()=>{
+      if (confirm('Réinitialiser la progression (notes et déblocages) ?')){
+        localStorage.removeItem(STORAGE_KEY);
+        notesCount = 0;
+        notesCountEl.textContent = '0';
+        refreshLocks();
+      }
+    });
+
+    /* ====== Utilitaires ====== */
+    function rand(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+    function map(x, inMin, inMax, outMin, outMax, clamp=false){
+      let t = (x - inMin) / (inMax - inMin);
+      if (clamp){ t = Math.max(0, Math.min(1, t)); }
+      return outMin + (outMax - outMin) * t;
+    }
+    function noteSVG(kind='quarter'){
+      const pathQuarter='M14 2c3.2 0 5.8 2.6 5.8 5.8v13.2c0 3.8-3.8 6.8-8 6.8s-7.2-2.2-7.2-5 3.2-5 7.2-5c2.2 0 4.2.6 5.6 1.6V7.8c0-1.6-1.2-2.8-2.8-2.8H14z';
+      const pathEighth='M9 7v14.5c-1.2-.6-2.6-.9-4-.9-3.6 0-6.5 1.8-6.5 4s2.9 4 6.5 4 6.5-1.8 6.5-4V9.5l10 3.5V5l-12-4v6z';
+      const pathBeamed='M2 20c0 2.2 3.1 4 7 4s7-1.8 7-4-3.1-4-7-4-7 1.8-7 4zm10-15v11c1.1-.6 2.8-1 4.5-1 3.6 0 6.5 1.8 6.5 4s-2.9 4-6.5 4-6.5-1.8-6.5-4V5l10-3v5l-8 3V5z';
+      const path = kind==='eighth'?pathEighth:kind==='beamed'?pathBeamed:pathQuarter;
+      const id='gold-'+Math.random().toString(36).slice(2);
+      return `
+      <svg viewBox="0 0 28 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+        <defs>
+          <linearGradient id="${id}" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#ffef9f"/>
+            <stop offset="55%" stop-color="#ffd76a"/>
+            <stop offset="100%" stop-color="#ffb84d"/>
+          </linearGradient>
+        </defs>
+        <path d="${path}" fill="url(#${id})" stroke="rgba(0,0,0,.25)" stroke-width=".4"/>
+      </svg>`;
+    }
+
+    /* ====== Mot magique (optionnel) ====== */
     function demanderMot() {
       document.getElementById('zoneMot').style.display = 'block';
     }
-
     function verifierMot() {
       const mot = document.getElementById('mot').value.trim().toLowerCase();
-      if (mot === 'camidjo') {
-        document.getElementById('contenuSecret').style.display = 'block';
+      if (mot === MAGIC_WORD) {
+        notesCount = 999;
+        localStorage.setItem(STORAGE_KEY, String(notesCount));
+        notesCountEl.textContent = notesCount;
+        refreshLocks();
         document.getElementById('zoneMot').style.display = 'none';
+        alert("Bravo ! Tous les morceaux sont débloqués ✨");
       } else {
         alert("Mot incorrect... Essaie encore !");
       }
     }
+    // Expose global pour les boutons inline
+    window.demanderMot = demanderMot;
+    window.verifierMot = verifierMot;
   </script>
 </body>
-
 </html>
