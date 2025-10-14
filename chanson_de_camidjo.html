@@ -11,6 +11,7 @@
     color:#fff8e6; font-family:Georgia,serif; text-align:center;
     margin:0; padding:2rem; min-height:100vh; box-sizing:border-box;
   }
+  body.no-scroll{ overflow:hidden; }
   h1{ color:#f0d864; margin-bottom:1rem; }
 
   .bloc-contenu{
@@ -101,21 +102,16 @@
 
   .sr-only{ position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
 
-  /* ===== Bulle magique (remplace alert) ===== */
+  /* ===== Bulle magique (pas assez de notes) ===== */
   .magic-alert {
-    position: fixed;
-    top: 50%; left: 50%;
+    position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background: rgba(20, 10, 0, 0.85);
-    color: #ffeb9b;
-    border: 1px solid rgba(255, 215, 100, 0.6);
-    border-radius: 18px;
+    background: rgba(20, 10, 0, 0.85); color: #ffeb9b;
+    border: 1px solid rgba(255, 215, 100, 0.6); border-radius: 18px;
     box-shadow: 0 0 25px rgba(255, 215, 100, 0.3);
-    padding: 1.3rem 1.6rem;
-    max-width: 320px; width: 80%;
-    text-align: center;
-    font-size: 1.05rem; line-height: 1.5;
-    z-index: 9999; opacity: 0; transition: all 0.35s ease;
+    padding: 1.3rem 1.6rem; max-width: 320px; width: 80%;
+    text-align: center; font-size: 1.05rem; line-height: 1.5;
+    z-index: 10001; opacity: 0; transition: all 0.35s ease;
   }
   .magic-alert.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   .magic-alert::before { content: "✨"; display: block; font-size: 1.8rem; margin-bottom: .5rem; }
@@ -126,10 +122,35 @@
   }
   .magic-alert button:hover { background: #ffef9f; }
 
-  /* ===== Mobile fine-tuning (≤ 480px) ===== */
+  /* ===== Modal de confirmation d’achat ===== */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(0,0,0,.45);
+    opacity:0; transition:opacity .25s ease; z-index:10000; pointer-events:none;
+  }
+  .modal{
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(.95);
+    background:rgba(20,10,0,.9); border:1px solid rgba(255,215,100,.55);
+    color:#ffeb9b; border-radius:18px; box-shadow:0 0 30px rgba(255,215,100,.25);
+    padding:1.2rem 1.4rem; max-width:360px; width:86%; text-align:center;
+    z-index:10001; opacity:0; transition:all .25s ease;
+  }
+  .modal.show{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  .modal-backdrop.show{ opacity:1; pointer-events:auto; }
+  .modal h4{ margin:.2rem 0 .8rem; color:#ffe066; font-size:1.1rem; }
+  .modal p{ margin:0 0 .8rem; }
+  .modal .actions{ display:flex; gap:.6rem; justify-content:center; margin-top:.4rem; }
+  .modal .btn-yes{ background:#9fe29f; color:#143a14; }
+  .modal .btn-no{ background:transparent; color:#ffe066; border:1px dashed #ffe066; }
+  .modal button{ padding:.5rem 1rem; border-radius:10px; border:none; cursor:pointer; font-weight:700; }
+
+  /* ===== Mobile (≤ 480px) ===== */
   @media (max-width: 480px){
     body{ padding: 1.2rem; }
-    h1{ font-size: 1.6rem; line-height: 1.15; margin: 1rem 0 .6rem; }
+    h1{
+      font-size: clamp(1.15rem, 6.6vw, 1.45rem);
+      line-height: 1.05; white-space: nowrap; text-align: center;
+      margin: 1rem 0 .6rem;
+    }
     .bloc-contenu{ max-width: 100%; padding: 1.1rem 1rem; border-radius: 14px; }
     .bloc-contenu h2{ font-size: 1.35rem; margin-bottom: .3rem; }
     .bloc-contenu h3{ font-size: 1.05rem; letter-spacing: .02em; margin: .2rem 0 .4rem; }
@@ -149,23 +170,6 @@
     h1{ font-size: 1.8rem; }
     .bloc-contenu p{ font-size: 1.05rem; }
   }
-  /* Titre mobile : une seule ligne, centré, taille fluide */
-@media (max-width: 480px){
-  h1{
-    /* taille qui s’adapte à la largeur du viewport */
-    font-size: clamp(1.15rem, 6.6vw, 1.45rem);
-    line-height: 1.05;
-    white-space: nowrap;      /* interdit le retour à la ligne */
-    text-align: center;
-    margin: 1rem 0 .6rem;
-  }
-}
-
-/* Très petits écrans (ex. 320px) : encore un chouïa plus petit */
-@media (max-width: 360px){
-  h1{ font-size: clamp(1.05rem, 6.2vw, 1.35rem); }
-}
-
 </style>
 </head>
 <body>
@@ -230,17 +234,61 @@ const shopEl = document.getElementById('shop');
 let balance = parseInt(localStorage.getItem(STORAGE_NOTES) || '0', 10);
 let owned = new Set(JSON.parse(localStorage.getItem(STORAGE_OWNED) || '[]'));
 
-/* ====== Bulle magique (remplace alert) ====== */
+/* ====== Bulle magique (pas assez de notes) ====== */
 function showMagicAlert(message){
   const old = document.querySelector('.magic-alert'); if (old) old.remove();
   const div = document.createElement('div');
   div.className = 'magic-alert';
-  div.innerHTML = `<p>${message}</p><button>OK</button>`;
+  div.setAttribute('role','dialog');
+  div.setAttribute('aria-modal','true');
+  div.innerHTML = `<p>${message}</p><button aria-label="Fermer">OK</button>`;
   document.body.appendChild(div);
   requestAnimationFrame(()=> div.classList.add('show'));
   div.querySelector('button').addEventListener('click', ()=>{
     div.classList.remove('show'); setTimeout(()=>div.remove(), 350);
   });
+}
+
+/* ====== Dialogue de confirmation d’achat ====== */
+function showConfirmPurchase(track, onYes){
+  const backdrop = document.createElement('div');
+  backdrop.className = 'modal-backdrop';
+
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+  modal.innerHTML = `
+    <h4>Confirmer l’achat</h4>
+    <p>Acheter <em>« ${track.title} »</em> pour <strong>${track.price} ✧</strong> ?</p>
+    <div class="actions">
+      <button class="btn btn-yes" autofocus>Oui</button>
+      <button class="btn btn-no">Non</button>
+    </div>
+  `;
+
+  const close = () => {
+    backdrop.classList.remove('show'); modal.classList.remove('show'); 
+    setTimeout(()=>{ backdrop.remove(); modal.remove(); document.body.classList.remove('no-scroll'); }, 200);
+    window.removeEventListener('keydown', onKey);
+  };
+  const onKey = (e)=>{
+    if(e.key === 'Escape'){ close(); }
+    if(e.key === 'Enter'){ yes(); }
+  };
+  const yes = ()=>{
+    close();
+    onYes?.();
+  };
+
+  document.body.append(backdrop, modal);
+  document.body.classList.add('no-scroll');
+  requestAnimationFrame(()=>{ backdrop.classList.add('show'); modal.classList.add('show'); });
+  modal.querySelector('.btn-yes').addEventListener('click', yes);
+  modal.querySelector('.btn-no').addEventListener('click', close);
+  window.addEventListener('keydown', onKey);
+  // Focus auto sur Oui pour action rapide clavier
+  modal.querySelector('.btn-yes').focus();
 }
 
 /* =================== RENDER BOUTIQUE =================== */
@@ -287,14 +335,15 @@ function attemptPurchase(track){
     showMagicAlert(`Il te manque <strong>${manque} ✧</strong> pour acheter <em>« ${track.title} »</em>.<br><br>✨ Continue à jouer une chanson pour récolter des notes dorées !`);
     return;
   }
-  const ok = confirm(`Acheter « ${track.title} » pour ${track.price} ✧ ?`);
-  if (!ok) return;
 
-  balance -= track.price;
-  owned.add(track.id);
-  persist();
-  updateBalanceUI();
-  renderShop();
+  // Ouvre la modal stylée au lieu de confirm()
+  showConfirmPurchase(track, ()=>{
+    balance -= track.price;
+    owned.add(track.id);
+    persist();
+    updateBalanceUI();
+    renderShop();
+  });
 }
 
 /* =================== PERSISTANCE =================== */
@@ -306,9 +355,10 @@ function updateBalanceUI(){ notesCountEl.textContent = balance; }
 
 /* =================== RESET =================== */
 resetBtn.addEventListener('click', ()=>{
-  if (!confirm('Réinitialiser le solde ET les achats ?')) return;
-  balance = 0; owned = new Set();
-  persist(); updateBalanceUI(); renderShop();
+  showConfirmPurchase({title:'réinitialiser', price:0}, ()=>{
+    balance = 0; owned = new Set();
+    persist(); updateBalanceUI(); renderShop();
+  });
 });
 
 /* =================== NOTES (SPAWN & COLLECT) =================== */
@@ -375,14 +425,18 @@ async function attachAnalyserTo(audioEl){
   if (!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
   if (!audioEl.crossOrigin) audioEl.crossOrigin = 'anonymous';
 
-  if (sourceNode) try{ sourceNode.disconnect(); }catch(e){}
-  if (analyser)   try{ analyser.disconnect();   }catch(e){}
+  // MediaElementSource : une seule fois par <audio>
+  if (!audioEl.__mediaSource) {
+    audioEl.__mediaSource = audioCtx.createMediaElementSource(audioEl);
+  }
+  sourceNode = audioEl.__mediaSource;
 
+  if (analyser) { try{ analyser.disconnect(); }catch(e){} }
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048;
   analyser.smoothingTimeConstant = 0.75;
 
-  sourceNode = audioCtx.createMediaElementSource(audioEl);
+  try { sourceNode.disconnect(); } catch(e){}
   sourceNode.connect(analyser);
   analyser.connect(audioCtx.destination);
 
@@ -420,7 +474,6 @@ function bandEnergy(arr, fracStart, fracEnd){
 function scheduleSpawnByEnergy(){
   if (spawnTimer || !activeAudio || activeAudio.paused || activeAudio.ended) return;
 
-  // énergie haute -> délai court => plus de notes
   const chorusBoost = map(energyEMA, 0.1, 0.9, 1.15, 0.45, true);
   const vol = (typeof activeAudio.volume==='number') ? activeAudio.volume : 1;
   const volBoost = map(vol, 0.0, 1.0, 1.15, 0.85, true);
