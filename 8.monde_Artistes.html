@@ -29,7 +29,7 @@
     background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  .wrap{ max-width:1100px; width:100%; text-align:center; }
+  .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:1; }
 
   /* ===== Titre ===== */
   h1{
@@ -108,9 +108,57 @@
   @media (max-width:560px){
     .btn, .shop{ grid-column: span 12; }
   }
+
+  /* ===== Effets décoratifs : notes + taches ===== */
+  .fx-layer{
+    position:fixed; inset:0; z-index:0;
+    pointer-events:none; overflow:hidden;
+  }
+  .fx-note, .fx-splash{
+    position:absolute; will-change: transform, opacity;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+    opacity:0;
+  }
+  /* Notes qui montent et dérivent */
+  .fx-note{
+    font-size: clamp(18px, 2.8vw, 28px);
+    text-shadow: 0 0 10px rgba(255,214,116,.35);
+    animation: note-float var(--dur,8s) ease-out forwards;
+  }
+  @keyframes note-float{
+    0%   { transform: translate(var(--x,0), 10vh) scale(.9) rotate(0deg); opacity:0; }
+    10%  { opacity:.95; }
+    100% { transform: translate(calc(var(--x,0) + var(--drift, 40px)), -15vh) scale(1) rotate(var(--rot,18deg)); opacity:0; }
+  }
+  /* Taches de peinture “blob” */
+  .fx-splash{
+    width: var(--size,80px); height: var(--size,80px);
+    background: var(--col,#ffcf66);
+    border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
+    transform: rotate(var(--rot,0deg)) scale(.6);
+    animation: splash-pop var(--dur,6s) ease-in-out forwards;
+  }
+  .fx-splash::before, .fx-splash::after{
+    content:""; position:absolute; background:inherit; opacity:.9;
+    border-radius: 60% 40% 50% 50%;
+  }
+  .fx-splash::before{ width:35%; height:35%; left:-10%; top:45%; transform:rotate(20deg); }
+  .fx-splash::after { width:28%; height:28%; right:-12%; top:-8%;  transform:rotate(-18deg); }
+  @keyframes splash-pop{
+    0%   { opacity:0; transform: translateY(10px) scale(.6) rotate(var(--rot,0deg)); }
+    12%  { opacity:.95; transform: translateY(0)    scale(1)   rotate(var(--rot,0deg)); }
+    70%  { opacity:.95; }
+    100% { opacity:0;  transform: translateY(-12px) scale(1.05) rotate(calc(var(--rot,0deg) + 6deg)); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fx-note, .fx-splash{ animation:none !important; display:none !important; }
+  }
 </style>
 </head>
 <body>
+  <!-- Calque d'effets -->
+  <div class="fx-layer" aria-hidden="true"></div>
+
   <main class="wrap">
     <h1>Bienvenue au monde des Artistes</h1>
     <div class="soustitre">Création • Harmonie • Lumière</div>
@@ -123,20 +171,76 @@
     </section>
 
     <nav class="grille">
-      <!-- simple -->
       <a class="btn outline" href="9.entree_Artistes.html">Entrée du monde</a>
-
-      <!-- boutiques mises en avant -->
       <a class="btn shop" href="chanson_de_camidjo.html">
         <span class="ico">🎵</span> Camidjo
       </a>
       <a class="btn shop" href="loup_bout_art.html">
         <span class="ico purple">🎨</span> Loup-Bout'Art
       </a>
-
-      <!-- retour -->
       <a class="btn outline" href="3.les_mondes.html">← Retour aux Mondes</a>
     </nav>
   </main>
+
+  <script>
+  (function(){
+    const layer = document.querySelector('.fx-layer');
+    if(!layer) return;
+
+    const palette = ['#ffd674','#f7a8c3','#a5d8ff','#c7f9cc','#b48df2','#ffad60'];
+    const notes = ['♪','♫','🎵','🎶'];
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const isMobile = window.matchMedia('(max-width: 560px)').matches;
+    const maxNodes = isMobile ? 16 : 24;           // plafond
+    const noteEvery  = isMobile ? 1400 : 1100;     // rythme
+    const splashEvery= isMobile ? 2000 : 1600;
+
+    function rand(min, max){ return Math.random()*(max-min)+min; }
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    function spawnNote(){
+      if(layer.childElementCount > maxNodes) return;
+      const el = document.createElement('span');
+      el.className = 'fx-note';
+      el.textContent = pick(notes);
+      const x = rand(5, 95); // en vw
+      el.style.left = x + 'vw';
+      el.style.bottom = '-6vh';
+      el.style.setProperty('--x', '0px');
+      el.style.setProperty('--drift', rand(-40, 60)+'px');
+      el.style.setProperty('--rot', rand(-25, 25)+'deg');
+      el.style.setProperty('--dur', rand(6, 10)+'s');
+      layer.appendChild(el);
+      el.addEventListener('animationend', ()=> el.remove());
+    }
+
+    function spawnSplash(){
+      if(layer.childElementCount > maxNodes) return;
+      const el = document.createElement('div');
+      el.className = 'fx-splash';
+      const size = rand(isMobile?36:44, isMobile?90:120);
+      el.style.width = size+'px';
+      el.style.height = size+'px';
+      el.style.left = rand(4, 86)+'vw';
+      el.style.top  = rand(12, 78)+'vh';
+      el.style.setProperty('--col', pick(palette));
+      el.style.setProperty('--rot', rand(-20, 20)+'deg');
+      el.style.setProperty('--dur', rand(4, 7)+'s');
+      layer.appendChild(el);
+      el.addEventListener('animationend', ()=> el.remove());
+    }
+
+    // Lancer quelques éléments au chargement
+    for(let i=0;i<6;i++){
+      setTimeout(()=> (Math.random()<0.5?spawnNote():spawnSplash()), i*220);
+    }
+    // Rythme continu
+    setInterval(spawnNote, noteEvery);
+    setInterval(spawnSplash, splashEvery);
+  })();
+  </script>
 </body>
 </html>
