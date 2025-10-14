@@ -100,77 +100,55 @@
   @keyframes pop{ 0%{transform:scale(1);opacity:1;} 70%{transform:scale(1.6);opacity:1;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5));} 100%{transform:scale(.6);opacity:0;} }
 
   .sr-only{ position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+
+  /* ===== Bulle magique (remplace alert) ===== */
+  .magic-alert {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: rgba(20, 10, 0, 0.85);
+    color: #ffeb9b;
+    border: 1px solid rgba(255, 215, 100, 0.6);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(255, 215, 100, 0.3);
+    padding: 1.3rem 1.6rem;
+    max-width: 320px; width: 80%;
+    text-align: center;
+    font-size: 1.05rem; line-height: 1.5;
+    z-index: 9999; opacity: 0; transition: all 0.35s ease;
+  }
+  .magic-alert.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .magic-alert::before { content: "✨"; display: block; font-size: 1.8rem; margin-bottom: .5rem; }
+  .magic-alert button {
+    margin-top: 1rem; background: #ffd76a; color: #3b2d16;
+    border: none; border-radius: 10px; padding: .4rem 1rem; cursor: pointer; font-weight: 600;
+    box-shadow: 0 0 8px rgba(255,215,100,.4);
+  }
+  .magic-alert button:hover { background: #ffef9f; }
+
   /* ===== Mobile fine-tuning (≤ 480px) ===== */
-@media (max-width: 480px){
-  body{
-    padding: 1.2rem;
+  @media (max-width: 480px){
+    body{ padding: 1.2rem; }
+    h1{ font-size: 1.6rem; line-height: 1.15; margin: 1rem 0 .6rem; }
+    .bloc-contenu{ max-width: 100%; padding: 1.1rem 1rem; border-radius: 14px; }
+    .bloc-contenu h2{ font-size: 1.35rem; margin-bottom: .3rem; }
+    .bloc-contenu h3{ font-size: 1.05rem; letter-spacing: .02em; margin: .2rem 0 .4rem; }
+    .bloc-contenu p { font-size: 1rem; line-height: 1.5; }
+    .chanson{ max-width: 100%; padding: .8rem; margin: 1rem auto; border-radius: 12px; }
+    .Artistes-image{ margin: 1.2rem auto; border-radius: 16px; }
+    audio{ margin-top: .35rem; }
+    .note-info{ font-size: 1.05rem; text-shadow: 0 0 8px rgba(255,223,100,.45); animation-duration: 3.2s; }
+    .note-info small{ font-size: .9rem; }
+    .badge-notes{ padding: .35rem .7rem; transform: scale(.97); }
+    .reset-notes{ padding: .4rem .65rem; font-size: .95rem; }
+    .shop{ grid-template-columns: 1fr !important; gap: .9rem; }
+    .card{ max-width: 100%; padding: .9rem; border-radius: 14px; }
   }
-
-  /* Titre principal trop gros */
-  h1{
-    font-size: 1.6rem;          /* avant ~2rem+ */
-    line-height: 1.15;
-    margin: 1rem 0 .6rem;
+  /* Option tablette */
+  @media (max-width: 768px){
+    h1{ font-size: 1.8rem; }
+    .bloc-contenu p{ font-size: 1.05rem; }
   }
-
-  /* Bloc d’intro plus compact */
-  .bloc-contenu{
-    max-width: 100%;
-    padding: 1.1rem 1rem;
-    border-radius: 14px;
-  }
-  .bloc-contenu h2{ font-size: 1.35rem; margin-bottom: .3rem; }
-  .bloc-contenu h3{ font-size: 1.05rem; letter-spacing: .02em; margin: .2rem 0 .4rem; }
-  .bloc-contenu p { font-size: 1rem; line-height: 1.5; }
-
-  /* Carte chanson + image */
-  .chanson{
-    max-width: 100%;
-    padding: .8rem;
-    margin: 1rem auto;
-    border-radius: 12px;
-  }
-  .Artistes-image{
-    margin: 1.2rem auto;
-    border-radius: 16px;
-  }
-  audio{ margin-top: .35rem; }
-
-  /* Bandeau “Ramasse les notes dorées” plus discret */
-  .note-info{
-    font-size: 1.05rem;
-    text-shadow: 0 0 8px rgba(255,223,100,.45);
-    animation-duration: 3.2s;   /* glow plus doux */
-  }
-  .note-info small{ font-size: .9rem; }
-
-  /* Compteur & boutons : un peu plus compacts */
-  .badge-notes{
-    padding: .35rem .7rem;
-    transform: scale(.97);
-  }
-  .reset-notes{
-    padding: .4rem .65rem;
-    font-size: .95rem;
-  }
-
-  /* Grille boutique en 1 colonne full width */
-  .shop{
-    grid-template-columns: 1fr !important;
-    gap: .9rem;
-  }
-  .card{
-    max-width: 100%;
-    padding: .9rem;
-    border-radius: 14px;
-  }
-}
-
-/* Option : fluidifier aussi sur tablettes (≤ 768px) */
-@media (max-width: 768px){
-  h1{ font-size: 1.8rem; }
-  .bloc-contenu p{ font-size: 1.05rem; }
-}
 </style>
 </head>
 <body>
@@ -184,13 +162,13 @@
 
   <h1>🎵 Chansons de Camidjo</h1>
 
-  <!-- 1) Une piste gratuite pour démarrer/faire apparaître les notes -->
+  <!-- Piste gratuite pour récolter des notes -->
   <div class="chanson">
     <p>🎶 Pensée pour elle <span class="hint">(gratuite)</span></p>
     <audio controls crossorigin="anonymous" src="camidjo_pensee.mp3"></audio>
   </div>
 
-  <!-- 2) En-tête solde + message -->
+  <!-- Solde + message -->
   <div class="header-notes" aria-live="polite">
     <div class="note-info">
       ✨ Ramasse les notes dorées ✨
@@ -202,13 +180,11 @@
     </div>
   </div>
 
-  <!-- 3) Overlay où apparaissent les notes -->
+  <!-- Overlay des notes -->
   <div id="zoneNotes" class="zone-notes" aria-label="Zone de collecte des notes"></div>
 
-  <!-- 4) Boutique -->
-  <section class="shop" id="shop">
-    <!-- Cartes rendues par JS (prix/achat/lecture si possédé) -->
-  </section>
+  <!-- Boutique -->
+  <section class="shop" id="shop"></section>
 
   <a href="8.monde_Artistes.html" class="btn btn-ghost" style="margin-top:1.2rem;">← Retour au Monde des Artistes</a>
 
@@ -237,6 +213,19 @@ const shopEl = document.getElementById('shop');
 let balance = parseInt(localStorage.getItem(STORAGE_NOTES) || '0', 10);
 let owned = new Set(JSON.parse(localStorage.getItem(STORAGE_OWNED) || '[]'));
 
+/* ====== Bulle magique (remplace alert) ====== */
+function showMagicAlert(message){
+  const old = document.querySelector('.magic-alert'); if (old) old.remove();
+  const div = document.createElement('div');
+  div.className = 'magic-alert';
+  div.innerHTML = `<p>${message}</p><button>OK</button>`;
+  document.body.appendChild(div);
+  requestAnimationFrame(()=> div.classList.add('show'));
+  div.querySelector('button').addEventListener('click', ()=>{
+    div.classList.remove('show'); setTimeout(()=>div.remove(), 350);
+  });
+}
+
 /* =================== RENDER BOUTIQUE =================== */
 function renderShop(){
   shopEl.innerHTML = '';
@@ -260,7 +249,6 @@ function renderShop(){
     shopEl.appendChild(card);
   });
 
-  // Binder achats
   shopEl.querySelectorAll('[data-buy]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const id = btn.getAttribute('data-buy');
@@ -270,7 +258,7 @@ function renderShop(){
     });
   });
 
-  // (Ré)activer l’analyse sur tous les lecteurs (dont ceux nouvellement rendus)
+  // (Re)branche l’analyse sur tout nouveau lecteur
   document.querySelectorAll('audio').forEach(wireAudio);
 }
 
@@ -278,7 +266,8 @@ function renderShop(){
 function attemptPurchase(track){
   if (owned.has(track.id)) return;
   if (balance < track.price){
-    alert(`Il te manque ${track.price - balance} ✧ pour acheter « ${track.title} ». Récolte encore quelques notes !`);
+    const manque = track.price - balance;
+    showMagicAlert(`Il te manque <strong>${manque} ✧</strong> pour acheter <em>« ${track.title} »</em>.<br><br>✨ Continue à jouer une chanson pour récolter des notes dorées !`);
     return;
   }
   const ok = confirm(`Acheter « ${track.title} » pour ${track.price} ✧ ?`);
@@ -310,8 +299,8 @@ function spawnNote(){
   const n = document.createElement('button');
   n.type='button'; n.className='note'; n.setAttribute('aria-label','Ramasser une note');
 
-  const leftPct   = rand(2,98);      // toute la largeur
-  const bottomPct = rand(0,90);      // toute la hauteur (petite marge haute)
+  const leftPct   = rand(2,98);
+  const bottomPct = rand(0,90);
   const duration  = rand(NOTE_LIFETIME[0], NOTE_LIFETIME[1]);
 
   n.style.left = leftPct + '%';
@@ -324,7 +313,7 @@ function spawnNote(){
     if (grabbed) return;
     grabbed = true;
     n.classList.add('collected');
-    balance += 1;         // +1 note collectée = +1 ✧ au solde
+    balance += 1;   // 1 note = 1 ✧
     persist(); updateBalanceUI();
     setTimeout(()=> n.remove(), 320);
   };
@@ -420,7 +409,7 @@ function scheduleSpawnByEnergy(){
   const volBoost = map(vol, 0.0, 1.0, 1.15, 0.85, true);
 
   const factor = Math.max(0.35, Math.min(2.0, chorusBoost * volBoost));
-  const delay = rand(BASE_SPAWN_MS[0]*factor, BASE_SPAWN_MS[1]*factor);
+  const delay = rand(BASE_SPAWN_MS[0]*factor,BASE_SPAWN_MS[1]*factor);
 
   spawnTimer = setTimeout(()=>{
     spawnTimer=null;
@@ -462,7 +451,6 @@ function noteSVG(kind='quarter'){
 /* =================== INIT =================== */
 updateBalanceUI();
 renderShop();
-// Active l’analyse pour les <audio> déjà présents (piste gratuite)
 document.querySelectorAll('audio').forEach(wireAudio);
 </script>
 </body>
