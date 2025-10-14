@@ -25,7 +25,7 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:flex-start;      /* titre en haut */
+    justify-content:flex-start; /* titre en haut */
     padding:clamp(16px,3vw,48px);
     position:relative;
     isolation:isolate;
@@ -35,9 +35,9 @@
     background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  /* Canvases & calque notes */
+  /* Canvas & calque notes */
   .fx-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; }
-  .fx-layer{  position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+  .fx-layer { position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
 
   /* Contenu */
   .wrap{
@@ -53,16 +53,46 @@
   }
   .soustitre{ font-size:clamp(.9rem,2.4vw,1.05rem); letter-spacing:.06em; opacity:.9; margin-bottom:1.4rem; }
 
-  /* Cartouche */
-  .cartouche{
-    margin:0 auto 2rem; max-width:880px;
-    background:var(--verre); border:1px solid var(--bord);
-    border-radius:var(--ray); padding:clamp(16px,3.2vw,26px);
-    box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 40px rgba(255,255,255,.04);
-    backdrop-filter:blur(6px);
+  /* ===== Cartouche (vide, sert de marge) + encadrement chic ===== */
+  .cartouche{ margin:0 auto 2rem; max-width:880px; background:none; border:none; box-shadow:none; padding:0; }
+  .quote-frame{
+    position: relative;
+    padding: clamp(18px, 3.2vw, 28px);
+    border-radius: 26px;
+    background: rgba(15, 0, 20, .42);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.35), inset 0 0 40px rgba(255,255,255,.03);
   }
-  .citation{ font-size:clamp(1.05rem,2.6vw,1.4rem); line-height:1.75; margin:0; }
-  .guil{ color:var(--or); font-size:1.6em; vertical-align:-.2em; }
+  .quote-frame::before{
+    content:""; position:absolute; inset:0; border-radius:inherit;
+    padding:1px;
+    background: linear-gradient(140deg,
+                rgba(255,214,116,.9),
+                rgba(255,255,255,.35) 35%,
+                rgba(255,255,255,.12) 60%,
+                rgba(255,214,116,.85));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    box-shadow: 0 0 22px rgba(255,214,116,.35);
+    pointer-events:none;
+  }
+  .quote-frame::after{
+    content:""; position:absolute; inset:8px; border-radius:18px;
+    border:1px solid rgba(255,214,116,.18); pointer-events:none;
+  }
+  .orn{ position:absolute; width:22px; height:22px; opacity:.55; pointer-events:none;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,214,116,.85), transparent 55%),
+      conic-gradient(from 0deg, rgba(255,214,116,.8), rgba(255,214,116,0) 70%);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+  }
+  .orn.tl{ left:10px; top:10px; border-radius:50% 0 0 0; }
+  .orn.tr{ right:10px; top:10px; border-radius:0 50% 0 0; transform:rotate(90deg); }
+  .orn.bl{ left:10px; bottom:10px; border-radius:0 0 0 50%; transform:rotate(-90deg); }
+  .orn.br{ right:10px; bottom:10px; border-radius:0 0 50% 0; transform:rotate(180deg); }
+
+  .citation{ margin:0; font-size:clamp(1.05rem,2.6vw,1.45rem); line-height:1.8; text-align:center; }
+  .citation .guil{ color:var(--or); font-size:1.4em; text-shadow:0 0 10px rgba(255,214,116,.35); }
 
   /* Boutons */
   .grille{
@@ -99,7 +129,7 @@
   .outline:hover{ background:rgba(0,0,0,.45); }
 
   @media (max-width:900px){ .btn, .shop{ grid-column: span 6; } }
-  @media (max-width:560px){ .btn, .shop{ grid-column: span 12; } }
+  @media (max-width:560px){ .btn, .shop{ grid-column: span 12; } .orn{ display:none; } }
 
   /* Notes musicales — montent jusqu'en haut */
   .fx-note{
@@ -122,7 +152,7 @@
 </style>
 </head>
 <body>
-  <!-- Canvas pour les pinceaux arc-en-ciel -->
+  <!-- Canvas : 3 pinceaux arc-en-ciel -->
   <canvas class="fx-canvas" aria-hidden="true"></canvas>
   <!-- Notes musicales -->
   <div class="fx-layer" aria-hidden="true"></div>
@@ -132,10 +162,19 @@
     <div class="soustitre">Création • Harmonie • Lumière</div>
 
     <section class="cartouche">
-      <p class="citation">
-        <span class="guil">«</span> Ici, les notes dansent, les couleurs vibrent,
-        et d’étranges créatures laissent exprimer leur talent à la lumière… <span class="guil">»</span>
-      </p>
+      <div class="quote-frame">
+        <span class="orn tl" aria-hidden="true"></span>
+        <span class="orn tr" aria-hidden="true"></span>
+        <span class="orn bl" aria-hidden="true"></span>
+        <span class="orn br" aria-hidden="true"></span>
+
+        <p class="citation">
+          <span class="guil">«</span>
+          Ici, les notes dansent, les couleurs vibrent,
+          et d’étranges créatures laissent exprimer leur talent à la lumière…
+          <span class="guil">»</span>
+        </p>
+      </div>
     </section>
 
     <nav class="grille">
@@ -147,7 +186,7 @@
   </main>
 
 <script>
-/* ===== 3 pinceaux arc-en-ciel — trajectoires distinctes, trace qui s'estompe, scintillement ===== */
+/* === 3 pinceaux arc-en-ciel — rubans colorés (pas de blanc) qui s'estompent doucement === */
 (function(){
   const c = document.querySelector('.fx-canvas');
   const ctx = c.getContext('2d');
@@ -163,99 +202,70 @@
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
   }
-  resize();
-  addEventListener('resize', resize);
+  resize(); addEventListener('resize', resize);
 
-  // Chaque pinceau a ses propres paramètres pour une trajectoire différente
+  // 3 pinceaux, trajectoires/teintes différentes
   const brushes = [
-    { sX:0.90, sY:1.25, phaseX:0.6, phaseY:0.0, ampX:0.42, ampY:0.30, yMin:0.18, yMax:0.90, width:2, offset:1.4, hueShift:0,   speed:0.0075 },
-    { sX:1.10, sY:0.80, phaseX:1.3, phaseY:0.9, ampX:0.35, ampY:0.36, yMin:0.25, yMax:0.85, width:2, offset:1.2, hueShift:35,  speed:0.0090 },
-    { sX:0.75, sY:1.45, phaseX:2.2, phaseY:1.7, ampX:0.48, ampY:0.26, yMin:0.22, yMax:0.88, width:1.8, offset:1.0, hueShift:-25, speed:0.0066 }
+    { sX:0.90, sY:1.25, phaseX:0.6, phaseY:0.0, ampX:0.42, ampY:0.30, yMin:0.18, yMax:0.90, width:2.0, offset:1.4, hueShift:0,    speed:0.0075 },
+    { sX:1.10, sY:0.80, phaseX:1.3, phaseY:0.9, ampX:0.35, ampY:0.36, yMin:0.25, yMax:0.85, width:2.0, offset:1.2, hueShift:35,   speed:0.0090 },
+    { sX:0.75, sY:1.45, phaseX:2.2, phaseY:1.7, ampX:0.48, ampY:0.26, yMin:0.22, yMax:0.88, width:1.8, offset:1.0, hueShift:-25,  speed:0.0066 }
   ];
 
-  const baseHues = [0, 24, 48, 120, 210, 280];      // arc-en-ciel
+  const baseHues = [0, 30, 55, 120, 210, 275]; // rouge → violet (saturé)
+  const fade = 0.017;                          // atténuation lente (la trace reste)
+
   let t = Math.random()*1000;
-
-  // Positions précédentes par pinceau
-  for(const b of brushes){
-    b.prev = { x: W*0.5, y: H*0.6 };
-  }
-
-  const fade = 0.017;  // effacement très léger pour que les rubans restent mais s’adoucissent
+  for(const b of brushes){ b.prev = { x: W*0.5, y: H*0.6 }; }
 
   function drawBrush(b, curr){
-    // vecteur + normale
     const vx = curr.x - b.prev.x, vy = curr.y - b.prev.y;
-    const L = Math.hypot(vx, vy) || 1;
-    const nx = -vy / L, ny = vx / L;
+    const L  = Math.hypot(vx, vy) || 1;
+    const nx = -vy / L, ny =  vx / L;
 
-    // teintes décalées pour chaque pinceau
     const hues = baseHues.map(h => (h + b.hueShift + 360) % 360);
 
-    // rubans très fins
+    // Ruban arc-en-ciel (plusieurs filets colorés côte à côte)
     for(let i=0;i<hues.length;i++){
       const k = (i - (hues.length-1)/2) * (b.offset * dpr);
-      ctx.strokeStyle = `hsl(${hues[i]} 85% 60%)`;
-      ctx.globalAlpha  = 0.9;
+      ctx.strokeStyle = `hsl(${hues[i]} 92% 62%)`;
+      ctx.globalAlpha  = 0.95;
       ctx.lineWidth    = b.width * dpr;
       ctx.beginPath();
       ctx.moveTo(b.prev.x + nx*k, b.prev.y + ny*k);
-      ctx.lineTo(curr.x + nx*k,   curr.y + ny*k);
+      ctx.lineTo(curr.x   + nx*k, curr.y   + ny*k);
       ctx.stroke();
     }
 
-    // liseré blanc discret
-    ctx.strokeStyle = 'rgba(255,255,255,0.18)';
-    ctx.lineWidth   = 1.2 * dpr;
-    ctx.beginPath();
-    ctx.moveTo(b.prev.x, b.prev.y);
-    ctx.lineTo(curr.x,   curr.y);
-    ctx.stroke();
-
-    // scintillement doux au bout du pinceau
+    // Scintillement doux au bout (halo, sans trait blanc)
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
-    const r = 6 * dpr;
+    const r = 5 * dpr;
     const g = ctx.createRadialGradient(curr.x, curr.y, 0, curr.x, curr.y, r*3);
-    g.addColorStop(0, 'rgba(255,255,255,0.95)');
+    g.addColorStop(0, 'rgba(255,255,255,0.8)');
     g.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(curr.x, curr.y, r*3, 0, Math.PI*2); ctx.fill();
-
-    // micro-étincelles occasionnelles
-    if (Math.random() < 0.6){
-      const ang = Math.random()*Math.PI*2;
-      const len = (Math.random()*5 + 4) * dpr;
-      ctx.strokeStyle = 'rgba(255,230,160,0.85)';
-      ctx.lineWidth = 1 * dpr;
-      ctx.beginPath();
-      ctx.moveTo(curr.x - Math.cos(ang)*len*0.5, curr.y - Math.sin(ang)*len*0.5);
-      ctx.lineTo(curr.x + Math.cos(ang)*len*0.5, curr.y + Math.sin(ang)*len*0.5);
-      ctx.stroke();
-    }
     ctx.restore();
 
     b.prev = curr;
   }
 
   function step(){
-    // Effet de persistance global pour adoucir les anciennes traces
+    // Évaporation légère pour adoucir les anciennes traces
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = `rgba(0,0,0,${fade})`;
     ctx.fillRect(0,0,W,H);
     ctx.globalCompositeOperation = 'source-over';
 
-    t += 1; // compteur "ticks", on multiplie par speed par pinceau
-
+    t += 1;
     for(const b of brushes){
       const tt = t * b.speed;
       const px = 0.5 + b.ampX * Math.sin(b.sX*tt + b.phaseX);
       const py = 0.5 + b.ampY * Math.sin(b.sY*tt + b.phaseY);
-      const yClamped = Math.min(b.yMax, Math.max(b.yMin, py));
-      const curr = { x: px * W, y: yClamped * H };
+      const y = Math.min(b.yMax, Math.max(b.yMin, py));
+      const curr = { x: px * W, y: y * H };
       drawBrush(b, curr);
     }
-
     requestAnimationFrame(step);
   }
 
