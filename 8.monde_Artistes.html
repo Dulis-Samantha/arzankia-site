@@ -10,7 +10,6 @@
   :root{
     --or:#ffd674;
     --ivoire:#fff8e6;
-    --encre:#2a221b;
     --verre:rgba(10,0,20,.45);
     --bord:rgba(255,214,116,.55);
     --ray:28px;
@@ -18,38 +17,76 @@
 
   /* ===== Fond + voile ===== */
   body{
-    margin:0; font-family:Georgia, serif; color:var(--ivoire);
+    margin:0;
+    font-family:Georgia, serif;
+    color:var(--ivoire);
     background:url('fond_monde_terre.png') center/cover no-repeat fixed;
-    min-height:100svh; display:flex; align-items:center; justify-content:center;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;              /* pour placer le titre en haut */
+    align-items:center;
+    justify-content:flex-start;         /* top au lieu de center */
     padding:clamp(16px,3vw,48px);
-    position:relative; isolation:isolate;
+    position:relative;
+    isolation:isolate;
   }
+
   body::before{
-    content:""; position:absolute; inset:0; z-index:-1;
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
     background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  /* Canvas arc-en-ciel sous les notes */
-  .fx-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+  /* ===== Canvas effets ===== */
+  .fx-canvas{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+  .fx-layer{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    overflow:hidden;
+  }
 
-  .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:2; }
+  /* ===== Contenu principal ===== */
+  .wrap{
+    max-width:1100px;
+    width:100%;
+    text-align:center;
+    position:relative;
+    z-index:2;
+    margin-top:clamp(1rem,4vh,2.5rem); /* espace sous la barre du mobile */
+  }
 
   /* ===== Titre ===== */
   h1{
-    margin:0 0 .8rem; line-height:1.1;
-    font-size:clamp(2.1rem,6vw,4rem); color:var(--or);
+    margin:0 0 .8rem;
+    line-height:1.1;
+    font-size:clamp(2.1rem,6vw,4rem);
+    color:var(--or);
     text-shadow:0 3px 0 rgba(0,0,0,.35), 0 0 24px rgba(255,214,116,.25);
   }
   .soustitre{
     font-size:clamp(.9rem,2.4vw,1.05rem);
-    letter-spacing:.06em; opacity:.9; margin-bottom:1.4rem;
+    letter-spacing:.06em;
+    opacity:.9;
+    margin-bottom:1.4rem;
   }
 
   /* ===== Cartouche ===== */
   .cartouche{
-    margin:0 auto 2rem; max-width:880px;
-    background:var(--verre); border:1px solid var(--bord);
-    border-radius:var(--ray); padding:clamp(16px,3.2vw,26px);
+    margin:0 auto 2rem;
+    max-width:880px;
+    background:var(--verre);
+    border:1px solid var(--bord);
+    border-radius:var(--ray);
+    padding:clamp(16px,3.2vw,26px);
     box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 40px rgba(255,255,255,.04);
     backdrop-filter:blur(6px);
   }
@@ -58,38 +95,64 @@
 
   /* ===== Grille ===== */
   .grille{
-    display:grid; gap:1rem; margin:0 auto; max-width:980px;
+    display:grid;
+    gap:1rem;
+    margin:0 auto;
+    max-width:980px;
     grid-template-columns: repeat(12, 1fr);
   }
   .btn{
     grid-column: span 4;
-    display:flex; align-items:center; justify-content:center; gap:.6rem;
-    text-decoration:none; color:var(--ivoire);
-    padding:14px 18px; border-radius:999px;
-    border:1px solid var(--bord); background:rgba(0,0,0,.35);
-    transition:.25s ease; font-size:1.05rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.6rem;
+    text-decoration:none;
+    color:var(--ivoire);
+    padding:14px 18px;
+    border-radius:999px;
+    border:1px solid var(--bord);
+    background:rgba(0,0,0,.35);
+    transition:.25s ease;
+    font-size:1.05rem;
     box-shadow:0 4px 18px rgba(0,0,0,.25);
   }
-  .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.35); }
+  .btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(0,0,0,.35);
+  }
 
   .shop{
     grid-column: span 4;
-    position:relative; overflow:hidden; font-weight:700;
+    position:relative;
+    overflow:hidden;
+    font-weight:700;
     background:linear-gradient(180deg, rgba(255,214,116,.18), rgba(255,214,116,.06));
     border:1px solid var(--or);
   }
   .shop::after{
-    content:""; position:absolute; inset:-200% -20%; transform:rotate(12deg);
+    content:"";
+    position:absolute;
+    inset:-200% -20%;
+    transform:rotate(12deg);
     background:linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
     animation:shine 3.2s linear infinite;
   }
-  @keyframes shine{ 0%{transform:translateX(-60%) rotate(12deg);} 100%{transform:translateX(60%) rotate(12deg);} }
+  @keyframes shine{
+    0%{transform:translateX(-60%) rotate(12deg);}
+    100%{transform:translateX(60%) rotate(12deg);}
+  }
 
   .ico{
-    width:32px; height:32px; border-radius:50%;
-    display:grid; place-items:center; flex:0 0 auto;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    flex:0 0 auto;
     background:radial-gradient(circle at 30% 30%, #ffecb3, #f3c86a);
-    color:#5a2e00; box-shadow:inset 0 0 8px rgba(0,0,0,.25), 0 0 12px rgba(255,214,116,.35);
+    color:#5a2e00;
+    box-shadow:inset 0 0 8px rgba(0,0,0,.25), 0 0 12px rgba(255,214,116,.35);
     font-size:18px;
   }
   .ico.purple{ background:radial-gradient(circle at 30% 30%, #e8d9ff, #b58cff); color:#2a103f; }
@@ -98,35 +161,35 @@
   .outline:hover{ background:rgba(0,0,0,.45); }
 
   @media (max-width:900px){ .btn, .shop{ grid-column: span 6; } }
-  @media (max-width:560px){ .btn, .shop{ grid-column: span 12; } }
+  @media (max-width:560px){
+    .btn, .shop{ grid-column: span 12; }
+    .wrap{ margin-top:1rem; }  /* moins d'espace pour mobile */
+  }
 
-  /* ===== Calque des notes ===== */
-  .fx-layer{
-    position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden;
-  }
+  /* ===== Notes musicales ===== */
   .fx-note{
-    position:absolute; will-change: transform, opacity;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
-    font-size: clamp(18px, 2.8vw, 28px);
-    text-shadow: 0 0 10px rgba(255,214,116,.35);
+    position:absolute;
+    will-change:transform, opacity;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
+    font-size:clamp(18px, 2.8vw, 28px);
+    text-shadow:0 0 10px rgba(255,214,116,.35);
     opacity:0;
-    animation: note-float var(--dur,8s) ease-out forwards;
+    animation:note-float var(--dur,8s) ease-out forwards;
   }
-  /* monte jusqu'au très haut de l'écran */
   @keyframes note-float{
-    0%   { transform: translate(var(--x,0), 10vh) scale(.9) rotate(0deg); opacity:0; }
-    10%  { opacity:.95; }
-    100% { transform: translate(calc(var(--x,0) + var(--drift, 40px)), -25vh) scale(1) rotate(var(--rot,18deg)); opacity:0; }
+    0%{transform:translate(var(--x,0),10vh)scale(.9)rotate(0);opacity:0;}
+    10%{opacity:.95;}
+    100%{transform:translate(calc(var(--x,0)+var(--drift,40px)),-25vh)scale(1)rotate(var(--rot,18deg));opacity:0;}
   }
 
   @media (prefers-reduced-motion: reduce){
-    .fx-note{ animation:none !important; display:none !important; }
-    .fx-canvas{ display:none !important; }
+    .fx-note{animation:none !important;display:none !important;}
+    .fx-canvas{display:none !important;}
   }
 </style>
 </head>
 <body>
-  <!-- Canvas pour la traînée arc-en-ciel du pinceau -->
+  <!-- Canvas pour la traînée arc-en-ciel -->
   <canvas class="fx-canvas" aria-hidden="true"></canvas>
   <!-- Notes musicales -->
   <div class="fx-layer" aria-hidden="true"></div>
@@ -137,7 +200,7 @@
 
     <section class="cartouche">
       <p class="citation">
-        <span class="guil">«</span> Ici, les notes dansent, les couleurs vibrent, 
+        <span class="guil">«</span> Ici, les notes dansent, les couleurs vibrent,<br>
         et d’étranges créatures laissent exprimer leur talent à la lumière… <span class="guil">»</span>
       </p>
     </section>
@@ -151,118 +214,87 @@
   </main>
 
 <script>
-/* ===== Traînée arc-en-ciel avec un pinceau qui se déplace ===== */
+/* ===== Pinceau arc-en-ciel ===== */
 (function(){
-  const c = document.querySelector('.fx-canvas');
-  const ctx = c.getContext('2d');
-  let dpr = Math.max(1, window.devicePixelRatio || 1);
-  let w, h;
-
+  const c=document.querySelector('.fx-canvas');
+  const ctx=c.getContext('2d');
+  let dpr=Math.max(1,window.devicePixelRatio||1),w,h;
   function resize(){
-    dpr = Math.max(1, window.devicePixelRatio || 1);
-    w = Math.floor(innerWidth * dpr);
-    h = Math.floor(innerHeight * dpr);
-    c.width = w; c.height = h;
-    c.style.width = innerWidth + 'px';
-    c.style.height = innerHeight + 'px';
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-  }
-  resize();
-  addEventListener('resize', resize);
-
-  // Mouvement lissé (Lissajous)
-  let t = Math.random() * 1000;
-  let prev = {x: w*0.5, y: h*0.5};
-
-  const hues = [0, 24, 48, 120, 210, 280]; // rouge → violet
-  const baseWidth = 6;                      // épaisseur du trait central (px @1x)
-  const offset = 3;                         // décalage entre bandes arc-en-ciel
-
+    dpr=Math.max(1,window.devicePixelRatio||1);
+    w=Math.floor(innerWidth*dpr);h=Math.floor(innerHeight*dpr);
+    c.width=w;c.height=h;
+    c.style.width=innerWidth+'px';
+    c.style.height=innerHeight+'px';
+    ctx.lineCap='round';ctx.lineJoin='round';
+  } resize();addEventListener('resize',resize);
+  let t=Math.random()*1000;
+  let prev={x:w*0.5,y:h*0.5};
+  const hues=[0,24,48,120,210,280];
+  const baseWidth=6,offset=3;
   function step(){
-    t += 0.008; // vitesse
-    // Courbe paramétrique
-    const nx = 0.5 + 0.45 * Math.sin(0.8*t + 0.7);
-    const ny = 0.5 + 0.45 * Math.sin(1.2*t);
-    const curr = { x: nx * w, y: ny * h };
-
-    // Effet "traces qui s'estompent" (on efface doucement)
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    t+=0.008;
+    const nx=0.5+0.45*Math.sin(0.8*t+0.7);
+    const ny=0.5+0.45*Math.sin(1.2*t);
+    const curr={x:nx*w,y:ny*h};
+    ctx.globalCompositeOperation='destination-out';
+    ctx.fillStyle='rgba(0,0,0,0.05)';
     ctx.fillRect(0,0,w,h);
-    ctx.globalCompositeOperation = 'source-over';
-
-    // Vecteur et normal
-    const vx = curr.x - prev.x;
-    const vy = curr.y - prev.y;
-    const len = Math.hypot(vx, vy) || 1;
-    const nxp = -vy / len, nyp = vx / len;
-
-    // Dessin des 6 bandes colorées parallèles (arc-en-ciel)
+    ctx.globalCompositeOperation='source-over';
+    const vx=curr.x-prev.x,vy=curr.y-prev.y,len=Math.hypot(vx,vy)||1;
+    const nxp=-vy/len,nyp=vx/len;
     for(let i=0;i<hues.length;i++){
-      const k = (i - (hues.length-1)/2) * (offset * dpr);
-      ctx.strokeStyle = `hsl(${hues[i]} 85% 60%)`;
-      ctx.globalAlpha = 0.85;
-      ctx.lineWidth = baseWidth * dpr;
+      const k=(i-(hues.length-1)/2)*(offset*dpr);
+      ctx.strokeStyle=`hsl(${hues[i]} 85% 60%)`;
+      ctx.globalAlpha=0.85;
+      ctx.lineWidth=baseWidth*dpr;
       ctx.beginPath();
-      ctx.moveTo(prev.x + nxp*k, prev.y + nyp*k);
-      ctx.lineTo(curr.x + nxp*k, curr.y + nyp*k);
+      ctx.moveTo(prev.x+nxp*k,prev.y+nyp*k);
+      ctx.lineTo(curr.x+nxp*k,curr.y+nyp*k);
       ctx.stroke();
     }
-
-    // Petit éclat blanc au “pinceau”
-    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
-    ctx.lineWidth = 2 * dpr;
+    ctx.strokeStyle='rgba(255,255,255,0.9)';
+    ctx.lineWidth=2*dpr;
     ctx.beginPath();
-    ctx.moveTo(prev.x, prev.y);
-    ctx.lineTo(curr.x, curr.y);
+    ctx.moveTo(prev.x,prev.y);
+    ctx.lineTo(curr.x,curr.y);
     ctx.stroke();
-
-    prev = curr;
-    requestAnimationFrame(step);
+    prev=curr;requestAnimationFrame(step);
   }
-
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduced) requestAnimationFrame(step);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce)requestAnimationFrame(step);
 })();
 </script>
 
 <script>
-/* ===== Notes musicales (plus nombreuses & jusqu’en haut) ===== */
+/* ===== Notes musicales ===== */
 (function(){
-  const layer = document.querySelector('.fx-layer');
-  if(!layer) return;
-
-  const notes = ['♪','♫','🎵','🎶'];
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  const isMobile = window.matchMedia('(max-width: 560px)').matches;
-  const maxNodes = isMobile ? 28 : 42;          // plus de notes
-  const noteEvery = isMobile ? 900 : 700;       // fréquence plus rapide
-
-  function rand(min, max){ return Math.random()*(max-min)+min; }
-  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-
-  function spawnNote(){
-    if(layer.childElementCount > maxNodes) return;
-    const el = document.createElement('span');
-    el.className = 'fx-note';
-    el.textContent = pick(notes);
-    const x = rand(4, 96);
-    el.style.left = x + 'vw';
-    el.style.bottom = '-8vh';
-    el.style.setProperty('--x', '0px');
-    el.style.setProperty('--drift', rand(-60, 80)+'px');
-    el.style.setProperty('--rot', rand(-35, 35)+'deg');
-    el.style.setProperty('--dur', rand(7, 11)+'s');
-    layer.appendChild(el);
-    el.addEventListener('animationend', ()=> el.remove());
+  const layer=document.querySelector('.fx-layer');
+  if(!layer)return;
+  const notes=['♪','♫','🎵','🎶'];
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  const isMobile=window.matchMedia('(max-width:560px)').matches;
+  const maxNodes=isMobile?28:42;
+  const noteEvery=isMobile?900:700;
+  function rand(a,b){return Math.random()*(b-a)+a;}
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function spawn(){
+    if(layer.childElementCount>maxNodes)return;
+    const e=document.createElement('span');
+    e.className='fx-note';
+    e.textContent=pick(notes);
+    const x=rand(4,96);
+    e.style.left=x+'vw';
+    e.style.bottom='-8vh';
+    e.style.setProperty('--x','0px');
+    e.style.setProperty('--drift',rand(-60,80)+'px');
+    e.style.setProperty('--rot',rand(-35,35)+'deg');
+    e.style.setProperty('--dur',rand(7,11)+'s');
+    layer.appendChild(e);
+    e.addEventListener('animationend',()=>e.remove());
   }
-
-  // Démarrage doux
-  for(let i=0;i<10;i++){ setTimeout(spawnNote, i*120); }
-  setInterval(spawnNote, noteEvery);
+  for(let i=0;i<10;i++){setTimeout(spawn,i*120);}
+  setInterval(spawn,noteEvery);
 })();
 </script>
 </body>
