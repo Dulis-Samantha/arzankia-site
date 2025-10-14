@@ -16,7 +16,7 @@
     --ray:28px;
   }
 
-  /* ===== Fond + voile dégradé pour lisibilité ===== */
+  /* ===== Fond + voile ===== */
   body{
     margin:0; font-family:Georgia, serif; color:var(--ivoire);
     background:url('fond_monde_terre.png') center/cover no-repeat fixed;
@@ -29,7 +29,10 @@
     background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:1; }
+  /* Canvas arc-en-ciel sous les notes */
+  .fx-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:2; }
 
   /* ===== Titre ===== */
   h1{
@@ -42,7 +45,7 @@
     letter-spacing:.06em; opacity:.9; margin-bottom:1.4rem;
   }
 
-  /* ===== Cartouche de présentation ===== */
+  /* ===== Cartouche ===== */
   .cartouche{
     margin:0 auto 2rem; max-width:880px;
     background:var(--verre); border:1px solid var(--bord);
@@ -50,18 +53,14 @@
     box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 40px rgba(255,255,255,.04);
     backdrop-filter:blur(6px);
   }
-  .citation{
-    font-size:clamp(1.05rem,2.6vw,1.4rem); line-height:1.75; margin:0;
-  }
+  .citation{ font-size:clamp(1.05rem,2.6vw,1.4rem); line-height:1.75; margin:0; }
   .guil{ color:var(--or); font-size:1.6em; vertical-align:-.2em; }
 
-  /* ===== Grille des actions ===== */
+  /* ===== Grille ===== */
   .grille{
     display:grid; gap:1rem; margin:0 auto; max-width:980px;
     grid-template-columns: repeat(12, 1fr);
   }
-
-  /* liens génériques */
   .btn{
     grid-column: span 4;
     display:flex; align-items:center; justify-content:center; gap:.6rem;
@@ -73,7 +72,6 @@
   }
   .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.35); }
 
-  /* ===== Boutons boutiques (accentués) ===== */
   .shop{
     grid-column: span 4;
     position:relative; overflow:hidden; font-weight:700;
@@ -87,7 +85,6 @@
   }
   @keyframes shine{ 0%{transform:translateX(-60%) rotate(12deg);} 100%{transform:translateX(60%) rotate(12deg);} }
 
-  /* pastille icône */
   .ico{
     width:32px; height:32px; border-radius:50%;
     display:grid; place-items:center; flex:0 0 auto;
@@ -97,66 +94,41 @@
   }
   .ico.purple{ background:radial-gradient(circle at 30% 30%, #e8d9ff, #b58cff); color:#2a103f; }
 
-  /* variantes “simples” */
   .outline{ background:rgba(0,0,0,.28); font-weight:600; }
   .outline:hover{ background:rgba(0,0,0,.45); }
 
-  /* responsive */
-  @media (max-width:900px){
-    .btn, .shop{ grid-column: span 6; }
-  }
-  @media (max-width:560px){
-    .btn, .shop{ grid-column: span 12; }
-  }
+  @media (max-width:900px){ .btn, .shop{ grid-column: span 6; } }
+  @media (max-width:560px){ .btn, .shop{ grid-column: span 12; } }
 
-  /* ===== Effets décoratifs : notes + taches ===== */
+  /* ===== Calque des notes ===== */
   .fx-layer{
-    position:fixed; inset:0; z-index:0;
-    pointer-events:none; overflow:hidden;
+    position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden;
   }
-  .fx-note, .fx-splash{
+  .fx-note{
     position:absolute; will-change: transform, opacity;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
-    opacity:0;
-  }
-  /* Notes qui montent et dérivent */
-  .fx-note{
     font-size: clamp(18px, 2.8vw, 28px);
     text-shadow: 0 0 10px rgba(255,214,116,.35);
+    opacity:0;
     animation: note-float var(--dur,8s) ease-out forwards;
   }
+  /* monte jusqu'au très haut de l'écran */
   @keyframes note-float{
     0%   { transform: translate(var(--x,0), 10vh) scale(.9) rotate(0deg); opacity:0; }
     10%  { opacity:.95; }
-    100% { transform: translate(calc(var(--x,0) + var(--drift, 40px)), -15vh) scale(1) rotate(var(--rot,18deg)); opacity:0; }
+    100% { transform: translate(calc(var(--x,0) + var(--drift, 40px)), -25vh) scale(1) rotate(var(--rot,18deg)); opacity:0; }
   }
-  /* Taches de peinture “blob” */
-  .fx-splash{
-    width: var(--size,80px); height: var(--size,80px);
-    background: var(--col,#ffcf66);
-    border-radius: 60% 40% 55% 45% / 55% 40% 60% 45%;
-    transform: rotate(var(--rot,0deg)) scale(.6);
-    animation: splash-pop var(--dur,6s) ease-in-out forwards;
-  }
-  .fx-splash::before, .fx-splash::after{
-    content:""; position:absolute; background:inherit; opacity:.9;
-    border-radius: 60% 40% 50% 50%;
-  }
-  .fx-splash::before{ width:35%; height:35%; left:-10%; top:45%; transform:rotate(20deg); }
-  .fx-splash::after { width:28%; height:28%; right:-12%; top:-8%;  transform:rotate(-18deg); }
-  @keyframes splash-pop{
-    0%   { opacity:0; transform: translateY(10px) scale(.6) rotate(var(--rot,0deg)); }
-    12%  { opacity:.95; transform: translateY(0)    scale(1)   rotate(var(--rot,0deg)); }
-    70%  { opacity:.95; }
-    100% { opacity:0;  transform: translateY(-12px) scale(1.05) rotate(calc(var(--rot,0deg) + 6deg)); }
-  }
+
   @media (prefers-reduced-motion: reduce){
-    .fx-note, .fx-splash{ animation:none !important; display:none !important; }
+    .fx-note{ animation:none !important; display:none !important; }
+    .fx-canvas{ display:none !important; }
   }
 </style>
 </head>
 <body>
-  <!-- Calque d'effets -->
+  <!-- Canvas pour la traînée arc-en-ciel du pinceau -->
+  <canvas class="fx-canvas" aria-hidden="true"></canvas>
+  <!-- Notes musicales -->
   <div class="fx-layer" aria-hidden="true"></div>
 
   <main class="wrap">
@@ -165,82 +137,133 @@
 
     <section class="cartouche">
       <p class="citation">
-        <span class="guil">«</span> Ici, les notes dansent, les couleurs vibrent,<br>
+        <span class="guil">«</span> Ici, les notes dansent, les couleurs vibrent, 
         et d’étranges créatures laissent exprimer leur talent à la lumière… <span class="guil">»</span>
       </p>
     </section>
 
     <nav class="grille">
       <a class="btn outline" href="9.entree_Artistes.html">Entrée du monde</a>
-      <a class="btn shop" href="chanson_de_camidjo.html">
-        <span class="ico">🎵</span> Camidjo
-      </a>
-      <a class="btn shop" href="loup_bout_art.html">
-        <span class="ico purple">🎨</span> Loup-Bout'Art
-      </a>
+      <a class="btn shop" href="chanson_de_camidjo.html"><span class="ico">🎵</span> Camidjo</a>
+      <a class="btn shop" href="loup_bout_art.html"><span class="ico purple">🎨</span> Loup-Bout'Art</a>
       <a class="btn outline" href="3.les_mondes.html">← Retour aux Mondes</a>
     </nav>
   </main>
 
-  <script>
-  (function(){
-    const layer = document.querySelector('.fx-layer');
-    if(!layer) return;
+<script>
+/* ===== Traînée arc-en-ciel avec un pinceau qui se déplace ===== */
+(function(){
+  const c = document.querySelector('.fx-canvas');
+  const ctx = c.getContext('2d');
+  let dpr = Math.max(1, window.devicePixelRatio || 1);
+  let w, h;
 
-    const palette = ['#ffd674','#f7a8c3','#a5d8ff','#c7f9cc','#b48df2','#ffad60'];
-    const notes = ['♪','♫','🎵','🎶'];
+  function resize(){
+    dpr = Math.max(1, window.devicePixelRatio || 1);
+    w = Math.floor(innerWidth * dpr);
+    h = Math.floor(innerHeight * dpr);
+    c.width = w; c.height = h;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  }
+  resize();
+  addEventListener('resize', resize);
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
+  // Mouvement lissé (Lissajous)
+  let t = Math.random() * 1000;
+  let prev = {x: w*0.5, y: h*0.5};
 
-    const isMobile = window.matchMedia('(max-width: 560px)').matches;
-    const maxNodes = isMobile ? 16 : 24;           // plafond
-    const noteEvery  = isMobile ? 1400 : 1100;     // rythme
-    const splashEvery= isMobile ? 2000 : 1600;
+  const hues = [0, 24, 48, 120, 210, 280]; // rouge → violet
+  const baseWidth = 6;                      // épaisseur du trait central (px @1x)
+  const offset = 3;                         // décalage entre bandes arc-en-ciel
 
-    function rand(min, max){ return Math.random()*(max-min)+min; }
-    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+  function step(){
+    t += 0.008; // vitesse
+    // Courbe paramétrique
+    const nx = 0.5 + 0.45 * Math.sin(0.8*t + 0.7);
+    const ny = 0.5 + 0.45 * Math.sin(1.2*t);
+    const curr = { x: nx * w, y: ny * h };
 
-    function spawnNote(){
-      if(layer.childElementCount > maxNodes) return;
-      const el = document.createElement('span');
-      el.className = 'fx-note';
-      el.textContent = pick(notes);
-      const x = rand(5, 95); // en vw
-      el.style.left = x + 'vw';
-      el.style.bottom = '-6vh';
-      el.style.setProperty('--x', '0px');
-      el.style.setProperty('--drift', rand(-40, 60)+'px');
-      el.style.setProperty('--rot', rand(-25, 25)+'deg');
-      el.style.setProperty('--dur', rand(6, 10)+'s');
-      layer.appendChild(el);
-      el.addEventListener('animationend', ()=> el.remove());
+    // Effet "traces qui s'estompent" (on efface doucement)
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.fillRect(0,0,w,h);
+    ctx.globalCompositeOperation = 'source-over';
+
+    // Vecteur et normal
+    const vx = curr.x - prev.x;
+    const vy = curr.y - prev.y;
+    const len = Math.hypot(vx, vy) || 1;
+    const nxp = -vy / len, nyp = vx / len;
+
+    // Dessin des 6 bandes colorées parallèles (arc-en-ciel)
+    for(let i=0;i<hues.length;i++){
+      const k = (i - (hues.length-1)/2) * (offset * dpr);
+      ctx.strokeStyle = `hsl(${hues[i]} 85% 60%)`;
+      ctx.globalAlpha = 0.85;
+      ctx.lineWidth = baseWidth * dpr;
+      ctx.beginPath();
+      ctx.moveTo(prev.x + nxp*k, prev.y + nyp*k);
+      ctx.lineTo(curr.x + nxp*k, curr.y + nyp*k);
+      ctx.stroke();
     }
 
-    function spawnSplash(){
-      if(layer.childElementCount > maxNodes) return;
-      const el = document.createElement('div');
-      el.className = 'fx-splash';
-      const size = rand(isMobile?36:44, isMobile?90:120);
-      el.style.width = size+'px';
-      el.style.height = size+'px';
-      el.style.left = rand(4, 86)+'vw';
-      el.style.top  = rand(12, 78)+'vh';
-      el.style.setProperty('--col', pick(palette));
-      el.style.setProperty('--rot', rand(-20, 20)+'deg');
-      el.style.setProperty('--dur', rand(4, 7)+'s');
-      layer.appendChild(el);
-      el.addEventListener('animationend', ()=> el.remove());
-    }
+    // Petit éclat blanc au “pinceau”
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.lineWidth = 2 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(prev.x, prev.y);
+    ctx.lineTo(curr.x, curr.y);
+    ctx.stroke();
 
-    // Lancer quelques éléments au chargement
-    for(let i=0;i<6;i++){
-      setTimeout(()=> (Math.random()<0.5?spawnNote():spawnSplash()), i*220);
-    }
-    // Rythme continu
-    setInterval(spawnNote, noteEvery);
-    setInterval(spawnSplash, splashEvery);
-  })();
-  </script>
+    prev = curr;
+    requestAnimationFrame(step);
+  }
+
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) requestAnimationFrame(step);
+})();
+</script>
+
+<script>
+/* ===== Notes musicales (plus nombreuses & jusqu’en haut) ===== */
+(function(){
+  const layer = document.querySelector('.fx-layer');
+  if(!layer) return;
+
+  const notes = ['♪','♫','🎵','🎶'];
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const isMobile = window.matchMedia('(max-width: 560px)').matches;
+  const maxNodes = isMobile ? 28 : 42;          // plus de notes
+  const noteEvery = isMobile ? 900 : 700;       // fréquence plus rapide
+
+  function rand(min, max){ return Math.random()*(max-min)+min; }
+  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+  function spawnNote(){
+    if(layer.childElementCount > maxNodes) return;
+    const el = document.createElement('span');
+    el.className = 'fx-note';
+    el.textContent = pick(notes);
+    const x = rand(4, 96);
+    el.style.left = x + 'vw';
+    el.style.bottom = '-8vh';
+    el.style.setProperty('--x', '0px');
+    el.style.setProperty('--drift', rand(-60, 80)+'px');
+    el.style.setProperty('--rot', rand(-35, 35)+'deg');
+    el.style.setProperty('--dur', rand(7, 11)+'s');
+    layer.appendChild(el);
+    el.addEventListener('animationend', ()=> el.remove());
+  }
+
+  // Démarrage doux
+  for(let i=0;i<10;i++){ setTimeout(spawnNote, i*120); }
+  setInterval(spawnNote, noteEvery);
+})();
+</script>
 </body>
 </html>
