@@ -133,12 +133,13 @@
 
   /* Notes musicales — montent jusqu'en haut */
   .fx-note{
-    position:absolute; will-change:transform, opacity;
-    filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
-    font-size:clamp(18px, 2.8vw, 28px);
-    text-shadow:0 0 10px rgba(255,214,116,.35);
-    opacity:0; animation:note-float var(--dur,10s) ease-out forwards;
-  }
+  position:absolute; will-change:transform, opacity;
+  filter:drop-shadow(0 3px 8px rgba(0,0,0,.4));
+  font-size:clamp(26px, 3.6vw, 42px);   /* ← plus gros */
+  text-shadow:0 0 12px rgba(255,214,116,.4);
+  opacity:0;
+  animation:note-float var(--dur,16s) ease-in-out forwards; /* ← plus lent par défaut */
+}
   @keyframes note-float{
     0%   { transform: translate(var(--x,0), 10vh) scale(.9) rotate(0); opacity:0; }
     10%  { opacity:.95; }
@@ -300,7 +301,7 @@
     e.style.setProperty('--x','0px');
     e.style.setProperty('--drift', rand(-60,80) + 'px');
     e.style.setProperty('--rot', rand(-35,35) + 'deg');
-    e.style.setProperty('--dur', (Math.random()*4 + 9).toFixed(1) + 's'); // 9–13s
+    e.style.setProperty('--dur', (Math.random()*6 + 14).toFixed(1) + 's'); // 14–20s
     layer.appendChild(e);
     e.addEventListener('animationend', ()=> e.remove());
   }
