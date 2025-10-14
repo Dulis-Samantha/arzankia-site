@@ -69,21 +69,21 @@
     border-radius: var(--radius);
     background: rgba(255,255,255,.88);
     box-shadow: 0 12px 28px rgba(0,0,0,.3);
-    text-align: center;           /* pour centrer le cartouche */
+    text-align: center;
   }
   .glass p{
     margin:0 0 1rem;
     font-size: clamp(1rem, 1.2vw + .4rem, 1.15rem);
     line-height:1.7;
-    text-align: justify;          /* texte justifié */
+    text-align: justify;
     hyphens:auto;
   }
 
-  /* Cartouche "ruban" fantasy centré */
+  /* Cartouche ruban */
   .chapitre.ribbon{
     position: relative;
     display: inline-block;
-    margin: -12px auto 1.1rem;    /* chevauche légèrement le haut du panneau */
+    margin: -12px auto 1.1rem;
     padding: .55em 1.4em;
     font-size: 1rem;
     font-style: italic;
@@ -118,17 +118,17 @@
     transform: translateY(-50%) skewX(18deg);
   }
 
-  /* LETTRINE ROBUSTE (grille, pas de float) */
+  /* Lettrine */
   .p-dc{
     display:grid;
-    grid-template-columns: auto auto 1fr; /* ponctuation | lettre | reste */
+    grid-template-columns: auto auto 1fr;
     column-gap:.35rem;
     align-items:start;
   }
   .p-dc .punc{
     font-size:1rem;
-    line-height:1.7;              /* même leading que le paragraphe */
-    white-space:nowrap;           /* garde « — groupés */
+    line-height:1.7;
+    white-space:nowrap;
   }
   .p-dc .dc{
     font-size:2.8rem;
@@ -136,7 +136,7 @@
     font-weight:700;
     color:var(--bleu);
     text-shadow:0 0 6px rgba(0,0,0,.12);
-    transform:translateY(.06em);  /* micro-alignement vertical */
+    transform:translateY(.06em);
   }
   .p-dc .rest{ line-height:1.7; }
 
@@ -172,39 +172,35 @@
   .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.45), 0 0 22px rgba(255,223,100,1) inset; }
 </style>
 </head>
+
 <body>
   <main class="container">
-    <h1>Entrée du monde des Ptikitis</h1>
+    <h1>Entrée du monde des Artistes</h1>
 
     <section class="grid">
-      <!-- Image -->
       <figure class="img-card">
         <img src="entree_artiste.webp" alt="Entrée du monde des Artistes">
       </figure>
 
-      <!-- Texte -->
       <article class="glass">
         <div class="chapitre ribbon">Extrait Chapitre 15 · p. 176</div>
 
-        <!-- 1er paragraphe avec lettrine en grille -->
-     <p class="p-dc">
-  <span class="punc">«&#8239;</span>
-  <span class="dc">J</span>
-  <span class="rest">e fis lentement le tour de son tronc, tentant de localiser la voix. 
-  L’écho venait de l’intérieur. Pris de panique, je trébuchai sur une racine 
-  et me rattrapai in extremis au tronc.</span>
-</p>
-        <p>Lorsque mes doigts effleurèrent l’écorce, des spirales de lumière jaillirent, s’enroulant autour du tronc en emportant avec elles l’écho mystérieux. Une lueur éclatante m’aveugla et lorsque je rouvris les yeux… l’arbre n’était plus le même.</p>
-        <p>De minuscules cabanes en bois avaient poussé partout, accrochées aux branches. Pas plus grandes que des nichoirs à oiseaux. C’était incroyable. Il y en avait des dizaines, peut-être une cinquantaine.</p>
-        <p>— Eh ! C’est par ici !</p>
-        <p>La voix était désormais claire, ce n’était plus un écho. Au pied du tronc, un rideau de feuilles frémissait. La voix venait de derrière. Je me penchai, écartai le feuillage…</p>
-        <p>De l’autre côté, une minuscule créature sautillait en agitant les bras.</p>
-        <p>— Eh ! Enfin tu as trouvé ! Allez, viens !»</p>
+        <!-- 1er paragraphe avec lettrine -->
+        <p class="p-dc">
+          <span class="punc">«&#8239;</span>
+          <span class="dc">P</span>
+          <span class="rest">hilibert m’entraîna jusqu’à un vieux tilleul géant. Son tronc avait une forme étrange… comme une guitare sculptée dans le bois vivant.</span>
+        </p>
+
+        <p>Philibert posa doucement sa main sur les cordes de bois, et une douce mélodie cristalline résonna.</p>
+        <p>Les feuilles de l’arbre, en forme de notes de musique, s’envolèrent en tourbillonnant autour de nous. Le tronc vibra, perdit sa forme de guitare… et des taches de peinture apparurent, comme si quelqu’un l’avait éclaboussé de couleurs arc-en-ciel.</p>
+        <p>Peu à peu, une porte magique se dessina, tout en spirales et en teintes chatoyantes. Malgré la pluie, la porte restait intacte, comme protégée par un sort. Autour de nous, l’eau et la lumière formaient des arcs-en-ciel dansants.</p>
+        <p>C’était magnifique.<span class="punc">&#8239;»</span></p>
       </article>
     </section>
 
     <p style="text-align:center">
-      <a href="8.monde_Ptikitis.html" class="btn">← Retour</a> 
+      <a href="8.monde_Artistes.html" class="btn">← Retour</a> 
     </p>
   </main>
 </body>
