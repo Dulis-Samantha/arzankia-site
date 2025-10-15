@@ -231,56 +231,86 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce) requestAnimationFrame(step);
 })();
-</script>
-
-<!-- ===== Notes “vivantes” : ~10 ===== -->
+<!-- ===== Notes “vivantes” : CAP 10 ===== -->
 <script>
 (function(){
+  if (window.__notesInit) return;         // évite double initialisation
+  window.__notesInit = true;
+
   const L = document.getElementById('notes-layer');
   if(!L) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce) return;
 
-  const poolSize = 10;
+  // Supprime toute note existante (y compris anciennes .fx-note)
+  L.querySelectorAll('.note, .fx-note').forEach(n => n.remove());
+
+  const POOL_SIZE = 10;                    // ← seulement une dizaine
   const glyphs   = ['♪','♫','🎵','🎶'];
   const notes = [];
 
-  function rand(a,b){ return Math.random()*(b-a)+a; }
-  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+  const rand = (a,b)=> Math.random()*(b-a)+a;
+  const pick = (a)=> a[Math.floor(Math.random()*a.length)];
 
-  function spawn(){
+  function spawnOne(){
+    if (notes.length >= POOL_SIZE) return;
     const el = document.createElement('span');
     el.className = 'note';
     el.textContent = pick(glyphs);
     L.appendChild(el);
-    const obj = {
-      el, x: rand(0, innerWidth), y: rand(0, innerHeight),
-      vx: rand(-0.20, 0.20), vy: rand(-0.15, 0.15),
-      rot: rand(-15,15), life: 0, maxLife: rand(7,12)*60, scale: rand(0.9,1.2)
+
+    const n = {
+      el,
+      x: rand(0, innerWidth),
+      y: rand(0, innerHeight),
+      vx: rand(-0.18, 0.18),
+      vy: rand(-0.12, 0.12),
+      rot: rand(-15, 15),
+      life: 0,
+      maxLife: rand(7,12)*60,   // ~7–12 s
+      scale: rand(0.9,1.2)
     };
     el.style.opacity = '0';
     requestAnimationFrame(()=> el.style.opacity = '1');
-    notes.push(obj);
+    notes.push(n);
   }
-  for(let i=0;i<poolSize;i++) spawn();
 
-  function step(){
-    for(let i=notes.length-1; i>=0; i--){
-      const n = notes[i]; n.life++;
-      n.vx += rand(-0.008,0.008); n.vy += rand(-0.006,0.006);
-      n.x += n.vx; n.y += n.vy; n.rot += (n.vx + n.vy)*0.25;
-      if(n.x < 0 || n.x > innerWidth)  n.vx *= -1;
-      if(n.y < 0 || n.y > innerHeight) n.vy *= -1;
+  // Remplissage initial à 10
+  for (let i=0; i<POOL_SIZE; i++) spawnOne();
+
+  function tick(){
+    for (let i=notes.length-1; i>=0; i--){
+      const n = notes[i];
+      n.life++;
+
+      // petit drift organique
+      n.vx += rand(-0.007, 0.007);
+      n.vy += rand(-0.005, 0.005);
+
+      n.x += n.vx;
+      n.y += n.vy;
+      n.rot += (n.vx + n.vy)*0.25;
+
+      // rebonds doux bords
+      if (n.x < 0 || n.x > innerWidth)  n.vx *= -1;
+      if (n.y < 0 || n.y > innerHeight) n.vy *= -1;
+
       n.el.style.transform = `translate(${n.x}px, ${n.y}px) rotate(${n.rot}deg) scale(${n.scale})`;
-      if(n.life > n.maxLife){
+
+      if (n.life > n.maxLife){
         n.el.style.opacity = '0';
-        setTimeout(()=>{ n.el.remove(); notes.splice(i,1); spawn(); }, 500);
+        setTimeout(() => {
+          n.el.remove();
+          notes.splice(i,1);
+          spawnOne();                     // respawn pour rester à 10
+        }, 400);
       }
     }
-    requestAnimationFrame(step);
+    requestAnimationFrame(tick);
   }
-  requestAnimationFrame(step);
+  requestAnimationFrame(tick);
 })();
 </script>
+
 </body>
 </html>
