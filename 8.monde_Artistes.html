@@ -184,6 +184,17 @@ h1{
 @media (max-width:360px){
   .shops-grid{ grid-template-columns:1fr; }
 }
+
+  .fx-canvas {
+  pointer-events: none; /* empêche tout blocage de clic */
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 10; /* remet tout le contenu au-dessus du canvas */
+}
+
 </style>
 </head>
 
