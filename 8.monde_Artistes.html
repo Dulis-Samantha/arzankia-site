@@ -122,6 +122,15 @@ h1{
     radial-gradient(18px 18px at 18px calc(100% - 18px),rgba(255,214,116,.18),transparent 70%),
     radial-gradient(18px 18px at calc(100% - 18px) calc(100% - 18px),rgba(255,214,116,.18),transparent 70%);
 }
+  .boutiques-frame::before,
+.boutiques-frame::after {
+  pointer-events: none;   /* ne bloque plus les liens en dessous */
+}
+.frame-topbar,
+.shops-grid{
+  position: relative;
+  z-index: 1;             /* au-dessus des ::before/::after */
+}
 
 /* Titre intégré au cadre bois */
 .frame-topbar{
