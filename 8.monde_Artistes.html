@@ -3,90 +3,117 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Citation animée – Arzankia</title>
+<meta name="robots" content="noindex" />
+<title>Monde des Artistes – Arzankia</title>
 
+<!-- Police artistique (optionnelle, tu peux retirer si tu préfères Georgia) -->
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --or:#ffd674;
     --ivoire:#fff8e6;
+    --verre:rgba(10,0,20,.45);
+    --bord:rgba(255,214,116,.55);
+    --ray:28px;
     --txtshadow: 0 0 6px rgba(255,214,116,.28), 0 2px 4px rgba(0,0,0,.55);
   }
 
+  /* ===== Fond + voile ===== */
   body{
     margin:0;
+    font-family:Georgia, serif;
+    color:var(--ivoire);
+    background:url('fond_monde_terre.png') center/cover no-repeat fixed;
     min-height:100svh;
-    display:grid; place-items:center;
-    background: url('fond_monde_terre.png') center/cover fixed no-repeat, #12081a;
-    color: var(--ivoire);
-    font-family: Georgia, serif;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    padding:clamp(16px,3vw,48px);
+    position:relative; isolation:isolate; overflow-x:hidden;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  /* ===== Scène de citation ===== */
-  .quote-stage{
-    position:relative;
-    width:min(960px, 92vw);
-    padding: min(6vw, 48px) min(4vw, 32px);
-    /* juste pour respirer, pas de cadre */
+  /* Canvas feux d’artifice + calque des notes */
+  .fx-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .fx-layer { position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+
+  /* Contenu */
+  .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:2; margin-top:clamp(1rem,4vh,2.5rem); }
+
+  /* Titres */
+  h1{
+    margin:0 0 .6rem; line-height:1.1;
+    font-size:clamp(2.2rem,6vw,4rem); color:var(--or);
+    text-shadow:0 3px 0 rgba(0,0,0,.35), 0 0 24px rgba(255,214,116,.25);
+  }
+  .soustitre{ font-size:clamp(.95rem,2.4vw,1.05rem); letter-spacing:.06em; opacity:.9; margin-bottom:1.2rem; }
+
+  .section-title{
+    margin:1.2rem auto .6rem;
+    font-size:clamp(1.1rem,2.3vw,1.4rem);
+    letter-spacing:.04em; opacity:.95;
+  }
+  .section-title::after{
+    content:""; display:block; width:120px; height:2px; margin:.5rem auto 0;
+    background:linear-gradient(90deg, transparent, var(--or), transparent);
+    border-radius:999px; box-shadow:0 0 10px rgba(255,214,116,.35);
   }
 
-  /* Ligne finale (sert de gabarit) */
-  .quote-line{
+  /* Cadre élégant pour la citation (on le garde, mais la phrase finale est rendue par l’animation) */
+  .cartouche{ margin:0 auto 1.6rem; max-width:980px; }
+  .gold-frame{
+    position:relative; padding:clamp(18px, 3vw, 26px); border-radius:26px;
+    background:
+      radial-gradient(140% 160% at 20% 0%, rgba(255,255,255,.10), rgba(255,255,255,0) 40%),
+      radial-gradient(140% 160% at 80% 100%, rgba(255,255,255,.08), rgba(255,255,255,0) 45%),
+      linear-gradient(180deg, rgba(25,5,35,.68), rgba(15,0,20,.68));
+    backdrop-filter: blur(7px) saturate(110%);
+    box-shadow: 0 18px 40px rgba(0,0,0,.35), inset 0 0 30px rgba(255,255,255,.03);
+  }
+  .gold-frame::before{
+    content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+    background:linear-gradient(135deg,#ffe8ae,#fff7dc 35%,#ffd674 65%,#ffdba2);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    box-shadow:0 0 20px rgba(255,214,116,.28); pointer-events:none;
+  }
+  .gold-frame::after{
+    content:""; position:absolute; inset:-8% -35%; border-radius:inherit;
+    background:linear-gradient(100deg, transparent 42%, rgba(255,255,255,.10) 50%, transparent 58%);
+    transform:translateX(-60%) rotate(7deg);
+    animation:glare 10s linear infinite; pointer-events:none;
+  }
+  @keyframes glare{ 0%{transform:translateX(-60%) rotate(7deg);} 100%{transform:translateX(60%) rotate(7deg);} }
+
+  /* Citation (servira de gabarit invisible pour mesurer la position finale des mots) */
+  .citation{
+    margin:0; font-size:clamp(1.06rem,2.6vw,1.45rem); line-height:1.9;
+    text-shadow:0 1px 0 rgba(0,0,0,.35);
     font-family: "IM Fell English", Georgia, serif;
-    font-size: clamp(1.15rem, 2.8vw, 1.6rem);
-    line-height: 1.9;
-    letter-spacing:.2px;
-    text-align:center;
-    text-shadow: var(--txtshadow);
-    margin:0;
-    opacity:0;         /* elle reste invisible, mais mesurable */
-    visibility:hidden; /* garde la place, utile pour mesurer */
+    opacity:0; visibility:hidden; /* on laisse la place mais on ne l’affiche pas */
   }
-  .quote-line .guil{
-    color: var(--or);
-    font-size: 1.4em;
-    text-shadow: 0 0 12px rgba(255,214,116,.35);
-  }
+  .citation .guil{ color:var(--or); font-size:1.4em; text-shadow:0 0 10px rgba(255,214,116,.35); }
 
-  /* Calque qui recevra les mots animés en absolu */
+  /* Calque des mots animés (absolu dans le cadre) */
   .quote-actors{
-    position:absolute; inset:0;
+    position:absolute; inset:clamp(18px, 3vw, 26px); /* colle aux paddings de .gold-frame */
     pointer-events:none;
   }
-
-  /* Style des mots volants */
   .word{
-    position:absolute;
-    white-space:pre;
+    position:absolute; white-space:pre;
     font-family: "IM Fell English", Georgia, serif;
-    font-size: clamp(1.15rem, 2.8vw, 1.6rem);
-    line-height: 1.9;
+    font-size:clamp(1.06rem,2.6vw,1.45rem);
+    line-height:1.9;
     text-shadow: var(--txtshadow);
-    will-change: transform, opacity, filter;
     transform: translate(var(--x,0px), var(--y,0px)) scale(.96);
-    opacity: 0;
-    filter: blur(2px);
+    opacity:0; filter: blur(2px);
     transition:
       transform .85s cubic-bezier(.17,.84,.23,1.08),
       opacity   .85s ease-out,
       filter    .85s ease-out;
-  }
-
-  /* Souffle lumineux qui passe une fois la phrase complète */
-  .shine{
-    position:absolute; inset:-20% -10%;
-    background: linear-gradient(100deg, transparent 45%, rgba(255,255,255,.18) 50%, transparent 55%);
-    transform: translateX(-70%) rotate(4deg);
-    pointer-events:none;
-    opacity:0;
-  }
-  .shine.play{
-    animation: shine-pass .55s ease-out forwards;
-  }
-  @keyframes shine-pass{
-    0%   { opacity:.0; transform: translateX(-70%) rotate(4deg); }
-    10%  { opacity:.8; }
-    100% { opacity:0;  transform: translateX(70%) rotate(4deg); }
+    will-change: transform, opacity, filter;
   }
 
   /* Scintillement doux des mots (après feux) */
@@ -95,269 +122,365 @@
   }
   @keyframes twinkle{
     0%   { text-shadow: var(--txtshadow); filter:none; }
-    40%  { text-shadow:
-              0 0 8px rgba(255,214,116,.65),
-              0 0 18px rgba(255,214,116,.35),
-              0 2px 4px rgba(0,0,0,.55);
-           transform: translateY(-1px); }
+    40%  {
+      text-shadow:
+        0 0 8px rgba(255,214,116,.65),
+        0 0 18px rgba(255,214,116,.35),
+        0 2px 4px rgba(0,0,0,.55);
+      transform: translateY(-1px);
+    }
     100% { text-shadow: var(--txtshadow); transform:none; }
-  }
-
-  /* Canvas feux d’artifice */
-  canvas#fw{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-  }
-
-  /* Accessibilité : réduire les mouvements */
-  @media (prefers-reduced-motion: reduce){
-    .word{ transition:none; filter:none; }
   }
 </style>
 </head>
 <body>
+  <!-- Feux d’artifice -->
+  <canvas class="fx-canvas" aria-hidden="true"></canvas>
 
-  <!-- Scène -->
-  <section class="quote-stage" id="quoteStage">
-    <!-- Gabarit de phrase (invisible) -->
-    <p class="quote-line" id="quoteLine">
-      <span class="guil">«</span>
-      Ici, les notes dansent, les couleurs vibrent, et d’étranges créatures laissent exprimer leur talent à la lumière…
-      <span class="guil">»</span>
-    </p>
+  <main class="wrap">
+    <h1>Monde des Artistes</h1>
+    <div class="soustitre">Création • Harmonie • Lumière</div>
 
-    <!-- Calque des acteurs (mots animés) -->
-    <div class="quote-actors" id="quoteActors" aria-hidden="true"></div>
+    <!-- Cadre citation -->
+    <section class="cartouche">
+      <div class="gold-frame" id="frame">
+        <p class="citation" id="citation">
+          <span class="guil">«</span>
+          Ici, les notes dansent, les couleurs vibrent, et d’étranges créatures laissent exprimer leur talent à la lumière…
+          <span class="guil">»</span>
+        </p>
 
-    <!-- Souffle lumineux -->
-    <div class="shine" id="shine" aria-hidden="true"></div>
-  </section>
+        <!-- Calque où les mots animés seront rendus -->
+        <div class="quote-actors" id="actors" aria-hidden="true"></div>
+      </div>
+    </section>
 
-  <!-- Feux d'artifice (déclenchés à la fin) -->
-  <canvas id="fw" aria-hidden="true"></canvas>
+    <!-- 1er rang : Entrée & Extrait -->
+    <div class="btn-row">
+      <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
+      <a class="btn" href="7.extrait_Artistes.html">Extrait du livre</a>
+    </div>
 
+    <!-- 2e rang : Titre + boutiques -->
+    <div class="section-title">La place des artistes</div>
+    <div class="btn-row">
+      <a class="btn shop" href="chanson_de_camidjo.html"><span class="ico">🎵</span> Camidjo</a>
+      <a class="btn shop" href="loup_bout_art.html"><span class="ico purple">🎨</span> Loup-Bout'Art</a>
+    </div>
+
+    <!-- Retour -->
+    <div class="btn-row">
+      <a class="btn" href="3.les_mondes.html">← Retour aux Mondes</a>
+    </div>
+  </main>
+
+<!-- ===== Feux d’artifice : grosses explosions, glitter, séquençage irrégulier ===== -->
 <script>
 (function(){
-  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const stage = document.getElementById('quoteStage');
-  const line  = document.getElementById('quoteLine');
-  const actors= document.getElementById('quoteActors');
-  const shine = document.getElementById('shine');
+  const c = document.querySelector('.fx-canvas');
+  const ctx = c.getContext('2d', { alpha: true });
+  let dpr = Math.max(1, window.devicePixelRatio || 1), W, H;
 
-  // 1) Découpe en mots (en conservant espaces et ponctuation)
-  const textContent = line.textContent.trim();
-  const tokens = textContent.split(/(\s+)/); // garde les espaces comme tokens
+  function resize(){
+    dpr = Math.max(1, window.devicePixelRatio || 1);
+    W = Math.floor(innerWidth * dpr);
+    H = Math.floor(innerHeight * dpr);
+    c.width = W; c.height = H;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    ctx.globalCompositeOperation = 'lighter';
+  }
+  resize(); addEventListener('resize', resize, { passive:true });
 
-  // 2) Construire des spans dans la ligne (pour mesurer)
-  line.innerHTML = '';
-  const measSpans = [];
-  tokens.forEach(t=>{
-    const s = document.createElement('span');
-    s.textContent = t;
-    line.appendChild(s);
-    measSpans.push(s);
-  });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 3) Construire les clones "acteurs" positionnés en absolu
-  const actorSpans = [];
-  const rectStage = stage.getBoundingClientRect();
-  measSpans.forEach((m,i)=>{
-    const r = m.getBoundingClientRect();
-    const a = document.createElement('span');
-    a.className = 'word';
-    a.textContent = m.textContent;
+  // Palettes (fixes + arc-en-ciel)
+  const fixedHues = { bleu:210, vert:120, rouge:0, orange:30, violet:270, rose:320, jaune:55 };
+  const fixedPalette = Object.values(fixedHues);
+  function makePalette(){
+    if (Math.random() < 0.7){
+      const h = fixedPalette[(Math.random()*fixedPalette.length)|0];
+      return Array.from({length:10}, (_,i)=> `hsl(${h + (i-5)*2} 95% 60%)`);
+    } else {
+      return Array.from({length:12}, (_,i)=> `hsl(${(i/12)*360} 90% 58%)`);
+    }
+  }
 
-    // Position cible relative au calque acteurs
-    const targetX = r.left - rectStage.left;
-    const targetY = r.top  - rectStage.top;
+  // Fusées (montée) puis explosions (sans glitter)
+  const rockets   = [];
+  const fireworks = [];
+  const MAX_RKTS  = 5;
+  const MAX_FWS   = 5;
+  let allowFireworks = false; // <-- GÂCHETTE : on n'envoie rien tant que false
 
-    // Start depuis le bas (hors écran)
-    const startY  = Math.max(window.innerHeight - rectStage.top + 40, rectStage.height + 80);
+  function spawnRocket(){
+    if (!allowFireworks) return;
+    if (rockets.length >= MAX_RKTS) return;
 
-    a.style.left = '0px';
-    a.style.top  = '0px';
-    a.style.setProperty('--x', `${targetX}px`);
-    a.style.setProperty('--y', `${startY}px`);
+    const x  = (0.08 + Math.random()*0.84) * W;
+    const y  = H * (0.92 + Math.random()*0.05);
+    const vx = (Math.random()-0.5) * 0.6 * dpr;
+    const vy = -(1.6 + Math.random()*0.7) * dpr;
+    const col = `hsl(${fixedPalette[(Math.random()*fixedPalette.length)|0]} 95% 70%)`;
 
-    // On place d'abord en bas (translateY start), puis on anime vers (targetX, targetY)
-    // Pour animer, on passera --y à targetY avec un délai.
-    actors.appendChild(a);
-    actorSpans.push({el:a, targetX, targetY});
-  });
+    rockets.push({
+      x, y, vx, vy,
+      ax: (Math.random()-0.5) * 0.005 * dpr,
+      ay: 0.0005 * dpr,
+      life: 0,
+      maxLife: 90 + Math.random()*60,
+      trail: [],
+      col,
+      palette: makePalette()
+    });
+  }
 
-  // 4) Lancer l'animation d'arrivée des mots
-  function launchWords(){
-    const baseDelay = 90; // ms
-    const jitter    = 60; // ms
+  function explodeAt(x, y, palette){
+    if (fireworks.length >= MAX_FWS) return;
+
+    const parts  = Math.floor(140 + Math.random()*120);
+    const speed  = (1.1 + Math.random()*0.7) * dpr;
+    const style  = Math.random();
+
+    const fw = { x, y, parts:[], life:0, max: 110 + Math.random()*60, palette };
+
+    for(let i=0;i<parts;i++){
+      const a = (i/parts) * Math.PI * 2;
+      let r = 1;
+      if (style < 0.33){ r = 1; }
+      else if (style < 0.66){ r = 1.2 + 0.4*Math.sin(a*6); }
+      else { r = 0.85 + 0.35*Math.sin(a*2); }
+
+      const vx = Math.cos(a) * speed * r;
+      const vy = Math.sin(a) * speed * r * (style>0.66 ? 0.7 : 1);
+
+      fw.parts.push({
+        x, y, vx, vy,
+        alpha: 1,
+        col: palette[i % palette.length],
+        decay: 0.985 - Math.random()*0.004
+      });
+    }
+    fireworks.push(fw);
+  }
+
+  // Cadence irrégulière (sur les fusées) — activée seulement quand allowFireworks = true
+  function scheduleNext(){
+    if (!allowFireworks) return; // on attend le feu vert
+    const base = 900 + Math.random()*1800;
+    setTimeout(()=>{
+      const bursts = Math.random() < 0.3 ? 2 : 1;
+      for (let i=0;i<bursts;i++){
+        setTimeout(()=>spawnRocket(), i* (180 + Math.random()*240));
+      }
+      scheduleNext();
+    }, base);
+  }
+
+  function step(){
+    if (reduce){
+      // Si l'utilisateur préfère moins d'animations, on nettoie le canvas et on n'anime pas
+      ctx.clearRect(0,0,W,H);
+      return;
+    }
+
+    // Effacement doux mais net pour éviter les traces
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.14)';
+    ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    let anyVisible = false;
+
+    // Phase fusées
+    for (let ri = rockets.length-1; ri>=0; ri--){
+      const r = rockets[ri];
+      r.life++;
+
+      r.vx += r.ax;
+      r.vy += r.ay;
+      const px = r.x, py = r.y;
+      r.x  += r.vx;
+      r.y  += r.vy;
+
+      // traînée
+      r.trail.push({x:r.x, y:r.y, a:1});
+      if (r.trail.length > 14) r.trail.shift();
+
+      for (let t=0; t<r.trail.length-1; t++){
+        const p1 = r.trail[t], p2 = r.trail[t+1];
+        p1.a *= 0.9;
+        if (p1.a < 0.05) continue;
+        ctx.globalAlpha = p1.a;
+        ctx.strokeStyle = r.col;
+        ctx.lineWidth = 1.0 * dpr;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      // tête
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = r.col;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, 1.1*dpr, 0, Math.PI*2);
+      ctx.fill();
+
+      anyVisible = true;
+
+      const nearApex   = r.vy > -0.15 * dpr;
+      const timeout    = r.life > r.maxLife;
+      const highEnough = r.y < H * (0.25 + Math.random()*0.25);
+
+      if (nearApex || timeout || highEnough){
+        explodeAt(r.x, r.y, r.palette);
+        rockets.splice(ri,1);
+      }
+    }
+
+    // Phase explosions (sans glitter)
+    for (let i=fireworks.length-1; i>=0; i--){
+      const fw = fireworks[i];
+      fw.life++;
+
+      for (let pi=fw.parts.length-1; pi>=0; pi--){
+        const p = fw.parts[pi];
+
+        if (p.alpha < 0.04){
+          fw.parts.splice(pi,1);
+          continue;
+        }
+
+        p.vy += 0.006 * dpr;
+        p.vx *= 0.996; p.vy *= 0.996;
+
+        const px = p.x, py = p.y;
+        p.x += p.vx; p.y += p.vy;
+        p.alpha *= p.decay;
+
+        ctx.globalAlpha = p.alpha;
+        ctx.strokeStyle = p.col; ctx.lineWidth = 1.2 * dpr;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+
+        anyVisible = true;
+      }
+
+      // disparition complète
+      if (fw.life > fw.max && fw.parts.length === 0){
+        fireworks.splice(i,1);
+      }
+    }
+
+    if (!anyVisible && rockets.length === 0 && fireworks.length === 0){
+      ctx.clearRect(0,0,W,H);
+    }
+
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+
+  // ==== Animation des mots + déclenchement feux ====
+  const frameEl   = document.getElementById('frame');
+  const citEl     = document.getElementById('citation');
+  const actorsEl  = document.getElementById('actors');
+
+  function animateWordsThenFireworks(){
+    // Si réduction des animations : on affiche juste la phrase, pas de feux
+    if (reduce){
+      citEl.style.opacity = 1;
+      citEl.style.visibility = 'visible';
+      return;
+    }
+
+    const originalHTML = citEl.innerHTML;
+    const rawText = citEl.textContent.trim();
+
+    // Remplace le contenu par des spans de mesure (on garde espaces)
+    const tokens = rawText.split(/(\s+)/);
+    citEl.innerHTML = '';
+    const meas = [];
+    tokens.forEach(t=>{
+      const s = document.createElement('span');
+      s.textContent = t;
+      citEl.appendChild(s);
+      meas.push(s);
+    });
+
+    // Calcule positions cibles relatives au cadre intérieur (actorsEl)
+    const rectActors = actorsEl.getBoundingClientRect();
+    const rectFrame  = frameEl.getBoundingClientRect();
+
+    const words = [];
+    meas.forEach((m)=>{
+      const r = m.getBoundingClientRect();
+      const a = document.createElement('span');
+      a.className = 'word';
+      a.textContent = m.textContent;
+
+      const tx = r.left - rectActors.left;
+      const ty = r.top  - rectActors.top;
+
+      // position de départ : sous le cadre
+      const startY = (rectFrame.bottom - rectActors.top) + 80;
+
+      a.style.setProperty('--x', `${tx}px`);
+      a.style.setProperty('--y', `${startY}px`);
+      a.style.left = '0px';
+      a.style.top  = '0px';
+
+      actorsEl.appendChild(a);
+      words.push({el:a, tx, ty});
+    });
+
+    // Lancement des mots
     let arrived = 0;
+    const baseDelay = 90, jitter = 60;
 
-    actorSpans.forEach((w, i)=>{
+    words.forEach((w, i)=>{
+      // position de départ
+      w.el.style.transform = `translate(${w.tx}px, ${parseFloat(getComputedStyle(w.el).getPropertyValue('--y'))}px) scale(.96)`;
+
       const delay = i*baseDelay + Math.random()*jitter;
-
-      // position de départ (bas)
-      w.el.style.transform = `translate(${w.targetX}px, ${parseFloat(getComputedStyle(w.el).getPropertyValue('--y'))}px) scale(.96)`;
-
       setTimeout(()=>{
         w.el.style.opacity = '1';
         w.el.style.filter  = 'blur(0px)';
-        // vers la cible
-        w.el.style.transform = `translate(${w.targetX}px, ${w.targetY}px)`;
+        w.el.style.transform = `translate(${w.tx}px, ${w.ty}px)`;
       }, delay);
 
       w.el.addEventListener('transitionend', (ev)=>{
         if (ev.propertyName === 'transform'){
           arrived++;
-          if (arrived === actorSpans.length){
-            onSentenceComplete();
+          if (arrived === words.length){
+            // phrase complète → feux + scintillement
+            allowFireworks = true;
+            scheduleNext();
+            startTwinkles(words.map(w=>w.el));
           }
         }
-      }, { once:false });
+      });
     });
   }
 
-  // 5) Quand la phrase est complète : souffle -> feux -> twinkles
-  function onSentenceComplete(){
-    // Souffle
-    shine.classList.add('play');
-
-    // Au bout du souffle (~550ms), lancer les feux
-    setTimeout(()=>{
-      startFireworks();
-      startTwinkles();
-    }, 560);
-  }
-
-  // 6) Scintillement aléatoire
-  let twinkleTimer = null;
-  function startTwinkles(){
-    if (prefersReduce) return; // pas d'effets
-    const pool = actorSpans.filter(w => w.el.textContent.trim().length); // pas les espaces
-    twinkleTimer = setInterval(()=>{
-      const n = Math.min(2, 1 + (Math.random()<0.3 ? 1:0)); // 1 ou 2 mots parfois
-      for (let i=0;i<n;i++){
+  // Scintillement aléatoire des mots
+  function startTwinkles(wordEls){
+    setInterval(()=>{
+      const pool = wordEls.filter(el => el.textContent.trim().length);
+      const n = Math.random() < 0.3 ? 2 : 1; // 1 ou parfois 2 mots
+      for(let i=0;i<n;i++){
         const w = pool[Math.floor(Math.random()*pool.length)];
-        w.el.classList.add('twinkle');
-        setTimeout(()=> w.el.classList.remove('twinkle'), 620);
+        w.classList.add('twinkle');
+        setTimeout(()=> w.classList.remove('twinkle'), 620);
       }
     }, 1200);
   }
 
-  // 7) Feux d’artifice minimalistes, déclenchés sur commande
-  const canvas = document.getElementById('fw');
-  const ctx = canvas.getContext('2d');
-  let W=0,H=0, dpr=1, fwRunning=false, particles=[], rockets=[], fwStopAt=0;
-
-  function resize(){
-    dpr = Math.max(1, window.devicePixelRatio||1);
-    W = canvas.width  = Math.floor(innerWidth*dpr);
-    H = canvas.height = Math.floor(innerHeight*dpr);
-    canvas.style.width  = innerWidth+'px';
-    canvas.style.height = innerHeight+'px';
-  }
-  addEventListener('resize', resize, {passive:true}); resize();
-
-  function startFireworks(){
-    if (prefersReduce) return;
-    fwRunning = true;
-    fwStopAt = performance.now() + 7000; // 7s
-    loop();
-    scheduleRockets();
-  }
-
-  function scheduleRockets(){
-    if (!fwRunning) return;
-    spawnRocket();
-    setTimeout(scheduleRockets, 400 + Math.random()*700);
-  }
-
-  function spawnRocket(){
-    const x  = (0.12 + Math.random()*0.76)*W;
-    const y  = H*0.98;
-    const vy = -(1.2 + Math.random()*0.6)*dpr;
-    rockets.push({x,y, vx:(Math.random()-.5)*0.5*dpr, vy, life:0, max: 50+Math.random()*40, hue: Math.random()*360});
-  }
-
-  function explode(x,y,hue){
-    const n = 120 + (Math.random()*100|0);
-    for (let i=0;i<n;i++){
-      const a = (i/n)*Math.PI*2;
-      const sp= (1+Math.random()*1.2)*dpr;
-      particles.push({
-        x,y,
-        vx: Math.cos(a)*sp,
-        vy: Math.sin(a)*sp*(Math.random()<0.5?0.8:1),
-        a: 1,
-        hue: (hue + (i%12)*4)%360,
-        decay: 0.985 - Math.random()*0.004
-      });
-    }
-  }
-
-  function loop(ts){
-    if (!fwRunning && particles.length===0 && rockets.length===0) return;
-
-    ctx.globalCompositeOperation='destination-out';
-    ctx.fillStyle='rgba(0,0,0,0.14)';
-    ctx.fillRect(0,0,W,H);
-    ctx.globalCompositeOperation='lighter';
-
-    // rockets
-    for (let i=rockets.length-1;i>=0;i--){
-      const r = rockets[i];
-      r.life++;
-      r.vy += 0.006*dpr;
-      r.x += r.vx; r.y += r.vy;
-
-      // trail
-      ctx.globalAlpha=1;
-      ctx.fillStyle = `hsl(${r.hue} 95% 70%)`;
-      ctx.beginPath(); ctx.arc(r.x, r.y, 1.2*dpr, 0, Math.PI*2); ctx.fill();
-
-      if (r.vy > -0.15*dpr || r.life>r.max){
-        explode(r.x, r.y, r.hue);
-        rockets.splice(i,1);
-      }
-    }
-
-    // particles
-    for (let i=particles.length-1;i>=0;i--){
-      const p = particles[i];
-      p.vy += 0.006*dpr;
-      p.vx *= 0.996; p.vy *= 0.996;
-      const px=p.x, py=p.y; p.x+=p.vx; p.y+=p.vy;
-      p.a *= p.decay;
-      if (p.a<0.04){ particles.splice(i,1); continue; }
-
-      ctx.globalAlpha=p.a;
-      ctx.strokeStyle=`hsl(${p.hue} 90% 58%)`;
-      ctx.lineWidth=1.1*dpr;
-      ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(px,py); ctx.stroke();
-    }
-
-    if (fwRunning && performance.now()>fwStopAt){
-      fwRunning=false;
-      // laisse s'éteindre naturellement
-      setTimeout(()=>{ ctx.clearRect(0,0,W,H); }, 1200);
-    }
-
-    requestAnimationFrame(loop);
-  }
-
-  // Lancement
-  function start(){
-    if (prefersReduce){
-      // Version soft : fade in direct, pas de feux
-      actors.innerHTML = '';
-      line.style.opacity = 1;
-      line.style.visibility = 'visible';
-      return;
-    }
-    launchWords();
-  }
-
-  // Attendre le rendu initial pour des positions propres
-  requestAnimationFrame(()=> requestAnimationFrame(start));
+  // Démarrage une fois la page rendue (positions stables)
+  requestAnimationFrame(()=> requestAnimationFrame(animateWordsThenFireworks));
 })();
 </script>
 </body>
 </html>
-
