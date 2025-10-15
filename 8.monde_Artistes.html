@@ -88,65 +88,74 @@
     box-shadow:inset 0 0 8px rgba(0,0,0,.25),0 0 12px rgba(255,214,116,.35);font-size:18px;}
   .ico.purple{background:radial-gradient(circle at 30% 30%,#e8d9ff,#b58cff);color:#2a103f;}
 
-  /* === Filigrane arabesques dorées === */
-.filigrane-arabesque {
+/* Cadre doré (haut/bas) + voile blanc inside */
+.phrase-magique{
   position: relative;
-  width: 80%;
-  max-width: 900px;
-  margin: 0 auto 1.2rem;
-  height: 3.6rem;
+  padding: 16px 18px;
+  margin: 0 auto 1.8rem;
+  overflow: hidden;                 /* le voile reste dans le cadre */
 }
 
-.filigrane-arabesque .ligne {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(
+/* Lignes dorées haut/bas (pas de lignes gauche/droite) */
+.phrase-magique::before,
+.phrase-magique::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(92%, 980px);
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(
     90deg,
     transparent,
-    rgba(255,214,116,0.7) 20%,
-    rgba(255,214,116,1),
-    rgba(255,214,116,0.7) 80%,
+    rgba(255,214,116,.75) 20%,
+    #ffd674 50%,
+    rgba(255,214,116,.75) 80%,
     transparent
   );
-  box-shadow: 0 0 6px rgba(255,214,116,0.4);
-  overflow: hidden;
+  box-shadow:0 0 8px rgba(255,214,116,.35);
+  z-index:2;                        /* au-dessus des mots et du voile */
+  pointer-events:none;
+}
+.phrase-magique::before{ top:0; }
+.phrase-magique::after { bottom:0; }
+
+/* Lueur qui parcourt les lignes (facultatif) */
+@keyframes arabesque-shine{
+  0%{ background-position:-100% 0; }
+  100%{ background-position:100% 0; }
+}
+.phrase-magique::before,
+.phrase-magique::after{
+  background-size:200% 100%;
+  animation:arabesque-shine 6s linear infinite;
+}
+.phrase-magique::after{ animation-delay:3s; }
+
+/* Voile blanc animé à l’intérieur du cadre */
+.voile{
+  position:absolute;
+  top:0; left:0;
+  width:120%; height:100%;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.18) 45%,
+    rgba(255,255,255,.28) 50%,
+    rgba(255,255,255,.18) 55%,
+    transparent 100%);
+  filter: blur(1px);
+  animation: voile-glisse 8s linear infinite;
+  z-index:0;                        /* sous les mots */
+  pointer-events:none;
+}
+@keyframes voile-glisse{
+  0%{ transform:translateX(-100%); }
+  100%{ transform:translateX(100%); }
 }
 
-.filigrane-arabesque .haut { top: 0; transform: rotate(1deg) scaleX(0.98); }
-.filigrane-arabesque .bas  { bottom: 0; transform: rotate(-1deg) scaleX(0.98); }
-
-/* Lueur dorée qui parcourt les arabesques */
-.filigrane-arabesque::before,
-.filigrane-arabesque::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, #fff8e6 50%, transparent);
-  opacity: 0.25;
-  animation: filigrane-glow 5s linear infinite;
-}
-.filigrane-arabesque::after {
-  animation-delay: 2.5s;
-  opacity: 0.35;
-}
-
-@keyframes filigrane-glow {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-  .mot {
-  position: relative;
-  z-index: 1; /* les mots passent sous les lignes mais au-dessus du voile */
-}
-
-.voile {
-  z-index: 0; /* le voile glisse sous les mots */
-}
-
+/* Les mots restent à l’intérieur, au-dessus du voile, sous les lignes */
+.mot{ position:relative; z-index:1; }
 
 </style>
 </head>
@@ -156,7 +165,10 @@
 <main class="wrap">
   <h1>Monde des Artistes</h1>
   <div class="soustitre">Création • Harmonie • Lumière</div>
-  <section class="phrase-magique"></section>
+  <section class="phrase-magique">
+  <div class="voile" aria-hidden="true"></div>
+</section>
+
 
   <div class="btn-row">
     <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
