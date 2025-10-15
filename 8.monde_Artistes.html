@@ -117,8 +117,6 @@
 <body>
   <!-- Feux d’artifice -->
   <canvas class="fx-canvas" aria-hidden="true"></canvas>
-  <!-- Notes -->
-  <div class="fx-layer" id="notes-layer" aria-hidden="true"></div>
 
   <main class="wrap">
     <h1>Monde des Artistes</h1>
@@ -188,28 +186,28 @@
     }
   }
 
-  // --- Modèle : fusées (phase 1) puis éclatement en feu (phase 2)
-  const rockets   = [];         // fusées en montée
-  const fireworks = [];         // explosions
-  const MAX_RKTS  = 6;          // limite simultanée
-  const MAX_FWS   = 6;
+  // Fusées (montée) puis explosions (sans glitter)
+  const rockets   = [];
+  const fireworks = [];
+  const MAX_RKTS  = 5;
+  const MAX_FWS   = 5;
 
   function spawnRocket(){
     if (rockets.length >= MAX_RKTS) return;
 
     const x  = (0.08 + Math.random()*0.84) * W;
     const y  = H * (0.92 + Math.random()*0.05);
-    const vx = (Math.random()-0.5) * 0.6 * dpr; // léger drift
-    const vy = -(1.6 + Math.random()*0.7) * dpr; // vitesse de montée (lente)
+    const vx = (Math.random()-0.5) * 0.6 * dpr;
+    const vy = -(1.6 + Math.random()*0.7) * dpr;
     const col = `hsl(${fixedPalette[Math| (Math.random()*fixedPalette.length)]} 95% 70%)`;
 
     rockets.push({
       x, y, vx, vy,
       ax: (Math.random()-0.5) * 0.005 * dpr,
-      ay: 0.0005 * dpr,          // gravité très légère pour courbe réaliste
+      ay: 0.0005 * dpr,
       life: 0,
-      maxLife: 90 + Math.random()*60, // sécurité d’explosion si trop long
-      trail: [],                 // positions pour la traînée
+      maxLife: 90 + Math.random()*60,
+      trail: [],
       col,
       palette: makePalette()
     });
@@ -222,7 +220,7 @@
     const speed  = (1.1 + Math.random()*0.7) * dpr;
     const style  = Math.random();
 
-    const fw = { x, y, parts:[], life:0, max: 110 + Math.random()*60, palette, glitter:[] };
+    const fw = { x, y, parts:[], life:0, max: 110 + Math.random()*60, palette };
 
     for(let i=0;i<parts;i++){
       const a = (i/parts) * Math.PI * 2;
@@ -238,19 +236,19 @@
         x, y, vx, vy,
         alpha: 1,
         col: palette[i % palette.length],
-        decay: 0.985 - Math.random()*0.004  // lente disparition
+        decay: 0.985 - Math.random()*0.004
       });
     }
     fireworks.push(fw);
   }
 
-  // Cadence : intervalles irréguliers + mini salves (sur les FUSÉES)
+  // Cadence irrégulière (sur les fusées)
   function scheduleNext(){
-    const base = 700 + Math.random()*1800;   // 0.7–2.5s
+    const base = 900 + Math.random()*1800;   // rythme un peu plus posé
     setTimeout(()=>{
-      const bursts = Math.random() < 0.35 ? (2 + Math.floor(Math.random()*2)) : 1;
+      const bursts = Math.random() < 0.3 ? 2 : 1;
       for (let i=0;i<bursts;i++){
-        setTimeout(()=>spawnRocket(), i* (170 + Math.random()*240));
+        setTimeout(()=>spawnRocket(), i* (180 + Math.random()*240));
       }
       scheduleNext();
     }, base);
@@ -258,7 +256,7 @@
   scheduleNext();
 
   function step(){
-    // Effacement : un peu plus fort pour éviter les traînées fantômes
+    // Effacement doux mais net pour éviter les traces
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = 'rgba(0,0,0,0.14)';
     ctx.fillRect(0,0,W,H);
@@ -266,49 +264,43 @@
 
     let anyVisible = false;
 
-    // --- Phase fusées
+    // Phase fusées
     for (let ri = rockets.length-1; ri>=0; ri--){
       const r = rockets[ri];
       r.life++;
 
-      // physique
       r.vx += r.ax;
-      r.vy += r.ay; // ralentit la montée (moins négatif)
+      r.vy += r.ay;
       const px = r.x, py = r.y;
       r.x  += r.vx;
       r.y  += r.vy;
 
-      // trail (enregistre quelques positions)
+      // traînée
       r.trail.push({x:r.x, y:r.y, a:1});
-      if (r.trail.length > 16) r.trail.shift();
+      if (r.trail.length > 14) r.trail.shift();
 
-      // dessiner la traînée (lente, lumineuse)
       for (let t=0; t<r.trail.length-1; t++){
         const p1 = r.trail[t], p2 = r.trail[t+1];
         p1.a *= 0.9;
         if (p1.a < 0.05) continue;
         ctx.globalAlpha = p1.a;
         ctx.strokeStyle = r.col;
-        ctx.lineWidth = 1.1 * dpr;
+        ctx.lineWidth = 1.0 * dpr;
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         ctx.stroke();
       }
 
-      // tête brillante
+      // tête
       ctx.globalAlpha = 1;
       ctx.fillStyle = r.col;
       ctx.beginPath();
-      ctx.arc(r.x, r.y, 1.2*dpr, 0, Math.PI*2);
+      ctx.arc(r.x, r.y, 1.1*dpr, 0, Math.PI*2);
       ctx.fill();
 
       anyVisible = true;
 
-      // conditions d’explosion :
-      // - la vitesse verticale devient faible (sommet de trajectoire)
-      // - OU durée max
-      // - OU atteint une hauteur aléatoire dans le haut de l’écran
       const nearApex   = r.vy > -0.15 * dpr;
       const timeout    = r.life > r.maxLife;
       const highEnough = r.y < H * (0.25 + Math.random()*0.25);
@@ -319,7 +311,7 @@
       }
     }
 
-    // --- Phase explosions
+    // Phase explosions (sans glitter)
     for (let i=fireworks.length-1; i>=0; i--){
       const fw = fireworks[i];
       fw.life++;
@@ -340,39 +332,21 @@
         p.alpha *= p.decay;
 
         ctx.globalAlpha = p.alpha;
-        ctx.strokeStyle = p.col; ctx.lineWidth = 1.3 * dpr;
+        ctx.strokeStyle = p.col; ctx.lineWidth = 1.2 * dpr;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(px, py);
         ctx.stroke();
 
-      // dessiner étincelles
-      for (let gi=fw.glitter.length-1; gi>=0; gi--){
-        const g = fw.glitter[gi];
-        g.vy += 0.004*dpr;
-        g.x += g.vx; g.y += g.vy;
-        g.alpha *= 0.86;
-
-        if (g.alpha <= 0.05){
-          fw.glitter.splice(gi,1);
-          continue;
-        }
-
-        ctx.globalAlpha = g.alpha;
-        ctx.fillStyle = g.col;
-        ctx.beginPath();
-        ctx.arc(g.x, g.y, 0.9*dpr, 0, Math.PI*2);
-        ctx.fill();
         anyVisible = true;
       }
 
-      // suppression complète quand plus rien n’est visible
-      if (fw.life > fw.max && fw.parts.length === 0 && fw.glitter.length === 0){
+      // disparition complète
+      if (fw.life > fw.max && fw.parts.length === 0){
         fireworks.splice(i,1);
       }
     }
 
-    // Si plus rien à l’écran, on nettoie totalement
     if (!anyVisible && rockets.length === 0 && fireworks.length === 0){
       ctx.clearRect(0,0,W,H);
     }
