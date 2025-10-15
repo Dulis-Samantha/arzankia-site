@@ -16,7 +16,6 @@
     --ray:28px;
   }
 
-  /* ===== Fond + voile ===== */
   body{
     margin:0;
     font-family:Georgia, serif;
@@ -32,13 +31,10 @@
     background:linear-gradient(180deg, rgba(10,0,20,.55), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 70%, rgba(10,0,20,.6));
   }
 
-  /* Canvas feux d’artifice */
   .fx-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; }
 
-  /* Contenu */
   .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:2; margin-top:clamp(1rem,4vh,2.5rem); }
 
-  /* Titres */
   h1{
     margin:0 0 .6rem; line-height:1.1;
     font-size:clamp(2.2rem,6vw,4rem); color:var(--or);
@@ -57,7 +53,7 @@
     border-radius:999px; box-shadow:0 0 10px rgba(255,214,116,.35);
   }
 
-  /* ===== Nouvelle phrase magique ===== */
+  /* ===== Phrase magique ===== */
   .phrase-magique{
     position:relative;
     display:flex; flex-wrap:wrap; justify-content:center;
@@ -87,12 +83,12 @@
   }
 
   .en-place{
-    animation: pulse 3.5s ease-in-out infinite alternate;
+    animation: pulse var(--pulse-duree,3.5s) ease-in-out infinite alternate;
   }
 
   @keyframes pulse{
-    0%{ text-shadow:0 0 10px rgba(255,214,116,.3); transform:scale(1);}
-    100%{ text-shadow:0 0 24px rgba(255,214,116,.55); transform:scale(1.05);}
+    0%{ text-shadow:0 0 10px rgba(255,214,116,.3); transform:scale(var(--scale-min,1)); }
+    100%{ text-shadow:0 0 24px rgba(255,214,116,.55); transform:scale(var(--scale-max,1.05)); }
   }
 
   /* Boutons */
@@ -119,30 +115,25 @@
 </style>
 </head>
 <body>
-  <!-- Feux d’artifice -->
   <canvas class="fx-canvas" aria-hidden="true"></canvas>
 
   <main class="wrap">
     <h1>Monde des Artistes</h1>
     <div class="soustitre">Création • Harmonie • Lumière</div>
 
-    <!-- Nouvelle phrase magique -->
     <section class="phrase-magique"></section>
 
-    <!-- 1er rang : Entrée & Extrait -->
     <div class="btn-row">
       <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
       <a class="btn" href="7.extrait_Artistes.html">Extrait du livre</a>
     </div>
 
-    <!-- 2e rang : Titre + boutiques -->
     <div class="section-title">La place des artistes</div>
     <div class="btn-row">
       <a class="btn shop" href="chanson_de_camidjo.html"><span class="ico">🎵</span> Camidjo</a>
       <a class="btn shop" href="loup_bout_art.html"><span class="ico purple">🎨</span> Loup-Bout'Art</a>
     </div>
 
-    <!-- Retour -->
     <div class="btn-row">
       <a class="btn" href="3.les_mondes.html">← Retour aux Mondes</a>
     </div>
@@ -153,25 +144,36 @@
 const phrase = "Ici, les notes dansent, les couleurs vibrent, et d’étranges créatures laissent exprimer leur talent à la lumière…";
 const container = document.querySelector('.phrase-magique');
 const mots = phrase.split(' ');
-const totalDuree = 9000; // ~9 secondes
+const totalDuree = 9000; // 9 secondes pour l'ensemble
 const delaiParMot = totalDuree / mots.length;
 
 mots.forEach((mot, i) => {
   const span = document.createElement('span');
   span.className = 'mot';
   span.textContent = mot;
-  // position de départ aléatoire
+
+  // Position de départ aléatoire (hors centre)
   const tx = (Math.random() * window.innerWidth - window.innerWidth/2) + 'px';
   const ty = (Math.random() * window.innerHeight - window.innerHeight/2) + 'px';
   span.style.setProperty('--tx', tx);
   span.style.setProperty('--ty', ty);
-  span.style.animationDelay = (i * delaiParMot/1000) + 's';
+
+  // Variation individuelle du pulse
+  const scaleMin = 1 + (Math.random() * 0.05 - 0.025);
+  const scaleMax = 1.05 + Math.random() * 0.05;
+  const pulseDuree = (3 + Math.random() * 2).toFixed(2) + 's';
+  span.style.setProperty('--scale-min', scaleMin);
+  span.style.setProperty('--scale-max', scaleMax);
+  span.style.setProperty('--pulse-duree', pulseDuree);
+
+  // Décalage d'apparition progressif
+  span.style.animationDelay = (i * delaiParMot / 1000) + 's';
   container.appendChild(span);
 
-  // ajouter effet pulse après arrivée
+  // Activation du pulse après l'arrivée
   setTimeout(()=>{
     span.classList.add('en-place');
-    if(i === mots.length-1) startFireworks(); // déclenche à la fin
+    if(i === mots.length-1) startFireworks();
   }, (i * delaiParMot) + 1000);
 });
 </script>
