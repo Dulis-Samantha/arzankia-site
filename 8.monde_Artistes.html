@@ -189,73 +189,81 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
 
-  // Palettes voulues + mode arc-en-ciel
-  const fixedHues = {
-    bleu: 210, vert: 120, rouge: 0, orange: 30, violet: 270, rose: 320, jaune: 55
-  };
+  // Palettes (fixes + arc-en-ciel)
+  const fixedHues = { bleu:210, vert:120, rouge:0, orange:30, violet:270, rose:320, jaune:55 };
   const fixedPalette = Object.values(fixedHues);
-
   function makePalette(){
-    // 70% chance palette fixe choisie, 30% arc-en-ciel
     if (Math.random() < 0.7){
       const h = fixedPalette[Math| (Math.random()*fixedPalette.length)];
-      // légère variation de teinte pour étincelles
       return Array.from({length:10}, (_,i)=> `hsl(${h + (i-5)*2} 95% 60%)`);
     } else {
-      return Array.from({length:12}, (_,i)=> `hsl(${(i/12)*360} 90% 58%)`); // arc-en-ciel
+      return Array.from({length:12}, (_,i)=> `hsl(${(i/12)*360} 90% 58%)`);
     }
   }
 
-  const fireworks = [];
-  const MAX_FWS = 6; // limite sécurité
+  // --- Modèle : fusées (phase 1) puis éclatement en feu (phase 2)
+  const rockets   = [];         // fusées en montée
+  const fireworks = [];         // explosions
+  const MAX_RKTS  = 6;          // limite simultanée
+  const MAX_FWS   = 6;
 
-  function spawnFirework(){
+  function spawnRocket(){
+    if (rockets.length >= MAX_RKTS) return;
+
+    const x  = (0.08 + Math.random()*0.84) * W;
+    const y  = H * (0.92 + Math.random()*0.05);
+    const vx = (Math.random()-0.5) * 0.6 * dpr; // léger drift
+    const vy = -(1.6 + Math.random()*0.7) * dpr; // vitesse de montée (lente)
+    const col = `hsl(${fixedPalette[Math| (Math.random()*fixedPalette.length)]} 95% 70%)`;
+
+    rockets.push({
+      x, y, vx, vy,
+      ax: (Math.random()-0.5) * 0.005 * dpr,
+      ay: 0.0005 * dpr,          // gravité très légère pour courbe réaliste
+      life: 0,
+      maxLife: 90 + Math.random()*60, // sécurité d’explosion si trop long
+      trail: [],                 // positions pour la traînée
+      col,
+      palette: makePalette()
+    });
+  }
+
+  function explodeAt(x, y, palette){
     if (fireworks.length >= MAX_FWS) return;
 
-    // position d’explosion (pas trop bas)
-    const x = (0.08 + Math.random()*0.84) * W;
-    const y = (0.08 + Math.random()*0.62) * H;
+    const parts  = Math.floor(140 + Math.random()*120);
+    const speed  = (1.1 + Math.random()*0.7) * dpr;
+    const style  = Math.random();
 
-    // "grosses" explosions -> beaucoup de particules, vitesse modérée
-    const parts = Math.floor(140 + Math.random()*120);
-    const speed = (1.1 + Math.random()*0.7) * dpr; // lente
-    const palette = makePalette();
-    const style = Math.random(); // différents motifs
-
-    const fw = { x, y, parts:[], life:0, max: 110 + Math.random()*60, palette, glitter:[], gtimer:0 };
+    const fw = { x, y, parts:[], life:0, max: 110 + Math.random()*60, palette, glitter:[] };
 
     for(let i=0;i<parts;i++){
       const a = (i/parts) * Math.PI * 2;
-      let r = 1, vx, vy;
-
-      // styles variés: anneau, fleur modulée, palmier/ellipse
+      let r = 1;
       if (style < 0.33){ r = 1; }
       else if (style < 0.66){ r = 1.2 + 0.4*Math.sin(a*6); }
       else { r = 0.85 + 0.35*Math.sin(a*2); }
 
-      vx = Math.cos(a) * speed * r;
-      vy = Math.sin(a) * speed * r * (style>0.66 ? 0.7 : 1);
+      const vx = Math.cos(a) * speed * r;
+      const vy = Math.sin(a) * speed * r * (style>0.66 ? 0.7 : 1);
 
       fw.parts.push({
-        x, y,
-        vx, vy,
+        x, y, vx, vy,
         alpha: 1,
         col: palette[i % palette.length],
-        // persistance lente
-        decay: 0.985 - Math.random()*0.004
+        decay: 0.985 - Math.random()*0.004  // lente disparition
       });
     }
     fireworks.push(fw);
   }
 
-  // Séquençage irrégulier (intervalles variables + mini salves)
+  // Cadence : intervalles irréguliers + mini salves (sur les FUSÉES)
   function scheduleNext(){
-    const base = 600 + Math.random()*1800; // 0.6s–2.4s
+    const base = 700 + Math.random()*1800;   // 0.7–2.5s
     setTimeout(()=>{
-      // parfois 2–3 explosions rapprochées
       const bursts = Math.random() < 0.35 ? (2 + Math.floor(Math.random()*2)) : 1;
       for (let i=0;i<bursts;i++){
-        setTimeout(()=>spawnFirework(), i* (150 + Math.random()*220));
+        setTimeout(()=>spawnRocket(), i* (170 + Math.random()*240));
       }
       scheduleNext();
     }, base);
@@ -263,20 +271,80 @@
   scheduleNext();
 
   function step(){
-    // effacement doux pour traînées persistantes
+    // Effacement : un peu plus fort pour éviter les traînées fantômes
     ctx.globalCompositeOperation = 'destination-out';
-    ctx.fillStyle = 'rgba(0,0,0,0.08)';
+    ctx.fillStyle = 'rgba(0,0,0,0.14)';
     ctx.fillRect(0,0,W,H);
     ctx.globalCompositeOperation = 'lighter';
 
-    // dessine chaque feu d’artifice
+    let anyVisible = false;
+
+    // --- Phase fusées
+    for (let ri = rockets.length-1; ri>=0; ri--){
+      const r = rockets[ri];
+      r.life++;
+
+      // physique
+      r.vx += r.ax;
+      r.vy += r.ay; // ralentit la montée (moins négatif)
+      const px = r.x, py = r.y;
+      r.x  += r.vx;
+      r.y  += r.vy;
+
+      // trail (enregistre quelques positions)
+      r.trail.push({x:r.x, y:r.y, a:1});
+      if (r.trail.length > 16) r.trail.shift();
+
+      // dessiner la traînée (lente, lumineuse)
+      for (let t=0; t<r.trail.length-1; t++){
+        const p1 = r.trail[t], p2 = r.trail[t+1];
+        p1.a *= 0.9;
+        if (p1.a < 0.05) continue;
+        ctx.globalAlpha = p1.a;
+        ctx.strokeStyle = r.col;
+        ctx.lineWidth = 1.1 * dpr;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      // tête brillante
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = r.col;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, 1.2*dpr, 0, Math.PI*2);
+      ctx.fill();
+
+      anyVisible = true;
+
+      // conditions d’explosion :
+      // - la vitesse verticale devient faible (sommet de trajectoire)
+      // - OU durée max
+      // - OU atteint une hauteur aléatoire dans le haut de l’écran
+      const nearApex   = r.vy > -0.15 * dpr;
+      const timeout    = r.life > r.maxLife;
+      const highEnough = r.y < H * (0.25 + Math.random()*0.25);
+
+      if (nearApex || timeout || highEnough){
+        explodeAt(r.x, r.y, r.palette);
+        rockets.splice(ri,1);
+      }
+    }
+
+    // --- Phase explosions
     for (let i=fireworks.length-1; i>=0; i--){
       const fw = fireworks[i];
       fw.life++;
 
-      // particules principales (traînées)
-      for (const p of fw.parts){
-        // gravité très légère + frottements => lenteur
+      for (let pi=fw.parts.length-1; pi>=0; pi--){
+        const p = fw.parts[pi];
+
+        if (p.alpha < 0.04){
+          fw.parts.splice(pi,1);
+          continue;
+        }
+
         p.vy += 0.006 * dpr;
         p.vx *= 0.996; p.vy *= 0.996;
 
@@ -284,15 +352,14 @@
         p.x += p.vx; p.y += p.vy;
         p.alpha *= p.decay;
 
-        // trait (trail)
-        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.globalAlpha = p.alpha;
         ctx.strokeStyle = p.col; ctx.lineWidth = 1.3 * dpr;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(px, py);
         ctx.stroke();
 
-        // scintillement (glitter) : petites étincelles brèves
+        // scintillement (glitter) : étincelles brèves et lentes
         if (Math.random() < 0.08){
           fw.glitter.push({
             x: p.x, y: p.y,
@@ -301,25 +368,38 @@
             alpha: 0.9, col: p.col
           });
         }
+        anyVisible = true;
       }
 
-      // étincelles (points lumineux courts)
+      // dessiner étincelles
       for (let gi=fw.glitter.length-1; gi>=0; gi--){
         const g = fw.glitter[gi];
         g.vy += 0.004*dpr;
         g.x += g.vx; g.y += g.vy;
         g.alpha *= 0.86;
 
-        ctx.globalAlpha = Math.max(0, g.alpha);
+        if (g.alpha <= 0.05){
+          fw.glitter.splice(gi,1);
+          continue;
+        }
+
+        ctx.globalAlpha = g.alpha;
         ctx.fillStyle = g.col;
         ctx.beginPath();
         ctx.arc(g.x, g.y, 0.9*dpr, 0, Math.PI*2);
         ctx.fill();
-
-        if (g.alpha < 0.04) fw.glitter.splice(gi,1);
+        anyVisible = true;
       }
 
-      if (fw.life > fw.max) fireworks.splice(i,1);
+      // suppression complète quand plus rien n’est visible
+      if (fw.life > fw.max && fw.parts.length === 0 && fw.glitter.length === 0){
+        fireworks.splice(i,1);
+      }
+    }
+
+    // Si plus rien à l’écran, on nettoie totalement
+    if (!anyVisible && rockets.length === 0 && fireworks.length === 0){
+      ctx.clearRect(0,0,W,H);
     }
 
     requestAnimationFrame(step);
@@ -328,28 +408,27 @@
 })();
 </script>
 
-<!-- ===== Notes “vivantes” : 20 visibles en continu ===== -->
-<script>
 (function(){
-  if (window.__notesInit) return; // évite double init
-  window.__notesInit = true;
-
+  // anti double-init même après navigation bfcache
   const L = document.getElementById('notes-layer');
-  if(!L) return;
+  if (!L || L.dataset.init === '1') return;
+  L.dataset.init = '1';
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce) return;
 
-  // Reset
-  L.querySelectorAll('.note, .fx-note').forEach(n => n.remove());
+  // Reset DOM
+  Array.from(L.querySelectorAll('.note, .fx-note')).forEach(n => n.remove());
 
-  const POOL_SIZE = 20; // ← 20 visibles en continu
-  const glyphs   = ['♪','♫','🎵','🎶'];
+  const POOL_SIZE = 20;
+  const glyphs = ['♪','♫','🎵','🎶'];
   const notes = [];
 
   const rand = (a,b)=> Math.random()*(b-a)+a;
   const pick = (a)=> a[Math.floor(Math.random()*a.length)];
 
   function spawnOne(){
+    // garde-fou strict
     if (notes.length >= POOL_SIZE) return;
 
     const el = document.createElement('span');
@@ -361,19 +440,19 @@
       el,
       x: rand(0, innerWidth),
       y: rand(0, innerHeight),
-      vx: rand(-0.22, 0.22), // vitesse moyenne
+      vx: rand(-0.22, 0.22),
       vy: rand(-0.16, 0.16),
       rot: rand(-18, 18),
       life: 0,
-      maxLife: rand(8,13)*60,   // ~8–13 s
-      scale: rand(0.8,1.4)      // tailles variées
+      maxLife: rand(8,13)*60,
+      scale: rand(0.8,1.4)
     };
     el.style.opacity = '0';
     requestAnimationFrame(()=> el.style.opacity = '1');
     notes.push(n);
   }
 
-  // Remplissage initial à 20
+  // remplissage initial
   for (let i=0; i<POOL_SIZE; i++) spawnOne();
 
   function tick(){
@@ -381,30 +460,39 @@
       const n = notes[i];
       n.life++;
 
-      // petit drift organique
       n.vx += Math.random()*0.014 - 0.007;
       n.vy += Math.random()*0.010 - 0.005;
 
-      n.x += n.vx;
-      n.y += n.vy;
+      n.x += n.vx; n.y += n.vy;
       n.rot += (n.vx + n.vy)*0.25;
 
-      // rebonds doux bords (pour rester "partout")
       if (n.x < 0 || n.x > innerWidth)  n.vx *= -1;
       if (n.y < 0 || n.y > innerHeight) n.vy *= -1;
 
       n.el.style.transform = `translate(${n.x}px, ${n.y}px) rotate(${n.rot}deg) scale(${n.scale})`;
 
-      // disparition / respawn ailleurs pour rester à 20
       if (n.life > n.maxLife){
         n.el.style.opacity = '0';
         setTimeout(() => {
           n.el.remove();
           notes.splice(i,1);
           spawnOne();
-        }, 400);
+        }, 300);
       }
     }
+
+    // “police” : si, pour une raison quelconque, plus de 20 éléments sont présents, on coupe.
+    const children = L.querySelectorAll('.note');
+    if (children.length > POOL_SIZE){
+      const extra = children.length - POOL_SIZE;
+      for (let k=0; k<extra; k++){
+        const el = children[children.length - 1 - k];
+        const idx = notes.findIndex(n => n.el === el);
+        if (idx >= 0) notes.splice(idx,1);
+        el.remove();
+      }
+    }
+
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
