@@ -138,6 +138,16 @@
   100% { transform: translateX(100%); }
 }
 
+  .mot {
+  position: relative;
+  z-index: 1; /* les mots passent sous les lignes mais au-dessus du voile */
+}
+
+.voile {
+  z-index: 0; /* le voile glisse sous les mots */
+}
+
+
 </style>
 </head>
 <body>
