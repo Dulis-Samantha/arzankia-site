@@ -22,14 +22,9 @@
     color:var(--ivoire);
     background:url('fond_monde_terre.png') center/cover no-repeat fixed;
     min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
     padding:clamp(16px,3vw,48px);
-    position:relative;
-    isolation:isolate;
-    overflow-x:hidden;
+    position:relative; isolation:isolate; overflow-x:hidden;
   }
   body::before{
     content:""; position:absolute; inset:0; z-index:-1;
@@ -41,115 +36,86 @@
   .fx-layer { position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
 
   /* Contenu */
-  .wrap{
-    max-width:1100px; width:100%; text-align:center; position:relative; z-index:2;
-    margin-top:clamp(1rem,4vh,2.5rem);
-  }
+  .wrap{ max-width:1100px; width:100%; text-align:center; position:relative; z-index:2; margin-top:clamp(1rem,4vh,2.5rem); }
 
-  /* Titre */
+  /* Titres */
   h1{
-    margin:0 0 .8rem; line-height:1.1;
-    font-size:clamp(2.1rem,6vw,4rem); color:var(--or);
+    margin:0 0 .6rem; line-height:1.1;
+    font-size:clamp(2.2rem,6vw,4rem); color:var(--or);
     text-shadow:0 3px 0 rgba(0,0,0,.35), 0 0 24px rgba(255,214,116,.25);
   }
-  .soustitre{ font-size:clamp(.9rem,2.4vw,1.05rem); letter-spacing:.06em; opacity:.9; margin-bottom:1.2rem; }
+  .soustitre{ font-size:clamp(.95rem,2.4vw,1.05rem); letter-spacing:.06em; opacity:.9; margin-bottom:1.2rem; }
 
-  /* ===== Cadre fin doré + surface “miroir” discrète ===== */
-  .cartouche{ margin:0 auto 2rem; max-width:980px; }
+  .section-title{
+    margin:1.2rem auto .6rem;
+    font-size:clamp(1.1rem,2.3vw,1.4rem);
+    letter-spacing:.04em; opacity:.95;
+  }
+  .section-title::after{
+    content:""; display:block; width:120px; height:2px; margin:.5rem auto 0;
+    background:linear-gradient(90deg, transparent, var(--or), transparent);
+    border-radius:999px; box-shadow:0 0 10px rgba(255,214,116,.35);
+  }
+
+  /* Cadre élégant pour la citation */
+  .cartouche{ margin:0 auto 1.6rem; max-width:980px; }
   .gold-frame{
-    position:relative;
-    padding: clamp(18px, 3vw, 26px);
-    border-radius: 26px;
+    position:relative; padding:clamp(18px, 3vw, 26px); border-radius:26px;
     background:
       radial-gradient(140% 160% at 20% 0%, rgba(255,255,255,.10), rgba(255,255,255,0) 40%),
       radial-gradient(140% 160% at 80% 100%, rgba(255,255,255,.08), rgba(255,255,255,0) 45%),
-      linear-gradient(180deg, rgba(25,5,35,.68), rgba(15,0,20,.68)); /* surface */
+      linear-gradient(180deg, rgba(25,5,35,.68), rgba(15,0,20,.68));
     backdrop-filter: blur(7px) saturate(110%);
     box-shadow: 0 18px 40px rgba(0,0,0,.35), inset 0 0 30px rgba(255,255,255,.03);
   }
-  /* Bordure or très fine, avec léger glow */
   .gold-frame::before{
     content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
     background:linear-gradient(135deg,#ffe8ae,#fff7dc 35%,#ffd674 65%,#ffdba2);
     -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite:xor; mask-composite:exclude;
-    box-shadow:0 0 20px rgba(255,214,116,.28);
-    pointer-events:none;
+    box-shadow:0 0 20px rgba(255,214,116,.28); pointer-events:none;
   }
-  /* Reflet très subtil qui glisse (sans effet “fort”) */
   .gold-frame::after{
     content:""; position:absolute; inset:-8% -35%; border-radius:inherit;
     background:linear-gradient(100deg, transparent 42%, rgba(255,255,255,.10) 50%, transparent 58%);
     transform:translateX(-60%) rotate(7deg);
-    animation:glare 10s linear infinite;
-    pointer-events:none;
+    animation:glare 10s linear infinite; pointer-events:none;
   }
-  @keyframes glare{
-    0%{ transform:translateX(-60%) rotate(7deg); }
-    100%{ transform:translateX(60%) rotate(7deg); }
-  }
+  @keyframes glare{ 0%{transform:translateX(-60%) rotate(7deg);} 100%{transform:translateX(60%) rotate(7deg);} }
   .citation{
-    margin:0;
-    font-size:clamp(1.06rem,2.6vw,1.45rem);
-    line-height:1.9;
-    text-align:center;
+    margin:0; font-size:clamp(1.06rem,2.6vw,1.45rem); line-height:1.9;
     text-shadow:0 1px 0 rgba(0,0,0,.35);
-    animation:reveal 800ms ease both 150ms;
   }
   .citation .guil{ color:var(--or); font-size:1.4em; text-shadow:0 0 10px rgba(255,214,116,.35); }
-  @keyframes reveal{
-    from{ opacity:0; filter:blur(6px); transform:translateY(6px); }
-    to  { opacity:1; filter:blur(0);  transform:translateY(0); }
-  }
 
   /* Boutons */
-  .grille{
-    display:grid; gap:1rem; margin:0 auto; max-width:980px;
-    grid-template-columns: repeat(12, 1fr);
-  }
   .btn{
-    grid-column: span 4;
-    display:flex; align-items:center; justify-content:center; gap:.6rem;
-    text-decoration:none; color:var(--ivoire);
-    padding:14px 18px; border-radius:999px;
+    display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+    text-decoration:none; color:var(--ivoire); padding:14px 18px; border-radius:999px;
     border:1px solid var(--bord); background:rgba(0,0,0,.35);
-    transition:.25s ease; font-size:1.05rem;
-    box-shadow:0 4px 18px rgba(0,0,0,.25);
+    transition:.25s ease; font-size:1.05rem; box-shadow:0 4px 18px rgba(0,0,0,.25);
+    margin:.4rem .35rem;
   }
   .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.35); }
-  .shop{ grid-column: span 4; position:relative; overflow:hidden; font-weight:700;
+  .shop{ font-weight:700; border:1px solid var(--or);
     background:linear-gradient(180deg, rgba(255,214,116,.18), rgba(255,214,116,.06));
-    border:1px solid var(--or);
   }
-  .shop::after{
-    content:""; position:absolute; inset:-200% -20%; transform:rotate(12deg);
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
-    animation:shine 3.2s linear infinite;
-  }
-  @keyframes shine{ 0%{transform:translateX(-60%) rotate(12deg);} 100%{transform:translateX(60%) rotate(12deg);} }
+
+  .btn-row{ display:flex; flex-wrap:wrap; justify-content:center; margin:.2rem auto 1rem; }
   .ico{
     width:32px; height:32px; border-radius:50%; display:grid; place-items:center; flex:0 0 auto;
     background:radial-gradient(circle at 30% 30%, #ffecb3, #f3c86a); color:#5a2e00;
     box-shadow:inset 0 0 8px rgba(0,0,0,.25), 0 0 12px rgba(255,214,116,.35); font-size:18px;
   }
   .ico.purple{ background:radial-gradient(circle at 30% 30%, #e8d9ff, #b58cff); color:#2a103f; }
-  .outline{ background:rgba(0,0,0,.28); font-weight:600; }
-  .outline:hover{ background:rgba(0,0,0,.45); }
 
-  @media (max-width:900px){ .btn, .shop{ grid-column: span 6; } }
-  @media (max-width:560px){ .btn, .shop{ grid-column: span 12; } }
-
-  /* ===== Notes “vivantes” — seulement ~10, qui errent doucement ===== */
+  /* Notes “vivantes” — 10 seulement */
   .note{
-    position:absolute;
-    will-change:transform, opacity;
+    position:absolute; will-change:transform, opacity;
     filter:drop-shadow(0 3px 8px rgba(0,0,0,.45));
     font-size: clamp(22px, 2.8vw, 36px);
-    opacity:0;
-    transform:translate(-50%, -50%) scale(.9) rotate(0deg);
-    transition: opacity .6s ease;
-    user-select:none;
-    pointer-events:none;
+    opacity:0; transform:translate(-50%, -50%) scale(.9) rotate(0deg);
+    transition: opacity .6s ease; user-select:none; pointer-events:none;
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -159,16 +125,16 @@
 </style>
 </head>
 <body>
-  <!-- Canvas : FEUX D’ARTIFICE -->
+  <!-- Feux d’artifice -->
   <canvas class="fx-canvas" aria-hidden="true"></canvas>
-
-  <!-- Calque des notes -->
+  <!-- Notes -->
   <div class="fx-layer" id="notes-layer" aria-hidden="true"></div>
 
   <main class="wrap">
     <h1>Monde des Artistes</h1>
     <div class="soustitre">Création • Harmonie • Lumière</div>
 
+    <!-- Cadre citation -->
     <section class="cartouche">
       <div class="gold-frame">
         <p class="citation">
@@ -180,15 +146,26 @@
       </div>
     </section>
 
-    <nav class="grille">
-      <a class="btn outline" href="9.entree_Artistes.html">Entrée du monde</a>
+    <!-- 1er rang : Entrée & Extrait -->
+    <div class="btn-row">
+      <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
+      <a class="btn" href="7.extrait_Artistes.html">Extrait</a>
+    </div>
+
+    <!-- 2e rang : Titre + boutiques -->
+    <div class="section-title">La place des artistes</div>
+    <div class="btn-row">
       <a class="btn shop" href="chanson_de_camidjo.html"><span class="ico">🎵</span> Camidjo</a>
       <a class="btn shop" href="loup_bout_art.html"><span class="ico purple">🎨</span> Loup-Bout'Art</a>
-      <a class="btn outline" href="3.les_mondes.html">← Retour aux Mondes</a>
-    </nav>
+    </div>
+
+    <!-- Retour -->
+    <div class="btn-row">
+      <a class="btn" href="3.les_mondes.html">← Retour aux Mondes</a>
+    </div>
   </main>
 
-<!-- ===== Feux d’artifice (mix des 3 styles, densité vivante, arc-en-ciel) ===== -->
+<!-- ===== Feux d’artifice (mix, arc-en-ciel) ===== -->
 <script>
 (function(){
   const c = document.querySelector('.fx-canvas');
@@ -204,20 +181,19 @@
     c.style.height = innerHeight + 'px';
     ctx.globalCompositeOperation = 'lighter';
   }
-  resize();
-  addEventListener('resize', resize);
+  resize(); addEventListener('resize', resize);
 
   const fireworks = [];
   const colors = (n)=>Array.from({length:n},(_,i)=>`hsl(${(i/n)*360} 90% 60%)`);
 
   function spawnFirework(){
     const x = Math.random()*W;
-    const y = Math.random()*H*0.7 + H*0.05; // partout
+    const y = Math.random()*H*0.7 + H*0.05;
     const style = Math.random();
     const parts = Math.floor(90 + Math.random()*90);
     const speed = 1.5 + Math.random()*1.2;
     const palette = colors(12);
-    const fw = { x, y, t:0, parts:[], life:0, max:80 + Math.random()*40, style, palette };
+    const fw = { x, y, parts:[], life:0, max:80 + Math.random()*40, style, palette };
     for(let i=0;i<parts;i++){
       const a = (i/parts)*Math.PI*2;
       let vx, vy;
@@ -228,8 +204,7 @@
     }
     fireworks.push(fw);
   }
-
-  const interval = 900; // densité “vivante” mais pas folle
+  const interval = 900;
   setInterval(spawnFirework, interval);
   for(let i=0;i<3;i++) setTimeout(spawnFirework, i*250);
 
@@ -243,18 +218,11 @@
       const fw = fireworks[fi];
       fw.life++;
       for(const p of fw.parts){
-        p.vy += 0.006 * dpr;
-        p.vx *= 0.996; p.vy *= 0.996;
-        p.x += p.vx * dpr; p.y += p.vy * dpr;
-        p.alpha *= 0.985;
+        p.vy += 0.006 * dpr; p.vx *= 0.996; p.vy *= 0.996;
+        p.x += p.vx * dpr;  p.y += p.vy * dpr;  p.alpha *= 0.985;
 
-        ctx.strokeStyle = p.col;
-        ctx.globalAlpha = Math.max(0, p.alpha);
-        ctx.lineWidth = 1.2*dpr;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx*3, p.y - p.vy*3);
-        ctx.stroke();
+        ctx.strokeStyle = p.col; ctx.globalAlpha = Math.max(0, p.alpha); ctx.lineWidth = 1.2*dpr;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx*3, p.y - p.vy*3); ctx.stroke();
       }
       if(fw.life > fw.max) fireworks.splice(fi,1);
     }
@@ -265,7 +233,7 @@
 })();
 </script>
 
-<!-- ===== Notes “vivantes” : ~10, errent doucement puis respawn ===== -->
+<!-- ===== Notes “vivantes” : ~10 ===== -->
 <script>
 (function(){
   const L = document.getElementById('notes-layer');
@@ -273,7 +241,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce) return;
 
-  const poolSize = 10;                    // ← seulement une dizaine
+  const poolSize = 10;
   const glyphs   = ['♪','♫','🎵','🎶'];
   const notes = [];
 
@@ -285,52 +253,28 @@
     el.className = 'note';
     el.textContent = pick(glyphs);
     L.appendChild(el);
-
     const obj = {
-      el,
-      x: rand(0, innerWidth),
-      y: rand(0, innerHeight),
-      vx: rand(-0.20, 0.20),
-      vy: rand(-0.15, 0.15),
-      rot: rand(-15,15),
-      life: 0,
-      maxLife: rand(7,12)*60,  // ~7–12s
-      scale: rand(0.9,1.2)
+      el, x: rand(0, innerWidth), y: rand(0, innerHeight),
+      vx: rand(-0.20, 0.20), vy: rand(-0.15, 0.15),
+      rot: rand(-15,15), life: 0, maxLife: rand(7,12)*60, scale: rand(0.9,1.2)
     };
     el.style.opacity = '0';
     requestAnimationFrame(()=> el.style.opacity = '1');
     notes.push(obj);
   }
-
   for(let i=0;i<poolSize;i++) spawn();
 
   function step(){
     for(let i=notes.length-1; i>=0; i--){
-      const n = notes[i];
-      n.life++;
-
-      // mouvement organique doux
-      n.vx += rand(-0.008,0.008);
-      n.vy += rand(-0.006,0.006);
-
-      n.x += n.vx;
-      n.y += n.vy;
-      n.rot += (n.vx + n.vy)*0.25;
-
-      // rebonds doux bords
+      const n = notes[i]; n.life++;
+      n.vx += rand(-0.008,0.008); n.vy += rand(-0.006,0.006);
+      n.x += n.vx; n.y += n.vy; n.rot += (n.vx + n.vy)*0.25;
       if(n.x < 0 || n.x > innerWidth)  n.vx *= -1;
       if(n.y < 0 || n.y > innerHeight) n.vy *= -1;
-
       n.el.style.transform = `translate(${n.x}px, ${n.y}px) rotate(${n.rot}deg) scale(${n.scale})`;
-
-      // fin de vie → fade-out + respawn ailleurs
       if(n.life > n.maxLife){
         n.el.style.opacity = '0';
-        setTimeout(()=>{
-          n.el.remove();
-          notes.splice(i,1);
-          spawn();
-        }, 500);
+        setTimeout(()=>{ n.el.remove(); notes.splice(i,1); spawn(); }, 500);
       }
     }
     requestAnimationFrame(step);
