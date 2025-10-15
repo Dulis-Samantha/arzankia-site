@@ -346,18 +346,6 @@
         ctx.lineTo(px, py);
         ctx.stroke();
 
-        // scintillement (glitter) : étincelles brèves et lentes
-        if (Math.random() < 0.08){
-          fw.glitter.push({
-            x: p.x, y: p.y,
-            vx: (Math.random()-0.5)*0.6*dpr,
-            vy: (Math.random()-0.5)*0.6*dpr,
-            alpha: 0.9, col: p.col
-          });
-        }
-        anyVisible = true;
-      }
-
       // dessiner étincelles
       for (let gi=fw.glitter.length-1; gi>=0; gi--){
         const g = fw.glitter[gi];
