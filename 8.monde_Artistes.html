@@ -87,6 +87,57 @@
     background:radial-gradient(circle at 30% 30%,#ffecb3,#f3c86a);color:#5a2e00;
     box-shadow:inset 0 0 8px rgba(0,0,0,.25),0 0 12px rgba(255,214,116,.35);font-size:18px;}
   .ico.purple{background:radial-gradient(circle at 30% 30%,#e8d9ff,#b58cff);color:#2a103f;}
+
+  /* === Filigrane arabesques dorées === */
+.filigrane-arabesque {
+  position: relative;
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto 1.2rem;
+  height: 3.6rem;
+}
+
+.filigrane-arabesque .ligne {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,214,116,0.7) 20%,
+    rgba(255,214,116,1),
+    rgba(255,214,116,0.7) 80%,
+    transparent
+  );
+  box-shadow: 0 0 6px rgba(255,214,116,0.4);
+  overflow: hidden;
+}
+
+.filigrane-arabesque .haut { top: 0; transform: rotate(1deg) scaleX(0.98); }
+.filigrane-arabesque .bas  { bottom: 0; transform: rotate(-1deg) scaleX(0.98); }
+
+/* Lueur dorée qui parcourt les arabesques */
+.filigrane-arabesque::before,
+.filigrane-arabesque::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, #fff8e6 50%, transparent);
+  opacity: 0.25;
+  animation: filigrane-glow 5s linear infinite;
+}
+.filigrane-arabesque::after {
+  animation-delay: 2.5s;
+  opacity: 0.35;
+}
+
+@keyframes filigrane-glow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 </style>
 </head>
 <body>
@@ -96,6 +147,11 @@
   <h1>Monde des Artistes</h1>
   <div class="soustitre">Création • Harmonie • Lumière</div>
   <section class="phrase-magique"></section>
+
+  <div class="filigrane-arabesque" aria-hidden="true">
+  <span class="ligne haut"></span>
+  <span class="ligne bas"></span>
+</div>
 
   <div class="btn-row">
     <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
