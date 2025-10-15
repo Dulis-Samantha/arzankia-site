@@ -8,272 +8,191 @@
 <title>Monde des Artistes – Arzankia</title>
 
 <style>
-  :root{
-    --or:#ffd674;
-    --ivoire:#fff8e6;
-    --bord:rgba(255,214,116,.55);
-  }
-
-  body{
-    margin:0;
-    font-family:Georgia, serif;
-    color:var(--ivoire);
-    background:url('fond_monde_air.png') center/cover no-repeat fixed;
-    min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    padding:clamp(16px,3vw,48px);
-    position:relative;
-    overflow-x:hidden;
-  }
-
-  body::before{
-    content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(180deg,rgba(10,0,20,.55),rgba(0,0,0,.25)30%,rgba(0,0,0,.35)70%,rgba(10,0,20,.6));
-  }
-
-  .fx-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
-
-  .wrap{max-width:1100px;width:100%;text-align:center;position:relative;z-index:2;margin-top:clamp(1rem,4vh,2.5rem);}
-  h1{margin:0 0 .6rem;line-height:1.1;font-size:clamp(2.2rem,6vw,4rem);color:var(--or);
-     text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 24px rgba(255,214,116,.25);}
-  .soustitre{font-size:clamp(.95rem,2.4vw,1.05rem);letter-spacing:.06em;opacity:.9;margin-bottom:1.2rem;}
-  .section-title {
-  margin: 2.8rem auto 0.6rem; /* ↑ marge haute plus grande, bas légère */
-  font-size: clamp(1.1rem, 2.3vw, 1.4rem);
-  letter-spacing: .04em;
-  opacity: .95;
+:root{
+  --or:#ffd674;
+  --ivoire:#fff8e6;
+  --bord:rgba(255,214,116,.55);
 }
 
-  .section-title::after{content:"";display:block;width:120px;height:2px;margin:.5rem auto 0;
-     background:linear-gradient(90deg,transparent,var(--or),transparent);
-     border-radius:999px;box-shadow:0 0 10px rgba(255,214,116,.35);}
-  .phrase-magique{
-    position:relative;
-    display:flex;flex-wrap:wrap;justify-content:center;
-    gap:.5rem .6rem;
-    font-family:"IM Fell English",Georgia,serif;
-    font-size:clamp(1.1rem,2.8vw,1.6rem);
-    line-height:1.8;
-    margin:0 auto 1.8rem;
-    max-width:900px;text-align:center;
-    min-height:3em;
-  }
-  .mot{
-    position:relative;
-    display:inline-block;
-    opacity:0;
-    transform:translate(0,0);
-    color:var(--ivoire);
-    text-shadow:0 0 10px rgba(255,214,116,.3);
-    filter:drop-shadow(0 0 6px rgba(255,214,116,.3));
-    will-change:transform,opacity;
-  }
-  .mot.en-place{
-    opacity:1;
-    animation:pulse var(--pulse-duree,3.5s) ease-in-out infinite alternate;
-  }
-  @keyframes pulse{
-    0%{transform:scale(var(--scale-min,1));text-shadow:0 0 10px rgba(255,214,116,.3);}
-    100%{transform:scale(var(--scale-max,1.05));text-shadow:0 0 24px rgba(255,214,116,.55);}
-  }
-
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
-    text-decoration:none;color:var(--ivoire);padding:14px 18px;border-radius:999px;
-    border:1px solid var(--bord);background:rgba(0,0,0,.35);
-    transition:.25s ease;font-size:1.05rem;box-shadow:0 4px 18px rgba(0,0,0,.25);
-    margin:.4rem .35rem;}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.35);}
-  .shop{font-weight:700;border:1px solid var(--or);
-    background:linear-gradient(180deg,rgba(255,214,116,.18),rgba(255,214,116,.06));}
-  
- .btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: .2rem auto 1rem; /* espace vertical augmenté */
-}
-
-  .ico{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
-    background:radial-gradient(circle at 30% 30%,#ffecb3,#f3c86a);color:#5a2e00;
-    box-shadow:inset 0 0 8px rgba(0,0,0,.25),0 0 12px rgba(255,214,116,.35);font-size:18px;}
-  .ico.purple{background:radial-gradient(circle at 30% 30%,#e8d9ff,#b58cff);color:#2a103f;}
-
-/* ==== Boutons des boutiques rectangulaires ==== */
-.btn-row.shops .btn {
-  border-radius: 12px;                     /* coins légèrement arrondis */
-  padding: 14px 20px;
-  font-weight: 600;
-  background: linear-gradient(180deg, rgba(255,214,116,.15), rgba(255,214,116,.05));
-  border: 1px solid var(--or);
-  width:100%;
-  box-sizing:border-box;
+/* === Fond & structure globale === */
+body{
   margin:0;
+  font-family:Georgia, serif;
+  color:var(--ivoire);
+  background:url('fond_monde_air.png') center/cover no-repeat fixed;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:clamp(16px,3vw,48px);
+  position:relative;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(10,0,20,.55),rgba(0,0,0,.25)30%,rgba(0,0,0,.35)70%,rgba(10,0,20,.6));
+}
+.fx-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+.wrap{
+  max-width:1100px;width:100%;text-align:center;
+  position:relative;z-index:2;
+  margin-top:clamp(1rem,4vh,2.5rem);
 }
 
-/* ==== Version mobile : côte à côte sans chevauchement ==== */
-@media (max-width:600px){
-  .btn-row.shops{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,1fr)); /* empêche le débord */
-    gap:10px;
-    width:100%;
-    max-width:520px;
-    margin:.5rem auto 1.5rem;
-  }
-  .btn-row.shops .btn{
-    padding:12px 10px;
-    font-size:.95rem;
-  }
-  .btn-row.shops .ico{ width:26px; height:26px; font-size:16px; }
+/* === Titres === */
+h1{
+  margin:0 0 .6rem;
+  line-height:1.1;
+  font-size:clamp(2.2rem,6vw,4rem);
+  color:var(--or);
+  text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 24px rgba(255,214,116,.25);
+}
+.soustitre{
+  font-size:1.2rem;
+  letter-spacing:.08em;
+  margin:.2em 0 .8em;
+  opacity:.9;
+}
+@media(max-width:600px){
+  .soustitre{font-size:.6rem;letter-spacing:.035em;}
 }
 
-
-
-/* Cadre doré (haut/bas) + voile blanc inside */
+/* === Phrase magique === */
 .phrase-magique{
-  position: relative;
-  padding: 16px 18px;
-  margin: 0 auto 1.8rem;
-  overflow: hidden;                 /* le voile reste dans le cadre */
+  position:relative;
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.5rem .6rem;
+  font-family:"IM Fell English",Georgia,serif;
+  font-size:clamp(1.1rem,2.8vw,1.6rem);
+  line-height:1.8;
+  margin:0 auto 1.8rem;
+  max-width:900px;text-align:center;
+  min-height:3em;
+  padding:16px 18px;
+  overflow:hidden;
 }
-
-/* Lignes dorées haut/bas (pas de lignes gauche/droite) */
 .phrase-magique::before,
 .phrase-magique::after{
   content:"";
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:min(92%, 980px);
+  width:min(92%,980px);
   height:2px;
   border-radius:999px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,214,116,.75) 20%,
-    #ffd674 50%,
-    rgba(255,214,116,.75) 80%,
-    transparent
-  );
+  background:linear-gradient(90deg,transparent,rgba(255,214,116,.75)20%,#ffd674 50%,rgba(255,214,116,.75)80%,transparent);
   box-shadow:0 0 8px rgba(255,214,116,.35);
-  z-index:2;                        /* au-dessus des mots et du voile */
-  pointer-events:none;
+  z-index:2;
 }
-.phrase-magique::before{ top:0; }
-.phrase-magique::after { bottom:0; }
-
-/* Lueur qui parcourt les lignes (facultatif) */
+.phrase-magique::before{top:0;}
+.phrase-magique::after{bottom:0;}
 @keyframes arabesque-shine{
-  0%{ background-position:-100% 0; }
-  100%{ background-position:100% 0; }
+  0%{background-position:-100% 0;}
+  100%{background-position:100% 0;}
 }
 .phrase-magique::before,
 .phrase-magique::after{
   background-size:200% 100%;
   animation:arabesque-shine 6s linear infinite;
 }
-.phrase-magique::after{ animation-delay:3s; }
-
-/* Voile blanc animé à l’intérieur du cadre */
 .voile{
-  position:absolute;
-  top:0; left:0;
-  width:120%; height:100%;
-  background:linear-gradient(90deg,
-    transparent 0%,
-    rgba(255,255,255,.18) 45%,
-    rgba(255,255,255,.28) 50%,
-    rgba(255,255,255,.18) 55%,
-    transparent 100%);
-  filter: blur(1px);
-  animation: voile-glisse 8s linear infinite;
-  z-index:0;                        /* sous les mots */
-  pointer-events:none;
+  position:absolute;top:0;left:0;
+  width:120%;height:100%;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18)45%,rgba(255,255,255,.28)50%,rgba(255,255,255,.18)55%,transparent 100%);
+  filter:blur(1px);
+  animation:voile-glisse 8s linear infinite;
+  z-index:0;
 }
 @keyframes voile-glisse{
-  0%{ transform:translateX(-100%); }
-  100%{ transform:translateX(100%); }
+  0%{transform:translateX(-100%);}
+  100%{transform:translateX(100%);}
 }
+.mot{position:relative;z-index:1;color:var(--ivoire);}
 
-/* Les mots restent à l’intérieur, au-dessus du voile, sous les lignes */
-.mot{ position:relative; z-index:1; }
-
-.soustitre {
-  font-size: 1.2rem;
-  letter-spacing: 0.08em;
-  margin: 0.2em 0 0.8em;
+/* === Boutons dorés : Entrée du monde / Extrait du livre === */
+.button-group{
+  display:flex;
+  justify-content:center;
+  gap:1.2rem;
+  margin-top:1.5rem;
+  flex-wrap:wrap;
 }
-
-@media (max-width: 600px) {
-  .soustitre {
-    font-size: 0.6rem;       /* plus petit encore */
-    letter-spacing: 0.035em;  /* espace réduit entre les lettres */
-    opacity: 0.9;
+.button-group a{
+  display:inline-block;
+  padding:.7rem 1.5rem;
+  background:linear-gradient(145deg,#ffe9af,#f2c94c);
+  color:#4a2e00;
+  text-decoration:none;
+  font-weight:700;
+  font-size:1rem;
+  border-radius:30px;
+  box-shadow:0 0 10px rgba(255,223,100,.6);
+  transition:transform .2s ease,box-shadow .2s ease;
+  min-width:180px;
+  text-align:center;
+}
+.button-group a:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 18px rgba(255,223,100,1);
+}
+@media(max-width:600px){
+  .button-group{
+    position:fixed;
+    bottom:10px;left:0;right:0;
+    justify-content:center;
+    background:rgba(0,0,0,.4);
+    padding:.5rem 1rem;
+    z-index:999;
+    gap:.5rem;
+  }
+  .button-group a{
+    font-size:.85rem;
+    padding:.45rem .9rem;
+    min-width:auto;
+    border-radius:25px;
+    box-shadow:0 0 8px rgba(255,223,100,.6);
   }
 }
-/* ===== Cadre bois “Boutiques des Artistes” ===== */
+
+/* === Cadre bois “Boutiques des Artistes” === */
 .boutiques-frame{
-  --bois1:#7a4e2b;       /* brun */
-  --bois2:#a36b3d;       /* brun clair */
-  --bois3:#5b381f;       /* ombre */
-  --dor:#ffd674;         /* liseré doré */
+  --bois1:#7a4e2b;
+  --bois2:#a36b3d;
+  --dor:#ffd674;
   position:relative;
-  margin: 2.6rem auto 2rem;
-  max-width: 920px;
-  padding: 18px;                       /* épaisseur bordure bois */
-  border-radius: 18px;
-  background:
-    /* veinage large */
-    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.08)),
-    repeating-linear-gradient( -12deg,
-      rgba(255,255,255,.02) 0 8px,
-      rgba(0,0,0,.06) 8px 16px ),
-    linear-gradient(180deg, var(--bois2), var(--bois1));
-  box-shadow:
-    inset 0 0 0 2px rgba(0,0,0,.25),    /* cerclage sombre intérieur */
-    0 10px 24px rgba(0,0,0,.35);        /* ombre portée */
-}
-
-/* Liseré doré intérieur (comme une incrustation) */
-.boutiques-frame::before{
-  content:"";
-  position:absolute; inset:10px;
-  border-radius:14px;
-  box-shadow: inset 0 0 0 2px rgba(255,214,116,.65),
-              inset 0 0 18px rgba(255,214,116,.25);
-  pointer-events:none;
-}
-
-/* Coins “sculptés” par de légères touches lumineuses */
-.boutiques-frame::after{
-  content:"";
-  position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(18px 18px at 18px 18px, rgba(255,214,116,.18), transparent 70%),
-    radial-gradient(18px 18px at calc(100% - 18px) 18px, rgba(255,214,116,.18), transparent 70%),
-    radial-gradient(18px 18px at 18px calc(100% - 18px), rgba(255,214,116,.18), transparent 70%),
-    radial-gradient(18px 18px at calc(100% - 18px) calc(100% - 18px), rgba(255,214,116,.18), transparent 70%);
+  margin:2.6rem auto 2rem;
+  max-width:920px;
+  padding:18px;
   border-radius:18px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.08)),
+    repeating-linear-gradient(-12deg,rgba(255,255,255,.02)0 8px,rgba(0,0,0,.06)8px 16px),
+    linear-gradient(180deg,var(--bois2),var(--bois1));
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.25),0 10px 24px rgba(0,0,0,.35);
 }
-
-/* Barre supérieure intégrée (porte le titre) */
+.boutiques-frame::before{
+  content:"";position:absolute;inset:10px;border-radius:14px;
+  box-shadow:inset 0 0 0 2px rgba(255,214,116,.65),inset 0 0 18px rgba(255,214,116,.25);
+}
+.boutiques-frame::after{
+  content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;
+  background:
+    radial-gradient(18px 18px at 18px 18px,rgba(255,214,116,.18),transparent 70%),
+    radial-gradient(18px 18px at calc(100% - 18px) 18px,rgba(255,214,116,.18),transparent 70%),
+    radial-gradient(18px 18px at 18px calc(100% - 18px),rgba(255,214,116,.18),transparent 70%),
+    radial-gradient(18px 18px at calc(100% - 18px) calc(100% - 18px),rgba(255,214,116,.18),transparent 70%);
+}
 .frame-topbar{
   position:relative;
   margin:-6px auto 14px;
   padding:10px 18px;
   display:inline-block;
   border-radius:12px;
-  background:
-    linear-gradient(180deg, rgba(255,214,116,.22), rgba(255,214,116,.08));
-  box-shadow:
-    inset 0 0 0 2px rgba(255,214,116,.6),
-    0 4px 10px rgba(0,0,0,.25);
+  background:linear-gradient(180deg,rgba(255,214,116,.22),rgba(255,214,116,.08));
+  box-shadow:inset 0 0 0 2px rgba(255,214,116,.6),0 4px 10px rgba(0,0,0,.25);
 }
-
-/* Titre dans la barre */
 .frame-title{
   font-weight:700;
   letter-spacing:.04em;
@@ -281,97 +200,94 @@
   text-shadow:0 0 6px rgba(255,214,116,.45);
   white-space:nowrap;
 }
-
-/* Contenu interne (fond feutré) */
-.boutiques-frame .shops-grid{
+.shops-grid{
   margin:10px auto 6px;
   padding:16px;
   border-radius:12px;
-  background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.32));
-  box-shadow: inset 0 0 24px rgba(0,0,0,.35);
+  background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.32));
+  box-shadow:inset 0 0 24px rgba(0,0,0,.35);
   display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:14px;
-  max-width: 820px;
+  max-width:820px;
 }
-
-/* Boutons en mode rectangle */
-.boutiques-frame .shop{
+.shop{
   border-radius:12px;
   border:1px solid var(--dor);
-  background: linear-gradient(180deg, rgba(255,214,116,.16), rgba(255,214,116,.06));
+  background:linear-gradient(180deg,rgba(255,214,116,.16),rgba(255,214,116,.06));
   font-weight:600;
   padding:14px 16px;
-  margin:0; width:100%;
+  margin:0;width:100%;
   box-shadow:0 6px 18px rgba(0,0,0,.25);
+  text-decoration:none;color:var(--ivoire);
 }
-.boutiques-frame .shop:hover{
-  transform: translateY(-2px);
-  box-shadow:0 12px 24px rgba(0,0,0,.32);
+.shop:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(0,0,0,.32);}
+@media(max-width:600px){
+  .boutiques-frame{margin:2.2rem auto 1.6rem;padding:14px;}
+  .frame-topbar{padding:8px 14px;}
+  .frame-title{font-size:.95rem;}
+  .shops-grid{gap:10px;padding:12px;}
+  .shop{padding:12px 10px;font-size:.95rem;}
 }
-
-/* Mobile : garde bien les 2 colonnes sans chevauchement */
-@media (max-width:600px){
-  .boutiques-frame{ margin: 2.2rem auto 1.6rem; padding:14px; }
-  .frame-topbar{ padding:8px 14px; }
-  .frame-title{ font-size: .95rem; }
-  .frame-signature{ right:16px; font-size:.9rem; }
-  .boutiques-frame .shops-grid{ gap:10px; padding:12px; }
-  .boutiques-frame .shop{ padding:12px 10px; font-size:.95rem; }
+@media(max-width:360px){
+  .shops-grid{grid-template-columns:1fr;}
 }
-
-
 </style>
 </head>
+
 <body>
 <canvas class="fx-canvas" aria-hidden="true"></canvas>
 
 <main class="wrap">
   <h1>Monde des Artistes</h1>
   <div class="soustitre">Création • Harmonie • Lumière</div>
+
   <section class="phrase-magique">
-  <div class="voile" aria-hidden="true"></div>
-</section>
+    <div class="voile" aria-hidden="true"></div>
+  </section>
 
-
-  <div class="btn-row">
-    <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
-    <a class="btn" href="7.extrait_Artistes.html">Extrait du livre</a>
-
-  </div>
-<div class="boutiques-frame">
-  <div class="frame-topbar">
-    <span class="frame-title">Les boutiques des Artistes</span>
+  <!-- Boutons dorés -->
+  <div class="button-group">
+    <a href="9.entree_Artistes.html">Entrée du monde</a>
+    <a href="7.extrait_Artistes.html">Extrait du livre</a>
   </div>
 
-  <div class="shops-grid">
-    <a class="btn shop" href="chanson_de_camidjo.html"><span class="ico">🎵</span> Camidjo</a>
-    <a class="btn shop" href="loup_bout_art.html"><span class="ico purple">🎨</span> Loup-Bout'Art</a>
-  </div>
-</div>
+  <!-- Cadre bois boutiques -->
+  <div class="boutiques-frame">
+    <div class="frame-topbar">
+      <span class="frame-title">Les boutiques des Artistes</span>
+    </div>
 
-  <div class="btn-row"><a class="btn" href="3.les_mondes.html">← Retour</a></div>
+    <div class="shops-grid">
+      <a class="shop" href="chanson_de_camidjo.html"><span class="ico">🎵</span> Camidjo</a>
+      <a class="shop" href="loup_bout_art.html"><span class="ico purple">🎨</span> Loup-Bout'Art</a>
+    </div>
+  </div>
+
+  <!-- Retour -->
+  <div class="button-group">
+    <a href="3.les_mondes.html">← Retour aux Mondes</a>
+  </div>
 </main>
 
-<!-- === Apparition chaotique et courbes === -->
+<!-- === Animation de texte === -->
 <script>
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-
 const phrase="Ici, les notes dansent, les couleurs vibrent, et d’étranges créatures laissent exprimer leur talent à la lumière…";
 const container=document.querySelector('.phrase-magique');
 const mots=phrase.split(' ');
 const order=shuffle([...mots.keys()]);
-let placesFinies=0;
-
 mots.forEach((mot,i)=>{
   const span=document.createElement('span');
   span.className='mot';
   span.textContent=mot;
   container.appendChild(span);
 });
-
 const spans=[...document.querySelectorAll('.mot')];
-
+order.forEach((index,i)=>{
+  const delai=i*300;
+  animeMot(index,delai);
+});
 function animeMot(index,delai){
   const span=spans[index];
   const rectFinal=span.getBoundingClientRect();
@@ -382,125 +298,19 @@ function animeMot(index,delai){
   const endX=rectFinal.left+rectFinal.width/2;
   const endY=rectFinal.top+rectFinal.height/2;
   span.style.opacity=0;
-
   const duration=2000+Math.random()*1000;
   const startTime=performance.now()+delai;
-
   function move(now){
     if(now<startTime){requestAnimationFrame(move);return;}
-    let t=(now-startTime)/duration;
-    if(t>1)t=1;
+    let t=(now-startTime)/duration;if(t>1)t=1;
     const inv=1-t;
     const x=inv*inv*startX+2*inv*t*ctrlX+t*t*endX;
     const y=inv*inv*startY+2*inv*t*ctrlY+t*t*endY;
     span.style.opacity=Math.min(1,t*2);
-    span.style.transform=`translate(${x-endX}px,${y-endY}px) scale(${1+0.1*Math.sin(t*Math.PI)}) rotate(${(1-t)*15*(Math.random()>0.5?1:-1)}deg)`;
+    span.style.transform=`translate(${x-endX}px,${y-endY}px) scale(${1+0.1*Math.sin(t*Math.PI)})`;
     if(t<1){requestAnimationFrame(move);}
-    else{
-      span.style.transform='translate(0,0)';
-      span.classList.add('en-place');
-      placesFinies++;
-      if(placesFinies===mots.length) startFireworks();
-    }
   }
   requestAnimationFrame(move);
-}
-
-order.forEach((index,i)=>{
-  const delai=i*300; // apparition en cascade aléatoire
-  animeMot(index,delai);
-});
-</script>
-
-<!-- === Feux d’artifice === -->
-<script>
-function startFireworks(){
-(function(){
-  const c=document.querySelector('.fx-canvas');
-  const ctx=c.getContext('2d',{alpha:true});
-  let dpr=Math.max(1,window.devicePixelRatio||1),W,H;
-  function resize(){dpr=Math.max(1,window.devicePixelRatio||1);
-    W=Math.floor(innerWidth*dpr);H=Math.floor(innerHeight*dpr);
-    c.width=W;c.height=H;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
-    ctx.globalCompositeOperation='lighter';}
-  resize();addEventListener('resize',resize,{passive:true});
-  const fixedPalette=[0,30,55,120,210,270,320];
-  function makePalette(){
-    if(Math.random()<0.7){
-      const h=fixedPalette[(Math.random()*fixedPalette.length)|0];
-      return Array.from({length:10},(_,i)=>`hsl(${h+(i-5)*2} 95% 60%)`);
-    }else{
-      return Array.from({length:12},(_,i)=>`hsl(${(i/12)*360} 90% 58%)`);
-    }}
-  const rockets=[],fireworks=[];const MAX_RKTS=5,MAX_FWS=5;
-  function spawnRocket(){
-    if(rockets.length>=MAX_RKTS)return;
-    const x=(0.08+Math.random()*0.84)*W;
-    const y=H*(0.92+Math.random()*0.05);
-    const vx=(Math.random()-0.5)*0.6*dpr;
-    const vy=-(1.6+Math.random()*0.7)*dpr;
-    const col=`hsl(${fixedPalette[(Math.random()*fixedPalette.length)|0]} 95% 70%)`;
-    rockets.push({x,y,vx,vy,ax:(Math.random()-0.5)*0.005*dpr,ay:0.0005*dpr,life:0,maxLife:90+Math.random()*60,trail:[],col,palette:makePalette()});
-  }
-  function explodeAt(x,y,palette){
-    if(fireworks.length>=MAX_FWS)return;
-    const parts=Math.floor(140+Math.random()*120);
-    const speed=(1.1+Math.random()*0.7)*dpr;
-    const fw={x,y,parts:[],life:0,max:110+Math.random()*60,palette};
-    for(let i=0;i<parts;i++){
-      const a=(i/parts)*Math.PI*2;
-      const vx=Math.cos(a)*speed;
-      const vy=Math.sin(a)*speed;
-      fw.parts.push({x,y,vx,vy,alpha:1,col:palette[i%palette.length],decay:0.985-Math.random()*0.004});
-    }
-    fireworks.push(fw);
-  }
-  function scheduleNext(){
-    const base=900+Math.random()*1800;
-    setTimeout(()=>{
-      const bursts=Math.random()<0.3?2:1;
-      for(let i=0;i<bursts;i++){setTimeout(()=>spawnRocket(),i*(180+Math.random()*240));}
-      scheduleNext();
-    },base);
-  }
-  scheduleNext();
-  function step(){
-    ctx.globalCompositeOperation='destination-out';
-    ctx.fillStyle='rgba(0,0,0,0.14)';
-    ctx.fillRect(0,0,W,H);
-    ctx.globalCompositeOperation='lighter';
-    let anyVisible=false;
-    for(let ri=rockets.length-1;ri>=0;ri--){
-      const r=rockets[ri];r.life++;
-      r.vx+=r.ax;r.vy+=r.ay;
-      const px=r.x,py=r.y;r.x+=r.vx;r.y+=r.vy;
-      r.trail.push({x:r.x,y:r.y,a:1});if(r.trail.length>14)r.trail.shift();
-      for(let t=0;t<r.trail.length-1;t++){
-        const p1=r.trail[t],p2=r.trail[t+1];p1.a*=0.9;if(p1.a<0.05)continue;
-        ctx.globalAlpha=p1.a;ctx.strokeStyle=r.col;ctx.lineWidth=1.0*dpr;
-        ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();}
-      ctx.globalAlpha=1;ctx.fillStyle=r.col;ctx.beginPath();ctx.arc(r.x,r.y,1.1*dpr,0,Math.PI*2);ctx.fill();
-      anyVisible=true;
-      if(r.vy>-0.15*dpr||r.life>r.maxLife||r.y<H*0.3){explodeAt(r.x,r.y,r.palette);rockets.splice(ri,1);}
-    }
-    for(let i=fireworks.length-1;i>=0;i--){
-      const fw=fireworks[i];fw.life++;
-      for(let pi=fw.parts.length-1;pi>=0;pi--){
-        const p=fw.parts[pi];
-        if(p.alpha<0.04){fw.parts.splice(pi,1);continue;}
-        p.vy+=0.006*dpr;p.vx*=0.996;p.vy*=0.996;
-        const px=p.x,py=p.y;p.x+=p.vx;p.y+=p.vy;p.alpha*=p.decay;
-        ctx.globalAlpha=p.alpha;ctx.strokeStyle=p.col;ctx.lineWidth=1.2*dpr;
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(px,py);ctx.stroke();
-        anyVisible=true;
-      }
-      if(fw.life>fw.max&&fw.parts.length===0){fireworks.splice(i,1);}
-    }
-    if(!anyVisible&&rockets.length===0&&fireworks.length===0){ctx.clearRect(0,0,W,H);}
-    requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-})();
 }
 </script>
 </body>
