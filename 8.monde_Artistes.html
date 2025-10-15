@@ -40,7 +40,13 @@
   h1{margin:0 0 .6rem;line-height:1.1;font-size:clamp(2.2rem,6vw,4rem);color:var(--or);
      text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 24px rgba(255,214,116,.25);}
   .soustitre{font-size:clamp(.95rem,2.4vw,1.05rem);letter-spacing:.06em;opacity:.9;margin-bottom:1.2rem;}
-  .section-title{margin:1.2rem auto .6rem;font-size:clamp(1.1rem,2.3vw,1.4rem);letter-spacing:.04em;opacity:.95;}
+  .section-title {
+  margin: 2.8rem auto 0.6rem; /* ↑ marge haute plus grande, bas légère */
+  font-size: clamp(1.1rem, 2.3vw, 1.4rem);
+  letter-spacing: .04em;
+  opacity: .95;
+}
+
   .section-title::after{content:"";display:block;width:120px;height:2px;margin:.5rem auto 0;
      background:linear-gradient(90deg,transparent,var(--or),transparent);
      border-radius:999px;box-shadow:0 0 10px rgba(255,214,116,.35);}
@@ -87,7 +93,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: .2rem auto 2.6rem; /* espace vertical augmenté */
+  margin: .2rem auto 1rem; /* espace vertical augmenté */
 }
 
   .ico{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
