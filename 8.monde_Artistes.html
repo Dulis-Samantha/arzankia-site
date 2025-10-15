@@ -137,6 +137,52 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
+  /* === Arabesques autour de la phrase (wrap) === */
+.phrase-magique{
+  position: relative;
+  padding: 16px 18px;        /* espace pour que les lignes ne collent pas au texte */
+  margin: 0 auto 1.8rem;
+}
+
+.phrase-magique::before,
+.phrase-magique::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width: min(92%, 980px);    /* suit la largeur de la phrase, responsive */
+  height:2px;
+  border-radius:999px;
+  background:
+    linear-gradient(90deg,
+      transparent,
+      rgba(255,214,116,.75) 20%,
+      #ffd674 50%,
+      rgba(255,214,116,.75) 80%,
+      transparent);
+  box-shadow:0 0 8px rgba(255,214,116,.35);
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* Ligne du haut et du bas (cadre fin) */
+.phrase-magique::before{ top:0; }
+.phrase-magique::after { bottom:0; }
+
+/* Lueur glissante discrète */
+@media (prefers-reduced-motion: no-preference){
+  .phrase-magique::before,
+  .phrase-magique::after{
+    background-size:200% 100%;
+    animation: arabesque-shine 6s linear infinite;
+  }
+  .phrase-magique::after{ animation-delay: 3s; } /* décalage pour alterner */
+}
+@keyframes arabesque-shine{
+  0%   { background-position:-100% 0; }
+  100% { background-position: 100% 0; }
+}
+
 
 </style>
 </head>
@@ -147,11 +193,6 @@
   <h1>Monde des Artistes</h1>
   <div class="soustitre">Création • Harmonie • Lumière</div>
   <section class="phrase-magique"></section>
-
-  <div class="filigrane-arabesque" aria-hidden="true">
-  <span class="ligne haut"></span>
-  <span class="ligne bas"></span>
-</div>
 
   <div class="btn-row">
     <a class="btn" href="9.entree_Artistes.html">Entrée du monde</a>
