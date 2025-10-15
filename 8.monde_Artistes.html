@@ -112,19 +112,6 @@
   /* (Sécurité) désactive d’anciens styles de notes auto */
   .fx-note{ display:none !important; }
 
-  /* Notes “vivantes” — 20 en continu */
-  .note{
-    position:absolute; will-change:transform, opacity;
-    filter:drop-shadow(0 3px 8px rgba(0,0,0,.45));
-    font-size: clamp(22px, 2.8vw, 36px);
-    opacity:0; transform:translate(-50%, -50%) scale(.9) rotate(0deg);
-    transition: opacity .6s ease; user-select:none; pointer-events:none;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .fx-canvas{ display:none !important; }
-    .note{ display:none !important; }
-  }
 </style>
 </head>
 <body>
@@ -405,106 +392,6 @@
     requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
-})();
-</script>
-  <script>
-
-(function(){
-  // anti double-init même après navigation bfcache
-  const L = document.getElementById('notes-layer');
-  if (!L || L.dataset.init === '1') return;
-  L.dataset.init = '1';
-
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce) return;
-
-  // Reset DOM
-  Array.from(L.querySelectorAll('.note, .fx-note')).forEach(n => n.remove());
-
-  const POOL_SIZE = 20;
-  const glyphs = ['♪','♫','🎵','🎶'];
-  const notes = [];
-
-  const rand = (a,b)=> Math.random()*(b-a)+a;
-  const pick = (a)=> a[Math.floor(Math.random()*a.length)];
-
-  function spawnOne(){
-    // garde-fou strict
-    if (notes.length >= POOL_SIZE) return;
-
-    const el = document.createElement('span');
-    el.className = 'note';
-    el.textContent = pick(glyphs);
-    L.appendChild(el);
-
-    const n = {
-      el,
-      x: rand(0, innerWidth),
-      y: rand(0, innerHeight),
-      vx: rand(-0.22, 0.22),
-      vy: rand(-0.16, 0.16),
-      rot: rand(-18, 18),
-      life: 0,
-      maxLife: rand(8,13)*60,
-      scale: rand(0.8,1.4)
-    };
-    el.style.opacity = '0';
-    requestAnimationFrame(()=> el.style.opacity = '1');
-    notes.push(n);
-  }
-
-  // remplissage initial
-  for (let i=0; i<POOL_SIZE; i++) spawnOne();
-
-  function tick(){
-    for (let i=notes.length-1; i>=0; i--){
-      const n = notes[i];
-      n.life++;
-
-      n.vx += Math.random()*0.014 - 0.007;
-      n.vy += Math.random()*0.010 - 0.005;
-
-      n.x += n.vx; n.y += n.vy;
-      n.rot += (n.vx + n.vy)*0.25;
-
-      if (n.x < 0 || n.x > innerWidth)  n.vx *= -1;
-      if (n.y < 0 || n.y > innerHeight) n.vy *= -1;
-
-      n.el.style.transform = `translate(${n.x}px, ${n.y}px) rotate(${n.rot}deg) scale(${n.scale})`;
-
-      if (n.life > n.maxLife){
-        n.el.style.opacity = '0';
-        setTimeout(() => {
-          n.el.remove();
-          notes.splice(i,1);
-          spawnOne();
-        }, 300);
-      }
-    }
-
-    // “police” : si, pour une raison quelconque, plus de 20 éléments sont présents, on coupe.
-    const children = L.querySelectorAll('.note');
-    if (children.length > POOL_SIZE){
-      const extra = children.length - POOL_SIZE;
-      for (let k=0; k<extra; k++){
-        const el = children[children.length - 1 - k];
-        const idx = notes.findIndex(n => n.el === el);
-        if (idx >= 0) notes.splice(idx,1);
-        el.remove();
-      }
-    }
-
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-
-  // ajuster positions si resize
-  addEventListener('resize', ()=>{
-    notes.forEach(n=>{
-      n.x = Math.min(Math.max(n.x, 0), innerWidth);
-      n.y = Math.min(Math.max(n.y, 0), innerHeight);
-    });
-  }, { passive:true });
 })();
 </script>
 
