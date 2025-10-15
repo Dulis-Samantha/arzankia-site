@@ -109,8 +109,6 @@
   }
   .ico.purple{ background:radial-gradient(circle at 30% 30%, #e8d9ff, #b58cff); color:#2a103f; }
 
-  /* (Sécurité) désactive d’anciens styles de notes auto */
-  .fx-note{ display:none !important; }
 
 </style>
 </head>
@@ -179,7 +177,7 @@
   const fixedPalette = Object.values(fixedHues);
   function makePalette(){
     if (Math.random() < 0.7){
-      const h = fixedPalette[Math| (Math.random()*fixedPalette.length)];
+      const h = fixedPalette[(Math.random()*fixedPalette.length)|0]; // <-- corrigé
       return Array.from({length:10}, (_,i)=> `hsl(${h + (i-5)*2} 95% 60%)`);
     } else {
       return Array.from({length:12}, (_,i)=> `hsl(${(i/12)*360} 90% 58%)`);
@@ -199,7 +197,7 @@
     const y  = H * (0.92 + Math.random()*0.05);
     const vx = (Math.random()-0.5) * 0.6 * dpr;
     const vy = -(1.6 + Math.random()*0.7) * dpr;
-    const col = `hsl(${fixedPalette[Math| (Math.random()*fixedPalette.length)]} 95% 70%)`;
+    const col = `hsl(${fixedPalette[(Math.random()*fixedPalette.length)|0]} 95% 70%)`; // <-- corrigé
 
     rockets.push({
       x, y, vx, vy,
@@ -244,7 +242,7 @@
 
   // Cadence irrégulière (sur les fusées)
   function scheduleNext(){
-    const base = 900 + Math.random()*1800;   // rythme un peu plus posé
+    const base = 900 + Math.random()*1800;
     setTimeout(()=>{
       const bursts = Math.random() < 0.3 ? 2 : 1;
       for (let i=0;i<bursts;i++){
