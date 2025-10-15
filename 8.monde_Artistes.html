@@ -109,6 +109,9 @@
   }
   .ico.purple{ background:radial-gradient(circle at 30% 30%, #e8d9ff, #b58cff); color:#2a103f; }
 
+  /* (Sécurité) désactive d’anciens styles de notes auto */
+  .fx-note{ display:none !important; }
+
   /* Notes “vivantes” — 10 seulement */
   .note{
     position:absolute; will-change:transform, opacity;
@@ -231,6 +234,8 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce) requestAnimationFrame(step);
 })();
+</script>
+
 <!-- ===== Notes “vivantes” : CAP 10 ===== -->
 <script>
 (function(){
@@ -284,8 +289,8 @@
       n.life++;
 
       // petit drift organique
-      n.vx += rand(-0.007, 0.007);
-      n.vy += rand(-0.005, 0.005);
+      n.vx += Math.random()*0.014 - 0.007;
+      n.vy += Math.random()*0.010 - 0.005;
 
       n.x += n.vx;
       n.y += n.vy;
