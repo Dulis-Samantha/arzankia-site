@@ -88,27 +88,42 @@
     box-shadow:inset 0 0 8px rgba(0,0,0,.25),0 0 12px rgba(255,214,116,.35);font-size:18px;}
   .ico.purple{background:radial-gradient(circle at 30% 30%,#e8d9ff,#b58cff);color:#2a103f;}
 
-  /* Boutiques côte à côte sur mobile */
+/* ==== Boutons des boutiques rectangulaires ==== */
+.btn-row.shops .btn {
+  border-radius: 12px;                     /* coins légèrement arrondis */
+  padding: 14px 20px;
+  font-weight: 600;
+  background: linear-gradient(180deg, rgba(255,214,116,.15), rgba(255,214,116,.05));
+  border: 1px solid var(--or);
+  min-width: 200px;
+}
+
+/* ==== Version mobile : côte à côte sans chevauchement ==== */
 @media (max-width: 600px) {
-  .btn-row.shops{
-    display:grid;
-    grid-template-columns: 1fr 1fr;  /* 2 colonnes */
-    gap: 12px;
-    max-width: 560px;                 /* garde une belle largeur */
-    margin: .2rem auto 1.2rem;
+  .btn-row.shops {
+    display: grid;
+    grid-template-columns: 1fr 1fr;        /* deux colonnes égales */
+    gap: 10px;                             /* espace entre les deux */
+    justify-content: center;
+    width: 100%;
+    max-width: 480px;
+    margin: .5rem auto 1.5rem;
   }
-  .btn-row.shops .btn{
-    width:100%;
-    margin:0;                         /* supprime la marge inline des .btn */
-    padding:14px 12px;
-    font-size:1rem;
-    white-space:nowrap;               /* évite les retours à la ligne moches */
-    justify-content:center;
+
+  .btn-row.shops .btn {
+    width: 100%;
+    margin: 0;
+    padding: 12px 10px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
   }
-  .btn-row.shops .ico{               /* icônes un poil plus compactes */
-    width:28px; height:28px; font-size:16px;
+
+  .btn-row.shops .ico {
+    width: 26px; height: 26px;
+    font-size: 16px;
   }
 }
+
 
 
 /* Cadre doré (haut/bas) + voile blanc inside */
