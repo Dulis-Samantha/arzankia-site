@@ -272,7 +272,7 @@ function startFireworks(){
     const x=(0.08+Math.random()*0.84)*W;
     const y=H*(0.92+Math.random()*0.05);
     const vx=(Math.random()-0.5)*0.6*dpr;
-    const vy=-(1.6+Math.random()*0.7)*dpr;
+    const vy = -(2.4 + Math.random() * 1.2) * dpr;
     const col=`hsl(${fixedPalette[(Math.random()*fixedPalette.length)|0]} 95% 70%)`;
     rockets.push({x,y,vx,vy,ax:(Math.random()-0.5)*0.005*dpr,ay:0.0005*dpr,life:0,maxLife:90+Math.random()*60,trail:[],col,palette:makePalette()});
   }
@@ -315,7 +315,7 @@ function startFireworks(){
         ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();}
       ctx.globalAlpha=1;ctx.fillStyle=r.col;ctx.beginPath();ctx.arc(r.x,r.y,1.1*dpr,0,Math.PI*2);ctx.fill();
       anyVisible=true;
-      if(r.vy>-0.15*dpr||r.life>r.maxLife||r.y<H*0.3){explodeAt(r.x,r.y,r.palette);rockets.splice(ri,1);}
+      if(r.vy > -0.15*dpr || r.life > r.maxLife || r.y < H*0.05){explodeAt(r.x,r.y,r.palette);rockets.splice(ri,1);}
     }
     for(let i=fireworks.length-1;i>=0;i--){
       const fw=fireworks[i];fw.life++;
