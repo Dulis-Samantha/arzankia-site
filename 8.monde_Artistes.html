@@ -241,43 +241,86 @@ h1{
 
 <!-- === Apparition des mots de la citation === -->
 <script>
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
 const phrase="Ici, les notes dansent, les couleurs vibrent, et d’étranges créatures laissent exprimer leur talent à la lumière…";
 const container=document.querySelector('.phrase-magique');
 const mots=phrase.split(' ');
 const order=shuffle([...mots.keys()]);
-mots.forEach(m=>{const s=document.createElement('span');s.className='mot';s.textContent=m;container.appendChild(s);});
+mots.forEach(m=>{
+  const s=document.createElement('span');
+  s.className='mot';
+  s.textContent=m;
+  container.appendChild(s);
+});
+
 const spans=[...document.querySelectorAll('.mot')];
+let animDone=0;
+
 order.forEach((index,i)=>animeMot(index,i*300));
+
 function animeMot(index,delai){
-  const span=spans[index]; const rectFinal=span.getBoundingClientRect();
-  const startX=(Math.random()*innerWidth); const startY=(Math.random()*innerHeight);
-  const ctrlX=(innerWidth/2)+(Math.random()*400-200); const ctrlY=(innerHeight/2)+(Math.random()*400-200);
-  const endX=rectFinal.left+rectFinal.width/2; const endY=rectFinal.top+rectFinal.height/2;
-  span.style.opacity=0; const duration=2000+Math.random()*1000; const startTime=performance.now()+delai;
+  const span=spans[index];
+  const rectFinal=span.getBoundingClientRect();
+  const startX=(Math.random()*innerWidth);
+  const startY=(Math.random()*innerHeight);
+  const ctrlX=(innerWidth/2)+(Math.random()*400-200);
+  const ctrlY=(innerHeight/2)+(Math.random()*400-200);
+  const endX=rectFinal.left+rectFinal.width/2;
+  const endY=rectFinal.top+rectFinal.height/2;
+  span.style.opacity=0;
+  const duration=2000+Math.random()*1000;
+  const startTime=performance.now()+delai;
+
   function move(now){
     if(now<startTime){requestAnimationFrame(move);return;}
-    let t=(now-startTime)/duration; if(t>1)t=1; const inv=1-t;
-    const x=inv*inv*startX+2*inv*t*ctrlX+t*t*endX; const y=inv*inv*startY+2*inv*t*ctrlY+t*t*endY;
+    let t=(now-startTime)/duration;
+    if(t>1)t=1;
+    const inv=1-t;
+    const x=inv*inv*startX+2*inv*t*ctrlX+t*t*endX;
+    const y=inv*inv*startY+2*inv*t*ctrlY+t*t*endY;
     span.style.opacity=Math.min(1,t*2);
     span.style.transform=`translate(${x-endX}px,${y-endY}px) scale(${1+0.1*Math.sin(t*Math.PI)})`;
     if(t<1){requestAnimationFrame(move);}
+    else{
+      animDone++;
+      // Quand tous les mots sont animés → démarrer les feux d’artifice après 1s
+      if(animDone===spans.length){
+        setTimeout(()=>startFireworks(),1000);
+      }
+    }
   }
   requestAnimationFrame(move);
 }
 </script>
-  <!-- === Feux d’artifice === -->
+
+
+<!-- === Feux d’artifice === -->
 <script>
 function startFireworks(){
 (function(){
   const c=document.querySelector('.fx-canvas');
   const ctx=c.getContext('2d',{alpha:true});
   let dpr=Math.max(1,window.devicePixelRatio||1),W,H;
-  function resize(){dpr=Math.max(1,window.devicePixelRatio||1);
-    W=Math.floor(innerWidth*dpr);H=Math.floor(innerHeight*dpr);
-    c.width=W;c.height=H;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
-    ctx.globalCompositeOperation='lighter';}
-  resize();addEventListener('resize',resize,{passive:true});
+
+  function resize(){
+    dpr=Math.max(1,window.devicePixelRatio||1);
+    W=Math.floor(innerWidth*dpr);
+    H=Math.floor(innerHeight*dpr);
+    c.width=W; c.height=H;
+    c.style.width=innerWidth+'px';
+    c.style.height=innerHeight+'px';
+    ctx.globalCompositeOperation='lighter';
+  }
+  resize();
+  addEventListener('resize',resize,{passive:true});
+
   const fixedPalette=[0,30,55,120,210,270,320];
   function makePalette(){
     if(Math.random()<0.7){
@@ -285,17 +328,31 @@ function startFireworks(){
       return Array.from({length:10},(_,i)=>`hsl(${h+(i-5)*2} 95% 60%)`);
     }else{
       return Array.from({length:12},(_,i)=>`hsl(${(i/12)*360} 90% 58%)`);
-    }}
-  const rockets=[],fireworks=[];const MAX_RKTS=5,MAX_FWS=5;
+    }
+  }
+
+  const rockets=[],fireworks=[];
+  const MAX_RKTS=5,MAX_FWS=5;
+
   function spawnRocket(){
     if(rockets.length>=MAX_RKTS)return;
     const x=(0.08+Math.random()*0.84)*W;
-    const y=H*(0.92+Math.random()*0.05);
+    const y=H*(0.95+Math.random()*0.03);
     const vx=(Math.random()-0.5)*0.6*dpr;
-    const vy = -(2.4 + Math.random() * 1.2) * dpr;
+    const vy = -(2.8 + Math.random() * 1.6) * dpr; // monte plus haut
     const col=`hsl(${fixedPalette[(Math.random()*fixedPalette.length)|0]} 95% 70%)`;
-    rockets.push({x,y,vx,vy,ax:(Math.random()-0.5)*0.005*dpr,ay:0.0005*dpr,life:0,maxLife:90+Math.random()*60,trail:[],col,palette:makePalette()});
+    rockets.push({
+      x,y,vx,vy,
+      ax:(Math.random()-0.5)*0.005*dpr,
+      ay:0.0005*dpr,
+      life:0,
+      maxLife:100+Math.random()*80,
+      trail:[],
+      col,
+      palette:makePalette()
+    });
   }
+
   function explodeAt(x,y,palette){
     if(fireworks.length>=MAX_FWS)return;
     const parts=Math.floor(140+Math.random()*120);
@@ -305,59 +362,91 @@ function startFireworks(){
       const a=(i/parts)*Math.PI*2;
       const vx=Math.cos(a)*speed;
       const vy=Math.sin(a)*speed;
-      fw.parts.push({x,y,vx,vy,alpha:1,col:palette[i%palette.length],decay:0.985-Math.random()*0.004});
+      fw.parts.push({
+        x,y,vx,vy,alpha:1,
+        col:palette[i%palette.length],
+        decay:0.985-Math.random()*0.004
+      });
     }
     fireworks.push(fw);
   }
+
   function scheduleNext(){
     const base=900+Math.random()*1800;
     setTimeout(()=>{
       const bursts=Math.random()<0.3?2:1;
-      for(let i=0;i<bursts;i++){setTimeout(()=>spawnRocket(),i*(180+Math.random()*240));}
+      for(let i=0;i<bursts;i++){
+        setTimeout(()=>spawnRocket(),i*(180+Math.random()*240));
+      }
       scheduleNext();
     },base);
   }
   scheduleNext();
+
   function step(){
     ctx.globalCompositeOperation='destination-out';
     ctx.fillStyle='rgba(0,0,0,0.14)';
     ctx.fillRect(0,0,W,H);
     ctx.globalCompositeOperation='lighter';
     let anyVisible=false;
+
     for(let ri=rockets.length-1;ri>=0;ri--){
-      const r=rockets[ri];r.life++;
-      r.vx+=r.ax;r.vy+=r.ay;
-      const px=r.x,py=r.y;r.x+=r.vx;r.y+=r.vy;
-      r.trail.push({x:r.x,y:r.y,a:1});if(r.trail.length>14)r.trail.shift();
+      const r=rockets[ri];
+      r.life++;
+      r.vx+=r.ax; r.vy+=r.ay;
+      const px=r.x, py=r.y;
+      r.x+=r.vx; r.y+=r.vy;
+      r.trail.push({x:r.x,y:r.y,a:1});
+      if(r.trail.length>14)r.trail.shift();
+
       for(let t=0;t<r.trail.length-1;t++){
-        const p1=r.trail[t],p2=r.trail[t+1];p1.a*=0.9;if(p1.a<0.05)continue;
-        ctx.globalAlpha=p1.a;ctx.strokeStyle=r.col;ctx.lineWidth=1.0*dpr;
-        ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();}
-      ctx.globalAlpha=1;ctx.fillStyle=r.col;ctx.beginPath();ctx.arc(r.x,r.y,1.1*dpr,0,Math.PI*2);ctx.fill();
+        const p1=r.trail[t],p2=r.trail[t+1];
+        p1.a*=0.9; if(p1.a<0.05)continue;
+        ctx.globalAlpha=p1.a;
+        ctx.strokeStyle=r.col; ctx.lineWidth=1.0*dpr;
+        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
+      }
+
+      ctx.globalAlpha=1;
+      ctx.fillStyle=r.col;
+      ctx.beginPath();
+      ctx.arc(r.x,r.y,1.1*dpr,0,Math.PI*2);
+      ctx.fill();
       anyVisible=true;
-      if(r.vy > -0.15*dpr || r.life > r.maxLife || r.y < H*0.05){explodeAt(r.x,r.y,r.palette);rockets.splice(ri,1);}
+
+      // explosion plus haut
+      if(r.vy>-0.15*dpr || r.life>r.maxLife || r.y < H*0.02){
+        explodeAt(r.x,r.y,r.palette);
+        rockets.splice(ri,1);
+      }
     }
+
     for(let i=fireworks.length-1;i>=0;i--){
-      const fw=fireworks[i];fw.life++;
+      const fw=fireworks[i];
+      fw.life++;
       for(let pi=fw.parts.length-1;pi>=0;pi--){
         const p=fw.parts[pi];
         if(p.alpha<0.04){fw.parts.splice(pi,1);continue;}
-        p.vy+=0.006*dpr;p.vx*=0.996;p.vy*=0.996;
-        const px=p.x,py=p.y;p.x+=p.vx;p.y+=p.vy;p.alpha*=p.decay;
-        ctx.globalAlpha=p.alpha;ctx.strokeStyle=p.col;ctx.lineWidth=1.2*dpr;
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(px,py);ctx.stroke();
+        p.vy+=0.006*dpr; p.vx*=0.996; p.vy*=0.996;
+        const px=p.x,py=p.y;
+        p.x+=p.vx; p.y+=p.vy; p.alpha*=p.decay;
+        ctx.globalAlpha=p.alpha; ctx.strokeStyle=p.col; ctx.lineWidth=1.2*dpr;
+        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(px,py); ctx.stroke();
         anyVisible=true;
       }
-      if(fw.life>fw.max&&fw.parts.length===0){fireworks.splice(i,1);}
+      if(fw.life>fw.max && fw.parts.length===0){fireworks.splice(i,1);}
     }
-    if(!anyVisible&&rockets.length===0&&fireworks.length===0){ctx.clearRect(0,0,W,H);}
+
+    if(!anyVisible && rockets.length===0 && fireworks.length===0){
+      ctx.clearRect(0,0,W,H);
+    }
     requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 })();
 }
-  startFireworks();
 </script>
+
 
 </body>
 </html>
