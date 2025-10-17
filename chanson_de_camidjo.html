@@ -192,8 +192,8 @@
   Pour la petite <strong>anecdote</strong>, j’étais en train de composer <em>« Façon de faire »</em> lorsque j’ai entendu <strong>l’Appel d’Arzankia</strong>.<br>
   C’est en fredonnant cette chanson que <strong>mon monde est né</strong>.<br><br>
 
-  ✨<strong>Récolte les notes dorées</strong> pour débloquer mes mélodies…✨<br>
-  <strong>Ouvre grand tes oreilles, et laisse la magie commencer.</strong> 🎶
+  ✨<strong>Récolte les notes dorées</strong> pour débloquer mes mélodies…✨<br><br>
+  <strong>Ouvre grand tes oreilles, et laisse la magie opérer.</strong> 
 </p>
 
 </div>
@@ -225,9 +225,10 @@
   <!-- Boutique -->
   <section class="shop" id="shop"></section>
 
- <div class="btn-row">
-    <a class="btn" href="8.monde_Artistes.html">← Retour</a>
-  </div>
+ <div class="btn-row" style="position:relative; z-index:50;">
+  <a id="btnBack" class="btn btn-ghost" href="8.monde_Artistes.html" rel="prev">← Retour</a>
+</div>
+
 <script>
 /* =================== CONFIG BOUTIQUE =================== */
 const STORAGE_NOTES = 'camidjo_notes_balance';
@@ -542,5 +543,16 @@ updateBalanceUI();
 renderShop();
 document.querySelectorAll('audio').forEach(wireAudio);
 </script>
+  <script>
+  document.getElementById('btnBack').addEventListener('click', function (e) {
+    // Si l’historique est disponible, on revient en arrière
+    if (window.history.length > 1) {
+      e.preventDefault();
+      window.history.back();
+    }
+    // sinon, on laisse l'attribut href faire la redirection vers 8.monde_Artistes.html
+  });
+</script>
+
 </body>
 </html>
