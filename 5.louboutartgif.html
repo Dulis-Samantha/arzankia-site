@@ -17,7 +17,6 @@
       --mediaW:800px;
     }
 
-    /* ===== Fond + voile ===== */
     html,body{height:100%}
     body{
       margin:0;
@@ -110,36 +109,29 @@
       text-align:left;
     }
 
-    /* ===== Vidéo affichée ENTIEREMENT ===== */
+    /* ===== Vidéo ou gif affiché ENTIEREMENT ===== */
     .cadre-video{
       position:relative;
       margin:12px auto 0;
       width:100%;
       max-width:var(--mediaW);
-      /* pas d'aspect-ratio forcé */
       border-radius:18px;
       overflow:hidden;
-
-      /* bandes “ciné” si besoin */
       background:#000;
-
-      /* liseré fin */
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,.05),
         0 0 0 1px rgba(255,214,116,.10);
-
-      /* limite de hauteur pour éviter le dépassement d'écran */
-      max-height: calc(100vh - 240px);
-      display:flex; align-items:center; justify-content:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
     }
     .cadre-video video{
       width:100%;
-      height:auto;          /* conserve le ratio natif */
-      object-fit:contain;   /* rien n'est rogné */
-      max-height:inherit;   /* respecte la limite ci-dessus */
+      height:auto;
+      object-fit:contain;
       display:block;
-      background:#000;
       border-radius:18px;
+      background:#000;
     }
 
     .carte .legende{
@@ -183,10 +175,6 @@
       0%,100%{box-shadow:0 0 12px rgba(255,214,116,.4);}
       50%{box-shadow:0 0 22px rgba(255,214,116,.7);}
     }
-
-    @media (max-width:768px){
-      .cadre-video{ max-width:calc(100% - 24px); max-height:none; }
-    }
   </style>
 </head>
 
@@ -200,7 +188,7 @@
   <!-- ===== Bloc de présentation ===== -->
   <section class="intro">
     <p><b>Salut, moi, c’est Aurélyne.</b> Bienvenue dans ma boutique.</p>
-    <p>Tu peux admirer ici les tableaux représentant mes créatures préférées d’Arzankia.</p>
+    <p>Tu peux admirer ici mes tableaux représentant mes créatures préférées d’Arzankia.</p>
   </section>
 
   <!-- ===== Carte vidéo ===== -->
