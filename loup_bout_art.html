@@ -31,6 +31,7 @@
 
     /* === IMAGE CLIQUABLE === */
     .image-lien{
+      position: relative;            /* nécessaire pour positionner le halo */
       display:block;
       text-align:center;
       transition: transform .3s ease, filter .3s ease;
@@ -47,6 +48,33 @@
       margin: 0 auto 1.2rem;
       border-radius: 18px;
       box-shadow: 0 0 25px rgba(255,255,255,.15);
+    }
+
+    /* Effet "toc" (petit tremblement) à chaque coup */
+    .image-lien.knock { animation: toc .18s ease; }
+    @keyframes toc {
+      0%   { transform: translateX(0); }
+      25%  { transform: translateX(-2px); }
+      50%  { transform: translateX(2px); }
+      75%  { transform: translateX(-1px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* HALO au 3ᵉ coup */
+    .halo-magique{
+      position:absolute; top:50%; left:50%;
+      transform: translate(-50%,-50%);
+      width:0; height:0; border-radius:50%;
+      pointer-events:none; opacity:0;
+      box-shadow: 0 0 0px 0px rgba(255,231,154,.8);
+    }
+    .image-lien.halo-actif .halo-magique{
+      animation: haloExpand 1.1s ease-out forwards;
+    }
+    @keyframes haloExpand{
+      0%   { opacity:.9; width:0;   height:0;   box-shadow:0 0 0px 0px rgba(255,231,154,.8); }
+      50%  { opacity:1;  width:160%; height:160%; box-shadow:0 0 30px 25px rgba(255,231,154,.8), 0 0 60px 45px rgba(255,231,154,.5); }
+      100% { opacity:0;  width:200%; height:200%; box-shadow:0 0 80px 70px rgba(255,231,154,0); }
     }
 
     /* === PHRASE D’INTRO === */
@@ -79,7 +107,6 @@
       pointer-events:none;
     }
     @keyframes contourLight{ 0%{background-position:-100% 0;} 100%{background-position:200% 0;} }
-
     .phrase-intro p{ margin: 0; }
     .phrase-intro .mot-lueur{
       color: #ffe79a;
@@ -173,98 +200,70 @@
       box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 22px rgba(255,231,154,.15);
     }
 
-  /* === BOUTON RETOUR === */
-.button-group{
-  display:flex;
-  justify-content:center;
-  margin-top:2rem;
-}
-.button-group a{
-  display:inline-block;
-  padding:.55rem 1.2rem;
-  background:rgba(255,231,154,.15);
-  border:1px solid rgba(255,231,154,.4);
-  color:#ffe9af;
-  text-decoration:none;
-  font-weight:600;
-  font-size:.95rem;
-  border-radius:25px;
-  transition:all .25s ease;
-  box-shadow:0 0 6px rgba(255,231,154,.2);
-}
-.button-group a:hover{
-  background:rgba(255,231,154,.25);
-  box-shadow:0 0 12px rgba(255,231,154,.35);
-  transform:scale(1.05);
-}
-
-/* === MOBILE : bouton plus petit, tout en bas === */
-@media (max-width:600px){
-  .button-group{
-    position:fixed;
-    bottom:12px;
-    left:0; right:0;
-    justify-content:center;
-    margin:0;
-    z-index:900;
-  }
-  .button-group a{
-    background:rgba(255,231,154,.1);
-    border:1px solid rgba(255,231,154,.25);
-    font-size:.85rem;
-    padding:.4rem .9rem;
-    box-shadow:none;
-    color:#fff8e6;
-  }
-}
-
+    /* === BOUTON RETOUR === */
+    .button-group{
+      display:flex;
+      justify-content:center;
+      margin-top:2rem;
+    }
+    .button-group a{
+      display:inline-block;
+      padding:.55rem 1.2rem;
+      background:rgba(255,231,154,.15);
+      border:1px solid rgba(255,231,154,.4);
+      color:#ffe9af;
+      text-decoration:none;
+      font-weight:600;
+      font-size:.95rem;
+      border-radius:25px;
+      transition:all .25s ease;
+      box-shadow:0 0 6px rgba(255,231,154,.2);
+    }
+    .button-group a:hover{
+      background:rgba(255,231,154,.25);
+      box-shadow:0 0 12px rgba(255,231,154,.35);
+      transform:scale(1.05);
+    }
 
     /* === MODALE === */
-   .modal-overlay{
-  position: fixed; inset: 0; z-index: 9999;
-  display:none; align-items:center; justify-content:center;
-  background: rgba(0,0,0,.65);
-  backdrop-filter: blur(2px);
-  padding: 4vmin;
-}
-.modal-overlay.open{ display:flex; }
-
-/* Taille plus contenue sur desktop */
-.modal{
-  position: relative;
-  width: min(720px, 90vw);      /* <— réduit la largeur max */
-  border-radius: 16px;
-  background: rgba(0,0,0,.85);
-  border: 1px solid rgba(255,231,154,.4);
-  box-shadow: 0 20px 60px rgba(0,0,0,.5);
-  padding: 1rem;
-}
+    .modal-overlay{
+      position: fixed; inset: 0; z-index: 9999;
+      display:none; align-items:center; justify-content:center;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(2px);
+      padding: 4vmin;
+    }
+    .modal-overlay.open{ display:flex; }
+    .modal{
+      position: relative;
+      width: min(720px, 90vw);
+      border-radius: 16px;
+      background: rgba(0,0,0,.85);
+      border: 1px solid rgba(255,231,154,.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      padding: 1rem;
+    }
     .modal header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
     .modal h3{margin:0;font-size:1rem;color:#ffe79a;font-weight:700;}
     .modal .close{border:none;background:transparent;color:#ffe79a;cursor:pointer;font-size:1.4rem;padding:.2rem .4rem;border-radius:8px;}
-    
     .modal video{
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 70vh;            /* <— limite la hauteur */
-  border-radius: 10px;
-  background: #000;
-}
-    
-  /* Petit ajustement pour les très grands écrans */
-@media (min-width: 1400px){
-  .modal{ width: 680px; }      /* <— encore un poil plus compact */
-}
+      display:block; width:100%; height:auto; max-height:70vh;
+      border-radius:10px; background:#000;
+    }
+    @media (min-width:1400px){ .modal{ width:680px; } }
 
     /* === MOBILE === */
-    @media(max-width:600px){
+    @media (max-width:600px){
       .container{padding:1rem .6rem 6.5rem;}
       .charade-ligne{grid-template-columns:1fr;}
       .button-group{
-        position:fixed;bottom:10px;left:0;right:0;
-        justify-content:center;background:rgba(0,0,0,.4);
-        padding:.5rem 1rem;z-index:998;gap:.5rem;
+        position:fixed; bottom:12px; left:0; right:0;
+        justify-content:center; margin:0; z-index:900;
+      }
+      .button-group a{
+        background:rgba(255,231,154,.1);
+        border:1px solid rgba(255,231,154,.25);
+        font-size:.85rem; padding:.4rem .9rem; box-shadow:none; color:#fff8e6;
       }
     }
   </style>
@@ -280,9 +279,11 @@
       </p>
     </div>
 
-    <!-- IMAGE CLIQUABLE -->
-    <a href="louboutartgif.html" class="image-lien">
+    <!-- IMAGE CLIQUABLE : toquer 3 fois pour entrer -->
+    <a href="#" id="porte" class="image-lien" data-target="louboutartgif.html"
+       aria-label="Toque trois fois pour entrer" title="Toque 3 fois pour entrer">
       <img class="Fees-image" src="monde_aurelyne.webp" alt="Mais qui est Aurélyne ?">
+      <span class="halo-magique" aria-hidden="true"></span>
     </a>
 
     <!-- ACCROCHE -->
@@ -310,9 +311,10 @@
     </section>
 
     <!-- BOUTON RETOUR -->
-<div class="button-group">
-  <a href="3.les_mondes.html">← Retour</a>
-</div>
+    <div class="button-group">
+      <a href="3.les_mondes.html">← Retour</a>
+    </div>
+  </div>
 
   <!-- MODALE VIDÉO -->
   <div class="modal-overlay" id="videoModal" aria-hidden="true">
@@ -326,7 +328,70 @@
   </div>
 
   <script>
-  (()=>{const z=document.querySelector('.charade-louboutin'),ins=[...z.querySelectorAll('input[data-answer]')],res=z.querySelector('.charade-result'),btn=z.querySelector('#btn-coulisses'),n=s=>(s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').trim();function c(i){const g=n(i.value)===n(i.dataset.answer),w=i.closest('.charade-case');w.classList.toggle('ok',g);w.classList.toggle('ko',i.value.length&&!g);return g}function a(){res.hidden=!ins.every(c)}ins.forEach(i=>{i.addEventListener('input',()=>{c(i);a();});i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();a();}})});const m=document.getElementById('videoModal'),p=document.getElementById('videoPlayer'),cl=m.querySelector('.close'),o=()=>{m.classList.add('open');m.setAttribute('aria-hidden','false');document.body.classList.add('no-scroll');try{p.currentTime=0;p.play();}catch(e){}cl.focus();},x=()=>{m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.classList.remove('no-scroll');p.pause();};btn?.addEventListener('click',o);cl.addEventListener('click',x);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))x();});m.addEventListener('click',e=>{if(e.target===m)x();});})();
+  (()=>{
+
+    /* ====== Charade ====== */
+    const zone=document.querySelector('.charade-louboutin');
+    const inputs=[...zone.querySelectorAll('input[data-answer]')];
+    const result=zone.querySelector('.charade-result');
+    const btn=zone.querySelector('#btn-coulisses');
+    const norm=s=>(s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').trim();
+    function checkInput(i){
+      const good=norm(i.value)===norm(i.dataset.answer);
+      const wrap=i.closest('.charade-case');
+      wrap.classList.toggle('ok',good);
+      wrap.classList.toggle('ko',i.value.length&&!good);
+      return good;
+    }
+    function checkAll(){ result.hidden=!inputs.every(checkInput); }
+    inputs.forEach(i=>{
+      i.addEventListener('input',()=>{checkInput(i);checkAll();});
+      i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkAll();}});
+    });
+
+    /* ====== Modale Vidéo ====== */
+    const modal=document.getElementById('videoModal');
+    const player=document.getElementById('videoPlayer');
+    const closeBtn=modal.querySelector('.close');
+    const openModal=()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('no-scroll'); try{player.currentTime=0;player.play();}catch(e){} closeBtn.focus(); };
+    const closeModal=()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('no-scroll'); player.pause(); };
+    btn?.addEventListener('click',openModal);
+    closeBtn.addEventListener('click',closeModal);
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&modal.classList.contains('open')) closeModal(); });
+    modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+
+    /* ====== Porte : 3 coups + halo ====== */
+    const porte = document.getElementById('porte');
+    if (porte){
+      let count=0, last=0;
+      const windowMs=1000; // délai max entre 2 taps
+
+      const onKnock = (e)=>{
+        e.preventDefault();
+        const now=Date.now();
+        if(now-last>windowMs) count=0;
+        last=now; count++;
+
+        // petit "toc"
+        porte.classList.add('knock');
+        setTimeout(()=>porte.classList.remove('knock'),180);
+
+        if(count>=3){
+          count=0;
+          // halo + ouverture
+          porte.classList.add('halo-actif');
+          setTimeout(()=>{
+            const url = porte.dataset.target || 'louboutartgif.html';
+            window.location.href = url;
+          }, 1000); // laisse le halo se voir
+        }
+      };
+
+      porte.addEventListener('click', onKnock);
+      porte.addEventListener('touchend', onKnock, { passive:false });
+    }
+
+  })();
   </script>
 </body>
 </html>
