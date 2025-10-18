@@ -4,22 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
-  <title>Boutique — Tableaux</title>
+  <title>Loup-Bout’Art — Boutique</title>
 
   <style>
     :root{
       --or:#ffd674;
       --ivoire:#fff8e6;
       --verre:rgba(10,0,20,.45);
-      --bord:rgba(255,214,116,.38);
+      --bord:rgba(255,214,116,.35);
       --ray:22px;
     }
 
-    /* ===== Fond + voile (adouci) ===== */
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Georgia, serif;
+      font-family:Georgia, serif;
       color:var(--ivoire);
       background:url('fond_gif.webp') center/cover no-repeat fixed;
       min-height:100svh;
@@ -35,28 +34,44 @@
       backdrop-filter: blur(1px) saturate(112%);
     }
 
-    /* ===== Contenu principal ===== */
     .wrap{ width:min(1040px,100%); display:grid; gap:clamp(16px,2vw,24px); }
 
-    /* ===== Titre (plus compact) ===== */
-    .titre{
-      text-align:center; line-height:1.25;
-      padding:clamp(12px,2vw,18px) clamp(12px,2vw,18px);
-      border-radius:18px;
-      background:linear-gradient( to right,
-        rgba(255,214,116,.10), rgba(255,214,116,.16), rgba(255,214,116,.10));
-      border:1px solid var(--bord);
-      box-shadow:0 6px 22px rgba(0,0,0,.25), inset 0 0 22px rgba(255,214,116,.08);
-      animation:none;
+    /* ===== Titre élégant ===== */
+    .brand{
+      text-align:center; padding:18px 16px 10px;
     }
-    .titre h1{
-      margin:0 0 .35rem;
-      font-size:clamp(1.4rem, 3vw, 2rem);
+    .brand h1{
+      margin:0;
+      font-size:clamp(2rem, 5vw, 3rem);
+      font-variant:small-caps;
+      letter-spacing:.5px;
       color:var(--or);
-      letter-spacing:.3px;
-      text-shadow:0 0 6px rgba(255,214,116,.18);
+      text-shadow:0 1px 0 #7a5b1a, 0 0 18px rgba(255,214,116,.25);
     }
-    .titre p{ margin:0; font-size:clamp(.98rem, 1.8vw, 1.05rem); opacity:.92; }
+    .brand .souligne{
+      width:min(460px,80%); height:10px; margin:10px auto 0;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, rgba(255,214,116,.6), transparent);
+      filter:blur(1px);
+    }
+
+    /* ===== Encadré d’accueil ===== */
+    .intro{
+      margin:4px auto 8px;
+      background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
+      border:1px solid var(--bord);
+      border-radius:18px;
+      box-shadow:0 8px 24px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.04);
+      padding:16px 20px;
+      max-width:900px;
+    }
+    .intro p{
+      margin:.4rem 0;
+      font-size:clamp(1rem, 1.9vw, 1.08rem);
+      line-height:1.6;
+      text-align:center;
+    }
+    .intro b{ color:var(--or); }
 
     /* ===== Carte tableau ===== */
     .galerie{ display:grid; grid-template-columns:1fr; gap:clamp(16px,2vw,22px); }
@@ -67,11 +82,10 @@
       border-radius:var(--ray);
       box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.04);
       overflow:hidden;
-      max-width:900px;           /* aligne visuellement avec le titre */
-      margin:0 auto;
+      max-width:900px; margin:0 auto;
+      position:relative;
     }
 
-    /* Header aligné sur la vidéo */
     .carte header{
       padding:0;
       border-bottom:1px solid rgba(255,214,116,.22);
@@ -80,46 +94,57 @@
     .carte h2{
       margin:0; color:var(--or); letter-spacing:.2px;
       font-size:clamp(1.05rem,2.2vw,1.25rem);
-      max-width:800px; margin:0 auto; padding:14px 18px;  /* largeur = vidéo */
+      max-width:800px; margin:0 auto; padding:14px 18px;
     }
 
-    /* Cadre vidéo + liseré interne léger */
-    .cadre-video{
+    /* Cadre média (image -> clic -> animation) */
+    .cadre-media{
       position:relative; margin:12px auto 0;
       width:100%; max-width:800px; aspect-ratio:16/9;
       border-radius:18px; overflow:hidden; background:rgba(0,0,0,.35);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),
-                 0 0 0 1px rgba(255,214,116,.10);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 0 0 1px rgba(255,214,116,.10);
+      cursor:pointer;
     }
-    .cadre-video video{
-      width:100%; height:100%; display:block; object-fit:cover;
-    }
+    .cadre-media img,
+    .cadre-media video{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* Légende centrée, même largeur que la vidéo */
+    /* Overlay “patiente…” pendant 3s */
+    .cadre-media .delay{
+      pointer-events:none;
+      position:absolute; inset:0; display:none; place-items:center;
+      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
+      font-size:clamp(1rem,2vw,1.15rem);
+    }
+    .cadre-media.pending .delay{ display:grid; }
+
+    /* Bulle message finale */
+    .bulle{
+      position:absolute; right:14px; bottom:14px;
+      max-width:min(70%, 360px);
+      background:rgba(0,0,0,.72);
+      border:1px solid rgba(255,214,116,.55);
+      color:var(--ivoire);
+      padding:10px 14px;
+      border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      opacity:0; transform:translateY(8px);
+      transition:.35s ease;
+    }
+    .bulle::after{
+      content:""; position:absolute; right:12px; bottom:-8px;
+      width:14px; height:14px; rotate:45deg;
+      background:rgba(0,0,0,.72); border-right:1px solid rgba(255,214,116,.55); border-bottom:1px solid rgba(255,214,116,.55);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    .bulle.show{ opacity:1; transform:translateY(0); }
+
     .carte .legende{
       max-width:800px; margin:10px auto 18px; padding:0 18px;
       font-size:clamp(.95rem,1.8vw,1rem); line-height:1.55; opacity:.95;
       text-align:center;
     }
 
-    /* Effet de survol discret (desktop) */
-    @media (hover:hover){
-      .carte:hover{
-        box-shadow:0 14px 34px rgba(0,0,0,.38),
-                   0 0 24px rgba(255,214,116,.08),
-                   inset 0 0 0 1px rgba(255,255,255,.06);
-        transform:translateY(-1px);
-        transition:.25s ease;
-      }
-    }
-
-    /* Sur mobile : vidéo pleine largeur de la carte */
-    @media (max-width:768px){
-      .cadre-video{ max-width:calc(100% - 24px); }
-      .carte h2, .carte .legende{ max-width:calc(100% - 24px); }
-    }
-
-    /* Bouton retour (en bas) – lueur adoucie */
+    /* Bouton retour */
     .btn-retour{
       display:inline-block; margin:24px auto 48px; padding:10px 26px;
       background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
@@ -134,53 +159,112 @@
       color:#1c1400;
     }
 
-    /* Accessibilité mouvement */
-    @media (prefers-reduced-motion: reduce){
-      .carte:hover{ transform:none; }
+    @media (max-width:768px){
+      .cadre-media{ max-width:calc(100% - 24px); }
+      .carte h2, .carte .legende{ max-width:calc(100% - 24px); }
     }
   </style>
 </head>
 
 <body>
   <main class="wrap" role="main">
-    <section class="titre" aria-label="Bienvenue">
-      <h1>Bienvenue dans ma boutique</h1>
-      <p>Ici, je te fais découvrir certains de mes tableaux.</p>
+    <!-- Titre -->
+    <header class="brand" aria-label="Loup-Bout'Art">
+      <h1>Loup-Bout’Art</h1>
+      <div class="souligne" aria-hidden="true"></div>
+    </header>
+
+    <!-- Encadré d’accueil -->
+    <section class="intro" aria-label="Présentation">
+      <p><b>Salut, bienvenue dans ma boutique.</b> Je m’appelle Aurélyne et j’adore dessiner les créatures d’Arzankia.</p>
+      <p>J’aime cacher des indices dans mes tableaux. <b>Si tu veux jouer</b>, clique sur l’image et cherche ce que je te demande…</p>
+      <p style="opacity:.9">En cliquant sur l’image, <b>3&nbsp;secondes après</b>, l’animation se met en place.</p>
     </section>
 
+    <!-- Carte : Libellule -->
     <section class="galerie" aria-label="Galerie des tableaux">
-      <!-- ===== Carte 1 : Tableau de la libellule ===== -->
       <article class="carte" aria-labelledby="titre-libelule">
         <header>
           <h2 id="titre-libelule">La Libellule — extrait (Ptikitis)</h2>
         </header>
 
-        <div class="cadre-video">
-          <!-- muted + playsinline autorisent l’autoplay sur mobile -->
-          <video
-            src="extrait_Ptikitis.mp4"
-            controls
-            playsinline
-            muted
-            autoplay
-            loop
-            preload="metadata"
-            aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
-            Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
+        <!-- 
+          Règle du jeu :
+          - Image d’attente = poster statique cliquable (remplace "monde_aurelyne.webp" si tu veux).
+          - Après clic : attente 3s, puis on lance la VIDEO (extrait_Ptikitis.mp4).
+          - SI tu as un GIF, mets data-gif="chemin/mon_gif.gif" et (optionnel) data-gif-duration="4000"
+            => on affichera le GIF à la place de la vidéo et on fera apparaître la bulle après la durée indiquée.
+        -->
+        <div class="cadre-media" id="media-libellule"
+             data-video="extrait_Ptikitis.mp4"
+             data-gif="" 
+             data-gif-duration="4000"
+             aria-label="Clique pour lancer l’animation">
+          <img src="monde_aurelyne.webp" alt="Tableau de la libellule (image fixe). Clique pour jouer." />
+          <div class="delay"><span>✨ Patiente un instant… la magie arrive…</span></div>
+          <div class="bulle" id="bulle-libellule">
+            <strong>AHAHAH je t’ai bien eu !</strong><br>
+            Attention… si tu fixes trop longtemps les créatures, ne sais-tu pas qu’elles <em>sortent du cadre</em> ?
+          </div>
         </div>
 
         <p class="legende">
-          Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.
-          Laisse-toi porter par la lumière et les détails.
+          Clique, attends trois secondes… puis observe. Certains détails n’apparaissent qu’aux yeux des plus curieux.
         </p>
       </article>
     </section>
   </main>
 
-  <!-- === BOUTON RETOUR FIN DE PAGE === -->
+  <!-- Bouton retour en bas de page -->
   <footer style="text-align:center;">
     <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour à la galerie</a>
   </footer>
+
+  <script>
+    // Gestion du clic : délai 3s -> lance vidéo OU bascule en GIF
+    (function(){
+      const cadre = document.getElementById('media-libellule');
+      const bulle = document.getElementById('bulle-libellule');
+      let played = false;
+
+      function showBubble(){ bulle.classList.add('show'); }
+
+      cadre.addEventListener('click', () => {
+        if(played) return; // éviter double clic
+        played = true;
+        cadre.classList.add('pending');
+
+        setTimeout(() => {
+          cadre.classList.remove('pending');
+
+          const gifPath = (cadre.dataset.gif || '').trim();
+          if(gifPath){
+            // Bascule en GIF (remplace le contenu par une <img>)
+            cadre.innerHTML = `
+              <img src="${gifPath}" alt="Animation du tableau (gif)">
+            `;
+            // Affiche la bulle après la durée estimée du GIF
+            const delay = parseInt(cadre.dataset.gifDuration || '4000', 10);
+            setTimeout(showBubble, isNaN(delay) ? 4000 : delay);
+          }else{
+            // Fallback : vidéo MP4
+            const videoSrc = cadre.dataset.video || 'extrait_Ptikitis.mp4';
+            cadre.innerHTML = `
+              <video id="vid" src="${videoSrc}" playsinline controls preload="metadata"></video>
+            `;
+            const vid = document.getElementById('vid');
+            // Lecture auto si possible
+            const tryPlay = () => vid.play().catch(()=>{ /* navigateur peut bloquer, l’utilisateur peut appuyer play */ });
+            tryPlay();
+
+            // Quand la vidéo se termine la première fois -> bulle
+            vid.addEventListener('ended', () => {
+              showBubble();
+            }, { once:true });
+          }
+        }, 3000); // délai "magique"
+      }, { once:true });
+    })();
+  </script>
 </body>
 </html>
