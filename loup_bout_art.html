@@ -173,25 +173,51 @@
       box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 22px rgba(255,231,154,.15);
     }
 
-    /* === BOUTONS === */
-    .button-group{
-      display:flex; justify-content:center; flex-wrap:wrap;
-      gap:1.2rem; margin-top:1.5rem;
-    }
-    .button-group a{
-      display:inline-block;
-      padding:.7rem 1.5rem;
-      background: linear-gradient(145deg, #ffe9af, #f2c94c);
-      color:#4a2e00;
-      text-decoration:none;
-      font-weight:700;
-      font-size:1rem;
-      border-radius:30px;
-      box-shadow:0 0 10px rgba(255,223,100,.6);
-      transition: transform .2s ease, box-shadow .2s ease;
-      min-width:180px;
-      text-align:center;
-    }
+  /* === BOUTON RETOUR === */
+.button-group{
+  display:flex;
+  justify-content:center;
+  margin-top:2rem;
+}
+.button-group a{
+  display:inline-block;
+  padding:.55rem 1.2rem;
+  background:rgba(255,231,154,.15);
+  border:1px solid rgba(255,231,154,.4);
+  color:#ffe9af;
+  text-decoration:none;
+  font-weight:600;
+  font-size:.95rem;
+  border-radius:25px;
+  transition:all .25s ease;
+  box-shadow:0 0 6px rgba(255,231,154,.2);
+}
+.button-group a:hover{
+  background:rgba(255,231,154,.25);
+  box-shadow:0 0 12px rgba(255,231,154,.35);
+  transform:scale(1.05);
+}
+
+/* === MOBILE : bouton plus petit, tout en bas === */
+@media (max-width:600px){
+  .button-group{
+    position:fixed;
+    bottom:12px;
+    left:0; right:0;
+    justify-content:center;
+    margin:0;
+    z-index:900;
+  }
+  .button-group a{
+    background:rgba(255,231,154,.1);
+    border:1px solid rgba(255,231,154,.25);
+    font-size:.85rem;
+    padding:.4rem .9rem;
+    box-shadow:none;
+    color:#fff8e6;
+  }
+}
+
 
     /* === MODALE === */
    .modal-overlay{
@@ -283,11 +309,10 @@
       </div>
     </section>
 
-    <!-- BOUTONS -->
-    <div class="button-group">
-      <a href="3.les_mondes.html">← Retour aux Mondes</a>
-    </div>
-  </div>
+    <!-- BOUTON RETOUR -->
+<div class="button-group">
+  <a href="3.les_mondes.html">← Retour</a>
+</div>
 
   <!-- MODALE VIDÉO -->
   <div class="modal-overlay" id="videoModal" aria-hidden="true">
