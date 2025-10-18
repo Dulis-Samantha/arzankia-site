@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loup-Bout'Art</title>
 
+  <!-- POLICE MAGIQUE -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     /* === BASE === */
     body{
@@ -26,16 +29,6 @@
       padding: 1.2rem 1rem 6rem; 
     }
 
-    /* === TITRE === */
-    .page-title{
-      text-align:center;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight:700;
-      margin: 1.5rem auto;
-      color:#ffe79a;
-      text-shadow: 0 0 8px rgba(0,0,0,.75), 0 0 18px rgba(255,231,154,.25);
-    }
-
     /* === IMAGE CLIQUABLE === */
     .image-lien{
       display:block;
@@ -44,7 +37,7 @@
     }
     .image-lien:hover{
       transform: scale(1.03);
-      filter: brightness(1.15);
+      filter: brightness(1.1);
     }
     .Fees-image{
       display:block;
@@ -56,40 +49,45 @@
       box-shadow: 0 0 25px rgba(255,255,255,.15);
     }
 
-    /* === TEXTE EXPLICATIF === */
-    .texte-monde{
-      max-width:800px;
-      margin: 1.2rem auto;
-      padding: 1rem 1.2rem;
-      font-size: clamp(1rem, 1.4vw, 1.2rem);
-      line-height:1.6;
-      text-align:center;
-      color:#ffe79a;
-      background: rgba(0,0,0,0.45);
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,.5);
-      animation: fadeTexte 1s ease forwards;
-    }
-    @keyframes fadeTexte{
-      from{opacity:0; transform:translateY(6px);}
-      to{opacity:1; transform:none;}
-    }
-
-    /* Lueur dorée sur certains mots */
-    .mot-lueur{
+    /* === PHRASE D’INTRO === */
+    .phrase-intro{
+      font-family: 'Cinzel Decorative', Georgia, serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      line-height: 1.7;
+      color: #fff9df;
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(0,0,0,.55) 20%, rgba(0,0,0,.7) 100%);
+      border: 1px solid rgba(255,231,154,.35);
+      border-radius: 16px;
+      padding: 1.4rem 1.8rem;
+      margin: 1.6rem auto 1.4rem;
+      box-shadow: 0 0 20px rgba(0,0,0,.4), 0 0 35px rgba(255,231,154,.1);
+      backdrop-filter: blur(6px);
+      max-width: 860px;
       position: relative;
+      animation: fadeTexte 1.2s ease forwards;
+      overflow: hidden;
+    }
+    .phrase-intro::before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:16px;
+      border:1px solid transparent;
+      background: linear-gradient(120deg, transparent, rgba(255,231,154,.5), transparent);
+      background-size:200% 100%;
+      animation: contourLight 6s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes contourLight{ 0%{background-position:-100% 0;} 100%{background-position:200% 0;} }
+
+    .phrase-intro p{ margin: 0; }
+    .phrase-intro .mot-lueur{
       color: #ffe79a;
-      text-shadow:
-        0 0 6px rgba(255,231,154,.6),
-        0 0 12px rgba(255,231,154,.4),
-        0 0 24px rgba(255,231,154,.25);
-      animation: brille 3s ease-in-out infinite alternate;
+      text-shadow: 0 0 8px rgba(255,231,154,.8), 0 0 20px rgba(255,231,154,.6), 0 0 36px rgba(255,231,154,.4);
+      font-weight: 700;
+      letter-spacing: .5px;
     }
-    @keyframes brille{
-      0%{text-shadow:0 0 4px rgba(255,231,154,.4),0 0 8px rgba(255,231,154,.2);}
-      50%{text-shadow:0 0 12px rgba(255,231,154,.9),0 0 24px rgba(255,231,154,.6),0 0 36px rgba(255,231,154,.4);}
-      100%{text-shadow:0 0 6px rgba(255,231,154,.5),0 0 16px rgba(255,231,154,.3);}
-    }
+    @keyframes fadeTexte { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform:none;} }
 
     /* === ACCROCHE (fade + brillance) === */
     .phrase-accroche{
@@ -110,17 +108,9 @@
       background-clip: text;
       color: transparent;
       animation: shine 2.6s ease-in-out infinite;
-      text-shadow: none;
     }
-    @keyframes accrocheFade{
-      from{opacity:0; transform:translateY(6px);}
-      to{opacity:1; transform:none;}
-    }
-    @keyframes shine{
-      0%{background-position:-100% 0;}
-      50%{background-position:100% 0;}
-      100%{background-position:200% 0;}
-    }
+    @keyframes accrocheFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+    @keyframes shine{ 0%{background-position:-100% 0;} 50%{background-position:100% 0;} 100%{background-position:200% 0;} }
 
     /* === CHARADE === */
     .charade-louboutin{
@@ -164,10 +154,11 @@
       width:18px; height:18px; border-radius:50%;
       display:inline-block;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.2) 60%, transparent 61%);
-      opacity:.35; transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+      opacity:.35; transition:transform .2s ease,opacity .2s ease,box-shadow .2s ease;
     }
     .charade-case.ok .etat{ opacity:1; box-shadow:0 0 0 2px rgba(59,178,115,.35), 0 0 12px #3bb273; }
     .charade-case.ko .etat{ opacity:1; box-shadow:0 0 0 2px rgba(201,79,79,.35), 0 0 12px #c94f4f; }
+
     .charade-result{
       margin-top: 1rem; padding-top: .8rem;
       border-top: 1px dashed rgba(255,231,154,.45);
@@ -180,7 +171,6 @@
       background: linear-gradient(180deg, rgba(255,231,154,.25), rgba(255,231,154,.1));
       color:#fff8e6;
       box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 22px rgba(255,231,154,.15);
-      transition: transform .15s ease, box-shadow .2s ease;
     }
 
     /* === BOUTONS === */
@@ -220,15 +210,12 @@
       box-shadow:0 20px 60px rgba(0,0,0,.5);
       padding:1rem;
     }
-    .modal header{
-      display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;
-    }
+    .modal header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
     .modal h3{margin:0;font-size:1rem;color:#ffe79a;font-weight:700;}
-    .modal .close{
-      border:none;background:transparent;color:#ffe79a;cursor:pointer;font-size:1.4rem;padding:.2rem .4rem;border-radius:8px;
-    }
+    .modal .close{border:none;background:transparent;color:#ffe79a;cursor:pointer;font-size:1.4rem;padding:.2rem .4rem;border-radius:8px;}
     .modal video{width:100%;border-radius:10px;background:#000;}
 
+    /* === MOBILE === */
     @media(max-width:600px){
       .container{padding:1rem .6rem 6.5rem;}
       .charade-ligne{grid-template-columns:1fr;}
@@ -243,21 +230,22 @@
 
 <body>
   <div class="container">
-    <h1 class="page-title">Aurélyne Louboutin</h1>
+    <!-- PHRASE D’INTRO -->
+    <div class="phrase-intro">
+      <p>
+        Aurélyne, <span class="mot-lueur">Loup-garou de renom</span> dans le Monde des <span class="mot-lueur">Artistes</span>, veille à préserver la mémoire du vivant.<br>
+        Grâce à son art, les espèces en voie de disparition sont répertoriées à l’intérieur de ses tableaux.
+      </p>
+    </div>
 
     <!-- IMAGE CLIQUABLE -->
     <a href="gif_html" class="image-lien">
       <img class="Fees-image" src="monde_aurelyne.webp" alt="Mais qui est Aurélyne ?">
     </a>
 
-    <!-- TEXTE -->
-    <div class="texte-monde">
-      « Aurélyne est un <span class="mot-lueur">Loup-garou</span> de renom dans le Monde des <span class="mot-lueur">Artistes</span>. Grâce à elle, les espèces en voie de disparition sont répertoriées à l’intérieur de ses tableaux. »
-    </div>
-
     <!-- ACCROCHE -->
     <p class="phrase-accroche">
-      Sous les crocs du loup sommeille une âme d’artiste… 
+      Sous les crocs du loup sommeille une âme d’artiste…
       <span class="shine">Dévoile son nom en résolvant la charade magique !</span>
     </p>
 
@@ -265,13 +253,13 @@
     <section class="charade-louboutin">
       <h2>Charade mystère</h2>
       <p class="charade-ligne"><span>Mon premier est un animal qui hurle à la lune…</span>
-        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="loup"><span class="etat">•</span></label>
+        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="loup"><span class="etat" aria-hidden="true">•</span></label>
       </p>
       <p class="charade-ligne"><span>Mon deuxième est l’extrémité d’une corde…</span>
-        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="bout"><span class="etat">•</span></label>
+        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="bout"><span class="etat" aria-hidden="true">•</span></label>
       </p>
       <p class="charade-ligne"><span>Mon troisième est une herbe qui parfume l’agneau…</span>
-        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="thym"><span class="etat">•</span></label>
+        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="thym"><span class="etat" aria-hidden="true">•</span></label>
       </p>
       <div class="charade-result" hidden>
         <p class="bravo"><strong>Bravo, tu as trouvé !</strong><br>Le nom d’Aurélyne est <em>Louboutin</em> !</p>
