@@ -8,6 +8,8 @@
 
 <!-- Police élégante -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+
 
 <style>
   /* ===== Fond & base ===== */
@@ -26,18 +28,43 @@
   }
   body.no-scroll{ overflow:hidden; }
 
-  /* ===== Titre hors cadre ===== */
-  .titre-camidjo{
-    font-family:'Playfair Display',serif;
-    color:#fce9b0; font-weight:600;
-    font-size:clamp(1.7rem,4vw,2.2rem);
-    letter-spacing:.4px; margin:0 0 1.1rem;
-    text-shadow:0 0 8px rgba(252,233,176,.45), 0 0 18px rgba(252,233,176,.25);
-  }
-  .titre-camidjo::after{
-    content:""; display:block; width:120px; height:2px; margin:.45rem auto 0;
-    border-radius:2px; background:linear-gradient(90deg,transparent,#f3e1b3,transparent); opacity:.75;
-  }
+/* ====== Titre style Aurélyne ====== */
+.titre-aurelyne{
+  margin:0 auto .8rem; text-align:center;
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:700; color:#ffe79a;
+  text-shadow:0 0 6px rgba(255,231,154,.5),0 0 14px rgba(255,231,154,.35);
+  letter-spacing:.5px; position:relative;
+}
+.titre-aurelyne::after{
+  content:""; display:block; width:120px; max-width:38vw; height:2px;
+  margin:.5rem auto 0; border-radius:2px;
+  background:linear-gradient(90deg,transparent,#ffe79a,transparent);
+  opacity:.7;
+}
+
+/* ====== Cartouche élégant identique ====== */
+.phrase-intro.cartouche-b{
+  max-width:860px; margin:.6rem auto 1.2rem; padding:1.1rem 1.4rem;
+  border-radius:16px; background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,231,154,.28);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  font-size:clamp(1rem,1.7vw,1.2rem); line-height:1.65;
+  color:#fff8e6; text-align:center; position:relative; overflow:hidden;
+}
+.phrase-intro.cartouche-b::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(80% 100% at 50% 30%, rgba(255,247,220,.06) 0%, rgba(255,247,220,0) 60%),
+    radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,.18) 0%, rgba(0,0,0,0) 60%);
+}
+.mot-lueur{
+  color:#ffe79a;
+  text-shadow:0 0 8px rgba(255,231,154,.8),0 0 20px rgba(255,231,154,.6),0 0 36px rgba(255,231,154,.4);
+  font-weight:600;
+}
+
 
   /* ===== Titre de section (ex-« h1 ») ===== */
   .section-title{
@@ -61,14 +88,6 @@
     backdrop-filter: blur(4px);
     position:relative; z-index:1;
   }
-  .bloc-contenu p{
-    font-family:'Playfair Display',serif;
-    font-size:clamp(1.05rem,1.8vw,1.2rem);
-    line-height:1.8; letter-spacing:.2px; margin:0;
-    color:#fff6e1;
-  }
-  .bloc-contenu p strong{ font-weight:600; color:#fce9b0; }
-  .bloc-contenu p em{ color:#fff3d3; }
 
   /* ===== Illustration encadrée ===== */
   .Artistes-image{
@@ -203,20 +222,23 @@
 
 <body>
   <!-- Titre hors cadre -->
-  <h1 class="titre-camidjo">Camidjo</h1>
-
+  <h1 class="titre-aurelyne">Camidjo</h1>
+  
   <!-- Cartouche d’intro (sans “Le Créateur”) -->
-  <div class="bloc-contenu">
-    <p>
-      <strong>Bonjour, jeune Aventurier !</strong><br>
-      Bienvenue dans mon magasin.<br>
-      Je m’appelle <strong>Camidjo</strong>, et je suis le créateur de ce monde.<br><br>
-      Pour la petite <strong>anecdote</strong>, j’étais en train de composer <em>« Façon de faire »</em> lorsque j’ai entendu <strong>l’Appel d’Arzankia</strong>.<br>
-      C’est en fredonnant cette chanson que <strong>mon monde est né</strong>.<br><br>
-      ✨<strong>Récolte les notes dorées</strong> pour débloquer mes mélodies…✨<br><br>
-      <strong>Ouvre grand tes oreilles, et laisse la magie opérer.</strong>
-    </p>
-  </div>
+ <div class="phrase-intro cartouche-b">
+  <p><strong>Bonjour, jeune Aventurier&nbsp;!</strong><br>
+  Bienvenue dans mon magasin.<br>
+  Je m’appelle <span class="mot-lueur">Camidjo</span>, et je suis le créateur de ce monde.</p>
+
+  <p>Pour la petite <strong>anecdote</strong>, j’étais en train de composer
+  <em>«&nbsp;Façon de faire&nbsp;»</em> lorsque j’ai entendu
+  <span class="mot-lueur">l’Appel d’Arzankia</span>.<br>
+  C’est en fredonnant cette chanson que <strong>mon monde est né</strong>.</p>
+
+  <p>✨<strong>Récolte les notes dorées</strong> pour débloquer mes mélodies…✨</p>
+
+  <p><strong>Ouvre grand tes oreilles, et laisse la magie opérer.</strong></p>
+</div>
 
   <img class="Artistes-image" src="monde_Artiste.png" alt="Illustration du Monde des Artistes">
 
