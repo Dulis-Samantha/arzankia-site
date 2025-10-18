@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex"/>
 <title>Camidjo — Chansons & Magasin</title>
 
-<!-- Police élégante pour titres & textes poétiques -->
+<!-- Police élégante -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 
 <style>
@@ -17,7 +17,6 @@
     margin:0; padding:2rem; min-height:100vh; box-sizing:border-box;
     position:relative;
   }
-  /* Vignettage doux pour soulager la lune derrière le texte */
   body::before{
     content:""; position:fixed; inset:0; pointer-events:none;
     background:
@@ -27,27 +26,29 @@
   }
   body.no-scroll{ overflow:hidden; }
 
-  /* ===== Titres ===== */
-  h1,h2,h3{ font-family:'Playfair Display',serif; letter-spacing:.4px; margin:0; }
-  h1{
-    color:#fce9b0; font-weight:600; margin:2rem 0 1rem;
+  /* ===== Titre hors cadre ===== */
+  .titre-camidjo{
+    font-family:'Playfair Display',serif;
+    color:#fce9b0; font-weight:600;
+    font-size:clamp(1.7rem,4vw,2.2rem);
+    letter-spacing:.4px; margin:0 0 1.1rem;
     text-shadow:0 0 8px rgba(252,233,176,.45), 0 0 18px rgba(252,233,176,.25);
   }
-  h1::after{
+  .titre-camidjo::after{
     content:""; display:block; width:120px; height:2px; margin:.45rem auto 0;
     border-radius:2px; background:linear-gradient(90deg,transparent,#f3e1b3,transparent); opacity:.75;
   }
-  .bloc-contenu h2{
-    color:#fce9b0; font-size:clamp(1.6rem,3.2vw,2rem); font-weight:600; margin:.2rem 0 .3rem;
-    text-shadow:0 0 8px rgba(243,225,179,.45);
+
+  /* ===== Titre de section (ex-« h1 ») ===== */
+  .section-title{
+    font-family:'Playfair Display',serif;
+    color:#fce9b0; font-weight:600; margin:2rem 0 1rem;
+    font-size:clamp(1.4rem,3.6vw,1.9rem);
+    text-shadow:0 0 8px rgba(252,233,176,.45), 0 0 18px rgba(252,233,176,.25);
   }
-  .bloc-contenu h2::after{
-    content:""; display:block; width:100px; height:2px; margin:.35rem auto 0;
-    border-radius:2px; background:linear-gradient(90deg,transparent,#f3e1b3,transparent); opacity:.7;
-  }
-  .bloc-contenu h3{
-    color:#ffe8bb; font-weight:400; font-style:italic; opacity:.9;
-    margin:0 0 .8rem;
+  .section-title::after{
+    content:""; display:block; width:120px; height:2px; margin:.45rem auto 0;
+    border-radius:2px; background:linear-gradient(90deg,transparent,#f3e1b3,transparent); opacity:.75;
   }
 
   /* ===== Cartouche principal (verre fumé doré) ===== */
@@ -66,7 +67,6 @@
     line-height:1.8; letter-spacing:.2px; margin:0;
     color:#fff6e1;
   }
-  /* adoucir les gras pour éviter l’effet criard */
   .bloc-contenu p strong{ font-weight:600; color:#fce9b0; }
   .bloc-contenu p em{ color:#fff3d3; }
 
@@ -79,7 +79,7 @@
     outline-offset: -6px;
   }
 
-  /* ===== Cartes chansons & boutique (verre + relief fin) ===== */
+  /* ===== Cartes chansons & boutique ===== */
   .chanson,.card{
     margin:1.2rem auto; max-width:860px; text-align:left;
     background:linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,.32));
@@ -94,7 +94,7 @@
 
   audio{ width:100%; margin-top:.4rem; filter:drop-shadow(0 8px 18px rgba(0,0,0,.28)); border-radius:8px; }
 
-  /* ===== En-tête notes (moins flashy, plus chic) ===== */
+  /* ===== En-tête notes ===== */
   .header-notes{ max-width:1000px; margin:1.6rem auto; display:flex; flex-direction:column; gap:1rem; align-items:center; }
   .note-info{
     font-family:'Playfair Display',serif; font-size:1.15rem; color:#fce9b0; font-weight:500;
@@ -117,7 +117,7 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* ===== Boutons élégants ===== */
+  /* ===== Boutons ===== */
   .btn-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin:1.2rem auto 1.6rem; }
   .btn{ appearance:none; border:none; cursor:pointer; padding:.6rem 1rem; border-radius:12px; font-weight:600; letter-spacing:.2px; transition: transform .18s ease, filter .2s ease, box-shadow .2s ease; }
   .btn-ghost{
@@ -138,7 +138,7 @@
   .shop{ max-width:1000px; margin:1.2rem auto; display:grid; gap:1rem; grid-template-columns:1fr; }
   @media(min-width:900px){ .shop{ grid-template-columns:1fr 1fr; } }
 
-  /* ===== Overlay notes (inchangé, juste drop-shadow déjà présent) ===== */
+  /* ===== Overlay notes ===== */
   .zone-notes{ position:fixed; inset:0; width:100%; height:100%; z-index:30; pointer-events:none; overflow:hidden; }
   .note{ position:absolute; pointer-events:auto; width:clamp(26px,3.5vw,40px); aspect-ratio:1/1; cursor:pointer; transform-origin:center; animation:flotter var(--duree,10s) linear forwards, wiggle 2.4s ease-in-out infinite; filter:drop-shadow(0 6px 10px rgba(0,0,0,.45)); background:none; border:none; padding:0; }
   .note svg{ width:100%; height:100%; display:block; }
@@ -183,31 +183,30 @@
   /* ===== Mobile ===== */
   @media (max-width: 480px){
     body{ padding: 1.2rem; }
-    h1{ font-size: clamp(1.15rem, 6.6vw, 1.45rem); line-height: 1.05; white-space: nowrap; margin: 1rem 0 .6rem; }
+    .titre-camidjo{ font-size: clamp(1.4rem, 6.4vw, 1.7rem); margin-bottom:.8rem; }
     .bloc-contenu{ max-width: 100%; padding: 1.05rem .95rem; border-radius: 14px; }
-    .bloc-contenu h2{ font-size: 1.35rem; margin-bottom: .3rem; }
-    .bloc-contenu h3{ font-size: 1.05rem; letter-spacing: .02em; margin: .2rem 0 .4rem; }
     .bloc-contenu p { font-size: 1rem; line-height: 1.55; }
     .chanson{ max-width: 100%; padding: .85rem; margin: 1rem auto; border-radius: 12px; }
     .Artistes-image{ margin: 1.2rem auto; border-radius: 14px; }
     audio{ margin-top: .35rem; }
-    .note-info{ font-size: 1rem; text-shadow: 0 0 6px rgba(252,233,176,.3); animation-duration: 4.6s; }
-    .note-info small{ font-size: .9rem; }
+    .note-info{ font-size: 1rem; animation-duration: 4.6s; }
     .badge-notes{ padding: .35rem .7rem; transform: scale(.97); }
     .shop{ grid-template-columns: 1fr !important; gap: .9rem; }
     .card{ max-width: 100%; padding: .9rem; border-radius: 13px; }
   }
   @media (max-width: 768px){
-    h1{ font-size: 1.8rem; }
+    .section-title{ font-size:1.6rem; }
     .bloc-contenu p{ font-size: 1.05rem; }
   }
 </style>
 </head>
 
 <body>
+  <!-- Titre hors cadre -->
+  <h1 class="titre-camidjo">Camidjo</h1>
+
+  <!-- Cartouche d’intro (sans “Le Créateur”) -->
   <div class="bloc-contenu">
-    <h2>Camidjo</h2>
-    <h3>– Le Créateur –</h3>
     <p>
       <strong>Bonjour, jeune Aventurier !</strong><br>
       Bienvenue dans mon magasin.<br>
@@ -221,7 +220,7 @@
 
   <img class="Artistes-image" src="monde_Artiste.png" alt="Illustration du Monde des Artistes">
 
-  <h1>Chansons de Camidjo</h1>
+  <h2 class="section-title">Chansons de Camidjo</h2>
 
   <!-- Piste gratuite -->
   <div class="chanson">
@@ -266,6 +265,27 @@ const BASE_SPAWN_MS = [900, 1500];
 const MAX_NOTES_ON_SCREEN = 14;
 const NOTE_LIFETIME = [9000, 13000];
 
+/* ====== BOOST REFRAINS : timings (en secondes) ====== */
+const CHORUS_WINDOWS = {
+  'camidjo_pensee.mp3'         : [45, 55, 100, 110],                 // Pensée pour elle
+  'camidjo_facon_de_faire.mp3' : [48, 55, 109, 115, 174],            // Façon de faire
+  'camidjo_poussiere.mp3'      : [67, 75],                            // Poussière
+  'camidjo_ma_clac.mp3'        : [28, 40, 50, 84, 90, 100, 138, 145, 150, 157] // J’en ai ma clac
+};
+const CHORUS_WINDOW_SEC = 3.5;        // demi-largeur de la fenêtre autour du point
+const CHORUS_DELAY_MULTIPLIER = 0.42; // <1 = plus de notes pendant la fenêtre
+
+const fileNameFromSrc = (src) => { try { return src.split('/').pop().split('?')[0]; } catch { return src; } };
+function inChorusWindow(audioEl){
+  if (!audioEl || !audioEl.src) return false;
+  const key = fileNameFromSrc(audioEl.src);
+  const marks = CHORUS_WINDOWS[key];
+  if (!marks || !marks.length) return false;
+  const t = audioEl.currentTime || 0;
+  for (const m of marks){ if (Math.abs(t - m) <= CHORUS_WINDOW_SEC) return true; }
+  return false;
+}
+
 /* =================== ÉTAT & RÉFS =================== */
 const notesCountEl = document.getElementById('notesCount');
 const zoneNotes = document.getElementById('zoneNotes');
@@ -275,7 +295,7 @@ const shopEl = document.getElementById('shop');
 let balance = parseInt(localStorage.getItem(STORAGE_NOTES) || '0', 10);
 let owned = new Set(JSON.parse(localStorage.getItem(STORAGE_OWNED) || '[]'));
 
-/* ====== Bulle magique (pas assez de notes) ====== */
+/* ====== Bulle magique ====== */
 function showMagicAlert(message){
   const old = document.querySelector('.magic-alert'); if (old) old.remove();
   const div = document.createElement('div');
@@ -290,7 +310,7 @@ function showMagicAlert(message){
   });
 }
 
-/* ====== Dialogue de confirmation d’achat ====== */
+/* ====== Modal d’achat ====== */
 function showConfirmPurchase(track, onYes){
   const backdrop = document.createElement('div');
   backdrop.className = 'modal-backdrop';
@@ -331,7 +351,7 @@ function showConfirmPurchase(track, onYes){
   modal.querySelector('.btn-yes').focus();
 }
 
-/* =================== RENDER BOUTIQUE =================== */
+/* =================== Boutique =================== */
 function renderShop(){
   shopEl.innerHTML = '';
   TRACKS.forEach(t=>{
@@ -366,7 +386,7 @@ function renderShop(){
   document.querySelectorAll('audio').forEach(wireAudio);
 }
 
-/* =================== ACHAT =================== */
+/* =================== Achat =================== */
 function attemptPurchase(track){
   if (owned.has(track.id)) return;
   if (balance < track.price){
@@ -383,14 +403,14 @@ function attemptPurchase(track){
   });
 }
 
-/* =================== PERSISTANCE =================== */
+/* =================== Persistance =================== */
 function persist(){
   localStorage.setItem(STORAGE_NOTES, String(balance));
   localStorage.setItem(STORAGE_OWNED, JSON.stringify([...owned]));
 }
 function updateBalanceUI(){ notesCountEl.textContent = balance; }
 
-/* =================== RESET =================== */
+/* =================== Reset =================== */
 resetBtn.addEventListener('click', ()=>{
   showConfirmPurchase({title:'réinitialiser', price:0}, ()=>{
     balance = 0; owned = new Set();
@@ -398,7 +418,7 @@ resetBtn.addEventListener('click', ()=>{
   });
 });
 
-/* =================== NOTES (SPAWN & COLLECT) =================== */
+/* =================== Notes (spawn & collect) =================== */
 function spawnNote(){
   const n = document.createElement('button');
   n.type='button'; n.className='note'; n.setAttribute('aria-label','Ramasser une note');
@@ -430,7 +450,7 @@ function spawnNote(){
   zoneNotes.appendChild(n);
 }
 
-/* =================== AUDIO & BOOST REFRAIN =================== */
+/* =================== Audio & boost refrain =================== */
 let audioCtx=null, analyser=null, sourceNode=null, freqData=null, energyEMA=0;
 let activeAudio=null, spawnTimer=null, rafId=null;
 
@@ -507,20 +527,26 @@ function bandEnergy(arr, fracStart, fracEnd){
   return count ? (sum/count)/255 : 0;
 }
 
+/* === ICI : délai entre spawns, boosté pendant les refrains === */
 function scheduleSpawnByEnergy(){
   if (spawnTimer || !activeAudio || activeAudio.paused || activeAudio.ended) return;
 
   const chorusBoost = map(energyEMA, 0.1, 0.9, 1.15, 0.45, true);
   const vol = (typeof activeAudio.volume==='number') ? activeAudio.volume : 1;
   const volBoost = map(vol, 0.0, 1.0, 1.15, 0.85, true);
+  let factor = Math.max(0.35, Math.min(2.0, chorusBoost * volBoost));
 
-  const factor = Math.max(0.35, Math.min(2.0, chorusBoost * volBoost));
-  const delay = rand(BASE_SPAWN_MS[0]*factor,BASE_SPAWN_MS[1]*factor);
+  // BOOST refrains : réduis le délai => plus de notes
+  if (inChorusWindow(activeAudio)) {
+    factor *= CHORUS_DELAY_MULTIPLIER;
+  }
+
+  const delay = rand(BASE_SPAWN_MS[0]*factor, BASE_SPAWN_MS[1]*factor);
 
   spawnTimer = setTimeout(()=>{
     spawnTimer=null;
     if (activeAudio && !activeAudio.paused && !activeAudio.ended){
-      if (zoneNotes.querySelectorAll('.note:not(.collected)').length < 14){
+      if (zoneNotes.querySelectorAll('.note:not(.collected)').length < MAX_NOTES_ON_SCREEN){
         spawnNote();
       }
       scheduleSpawnByEnergy();
@@ -528,6 +554,7 @@ function scheduleSpawnByEnergy(){
   }, delay);
 }
 
+/* =================== Helpers =================== */
 function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
 function map(x,inMin,inMax,outMin,outMax,clamp=false){
   let t = (x - inMin) / (inMax - inMin);
