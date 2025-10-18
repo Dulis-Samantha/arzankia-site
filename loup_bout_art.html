@@ -36,7 +36,16 @@
       text-shadow: 0 0 8px rgba(0,0,0,.75), 0 0 18px rgba(255,231,154,.25);
     }
 
-    /* === IMAGE === */
+    /* === IMAGE CLIQUABLE === */
+    .image-lien{
+      display:block;
+      text-align:center;
+      transition: transform .3s ease, filter .3s ease;
+    }
+    .image-lien:hover{
+      transform: scale(1.03);
+      filter: brightness(1.15);
+    }
     .Fees-image{
       display:block;
       width:100%;
@@ -61,6 +70,10 @@
       box-shadow: 0 0 12px rgba(0,0,0,.5);
       animation: fadeTexte 1s ease forwards;
     }
+    @keyframes fadeTexte{
+      from{opacity:0; transform:translateY(6px);}
+      to{opacity:1; transform:none;}
+    }
 
     /* Lueur dorée sur certains mots */
     .mot-lueur{
@@ -72,14 +85,10 @@
         0 0 24px rgba(255,231,154,.25);
       animation: brille 3s ease-in-out infinite alternate;
     }
-    @keyframes brille {
-      0%   { text-shadow: 0 0 4px rgba(255,231,154,.4), 0 0 8px rgba(255,231,154,.2); }
-      50%  { text-shadow: 0 0 12px rgba(255,231,154,.9), 0 0 24px rgba(255,231,154,.6), 0 0 36px rgba(255,231,154,.4); }
-      100% { text-shadow: 0 0 6px rgba(255,231,154,.5), 0 0 16px rgba(255,231,154,.3); }
-    }
-    @keyframes fadeTexte {
-      from{ opacity:0; transform: translateY(6px); }
-      to  { opacity:1; transform:none; }
+    @keyframes brille{
+      0%{text-shadow:0 0 4px rgba(255,231,154,.4),0 0 8px rgba(255,231,154,.2);}
+      50%{text-shadow:0 0 12px rgba(255,231,154,.9),0 0 24px rgba(255,231,154,.6),0 0 36px rgba(255,231,154,.4);}
+      100%{text-shadow:0 0 6px rgba(255,231,154,.5),0 0 16px rgba(255,231,154,.3);}
     }
 
     /* === ACCROCHE (fade + brillance) === */
@@ -104,13 +113,13 @@
       text-shadow: none;
     }
     @keyframes accrocheFade{
-      from{ opacity:0; transform: translateY(6px); }
-      to  { opacity:1; transform: none; }
+      from{opacity:0; transform:translateY(6px);}
+      to{opacity:1; transform:none;}
     }
     @keyframes shine{
-      0%   { background-position: -100% 0; }
-      50%  { background-position: 100% 0; }
-      100% { background-position: 200% 0; }
+      0%{background-position:-100% 0;}
+      50%{background-position:100% 0;}
+      100%{background-position:200% 0;}
     }
 
     /* === CHARADE === */
@@ -164,7 +173,6 @@
       border-top: 1px dashed rgba(255,231,154,.45);
       text-align:center;
     }
-    .charade-result .bravo{ margin:0 0 .8rem; line-height:1.55; }
     .charade-btn{
       cursor:pointer; font-size:1rem;
       padding:.75rem 1.1rem; border-radius:999px;
@@ -174,7 +182,6 @@
       box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 22px rgba(255,231,154,.15);
       transition: transform .15s ease, box-shadow .2s ease;
     }
-    .charade-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,0,0,.28), inset 0 0 28px rgba(255,231,154,.22); }
 
     /* === BOUTONS === */
     .button-group{
@@ -195,60 +202,40 @@
       min-width:180px;
       text-align:center;
     }
-    .button-group a:hover{
-      transform: scale(1.05);
-      box-shadow:0 0 18px rgba(255,223,100,1);
-    }
 
-    /* === MODALE VIDÉO === */
+    /* === MODALE === */
     .modal-overlay{
       position: fixed; inset: 0; z-index: 9999;
-      display:none; align-items: center; justify-content: center;
+      display:none; align-items:center; justify-content:center;
       background: rgba(0,0,0,.65);
       backdrop-filter: blur(2px);
-      padding: 4vmin;
+      padding:4vmin;
     }
-    .modal-overlay.open{ display:flex; }
+    .modal-overlay.open{display:flex;}
     .modal{
-      position: relative;
-      width: min(960px, 96vw);
-      border-radius: 16px;
-      background: rgba(0,0,0,.85);
-      border: 1px solid rgba(255,231,154,.4);
-      box-shadow: 0 20px 60px rgba(0,0,0,.5);
-      padding: 1rem;
+      width:min(960px,96vw);
+      border-radius:16px;
+      background:rgba(0,0,0,.85);
+      border:1px solid rgba(255,231,154,.4);
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+      padding:1rem;
     }
     .modal header{
-      display:flex; align-items:center; justify-content:space-between;
-      margin-bottom:.5rem;
+      display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;
     }
-    .modal h3{ margin:0; font-size:1rem; color:#ffe79a; font-weight:700; }
+    .modal h3{margin:0;font-size:1rem;color:#ffe79a;font-weight:700;}
     .modal .close{
-      appearance:none; border:none; cursor:pointer;
-      background: transparent; color:#ffe79a;
-      font-size: 1.4rem; line-height:1; padding:.2rem .4rem;
-      border-radius: 8px;
+      border:none;background:transparent;color:#ffe79a;cursor:pointer;font-size:1.4rem;padding:.2rem .4rem;border-radius:8px;
     }
-    .modal .close:hover{ background: rgba(255,231,154,.12); }
-    .modal video{
-      width:100%; height:auto; display:block;
-      border-radius: 10px; background:#000;
-    }
+    .modal video{width:100%;border-radius:10px;background:#000;}
 
-    /* === MOBILE === */
-    @media (max-width: 600px){
-      .container{ padding: 1rem 0.6rem 6.5rem; }
-      .texte-monde{ font-size:.95rem; padding:0.9rem; }
-      .charade-ligne{ grid-template-columns: 1fr; }
+    @media(max-width:600px){
+      .container{padding:1rem .6rem 6.5rem;}
+      .charade-ligne{grid-template-columns:1fr;}
       .button-group{
-        position: fixed; bottom:10px; left:0; right:0;
-        justify-content:center; background: rgba(0,0,0,.4);
-        padding:.5rem 1rem; z-index:998; gap:.5rem;
-      }
-      .button-group a{
-        font-size:.85rem; padding:.45rem .9rem;
-        min-width:auto; border-radius:25px;
-        box-shadow:0 0 8px rgba(255,223,100,.6);
+        position:fixed;bottom:10px;left:0;right:0;
+        justify-content:center;background:rgba(0,0,0,.4);
+        padding:.5rem 1rem;z-index:998;gap:.5rem;
       }
     }
   </style>
@@ -256,14 +243,17 @@
 
 <body>
   <div class="container">
-     <!-- TEXTE -->
+    <h1 class="page-title">Aurélyne Louboutin</h1>
+
+    <!-- IMAGE CLIQUABLE -->
+    <a href="gif_html" class="image-lien">
+      <img class="Fees-image" src="monde_aurelyne.webp" alt="Mais qui est Aurélyne ?">
+    </a>
+
+    <!-- TEXTE -->
     <div class="texte-monde">
       « Aurélyne est un <span class="mot-lueur">Loup-garou</span> de renom dans le Monde des <span class="mot-lueur">Artistes</span>. Grâce à elle, les espèces en voie de disparition sont répertoriées à l’intérieur de ses tableaux. »
     </div>
-
-    <!-- IMAGE -->
-    <img class="Fees-image" src="monde_aurelyne.webp" alt="Mais qui est Aurélyne ?">
-
 
     <!-- ACCROCHE -->
     <p class="phrase-accroche">
@@ -272,37 +262,20 @@
     </p>
 
     <!-- CHARADE -->
-    <section class="charade-louboutin" aria-labelledby="charade-titre">
-      <h2 id="charade-titre">Charade mystère</h2>
-      <p class="charade-ligne">
-        <span>Mon premier est un animal qui hurle à la lune…</span>
-        <label class="charade-case">
-          <input type="text" placeholder="ta réponse" data-answer="loup">
-          <span class="etat" aria-hidden="true">•</span>
-        </label>
+    <section class="charade-louboutin">
+      <h2>Charade mystère</h2>
+      <p class="charade-ligne"><span>Mon premier est un animal qui hurle à la lune…</span>
+        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="loup"><span class="etat">•</span></label>
       </p>
-      <p class="charade-ligne">
-        <span>Mon deuxième est l’extrémité d’une corde…</span>
-        <label class="charade-case">
-          <input type="text" placeholder="ta réponse" data-answer="bout">
-          <span class="etat" aria-hidden="true">•</span>
-        </label>
+      <p class="charade-ligne"><span>Mon deuxième est l’extrémité d’une corde…</span>
+        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="bout"><span class="etat">•</span></label>
       </p>
-      <p class="charade-ligne">
-        <span>Mon troisième est une herbe qui parfume l’agneau…</span>
-        <label class="charade-case">
-          <input type="text" placeholder="ta réponse" data-answer="thym">
-          <span class="etat" aria-hidden="true">•</span>
-        </label>
+      <p class="charade-ligne"><span>Mon troisième est une herbe qui parfume l’agneau…</span>
+        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="thym"><span class="etat">•</span></label>
       </p>
       <div class="charade-result" hidden>
-        <p class="bravo">
-          <strong>Bravo, tu as trouvé !</strong><br>
-          Le nom d’Aurélyne est <em>Louboutin</em> !
-        </p>
-        <button type="button" class="charade-btn" id="btn-coulisses">
-          Les coulisses d’Aurélyne Louboutin
-        </button>
+        <p class="bravo"><strong>Bravo, tu as trouvé !</strong><br>Le nom d’Aurélyne est <em>Louboutin</em> !</p>
+        <button type="button" class="charade-btn" id="btn-coulisses">Les coulisses d’Aurélyne Louboutin</button>
       </div>
     </section>
 
@@ -314,50 +287,18 @@
   </div>
 
   <!-- MODALE VIDÉO -->
-  <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoTitle" aria-hidden="true">
+  <div class="modal-overlay" id="videoModal" aria-hidden="true">
     <div class="modal">
       <header>
-        <h3 id="videoTitle">Les coulisses d’Aurélyne Louboutin</h3>
-        <button class="close" type="button" aria-label="Fermer">×</button>
+        <h3>Les coulisses d’Aurélyne Louboutin</h3>
+        <button class="close" type="button">×</button>
       </header>
       <video id="videoPlayer" src="raphael.mp4" controls playsinline></video>
     </div>
   </div>
 
   <script>
-  (() => {
-    const zone=document.querySelector('.charade-louboutin');
-    const inputs=[...zone.querySelectorAll('input[data-answer]')];
-    const result=zone.querySelector('.charade-result');
-    const btn=zone.querySelector('#btn-coulisses');
-    const norm=s=>(s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').trim();
-    function checkInput(i){
-      const good=norm(i.value)===norm(i.dataset.answer);
-      const wrap=i.closest('.charade-case');
-      wrap.classList.toggle('ok',good);
-      wrap.classList.toggle('ko',i.value.length&&!good);
-      return good;
-    }
-    function checkAll(){
-      const ok=inputs.every(checkInput);
-      result.hidden=!ok;
-    }
-    inputs.forEach(i=>{
-      i.addEventListener('input',()=>{checkInput(i);checkAll();});
-      i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkAll();}});
-    });
-
-    /* === MODALE === */
-    const modal=document.getElementById('videoModal');
-    const player=document.getElementById('videoPlayer');
-    const closeBtn=modal.querySelector('.close');
-    const open=()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('no-scroll');try{player.currentTime=0;player.play();}catch(e){}closeBtn.focus();};
-    const close=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('no-scroll');player.pause();};
-    btn?.addEventListener('click',open);
-    closeBtn.addEventListener('click',close);
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
-    modal.addEventListener('click',e=>{if(e.target===modal)close();});
-  })();
+  (()=>{const z=document.querySelector('.charade-louboutin'),ins=[...z.querySelectorAll('input[data-answer]')],res=z.querySelector('.charade-result'),btn=z.querySelector('#btn-coulisses'),n=s=>(s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').trim();function c(i){const g=n(i.value)===n(i.dataset.answer),w=i.closest('.charade-case');w.classList.toggle('ok',g);w.classList.toggle('ko',i.value.length&&!g);return g}function a(){res.hidden=!ins.every(c)}ins.forEach(i=>{i.addEventListener('input',()=>{c(i);a();});i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();a();}})});const m=document.getElementById('videoModal'),p=document.getElementById('videoPlayer'),cl=m.querySelector('.close'),o=()=>{m.classList.add('open');m.setAttribute('aria-hidden','false');document.body.classList.add('no-scroll');try{p.currentTime=0;p.play();}catch(e){}cl.focus();},x=()=>{m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.classList.remove('no-scroll');p.pause();};btn?.addEventListener('click',o);cl.addEventListener('click',x);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))x();});m.addEventListener('click',e=>{if(e.target===m)x();});})();
   </script>
 </body>
 </html>
