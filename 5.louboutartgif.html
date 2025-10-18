@@ -107,25 +107,38 @@
       max-width:var(--mediaW);
       padding:14px 18px;
       margin-inline:auto;
+      text-align:left;
     }
 
+    /* ===== Vidéo affichée ENTIEREMENT ===== */
     .cadre-video{
       position:relative;
-      background:rgba(0,0,0,.35);
-      overflow:hidden;
-      border-radius:18px;
       margin:12px auto 0;
       width:100%;
       max-width:var(--mediaW);
-      aspect-ratio:16/9;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),
-                 0 0 0 1px rgba(255,214,116,.10);
+      /* pas d'aspect-ratio forcé */
+      border-radius:18px;
+      overflow:hidden;
+
+      /* bandes “ciné” si besoin */
+      background:#000;
+
+      /* liseré fin */
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.05),
+        0 0 0 1px rgba(255,214,116,.10);
+
+      /* limite de hauteur pour éviter le dépassement d'écran */
+      max-height: calc(100vh - 240px);
+      display:flex; align-items:center; justify-content:center;
     }
     .cadre-video video{
       width:100%;
-      height:100%;
+      height:auto;          /* conserve le ratio natif */
+      object-fit:contain;   /* rien n'est rogné */
+      max-height:inherit;   /* respecte la limite ci-dessus */
       display:block;
-      object-fit:cover;
+      background:#000;
       border-radius:18px;
     }
 
@@ -172,7 +185,7 @@
     }
 
     @media (max-width:768px){
-      .cadre-video{ max-width:calc(100% - 24px); }
+      .cadre-video{ max-width:calc(100% - 24px); max-height:none; }
     }
   </style>
 </head>
@@ -193,7 +206,7 @@
   <!-- ===== Carte vidéo ===== -->
   <article class="carte" aria-labelledby="titre-libelule">
     <header>
-      <h2 id="titre-libelule">La Libellule — extrait (Ptikitis)</h2>
+      <h2 id="titre-libelule">Cette libellule nous arrive tout droit du monde des Ptikitis.</h2>
     </header>
 
     <div class="cadre-video">
