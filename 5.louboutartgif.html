@@ -78,33 +78,31 @@
     }
     .intro b{ color:var(--or); }
 
-    /* ===== Vidéo sans cadre ===== */
-    .cadre-video{
-      width:min(900px, 90%);
-      margin:10px auto 0;
-      background:none;
-      border:none;
-      box-shadow:none;
-    }
-    .cadre-video video{
-      display:block;
-      width:100%;
-      height:auto;
-      border:none;
-      border-radius:0;
-      box-shadow:none;
-      object-fit:contain;
-      background:none;
-    }
+  .cadre-video{
+  width:min(480px, 70%);
+  margin:20px auto;
+  background:none;
+  border:none;
+  box-shadow:none;
+  text-align:center;
+}
+.cadre-video video{
+  display:inline-block;
+  width:100%;
+  max-width:480px;
+  height:auto;
+  border:none;
+  border-radius:12px;
+  box-shadow:0 0 12px rgba(255,214,116,.25);
+  object-fit:contain;
+}
+.legende,
+.description{
+  max-width:480px;
+  margin:auto;
+  text-align:center;
+}
 
-    /* ===== Texte sous la vidéo ===== */
-    .legende{
-      margin:12px auto 6px;
-      text-align:center;
-      color:var(--or);
-      font-weight:bold;
-      font-size:clamp(1rem,2.2vw,1.2rem);
-    }
     .description{
       text-align:center;
       font-size:clamp(.95rem,2vw,1rem);
