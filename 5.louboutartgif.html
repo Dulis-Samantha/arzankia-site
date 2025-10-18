@@ -104,40 +104,25 @@
       text-align:center;
     }
 
-    /* ===== Vidéo/GIF ===== */
+    /* ===== Vidéo/GIF — sans cadre ===== */
     .cadre-video{
-  display:block;
-  margin:16px auto 0;
-  width:min(900px, 90%);
-  /* réserve une vraie hauteur au conteneur */
-  aspect-ratio: 16 / 9;          /* ajuste si ta vidéo est 9/16, 4/3, etc. */
-  border-radius:18px;
-  overflow:hidden;
-  background:#000;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.05),
-    0 0 0 1px rgba(255,214,116,.10);
-}
-
-.cadre-video video{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:contain;             /* ou 'cover' si tu préfères remplir sans bandes */
-  background:#000;
-}
-@media (max-width:768px){
-  .cadre-video{ width:100%; border-radius:12px; }
-  .carte .legende{ width:100%; }
-}
-
-    
-   .cadre-video img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:contain;   /* ou cover */
-}
+      width:min(900px, 90%);
+      margin:16px auto 0;
+      background:none;
+      box-shadow:none;
+      border:none;
+      overflow:visible;
+    }
+    .cadre-video video{
+      display:block;
+      width:100%;
+      height:auto;          /* laisse la vidéo décider de la hauteur */
+      border:none;
+      border-radius:0;
+      box-shadow:none;
+      object-fit:contain;   /* ou 'cover' si tu veux remplir sans bandes */
+      background:none;
+    }
 
     /* ===== Légende ===== */
     .carte .legende{
@@ -183,10 +168,8 @@
 
     /* ===== Responsive ===== */
     @media (max-width:768px){
-      .cadre-video, .carte .legende{
-        width:100%;
-        border-radius:0;
-      }
+      .cadre-video{ width:100%; }
+      .carte .legende{ width:100%; }
     }
   </style>
 </head>
