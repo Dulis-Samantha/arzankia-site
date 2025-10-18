@@ -18,6 +18,7 @@
       color:#fff8e6;
       text-shadow:1px 1px 4px #000;
     }
+    body.no-scroll{ overflow:hidden; }
 
     .container{
       max-width:1100px;
@@ -60,6 +61,78 @@
       box-shadow: 0 0 12px rgba(0,0,0,.5);
     }
 
+    /* === CHARADE === */
+    .charade-louboutin{
+      max-width:860px;
+      margin: 1.2rem auto 1.4rem;
+      padding: clamp(16px,3vw,28px);
+      border-radius: 16px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,231,154,.45);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      color:#fff8e6;
+      backdrop-filter: blur(4px);
+    }
+    .charade-louboutin h2{
+      margin: 0 0 .8rem;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      color:#ffe79a;
+      text-align:center;
+      letter-spacing:.3px;
+    }
+    .charade-ligne{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      align-items:center;
+      gap:12px;
+      margin:.6rem 0;
+    }
+    .charade-ligne span:first-child{ line-height:1.5; }
+    .charade-case{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:12px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,231,154,.45);
+    }
+    .charade-case input{
+      width:160px; max-width:42vw;
+      border:none; outline:none; background:transparent;
+      color:#fff8e6; font-size:1rem; padding:6px 2px;
+    }
+    .charade-case input::placeholder{ color:rgba(255,248,230,.6); }
+    .charade-case .etat{
+      width:18px; height:18px; border-radius:50%;
+      display:inline-block; text-indent:-9999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.2) 60%, transparent 61%);
+      opacity:.35; transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+    }
+    .charade-case.ok .etat{
+      opacity:1; box-shadow:0 0 0 2px rgba(59,178,115,.35), 0 0 12px #3bb273;
+    }
+    .charade-case.ko .etat{
+      opacity:1; box-shadow:0 0 0 2px rgba(201,79,79,.35), 0 0 12px #c94f4f;
+    }
+    .charade-result{
+      margin-top: 1rem;
+      padding-top: .8rem;
+      border-top: 1px dashed rgba(255,231,154,.45);
+      text-align:center;
+    }
+    .charade-result .bravo{ margin:0 0 .8rem; line-height:1.55; }
+    .charade-result .nom{ color:#ffe79a; letter-spacing:1px; }
+    .charade-btn{
+      cursor:pointer; font-size:1rem;
+      padding:.75rem 1.1rem; border-radius:999px;
+      border:1px solid #ffe79a;
+      background: linear-gradient(180deg, rgba(255,231,154,.25), rgba(255,231,154,.1));
+      color:#fff8e6;
+      box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 22px rgba(255,231,154,.15);
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .charade-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,0,0,.28), inset 0 0 28px rgba(255,231,154,.22); }
+    .charade-btn:active{ transform: translateY(0); }
+
     /* === BOUTONS === */
     .button-group{
       display:flex;
@@ -87,17 +160,59 @@
       box-shadow:0 0 18px rgba(255,223,100,1);
     }
 
+    /* === MODALE VIDÉO === */
+    .modal-overlay{
+      position: fixed; inset: 0; z-index: 9999;
+      display:none; /* visible quand .open */
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(2px);
+      padding: 4vmin;
+    }
+    .modal-overlay.open{ display:flex; }
+    .modal{
+      position: relative;
+      width: min(960px, 96vw);
+      border-radius: 16px;
+      background: rgba(0,0,0,.85);
+      border: 1px solid rgba(255,231,154,.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      padding: 1rem;
+    }
+    .modal header{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:.5rem;
+    }
+    .modal h3{
+      margin:0; font-size:1rem; color:#ffe79a; font-weight:700;
+    }
+    .modal .close{
+      appearance:none; border:none; cursor:pointer;
+      background: transparent; color:#ffe79a;
+      font-size: 1.4rem; line-height:1; padding:.2rem .4rem;
+      border-radius: 8px;
+    }
+    .modal .close:hover{ background: rgba(255,231,154,.12); }
+    .modal video{
+      width:100%; height:auto; display:block;
+      border-radius: 10px;
+      outline: none;
+      background:#000;
+    }
+
     /* === MOBILE === */
     @media (max-width: 600px){
       .container{ padding: 1rem 0.6rem 6.5rem; }
       .texte-monde{ font-size:.95rem; padding:0.9rem; }
+      .charade-ligne{ grid-template-columns: 1fr; }
+
       .button-group{
         position: fixed;
         bottom:10px; left:0; right:0;
         justify-content:center;
         background: rgba(0,0,0,.4);
         padding:.5rem 1rem;
-        z-index:999;
+        z-index:998; /* sous la modale */
         gap:.5rem;
       }
       .button-group a{
@@ -124,11 +239,131 @@
       « Aurélyne Louboutin est une Artiste. »
     </div>
 
+    <!-- CHARADE -->
+    <section class="charade-louboutin" aria-labelledby="charade-titre">
+      <h2 id="charade-titre">Charade mystère</h2>
+
+      <p class="charade-ligne">
+        <span>Mon premier est un animal qui hurle à la lune…</span>
+        <label class="charade-case">
+          <input type="text" inputmode="latin" autocomplete="off" placeholder="ta réponse" data-answer="loup">
+          <span class="etat" aria-hidden="true">•</span>
+        </label>
+      </p>
+
+      <p class="charade-ligne">
+        <span>Mon deuxième est l’extrémité d’une corde…</span>
+        <label class="charade-case">
+          <input type="text" inputmode="latin" autocomplete="off" placeholder="ta réponse" data-answer="bout">
+          <span class="etat" aria-hidden="true">•</span>
+        </label>
+      </p>
+
+      <p class="charade-ligne">
+        <span>Mon troisième est une herbe qui parfume l’agneau…</span>
+        <label class="charade-case">
+          <input type="text" inputmode="latin" autocomplete="off" placeholder="ta réponse" data-answer="thym">
+          <span class="etat" aria-hidden="true">•</span>
+        </label>
+      </p>
+
+      <div class="charade-result" hidden>
+        <p class="bravo">
+          <strong>Bravo, tu as trouvé !</strong><br>
+          Le nom d’Aurélyne est <span class="nom">LOUBOUTIN</span>.<br>
+          Tu comprends maintenant pourquoi sa boutique s’appelle comme ça !
+        </p>
+        <button type="button" class="charade-btn" id="btn-coulisses">
+          Les coulisses d’Aurélyne Louboutin
+        </button>
+      </div>
+    </section>
+
     <!-- BOUTONS -->
     <div class="button-group">
       <a href="7.extrait_Artistes.html"> Extrait du livre</a>
       <a href="3.les_mondes.html">← Retour aux Mondes</a>
     </div>
   </div>
+
+  <!-- === MODALE VIDÉO (pop-up) === -->
+  <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoTitle" aria-hidden="true">
+    <div class="modal" role="document">
+      <header>
+        <h3 id="videoTitle">Les coulisses d’Aurélyne Louboutin</h3>
+        <button class="close" type="button" aria-label="Fermer">×</button>
+      </header>
+      <video id="videoPlayer" src="raphael.mp4" controls playsinline></video>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    /* ====== Charade ====== */
+    const zone = document.querySelector('.charade-louboutin');
+    const inputs = Array.from(zone.querySelectorAll('input[data-answer]'));
+    const result = zone.querySelector('.charade-result');
+    const btn = zone.querySelector('#btn-coulisses');
+
+    const norm = s => (s||"")
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/\s+/g,'')
+      .trim();
+
+    function checkInput(input){
+      const good = norm(input.value) === norm(input.dataset.answer);
+      const wrapper = input.closest('.charade-case');
+      wrapper.classList.toggle('ok', good);
+      wrapper.classList.toggle('ko', input.value.length && !good);
+      return good;
+    }
+
+    function checkAll(){
+      const allGood = inputs.every(checkInput);
+      result.hidden = !allGood;
+    }
+
+    inputs.forEach(inp => {
+      inp.addEventListener('input', () => { checkInput(inp); checkAll(); });
+      inp.addEventListener('keydown', (e) => { if (e.key === 'Enter'){ e.preventDefault(); checkAll(); }});
+    });
+
+    /* ====== Modale Vidéo ====== */
+    const modal = document.getElementById('videoModal');
+    const player = document.getElementById('videoPlayer');
+    const closeBtn = modal.querySelector('.close');
+
+    function openModal(){
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.classList.add('no-scroll');
+      // Démarre la vidéo (autoplay respectueux : sans son imposé)
+      try { player.currentTime = 0; player.play(); } catch(e){}
+      // Focus accessibilité sur la croix
+      closeBtn.focus();
+    }
+
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.classList.remove('no-scroll');
+      // Met en pause la vidéo
+      player.pause();
+    }
+
+    // Ouvre la modale quand le bouton apparaît et qu'on clique
+    btn?.addEventListener('click', openModal);
+
+    // Fermer : croix, Échap, clic hors du contenu
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    /* Affiche/masque le bloc résultat selon la charade */
+    // (placé après la modale pour conserver la logique)
+    // NB : on réutilise checkAll() déjà branché sur input
+  })();
+  </script>
 </body>
 </html>
