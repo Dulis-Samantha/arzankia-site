@@ -11,11 +11,11 @@
       --or:#ffd674;
       --ivoire:#fff8e6;
       --verre:rgba(10,0,20,.45);
-      --bord:rgba(255,214,116,.55);
-      --ray:28px;
+      --bord:rgba(255,214,116,.38);
+      --ray:22px;
     }
 
-    /* ===== Fond + voile ===== */
+    /* ===== Fond + voile (adouci) ===== */
     html,body{height:100%}
     body{
       margin:0;
@@ -23,187 +23,121 @@
       color:var(--ivoire);
       background:url('fond_gif.webp') center/cover no-repeat fixed;
       min-height:100svh;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      padding:clamp(16px,3vw,48px);
-      position:relative;
-      overflow-x:hidden;
-      isolation:isolate;
+      display:flex; align-items:flex-start; justify-content:center;
+      padding:clamp(16px,3vw,40px);
+      position:relative; overflow-x:hidden; isolation:isolate;
     }
-    /* léger voile assombrissant pour la lisibilité du texte */
     body::before{
       content:""; position:absolute; inset:0; z-index:-1;
-      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55));
-      backdrop-filter:saturate(120%) blur(1px);
+      background:
+        radial-gradient(1200px 600px at 50% 0%, rgba(0,0,0,.35), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55));
+      backdrop-filter: blur(1px) saturate(112%);
     }
 
     /* ===== Contenu principal ===== */
-    .wrap{
-      width:min(1100px, 100%);
-      display:grid;
-      gap:clamp(16px,2vw,24px);
-    }
+    .wrap{ width:min(1040px,100%); display:grid; gap:clamp(16px,2vw,24px); }
 
+    /* ===== Titre (plus compact) ===== */
     .titre{
-      text-align:center;
-      line-height:1.25;
-      padding:clamp(8px,1.5vw,12px) clamp(10px,2vw,16px);
-      border-radius:20px;
+      text-align:center; line-height:1.25;
+      padding:clamp(12px,2vw,18px) clamp(12px,2vw,18px);
+      border-radius:18px;
       background:linear-gradient( to right,
         rgba(255,214,116,.10), rgba(255,214,116,.16), rgba(255,214,116,.10));
       border:1px solid var(--bord);
-      box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 30px rgba(255,214,116,.10);
-      animation:fadeIn .9s ease both, glow 3.5s ease-in-out infinite alternate;
+      box-shadow:0 6px 22px rgba(0,0,0,.25), inset 0 0 22px rgba(255,214,116,.08);
+      animation:none;
     }
     .titre h1{
-      margin:0 0 .4rem;
-      font-size:clamp(1.6rem, 3.8vw, 2.6rem);
+      margin:0 0 .35rem;
+      font-size:clamp(1.4rem, 3vw, 2rem);
       color:var(--or);
-      letter-spacing:.5px;
-      text-shadow:0 0 10px rgba(255,214,116,.25);
+      letter-spacing:.3px;
+      text-shadow:0 0 6px rgba(255,214,116,.18);
     }
-    .titre p{
-      margin:0;
-      font-size:clamp(1rem, 2.1vw, 1.15rem);
-      opacity:.95;
+    .titre p{ margin:0; font-size:clamp(.98rem, 1.8vw, 1.05rem); opacity:.92; }
+
+    /* ===== Carte tableau ===== */
+    .galerie{ display:grid; grid-template-columns:1fr; gap:clamp(16px,2vw,22px); }
+
+    .carte{
+      background:linear-gradient(180deg, rgba(0,0,0,.40), var(--verre));
+      border:1px solid var(--bord);
+      border-radius:var(--ray);
+      box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.04);
+      overflow:hidden;
+      max-width:900px;           /* aligne visuellement avec le titre */
+      margin:0 auto;
     }
 
-    /* ===== Carte tableau (vidéo) ===== */
-    .galerie{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:clamp(16px,2vw,22px);
+    /* Header aligné sur la vidéo */
+    .carte header{
+      padding:0;
+      border-bottom:1px solid rgba(255,214,116,.22);
+      background:linear-gradient(to right, rgba(255,214,116,.10), rgba(0,0,0,0));
     }
-.carte{
-  background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
-  border:1px solid var(--bord);
-  border-radius:var(--ray);
-  box-shadow:
-    0 12px 40px rgba(0,0,0,.35),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-  overflow:hidden;
+    .carte h2{
+      margin:0; color:var(--or); letter-spacing:.2px;
+      font-size:clamp(1.05rem,2.2vw,1.25rem);
+      max-width:800px; margin:0 auto; padding:14px 18px;  /* largeur = vidéo */
+    }
 
-  /* limites et centrage sur grand écran */
-  max-width:860px;
-  margin:0 auto;
-}
+    /* Cadre vidéo + liseré interne léger */
+    .cadre-video{
+      position:relative; margin:12px auto 0;
+      width:100%; max-width:800px; aspect-ratio:16/9;
+      border-radius:18px; overflow:hidden; background:rgba(0,0,0,.35);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),
+                 0 0 0 1px rgba(255,214,116,.10);
+    }
+    .cadre-video video{
+      width:100%; height:100%; display:block; object-fit:cover;
+    }
 
-/* Respecte les préférences de mouvement de l’utilisateur */
-@media (prefers-reduced-motion: reduce){
-  .titre{ animation:none; }
-  .btn-retour{ animation:none; }
-  .carte:hover{ transform:none; }
-}
-
-.carte header{
-  padding:14px 18px;
-  border-bottom:1px solid rgba(255,214,116,.28);
-  background:linear-gradient(to right, rgba(255,214,116,.10), rgba(0,0,0,0));
-}
-
-.carte h2{
-  margin:0;
-  font-size:clamp(1.1rem,2.6vw,1.35rem);
-  color:var(--or);
-  letter-spacing:.3px;
-}
-
-.cadre-video{
-  position:relative;
-  background:rgba(0,0,0,.35);
-  overflow:hidden;
-  border-radius:var(--ray);
-  margin:auto;
-  width:100%;
-  max-width:800px;   /* limite la vidéo sur PC */
-  aspect-ratio:16/9;
-}
-
-.cadre-video video{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  border-radius:var(--ray);
-}
-
-
-/* Sur mobile : prend toute la largeur */
-@media (max-width:768px){
-  .cadre-video{
-    max-width:100%;
-  }
-}
-
+    /* Légende centrée, même largeur que la vidéo */
     .carte .legende{
-      padding:12px 18px 18px;
-      font-size:clamp(.95rem,2vw,1rem);
-      opacity:.95;
+      max-width:800px; margin:10px auto 18px; padding:0 18px;
+      font-size:clamp(.95rem,1.8vw,1rem); line-height:1.55; opacity:.95;
+      text-align:center;
     }
 
-    /* Effet lueur au survol de la carte (desktop) */
+    /* Effet de survol discret (desktop) */
     @media (hover:hover){
       .carte:hover{
-        box-shadow:
-          0 18px 50px rgba(0,0,0,.45),
-          0 0 40px rgba(255,214,116,.12),
-          inset 0 0 0 1px rgba(255,255,255,.06);
+        box-shadow:0 14px 34px rgba(0,0,0,.38),
+                   0 0 24px rgba(255,214,116,.08),
+                   inset 0 0 0 1px rgba(255,255,255,.06);
         transform:translateY(-1px);
         transition:.25s ease;
       }
     }
 
-    /* Animations */
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(6px) }
-      to{ opacity:1; transform:translateY(0) }
+    /* Sur mobile : vidéo pleine largeur de la carte */
+    @media (max-width:768px){
+      .cadre-video{ max-width:calc(100% - 24px); }
+      .carte h2, .carte .legende{ max-width:calc(100% - 24px); }
     }
-    @keyframes glow{
-      from{ box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 25px rgba(255,214,116,.06) }
-      to{   box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 40px rgba(255,214,116,.14) }
+
+    /* Bouton retour (en bas) – lueur adoucie */
+    .btn-retour{
+      display:inline-block; margin:24px auto 48px; padding:10px 26px;
+      background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
+      color:#2a1b00; font-family:Georgia,serif; font-size:1.02rem;
+      border-radius:28px; text-decoration:none; letter-spacing:.2px;
+      box-shadow:0 0 10px rgba(255,214,116,.35), inset 0 0 6px rgba(255,214,116,.55);
+      transition:all .25s ease;
     }
-.btn-retour{
-  display:inline-block;
-  margin:20px auto 40px;
-  padding:10px 26px;
-  background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
-  color:#2a1b00;
-  font-family:Georgia,serif;
-  font-size:1.05rem;
-  border-radius:28px;
-  text-decoration:none;
-  letter-spacing:.3px;
-  box-shadow:
-    0 0 12px rgba(255,214,116,.4),
-    inset 0 0 6px rgba(255,214,116,.6);
-  transition:all .3s ease;
-}
+    .btn-retour:hover{
+      transform:translateY(-2px);
+      box-shadow:0 0 18px rgba(255,214,116,.55), inset 0 0 10px rgba(255,214,116,.85);
+      color:#1c1400;
+    }
 
-/* Effet de survol */
-.btn-retour:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 24px rgba(255,214,116,.7),
-    inset 0 0 10px rgba(255,214,116,.9);
-  color:#1c1400;
-}
-
-/* Effet clic */
-.btn-retour:active{
-  transform:scale(.97);
-}
-
-/* Animation douce de lueur magique */
-@keyframes pulseOr{
-  0%,100%{box-shadow:0 0 12px rgba(255,214,116,.4);}
-  50%{box-shadow:0 0 22px rgba(255,214,116,.7);}
-}
-.btn-retour{
-  animation:pulseOr 3.5s ease-in-out infinite;
-}
-
-    
+    /* Accessibilité mouvement */
+    @media (prefers-reduced-motion: reduce){
+      .carte:hover{ transform:none; }
+    }
   </style>
 </head>
 
@@ -222,11 +156,7 @@
         </header>
 
         <div class="cadre-video">
-          <!--
-            - muted + playsinline permettent l’autoplay sur mobile
-            - controls laisse la main à l’utilisateur
-            - preload="metadata" pour charger léger
-          -->
+          <!-- muted + playsinline autorisent l’autoplay sur mobile -->
           <video
             src="extrait_Ptikitis.mp4"
             controls
@@ -236,21 +166,21 @@
             loop
             preload="metadata"
             aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
-              Votre navigateur ne supporte pas la vidéo HTML5.
+            Votre navigateur ne supporte pas la vidéo HTML5.
           </video>
         </div>
 
         <p class="legende">
-          Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis. 
+          Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.
           Laisse-toi porter par la lumière et les détails.
         </p>
       </article>
     </section>
   </main>
-  <!-- === BOUTON RETOUR FIN DE PAGE === -->
-<footer style="text-align:center; margin-top:50px;">
-  <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour à la galerie</a>
-</footer>
 
+  <!-- === BOUTON RETOUR FIN DE PAGE === -->
+  <footer style="text-align:center;">
+    <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour à la galerie</a>
+  </footer>
 </body>
 </html>
