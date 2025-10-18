@@ -12,7 +12,6 @@
       --ivoire:#fff8e6;
       --verre:rgba(10,0,20,.45);
       --bord:rgba(255,214,116,.55);
-      --ray:28px;
     }
 
     /* ===== Fond ===== */
@@ -67,7 +66,7 @@
       background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
       border:1px solid var(--bord);
       border-radius:18px;
-      box-shadow:0 8px 24px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.04);
+      box-shadow:0 8px 24px rgba(0,0,0,.28);
       padding:24px 28px;
       margin-bottom:36px;
       animation:fadeIn 1.3s ease both;
@@ -79,27 +78,13 @@
     }
     .intro b{ color:var(--or); }
 
-    /* ===== Carte ===== */
-    .carte{
-      background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
-      border:1px solid var(--bord);
-      border-radius:var(--ray);
-      box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
-      overflow:hidden;
-      width:clamp(280px,90%,900px);
-      margin:0 auto 40px;
-      animation:fadeIn 1.5s ease both;
-      text-align:center;
-    }
-
-    /* ===== Vidéo/GIF — sans cadre ===== */
+    /* ===== Vidéo sans cadre ===== */
     .cadre-video{
       width:min(900px, 90%);
-      margin:16px auto 0;
+      margin:10px auto 0;
       background:none;
-      box-shadow:none;
       border:none;
-      overflow:visible;
+      box-shadow:none;
     }
     .cadre-video video{
       display:block;
@@ -112,29 +97,26 @@
       background:none;
     }
 
-    /* ===== Légende ===== */
-    .carte .legende{
-      width:80%;
-      margin:10px auto 18px;
-      font-size:clamp(.95rem,2vw,1rem);
-      opacity:.95;
+    /* ===== Texte sous la vidéo ===== */
+    .legende{
+      margin:12px auto 6px;
       text-align:center;
       color:var(--or);
       font-weight:bold;
+      font-size:clamp(1rem,2.2vw,1.2rem);
     }
-    .carte .description{
-      width:80%;
-      margin:8px auto 18px;
+    .description{
+      text-align:center;
       font-size:clamp(.95rem,2vw,1rem);
       opacity:.95;
-      text-align:center;
-      color:var(--ivoire);
+      max-width:900px;
+      margin:auto;
     }
 
     /* ===== Bouton retour ===== */
     .btn-retour{
       display:inline-block;
-      margin:10px auto 60px;
+      margin:30px auto 60px;
       padding:10px 26px;
       background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
       color:#2a1b00;
@@ -154,7 +136,6 @@
       color:#1c1400;
     }
 
-    /* ===== Animations ===== */
     @keyframes fadeIn{
       from{opacity:0; transform:translateY(8px);}
       to{opacity:1; transform:translateY(0);}
@@ -164,54 +145,47 @@
       50%{box-shadow:0 0 22px rgba(255,214,116,.7);}
     }
 
-    /* ===== Responsive ===== */
     @media (max-width:768px){
       .cadre-video{ width:100%; }
-      .carte .legende, .carte .description{ width:100%; }
     }
   </style>
 </head>
 
 <body>
-  <!-- ===== Titre principal ===== -->
   <header class="brand">
     <h1>Loup-Bout’Art</h1>
     <div class="souligne"></div>
   </header>
 
-  <!-- ===== Bloc de présentation ===== -->
   <section class="intro">
     <p><b>Salut ! Moi, c’est Aurélyne.</b></p>
     <p>Bienvenue dans ma boutique !</p>
     <p>Ici, tu découvriras les tableaux de mes créatures préférées d’Arzankia.<br>Approche… regarde-les vivre.</p>
   </section>
 
-  <!-- ===== Carte vidéo ===== -->
-  <article class="carte">
-    <div class="cadre-video">
-      <video
-        src="extrait_Ptikitis.mp4"
-        controls
-        playsinline
-        muted
-        autoplay
-        loop
-        preload="metadata"
-        aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
-        Votre navigateur ne supporte pas la vidéo HTML5.
-      </video>
-    </div>
+  <!-- ===== Vidéo libre ===== -->
+  <div class="cadre-video">
+    <video
+      src="extrait_Ptikitis.mp4"
+      controls
+      playsinline
+      muted
+      autoplay
+      loop
+      preload="metadata"
+      aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
+      Votre navigateur ne supporte pas la vidéo HTML5.
+    </video>
+  </div>
 
-    <p class="legende">Cette libellule nous arrive tout droit du monde des Ptikitis.</p>
-
-    <p class="description">
-      Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.<br>
-      Laisse-toi porter par la lumière et les détails.
-    </p>
-  </article>
+  <p class="legende">Cette libellule nous arrive tout droit du monde des Ptikitis.</p>
+  <p class="description">
+    Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.<br>
+    Laisse-toi porter par la lumière et les détails.
+  </p>
 
   <footer style="text-align:center;">
-    <a href="5.loup_bout_art.html" class="btn-retour">Retour</a>
+    <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour</a>
   </footer>
 </body>
 </html>
