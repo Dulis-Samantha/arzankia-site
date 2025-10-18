@@ -31,15 +31,12 @@
 
     /* === IMAGE CLIQUABLE === */
     .image-lien{
-      position: relative;            /* nécessaire pour positionner le halo */
+      position: relative;
       display:block;
       text-align:center;
       transition: transform .3s ease, filter .3s ease;
     }
-    .image-lien:hover{
-      transform: scale(1.03);
-      filter: brightness(1.1);
-    }
+    .image-lien:hover{ transform: scale(1.03); filter: brightness(1.1); }
     .Fees-image{
       display:block;
       width:100%;
@@ -50,14 +47,10 @@
       box-shadow: 0 0 25px rgba(255,255,255,.15);
     }
 
-    /* Effet "toc" (petit tremblement) à chaque coup */
+    /* Effet "toc" */
     .image-lien.knock { animation: toc .18s ease; }
-    @keyframes toc {
-      0%   { transform: translateX(0); }
-      25%  { transform: translateX(-2px); }
-      50%  { transform: translateX(2px); }
-      75%  { transform: translateX(-1px); }
-      100% { transform: translateX(0); }
+    @keyframes toc{
+      0%{transform:translateX(0)}25%{transform:translateX(-2px)}50%{transform:translateX(2px)}75%{transform:translateX(-1px)}100%{transform:translateX(0)}
     }
 
     /* HALO au 3ᵉ coup */
@@ -68,108 +61,69 @@
       pointer-events:none; opacity:0;
       box-shadow: 0 0 0px 0px rgba(255,231,154,.8);
     }
-    .image-lien.halo-actif .halo-magique{
-      animation: haloExpand 1.1s ease-out forwards;
-    }
+    .image-lien.halo-actif .halo-magique{ animation: haloExpand 1.1s ease-out forwards; }
     @keyframes haloExpand{
-      0%   { opacity:.9; width:0;   height:0;   box-shadow:0 0 0px 0px rgba(255,231,154,.8); }
-      50%  { opacity:1;  width:160%; height:160%; box-shadow:0 0 30px 25px rgba(255,231,154,.8), 0 0 60px 45px rgba(255,231,154,.5); }
-      100% { opacity:0;  width:200%; height:200%; box-shadow:0 0 80px 70px rgba(255,231,154,0); }
+      0%{opacity:.9;width:0;height:0;box-shadow:0 0 0px 0px rgba(255,231,154,.8)}
+      50%{opacity:1;width:160%;height:160%;box-shadow:0 0 30px 25px rgba(255,231,154,.8),0 0 60px 45px rgba(255,231,154,.5)}
+      100%{opacity:0;width:200%;height:200%;box-shadow:0 0 80px 70px rgba(255,231,154,0)}
     }
 
- /* ====== Titre "Aurélyne" hors cadre ====== */
-.titre-aurelyne{
-  margin: 0 auto .8rem;
-  text-align: center;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 700;
-  color: #ffe79a;
-  text-shadow:
-    0 0 6px rgba(255,231,154,.5),
-    0 0 14px rgba(255,231,154,.35);
-  letter-spacing: .5px;
-  position: relative;
-}
-.titre-aurelyne::after{
-  content:"";
-  display:block;
-  width: 120px;
-  max-width: 38vw;
-  height: 2px;
-  margin: .5rem auto 0;
-  border-radius: 2px;
-  background: linear-gradient(90deg, transparent, #ffe79a, transparent);
-  opacity: .7;
-}
+    /* ====== Titre "Aurélyne" ====== */
+    .titre-aurelyne{
+      margin: 0 auto .8rem;
+      text-align: center;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #ffe79a;
+      text-shadow: 0 0 6px rgba(255,231,154,.5), 0 0 14px rgba(255,231,154,.35);
+      letter-spacing: .5px;
+      position: relative;
+    }
+    .titre-aurelyne::after{
+      content:"";
+      display:block;
+      width: 120px;
+      max-width: 38vw;
+      height: 2px;
+      margin: .5rem auto 0;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #ffe79a, transparent);
+      opacity: .7;
+    }
 
-/* ====== Cartouche élégante (Option B) ====== */
-.phrase-intro.cartouche-b{
-  /* conteneur */
-  max-width: 860px;
-  margin: .6rem auto 1.2rem;
-  padding: 1.1rem 1.4rem;
-  border-radius: 16px;
+    /* ====== Cartouche élégante ====== */
+    .phrase-intro.cartouche-b{
+      max-width: 860px;
+      margin: .6rem auto 1.2rem;
+      padding: 1.1rem 1.4rem;
+      border-radius: 16px;
+      background: rgba(0,0,0,.50);
+      border: 1px solid rgba(255,231,154,.28);
+      box-shadow: 0 10px 28px rgba(0,0,0,.28);
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      line-height: 1.65;
+      color: #fff8e6;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeTexte .8s ease forwards;
+    }
+    .phrase-intro.cartouche-b::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(80% 100% at 50% 30%, rgba(255,247,220,.06) 0%, rgba(255,247,220,0) 60%),
+        radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,.18) 0%, rgba(0,0,0,0) 60%);
+    }
+    @keyframes fadeTexte{ from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 
-  /* style visuel */
-  background: rgba(0,0,0,.50);
-  border: 1px solid rgba(255,231,154,.28);
-  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+    .mot-lueur{
+      color:#ffe79a;
+      text-shadow:0 0 8px rgba(255,231,154,.8),0 0 20px rgba(255,231,154,.6),0 0 36px rgba(255,231,154,.4);
+      font-weight:600;
+    }
 
-  /* typo allégée */
-  font-family: Georgia, serif;
-  font-size: clamp(1rem, 1.7vw, 1.2rem); /* ~-10/15% vs avant */
-  line-height: 1.65;
-  color: #fff8e6;
-  text-align: center;
-
-  position: relative;
-  overflow: hidden;
-  animation: fadeTexte .8s ease forwards;
-}
-
-/* Vignette douce à l’intérieur du cadre */
-.phrase-intro.cartouche-b::after{
-  content:"";
-  position:absolute; inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(80% 100% at 50% 30%, rgba(255,247,220,.06) 0%, rgba(255,247,220,0) 60%),
-    radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,.18) 0%, rgba(0,0,0,0) 60%);
-}
-
-/* Mots clés lumineux (on garde ton effet) */
-.mot-lueur{
-  color:#ffe79a;
-  text-shadow:
-    0 0 8px rgba(255,231,154,.7),
-    0 0 18px rgba(255,231,154,.45);
-  font-weight: 600;
-}
-
-/* Mobile : texte plus lisible aligné à gauche */
-@media (max-width: 600px){
-  .titre-aurelyne{ font-size: 1.6rem; }
-  .titre-aurelyne::after{ width: 90px; }
-  .phrase-intro.cartouche-b{
-    text-align: left;
-    padding: 1rem 1.1rem;
-    margin: .4rem auto 1rem;
-  }
-}
-
-/* --- Conserve la brillance pour les mots dorés --- */
-.mot-lueur {
-  color: #ffe79a;
-  text-shadow:
-    0 0 8px rgba(255,231,154,.8),
-    0 0 20px rgba(255,231,154,.6),
-    0 0 36px rgba(255,231,154,.4);
-  font-weight: 600;
-}
-
-
-    /* === ACCROCHE (fade + brillance) === */
+    /* === ACCROCHE === */
     .phrase-accroche{
       max-width: 860px;
       margin: 1rem auto 0.6rem;
@@ -184,26 +138,79 @@
       display: inline-block;
       background: linear-gradient(90deg, rgba(255,231,154,.25), #ffe79a, rgba(255,231,154,.25));
       background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
       animation: shine 2.6s ease-in-out infinite;
     }
     @keyframes accrocheFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
     @keyframes shine{ 0%{background-position:-100% 0;} 50%{background-position:100% 0;} 100%{background-position:200% 0;} }
 
+    /* ===== Séparateur scintillant ===== */
+    .divider-etoiles{
+      height: 2px;
+      max-width: 860px;
+      margin: 10px auto 18px;
+      position: relative;
+      background: linear-gradient(90deg, transparent, #ffe79a, transparent);
+      opacity: .8;
+      border-radius: 2px;
+      overflow: visible;
+    }
+    .divider-etoiles::after{
+      content:"";
+      position:absolute; inset:-6px -20px;
+      background:
+        radial-gradient(6px 6px at 20% 50%, rgba(255,231,154,.9) 0 45%, transparent 46%),
+        radial-gradient(7px 7px at 80% 50%, rgba(255,231,154,.9) 0 45%, transparent 46%);
+      filter: blur(.2px);
+      animation: scintille 2.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes scintille{
+      0%,100%{ transform: translateX(-6px); opacity:.55;}
+      50%{ transform: translateX(6px);  opacity:1;}
+    }
+
     /* === CHARADE === */
     .charade-louboutin{
+      position: relative;
       max-width:860px;
       margin: 1.2rem auto 1.4rem;
       padding: clamp(16px,3vw,28px);
       border-radius: 16px;
-      background: rgba(0,0,0,.45);
-      border: 1px solid rgba(255,231,154,.45);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.42));
+      border: 1px solid rgba(255,231,154,.35);
+      box-shadow: 0 12px 34px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,231,154,.08);
       color:#fff8e6;
       backdrop-filter: blur(4px);
+      overflow:hidden;
     }
+    /* coins dorés haut */
+    .charade-louboutin::before,
+    .charade-louboutin::after{
+      content:"";
+      position:absolute; width:18px; height:18px; top:0; opacity:.45; filter:blur(.2px);
+    }
+    .charade-louboutin::before{
+      left:0;
+      background: radial-gradient(18px 18px at 100% 0, rgba(255,231,154,.7) 0 38%, transparent 39%);
+    }
+    .charade-louboutin::after{
+      right:0;
+      background: radial-gradient(18px 18px at 0 0, rgba(255,231,154,.7) 0 38%, transparent 39%);
+    }
+    /* coins dorés bas */
+    .charade-louboutin .coins-bas{ content:""; position:absolute; inset:auto 0 0 0; pointer-events:none; }
+    .charade-louboutin .coins-bas::before,
+    .charade-louboutin .coins-bas::after{
+      content:""; position:absolute; width:18px; height:18px; bottom:0; opacity:.45; filter: blur(.2px);
+    }
+    .charade-louboutin .coins-bas::before{
+      left:0; background: radial-gradient(18px 18px at 100% 100%, rgba(255,231,154,.7) 0 38%, transparent 39%);
+    }
+    .charade-louboutin .coins-bas::after{
+      right:0; background: radial-gradient(18px 18px at 0 100%, rgba(255,231,154,.7) 0 38%, transparent 39%);
+    }
+
     .charade-louboutin h2{
       margin: 0 0 .8rem;
       font-size: clamp(1.3rem, 3vw, 1.8rem);
@@ -218,17 +225,21 @@
       gap:12px;
       margin:.6rem 0;
     }
+    .charade-ligne span{ opacity:.95; }
+
     .charade-case{
       display:inline-flex; align-items:center; gap:8px;
       padding:6px 10px;
       border-radius:12px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,231,154,.45);
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,231,154,.35);
+      transition: box-shadow .25s ease, background .25s ease, border-color .25s ease;
     }
+    .charade-case:hover{ background: rgba(255,255,255,.09); box-shadow: 0 0 0 3px rgba(255,231,154,.12); }
     .charade-case input{
       width:160px; max-width:42vw;
       border:none; outline:none; background:transparent;
-      color:#fff8e6; font-size:1rem; padding:6px 2px;
+      color:#fff8e6; font-size:1rem; padding:6px 2px; letter-spacing:.3px;
     }
     .charade-case .etat{
       width:18px; height:18px; border-radius:50%;
@@ -236,29 +247,46 @@
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.2) 60%, transparent 61%);
       opacity:.35; transition:transform .2s ease,opacity .2s ease,box-shadow .2s ease;
     }
+    .charade-case.ok{ border-color: rgba(59,178,115,.6); box-shadow: 0 0 0 3px rgba(59,178,115,.18), inset 0 0 18px rgba(59,178,115,.08); }
     .charade-case.ok .etat{ opacity:1; box-shadow:0 0 0 2px rgba(59,178,115,.35), 0 0 12px #3bb273; }
+    .charade-case.ko{ border-color: rgba(201,79,79,.6); box-shadow: 0 0 0 3px rgba(201,79,79,.16), inset 0 0 18px rgba(201,79,79,.06); }
     .charade-case.ko .etat{ opacity:1; box-shadow:0 0 0 2px rgba(201,79,79,.35), 0 0 12px #c94f4f; }
 
     .charade-result{
-      margin-top: 1rem; padding-top: .8rem;
-      border-top: 1px dashed rgba(255,231,154,.45);
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px dashed rgba(255,231,154,.35);
       text-align:center;
+      opacity:0; transform: translateY(8px);
+      transition: opacity .35s ease, transform .35s ease, box-shadow .35s ease;
     }
+    .charade-result[hidden]{ display:block; visibility:hidden; height:0; padding-top:0; margin-top:0; border-top:0; }
+    .charade-result.show{ opacity:1; transform:none; visibility:visible; box-shadow: 0 -8px 28px -16px rgba(255,231,154,.22); }
+    .charade-result .bravo em{ color:#ffe79a; font-style: normal; font-weight:700; text-shadow: 0 0 10px rgba(255,231,154,.35); }
+
     .charade-btn{
       cursor:pointer; font-size:1rem;
-      padding:.75rem 1.1rem; border-radius:999px;
-      border:1px solid #ffe79a;
-      background: linear-gradient(180deg, rgba(255,231,154,.25), rgba(255,231,154,.1));
+      margin-top:.6rem; padding:.8rem 1.2rem;
+      border-radius:999px;
+      border:1px solid rgba(255,231,154,.55);
+      background: radial-gradient(120% 140% at 50% -20%, rgba(255,231,154,.22), rgba(255,231,154,.08) 55%, rgba(0,0,0,.0) 56%);
       color:#fff8e6;
-      box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 22px rgba(255,231,154,.15);
+      box-shadow: 0 10px 28px rgba(0,0,0,.28), inset 0 0 22px rgba(255,231,154,.12);
+      transition: transform .18s ease, box-shadow .25s ease, filter .25s ease;
+      position:relative; overflow:hidden;
     }
+    .charade-btn:hover{ transform: translateY(-1px); filter:brightness(1.05); box-shadow: 0 12px 34px rgba(0,0,0,.32), inset 0 0 26px rgba(255,231,154,.16); }
+    /* micro glitter */
+    .charade-btn::after{
+      content:""; position:absolute; top:0; bottom:0; left:-30%;
+      width:30%; transform:skewX(-20deg);
+      background: linear-gradient(90deg, transparent, rgba(255,231,154,.35), transparent);
+      opacity:0; pointer-events:none;
+    }
+    .charade-btn:hover::after{ animation: btnShine .9s ease; }
+    @keyframes btnShine{ 0%{ left:-30%; opacity:0; } 40%{ opacity:.9; } 100%{ left:120%; opacity:0; } }
 
     /* === BOUTON RETOUR === */
-    .button-group{
-      display:flex;
-      justify-content:center;
-      margin-top:2rem;
-    }
+    .button-group{ display:flex; justify-content:center; margin-top: clamp(1.4rem, 3.5vw, 2.2rem); }
     .button-group a{
       display:inline-block;
       padding:.55rem 1.2rem;
@@ -272,50 +300,34 @@
       transition:all .25s ease;
       box-shadow:0 0 6px rgba(255,231,154,.2);
     }
-    .button-group a:hover{
-      background:rgba(255,231,154,.25);
-      box-shadow:0 0 12px rgba(255,231,154,.35);
-      transform:scale(1.05);
-    }
+    .button-group a:hover{ background:rgba(255,231,154,.25); box-shadow:0 0 12px rgba(255,231,154,.35); transform:scale(1.05); }
+    @supports (padding: max(0px)){ .button-group{ padding-bottom: max(0px, env(safe-area-inset-bottom)); } }
 
     /* === MODALE === */
-    .modal-overlay{
-      position: fixed; inset: 0; z-index: 9999;
-      display:none; align-items:center; justify-content:center;
-      background: rgba(0,0,0,.65);
-      backdrop-filter: blur(2px);
-      padding: 4vmin;
-    }
+    .modal-overlay{ position: fixed; inset: 0; z-index: 9999; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,.65); backdrop-filter: blur(2px); padding: 4vmin; }
     .modal-overlay.open{ display:flex; }
-    .modal{
-      position: relative;
-      width: min(720px, 90vw);
-      border-radius: 16px;
-      background: rgba(0,0,0,.85);
-      border: 1px solid rgba(255,231,154,.4);
-      box-shadow: 0 20px 60px rgba(0,0,0,.5);
-      padding: 1rem;
-    }
+    .modal{ position: relative; width: min(720px, 90vw); border-radius: 16px; background: rgba(0,0,0,.85); border: 1px solid rgba(255,231,154,.4); box-shadow: 0 20px 60px rgba(0,0,0,.5); padding: 1rem; }
     .modal header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
     .modal h3{margin:0;font-size:1rem;color:#ffe79a;font-weight:700;}
     .modal .close{border:none;background:transparent;color:#ffe79a;cursor:pointer;font-size:1.4rem;padding:.2rem .4rem;border-radius:8px;}
-    .modal video{
-      display:block; width:100%; height:auto; max-height:70vh;
-      border-radius:10px; background:#000;
-    }
+    .modal video{ display:block; width:100%; height:auto; max-height:70vh; border-radius:10px; background:#000; }
     @media (min-width:1400px){ .modal{ width:680px; } }
 
     /* === MOBILE === */
     @media (max-width:600px){
       .container{padding:1rem .6rem 6.5rem;}
-      .charade-ligne{grid-template-columns:1fr;}
+      .titre-aurelyne{ font-size: 1.6rem; }
+      .titre-aurelyne::after{ width: 90px; }
+      .phrase-intro.cartouche-b{ text-align:left; padding:1rem 1.1rem; margin:.4rem auto 1rem; }
+      .divider-etoiles{ margin: 6px auto 12px; opacity:.9; }
+      .charade-louboutin{ padding:14px; }
+      .charade-ligne{ grid-template-columns:1fr; gap:10px; }
+      .charade-case input{ max-width:100%; }
       .button-group{
-        position:fixed; bottom:12px; left:0; right:0;
-        justify-content:center; margin:0; z-index:900;
+        position:fixed; bottom:12px; left:0; right:0; justify-content:center; margin:0; z-index:900;
       }
       .button-group a{
-        background:rgba(255,231,154,.1);
-        border:1px solid rgba(255,231,154,.25);
+        background:rgba(255,231,154,.1); border:1px solid rgba(255,231,154,.25);
         font-size:.85rem; padding:.4rem .9rem; box-shadow:none; color:#fff8e6;
       }
     }
@@ -324,16 +336,16 @@
 
 <body>
   <div class="container">
- <!-- Titre hors cadre -->
-<h1 class="titre-aurelyne">Aurélyne</h1>
+    <!-- Titre hors cadre -->
+    <h1 class="titre-aurelyne">Aurélyne</h1>
 
-<!-- Cartouche / cadre du texte -->
-<div class="phrase-intro cartouche-b">
-  <p>
-    Loup-garou de renom dans le Monde des <span class="mot-lueur">Artistes</span>, Aurélyne veille à préserver la mémoire du vivant.<br>
-    Grâce à son art, toutes les espèces d'Arzankia sont répertoriées à l’intérieur de ses tableaux.
-  </p>
-</div>
+    <!-- Cartouche / cadre du texte -->
+    <div class="phrase-intro cartouche-b">
+      <p>
+        Loup-garou de renom dans le Monde des <span class="mot-lueur">Artistes</span>, Aurélyne veille à préserver la mémoire du vivant.<br>
+        Grâce à son art, toutes les espèces d'Arzankia sont répertoriées à l’intérieur de ses tableaux.
+      </p>
+    </div>
 
     <!-- IMAGE CLIQUABLE : toquer 3 fois pour entrer -->
     <a href="#" id="porte" class="image-lien" data-target="5.louboutartgif.html"
@@ -348,22 +360,47 @@
       <span class="shine">Dévoile son nom en résolvant la charade magique !</span>
     </p>
 
+    <!-- Séparateur élégant -->
+    <div class="divider-etoiles" aria-hidden="true"></div>
+
     <!-- CHARADE -->
     <section class="charade-louboutin">
       <h2>Charade mystère</h2>
-      <p class="charade-ligne"><span>Mon premier est un animal qui hurle à la lune…</span>
-        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="loup"><span class="etat" aria-hidden="true">•</span></label>
+
+      <p class="charade-ligne">
+        <span>Mon premier est un animal qui hurle à la lune…</span>
+        <label class="charade-case">
+          <input type="text" placeholder="ta réponse"
+                 data-answers="loup,lou">
+          <span class="etat" aria-hidden="true">•</span>
+        </label>
       </p>
-      <p class="charade-ligne"><span>Mon deuxième est l’extrémité d’une corde…</span>
-        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="bout"><span class="etat" aria-hidden="true">•</span></label>
+
+      <p class="charade-ligne">
+        <span>Mon deuxième est l’extrémité d’une corde…</span>
+        <label class="charade-case">
+          <input type="text" placeholder="ta réponse"
+                 data-answers="bout,bou,boud">
+          <span class="etat" aria-hidden="true">•</span>
+        </label>
       </p>
-      <p class="charade-ligne"><span>Mon troisième est une herbe qui parfume l’agneau…</span>
-        <label class="charade-case"><input type="text" placeholder="ta réponse" data-answer="thym"><span class="etat" aria-hidden="true">•</span></label>
+
+      <p class="charade-ligne">
+        <span>Mon troisième est une herbe qui parfume l’agneau…</span>
+        <label class="charade-case">
+          <input type="text" placeholder="ta réponse"
+                 data-answers="thym,tin,tyn,tym">
+          <span class="etat" aria-hidden="true">•</span>
+        </label>
       </p>
+
       <div class="charade-result" hidden>
         <p class="bravo"><strong>Bravo, tu as trouvé !</strong><br>Le nom d’Aurélyne est <em>Louboutin</em> !</p>
         <button type="button" class="charade-btn" id="btn-coulisses">Les coulisses d’Aurélyne Louboutin</button>
       </div>
+
+      <!-- coins dorés bas -->
+      <div class="coins-bas" aria-hidden="true"></div>
     </section>
 
     <!-- BOUTON RETOUR -->
@@ -386,23 +423,48 @@
   <script>
   (()=>{
 
-    /* ====== Charade ====== */
-    const zone=document.querySelector('.charade-louboutin');
-    const inputs=[...zone.querySelectorAll('input[data-answer]')];
-    const result=zone.querySelector('.charade-result');
-    const btn=zone.querySelector('#btn-coulisses');
-    const norm=s=>(s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').trim();
+    /* ====== Charade (tolérance variantes) ====== */
+    const zone = document.querySelector('.charade-louboutin');
+    const inputs = [...zone.querySelectorAll('input[placeholder][type="text"]')];
+    const result = zone.querySelector('.charade-result');
+    const btn = zone.querySelector('#btn-coulisses');
+
+    const norm = s => (s||"")
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')   // accents
+      .replace(/[^a-z0-9]/g,'')                          // espaces/ponctuation
+      .trim();
+
+    function getAcceptedSet(input){
+      const raw = input.dataset.answers || input.dataset.answer || "";
+      return new Set( raw.split(',').map(v => norm(v)).filter(Boolean) );
+    }
+
     function checkInput(i){
-      const good=norm(i.value)===norm(i.dataset.answer);
-      const wrap=i.closest('.charade-case');
-      wrap.classList.toggle('ok',good);
-      wrap.classList.toggle('ko',i.value.length&&!good);
+      const accepted = getAcceptedSet(i);
+      const good = accepted.has( norm(i.value) );
+      const wrap = i.closest('.charade-case');
+      wrap.classList.toggle('ok', good);
+      wrap.classList.toggle('ko', i.value.length && !good);
       return good;
     }
-    function checkAll(){ result.hidden=!inputs.every(checkInput); }
+
+    function checkAll(){
+      const ok = inputs.every(checkInput);
+      if(!ok){
+        result.hidden = true;
+        result.classList.remove('show');
+      }else{
+        result.hidden = false;
+        result.classList.add('show'); // apparition douce
+      }
+    }
+
     inputs.forEach(i=>{
-      i.addEventListener('input',()=>{checkInput(i);checkAll();});
-      i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkAll();}});
+      i.addEventListener('input', ()=>{ checkInput(i); checkAll(); });
+      i.addEventListener('keydown', e=>{
+        if(e.key==='Enter'){ e.preventDefault(); checkAll(); }
+      });
     });
 
     /* ====== Modale Vidéo ====== */
@@ -421,7 +483,6 @@
     if (porte){
       let count=0, last=0;
       const windowMs=1000; // délai max entre 2 taps
-
       const onKnock = (e)=>{
         e.preventDefault();
         const now=Date.now();
@@ -434,15 +495,13 @@
 
         if(count>=3){
           count=0;
-          // halo + ouverture
           porte.classList.add('halo-actif');
           setTimeout(()=>{
             const url = porte.dataset.target || 'louboutartgif.html';
             window.location.href = url;
-          }, 1000); // laisse le halo se voir
+          }, 1000);
         }
       };
-
       porte.addEventListener('click', onKnock);
       porte.addEventListener('touchend', onKnock, { passive:false });
     }
