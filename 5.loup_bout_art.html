@@ -115,6 +115,40 @@
       letter-spacing: .5px;
     }
     @keyframes fadeTexte { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform:none;} }
+    /* --- Allègement du haut : Aurélyne en titre doré --- */
+.nom-aurelyne {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  font-weight: 700;
+  color: #ffe79a;
+  text-shadow:
+    0 0 6px rgba(255,231,154,.8),
+    0 0 18px rgba(255,231,154,.6),
+    0 0 35px rgba(255,231,154,.4);
+  margin-bottom: .8rem;
+  letter-spacing: 1px;
+}
+
+/* --- Texte plus doux en dessous --- */
+.texte-aurelyne {
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #fff8e6;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* --- Conserve la brillance pour les mots dorés --- */
+.mot-lueur {
+  color: #ffe79a;
+  text-shadow:
+    0 0 8px rgba(255,231,154,.8),
+    0 0 20px rgba(255,231,154,.6),
+    0 0 36px rgba(255,231,154,.4);
+  font-weight: 600;
+}
+
 
     /* === ACCROCHE (fade + brillance) === */
     .phrase-accroche{
@@ -271,13 +305,15 @@
 
 <body>
   <div class="container">
-    <!-- PHRASE D’INTRO -->
-    <div class="phrase-intro">
-      <p>
-        Aurélyne, <span class="mot-lueur">Loup-garou de renom</span> dans le Monde des <span class="mot-lueur">Artistes</span>, veille à préserver la mémoire du vivant.<br>
-        Grâce à son art, les espèces en voie de disparition sont répertoriées à l’intérieur de ses tableaux.
-      </p>
-    </div>
+  <div class="phrase-intro">
+  <p>
+    <span class="nom-aurelyne">Aurélyne</span><br>
+    <span class="texte-aurelyne">
+      Loup-garou de renom dans le Monde des <span class="mot-lueur">Artistes</span>, veille à préserver la mémoire du vivant.<br>
+      Grâce à son art, les espèces en voie de disparition sont répertoriées à l’intérieur de ses tableaux.
+    </span>
+  </p>
+</div>
 
     <!-- IMAGE CLIQUABLE : toquer 3 fois pour entrer -->
     <a href="#" id="porte" class="image-lien" data-target="5.louboutartgif.html"
