@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Boutique — Tableaux</title>
+
+  <style>
+    :root{
+      --or:#ffd674;
+      --ivoire:#fff8e6;
+      --verre:rgba(10,0,20,.45);
+      --bord:rgba(255,214,116,.55);
+      --ray:28px;
+    }
+
+    /* ===== Fond + voile ===== */
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Georgia, serif;
+      color:var(--ivoire);
+      background:url('fond_gif.webp') center/cover no-repeat fixed;
+      min-height:100svh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:clamp(16px,3vw,48px);
+      position:relative;
+      overflow-x:hidden;
+      isolation:isolate;
+    }
+    /* léger voile assombrissant pour la lisibilité du texte */
+    body::before{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55));
+      backdrop-filter:saturate(120%) blur(1px);
+    }
+
+    /* ===== Contenu principal ===== */
+    .wrap{
+      width:min(1100px, 100%);
+      display:grid;
+      gap:clamp(16px,2vw,24px);
+    }
+
+    .titre{
+      text-align:center;
+      line-height:1.25;
+      padding:clamp(8px,1.5vw,12px) clamp(10px,2vw,16px);
+      border-radius:20px;
+      background:linear-gradient( to right,
+        rgba(255,214,116,.10), rgba(255,214,116,.16), rgba(255,214,116,.10));
+      border:1px solid var(--bord);
+      box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 30px rgba(255,214,116,.10);
+      animation:fadeIn .9s ease both, glow 3.5s ease-in-out infinite alternate;
+    }
+    .titre h1{
+      margin:0 0 .4rem;
+      font-size:clamp(1.6rem, 3.8vw, 2.6rem);
+      color:var(--or);
+      letter-spacing:.5px;
+      text-shadow:0 0 10px rgba(255,214,116,.25);
+    }
+    .titre p{
+      margin:0;
+      font-size:clamp(1rem, 2.1vw, 1.15rem);
+      opacity:.95;
+    }
+
+    /* ===== Carte tableau (vidéo) ===== */
+    .galerie{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:clamp(16px,2vw,22px);
+    }
+    .carte{
+      background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
+      border:1px solid var(--bord);
+      border-radius:var(--ray);
+      box-shadow:
+        0 12px 40px rgba(0,0,0,.35),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .carte header{
+      padding:14px 18px;
+      border-bottom:1px solid rgba(255,214,116,.28);
+      background:linear-gradient( to right, rgba(255,214,116,.10), rgba(0,0,0,.0));
+    }
+    .carte h2{
+      margin:0;
+      font-size:clamp(1.1rem,2.6vw,1.35rem);
+      color:var(--or);
+      letter-spacing:.3px;
+    }
+    .cadre-video{
+      position:relative;
+      aspect-ratio:16/9; /* garde un joli ratio sur tous écrans */
+      background:rgba(0,0,0,.35);
+      overflow:clip;
+    }
+    .cadre-video video{
+      width:100%; height:100%;
+      display:block;
+      object-fit:cover;
+      filter:saturate(105%);
+    }
+    .carte .legende{
+      padding:12px 18px 18px;
+      font-size:clamp(.95rem,2vw,1rem);
+      opacity:.95;
+    }
+
+    /* Effet lueur au survol de la carte (desktop) */
+    @media (hover:hover){
+      .carte:hover{
+        box-shadow:
+          0 18px 50px rgba(0,0,0,.45),
+          0 0 40px rgba(255,214,116,.12),
+          inset 0 0 0 1px rgba(255,255,255,.06);
+        transform:translateY(-1px);
+        transition:.25s ease;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn{
+      from{ opacity:0; transform:translateY(6px) }
+      to{ opacity:1; transform:translateY(0) }
+    }
+    @keyframes glow{
+      from{ box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 25px rgba(255,214,116,.06) }
+      to{   box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 40px rgba(255,214,116,.14) }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap" role="main">
+    <section class="titre" aria-label="Bienvenue">
+      <h1>Bienvenue dans ma boutique</h1>
+      <p>Ici, je te fais découvrir certains de mes tableaux.</p>
+    </section>
+
+    <section class="galerie" aria-label="Galerie des tableaux">
+      <!-- ===== Carte 1 : Tableau de la libellule ===== -->
+      <article class="carte" aria-labelledby="titre-libelule">
+        <header>
+          <h2 id="titre-libelule">La Libellule — extrait (Ptikitis)</h2>
+        </header>
+
+        <div class="cadre-video">
+          <!--
+            - muted + playsinline permettent l’autoplay sur mobile
+            - controls laisse la main à l’utilisateur
+            - preload="metadata" pour charger léger
+          -->
+          <video
+            src="extrait_Ptikitis.mp4"
+            controls
+            playsinline
+            muted
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+        </div>
+
+        <p class="legende">
+          Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis. 
+          Laisse-toi porter par la lumière et les détails.
+        </p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
