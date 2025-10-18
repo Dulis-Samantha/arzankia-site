@@ -75,34 +75,48 @@
       grid-template-columns:1fr;
       gap:clamp(16px,2vw,22px);
     }
-    .carte{
-      background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
-      border:1px solid var(--bord);
-      border-radius:var(--ray);
-      box-shadow:
-        0 12px 40px rgba(0,0,0,.35),
-        inset 0 0 0 1px rgba(255,255,255,.04);
-      overflow:hidden;
-    }
-    .carte header{
-      padding:14px 18px;
-      border-bottom:1px solid rgba(255,214,116,.28);
-      background:linear-gradient( to right, rgba(255,214,116,.10), rgba(0,0,0,.0));
-    }
-    .carte h2{
-      margin:0;
-      font-size:clamp(1.1rem,2.6vw,1.35rem);
-      color:var(--or);
-      letter-spacing:.3px;
-    }
-    .cadre-video{
+.carte{
+  background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
+  border:1px solid var(--bord);
+  border-radius:var(--ray);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+  overflow:hidden;
+
+  /* limites et centrage sur grand écran */
+  max-width:860px;
+  margin:0 auto;
+}
+
+/* Respecte les préférences de mouvement de l’utilisateur */
+@media (prefers-reduced-motion: reduce){
+  .titre{ animation:none; }
+  .btn-retour{ animation:none; }
+  .carte:hover{ transform:none; }
+}
+
+.carte header{
+  padding:14px 18px;
+  border-bottom:1px solid rgba(255,214,116,.28);
+  background:linear-gradient(to right, rgba(255,214,116,.10), rgba(0,0,0,0));
+}
+
+.carte h2{
+  margin:0;
+  font-size:clamp(1.1rem,2.6vw,1.35rem);
+  color:var(--or);
+  letter-spacing:.3px;
+}
+
+.cadre-video{
   position:relative;
   background:rgba(0,0,0,.35);
   overflow:hidden;
   border-radius:var(--ray);
   margin:auto;
   width:100%;
-  max-width:800px; /* Limite la taille sur grand écran */
+  max-width:800px;   /* limite la vidéo sur PC */
   aspect-ratio:16/9;
 }
 
@@ -113,6 +127,7 @@
   object-fit:cover;
   border-radius:var(--ray);
 }
+
 
 /* Sur mobile : prend toute la largeur */
 @media (max-width:768px){
@@ -148,6 +163,47 @@
       from{ box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 25px rgba(255,214,116,.06) }
       to{   box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 40px rgba(255,214,116,.14) }
     }
+.btn-retour{
+  display:inline-block;
+  margin:20px auto 40px;
+  padding:10px 26px;
+  background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
+  color:#2a1b00;
+  font-family:Georgia,serif;
+  font-size:1.05rem;
+  border-radius:28px;
+  text-decoration:none;
+  letter-spacing:.3px;
+  box-shadow:
+    0 0 12px rgba(255,214,116,.4),
+    inset 0 0 6px rgba(255,214,116,.6);
+  transition:all .3s ease;
+}
+
+/* Effet de survol */
+.btn-retour:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 24px rgba(255,214,116,.7),
+    inset 0 0 10px rgba(255,214,116,.9);
+  color:#1c1400;
+}
+
+/* Effet clic */
+.btn-retour:active{
+  transform:scale(.97);
+}
+
+/* Animation douce de lueur magique */
+@keyframes pulseOr{
+  0%,100%{box-shadow:0 0 12px rgba(255,214,116,.4);}
+  50%{box-shadow:0 0 22px rgba(255,214,116,.7);}
+}
+.btn-retour{
+  animation:pulseOr 3.5s ease-in-out infinite;
+}
+
+    
   </style>
 </head>
 
@@ -191,5 +247,10 @@
       </article>
     </section>
   </main>
+  <!-- === BOUTON RETOUR FIN DE PAGE === -->
+<footer style="text-align:center; margin-top:50px;">
+  <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour à la galerie</a>
+</footer>
+
 </body>
 </html>
