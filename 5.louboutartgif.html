@@ -89,18 +89,6 @@
       width:clamp(280px,90%,900px);
       margin:0 auto 40px;
       animation:fadeIn 1.5s ease both;
-    }
-    .carte header{
-      padding:0;
-      border-bottom:1px solid rgba(255,214,116,.28);
-      background:linear-gradient(to right, rgba(255,214,116,.10), rgba(0,0,0,0));
-    }
-    .carte h2{
-      margin:0;
-      font-size:clamp(1.1rem,2.6vw,1.35rem);
-      color:var(--or);
-      letter-spacing:.3px;
-      padding:14px 18px;
       text-align:center;
     }
 
@@ -116,11 +104,11 @@
     .cadre-video video{
       display:block;
       width:100%;
-      height:auto;          /* laisse la vidéo décider de la hauteur */
+      height:auto;
       border:none;
       border-radius:0;
       box-shadow:none;
-      object-fit:contain;   /* ou 'cover' si tu veux remplir sans bandes */
+      object-fit:contain;
       background:none;
     }
 
@@ -131,6 +119,16 @@
       font-size:clamp(.95rem,2vw,1rem);
       opacity:.95;
       text-align:center;
+      color:var(--or);
+      font-weight:bold;
+    }
+    .carte .description{
+      width:80%;
+      margin:8px auto 18px;
+      font-size:clamp(.95rem,2vw,1rem);
+      opacity:.95;
+      text-align:center;
+      color:var(--ivoire);
     }
 
     /* ===== Bouton retour ===== */
@@ -169,7 +167,7 @@
     /* ===== Responsive ===== */
     @media (max-width:768px){
       .cadre-video{ width:100%; }
-      .carte .legende{ width:100%; }
+      .carte .legende, .carte .description{ width:100%; }
     }
   </style>
 </head>
@@ -190,10 +188,6 @@
 
   <!-- ===== Carte vidéo ===== -->
   <article class="carte">
-    <header>
-      <h2>Cette libellule nous arrive tout droit du monde des Ptikitis.</h2>
-    </header>
-
     <div class="cadre-video">
       <video
         src="extrait_Ptikitis.mp4"
@@ -208,14 +202,16 @@
       </video>
     </div>
 
-    <p class="legende">
-      Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.
+    <p class="legende">Cette libellule nous arrive tout droit du monde des Ptikitis.</p>
+
+    <p class="description">
+      Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.<br>
       Laisse-toi porter par la lumière et les détails.
     </p>
   </article>
 
   <footer style="text-align:center;">
-    <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour</a>
+    <a href="5.loup_bout_art.html" class="btn-retour">Retour</a>
   </footer>
 </body>
 </html>
