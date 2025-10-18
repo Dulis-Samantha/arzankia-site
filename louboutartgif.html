@@ -96,17 +96,31 @@
       letter-spacing:.3px;
     }
     .cadre-video{
-      position:relative;
-      aspect-ratio:16/9; /* garde un joli ratio sur tous écrans */
-      background:rgba(0,0,0,.35);
-      overflow:clip;
-    }
-    .cadre-video video{
-      width:100%; height:100%;
-      display:block;
-      object-fit:cover;
-      filter:saturate(105%);
-    }
+  position:relative;
+  background:rgba(0,0,0,.35);
+  overflow:hidden;
+  border-radius:var(--ray);
+  margin:auto;
+  width:100%;
+  max-width:800px; /* Limite la taille sur grand écran */
+  aspect-ratio:16/9;
+}
+
+.cadre-video video{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  border-radius:var(--ray);
+}
+
+/* Sur mobile : prend toute la largeur */
+@media (max-width:768px){
+  .cadre-video{
+    max-width:100%;
+  }
+}
+
     .carte .legende{
       padding:12px 18px 18px;
       font-size:clamp(.95rem,2vw,1rem);
