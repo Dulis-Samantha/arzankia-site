@@ -11,10 +11,13 @@
       --or:#ffd674;
       --ivoire:#fff8e6;
       --verre:rgba(10,0,20,.45);
-      --bord:rgba(255,214,116,.35);
-      --ray:22px;
+      --bord:rgba(255,214,116,.55);
+      --ray:28px;
+      --maxW:900px;
+      --mediaW:800px;
     }
 
+    /* ===== Fond + voile ===== */
     html,body{height:100%}
     body{
       margin:0;
@@ -22,249 +25,200 @@
       color:var(--ivoire);
       background:url('fond_gif.webp') center/cover no-repeat fixed;
       min-height:100svh;
-      display:flex; align-items:flex-start; justify-content:center;
-      padding:clamp(16px,3vw,40px);
-      position:relative; overflow-x:hidden; isolation:isolate;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:clamp(20px,3vw,50px);
+      position:relative;
+      overflow-x:hidden;
+      isolation:isolate;
     }
     body::before{
       content:""; position:absolute; inset:0; z-index:-1;
-      background:
-        radial-gradient(1200px 600px at 50% 0%, rgba(0,0,0,.35), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55));
-      backdrop-filter: blur(1px) saturate(112%);
+      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55));
+      backdrop-filter:saturate(120%) blur(1px);
     }
 
-    .wrap{ width:min(1040px,100%); display:grid; gap:clamp(16px,2vw,24px); }
-
-    /* ===== Titre élégant ===== */
+    /* ===== Titre principal ===== */
     .brand{
-      text-align:center; padding:18px 16px 10px;
+      text-align:center;
+      margin-bottom:20px;
+      animation:fadeIn 1s ease both;
     }
     .brand h1{
       margin:0;
-      font-size:clamp(2rem, 5vw, 3rem);
-      font-variant:small-caps;
-      letter-spacing:.5px;
+      font-size:clamp(2rem,5vw,3rem);
       color:var(--or);
-      text-shadow:0 1px 0 #7a5b1a, 0 0 18px rgba(255,214,116,.25);
+      letter-spacing:.5px;
+      font-variant:small-caps;
+      text-shadow:0 1px 2px #3a2b00, 0 0 15px rgba(255,214,116,.3);
     }
-    .brand .souligne{
-      width:min(460px,80%); height:10px; margin:10px auto 0;
+    .souligne{
+      width:min(400px,80%);
+      height:6px;
+      margin:10px auto 0;
       border-radius:999px;
       background:linear-gradient(90deg, transparent, rgba(255,214,116,.6), transparent);
       filter:blur(1px);
     }
 
-    /* ===== Encadré d’accueil ===== */
+    /* ===== Encadré de présentation ===== */
     .intro{
-      margin:4px auto 8px;
+      max-width:var(--maxW);
+      text-align:center;
       background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
       border:1px solid var(--bord);
       border-radius:18px;
       box-shadow:0 8px 24px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.04);
-      padding:16px 20px;
-      max-width:900px;
+      padding:20px 25px;
+      margin-bottom:30px;
+      animation:fadeIn 1.3s ease both;
     }
     .intro p{
       margin:.4rem 0;
-      font-size:clamp(1rem, 1.9vw, 1.08rem);
+      font-size:clamp(1rem, 1.9vw, 1.1rem);
       line-height:1.6;
-      text-align:center;
     }
     .intro b{ color:var(--or); }
 
     /* ===== Carte tableau ===== */
-    .galerie{ display:grid; grid-template-columns:1fr; gap:clamp(16px,2vw,22px); }
-
     .carte{
-      background:linear-gradient(180deg, rgba(0,0,0,.40), var(--verre));
+      background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
       border:1px solid var(--bord);
       border-radius:var(--ray);
-      box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.04);
+      box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
       overflow:hidden;
-      max-width:900px; margin:0 auto;
-      position:relative;
+      width:100%;
+      max-width:var(--maxW);
+      margin:0 auto 30px;
+      animation:fadeIn 1.5s ease both;
     }
-
     .carte header{
       padding:0;
-      border-bottom:1px solid rgba(255,214,116,.22);
+      border-bottom:1px solid rgba(255,214,116,.28);
       background:linear-gradient(to right, rgba(255,214,116,.10), rgba(0,0,0,0));
     }
     .carte h2{
-      margin:0; color:var(--or); letter-spacing:.2px;
-      font-size:clamp(1.05rem,2.2vw,1.25rem);
-      max-width:800px; margin:0 auto; padding:14px 18px;
+      margin:0;
+      font-size:clamp(1.1rem,2.6vw,1.35rem);
+      color:var(--or);
+      letter-spacing:.3px;
+      max-width:var(--mediaW);
+      padding:14px 18px;
+      margin-inline:auto;
     }
 
-    /* Cadre média (image -> clic -> animation) */
-    .cadre-media{
-      position:relative; margin:12px auto 0;
-      width:100%; max-width:800px; aspect-ratio:16/9;
-      border-radius:18px; overflow:hidden; background:rgba(0,0,0,.35);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 0 0 1px rgba(255,214,116,.10);
-      cursor:pointer;
+    .cadre-video{
+      position:relative;
+      background:rgba(0,0,0,.35);
+      overflow:hidden;
+      border-radius:18px;
+      margin:12px auto 0;
+      width:100%;
+      max-width:var(--mediaW);
+      aspect-ratio:16/9;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),
+                 0 0 0 1px rgba(255,214,116,.10);
     }
-    .cadre-media img,
-    .cadre-media video{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    /* Overlay “patiente…” pendant 3s */
-    .cadre-media .delay{
-      pointer-events:none;
-      position:absolute; inset:0; display:none; place-items:center;
-      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
-      font-size:clamp(1rem,2vw,1.15rem);
+    .cadre-video video{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      border-radius:18px;
     }
-    .cadre-media.pending .delay{ display:grid; }
-
-    /* Bulle message finale */
-    .bulle{
-      position:absolute; right:14px; bottom:14px;
-      max-width:min(70%, 360px);
-      background:rgba(0,0,0,.72);
-      border:1px solid rgba(255,214,116,.55);
-      color:var(--ivoire);
-      padding:10px 14px;
-      border-radius:16px;
-      box-shadow:0 8px 20px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
-      opacity:0; transform:translateY(8px);
-      transition:.35s ease;
-    }
-    .bulle::after{
-      content:""; position:absolute; right:12px; bottom:-8px;
-      width:14px; height:14px; rotate:45deg;
-      background:rgba(0,0,0,.72); border-right:1px solid rgba(255,214,116,.55); border-bottom:1px solid rgba(255,214,116,.55);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
-    }
-    .bulle.show{ opacity:1; transform:translateY(0); }
 
     .carte .legende{
-      max-width:800px; margin:10px auto 18px; padding:0 18px;
-      font-size:clamp(.95rem,1.8vw,1rem); line-height:1.55; opacity:.95;
+      max-width:var(--mediaW);
+      margin:10px auto 18px;
+      padding:0 18px;
+      font-size:clamp(.95rem,2vw,1rem);
+      opacity:.95;
       text-align:center;
     }
 
-    /* Bouton retour */
+    /* ===== Bouton retour ===== */
     .btn-retour{
-      display:inline-block; margin:24px auto 48px; padding:10px 26px;
+      display:inline-block;
+      margin:10px auto 60px;
+      padding:10px 26px;
       background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
-      color:#2a1b00; font-family:Georgia,serif; font-size:1.02rem;
-      border-radius:28px; text-decoration:none; letter-spacing:.2px;
-      box-shadow:0 0 10px rgba(255,214,116,.35), inset 0 0 6px rgba(255,214,116,.55);
-      transition:all .25s ease;
+      color:#2a1b00;
+      font-family:Georgia,serif;
+      font-size:1.05rem;
+      border-radius:28px;
+      text-decoration:none;
+      letter-spacing:.3px;
+      box-shadow:0 0 12px rgba(255,214,116,.4), inset 0 0 6px rgba(255,214,116,.6);
+      transition:all .3s ease;
+      animation:pulseOr 3.5s ease-in-out infinite;
     }
     .btn-retour:hover{
       transform:translateY(-2px);
-      box-shadow:0 0 18px rgba(255,214,116,.55), inset 0 0 10px rgba(255,214,116,.85);
+      box-shadow:0 0 24px rgba(255,214,116,.7),
+                 inset 0 0 10px rgba(255,214,116,.9);
       color:#1c1400;
     }
 
+    /* ===== Animations ===== */
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(8px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+    @keyframes pulseOr{
+      0%,100%{box-shadow:0 0 12px rgba(255,214,116,.4);}
+      50%{box-shadow:0 0 22px rgba(255,214,116,.7);}
+    }
+
     @media (max-width:768px){
-      .cadre-media{ max-width:calc(100% - 24px); }
-      .carte h2, .carte .legende{ max-width:calc(100% - 24px); }
+      .cadre-video{ max-width:calc(100% - 24px); }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap" role="main">
-    <!-- Titre -->
-    <header class="brand" aria-label="Loup-Bout'Art">
-      <h1>Loup-Bout’Art</h1>
-      <div class="souligne" aria-hidden="true"></div>
+  <!-- ===== Titre principal ===== -->
+  <header class="brand">
+    <h1>Loup-Bout’Art</h1>
+    <div class="souligne"></div>
+  </header>
+
+  <!-- ===== Bloc de présentation ===== -->
+  <section class="intro">
+    <p><b>Salut, moi, c’est Aurélyne.</b> Bienvenue dans ma boutique.</p>
+    <p>Tu peux admirer ici mes tableaux représentant mes créatures préférées d’Arzankia.</p>
+  </section>
+
+  <!-- ===== Carte vidéo ===== -->
+  <article class="carte" aria-labelledby="titre-libelule">
+    <header>
+      <h2 id="titre-libelule">La Libellule — extrait (Ptikitis)</h2>
     </header>
 
-    <!-- Encadré d’accueil -->
-    <section class="intro" aria-label="Présentation">
-      <p><b>Salut, bienvenue dans ma boutique.</b> Je m’appelle Aurélyne et j’adore dessiner les créatures d’Arzankia.</p>
-      <p>J’aime cacher des indices dans mes tableaux. <b>Si tu veux jouer</b>, clique sur l’image et cherche ce que je te demande…</p>
-      <p style="opacity:.9">En cliquant sur l’image, <b>3&nbsp;secondes après</b>, l’animation se met en place.</p>
-    </section>
+    <div class="cadre-video">
+      <video
+        src="extrait_Ptikitis.mp4"
+        controls
+        playsinline
+        muted
+        autoplay
+        loop
+        preload="metadata"
+        aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
+        Votre navigateur ne supporte pas la vidéo HTML5.
+      </video>
+    </div>
 
-    <!-- Carte : Libellule -->
-    <section class="galerie" aria-label="Galerie des tableaux">
-      <article class="carte" aria-labelledby="titre-libelule">
-        <header>
-          <h2 id="titre-libelule">La Libellule — extrait (Ptikitis)</h2>
-        </header>
+    <p class="legende">
+      Un extrait animé de mon tableau de la libellule, issu du monde des Ptikitis.
+      Laisse-toi porter par la lumière et les détails.
+    </p>
+  </article>
 
-        <!-- 
-          Règle du jeu :
-          - Image d’attente = poster statique cliquable (remplace "monde_aurelyne.webp" si tu veux).
-          - Après clic : attente 3s, puis on lance la VIDEO (extrait_Ptikitis.mp4).
-          - SI tu as un GIF, mets data-gif="chemin/mon_gif.gif" et (optionnel) data-gif-duration="4000"
-            => on affichera le GIF à la place de la vidéo et on fera apparaître la bulle après la durée indiquée.
-        -->
-        <div class="cadre-media" id="media-libellule"
-             data-video="extrait_Ptikitis.mp4"
-             data-gif="" 
-             data-gif-duration="4000"
-             aria-label="Clique pour lancer l’animation">
-          <img src="monde_aurelyne.webp" alt="Tableau de la libellule (image fixe). Clique pour jouer." />
-          <div class="delay"><span>✨ Patiente un instant… la magie arrive…</span></div>
-          <div class="bulle" id="bulle-libellule">
-            <strong>AHAHAH je t’ai bien eu !</strong><br>
-            Attention… si tu fixes trop longtemps les créatures, ne sais-tu pas qu’elles <em>sortent du cadre</em> ?
-          </div>
-        </div>
-
-        <p class="legende">
-          Clique, attends trois secondes… puis observe. Certains détails n’apparaissent qu’aux yeux des plus curieux.
-        </p>
-      </article>
-    </section>
-  </main>
-
-  <!-- Bouton retour en bas de page -->
+  <!-- ===== Bouton retour ===== -->
   <footer style="text-align:center;">
     <a href="5.loup_bout_art.html" class="btn-retour">⟵ Retour à la galerie</a>
   </footer>
-
-  <script>
-    // Gestion du clic : délai 3s -> lance vidéo OU bascule en GIF
-    (function(){
-      const cadre = document.getElementById('media-libellule');
-      const bulle = document.getElementById('bulle-libellule');
-      let played = false;
-
-      function showBubble(){ bulle.classList.add('show'); }
-
-      cadre.addEventListener('click', () => {
-        if(played) return; // éviter double clic
-        played = true;
-        cadre.classList.add('pending');
-
-        setTimeout(() => {
-          cadre.classList.remove('pending');
-
-          const gifPath = (cadre.dataset.gif || '').trim();
-          if(gifPath){
-            // Bascule en GIF (remplace le contenu par une <img>)
-            cadre.innerHTML = `
-              <img src="${gifPath}" alt="Animation du tableau (gif)">
-            `;
-            // Affiche la bulle après la durée estimée du GIF
-            const delay = parseInt(cadre.dataset.gifDuration || '4000', 10);
-            setTimeout(showBubble, isNaN(delay) ? 4000 : delay);
-          }else{
-            // Fallback : vidéo MP4
-            const videoSrc = cadre.dataset.video || 'extrait_Ptikitis.mp4';
-            cadre.innerHTML = `
-              <video id="vid" src="${videoSrc}" playsinline controls preload="metadata"></video>
-            `;
-            const vid = document.getElementById('vid');
-            // Lecture auto si possible
-            const tryPlay = () => vid.play().catch(()=>{ /* navigateur peut bloquer, l’utilisateur peut appuyer play */ });
-            tryPlay();
-
-            // Quand la vidéo se termine la première fois -> bulle
-            vid.addEventListener('ended', () => {
-              showBubble();
-            }, { once:true });
-          }
-        }, 3000); // délai "magique"
-      }, { once:true });
-    })();
-  </script>
 </body>
 </html>
