@@ -107,6 +107,58 @@
       transition:transform .15s ease, filter .15s ease;
     }
     .back-button a:hover{ transform:translateY(-2px); filter:saturate(1.05); }
+
+    /* ===== Question "artiste préférée" ===== */
+    .question-parch{
+      background:url('parchemin_fond.png') center/contain no-repeat;
+      background-color:rgba(255,248,230,0.88);
+      color:var(--parch-texte);
+      text-shadow:none;
+      border-radius:16px;
+      box-shadow:0 0 30px rgba(255,240,200,.55), 0 0 10px rgba(255,215,0,.15) inset;
+      padding:1rem 1.1rem 1.2rem;
+      margin:1rem auto 1.3rem;
+      max-width:700px;
+      opacity:0; transform:translateY(10px);
+    }
+    .question-parch.show{ animation:fadeIn .9s forwards; }
+
+    .question-parch p{ margin:.4rem 0; }
+    .question-parch strong{ color:#5a3d1f; }
+
+    .qa-row{
+      display:flex; gap:.6rem; margin-top:.6rem; justify-content:center; flex-wrap:wrap;
+    }
+    .qa-row input[type="text"]{
+      flex:1 1 260px; max-width:360px;
+      padding:.7rem .9rem; border-radius:12px; border:1px solid #d9c889;
+      background:rgba(255,255,255,.85);
+      color:#2a2416; font-size:1rem; outline:none;
+      box-shadow:inset 0 1px 3px rgba(0,0,0,.1);
+    }
+    .qa-row button{
+      --g1:#fff5c7; --g2:#f3e3a0; --g3:#e2d289; --edge:#d9c889;
+      padding:.8rem 1.1rem; border-radius:12px; border:1px solid var(--edge);
+      background:linear-gradient(180deg,var(--g1),var(--g2) 55%,var(--g3));
+      font-weight:800; letter-spacing:.2px; color:#2a2416; cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.75), inset 0 -2px 6px rgba(0,0,0,.08);
+      transition:transform .15s ease, filter .15s ease;
+    }
+    .qa-row button:hover{ transform:translateY(-1px); filter:saturate(1.05); }
+
+    .feedback{
+      margin-top:.6rem; font-size:1rem; line-height:1.45;
+      background:linear-gradient(180deg, rgba(255,248,230,.92), rgba(255,244,210,.92));
+      border:1px solid #e2d289; border-radius:12px;
+      padding:.7rem .9rem; color:#4a361f;
+      box-shadow:0 0 12px rgba(255,215,0,.2) inset;
+    }
+    .feedback.success{
+      border-color:#66ffcc; box-shadow:0 0 0 2px rgba(102,255,204,.25), 0 0 12px rgba(102,255,204,.25) inset;
+    }
+    .feedback.error{
+      border-color:#ff8888; box-shadow:0 0 0 2px rgba(255,136,136,.2), 0 0 12px rgba(255,136,136,.18) inset;
+    }
   </style>
 </head>
 
@@ -159,6 +211,20 @@
           <p><strong>Spécialisation :</strong> Chercheuse</p>
           <p><strong>Statut :</strong> En formation – niv 2</p>
           <br>
+        </div>
+
+        <!-- Question "artiste préférée" -->
+        <div id="quizArtist" class="question-parch" aria-live="polite">
+          <p><strong>Hey ! Attends ! Pas si vite !</strong></p>
+          <p>J’ai une dernière question pour toi…</p>
+          <p><em>Comment s’appelle mon artiste préférée du Monde des Artistes&nbsp;?</em></p>
+
+          <div class="qa-row">
+            <input id="artistInput" type="text" placeholder="Écris son prénom…" inputmode="text" autocomplete="off" aria-label="Réponse" />
+            <button id="artistValidate" type="button">Valider</button>
+          </div>
+
+          <p id="artistFeedback" class="feedback" hidden></p>
         </div>
 
         <nav class="back-button">
@@ -225,6 +291,64 @@
 
     // cache tout au chargement
     hideProfile();
+
+    /* ===== Quiz artiste préférée ===== */
+    const quizArtist = document.getElementById('quizArtist');
+    const artistInput = document.getElementById('artistInput');
+    const artistValidate = document.getElementById('artistValidate');
+    const artistFeedback = document.getElementById('artistFeedback');
+
+    // Normalise : minuscules, supprime accents/espaces/punctuations
+    function norm(s){
+      return (s||"")
+        .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // accents
+        .toLowerCase().replace(/[^a-z]/g,'');            // letters only
+    }
+
+    // Variantes tolérées : Aurélyne / Aurelyne / Auréline / Aureline (+ éventuellement "Louboutin")
+    const OK = new Set(['aurelyne','aureline']);
+    function isCorrectAnswer(v){
+      const n = norm(v);
+      return OK.has(n) || n.startsWith('aurelyne') || n.startsWith('aureline') || n.includes('louboutin');
+    }
+
+    function showArtistFeedback(ok){
+      artistFeedback.hidden = false;
+      if(ok){
+        artistFeedback.classList.remove('error');
+        artistFeedback.classList.add('success');
+        artistFeedback.innerHTML = "🎉 <strong>Bien joué&nbsp;!</strong> C’est exact. <strong>Aurélyne</strong> est une artiste incroyable.<br>As-tu visité sa boutique&nbsp;?<br><em>Petite astuce&nbsp;:</em> si la porte est fermée et qu’Aurélyne est à l’intérieur, <strong>toc trois fois à la porte</strong> et elle t’ouvrira&nbsp;!";
+      }else{
+        artistFeedback.classList.remove('success');
+        artistFeedback.classList.add('error');
+        artistFeedback.textContent = "🤔 Pas tout à fait… Essaie encore ! (Indice : son prénom commence par « Au… »)";
+      }
+    }
+
+    // apparition progressive du bloc question quand la fiche apparaît
+    function revealQuizArtist(){
+      if(!quizArtist) return;
+      setTimeout(()=> quizArtist.classList.add('show'), 250);
+    }
+
+    // branchement validation
+    if(artistValidate && artistInput){
+      artistValidate.addEventListener('click', ()=>{
+        showArtistFeedback(isCorrectAnswer(artistInput.value));
+      });
+      artistInput.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter'){
+          showArtistFeedback(isCorrectAnswer(artistInput.value));
+        }
+      });
+    }
+
+    // On étend showProfile pour déclencher l'apparition du quiz
+    const _origShowProfile = showProfile;
+    window.showProfile = function(){
+      _origShowProfile();
+      revealQuizArtist();
+    };
   </script>
 </body>
 </html>
