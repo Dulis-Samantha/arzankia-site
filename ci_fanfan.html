@@ -159,6 +159,21 @@
     .feedback.error{
       border-color:#ff8888; box-shadow:0 0 0 2px rgba(255,136,136,.2), 0 0 12px rgba(255,136,136,.18) inset;
     }
+    
+    .bouton-ore{
+  display:inline-block;
+  margin-top:.6rem;
+  padding:.6rem 1.2rem;
+  border-radius:12px;
+  background:linear-gradient(180deg,#fff5c7,#f3e3a0 55%,#e2d289);
+  border:1px solid #d9c889;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  color:#2a2416; font-weight:800;
+  text-decoration:none;
+  transition:transform .15s ease, filter .15s ease;
+}
+.bouton-ore:hover{ transform:translateY(-1px); filter:saturate(1.05); }
+
   </style>
 </head>
 
@@ -219,13 +234,13 @@
           <p>J’ai une dernière question pour toi…</p>
           <p><em>Comment s’appelle mon artiste préférée du Monde des Artistes&nbsp;?</em></p>
 
-          <div class="qa-row">
-            <input id="artistInput" type="text" placeholder="Écris son prénom…" inputmode="text" autocomplete="off" aria-label="Réponse" />
-            <button id="artistValidate" type="button">Valider</button>
-          </div>
+         <div class="qa-row">
+         <input id="artistInput" type="text" placeholder="Écris son prénom…" inputmode="text" autocomplete="off" aria-label="Réponse" />
+         <button id="artistValidate" type="button">Valider</button>
+         </div>
 
-          <p id="artistFeedback" class="feedback" hidden></p>
-        </div>
+         <p id="artistFeedback" class="feedback" hidden></p>
+
 
         <nav class="back-button">
           <a href="3.les_heros.html" aria-label="Retour à la liste des héros">← Les héros d'Arzankia</a>
