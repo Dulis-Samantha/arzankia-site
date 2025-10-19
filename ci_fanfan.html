@@ -239,8 +239,8 @@
          <button id="artistValidate" type="button">Valider</button>
          </div>
 
-         <p id="artistFeedback" class="feedback" hidden></p>
-
+          <p id="artistFeedback" class="feedback" hidden></p>
+          </div> <!-- <-- ferme #quizArtist ICI -->
 
         <nav class="back-button">
           <a href="3.les_heros.html" aria-label="Retour à la liste des héros">← Les héros d'Arzankia</a>
@@ -332,7 +332,12 @@
       if(ok){
         artistFeedback.classList.remove('error');
         artistFeedback.classList.add('success');
-        artistFeedback.innerHTML = "🎉 <strong>Bien joué&nbsp;!</strong> C’est exact. <strong>Aurélyne</strong> est une artiste incroyable.<br>As-tu visité sa boutique&nbsp;?<br><em>Petite astuce&nbsp;:</em> si la porte est fermée et qu’Aurélyne est à l’intérieur, <strong>toc trois fois à la porte</strong> et elle t’ouvrira&nbsp;!";
+     artistFeedback.innerHTML = `
+🎉 <strong>Bien joué&nbsp;!</strong> C’est exact. <strong>Aurélyne</strong> est une artiste incroyable.<br>
+As-tu visité sa boutique&nbsp;?<br>
+<a href="5.loup_bout_art.html" class="bouton-ore" target="_blank">Entrer chez Aurélyne</a><br>
+<em>Petite astuce&nbsp;:</em> si la porte est fermée et qu’Aurélyne est à l’intérieur, <strong>toc trois fois à la porte</strong> et elle t’ouvrira&nbsp;!`;
+
       }else{
         artistFeedback.classList.remove('success');
         artistFeedback.classList.add('error');
