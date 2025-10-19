@@ -226,21 +226,29 @@
     box-shadow: 0 0 12px rgba(255,231,154,.08),
                 inset 0 0 18px rgba(255,231,154,.05);
   }
-  /* Effet doré animé sur "Bravo..." et <em> */
-  .charade-result .bravo strong,
-  .charade-result .bravo em{
-    background: linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: goldFlow 3s ease-in-out infinite;
-    text-shadow: 0 0 6px rgba(255,230,180,.35);
-    font-weight:700;
-  }
-  .charade-result .bravo strong{
-    text-shadow:0 0 8px rgba(255,230,180,.5), 0 0 18px rgba(255,230,180,.35);
-  }
+
+  /* Effet magique uniquement sur "Bravo..." */
+.charade-result .bravo strong{
+  background: linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: goldFlow 3s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255,230,180,.5), 0 0 18px rgba(255,230,180,.35);
+  font-weight: 700;
+}
+
+/* Doré doux sans animation sur <em> */
+.charade-result .bravo em{
+  color:#ffe79a;
+  font-style:normal;
+  font-weight:600;
+  text-shadow:0 0 4px rgba(255,231,154,.2);
+  background:none;
+  animation:none;
+}
+
 
   .charade-btn{
     background:linear-gradient(180deg,#b79b57 0%,#d8c179 100%);
@@ -370,12 +378,13 @@
       </p>
 
 <div class="charade-result" hidden>
-  <p class="bravo">
-    <strong>Bravo, tu as trouvé&nbsp;le nom d’Aurélyne&nbsp;!</strong><br>
-    Loup + Bout + Thym&nbsp;: <em>Louboutin</em>.<br>
-    Tu comprends le choix artistique du nom de sa boutique <em>Loup-Bout’Art</em>&nbsp;?<br>
-    Aurélyne est une vraie artiste… découvre les coulisses de son travail&nbsp;!
-  </p>
+<p class="bravo">
+  <strong>Bravo, tu as trouvé&nbsp;le nom d’Aurélyne&nbsp;!</strong><br>
+  Loup + Bout + Thym&nbsp;: <em class="no-glow">Louboutin</em>.<br>
+  Tu comprends le choix artistique du nom de sa boutique
+  <em class="no-glow">Loup-Bout’Art</em>&nbsp;?<br>
+  Aurélyne est une vraie artiste… découvre les coulisses de son travail&nbsp;!
+</p>
   <button type="button" class="charade-btn" id="btn-coulisses">
     Découvrir les coulisses
   </button>
