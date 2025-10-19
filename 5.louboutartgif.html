@@ -117,30 +117,39 @@
     .fiche dt{ font-weight:700; color:var(--or); margin-top:.4rem; }
     .fiche dd{ margin:0 0 .6rem 0; line-height:1.55; }
 
-    /* ===== Bouton "En savoir plus" (ancien style conservé) ===== */
+      /* ===== Bouton "En savoir plus" — version Ghost Verre fin ===== */
     .btn-en-savoir-plus{
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      margin:6px auto 0; padding:10px 14px;
-      min-height:44px; width:auto; max-width:90%;
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      margin:6px auto 0;
+      padding:8px 12px;
+      min-height:38px;
+      width:auto;
+      inline-size:fit-content;
       cursor:pointer; list-style:none; user-select:none;
+
       color:rgba(255,214,116,.95);
-      background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
-      border:1px solid rgba(255,214,116,.45); border-radius:999px;
+      background:rgba(10,0,20,.28);
+      border:1px solid rgba(255,214,116,.45);
+      border-radius:999px;
       box-shadow:0 6px 14px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.05);
-      font-family:Georgia,serif; font-size:1rem; letter-spacing:.2px;
+      font-family:Georgia,serif;
+      font-size:.9rem;
+      letter-spacing:.2px;
+      backdrop-filter:blur(3px) saturate(120%);
       transition:background .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
     .btn-en-savoir-plus::-webkit-details-marker{ display:none; }
     .btn-en-savoir-plus:hover{
-      background:linear-gradient(90deg,#d4b44e,#ffe58a,#d4b44e);
-      box-shadow:0 8px 18px rgba(0,0,0,.28);
+      background:rgba(10,0,20,.36);
+      border-color:rgba(255,214,116,.6);
+      box-shadow:0 8px 18px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.06);
     }
     .btn-en-savoir-plus:focus-visible{
       outline:none;
       box-shadow:0 0 0 3px rgba(255,214,116,.35), 0 8px 18px rgba(0,0,0,.28);
     }
     .btn-en-savoir-plus svg{
-      width:18px; height:18px; flex:0 0 18px;
+      width:16px; height:16px;
       transition:transform .22s ease;
       opacity:.95;
     }
