@@ -209,17 +209,21 @@
   }
 
   /* Bloc Bravo — état par défaut (pas d’anim au chargement) */
-  .bravo{
-    font-family:'Playfair Display', Georgia, serif;
-    color:#fff8e6;
-    opacity:0;
-    transform:translateY(8px);
-    animation:none;
-    line-height:1.6;
-    background:radial-gradient(circle at 50% 120%, rgba(255,231,154,.08) 0%, transparent 70%);
-    border-radius:12px;
-    padding:.6rem .3rem;
-  }
+.bravo{
+  font-family:'Playfair Display', Georgia, serif;
+  color:#fff8e6;
+  opacity:0;
+  transform:translateY(8px);
+  animation:none;
+  line-height:1.6;
+  background:radial-gradient(circle at 50% 120%, rgba(255,231,154,.08) 0%, transparent 70%);
+  border-radius:12px;
+  padding:.9rem .6rem;
+  text-align:center;                     /* centrage du texte */
+  box-shadow:0 0 12px rgba(255,231,154,.05) inset; /* lueur douce */
+  letter-spacing:.2px;                   /* un poil plus respirant */
+}
+
   /* Déclenchement de l’anim quand le parent passe en .show */
   .charade-result.show .bravo{
     animation: bravoFade .9s ease forwards;
@@ -228,16 +232,6 @@
   }
 
   /* Effet magique uniquement sur "Bravo..." */
-.charade-result .bravo strong{
-  background: linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: goldFlow 3s ease-in-out infinite;
-  text-shadow: 0 0 8px rgba(255,230,180,.5), 0 0 18px rgba(255,230,180,.35);
-  font-weight: 700;
-}
 
 /* Doré doux sans animation sur <em> */
 .charade-result .bravo em{
@@ -248,7 +242,31 @@
   background:none;
   animation:none;
 }
+   /* Effet magique UNIQUEMENT sur "Bravo," + plus grand et sur sa propre ligne */
+.charade-result .bravo .bravo-title{
+  display:block;
+  font-size: clamp(1.25rem, 2.9vw, 1.7rem);
+  line-height: 1.1;
+  margin-bottom: .2rem;
 
+  background: linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: goldFlow 3s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255,230,180,.5), 0 0 18px rgba(255,230,180,.35);
+  font-weight: 700;
+}
+
+/* Sous-titre "tu as trouvé..." en ligne séparée, lisible, sans brillance */
+.charade-result .bravo .bravo-sub{
+  display:block;
+  font-size: clamp(1rem, 2.1vw, 1.2rem);
+  line-height: 1.35;
+  color: #fff8e6;
+  text-shadow: 0 0 6px rgba(255,231,154,.25);
+}
 
   .charade-btn{
     background:linear-gradient(180deg,#b79b57 0%,#d8c179 100%);
@@ -379,10 +397,10 @@
 
 <div class="charade-result" hidden>
 <p class="bravo">
-  <strong>Bravo, tu as trouvé&nbsp;le nom d’Aurélyne&nbsp;!</strong><br>
-  Loup + Bout + Thym&nbsp;: <em class="no-glow">Louboutin</em>.<br>
-  Tu comprends le choix artistique du nom de sa boutique
-  <em class="no-glow">Loup-Bout’Art</em>&nbsp;?<br>
+  <strong class="bravo-title">Bravo,</strong>
+  <span class="bravo-sub">tu as trouvé&nbsp;le nom d’Aurélyne&nbsp;!</span><br>
+  Loup + Bout + Thym&nbsp;: <em>Louboutin</em>.<br>
+  Tu comprends le choix artistique du nom de sa boutique <em>Loup-Bout’Art</em>&nbsp;?<br>
   Aurélyne est une vraie artiste… découvre les coulisses de son travail&nbsp;!
 </p>
   <button type="button" class="charade-btn" id="btn-coulisses">
