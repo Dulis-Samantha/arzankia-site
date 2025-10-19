@@ -112,23 +112,138 @@
       50%{ transform: translateX(6px);  opacity:1;}
     }
 
-    /* === CHARADE (cadre + coins dorés) === */
-    .charade-louboutin{
-      position:relative;max-width:860px;margin:1.2rem auto 1.4rem;
-      padding:clamp(16px,3vw,28px);border-radius:16px;
-      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.42));
-      border:1px solid rgba(255,231,154,.35);
-      box-shadow:0 12px 34px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,231,154,.08);
-      color:#fff8e6;backdrop-filter:blur(4px);overflow:hidden;
-    }
+    /* === CHARADE (cadre + coins dorés, cases, états, résultat, bouton) === */
+.charade-louboutin{
+  position:relative;max-width:860px;margin:1.2rem auto 1.4rem;
+  padding:clamp(16px,3vw,28px);border-radius:16px;
+  background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.42));
+  border:1px solid rgba(255,231,154,.35);
+  box-shadow:0 12px 34px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,231,154,.08);
+  color:#fff8e6;backdrop-filter:blur(4px);overflow:hidden;
+}
+/* Coins dorés en haut */
+.charade-louboutin::before,.charade-louboutin::after{
+  content:"";position:absolute;width:18px;height:18px;top:0;opacity:.45;filter:blur(.2px);
+}
+.charade-louboutin::before{
+  left:0;
+  background:radial-gradient(18px 18px at 100% 0, rgba(255,231,154,.7) 0 38%, transparent 39%);
+}
+.charade-louboutin::after{
+  right:0;
+  background:radial-gradient(18px 18px at 0 0, rgba(255,231,154,.7) 0 38%, transparent 39%);
+}
+/* Coins dorés en bas */
+.charade-louboutin .coins-bas{content:"";position:absolute;inset:auto 0 0 0;pointer-events:none;}
+.charade-louboutin .coins-bas::before,.charade-louboutin .coins-bas::after{
+  content:"";position:absolute;width:18px;height:18px;bottom:0;opacity:.45;filter:blur(.2px);
+}
+.charade-louboutin .coins-bas::before{
+  left:0;
+  background:radial-gradient(18px 18px at 100% 100%, rgba(255,231,154,.7) 0 38%, transparent 39%);
+}
+.charade-louboutin .coins-bas::after{
+  right:0;
+  background:radial-gradient(18px 18px at 0 100%, rgba(255,231,154,.7) 0 38%, transparent 39%);
+}
 
-    .charade-louboutin h2{
-      font-family:'Playfair Display',serif;
-      font-weight:600;font-size:clamp(1.5rem,3vw,2rem);
-      color:#fce9b0;text-shadow:0 0 8px rgba(255,231,154,.5),0 0 14px rgba(255,231,154,.25);
-      letter-spacing:1px;text-align:center;margin-bottom:1rem;
-      position:relative;padding-bottom:.6rem;
-    }
+/* Titre charade (Playfair + ligne) */
+.charade-louboutin h2{
+  font-family:'Playfair Display',serif;
+  font-weight:600;font-size:clamp(1.5rem,3vw,2rem);
+  color:#fce9b0;text-shadow:0 0 8px rgba(255,231,154,.5),0 0 14px rgba(255,231,154,.25);
+  letter-spacing:1px;text-align:center;margin-bottom:1rem;
+  position:relative;padding-bottom:.6rem;
+}
+.charade-louboutin h2::after{
+  content:"";display:block;width:120px;max-width:35vw;height:2px;
+  margin:.4rem auto 0;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#fce9b0,transparent);
+  opacity:.75;
+}
+
+/* Lignes + cases */
+.charade-ligne{
+  display:grid;grid-template-columns:1fr auto;align-items:center;
+  gap:12px;margin:.6rem 0;
+}
+.charade-case{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 10px;border-radius:12px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,231,154,.35);
+  transition:box-shadow .25s ease,background .25s ease,border-color .25s ease;
+}
+.charade-case:hover{
+  background:rgba(255,255,255,.09);
+  box-shadow:0 0 0 3px rgba(255,231,154,.12);
+}
+.charade-case input{
+  width:160px;max-width:42vw;border:none;outline:none;
+  background:transparent;color:#fff8e6;font-size:1rem;
+  padding:6px 2px;letter-spacing:.3px;
+}
+.charade-case .etat{
+  width:18px;height:18px;border-radius:50%;
+  display:inline-block;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(255,255,255,.2)60%,transparent61%);
+  opacity:.35;transition:transform .2s ease,opacity .2s ease,box-shadow .2s ease;
+}
+.charade-case.ok{
+  border-color:rgba(59,178,115,.6);
+  box-shadow:0 0 0 3px rgba(59,178,115,.18), inset 0 0 18px rgba(59,178,115,.08);
+}
+.charade-case.ok .etat{
+  opacity:1;box-shadow:0 0 0 2px rgba(59,178,115,.35), 0 0 12px #3bb273;
+}
+.charade-case.ko{
+  border-color:rgba(201,79,79,.6);
+  box-shadow:0 0 0 3px rgba(201,79,79,.16), inset 0 0 18px rgba(201,79,79,.06);
+}
+.charade-case.ko .etat{
+  opacity:1;box-shadow:0 0 0 2px rgba(201,79,79,.35), 0 0 12px #c94f4f;
+}
+
+/* Résultat + bouton */
+.charade-result{
+  margin-top:1rem;padding-top:1rem;border-top:1px dashed rgba(255,231,154,.35);
+  text-align:center;opacity:0;transform:translateY(8px);
+  transition:opacity .35s ease,transform .35s ease,box-shadow .35s ease;
+}
+.charade-result[hidden]{display:block;visibility:hidden;height:0;padding-top:0;margin-top:0;border-top:0;}
+.charade-result.show{
+  opacity:1;transform:none;visibility:visible;
+  box-shadow:0 -8px 28px -16px rgba(255,231,154,.22);
+}
+.charade-result .bravo{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.6;
+  color:#fce9b0;text-shadow:0 0 6px rgba(255,231,154,.35);
+}
+.charade-result .bravo em{
+  color:#ffe79a;font-style:normal;font-weight:600;
+  text-shadow:0 0 8px rgba(255,231,154,.4);
+}
+.charade-btn{
+  background:linear-gradient(180deg,#b79b57 0%,#d8c179 100%);
+  color:#fffaf0;font-weight:600;border:none;border-radius:999px;
+  padding:.8rem 1.4rem;font-family:'Playfair Display',serif;font-size:1rem;
+  letter-spacing:.3px;text-shadow:0 0 4px rgba(0,0,0,.4);
+  box-shadow:0 6px 20px rgba(0,0,0,.25), inset 0 0 18px rgba(255,231,154,.2);
+  transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
+}
+.charade-btn:hover{
+  filter:brightness(1.1);
+  transform:translateY(-1px);
+  box-shadow:0 10px 26px rgba(0,0,0,.35), inset 0 0 26px rgba(255,231,154,.25);
+}
+.charade-btn:active{transform:translateY(0);filter:brightness(.95);}
+
+/* MOBILE : garde la mise en page responsive d’origine */
+@media (max-width:600px){
+  .charade-ligne{grid-template-columns:1fr;gap:10px;}
+  .charade-case input{max-width:100%;}
+}
 
     /* === Réseaux === */
     .liens-reseaux{
@@ -159,6 +274,27 @@
     @media (max-width:600px){
       .container{padding:1rem .6rem 6rem;}
     }
+    
+    /* Bouton retour */
+.button-group{
+  display:flex;justify-content:center;
+  margin-top:clamp(1.4rem,3.5vw,2.2rem);
+}
+.button-group a{
+  display:inline-block;padding:.55rem 1.2rem;
+  background:rgba(255,231,154,.15);
+  border:1px solid rgba(255,231,154,.4);
+  color:#ffe9af;text-decoration:none;font-weight:600;
+  font-size:.95rem;border-radius:25px;
+  transition:all .25s ease;
+  box-shadow:0 0 6px rgba(255,231,154,.2);
+}
+.button-group a:hover{
+  background:rgba(255,231,154,.25);
+  box-shadow:0 0 12px rgba(255,231,154,.35);
+  transform:scale(1.05);
+}
+
   </style>
 </head>
 
@@ -220,6 +356,8 @@
         </p>
         <button type="button" class="charade-btn" id="btn-coulisses">Découvrir les coulisses</button>
       </div>
+        <!-- Coins dorés bas -->
+  <div class="coins-bas" aria-hidden="true"></div>
     </section>
 
     <div class="button-group">
