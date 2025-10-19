@@ -245,6 +245,42 @@
   .charade-case input{max-width:100%;}
 }
 
+    /* === Apparition magique du message Bravo === */
+.bravo {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: bravoFade 1.4s ease forwards;
+  background: radial-gradient(circle at 50% 120%, rgba(255,231,154,.08) 0%, transparent 70%);
+  border-radius: 12px;
+  padding: .6rem .3rem;
+  line-height: 1.6;
+}
+
+/* Effet lumineux sur les mots importants */
+.bravo strong,
+.bravo em {
+  background: linear-gradient(90deg, rgba(255,231,154,.35), #ffe79a, rgba(255,231,154,.35));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: goldFlow 3s ease-in-out infinite;
+  font-style: normal;
+}
+
+/* Animation d’entrée du texte */
+@keyframes bravoFade {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Animation de dégradé doré qui se déplace */
+@keyframes goldFlow {
+  0%   { background-position: -100% 0; }
+  50%  { background-position: 100% 0; }
+  100% { background-position: 200% 0; }
+}
+
     /* === Réseaux === */
     .liens-reseaux{
       font-size:1.2rem;
@@ -443,7 +479,7 @@
         </label>
       </p>
 
-   <div class="charade-result" hidden>
+<div class="charade-result" hidden>
   <p class="bravo">
     <strong>Bravo, tu as trouvé&nbsp;le nom d’Aurélyne&nbsp;!</strong><br>
     Loup + Bout + Thym&nbsp;: <em>Louboutin</em>.<br>
@@ -457,6 +493,7 @@
 
 <!-- Coins dorés bas -->
 <div class="coins-bas" aria-hidden="true"></div>
+
     </section>
 
     <div class="button-group">
