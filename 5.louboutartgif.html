@@ -22,13 +22,9 @@
       color:var(--ivoire);
       background:url('fond_etoile_perso.webp') center/cover no-repeat fixed;
       min-height:100svh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
       padding:clamp(20px,3vw,50px);
-      position:relative;
-      overflow-x:hidden;
+      position:relative; overflow-x:hidden;
     }
     body::before{
       content:""; position:absolute; inset:0; z-index:-1;
@@ -37,7 +33,7 @@
     }
 
     /* ===== Titre principal ===== */
-    .brand{ text-align:center; margin-bottom:24px; animation:fadeIn 1s ease both; }
+    .brand{ text-align:center; margin-bottom:24px; }
     .brand h1{
       margin:0; font-size:clamp(2rem,5vw,3rem); color:var(--or);
       letter-spacing:.5px; font-variant:small-caps;
@@ -55,14 +51,10 @@
       background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
       border:1px solid var(--bord); border-radius:18px;
       box-shadow:0 8px 24px rgba(0,0,0,.28);
-      padding:24px 28px; margin-bottom:36px; animation:fadeIn 1.3s ease both;
+      padding:24px 28px; margin-bottom:36px;
     }
     .intro p{ margin:.6rem 0; font-size:clamp(1rem, 1.9vw, 1.15rem); line-height:1.65; }
     .intro b{ color:var(--or); }
-
-    /* Apparition douce sur la phrase 2 */
-    .fade-text{ opacity:0; transform:translateY(8px); animation:fadeInText 2s ease-out forwards; animation-delay:1.2s; }
-    @keyframes fadeInText{ from{opacity:0; transform:translateY(10px); filter:blur(2px);} to{opacity:1; transform:translateY(0); filter:blur(0);} }
 
     /* ===== Layout média + fiche ===== */
     .media-layout{
@@ -70,26 +62,27 @@
       margin:16px auto 10px; width:clamp(300px, 92vw, 1100px);
     }
     @media (min-width: 980px){
-      .media-layout{ grid-template-columns: minmax(420px, 1fr) minmax(300px, 420px); gap:28px; }
+      .media-layout{ grid-template-columns: minmax(420px, 1fr) minmax(320px, 460px); gap:28px; }
     }
 
-    /* ===== Vidéo & légende ===== */
-    .media{ display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; }
+    /* ===== Bloc média ===== */
+    .media{ display:flex; flex-direction:column; align-items:center; gap:10px; margin:0; }
     .media video{
       width:100%; height:auto; display:block; object-fit:contain; background:#000; border-radius:18px;
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 0 0 1px rgba(255,214,116,.10);
     }
 
-    /* Titre mobile au-dessus de la vidéo */
+    /* Titre MOBILE au-dessus de la vidéo */
     .titre-creature-mobile{
-      display:block; margin:0 auto 6px; text-align:center; color:var(--or);
+      margin:0 0 6px; text-align:center; color:var(--or);
       font-variant:small-caps; font-size:1.15rem; letter-spacing:.3px;
+      text-shadow:0 0 8px rgba(255,214,116,.25);
     }
     @media (min-width:980px){ .titre-creature-mobile{ display:none; } }
 
-    /* Légende élégante centrée sous la vidéo */
+    /* Légende sous la vidéo (mobile & desktop) */
     .legende-cadre{
-      width:100%; max-width:800px; margin:0; padding:10px 14px; text-align:center;
+      width:100%; max-width:800px; margin:2px 0 0; padding:10px 14px; text-align:center;
       font-style:italic; font-family: Georgia, "Times New Roman", serif; letter-spacing:.2px; line-height:1.45;
       color:rgba(255,248,230,.92);
       background:linear-gradient(180deg, rgba(0,0,0,.28), rgba(10,0,20,.38));
@@ -101,28 +94,14 @@
       background:linear-gradient(90deg, transparent, rgba(255,214,116,.45), transparent);
     }
 
-    /* ===== Fiche créature adaptative ===== */
+    /* ===== Fiche créature (cadre) ===== */
     details.fiche-creature{
       border:1px solid rgba(255,214,116,.35); border-radius:18px;
       background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(10,0,20,.45));
       box-shadow:0 8px 20px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.05);
       overflow:hidden;
     }
-
-    /* Bouton mobile */
-    .btn-en-savoir-plus{
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 14px; cursor:pointer; list-style:none; color:#2a1b00;
-      background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
-      border-bottom:1px solid rgba(255,214,116,.35);
-      font-family:Georgia,serif; font-size:1rem;
-    }
-    .btn-en-savoir-plus::-webkit-details-marker{ display:none; }
-
-    /* Contenu de la fiche (caché tant que non ouvert sur mobile) */
-    .fiche-contenu{ display:none; padding:14px 18px; color:var(--ivoire); }
-    .fiche-creature[open] .fiche-contenu{ display:block; }
-
+    .fiche-contenu{ padding:14px 18px; color:var(--ivoire); }
     .fiche-contenu h3{
       margin:2px 0 8px; text-align:center; color:var(--or);
       font-size:1.2rem; font-variant:small-caps; text-shadow:0 0 8px rgba(255,214,116,.25);
@@ -131,13 +110,46 @@
     .fiche dt{ font-weight:700; color:var(--or); margin-top:.4rem; }
     .fiche dd{ margin:0 0 .6rem 0; line-height:1.55; }
 
-    /* Desktop : fiche visible en panneau latéral, bouton masqué */
+    /* ===== Bouton "En savoir plus" — Style 1 Ghost Verre (mobile seulement) ===== */
+    .btn-en-savoir-plus{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      margin:6px auto 0; padding:10px 14px; min-height:44px;
+      width:auto; max-width:90%;
+      cursor:pointer; list-style:none; user-select:none;
+      color:rgba(255,214,116,.95);
+      background:rgba(10,0,20,.28); /* verre discret */
+      border:1px solid rgba(255,214,116,.45); border-radius:999px;
+      box-shadow:0 6px 14px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.05);
+      font-family:Georgia,serif; font-size:1rem; letter-spacing:.2px;
+      backdrop-filter: blur(3px) saturate(120%);
+      transition: background .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .btn-en-savoir-plus::-webkit-details-marker{ display:none; }
+    .btn-en-savoir-plus:hover{
+      background:rgba(10,0,20,.36);
+      border-color:rgba(255,214,116,.6);
+      box-shadow:0 8px 18px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .btn-en-savoir-plus:focus-visible{
+      outline: none;
+      box-shadow:0 0 0 3px rgba(255,214,116,.35), 0 8px 18px rgba(0,0,0,.28);
+    }
+    /* Chevron (micro-interaction) */
+    .btn-en-savoir-plus svg{
+      width:18px; height:18px; flex:0 0 18px;
+      transition: transform .22s ease;
+      opacity:.95;
+    }
+    /* Rotation du chevron quand la fiche est ouverte */
+    .fiche-creature[open] .btn-en-savoir-plus svg{
+      transform: rotate(180deg);
+    }
+    /* Desktop : on masque le bouton, la fiche restera ouverte via JS */
     @media (min-width:980px){
       .btn-en-savoir-plus{ display:none; }
-      .fiche-contenu{ display:block; } /* visible même sans [open] */
     }
 
-    /* Bouton retour */
+    /* Bouton retour (conserve ton style distinct) */
     .btn-retour{
       display:inline-block; margin:30px auto 60px; padding:10px 26px;
       background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e); color:#2a1b00;
@@ -146,16 +158,6 @@
       transition:all .3s ease;
     }
     .btn-retour:hover{ transform:translateY(-2px); box-shadow:0 0 24px rgba(255,214,116,.7), inset 0 0 10px rgba(255,214,116,.9); color:#1c1400; }
-
-    /* Animations générales */
-    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
-
-    /* Intro plus discrète sur mobile */
-    @media (max-width:768px){
-      .intro{ padding:12px 16px; font-size:.85rem; background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(10,0,20,.35)); }
-      .intro p{ font-size:clamp(.8rem, 2.5vw, .95rem); line-height:1.35; color:rgba(255,248,230,.9); }
-      .fade-text{ animation-delay:.8s; }
-    }
   </style>
 </head>
 
@@ -167,18 +169,17 @@
 
   <section class="intro" aria-label="Présentation">
     <p><b>Bienvenue dans ma boutique.</b></p>
-    <p class="fade-text">Attention où tu regardes : ici, les tableaux s’animent et les créatures s’échappent parfois de leur monde.</p>
+    <p>Attention où tu regardes : ici, les tableaux s’animent et les créatures s’échappent parfois de leur monde.</p>
   </section>
 
-  <!-- ===== Carte Libellule (PC: 2 colonnes / Mobile: empilé avec fiche pliable) ===== -->
+  <!-- ===== Carte œuvre ===== -->
   <article class="carte" aria-labelledby="titre-libelule">
-    <header>
-      <h2 id="titre-libelule" class="titre-creature-mobile">Libellule Partiate</h2>
-    </header>
-
     <section class="media-layout">
-      <!-- Média -->
+      <!-- MÉDIA (gauche sur PC) -->
       <figure class="media">
+        <!-- Titre MOBILE au-dessus de la vidéo -->
+        <h2 id="titre-libelule" class="titre-creature-mobile">Libellule Partiate</h2>
+
         <video
           src="extrait_Ptikitis.mp4"
           controls
@@ -188,11 +189,23 @@
           aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
           Votre navigateur ne supporte pas la vidéo HTML5.
         </video>
+
+        <!-- Légende sous la vidéo -->
+        <figcaption class="legende-cadre">
+          Cette libellule nous vient tout droit du monde des Ptikitis. On l’appelle « monture de velours »…
+        </figcaption>
       </figure>
 
-      <!-- Fiche : mobile pliable / desktop visible -->
+      <!-- FICHE (droite sur PC / pliable sur mobile) -->
       <details class="fiche-creature" id="fiche-libellule">
-        <summary class="btn-en-savoir-plus">En savoir plus</summary>
+        <summary class="btn-en-savoir-plus" aria-label="Afficher la fiche détaillée">
+          <!-- Chevron fin -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>En savoir plus</span>
+        </summary>
+
         <div class="fiche-contenu">
           <h3>Libellule Partiate</h3>
           <dl class="fiche">
@@ -214,5 +227,42 @@
   <footer style="text-align:center;">
     <a href="5.loup_bout_art.html" class="btn-retour">Retour</a>
   </footer>
+
+  <!-- ===== JS : ouvre la fiche sur PC, la ferme sur mobile + garde la synchro au resize ===== -->
+  <script>
+    (function(){
+      const fiche = document.getElementById('fiche-libellule');
+      const mq = window.matchMedia('(min-width:980px)');
+
+      function syncDetails(){
+        if(!fiche) return;
+        if(mq.matches){
+          // Desktop : toujours ouvert
+          if(!fiche.open) fiche.open = true;
+          // Retirer l'attribut inert si ajouté précédemment
+          fiche.removeAttribute('inert');
+        }else{
+          // Mobile : fermé par défaut
+          if(fiche.open) fiche.open = false;
+        }
+      }
+
+      // au chargement + à chaque changement de media query
+      window.addEventListener('load', syncDetails, { once:true });
+      mq.addEventListener('change', syncDetails);
+      window.addEventListener('resize', syncDetails);
+
+      // Amélioration accessibilité : focus visible sur le <summary> au clavier
+      const summary = fiche?.querySelector('summary');
+      if(summary){
+        summary.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){
+            // laisser le comportement natif de <details>/<summary>
+            setTimeout(()=> summary.blur(), 240); // micro-retire le focus après l’anim
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
