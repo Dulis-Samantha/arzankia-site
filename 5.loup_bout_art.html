@@ -274,6 +274,19 @@
     @media (max-width:600px){
       .container{padding:1rem .6rem 6rem;}
     }
+
+    .logo-reseau {
+  width: 40px;
+  height: 40px;
+  margin: 0 8px;
+  transition: transform .3s ease, filter .3s ease;
+  vertical-align: middle;
+}
+.logo-reseau:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px #ffd674);
+}
+
     
     /* Bouton retour */
 .button-group{
@@ -377,13 +390,17 @@
 
   <!-- Réseaux -->
   <p class="liens-reseaux">
-    Si tu veux en savoir plus sur moi,<br>
-    retrouve-moi sur :
-    <br><br>
-    <a href="https://www.tiktok.com/@bookyneuse" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok"><i class="fab fa-tiktok"></i></a>
-    <a href="https://www.instagram.com/inside.my.head29" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-  
-  </p>
+  Si tu veux en savoir plus sur moi,<br>
+  retrouve-moi sur :
+  <br><br>
+  <a href="https://www.tiktok.com/@bookyneuse" target="_blank" rel="noopener noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok" class="logo-reseau">
+  </a>
+  <a href="https://www.instagram.com/inside.my.head29" target="_blank" rel="noopener noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="logo-reseau">
+  </a>
+</p>
+
 
   <script>
   (()=>{
