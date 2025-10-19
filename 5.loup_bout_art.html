@@ -217,15 +217,28 @@
   opacity:1;transform:none;visibility:visible;
   box-shadow:0 -8px 28px -16px rgba(255,231,154,.22);
 }
-.charade-result .bravo{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.6;
-  color:#fce9b0;text-shadow:0 0 6px rgba(255,231,154,.35);
+/* ——— OVERRIDES pour l'effet magique ——— */
+.charade-result .bravo {
+  /* on laisse la couleur hériter du bloc, on n'impose pas un autre color */
+  color: inherit;
 }
-.charade-result .bravo em{
-  color:#ffe79a;font-style:normal;font-weight:600;
-  text-shadow:0 0 8px rgba(255,231,154,.4);
+
+.charade-result .bravo strong,
+.charade-result .bravo em {
+  background: linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;                 /* indispensable pour voir le dégradé */
+  animation: goldFlow 3s ease-in-out infinite;
+  text-shadow: 0 0 6px rgba(255,230,180,.35);
+  font-weight: 700;
 }
+
+.charade-result .bravo strong {
+  text-shadow: 0 0 8px rgba(255,230,180,.5), 0 0 18px rgba(255,230,180,.35);
+}
+
 .charade-btn{
   background:linear-gradient(180deg,#b79b57 0%,#d8c179 100%);
   color:#fffaf0;font-weight:600;border:none;border-radius:999px;
@@ -249,16 +262,22 @@
 
     /* === Apparition magique du message Bravo === */
 /* Bloc Bravo : texte plus élégant, doré adouci, même apparition */
+/* état par défaut: prêt mais sans animation */
 .bravo{
   font-family: 'Playfair Display', Georgia, serif;
-  color: #fff8e6;                 /* corps du texte ivoire */
+  color: #fff8e6;
   opacity: 0;
   transform: translateY(8px);
-  animation: bravoFade 1.4s ease forwards; /* tu l’as déjà */
+  animation: none;                           /* ← pas d’anim au chargement */
   line-height: 1.6;
   background: radial-gradient(circle at 50% 120%, rgba(255,231,154,.08) 0%, transparent 70%);
   border-radius: 12px;
   padding: .6rem .3rem;
+}
+
+/* déclenche l'anim uniquement quand le parent a .show */
+.charade-result.show .bravo{
+  animation: bravoFade .9s ease forwards;
 }
 
 /* Effet magique gardé sur la phrase "Bravo..." (strong) et les <em> */
