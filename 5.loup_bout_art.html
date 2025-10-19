@@ -9,6 +9,8 @@
   <!-- POLICES -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
 
   <!-- Icônes Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -246,26 +248,35 @@
 }
 
     /* === Apparition magique du message Bravo === */
-.bravo {
+/* Bloc Bravo : texte plus élégant, doré adouci, même apparition */
+.bravo{
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #fff8e6;                 /* corps du texte ivoire */
   opacity: 0;
   transform: translateY(8px);
-  animation: bravoFade 1.4s ease forwards;
+  animation: bravoFade 1.4s ease forwards; /* tu l’as déjà */
+  line-height: 1.6;
   background: radial-gradient(circle at 50% 120%, rgba(255,231,154,.08) 0%, transparent 70%);
   border-radius: 12px;
   padding: .6rem .3rem;
-  line-height: 1.6;
 }
 
-/* Effet lumineux sur les mots importants */
+/* Effet magique gardé sur la phrase "Bravo..." (strong) et les <em> */
 .bravo strong,
-.bravo em {
-  background: linear-gradient(90deg, rgba(255,231,154,.35), #ffe79a, rgba(255,231,154,.35));
+.bravo em{
+  background: linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  animation: goldFlow 3s ease-in-out infinite;
-  font-style: normal;
+  color: transparent;             /* fait apparaître le dégradé */
+  animation: goldFlow 3s ease-in-out infinite; /* tu l’as déjà */
+  text-shadow: 0 0 6px rgba(255,230,180,.35);
+  font-weight: 700;
+}
+
+/* Option : un tout petit peu plus d’éclat pour le tout premier strong */
+.bravo strong{
+  text-shadow: 0 0 8px rgba(255,230,180,.5), 0 0 18px rgba(255,230,180,.35);
 }
 
 /* Animation d’entrée du texte */
