@@ -37,201 +37,125 @@
     }
 
     /* ===== Titre principal ===== */
-    .brand{
-      text-align:center;
-      margin-bottom:24px;
-      animation:fadeIn 1s ease both;
-    }
+    .brand{ text-align:center; margin-bottom:24px; animation:fadeIn 1s ease both; }
     .brand h1{
-      margin:0;
-      font-size:clamp(2rem,5vw,3rem);
-      color:var(--or);
-      letter-spacing:.5px;
-      font-variant:small-caps;
+      margin:0; font-size:clamp(2rem,5vw,3rem); color:var(--or);
+      letter-spacing:.5px; font-variant:small-caps;
       text-shadow:0 1px 2px #3a2b00, 0 0 15px rgba(255,214,116,.3);
     }
     .souligne{
-      width:min(400px,80%);
-      height:6px;
-      margin:10px auto 0;
-      border-radius:999px;
+      width:min(400px,80%); height:6px; margin:10px auto 0; border-radius:999px;
       background:linear-gradient(90deg, transparent, rgba(255,214,116,.6), transparent);
       filter:blur(1px);
     }
 
-    /* ===== Encadré de présentation ===== */
+    /* ===== Intro ===== */
     .intro{
-      width:clamp(280px,90%,900px);
-      text-align:center;
+      width:clamp(280px,90%,900px); text-align:center;
       background:linear-gradient(180deg, rgba(0,0,0,.35), var(--verre));
-      border:1px solid var(--bord);
-      border-radius:18px;
+      border:1px solid var(--bord); border-radius:18px;
       box-shadow:0 8px 24px rgba(0,0,0,.28);
-      padding:24px 28px;
-      margin-bottom:36px;
-      animation:fadeIn 1.3s ease both;
+      padding:24px 28px; margin-bottom:36px; animation:fadeIn 1.3s ease both;
     }
-    .intro p{
-      margin:.6rem 0;
-      font-size:clamp(1rem, 1.9vw, 1.15rem);
-      line-height:1.65;
-    }
+    .intro p{ margin:.6rem 0; font-size:clamp(1rem, 1.9vw, 1.15rem); line-height:1.65; }
     .intro b{ color:var(--or); }
 
-    /* ===== Vidéo sans cadre ===== */
-    .cadre-video{
-      width:min(900px, 90%);
-      margin:10px auto 0;
-      background:none;
-      border:none;
-      box-shadow:none;
+    /* Apparition douce sur la phrase 2 */
+    .fade-text{ opacity:0; transform:translateY(8px); animation:fadeInText 2s ease-out forwards; animation-delay:1.2s; }
+    @keyframes fadeInText{ from{opacity:0; transform:translateY(10px); filter:blur(2px);} to{opacity:1; transform:translateY(0); filter:blur(0);} }
+
+    /* ===== Layout média + fiche ===== */
+    .media-layout{
+      display:grid; grid-template-columns: 1fr; gap:20px; align-items:start;
+      margin:16px auto 10px; width:clamp(300px, 92vw, 1100px);
     }
-    .cadre-video video{
-      display:block;
-      width:100%;
-      max-width:400px;
-      height:auto;
-      border:none;
-      border-radius:0;
-      box-shadow:none;
-      object-fit:contain;
-      background:none;
+    @media (min-width: 980px){
+      .media-layout{ grid-template-columns: minmax(420px, 1fr) minmax(300px, 420px); gap:28px; }
     }
 
-    /* ===== Texte sous la vidéo ===== */
-    .legende{
-      margin:12px auto 6px;
-      text-align:center;
-      color:var(--or);
-      font-weight:bold;
-      font-size:clamp(1rem,2.2vw,1.2rem);
+    /* ===== Vidéo & légende ===== */
+    .media{ display:flex; flex-direction:column; align-items:center; gap:12px; margin:0; }
+    .media video{
+      width:100%; height:auto; display:block; object-fit:contain; background:#000; border-radius:18px;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 0 0 1px rgba(255,214,116,.10);
     }
 
-    /* Cartouche de légende élégant, centré sous l'image/vidéo */
-.legende-cadre{
-  width:80%;                      /* même logique que la vidéo */
-  max-width:800px;                /* garde l’alignement propre */
-  margin:12px auto 22px;
-  padding:10px 14px;
-  text-align:center;
-  font-style:italic;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight:400;
-  letter-spacing:.2px;
-  line-height:1.45;
+    /* Titre mobile au-dessus de la vidéo */
+    .titre-creature-mobile{
+      display:block; margin:0 auto 6px; text-align:center; color:var(--or);
+      font-variant:small-caps; font-size:1.15rem; letter-spacing:.3px;
+    }
+    @media (min-width:980px){ .titre-creature-mobile{ display:none; } }
 
-  /* Couleurs plus discrètes que l’or vif */
-  color:rgba(255,248,230,.92);    /* ivoire doux */
-  background:linear-gradient(180deg, rgba(0,0,0,.28), rgba(10,0,20,.38));
-  border:1px solid rgba(255,214,116,.32);  /* fin liséré doré */
-  border-radius:14px;
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.28),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-}
+    /* Légende élégante centrée sous la vidéo */
+    .legende-cadre{
+      width:100%; max-width:800px; margin:0; padding:10px 14px; text-align:center;
+      font-style:italic; font-family: Georgia, "Times New Roman", serif; letter-spacing:.2px; line-height:1.45;
+      color:rgba(255,248,230,.92);
+      background:linear-gradient(180deg, rgba(0,0,0,.28), rgba(10,0,20,.38));
+      border:1px solid rgba(255,214,116,.32); border-radius:14px;
+      box-shadow:0 8px 20px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .legende-cadre::before{
+      content:""; display:block; height:2px; margin:-10px -14px 8px; border-radius:14px 14px 0 0;
+      background:linear-gradient(90deg, transparent, rgba(255,214,116,.45), transparent);
+    }
 
-/* Un mince filet lumineux en haut pour le côté “classe” */
-.legende-cadre::before{
-  content:"";
-  display:block;
-  height:2px;
-  margin:-10px -14px 8px;         /* s’aligne au bord du cadre */
-  border-radius:14px 14px 0 0;
-  background:linear-gradient(90deg, transparent, rgba(255,214,116,.45), transparent);
-}
+    /* ===== Fiche créature adaptative ===== */
+    details.fiche-creature{
+      border:1px solid rgba(255,214,116,.35); border-radius:18px;
+      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(10,0,20,.45));
+      box-shadow:0 8px 20px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.05);
+      overflow:hidden;
+    }
 
-/* Mobile : encore plus discret et à 100% de largeur */
-@media (max-width:768px){
-  .legende-cadre{
-    width:100%;
-    margin:10px auto 18px;
-    padding:8px 12px;
-    font-size:.95rem;
-    color:rgba(255,248,230,.88);
-  }
-}
-
-    /* ===== Bouton retour ===== */
-    .btn-retour{
-      display:inline-block;
-      margin:30px auto 60px;
-      padding:10px 26px;
+    /* Bouton mobile */
+    .btn-en-savoir-plus{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px; cursor:pointer; list-style:none; color:#2a1b00;
       background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e);
-      color:#2a1b00;
-      font-family:Georgia,serif;
-      font-size:1.05rem;
-      border-radius:28px;
-      text-decoration:none;
-      letter-spacing:.3px;
+      border-bottom:1px solid rgba(255,214,116,.35);
+      font-family:Georgia,serif; font-size:1rem;
+    }
+    .btn-en-savoir-plus::-webkit-details-marker{ display:none; }
+
+    /* Contenu de la fiche (caché tant que non ouvert sur mobile) */
+    .fiche-contenu{ display:none; padding:14px 18px; color:var(--ivoire); }
+    .fiche-creature[open] .fiche-contenu{ display:block; }
+
+    .fiche-contenu h3{
+      margin:2px 0 8px; text-align:center; color:var(--or);
+      font-size:1.2rem; font-variant:small-caps; text-shadow:0 0 8px rgba(255,214,116,.25);
+    }
+    .fiche{ margin:8px 0 0; }
+    .fiche dt{ font-weight:700; color:var(--or); margin-top:.4rem; }
+    .fiche dd{ margin:0 0 .6rem 0; line-height:1.55; }
+
+    /* Desktop : fiche visible en panneau latéral, bouton masqué */
+    @media (min-width:980px){
+      .btn-en-savoir-plus{ display:none; }
+      .fiche-contenu{ display:block; } /* visible même sans [open] */
+    }
+
+    /* Bouton retour */
+    .btn-retour{
+      display:inline-block; margin:30px auto 60px; padding:10px 26px;
+      background:linear-gradient(90deg,#b38b2e,#ffd674,#b38b2e); color:#2a1b00;
+      font-family:Georgia,serif; font-size:1.05rem; border-radius:28px; text-decoration:none; letter-spacing:.3px;
       box-shadow:0 0 12px rgba(255,214,116,.4), inset 0 0 6px rgba(255,214,116,.6);
       transition:all .3s ease;
-      animation:pulseOr 3.5s ease-in-out infinite;
     }
-    .btn-retour:hover{
-      transform:translateY(-2px);
-      box-shadow:0 0 24px rgba(255,214,116,.7),
-                 inset 0 0 10px rgba(255,214,116,.9);
-      color:#1c1400;
-    }
+    .btn-retour:hover{ transform:translateY(-2px); box-shadow:0 0 24px rgba(255,214,116,.7), inset 0 0 10px rgba(255,214,116,.9); color:#1c1400; }
 
-    @keyframes fadeIn{
-      from{opacity:0; transform:translateY(8px);}
-      to{opacity:1; transform:translateY(0);}
-    }
-    @keyframes pulseOr{
-      0%,100%{box-shadow:0 0 12px rgba(255,214,116,.4);}
-      50%{box-shadow:0 0 22px rgba(255,214,116,.7);}
-    }
+    /* Animations générales */
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 
+    /* Intro plus discrète sur mobile */
     @media (max-width:768px){
-      .cadre-video{ width:100%; }
+      .intro{ padding:12px 16px; font-size:.85rem; background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(10,0,20,.35)); }
+      .intro p{ font-size:clamp(.8rem, 2.5vw, .95rem); line-height:1.35; color:rgba(255,248,230,.9); }
+      .fade-text{ animation-delay:.8s; }
     }
-
-   /* === Apparition magique === */
-.fade-text{
-  opacity:0;
-  transform:translateY(8px);
-  animation:fadeInText 2s ease-out forwards;
-  animation-delay:1.2s; /* commence après le titre */
-}
-
-@keyframes fadeInText{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-    filter:blur(2px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-    filter:blur(0);
-  }
-}
-
-/* === Version mobile : plus discrète === */
-@media (max-width: 768px){
-  .intro{
-    padding:12px 16px;
-    font-size:0.85rem;
-    background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(10,0,20,.35));
-  }
-
-  .intro p{
-    font-size:clamp(0.8rem, 2.5vw, 0.95rem);
-    line-height:1.35;
-    color:rgba(255,248,230,0.9); /* ivoire plus doux */
-  }
-
-  .intro b{
-    font-size:1rem;
-    color:var(--or);
-  }
-
-  .fade-text{
-    animation-delay:0.8s;
-  }
-}
-
   </style>
 </head>
 
@@ -241,34 +165,54 @@
     <div class="souligne"></div>
   </header>
 
- <section class="intro" aria-label="Présentation">
-  <p><b>Bienvenue dans ma boutique.</b></p>
-  <p class="fade-text">
-    Attention où tu regardes : ici, les tableaux s’animent
-    et les créatures s’échappent parfois de leur monde.
-  </p>
-</section>
+  <section class="intro" aria-label="Présentation">
+    <p><b>Bienvenue dans ma boutique.</b></p>
+    <p class="fade-text">Attention où tu regardes : ici, les tableaux s’animent et les créatures s’échappent parfois de leur monde.</p>
+  </section>
 
+  <!-- ===== Carte Libellule (PC: 2 colonnes / Mobile: empilé avec fiche pliable) ===== -->
+  <article class="carte" aria-labelledby="titre-libelule">
+    <header>
+      <h2 id="titre-libelule" class="titre-creature-mobile">Libellule Partiate</h2>
+    </header>
 
+    <section class="media-layout">
+      <!-- Média -->
+      <figure class="media">
+        <video
+          src="extrait_Ptikitis.mp4"
+          controls
+          playsinline
+          muted
+          preload="metadata"
+          aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
+          Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+        <figcaption class="legende-cadre">
+          <em>Cette libellule est une espèce appartenant au monde des Ptikitis.</em>
+        </figcaption>
+      </figure>
 
-  <!-- ===== Vidéo libre ===== -->
-  <div class="cadre-video">
-    <video
-      src="extrait_Ptikitis.mp4"
-      controls
-      playsinline
-      muted
-      autoplay
-      loop
-      preload="metadata"
-      aria-label="Vidéo du tableau de la libellule, extrait du monde des Ptikitis">
-      Votre navigateur ne supporte pas la vidéo HTML5.
-    </video>
-  </div>
-
- <p class="legende legende-cadre">
-  <em>Cette libellule est une espèce appartenant au monde des Ptikitis.</em>
-</p>
+      <!-- Fiche : mobile pliable / desktop visible -->
+      <details class="fiche-creature" id="fiche-libellule">
+        <summary class="btn-en-savoir-plus">En savoir plus</summary>
+        <div class="fiche-contenu">
+          <h3>Libellule Partiate</h3>
+          <dl class="fiche">
+            <dt>Provenance&nbsp;:</dt>
+            <dd>Monde des Ptikitis</dd>
+            <dt>Description&nbsp;:</dt>
+            <dd>
+              <p><strong>La Libellule Partiate</strong> est l’espèce la plus populaire du monde des Ptikitis.</p>
+              <p>On l’appelle <em>la monture de velours</em>.</p>
+              <p>Utilisée comme moyen de transport, elle est rapide, docile et incroyablement confortable.</p>
+              <p>Mais attention à bien te tenir&nbsp;: on raconte que les voyageurs distraits finissent souvent… parmi les nuages.</p>
+            </dd>
+          </dl>
+        </div>
+      </details>
+    </section>
+  </article>
 
   <footer style="text-align:center;">
     <a href="5.loup_bout_art.html" class="btn-retour">Retour</a>
