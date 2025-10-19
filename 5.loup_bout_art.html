@@ -231,7 +231,24 @@
                 inset 0 0 18px rgba(255,231,154,.05);
   }
 
-  /* Effet magique uniquement sur "Bravo..." */
+ /* === Effet magique uniquement sur le mot "Bravo," === */
+.bravo-title{
+  display:block;
+  font-size:clamp(1.25rem, 2.9vw, 1.7rem);
+  line-height:1.1;
+  margin-bottom:.2rem;
+  letter-spacing:1px;
+
+  background:linear-gradient(90deg, rgba(255,236,179,.35), #ffecb3, rgba(255,236,179,.35));
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:goldFlow 3s ease-in-out infinite;
+  text-shadow:0 0 8px rgba(255,230,180,.5),0 0 18px rgba(255,230,180,.35);
+  font-weight:700;
+}
+
 
 /* Doré doux sans animation sur <em> */
 .charade-result .bravo em{
