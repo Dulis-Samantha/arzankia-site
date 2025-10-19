@@ -107,6 +107,50 @@
       font-size:clamp(1rem,2.2vw,1.2rem);
     }
 
+    /* Cartouche de légende élégant, centré sous l'image/vidéo */
+.legende-cadre{
+  width:80%;                      /* même logique que la vidéo */
+  max-width:800px;                /* garde l’alignement propre */
+  margin:12px auto 22px;
+  padding:10px 14px;
+  text-align:center;
+  font-style:italic;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight:400;
+  letter-spacing:.2px;
+  line-height:1.45;
+
+  /* Couleurs plus discrètes que l’or vif */
+  color:rgba(255,248,230,.92);    /* ivoire doux */
+  background:linear-gradient(180deg, rgba(0,0,0,.28), rgba(10,0,20,.38));
+  border:1px solid rgba(255,214,116,.32);  /* fin liséré doré */
+  border-radius:14px;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.28),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+/* Un mince filet lumineux en haut pour le côté “classe” */
+.legende-cadre::before{
+  content:"";
+  display:block;
+  height:2px;
+  margin:-10px -14px 8px;         /* s’aligne au bord du cadre */
+  border-radius:14px 14px 0 0;
+  background:linear-gradient(90deg, transparent, rgba(255,214,116,.45), transparent);
+}
+
+/* Mobile : encore plus discret et à 100% de largeur */
+@media (max-width:768px){
+  .legende-cadre{
+    width:100%;
+    margin:10px auto 18px;
+    padding:8px 12px;
+    font-size:.95rem;
+    color:rgba(255,248,230,.88);
+  }
+}
+
     /* ===== Bouton retour ===== */
     .btn-retour{
       display:inline-block;
@@ -222,8 +266,9 @@
     </video>
   </div>
 
-  <p class="legende">Cette libellule nous arrive tout droit du monde des Ptikitis.</p>
- 
+ <p class="legende legende-cadre">
+  <em>Cette libellule est une espèce appartenant au monde des Ptikitis.</em>
+</p>
 
   <footer style="text-align:center;">
     <a href="5.loup_bout_art.html" class="btn-retour">Retour</a>
