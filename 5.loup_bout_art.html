@@ -358,6 +358,39 @@
     font-size:.95rem;border-radius:25px; transition:all .25s ease; box-shadow:0 0 6px rgba(255,231,154,.2);
   }
   .button-group a:hover{ background:rgba(255,231,154,.25); box-shadow:0 0 12px rgba(255,231,154,.35); transform:scale(1.05); }
+
+   /* ===== Patch MOBILE vidéo/modale (ajout) ===== */
+@media (max-width:600px){
+  /* Overlay modale : hauteur stable + padding fixe */
+  #videoModal{
+    height: 100svh;
+    padding: 12px !important;          /* remplace le 4vmin inline */
+    overscroll-behavior: contain;
+    touch-action: none;
+  }
+  /* Boîte de la modale : largeur mobile */
+  #videoModal .modal{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 14px;
+  }
+  /* Vidéo : limite par svh + ratio stable */
+  #videoModal video{
+    width: 100%;
+    height: auto;
+    max-height: 70svh !important;      /* remplace le 70vh inline */
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+  }
+  /* Verrouillage réel du scroll pendant la modale */
+  body.no-scroll{
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+  }
+}
+
 </style>
 
 </head>
@@ -525,10 +558,30 @@
     const player = document.getElementById('videoPlayer');
     const closeBtn = modal.querySelector('.close');
 
+    /* ===== Patch MOBILE : stabilité iOS/Android (ajout) ===== */
+const isMobile = matchMedia('(max-width:600px)').matches;
+if (isMobile) {
+  player.setAttribute('webkit-playsinline','');
+}
+
+let _blockTouch = null;
+const addTouchLock = () => {
+  if (!isMobile || _blockTouch) return;
+  _blockTouch = (e)=> e.preventDefault();
+  document.addEventListener('touchmove', _blockTouch, { passive:false });
+};
+const removeTouchLock = () => {
+  if (!isMobile || !_blockTouch) return;
+  document.removeEventListener('touchmove', _blockTouch);
+  _blockTouch = null;
+};
+
+
     function openModal(){
       modal.style.display = 'flex';
       modal.setAttribute('aria-hidden','false');
       document.body.classList.add('no-scroll');
+      addTouchLock();                // <-- AJOUT MOBILE
       try{ player.currentTime = 0; player.play(); }catch(e){}
       closeBtn.focus();
     }
@@ -536,6 +589,7 @@
       modal.style.display = 'none';
       modal.setAttribute('aria-hidden','true');
       document.body.classList.remove('no-scroll');
+      removeTouchLock();             // <-- AJOUT MOBILE
       try{ player.pause(); }catch(e){}
     }
 
