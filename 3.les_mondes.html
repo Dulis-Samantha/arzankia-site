@@ -694,14 +694,36 @@
 }
 
 .subtitle{
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem);     /* plus grand */
+  letter-spacing: .3px;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.55),
+    0 0 10px rgba(255, 230, 168, .12);         /* lueur douce */
   position: relative;
   z-index: 1;
   text-align: center;
   line-height: 1.5;                /* respiration douce */
   color: #fff3cc;                  /* ivoire chaud */
   font-family: "IM Fell English", Georgia, serif;
-  text-shadow: 0 2px 6px rgba(0,0,0,.55);
   margin: 0;
+}
+    .subtitle .mot{
+  display:inline-block;
+  opacity:0;
+  transform: translateY(6px) scale(.98);
+  animation: mot-entre .55s ease-out forwards;
+}
+
+@keyframes mot-entre{
+  to{
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Accessibilité : pas d’animation si l’utilisateur préfère réduire les mouvements */
+@media (prefers-reduced-motion: reduce){
+  .subtitle .mot{ animation:none !important; opacity:1 !important; transform:none !important; }
 }
 
 /* poussières de fée */
@@ -893,6 +915,21 @@ for(let i=0;i<COUNT;i++){
   }
 });
 </script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const line = document.querySelector('.subtitle .line1');
+  if(!line) return;
+
+  const txt = line.textContent.trim();
+  const words = txt.split(/\s+/);
+
+  // remplace le contenu par des <span class="mot">…</span> avec délai progressif
+  line.innerHTML = words.map((w, i) =>
+    `<span class="mot" style="animation-delay:${i * 120}ms">${w}</span>`
+  ).join(' ');
+});
+</script>
+
 
  
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
