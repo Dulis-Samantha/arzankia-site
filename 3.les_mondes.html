@@ -736,56 +736,60 @@
 }
 
 
-/* Retour discret stylé (optionnel) */
-.footer-ghost {
-  text-align: center;
-  margin: 2.5rem 0 2rem;
-}
-
-/* Conteneur header existant, on le garde mais on améliore un peu */
+/* Conteneur header */
 .header-box{
-  position:sticky; top:0; /* reste en haut sans cacher la page */
+  position: sticky; top: 0;
   background: rgba(0,0,0,.52);
   backdrop-filter: blur(6px);
   padding: .8rem .5rem .7rem;
-  text-align:center;
-  z-index:1000;
+  text-align: center;
+  z-index: 1000;
   border-radius: 0 0 12px 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,.3);
 }
 
-/* Boutons sous le sous-titre (desktop) */
-.actions-desktop{
-  margin-top:.6rem;
-  display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap;
-}
-
-    /* BR visible seulement sur mobile */
+/* BR visible seulement sur mobile */
 .mobile-br{ display:none; }
 @media (max-width:768px){ .mobile-br{ display:block; } }
 
 /* Sous-titre hors bandeau : petit espace */
 .subtitle--out{ margin:.5rem auto 0; }
 
-  
-  .btn-row{ 
-    display:flex;
-    flex-wrap:wrap; 
-    justify-content:center;
-    gap:1rem; 
-    margin:1.2rem 
-    auto 1.6rem; }
-    
-  .btn-ghost{
-    background:transparent; 
-    color:#fce9b0; 
-    border:1px solid rgba(243,225,179,.45);
-    box-shadow:0 6px 16px rgba(0,0,0,.18);
-  }
-  .btn-ghost:hover{ 
-    background:rgba(255,243,207,.09); 
-    filter:brightness(1.05); 
-    transform:translateY(-1px); }
+/* — Bouton retour discret en bas — */
+.footer-ghost{
+  text-align:center;
+  margin: 2.4rem 0 2rem;
+}
+
+.btn-ghost{
+  display:inline-block;
+  padding:.42rem .85rem;
+  border-radius:999px;
+  border:1px solid rgba(243,225,179,.45);
+  background:transparent;
+  color:#fce9b0;
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.1px;
+  backdrop-filter: blur(4px);
+  box-shadow:0 2px 6px rgba(0,0,0,.13);
+  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+}
+.btn-ghost:hover{
+  background:rgba(255,243,207,.09);
+  border-color: rgba(243,225,179,.6);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,.18);
+}
+.btn-ghost:focus-visible{
+  outline: 2px solid #ffe6a8;
+  outline-offset: 2px;
+}
+
+/* Mobile : zone tactile un peu plus grande */
+@media (max-width:768px){
+  .btn-ghost{ padding:.55rem 1rem; }
+}
 
 </style>
 </head>
@@ -834,10 +838,11 @@
 </a>
     </div><!-- /bubble-row hegaia-alone -->
   
-  <div class="btn-row" style="position:relative; z-index:50;">
-    <a id="btnBack" class="btn btn-ghost" href="2.les_coulisses.html" rel="prev">Retour</a>
-  </div>
-
+<div class="footer-ghost">
+  <a href="2.les_coulisses.html"
+     class="btn-ghost"
+     aria-label="Retour aux coulisses d’Arzankia">← Retour aux coulisses d’Arzankia</a>
+</div>
   <!-- Script apparition texte -->
 <script>
   function reveleSecretHegaia(event) {
