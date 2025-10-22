@@ -693,7 +693,20 @@
   margin-top:.6rem;
   display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap;
 }
-/* --- Ghost button discret (desktop) --- */
+
+    /* BR visible seulement sur mobile */
+.mobile-br{ display:none; }
+@media (max-width:768px){ .mobile-br{ display:block; } }
+
+/* Sous-titre hors bandeau : petit espace */
+.subtitle--out{ margin:.5rem auto 0; }
+
+
+.footer-ghost{
+  text-align:center;
+  margin: 18px 0 26px;
+}
+
 .btn-ghost{
   display:inline-block;
   padding:.45rem .9rem;
@@ -703,8 +716,8 @@
   color:#fff; text-decoration:none; font-weight:600;
   letter-spacing:.1px;
   backdrop-filter: blur(4px);
-  box-shadow: 0 2px 6px rgba(0,0,0,.15);
-  transition: background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.13);
+  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
 }
 .btn-ghost:hover{
   background: rgba(255,255,255,.16);
@@ -712,52 +725,22 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 12px rgba(0,0,0,.18);
 }
-
-/* --- Ghost mini (mobile, fixe en bas après scroll) --- */
-.mobile-actions{
-  position: fixed; left:0; right:0; bottom:12px;
-  display:flex; justify-content:center;
-  padding: .25rem .6rem;
-  padding-bottom: calc(.25rem + env(safe-area-inset-bottom)); /* iPhone safe area */
-  opacity:0; pointer-events:none; transform: translateY(12px);
-  transition: opacity .25s ease, transform .25s ease;
-  z-index:1100;
-}
-.mobile-actions.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
-
-.mini-ghost{
-  display:inline-block;
-  padding:.5rem .85rem;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.45);
-  background: rgba(255,255,255,.10);
-  color:#fff; text-decoration:none; font-weight:600;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 6px rgba(0,0,0,.15);
-}
-.mini-ghost:active{ transform: translateY(1px); }
-
-/* Visibilité selon viewport (on garde ta logique) */
-@media (min-width: 769px){ .mobile-actions { display:none; } }   /* desktop : caché */
-@media (max-width: 768px){ .actions-desktop { display:none; } }  /* mobile : on cache le bouton du header */
+.btn-ghost--sm{ padding:.4rem .8rem; font-weight:600; }
 
 </style>
 </head>
 <body>
 
-  <div class="header-box" id="hero">
+ <div class="header-box" id="hero">
   <div class="title-accent">
     <h1>Les Mondes d’Arzankia</h1>
   </div>
-  <p class="subtitle">
-    Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.
-  </p>
-    <div class="actions-desktop">
-  <a href="2.les_coulisses.html"
-     class="btn-ghost"
-     aria-label="Retour aux coulisses d’Arzankia">Retour</a>
 </div>
-    </div>
+
+ <p class="subtitle subtitle--out">
+  Explore les mondes qui composent l’univers d’Arzankia.<br class="mobile-br">
+  Chacun est unique, peuplé de créatures, de mystères… et de dangers.
+</p>
 
   <!-- Bulles flottantes -->
 <div class="bubble-zone">
@@ -788,7 +771,13 @@
   <div class="bubble-inner"><span class="label"></span></div>
 </a>
     </div><!-- /bubble-row hegaia-alone -->
-</div><!-- /bubble-zone -->
+  
+  <div class="footer-ghost">
+  <a href="2.les_coulisses.html"
+     class="btn-ghost btn-ghost--sm"
+     aria-label="Retour aux coulisses d’Arzankia">← Retour aux coulisses d’Arzankia</a>
+</div>
+
 
   <!-- Script apparition texte -->
 <script>
@@ -817,42 +806,10 @@
   }
 
 </script>
-  <script>
-  // Affiche la barre mobile après avoir passé le header
-  (function(){
-    const hero = document.getElementById('hero');
-    const bar  = document.getElementById('mobileActions');
-    if(!hero || !bar) return;
-
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          // header visible -> on cache la barre
-          bar.classList.remove('show');
-          bar.setAttribute('aria-hidden','true');
-        }else{
-          // header sorti -> on montre la barre
-          bar.classList.add('show');
-          bar.setAttribute('aria-hidden','false');
-        }
-      });
-    }, {threshold: 0});
-    io.observe(hero);
-  })();
-</script>
-
-  
+ 
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
   <span id="texte-hegaia-tape"></span>
 </div>
   
-<div class="mobile-actions" id="mobileActions" aria-hidden="true">
-  <a href="2.les_coulisses.html"
-     class="mini-ghost"
-     aria-label="Retour aux coulisses">Retour</a>
-</div>
-
-
-
 </body>
 </html>
