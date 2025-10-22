@@ -664,16 +664,30 @@
   letter-spacing:.5px;
   text-shadow: 0 2px 6px rgba(0,0,0,.55);
 }
+    /* Import d'une police fantasy élégante */
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Cinzel+Decorative:wght@400;700&display=swap');
 
-/* Sous-titre plus lisible */
-.subtitle{
-  margin:.4rem auto 0;
-  max-width: 900px;
-  font-size: clamp(.9rem, 1.6vw, 1rem);
-  font-style: italic;
-  color:#fff;
-  opacity:.95;
-  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+/* Sous-titre centré et stylisé */
+.subtitle {
+  text-align: center;
+  font-family: 'Uncial Antiqua', 'Cinzel Decorative', serif;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: #fff8e6;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  margin: 0.8rem auto 1.4rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
+}
+
+/* Espacement sous le bandeau */
+.subtitle--out {
+  margin-top: 0.8rem;
+}
+
+/* Retour discret stylé (optionnel) */
+.footer-ghost {
+  text-align: center;
+  margin: 2.5rem 0 2rem;
 }
 
 /* Conteneur header existant, on le garde mais on améliore un peu */
@@ -701,31 +715,24 @@
 /* Sous-titre hors bandeau : petit espace */
 .subtitle--out{ margin:.5rem auto 0; }
 
-
-.footer-ghost{
-  text-align:center;
-  margin: 18px 0 26px;
+.btn-ghost {
+  display: inline-block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  padding: 0.45rem 1.1rem;
+  text-decoration: none;
+  transition: all 0.25s ease-in-out;
 }
-
-.btn-ghost{
-  display:inline-block;
-  padding:.45rem .9rem;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.45);
-  background: rgba(255,255,255,.10);
-  color:#fff; text-decoration:none; font-weight:600;
-  letter-spacing:.1px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 6px rgba(0,0,0,.13);
-  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.04);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
 }
-.btn-ghost:hover{
-  background: rgba(255,255,255,.16);
-  border-color: rgba(255,255,255,.6);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px rgba(0,0,0,.18);
-}
-.btn-ghost--sm{ padding:.4rem .8rem; font-weight:600; }
 
 </style>
 </head>
