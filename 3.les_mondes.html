@@ -477,22 +477,6 @@
   display: block;
 }
 
-.btn-retour {
-  display: inline-block;
-  background: white;
-  color: black;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  text-decoration: none;
-  margin: 10px;
-  transition: transform 0.2s ease;
-}
-
-.btn-retour:hover {
-  transform: scale(1.05);
-}
    @media (max-width: 768px) {
   .bubble-container {
     display: flex;
@@ -662,20 +646,6 @@
   }
 }
 
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .retour-container {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
-    margin-top: 40px;
-  }
-
-  .btn-retour {
-    font-size: 0.9rem;
-    padding: 10px 15px;
-  }
-}
     /* --- Titre avec filets dorés gauche/droite --- */
 .title-accent{
   display:flex; align-items:center; justify-content:center;
@@ -723,40 +693,53 @@
   margin-top:.6rem;
   display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap;
 }
-.btn-pill{
+/* --- Ghost button discret (desktop) --- */
+.btn-ghost{
   display:inline-block;
-  padding:.55rem .9rem;
+  padding:.45rem .9rem;
   border-radius:999px;
-  background: rgba(255,255,255,.9);
-  color:#222; text-decoration:none; font-weight:700;
-  box-shadow: 0 6px 14px rgba(0,0,0,.2);
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  border:1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.10);
+  color:#fff; text-decoration:none; font-weight:600;
+  letter-spacing:.1px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.btn-pill:hover{ transform: translateY(-1px); box-shadow:0 10px 18px rgba(0,0,0,.25); background:#fff; }
+.btn-ghost:hover{
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.6);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,.18);
+}
 
-    /* Barre d’actions mobile fixe */
+/* --- Ghost mini (mobile, fixe en bas après scroll) --- */
 .mobile-actions{
   position: fixed; left:0; right:0; bottom:12px;
-  display:flex; justify-content:center; gap:.6rem;
+  display:flex; justify-content:center;
   padding: .25rem .6rem;
+  padding-bottom: calc(.25rem + env(safe-area-inset-bottom)); /* iPhone safe area */
   opacity:0; pointer-events:none; transform: translateY(12px);
   transition: opacity .25s ease, transform .25s ease;
-  z-index: 1100;
-}
-.mobile-actions .mini-pill{
-  padding:.55rem .9rem;
-  border-radius:999px;
-  background: rgba(255,255,255,.95);
-  color:#222; text-decoration:none; font-weight:700;
-  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+  z-index:1100;
 }
 .mobile-actions.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
 
-/* Visibilité selon viewport */
-@media (min-width: 769px){ .mobile-actions { display:none; } }        /* Desktop : caché */
-@media (max-width: 768px){ .actions-desktop { display:none; } }       /* Mobile : on cache les boutons du header */
+.mini-ghost{
+  display:inline-block;
+  padding:.5rem .85rem;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.10);
+  color:#fff; text-decoration:none; font-weight:600;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.mini-ghost:active{ transform: translateY(1px); }
 
-
+/* Visibilité selon viewport (on garde ta logique) */
+@media (min-width: 769px){ .mobile-actions { display:none; } }   /* desktop : caché */
+@media (max-width: 768px){ .actions-desktop { display:none; } }  /* mobile : on cache le bouton du header */
 
 </style>
 </head>
@@ -770,8 +753,9 @@
     Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.
   </p>
     <div class="actions-desktop">
-  <a href="1.accueil.html" class="btn-pill">← Retour à l’accueil</a>
-  <a href="2.les_coulisses.html" class="btn-pill">← Retour aux coulisses d’Arzankia</a>
+  <a href="2.les_coulisses.html"
+     class="btn-ghost"
+     aria-label="Retour aux coulisses d’Arzankia">← Retour</a>
 </div>
     </div>
 
@@ -863,9 +847,11 @@
 </div>
   
 <div class="mobile-actions" id="mobileActions" aria-hidden="true">
-  <a href="1.accueil.html" class="mini-pill">Accueil</a>
-  <a href="2.les_coulisses.html" class="mini-pill">Coulisses</a>
+  <a href="2.les_coulisses.html"
+     class="mini-ghost"
+     aria-label="Retour aux coulisses">Retour</a>
 </div>
+
 
 
 </body>
