@@ -783,6 +783,114 @@
   margin: 2.4rem 0 2rem;
 }
 
+    /* === Carte magique fixe (haut-gauche) === */
+.magic-note{
+  position: fixed;
+  top: clamp(72px, 11vh, 112px);         /* sous ton bandeau */
+  left: clamp(12px, 3.5vw, 44px);
+  z-index: 900;                          /* sous le header (z=1000) */
+  transform: rotate(-6deg) translateZ(0);
+  transform-origin: 12% 18%;
+  padding: .65rem .95rem;
+  max-width: clamp(320px, 36vw, 520px);
+  border-radius: 999px;                  /* ovale doux */
+  background: rgba(10,0,20,.38);         /* verre sombre */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff3cc;
+  box-shadow: 0 10px 26px rgba(0,0,0,.28);
+  isolation: isolate;
+  pointer-events: none;                  /* n’empêche pas de cliquer en dessous */
+  opacity: 0;                            /* sera révélé par l’anim */
+  animation: note-appear .8s cubic-bezier(.2,.7,.2,1) .15s forwards;
+}
+
+/* Halo doré qui "respire" */
+.magic-note::before{
+  content:"";
+  position:absolute; inset:-10px -16px;
+  border-radius: inherit;
+  background:
+    radial-gradient(60% 60% at 50% 50%, rgba(255,214,116,.24), rgba(255,214,116,0) 70%);
+  filter: blur(8px);
+  opacity:.9;
+  z-index:-1;
+  animation: halo-pulse 3.6s ease-in-out infinite;
+}
+
+/* Brume dorée interne très légère */
+.magic-note::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background:
+    radial-gradient(140% 80% at 0% 50%, rgba(255,230,168,.10), transparent 60%),
+    radial-gradient(120% 80% at 100% 50%, rgba(255,214,116,.08), transparent 60%);
+  mix-blend-mode: screen;
+  animation: mist-shift 12s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* Texte de la note */
+.magic-text{
+  margin:0;
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: clamp(1.1rem, 2.4vw, 1.7rem);  /* plus grand */
+  line-height: 1.35;
+  text-shadow: 0 2px 6px rgba(0,0,0,.55), 0 0 10px rgba(255,230,168,.12);
+}
+
+/* — Mot par mot : chaque mot animé — */
+.magic-note.wordy .mot{
+  display:inline-block;
+  opacity:0;
+  transform: translateY(6px) scale(.98);
+  animation: mot-entre .55s ease-out forwards;
+}
+
+/* Animations */
+@keyframes note-appear{
+  0%   { opacity:0; transform: rotate(-12deg) scale(.96); }
+  100% { opacity:1; transform: rotate(-6deg)  scale(1); }
+}
+@keyframes halo-pulse{
+  0%,100% { filter: blur(8px); opacity:.85; }
+  50%     { filter: blur(12px); opacity:1; }
+}
+@keyframes mist-shift{
+  0%   { transform: translateX(-3%) }
+  50%  { transform: translateX(3%)  }
+  100% { transform: translateX(-3%) }
+}
+@keyframes mot-entre{
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* Mobile : un peu moins incliné + plus compact */
+@media (max-width: 768px){
+  .magic-note{
+    transform: rotate(-3deg);
+    top: clamp(64px, 10vh, 96px);
+    left: 10px;
+    max-width: min(92%, 480px);
+    padding: .6rem .8rem;
+  }
+  .magic-text{ font-size: clamp(1.05rem, 4.2vw, 1.45rem); }
+}
+
+/* Accessibilité : réduire les animations si demandé */
+@media (prefers-reduced-motion: reduce){
+  .magic-note,
+  .magic-note::before,
+  .magic-note::after,
+  .magic-note .mot{
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+
 .btn-ghost{
   display:inline-block;
   padding:.42rem .85rem;
@@ -823,11 +931,11 @@
   </div>
 </div>
   
-<div class="subtitle-wrap d2">
-  <p class="subtitle subtitle--out">
+<!-- Encart magique : ajouter la classe "wordy" si tu veux l’effet mot par mot -->
+<div class="magic-note wordy" aria-live="polite">
+  <p class="magic-text">
     <span class="line1">Explore les mondes qui composent l’univers d’Arzankia.</span>
   </p>
-  <div class="pixie-dust" aria-hidden="true"></div>
 </div>
 
   <!-- Bulles flottantes -->
@@ -917,20 +1025,18 @@ for(let i=0;i<COUNT;i++){
 </script>
   <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const line = document.querySelector('.subtitle .line1');
+  const note = document.querySelector('.magic-note.wordy');
+  if(!note) return;                 // pas de découpe si pas "wordy"
+  const line = note.querySelector('.line1');
   if(!line) return;
 
   const txt = line.textContent.trim();
   const words = txt.split(/\s+/);
-
-  // remplace le contenu par des <span class="mot">…</span> avec délai progressif
   line.innerHTML = words.map((w, i) =>
-    `<span class="mot" style="animation-delay:${i * 120}ms">${w}</span>`
+    `<span class="mot" style="animation-delay:${i*120}ms">${w}</span>`
   ).join(' ');
 });
 </script>
-
-
  
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
   <span id="texte-hegaia-tape"></span>
