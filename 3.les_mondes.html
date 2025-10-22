@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Les Mondes d'Arzankia</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -668,21 +669,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Cinzel+Decorative:wght@400;700&display=swap');
 
 /* Sous-titre centré et stylisé */
-.subtitle {
-  text-align: center;
-  font-family: 'Uncial Antiqua', 'Cinzel Decorative', serif;
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
-  color: #fff8e6;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  margin: 0.8rem auto 1.4rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,.6);
+    /* --- D2 : brume dorée + poussières de fée --- */
+.subtitle-wrap{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: .5rem auto 0;
+  padding: .35rem .9rem;
+  max-width: 980px;
 }
 
-/* Espacement sous le bandeau */
-.subtitle--out {
-  margin-top: 0.8rem;
+.subtitle-wrap::before{
+  content:"";
+  position:absolute; inset: -6px -12px;
+  background:
+    radial-gradient(60% 60% at 50% 50%, rgba(255,214,116,.28), rgba(233,199,106,.12) 60%, transparent 70%),
+    radial-gradient(22% 22% at 50% 50%, rgba(255,245,205,.22), transparent 60%);
+  filter: blur(6px);
+  pointer-events:none;
+  z-index:0;
+  border-radius: 14px;        /* pas de cadre, juste le voile */
 }
+
+.subtitle{
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff8e6;
+  font-family: "IM Fell English", Georgia, serif;
+  text-shadow: 0 2px 6px rgba(0,0,0,.55);
+  margin: 0;
+}
+
+/* 2e ligne un peu italique */
+.subtitle .line2{ font-style: italic; }
+
+/* poussières de fée */
+.pixie-dust{
+  position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible;
+}
+.pixie-dust span{
+  position:absolute;
+  width: 3px; height: 3px;
+  background: radial-gradient(circle, #fff 0%, rgba(255,214,116,.9) 50%, rgba(255,214,116,0) 70%);
+  border-radius:50%;
+  opacity:.85;
+  filter: drop-shadow(0 0 6px rgba(255,214,116,.6));
+  animation: pd-float linear infinite;
+}
+@keyframes pd-float{
+  0%   { transform: translateY(6px) scale(.9); opacity:.0; }
+  10%  { opacity:.85; }
+  60%  { transform: translateY(-14px) scale(1); }
+  100% { transform: translateY(-26px) scale(.95); opacity:0; }
+}
+
+/* Responsive : tailles un poil plus sages */
+@media (max-width: 768px){
+  .subtitle-wrap{ padding: .25rem .6rem; }
+}
+
 
 /* Retour discret stylé (optionnel) */
 .footer-ghost {
@@ -736,10 +782,14 @@
   </div>
 </div>
 
- <p class="subtitle subtitle--out">
-  Explore les mondes qui composent l’univers d’Arzankia.<br class="mobile-br">
-  Chacun est unique, peuplé de créatures, de mystères… et de dangers.
-</p>
+<div class="subtitle-wrap d2">
+  <p class="subtitle subtitle--out">
+    <span class="line1">Explore les mondes qui composent l’univers d’Arzankia.</span><br class="mobile-br">
+    <span class="line2">Chacun est unique, peuplé de créatures, de mystères… et de dangers.</span>
+  </p>
+  <div class="pixie-dust" aria-hidden="true"></div>
+</div>
+
 
   <!-- Bulles flottantes -->
 <div class="bubble-zone">
@@ -805,6 +855,29 @@
   }
 
 </script>
+  <script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  const dust = document.querySelector('.pixie-dust');
+  if(!dust) return;
+  const COUNT = 18;
+  for(let i=0;i<COUNT;i++){
+    const s = document.createElement('span');
+    const x = Math.random()*96 + 2;          // 2% → 98%
+    const y = Math.random()*70 + 10;         // 10% → 80%
+    const d = 9 + Math.random()*5;           // 9s → 14s
+    const delay = Math.random()*12;          // 0 → 12s
+    const size = 2 + Math.random()*3;        // 2px → 5px
+    s.style.left = x + '%';
+    s.style.top = y + '%';
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.animationDuration = d + 's';
+    s.style.animationDelay = (-delay) + 's'; // démarre décalé
+    dust.appendChild(s);
+  }
+});
+</script>
+
  
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
   <span id="texte-hegaia-tape"></span>
