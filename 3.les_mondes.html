@@ -761,6 +761,15 @@
 /* Sous-titre hors bandeau : petit espace */
 .subtitle--out{ margin:.5rem auto 0; }
 
+  
+  .btn-row{ 
+    display:flex;
+    flex-wrap:wrap; 
+    justify-content:center;
+    gap:1rem; 
+    margin:1.2rem 
+    auto 1.6rem; }
+    
   .btn-ghost{
     background:transparent; 
     color:#fce9b0; 
@@ -821,12 +830,9 @@
 </a>
     </div><!-- /bubble-row hegaia-alone -->
   
-  <div class="footer-ghost">
-  <a href="2.les_coulisses.html"
-     class="btn-ghost btn-ghost--sm"
-     aria-label="Retour aux coulisses d’Arzankia">Retour</a>
-</div>
-
+  <div class="btn-row" style="position:relative; z-index:50;">
+    <a id="btnBack" class="btn btn-ghost" href="2.les_coulisses.html" rel="prev">Retour</a>
+  </div>
 
   <!-- Script apparition texte -->
 <script>
