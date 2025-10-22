@@ -805,79 +805,6 @@
   animation: note-appear .8s cubic-bezier(.2,.7,.2,1) .15s forwards;
 }
 
-/* Halo doré qui "respire" */
-.magic-note::before{
-  content:"";
-  position:absolute; inset:-10px -16px;
-  border-radius: inherit;
-  background:
-    radial-gradient(60% 60% at 50% 50%, rgba(255,214,116,.24), rgba(255,214,116,0) 70%);
-  filter: blur(8px);
-  opacity:.9;
-  z-index:-1;
-  animation: halo-pulse 3.6s ease-in-out infinite;
-}
-
-/* Brume dorée interne très légère */
-.magic-note::after{
-  content:"";
-  position:absolute; inset:0;
-  border-radius: inherit;
-  background:
-    radial-gradient(140% 80% at 0% 50%, rgba(255,230,168,.10), transparent 60%),
-    radial-gradient(120% 80% at 100% 50%, rgba(255,214,116,.08), transparent 60%);
-  mix-blend-mode: screen;
-  animation: mist-shift 12s ease-in-out infinite;
-  pointer-events:none;
-}
-
-/* Texte de la note */
-.magic-text{
-  margin:0;
-  font-family: "IM Fell English", Georgia, serif;
-  font-size: clamp(1.1rem, 2.4vw, 1.7rem);  /* plus grand */
-  line-height: 1.35;
-  text-shadow: 0 2px 6px rgba(0,0,0,.55), 0 0 10px rgba(255,230,168,.12);
-}
-
-/* — Mot par mot : chaque mot animé — */
-.magic-note.wordy .mot{
-  display:inline-block;
-  opacity:0;
-  transform: translateY(6px) scale(.98);
-  animation: mot-entre .55s ease-out forwards;
-}
-
-/* Animations */
-@keyframes note-appear{
-  0%   { opacity:0; transform: rotate(-12deg) scale(.96); }
-  100% { opacity:1; transform: rotate(-6deg)  scale(1); }
-}
-@keyframes halo-pulse{
-  0%,100% { filter: blur(8px); opacity:.85; }
-  50%     { filter: blur(12px); opacity:1; }
-}
-@keyframes mist-shift{
-  0%   { transform: translateX(-3%) }
-  50%  { transform: translateX(3%)  }
-  100% { transform: translateX(-3%) }
-}
-@keyframes mot-entre{
-  to { opacity:1; transform: translateY(0) scale(1); }
-}
-
-/* Mobile : un peu moins incliné + plus compact */
-@media (max-width: 768px){
-  .magic-note{
-    transform: rotate(-3deg);
-    top: clamp(64px, 10vh, 96px);
-    left: 10px;
-    max-width: min(92%, 480px);
-    padding: .6rem .8rem;
-  }
-  .magic-text{ font-size: clamp(1.05rem, 4.2vw, 1.45rem); }
-}
-
 /* Accessibilité : réduire les animations si demandé */
 @media (prefers-reduced-motion: reduce){
   .magic-note,
@@ -889,7 +816,46 @@
     opacity: 1 !important;
   }
 }
+    /* Variante petite bulle d’astuce, sous le bandeau */
+.magic-note.mini{
+  position: fixed;
+  top: calc(var(--header-h, 96px) + 6px); /* pile sous le bandeau */
+  left: clamp(8px, 2.6vw, 24px);
 
+  /* taille beaucoup plus petite */
+  max-width: clamp(120px, 20vw, 200px);
+  padding: .35rem .55rem;
+
+  transform: rotate(-8deg);
+  border-radius: 999px;
+
+  /* assure un rendu "bulle" compact */
+  text-align: center;
+  overflow: hidden;
+}
+
+
+/* texte plus discret */
+.magic-note.mini .magic-text{
+  font-size: clamp(.78rem, 1.6vw, .95rem);
+  line-height: 1.2;
+  text-wrap: balance;   /* jolis retours à la ligne */
+  hyphens: auto;        /* césures FR si besoin */
+}
+
+    @media (max-width:768px){
+  .magic-note.mini{
+    top: calc(var(--header-h, 84px) + 4px);
+    left: 10px;
+    transform: rotate(-4deg);
+    max-width: min(64vw, 180px);
+    padding: .32rem .5rem;
+  }
+  .magic-note.mini .magic-text{
+    font-size: clamp(.82rem, 3.4vw, .92rem);
+    line-height: 1.2;
+  }
+}
 
 .btn-ghost{
   display:inline-block;
@@ -931,12 +897,12 @@
   </div>
 </div>
   
-<!-- Encart magique : ajouter la classe "wordy" si tu veux l’effet mot par mot -->
-<div class="magic-note wordy" aria-live="polite">
+<div class="magic-note mini wordy" aria-live="polite">
   <p class="magic-text">
     <span class="line1">Explore les mondes qui composent l’univers d’Arzankia.</span>
   </p>
 </div>
+
 
   <!-- Bulles flottantes -->
 <div class="bubble-zone">
@@ -1037,6 +1003,20 @@ document.addEventListener('DOMContentLoaded', () => {
   ).join(' ');
 });
 </script>
+  
+  <script>
+(function(){
+  function setHeaderVar(){
+    const header = document.querySelector('.header-box');
+    if(!header) return;
+    const h = header.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  window.addEventListener('load', setHeaderVar);
+  window.addEventListener('resize', setHeaderVar);
+})();
+</script>
+
  
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
   <span id="texte-hegaia-tape"></span>
