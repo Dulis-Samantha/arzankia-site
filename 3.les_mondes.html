@@ -694,20 +694,21 @@
 }
 
 .subtitle{
-  font-size: clamp(1.2rem, 2.3vw, 1.6rem);     /* plus grand */
-  letter-spacing: .3px;
-  text-shadow:
-    0 2px 6px rgba(0,0,0,.55),
-    0 0 10px rgba(255, 230, 168, .12);         /* lueur douce */
   position: relative;
   z-index: 1;
   text-align: center;
   line-height: 1.5;                /* respiration douce */
   color: #fff3cc;                  /* ivoire chaud */
   font-family: "IM Fell English", Georgia, serif;
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem);     /* plus grand */
+  letter-spacing: .3px;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.55),
+    0 0 10px rgba(255, 230, 168, .12);         /* lueur douce */
   margin: 0;
 }
-    .subtitle .mot{
+    /* Animation "apparition magique" mot par mot */
+.subtitle .mot{
   display:inline-block;
   opacity:0;
   transform: translateY(6px) scale(.98);
@@ -783,96 +784,6 @@
   margin: 2.4rem 0 2rem;
 }
 
-    /* === Carte magique fixe (haut-gauche) === */
-.magic-note{
-  position: fixed;
-  top: clamp(72px, 11vh, 112px);         /* sous ton bandeau */
-  left: clamp(12px, 3.5vw, 44px);
-  z-index: 900;                          /* sous le header (z=1000) */
-  transform: rotate(-6deg) translateZ(0);
-  transform-origin: 12% 18%;
-  padding: .65rem .95rem;
-  max-width: clamp(320px, 36vw, 520px);
-  border-radius: 999px;                  /* ovale doux */
-  background: rgba(10,0,20,.38);         /* verre sombre */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #fff3cc;
-  box-shadow: 0 10px 26px rgba(0,0,0,.28);
-  isolation: isolate;
-  pointer-events: none;                  /* n’empêche pas de cliquer en dessous */
-  opacity: 0;                            /* sera révélé par l’anim */
-  animation: note-appear .8s cubic-bezier(.2,.7,.2,1) .15s forwards;
-}
-
-/* Accessibilité : réduire les animations si demandé */
-@media (prefers-reduced-motion: reduce){
-  .magic-note,
-  .magic-note::before,
-  .magic-note::after,
-  .magic-note .mot{
-    animation: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-  }
-}
-    /* Variante petite bulle d’astuce, sous le bandeau */
-.magic-note.mini{
-  position: fixed;
-  top: calc(var(--header-h, 96px) + 6px); /* pile sous le bandeau */
-  left: clamp(8px, 2.6vw, 24px);
-
-  /* taille beaucoup plus petite */
-  max-width: clamp(120px, 20vw, 200px);
-  padding: .35rem .55rem;
-
-  transform: rotate(-8deg);
-  border-radius: 999px;
-
-  /* assure un rendu "bulle" compact */
-  text-align: center;
-  overflow: hidden;
-}
-
-
-/* texte plus discret */
-.magic-note.mini .magic-text{
-  font-size: clamp(.78rem, 1.6vw, .95rem);
-  line-height: 1.2;
-  text-wrap: balance;   /* jolis retours à la ligne */
-  hyphens: auto;        /* césures FR si besoin */
-}
-
-    @media (max-width:768px){
-  .magic-note.mini{
-    top: calc(var(--header-h, 84px) + 4px);
-    left: 10px;
-    transform: rotate(-4deg);
-    max-width: min(64vw, 180px);
-    padding: .32rem .5rem;
-  }
-  .magic-note.mini .magic-text{
-    font-size: clamp(.82rem, 3.4vw, .92rem);
-    line-height: 1.2;
-  }
-}
-/* Animation qui révèle la note (manquante) */
-@keyframes note-appear{
-  from { opacity:0; transform: rotate(-12deg) scale(.96); }
-  to   { opacity:1;  transform: rotate(-6deg)  scale(1); }
-}
-
-/* (facultatif) mot par mot pour la note si "wordy" est présent */
-.magic-note.wordy .mot{
-  display:inline-block;
-  opacity:0;
-  transform: translateY(6px) scale(.98);
-  animation: mot-entre .55s ease-out forwards;
-}
-@keyframes mot-entre{
-  to { opacity:1; transform: translateY(0) scale(1); }
-}
-
 .btn-ghost{
   display:inline-block;
   padding:.42rem .85rem;
@@ -913,12 +824,12 @@
   </div>
 </div>
   
-<div class="magic-note mini wordy" aria-live="polite">
-  <p class="magic-text">
+<div class="subtitle-wrap d2">
+  <p class="subtitle subtitle--out">
     <span class="line1">Explore les mondes qui composent l’univers d’Arzankia.</span>
   </p>
+  <div class="pixie-dust" aria-hidden="true"></div>
 </div>
-
 
   <!-- Bulles flottantes -->
 <div class="bubble-zone">
@@ -1007,31 +918,19 @@ for(let i=0;i<COUNT;i++){
 </script>
   <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const note = document.querySelector('.magic-note.wordy');
-  if(!note) return;                 // pas de découpe si pas "wordy"
-  const line = note.querySelector('.line1');
+  const line = document.querySelector('.subtitle .line1');
   if(!line) return;
 
   const txt = line.textContent.trim();
   const words = txt.split(/\s+/);
+
+  // remplace le contenu par des <span class="mot">…</span> avec délai progressif
   line.innerHTML = words.map((w, i) =>
-    `<span class="mot" style="animation-delay:${i*120}ms">${w}</span>`
+    `<span class="mot" style="animation-delay:${i * 120}ms">${w}</span>`
   ).join(' ');
 });
 </script>
-  
-  <script>
-(function(){
-  function setHeaderVar(){
-    const header = document.querySelector('.header-box');
-    if(!header) return;
-    const h = header.getBoundingClientRect().height;
-    document.documentElement.style.setProperty('--header-h', h + 'px');
-  }
-  window.addEventListener('load', setHeaderVar);
-  window.addEventListener('resize', setHeaderVar);
-})();
-</script>
+
 
  
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
