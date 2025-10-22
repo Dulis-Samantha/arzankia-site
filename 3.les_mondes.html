@@ -856,6 +856,22 @@
     line-height: 1.2;
   }
 }
+/* Animation qui révèle la note (manquante) */
+@keyframes note-appear{
+  from { opacity:0; transform: rotate(-12deg) scale(.96); }
+  to   { opacity:1;  transform: rotate(-6deg)  scale(1); }
+}
+
+/* (facultatif) mot par mot pour la note si "wordy" est présent */
+.magic-note.wordy .mot{
+  display:inline-block;
+  opacity:0;
+  transform: translateY(6px) scale(.98);
+  animation: mot-entre .55s ease-out forwards;
+}
+@keyframes mot-entre{
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
 
 .btn-ghost{
   display:inline-block;
