@@ -408,7 +408,7 @@
   
  .arenyth {
       background: linear-gradient(135deg, #2a2a2a, #444);
-      animation: acierBrillant 4s ease-in-out infinite;
+      animation: acierHalo 3.5s ease-in-out infinite;
       opacity: 0.95;
     }
 
@@ -515,6 +515,9 @@
   gap: 2rem;
   align-items: center;
 }
+    @media (min-width:769px){
+  .bubble-zone{ position: relative; }
+}
 
 .bubble-row {
   display: flex;
@@ -524,7 +527,6 @@
 }
 
 .bubble {
-  position: static !important;
   width: 130px;
   height: 130px;
   font-size: 1rem;
@@ -543,11 +545,6 @@
 
   .bubble .label {
     font-size: 0.6rem !important;
-  }
-
-  .bubble::before,
-  .bubble::after {
-    display: none !important;
   }
 }
 
