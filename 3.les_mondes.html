@@ -439,31 +439,6 @@
   0% { background-position: 0 0; }
   100% { background-position: 10px 10px; }
 }
-
-
-
-
-.bubble.hegaia {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.04)); /* Fond très doux mais visible */
-  opacity: 0.65;                                     /* Opacité augmentée pour qu’elle soit visible mais discrète */
-}
-
-.bubble.hegaia:hover {
-  transform: none !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
-  opacity: 0.28 !important;
-  animation: none !important;
-}
-    
-   .bubble-hegaia {
-  opacity: 0.5; /* Rend la bulle presque invisible */
-  pointer-events: none; /* Empêche toute interaction si souhaité */
-}
-
-.bubble-hegaia:hover {
-  opacity: 0.2; /* Garde la même opacité lorsqu'on survole */
-  transform: none; /* Aucune transformation sur le survol */
-}
     
 .bubble.hegaia {
   background: transparent !important;
@@ -501,50 +476,6 @@
 .popup-secret.show {
   display: block;
 }
-    .footer-buttons {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 1em 0;
-  text-align: center;
-  z-index: 1000;
-}
-
-.footer-buttons a {
-  display: inline-block;
-  margin: 0 1.5em;                    /* écart horizontal plus large */
-  background-color: #ffffffcc;
-  color: #333;
-  padding: 0.5em 1em;                 /* taille réduite */
-  font-size: 0.9rem;                  /* texte un peu plus petit */
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 8px rgba(255,255,255,0.3);
-  transition: all 0.3s ease;
-}
-
-.footer-buttons a:hover {
-  background-color: #fff;
-  color: #000;
-  box-shadow: 0 0 15px #fff;
-}
-    .header-box {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.55); /* ou autre fond pour lisibilité */
-  padding: 0.8em 0.5em; /* Réduction de la hauteur */
-  text-align: center;
-  z-index: 1000;
-  color: #fff;
-  backdrop-filter: blur(6px); /* pour un effet flouté élégant */
-}
-
-
 
 .btn-retour {
   display: inline-block;
@@ -572,10 +503,7 @@
     margin-top: 140px;
     margin-bottom: 90px;
   }
-.footer-buttons a {
-  display: block;
-  margin: 0.7em auto; /* Espace vertical + centrage */
-}
+     
   .bubble {
     position: static !important;
     width: 90px !important;
@@ -636,7 +564,6 @@
   }
 }
 
-
 .fenetre-secret-hegaia {
   display: none;
   position: absolute;
@@ -654,28 +581,41 @@
   z-index: 999;
   text-align: center;
 }
-  .bubble.hegaia {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2) !important; /* ombre douce blanche */
-  opacity: 0.5 !important;
-  animation: none !important;
-  transition: none !important;
-  cursor: default !important;
+
+    /* Halo blanc uniforme pour toutes les bulles */
+.bubble{
+  box-shadow: 0 0 22px rgba(255,255,255,.38);
+  outline: 1px solid rgba(255,255,255,.35);
+  outline-offset: -2px;
 }
-    
-.bubble.hegaia:hover {
-  transform: none !important;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2) !important;
-  opacity: 0.5 !important;
+.bubble::before{
+  /* on renforce le halo blanc existant, sans animation forte */
+  background: radial-gradient(circle, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 70%);
+  filter: blur(8px);
 }
 
-    .hegaia-alone {
-  justify-content: center;
-  margin-top: -10px;
-  margin-bottom: -10px;
+/* Mobile : on réactive un petit halo (tu les avais masqués) */
+@media (max-width:768px){
+  .bubble::before{ display:block !important; }
+}
+/* Contraste universel pour les labels dans les bulles */
+.bubble .label{
+  text-shadow:
+    0 2px 4px rgba(0,0,0,.65),
+    0 0 2px rgba(0,0,0,.75);
+  -webkit-text-stroke: .4px rgba(0,0,0,.35);
 }
 
+/* Cas des bulles à texte foncé → contours clairs */
+.bubble.quack .label,
+.bubble.creature .label,
+.bubble.pan .label{
+  color:#111 !important;
+  text-shadow:
+    0 1px 2px rgba(255,255,255,.55),
+    0 0 1px rgba(255,255,255,.7);
+  -webkit-text-stroke: .35px rgba(255,255,255,.55);
+}
     .retour-container {
   display: flex;
   justify-content: center;
@@ -721,25 +661,6 @@
     padding: 1em; /* Réduit l’espace intérieur */
   }
 }
-    
-    .header-box {
-  padding: 0.3em 0.5em;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.header-box h1 {
-  font-size: 1.6rem;
-  margin: 0.6;
-  padding: 0.2em 0;
-}
-
-  .header-box p {
-    font-size: 0.85rem !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-}
 
 /* Responsive mobile */
 @media (max-width: 768px) {
@@ -755,16 +676,104 @@
     padding: 10px 15px;
   }
 }
+    /* --- Titre avec filets dorés gauche/droite --- */
+.title-accent{
+  display:flex; align-items:center; justify-content:center;
+  gap: clamp(10px, 3vw, 20px);
+  padding-top: .2rem;
+}
+.title-accent::before,
+.title-accent::after{
+  content:""; flex:1 1 120px; height:2px;
+  background: linear-gradient(90deg, transparent, #ffd674 40%, #ffe6a8 60%, transparent);
+  filter: drop-shadow(0 0 4px #ffd674aa);
+}
+.header-box h1{
+  margin:0;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  letter-spacing:.5px;
+  text-shadow: 0 2px 6px rgba(0,0,0,.55);
+}
+
+/* Sous-titre plus lisible */
+.subtitle{
+  margin:.4rem auto 0;
+  max-width: 900px;
+  font-size: clamp(.9rem, 1.6vw, 1rem);
+  font-style: italic;
+  color:#fff;
+  opacity:.95;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+
+/* Conteneur header existant, on le garde mais on améliore un peu */
+.header-box{
+  position:sticky; top:0; /* reste en haut sans cacher la page */
+  background: rgba(0,0,0,.52);
+  backdrop-filter: blur(6px);
+  padding: .8rem .5rem .7rem;
+  text-align:center;
+  z-index:1000;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+}
+
+/* Boutons sous le sous-titre (desktop) */
+.actions-desktop{
+  margin-top:.6rem;
+  display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap;
+}
+.btn-pill{
+  display:inline-block;
+  padding:.55rem .9rem;
+  border-radius:999px;
+  background: rgba(255,255,255,.9);
+  color:#222; text-decoration:none; font-weight:700;
+  box-shadow: 0 6px 14px rgba(0,0,0,.2);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-pill:hover{ transform: translateY(-1px); box-shadow:0 10px 18px rgba(0,0,0,.25); background:#fff; }
+
+    /* Barre d’actions mobile fixe */
+.mobile-actions{
+  position: fixed; left:0; right:0; bottom:12px;
+  display:flex; justify-content:center; gap:.6rem;
+  padding: .25rem .6rem;
+  opacity:0; pointer-events:none; transform: translateY(12px);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 1100;
+}
+.mobile-actions .mini-pill{
+  padding:.55rem .9rem;
+  border-radius:999px;
+  background: rgba(255,255,255,.95);
+  color:#222; text-decoration:none; font-weight:700;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+.mobile-actions.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
+
+/* Visibilité selon viewport */
+@media (min-width: 769px){ .mobile-actions { display:none; } }        /* Desktop : caché */
+@media (max-width: 768px){ .actions-desktop { display:none; } }       /* Mobile : on cache les boutons du header */
+
+
 
 </style>
 </head>
 <body>
 
-   <div class="header-box">
-  <h1> Les Mondes d’Arzankia</h1>
-  <p>Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.</p>
+  <div class="header-box" id="hero">
+  <div class="title-accent">
+    <h1>Les Mondes d’Arzankia</h1>
+  </div>
+  <p class="subtitle">
+    Explore les mondes qui composent l’univers d’Arzankia. Chacun est unique, peuplé de créatures, de mystères… et de dangers.
+  </p>
+    <div class="actions-desktop">
+  <a href="1.accueil.html" class="btn-pill">← Retour à l’accueil</a>
+  <a href="2.les_coulisses.html" class="btn-pill">← Retour aux coulisses d’Arzankia</a>
 </div>
-
+    </div>
 
   <!-- Bulles flottantes -->
 <div class="bubble-zone">
@@ -794,12 +803,8 @@
  <a href="8.monde_Hegaia.html" class="bubble hegaia flotter2" onclick="reveleSecretHegaia(event)">
   <div class="bubble-inner"><span class="label"></span></div>
 </a>
-
-   
-    <div class="footer-buttons">
-    <a href="1.accueil.html">← Retour à l’accueil</a>
-    <a href="2.les_coulisses.html">← Retour aux coulisses d'Arzankia</a>
-  </div>
+    </div><!-- /bubble-row hegaia-alone -->
+</div><!-- /bubble-zone -->
 
   <!-- Script apparition texte -->
 <script>
@@ -826,10 +831,40 @@
       window.location.href = "8.monde_Hegaia.html";
     }, 5000);
   }
+
 </script>
+  <script>
+  // Affiche la barre mobile après avoir passé le header
+  (function(){
+    const hero = document.getElementById('hero');
+    const bar  = document.getElementById('mobileActions');
+    if(!hero || !bar) return;
+
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          // header visible -> on cache la barre
+          bar.classList.remove('show');
+          bar.setAttribute('aria-hidden','true');
+        }else{
+          // header sorti -> on montre la barre
+          bar.classList.add('show');
+          bar.setAttribute('aria-hidden','false');
+        }
+      });
+    }, {threshold: 0});
+    io.observe(hero);
+  })();
+</script>
+
   
  <div id="texte-hegaia-secret" class="fenetre-secret-hegaia">
   <span id="texte-hegaia-tape"></span>
+</div>
+  
+<div class="mobile-actions" id="mobileActions" aria-hidden="true">
+  <a href="1.accueil.html" class="mini-pill">Accueil</a>
+  <a href="2.les_coulisses.html" class="mini-pill">Coulisses</a>
 </div>
 
 
