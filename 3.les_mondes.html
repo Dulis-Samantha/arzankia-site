@@ -706,7 +706,8 @@
 
 /* poussières de fée */
 .pixie-dust{
-  position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible;
+  position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible; will-change: transform;
+
 }
 .pixie-dust span{
   position:absolute;
@@ -717,6 +718,11 @@
   filter: drop-shadow(0 0 6px rgba(255,214,116,.6));
   animation: pd-float linear infinite;
 }
+
+    @media (prefers-reduced-motion: reduce) {
+  .pixie-dust span { animation: none !important; opacity: 0 !important; }
+}
+
 @keyframes pd-float{
   0%   { transform: translateY(6px) scale(.9); opacity:.0; }
   10%  { opacity:.85; }
@@ -863,14 +869,15 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   const dust = document.querySelector('.pixie-dust');
   if(!dust) return;
-  const COUNT = 18;
-  for(let i=0;i<COUNT;i++){
-    const s = document.createElement('span');
-    const x = Math.random()*96 + 2;          // 2% → 98%
-    const y = Math.random()*70 + 10;         // 10% → 80%
-    const d = 9 + Math.random()*5;           // 9s → 14s
-    const delay = Math.random()*12;          // 0 → 12s
-    const size = 2 + Math.random()*3;        // 2px → 5px
+  const COUNT = 24;
+for(let i=0;i<COUNT;i++){
+  const s = document.createElement('span');
+  const x = Math.random()*96 + 2;          // 2 % → 98 %
+  const y = Math.random()*70 + 10;         // 10 % → 80 %
+  const d = 9 + Math.random()*6;           // 9 s → 15 s
+  const delay = Math.random()*14;          // 0 → 14 s
+  const size = 2 + Math.random()*4;        // 2 px → 6 px
+
     s.style.left = x + '%';
     s.style.top = y + '%';
     s.style.width = size + 'px';
