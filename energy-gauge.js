@@ -13,7 +13,7 @@
     items: {
       'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: 'ing_ptikitis.webp' },
       'foret_champignon' : { name: 'Champignon bleu',          img: 'ing_foret.webp' },
-      'ames_plante'      : { name: 'Plante spectrale',          img: 'ing_ames.webp' },
+      'ames_plante'      : { name: 'Olivette Brumis',          img: 'ing_ames.webp' },
       'reserve_ptikitis' : { name: 'Pousse rare (Réserve)',     img: 'ing_reserve_ptikitis.webp' },
       'eau_creature'     : { name: 'Essence des créatures de l’eau', img: 'ing_creature.webp' },
     },
