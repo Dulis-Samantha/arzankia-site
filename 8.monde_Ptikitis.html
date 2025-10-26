@@ -108,6 +108,35 @@
         box-shadow:0 0 8px rgba(255,223,100,.6);
       }
     }
+    .image-zone {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.2rem;
+}
+
+.ing-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.ingredient-img {
+  width: 60px;
+  height: auto;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* effet discret au survol (optionnel) */
+.ing-btn:hover .ingredient-img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
   </style>
 </head>
 
@@ -138,8 +167,20 @@
     <!-- TITRE -->
     <h1 class="page-title">Monde des Ptikitis</h1>
 
-    <!-- IMAGE -->
-    <img class="Fees-image" src="monde_Ptikitis.webp" alt="Monde des Ptikitis">
+<!-- IMAGE AVEC INGREDIENT CACHÉ : RUBICTUS AUX BAIES ROUGES -->
+<div class="image-zone">
+  <img class="Fees-image" src="monde_Ptikitis.webp" alt="Monde des Ptikitis">
+
+  <!-- Rubictus caché -->
+  <button class="ing-btn quest-ingredient"
+          data-id="ptikitis_rubictus"
+          data-recharge="60"
+          aria-label="Rubictus aux baies rouges"
+          style="bottom:6%; left:9%;">
+    <img src="ing_ptikitis.webp" alt="Rubictus aux baies rouges" class="ingredient-img">
+  </button>
+</div>
+
 
     <!-- TEXTE -->
     <div class="texte-monde">
