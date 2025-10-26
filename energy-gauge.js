@@ -52,6 +52,8 @@
       <h3>Ton sac magique</h3>
       <ul id="bagList"></ul>
       <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+      <button class="bag-reset" id="bagReset">🔄 Réinitialiser les ingrédients</button>
+
     </div>
   `;
   document.body.appendChild(bagWrap);
@@ -74,6 +76,20 @@
       bagIcon.setAttribute('aria-expanded', 'false');
     }
   });
+    // === Bouton réinitialiser ===
+  const bagReset = bagWrap.querySelector('#bagReset');
+  bagReset.addEventListener('click', () => {
+    if (confirm("Souhaites-tu vraiment réinitialiser tous les ingrédients ?")) {
+      state.bag = [];
+      state.used = [];
+      state.infinite = false;
+      state.msgShown = false;
+      saveState();
+      renderAll();
+      toast("Tous les ingrédients ont été réinitialisés !");
+    }
+  });
+
 
   // ===== INIT listeners: collecte d’ingrédients sur la page =====
   initCollectibles();
