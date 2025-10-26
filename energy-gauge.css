@@ -148,6 +148,125 @@
   0%, 100% { transform: translate(-50%, -52%); }
   50% { transform: translate(-50%, -48%); }
 }
+/* Ruban d’alerte (≤ 15%) */
+.quest-ribbon{
+  position: fixed;
+  top: 72px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4600;
+  background: rgba(10,0,20,.75);
+  color: #fff8e6;
+  border: 1px solid rgba(255,214,116,.55);
+  border-radius: 10px;
+  padding: .5rem .9rem;
+  box-shadow: 0 10px 24px rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  font-weight: 700;
+}
+
+/* Sac magique (visible même vide) */
+.bag-wrap{
+  position: fixed;
+  top: 72px; right: 12px;
+  z-index: 4700;
+}
+.bag-icon{
+  width: 48px; height: 48px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
+  transition: transform .2s;
+}
+.bag-icon:hover{ transform: scale(1.08); }
+
+/* Compteur du sac (badge) */
+.bag-badge{
+  position: absolute;
+  top: -6px; right: -6px;
+  min-width: 18px; height: 18px;
+  padding: 0 4px;
+  background: linear-gradient(90deg,#ffd674,#ffe9a8);
+  color: #3a2400;
+  font-weight: 800; font-size: 12px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+
+/* Menu déroulant */
+.bag-menu{
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 240px;
+  color: #fff3cc;
+  background: rgba(10,0,20,.82);
+  border: 1px solid rgba(255,214,116,.45);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  padding: .8rem 1rem;
+}
+.bag-menu.show{ display:block; animation: slideDown .25s ease-out; }
+@keyframes slideDown{
+  from{ opacity: 0; transform: translateY(-6px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+.bag-menu h3{
+  margin:.2rem 0 .6rem; text-align:center;
+  font-family: "Cinzel Decorative", serif;
+  font-size:1.05rem; color:#ffd674;
+}
+.bag-menu ul{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:.6rem;
+}
+.bag-menu li{
+  display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+  background: rgba(255,255,255,.06);
+  border-radius: 10px;
+  padding: .45rem .6rem;
+}
+.bag-item{ display:flex; align-items:center; gap:.55rem; }
+.bag-item img{ width:32px; height:32px; display:block; }
+.bag-label{ line-height:1.2 }
+.bag-name{ font-weight:700; }
+.bag-id{ opacity:.6; font-size:.8rem; }
+
+.bag-menu .bag-empty{
+  margin-top:.3rem; text-align:center; opacity:.75;
+  font-style: italic;
+}
+
+.bag-menu .bag-use{
+  background: linear-gradient(90deg,#ffd674,#ffe9a8);
+  color:#3a2400; font-weight:800;
+  border:none; border-radius:8px;
+  padding:.25rem .6rem; cursor:pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+.bag-menu .bag-use:hover{ transform: scale(1.05); }
+
+/* Toasts */
+.arz-toast{
+  position: fixed;
+  bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4800;
+  background: rgba(10,0,20,.9);
+  color: #fff8e6;
+  border:1px solid rgba(255,214,116,.5);
+  border-radius: 10px;
+  padding: .5rem .8rem;
+  opacity: 0; transition: opacity .2s;
+}
+.arz-toast.show{ opacity: 1; }
+
+/* (Optionnel) style quand jauge infinie */
+body.arz-infinite .energy-wrap{
+  box-shadow: 0 0 24px rgba(255,214,116,.65);
+}
+
 
 .btn {
   cursor: pointer;
