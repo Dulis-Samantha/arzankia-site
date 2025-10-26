@@ -149,27 +149,31 @@
 
   /* monte un peu la jauge sous le titre */
   .energy-wrap {
-    top: 92px;                  /* ← avant c’était 108px */
+    top: 92px;                  /* position verticale */
     left: 50%;
     right: auto;
     transform: translateX(-50%) scale(.95);
     margin-right: 0;
     z-index: 4000;
+    display: flex;
+    align-items: center;        /* centre verticalement le contenu */
   }
 
-  /* sac aligné à droite, même hauteur que la jauge */
+  /* aligne parfaitement le sac sur la jauge */
   .bag-wrap {
-    top: 92px;                  /* même valeur que la jauge */
-    right: 12px;
+    position: fixed;
+    top: 92px;                  /* même valeur exacte que .energy-wrap */
+    right: calc(50% - 480px);   /* ajuste selon la largeur max (1100px/2 - 70px marge env.) */
     z-index: 4700;
+    transform: translateX(400%); /* décale à droite sans bouger verticalement */
   }
 
-  /* descend un peu l'illustration */
+  /* descend légèrement l'image */
   .image-zone { 
-    margin-top: 96px !important;  /* ← avant c’était 72px */
+    margin-top: 96px !important;
   }
 
-  /* si la page n’a pas .image-zone */
+  /* si ta page n’a pas .image-zone */
   /* .Fees-image { margin-top: 96px !important; } */
 }
 
