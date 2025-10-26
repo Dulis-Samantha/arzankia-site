@@ -294,3 +294,34 @@ body.arz-infinite .energy-wrap{
 /* L’overlay doit être tout en haut */
 .lock-overlay{ z-index: 5000 !important; }
 
+/* === Correction mobile : repositionne la jauge et le sac === */
+@media (max-width: 768px){
+  /* jauge */
+  .energy-wrap{
+    top: 108px !important;       /* descend sous le titre */
+    left: 12px;                  /* un peu de marge à gauche */
+    right: auto;
+    transform: scale(.9);        /* rend la jauge légèrement plus petite */
+  }
+  .energy-bar{
+    width: 140px;                /* réduit la largeur de la barre */
+  }
+
+  /* sac magique */
+  .bag-wrap{
+    top: 108px !important;       /* même hauteur que la jauge */
+    right: 12px;                 /* bord droit de l’écran */
+  }
+  .bag-icon{
+    width: 40px; height: 40px;   /* icône plus petite */
+  }
+
+  /* bandeau de quête (quand il reste 15%) */
+  .quest-ribbon{
+    top: 152px;                  /* juste en dessous de la jauge */
+    left: 12px; right: 12px;
+    transform: none;             /* pleine largeur */
+  }
+}
+
+
