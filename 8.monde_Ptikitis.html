@@ -138,43 +138,38 @@
 }
 
 /* --- Mobile : ajustements spécifiques --- */
-@media (max-width: 768px) {
+@media (max-width: 768px){
 
-  /* repositionne le bouton du Rubictus */
-  .image-zone .quest-ingredient[data-id="ptikitis_rubictus"] {
+  /* bouton Rubictus (si besoin) */
+  .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{
     bottom: 0%;
     left: 12%;
     transform: none !important;
   }
 
-  /* monte un peu la jauge sous le titre */
-  .energy-wrap {
-    top: 85px;                  /* position verticale */
+  /* jauge centrée sous le titre */
+  .energy-wrap{
+    top: 85px;
     left: 50%;
     right: auto;
     transform: translateX(-50%) scale(.95);
-    margin-right: 0;
+    margin-right: 0;   /* annule le décalage desktop */
     z-index: 4000;
-    display: flex;
-    align-items: center;        /* centre verticalement le contenu */
   }
 
-  /* aligne parfaitement le sac sur la jauge */
-  .bag-wrap {
+  /* sac aligné à droite, même hauteur que la jauge */
+  .bag-wrap{
     position: fixed;
-    top: 85px;                  /* même valeur exacte que .energy-wrap */
-    right: calc(50% - 480px);   /* ajuste selon la largeur max (1100px/2 - 70px marge env.) */
+    top: 85px;     /* même valeur que .energy-wrap */
+    right: 12px;   /* ← simple, fiable */
+    transform: none; 
     z-index: 4700;
-    transform: translateX(400%); /* décale à droite sans bouger verticalement */
   }
 
-  /* descend légèrement l'image */
-  .image-zone { 
+  /* laisse de la place avant l'illustration */
+  .image-zone{
     margin-top: 96px !important;
   }
-
-  /* si ta page n’a pas .image-zone */
-  /* .Fees-image { margin-top: 96px !important; } */
 }
 
 
@@ -231,7 +226,7 @@
 
     <!-- BOUTONS -->
     <div class="button-group">
-      <<a href="7.extrait_Ptikitis.html">Extrait du livre</a>
+      <a href="7.extrait_Ptikitis.html">Extrait du livre</a>
         <a href="9.entree_Ptikitis.html">Entrée du monde</a>
         <a href="3.les_mondes.html">← Retour</a>  
     </div>
