@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde de la Forêt Enchantée</title>
 
-  <style>
+   <style>
     /* === BASE === */
     body{
       margin:0;
@@ -137,7 +137,41 @@
   opacity: 1;
 }
 
-   @media (max-width: 768px){ .image-zone .quest-ingredient[data-id="foret_champignon"]{ bottom: -2%; left: 12%; transform: none !important; } }
+/* --- Mobile : ajustements spécifiques --- */
+@media (max-width: 768px){
+
+  /* bouton Rubictus (si besoin) */
+  .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{
+    bottom: 15%;
+    left: 12%;
+    transform: none !important;
+  }
+
+  /* jauge centrée sous le titre */
+  .energy-wrap{
+    top: 85px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(.95);
+    margin-right: 0;   /* annule le décalage desktop */
+    z-index: 4000;
+  }
+
+  /* sac aligné à droite, même hauteur que la jauge */
+  .bag-wrap{
+    position: fixed;
+    top: 85px;     /* même valeur que .energy-wrap */
+    right: 12px;   /* ← simple, fiable */
+    transform: none; 
+    z-index: 4700;
+  }
+
+  /* laisse de la place avant l'illustration */
+  .image-zone{
+    margin-top: 96px !important;
+  }
+}
+
 
   </style>
 </head>
