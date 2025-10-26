@@ -165,6 +165,16 @@
   font-size:.9rem;
   box-shadow:0 0 6px rgba(111,255,145,.25);
 }
+/* quantité + restant dans le sac */
+.bag-qty{
+  font-weight:700;
+  margin-left:.35rem;
+  padding:.05rem .4rem;
+  border-radius:.45rem;
+  background: rgba(255,255,255,.12);
+  font-size:.85rem;
+}
+.bag-rem{ opacity:.75; font-size:.85rem; }
 .bag-reset {
   display: block;
   margin: 0.6rem auto 0.4rem;
@@ -183,6 +193,16 @@
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0,0,0,0.45);
 }
+/* bouton mode tranquille */
+.bag-toggle{
+  display:block; margin:.3rem auto .6rem; padding:.45rem .9rem; font-family:"Cinzel Decorative",serif;
+  background: rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:10px;
+  font-weight:600; cursor:pointer;
+}
+.bag-toggle:hover{ background: rgba(255,255,255,.14); }
+
+/* état visuel optionnel */
+.arz-no-pressure .energy-wrap{ opacity:.9; filter:saturate(.85); }
 
 /* Toast */
 .arz-toast{
@@ -242,4 +262,5 @@ body.arz-infinite .energy-wrap{ box-shadow: 0 0 24px rgba(255,214,116,.65); }
     margin-right: 95px;   /* décale la jauge vers la gauche pour ne pas être cachée par le sac */
   }
 }
+
 
