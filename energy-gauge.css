@@ -154,6 +154,18 @@
 }
 .bag-menu .bag-use:hover{ transform: scale(1.05); }
 
+.bag-used{
+  color:#6fff91;
+  font-weight:700;
+  text-shadow:0 0 6px rgba(111,255,145,.7);
+  background:rgba(0,40,0,.28);
+  border-radius:8px;
+  padding:.28rem .55rem;
+  display:inline-block;
+  font-size:.9rem;
+  box-shadow:0 0 6px rgba(111,255,145,.25);
+}
+
 /* Toast */
 .arz-toast{
   position: fixed; bottom:16px; left:50%; transform: translateX(-50%);
@@ -205,3 +217,5 @@ body.arz-infinite .energy-wrap{ box-shadow: 0 0 24px rgba(255,214,116,.65); }
 @media (prefers-reduced-motion: reduce){
   *{ animation: none !important; transition: none !important; }
 }
+
+
