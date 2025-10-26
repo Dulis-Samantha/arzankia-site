@@ -137,7 +137,42 @@
   opacity: 1;
 }
 
-   @media (max-width: 768px){ .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{ bottom: -2%; left: 12%; transform: none !important; } }
+/* --- Mobile : ajustements spécifiques --- */
+@media (max-width: 768px) {
+
+  /* repositionne le bouton du Rubictus */
+  .image-zone .quest-ingredient[data-id="ptikitis_rubictus"] {
+    bottom: -2%;
+    left: 12%;
+    transform: none !important;
+  }
+
+  /* centre la jauge sous le titre */
+  .energy-wrap {
+    top: 108px;                 /* ↓ ajuste 96–120px selon ton titre */
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(.95);
+    margin-right: 0;            /* on annule le décalage desktop */
+    z-index: 4000;
+  }
+
+  /* sac aligné à droite, même hauteur que la jauge */
+  .bag-wrap {
+    top: 108px;                 /* même valeur que .energy-wrap */
+    right: 12px;
+    z-index: 4700;
+  }
+
+  /* crée un espace avant l'image (pour que rien ne chevauche) */
+  .image-zone { 
+    margin-top: 72px !important; /* réserve l'emplacement de la jauge+ sac */
+  }
+
+  /* si la page n'a pas .image-zone, utiliser cette ligne à la place :
+     .Fees-image { margin-top: 72px !important; } */
+}
+
 
   </style>
 </head>
