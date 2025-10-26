@@ -3,13 +3,33 @@
   const CONFIG = {
     key: 'arz_energy_v1',
     max: 100,
-    drainPerSecond: 0.1,     // 1 point / 10s
+
+    // drain par défaut (points / seconde)
+    drainPerSecond: 0.10,
     tickMs: 1000,
-    questThresholdPct: 15,   // alerte/quète à <= 15%
+
+    questThresholdPct: 15,
     zeroRedirectUrl: '2.les_coulisses.html',
-    bagMax: 5,
+
+    // inventaire
+    bagMax: 10,          // taille totale du sac
+    perItemMax: 2,       // exemplaires max par ingrédient
     bagIconSrc: 'sac_magique.webp',
-    // libellés par défaut si data-name / data-img ne sont pas fournis sur le bouton
+
+    // nombre d'utilisations pour passer en "infini"
+    infiniteAfterUses: 10,  // <<< tu peux mettre 10, 12, etc.
+
+    // Effets par ingrédient : facteur appliqué au drain courant quand on l’utilise
+    // (ex: 0.9 = 10% plus lent ; 1.0 = inchangé ; 0.8 = 20% plus lent)
+    effects: {
+      ptikitis_rubictus: { drainFactor: 0.90 },
+      foret_champignon : { drainFactor: 0.92 },
+      ames_plante      : { drainFactor: 0.88 },
+      reserve_ptikitis : { drainFactor: 0.94 },
+      eau_creature     : { drainFactor: 0.90 },
+    },
+
+    // Noms / images par défaut (si data-… non fournis dans le HTML)
     items: {
       'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: 'ing_ptikitis.webp' },
       'foret_champignon' : { name: 'Champignon bleu',          img: 'ing_foret.webp' },
@@ -17,12 +37,17 @@
       'reserve_ptikitis' : { name: 'Pousse rare (Réserve)',     img: 'ing_reserve_ptikitis.webp' },
       'eau_creature'     : { name: 'Essence des créatures de l’eau', img: 'ing_creature.webp' },
     },
+
     messages: {
       low: "Ton Arzanskân faiblit… utilise un ingrédient ou trouve-en un nouveau.",
-      bagFull: "Ton sac est plein (5). Utilise un ingrédient avant d’en ramasser un autre.",
+      bagFull: "Ton sac est plein. Utilise d’abord un ingrédient.",
+      perItemMax: "Tu possèdes déjà la quantité maximale de cet ingrédient.",
       added: "Ingrédient ajouté au sac.",
-      already: "Cet ingrédient a déjà été acquis ou utilisé.",
-      infinite: "Bravo ! Ton corps s’est accordé à la magie des mondes.\nTu n’as plus besoin de recharger ton Arzanskân."
+      already: "Cet ingrédient est déjà dans le sac ou a été utilisé.",
+      infinite: "Bravo ! Ton corps s’est accordé à la magie des mondes.\nTu n’as plus besoin de recharger ton Arzanskân.",
+      reset: "Tous les ingrédients ont été réinitialisés.",
+      calm_on: "Mode tranquille activé (pas de décharge).",
+      calm_off:"Mode tranquille désactivé."
     }
   };
 
@@ -53,7 +78,7 @@
       <ul id="bagList"></ul>
       <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
       <button class="bag-reset" id="bagReset">🔄 Réinitialiser les ingrédients</button>
-
+      <button class="bag-toggle" id="bagToggle"></button>
     </div>
   `;
   document.body.appendChild(bagWrap);
@@ -63,7 +88,10 @@
   const bagList  = bagWrap.querySelector('#bagList');
   const bagBadge = bagWrap.querySelector('#bagBadge');
   const bagEmpty = bagWrap.querySelector('#bagEmpty');
+  const bagReset = bagWrap.querySelector('#bagReset');
+  const bagToggle= bagWrap.querySelector('#bagToggle');
 
+  // ouvrir/fermer le sac
   bagIcon.addEventListener('click', () => {
     const show = !bagMenu.classList.contains('show');
     bagMenu.classList.toggle('show', show);
@@ -76,37 +104,46 @@
       bagIcon.setAttribute('aria-expanded', 'false');
     }
   });
-    // === Bouton réinitialiser ===
-  const bagReset = bagWrap.querySelector('#bagReset');
+
+  // reset inventaire
   bagReset.addEventListener('click', () => {
     if (confirm("Souhaites-tu vraiment réinitialiser tous les ingrédients ?")) {
       state.bag = [];
-      state.used = [];
+      state.totalUses = 0;
       state.infinite = false;
       state.msgShown = false;
-      saveState();
-      renderAll();
-      toast("Tous les ingrédients ont été réinitialisés !");
+      saveState(); renderAll();
+      toast(CONFIG.messages.reset);
     }
   });
 
+  // toggle mode tranquille
+  updateToggleLabel();
+  bagToggle.addEventListener('click', () => {
+    state.noPressure = !state.noPressure;
+    if (state.noPressure){
+      stop(); state.energy = CONFIG.max;
+      toast(CONFIG.messages.calm_on);
+    } else {
+      if (!state.infinite && state.energy > 0) start();
+      toast(CONFIG.messages.calm_off);
+    }
+    saveState(); renderAll(); updateToggleLabel();
+  });
 
-  // ===== INIT listeners: collecte d’ingrédients sur la page =====
+  // ===== INIT listeners: collecte d’ingrédients =====
   initCollectibles();
 
-  // ====== TICK ======
+  // ====== BOOT ======
   renderAll();
-  if (state.infinite) {
-    // pas de drain
-  } else if (state.energy > 0) {
-    start();
-  } else {
-    redirectZero();
+  if (!state.noPressure && !state.infinite){
+    if (state.energy > 0) start();
+    else redirectZero();
   }
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) return;
-    if (state.infinite) return;
+    if (state.noPressure || state.infinite) return;
     if (state.energy > 0 && !intervalId) start();
   });
 
@@ -117,9 +154,9 @@
   function stop(){ if(intervalId){ clearInterval(intervalId); intervalId=null; } }
 
   function tick(){
-    if (state.infinite) { stop(); return; }
+    if (state.noPressure || state.infinite) { stop(); return; }
     if (document.hidden) return;
-    state.energy = clamp(state.energy - CONFIG.drainPerSecond, 0, CONFIG.max);
+    state.energy = clamp(state.energy - state.drain, 0, CONFIG.max);
     if (state.energy <= 0) { saveState(); redirectZero(); return; }
     renderGauge(); saveState();
   }
@@ -135,42 +172,62 @@
 
   function updateRibbon(){
     const pct = clamp((state.energy / CONFIG.max) * 100, 0, 100);
-    ribbon.style.display = (pct <= CONFIG.questThresholdPct && !state.infinite) ? 'block' : 'none';
+    ribbon.style.display =
+      (!state.noPressure && !state.infinite && pct <= CONFIG.questThresholdPct)
+      ? 'block' : 'none';
   }
 
-  function updateInfiniteUI(){ document.body.classList.toggle('arz-infinite', !!state.infinite); }
+  function updateInfiniteUI(){
+    document.body.classList.toggle('arz-infinite', !!state.infinite);
+    document.body.classList.toggle('arz-no-pressure', !!state.noPressure);
+  }
 
   function redirectZero(){ window.location.href = CONFIG.zeroRedirectUrl; }
 
+  function updateToggleLabel(){
+    bagToggle.textContent = state.noPressure
+      ? '▶️ Réactiver la jauge'
+      : '🕊️ Mode tranquille (désactiver la jauge)';
+  }
+
   // ====== SAC ======
   function renderBag(){
-    bagBadge.textContent = String(state.bag.length);
+    // badge
+    bagBadge.textContent = String(totalQty(state.bag));
     bagBadge.style.display = 'block';
 
+    // liste
     bagList.innerHTML = '';
-    if(state.bag.length === 0){ bagEmpty.style.display = 'block'; return; }
+    if(state.bag.length === 0){
+      bagEmpty.style.display = 'block';
+      return;
+    }
     bagEmpty.style.display = 'none';
 
     state.bag.forEach((entry, idx) => {
-      const id   = getId(entry);
-      const used = isUsed(entry);
+      const { id, qty, used } = entry;
       const meta = getMeta(id);
+      const remaining = Math.max(qty - used, 0);
 
       const li = document.createElement('li');
       li.innerHTML = `
         <div class="bag-item">
-          <img src="${meta.img}" alt="" />
+          <img src="${meta.img}" alt="">
           <div class="bag-label">
-            <div class="bag-name">${meta.name}</div>
+            <div class="bag-name">${meta.name} <span class="bag-qty">×${qty}</span></div>
+            ${remaining>0 ? `<div class="bag-rem">restant : ${remaining}</div>` : ''}
           </div>
         </div>
-        ${ used
-            ? `<div class="bag-used" aria-label="Ingrédient déjà utilisé">✓ Utilisé</div>`
-            : `<button type="button" class="bag-use" data-index="${idx}">Utiliser</button>` }
+        ${
+          remaining>0
+            ? `<button type="button" class="bag-use" data-index="${idx}">Utiliser</button>`
+            : `<div class="bag-used" aria-label="Ingrédient épuisé">✓ Utilisé</div>`
+        }
       `;
       bagList.appendChild(li);
     });
 
+    // actions
     bagList.querySelectorAll('.bag-use').forEach(btn => {
       btn.addEventListener('click', () => {
         const index = parseInt(btn.getAttribute('data-index'), 10);
@@ -181,31 +238,27 @@
 
   function useItemAt(index){
     if(index < 0 || index >= state.bag.length) return;
-
     const entry = state.bag[index];
-    const id = getId(entry);
+    if (entry.used >= entry.qty) return; // déjà épuisé
 
-    // 1) marquer comme utilisé (ne plus retirer l’objet du sac)
-    if (typeof entry === 'string') {
-      state.bag[index] = { id, used: true };
-    } else {
-      entry.used = true;
-    }
+    // 1) appliquer l’effet de l’ingrédient (vitesse)
+    applyEffect(entry.id);
 
-    // 2) recharge à 100 %
+    // 2) consommer une unité
+    entry.used += 1;
+
+    // 3) recharge à 100 %
     state.energy = CONFIG.max;
 
-    // 3) journaliser l’utilisation pour le mode infini
-    if (!state.used.includes(id)) state.used.push(id);
-
-    // 4) passage en infini après 3 différents
-    if (state.used.length >= 3 && !state.infinite){
+    // 4) progression vers "infini"
+    state.totalUses += 1;
+    if (state.totalUses >= CONFIG.infiniteAfterUses && !state.infinite){
       state.infinite = true;
       if (!state.msgShown){
         state.msgShown = true;
         toast(CONFIG.messages.infinite, 4500);
       }
-      stop(); updateInfiniteUI();
+      stop();
     }
 
     saveState(); renderAll();
@@ -214,7 +267,7 @@
   // ====== COLLECTIBLES ======
   function initCollectibles(){
     document.querySelectorAll('.quest-ingredient').forEach(btn => {
-      // accessibilité
+      // a11y
       if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
       if (!btn.hasAttribute('role')) btn.setAttribute('role', 'button');
       btn.addEventListener('keydown', (e) => {
@@ -225,26 +278,34 @@
         const id = btn.getAttribute('data-id');
         if(!id) return;
 
-        // déjà dans le sac ou déjà utilisé ?
-        const inBag = state.bag.some(e => getId(e) === id);
-        if (state.used.includes(id) || inBag){
-          toast(CONFIG.messages.already);
-          return;
-        }
-        if (state.bag.length >= CONFIG.bagMax){
-          toast(CONFIG.messages.bagFull);
-          return;
+        // déjà dans le sac ? incrémente jusqu'au perItemMax
+        const found = state.bag.find(e => e.id === id);
+        if (found){
+          if (found.qty >= CONFIG.perItemMax){ toast(CONFIG.messages.perItemMax); return; }
+          found.qty += 1;
+          saveState(); renderBag(); toast(CONFIG.messages.added); return;
         }
 
-        // ajout comme entrée {id, used:false}
-        state.bag.push(toEntry(id));
-        saveState(); renderBag();
-        toast(CONFIG.messages.added);
+        // sac plein ?
+        if (state.bag.length >= CONFIG.bagMax){ toast(CONFIG.messages.bagFull); return; }
+
+        // nouvelle entrée
+        state.bag.push({ id, qty:1, used:0 });
+        saveState(); renderBag(); toast(CONFIG.messages.added);
       });
     });
   }
 
   // ====== HELPERS ======
+  function applyEffect(id){
+    const eff = CONFIG.effects[id];
+    if (!eff || !eff.drainFactor) return;
+    // on multiplie le drain courant par le facteur, en bornant pour éviter des valeurs trop faibles
+    state.drain = clamp(state.drain * eff.drainFactor, 0.02, 1.0);
+  }
+
+  function totalQty(arr){ return arr.reduce((s, e)=> s + (e.qty||0), 0); }
+
   function getMeta(id){
     const source = document.querySelector(`.quest-ingredient[data-id="${id}"]`);
     const name = source?.getAttribute('data-name');
@@ -261,25 +322,37 @@
 
   function clamp(n, min, max){ return Math.max(min, Math.min(max, n)) }
 
-  // nouvelles petites aides
-  function getId(entry){ return (typeof entry === 'string') ? entry : entry.id }
-  function isUsed(entry){ return (typeof entry === 'object') && entry.used === true }
-  function toEntry(id){ return { id, used:false } }
-
   function loadState(){
     const raw = localStorage.getItem(CONFIG.key);
-    const def = { energy: CONFIG.max, bag: [], used: [], infinite: false, msgShown: false };
+    const def = {
+      energy: CONFIG.max,
+      bag: [],                  // [{id, qty, used}]
+      totalUses: 0,             // utilisations cumulées pour l’infini
+      drain: CONFIG.drainPerSecond,
+      infinite: false,
+      msgShown: false,
+      noPressure: false
+    };
     if (!raw) return def;
     try {
       const s = JSON.parse(raw);
-      // migrations + défauts
+
+      // migrations
       if (!Array.isArray(s.bag)) s.bag = [];
-      // convertir anciennes entrées "string" en objets {id, used:false}
-      s.bag = s.bag.map(e => (typeof e === 'string') ? toEntry(e) : e);
-      if (!Array.isArray(s.used)) s.used = [];
+      // anciennes versions : string ou objet {id, used:true/false}
+      s.bag = s.bag.map(e => {
+        if (typeof e === 'string') return { id:e, qty:1, used:0 };
+        if (typeof e === 'object' && !('qty' in e)) return { id:e.id, qty:1, used:(e.used?1:0) };
+        return e;
+      });
+
+      if (typeof s.totalUses !== 'number') s.totalUses = 0;
+      if (typeof s.drain !== 'number') s.drain = CONFIG.drainPerSecond;
       if (typeof s.infinite !== 'boolean') s.infinite = false;
       if (typeof s.msgShown !== 'boolean') s.msgShown = false;
+      if (typeof s.noPressure !== 'boolean') s.noPressure = false;
       if (typeof s.energy !== 'number') s.energy = CONFIG.max;
+
       return s;
     } catch {
       return def;
@@ -300,17 +373,13 @@
     }, ms);
   }
 
-  // (option) API dev dans la console
+  // API debug
   window.Arz = {
     get: () => ({...state}),
     setEnergy: (v)=>{ state.energy = clamp(v,0,CONFIG.max); saveState(); renderAll(); },
-    add: (id)=>{
-      const exists = state.bag.some(e => getId(e) === id);
-      if(state.bag.length<CONFIG.bagMax && !state.used.includes(id) && !exists){
-        state.bag.push(toEntry(id)); saveState(); renderAll();
-      }
-    },
-    use: (id)=>{ const i = state.bag.findIndex(e => getId(e) === id); if(i>=0) useItemAt(i); },
-    reset: ()=>{ state = { energy: CONFIG.max, bag: [], used: [], infinite: false, msgShown:false }; saveState(); renderAll(); start(); }
+    add: (id)=>{ const f=state.bag.find(e=>e.id===id); if(f){ if(f.qty<CONFIG.perItemMax){f.qty++;} } else { state.bag.push({id,qty:1,used:0}); } saveState(); renderAll(); },
+    use: (id)=>{ const i=state.bag.findIndex(e=>e.id===id); if(i>=0) useItemAt(i); },
+    reset: ()=>{ state = { energy: CONFIG.max, bag: [], totalUses:0, drain: CONFIG.drainPerSecond, infinite:false, msgShown:false, noPressure:false }; saveState(); renderAll(); start(); },
+    calm: (on)=>{ state.noPressure=!!on; saveState(); renderAll(); }
   };
 })();
