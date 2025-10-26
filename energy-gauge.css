@@ -8,320 +8,200 @@
   --overlay: rgba(0, 0, 0, 0.7);
 }
 
-/* ====== Jauge fixe en haut à droite ====== */
-.energy-wrap {
+/* ===== Jauge (desktop) ===== */
+.energy-wrap{
   position: fixed;
-  top: 12px;
+  top: 68px;              /* passe sous le header sticky */
   right: 12px;
-  z-index: 50;
+  z-index: 4000;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: .6rem;
   background: var(--glass);
   border: 1px solid var(--bar-border);
-  padding: 0.6rem 0.75rem;
+  padding: .6rem .75rem;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
   backdrop-filter: blur(6px);
   animation: appear 1.5s ease;
 }
 @keyframes appear {
   from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-.energy-icon {
-  font-size: 22px;
-  filter: drop-shadow(0 0 6px rgba(255, 214, 116, 0.7));
-}
-
-.energy-label {
-  font-family: "Cinzel Decorative", serif;
-  font-variant: small-caps;
-  letter-spacing: 0.5px;
-  opacity: 0.9;
-}
-
-.energy-bar {
-  width: 180px;
-  height: var(--bar-h);
+.energy-icon{ font-size: 22px; filter: drop-shadow(0 0 6px rgba(255, 214, 116, .7)); }
+.energy-label{ font-family:"Cinzel Decorative", serif; font-variant: small-caps; letter-spacing:.5px; opacity:.9; }
+.energy-bar{
+  width: 180px; height: var(--bar-h);
   background: var(--bar-bg);
-  border-radius: 999px;
-  position: relative;
-  overflow: hidden;
+  border-radius: 999px; position: relative; overflow: hidden;
   border: 1px solid var(--bar-border);
 }
-
-.energy-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0%;
+.energy-fill{
+  position: absolute; inset: 0 auto 0 0; width:0%;
   background: var(--bar-fill);
-  box-shadow: inset 0 0 12px rgba(255, 214, 116, 0.55);
-  transition: width 0.4s ease-out;
+  box-shadow: inset 0 0 12px rgba(255, 214, 116, .55);
+  transition: width .45s cubic-bezier(.22,.61,.36,1);
 }
+.energy-pct{ min-width: 3ch; text-align: right; font-size:.9rem; opacity:.85; }
 
-.energy-pct {
-  min-width: 3ch;
-  text-align: right;
-  font-size: 0.9rem;
-  opacity: 0.85;
-}
-
-/* ====== Overlay blocage + mini-quête ====== */
-.lock-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  display: none;
-  place-items: center;
+/* ===== Overlay blocage + mini-quête ===== */
+.lock-overlay{
+  position: fixed; inset: 0; z-index: 5000;
+  display: none; place-items: center;
   background: var(--overlay);
   backdrop-filter: blur(3px);
-  animation: fadein 0.5s ease;
+  animation: fadein .5s ease;
 }
-@keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.lock-card {
+@keyframes fadein { from{opacity:0} to{opacity:1} }
+.lock-card{
   width: min(680px, 92vw);
   background: var(--glass);
   border: 1px solid var(--bar-border);
   border-radius: 18px;
   padding: 1.1rem 1.25rem 1.25rem;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
   backdrop-filter: blur(8px);
   text-align: center;
-  animation: rise 0.8s ease-out;
+  animation: rise .8s ease-out;
 }
-@keyframes rise {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.lock-title {
-  font-family: "Cinzel Decorative", serif;
+@keyframes rise { from{transform:translateY(20px);opacity:0} to{transform:none;opacity:1} }
+.lock-title{
+  font-family:"Cinzel Decorative", serif;
   font-size: clamp(22px, 3.2vw, 32px);
-  margin: 0.4rem 0;
+  margin: .4rem 0;
   color: #ffd674;
-  text-shadow: 0 0 10px rgba(255, 214, 116, 0.6);
+  text-shadow: 0 0 10px rgba(255,214,116,.6);
+}
+.lock-desc{ opacity:.9; line-height:1.5; margin:.5rem auto .8rem; }
+.play-area{
+  position: relative; height: 220px; margin-top:.5rem;
+  border-radius: 14px; border: 1px dashed var(--bar-border);
+  overflow: hidden; background: rgba(255,255,255,.03);
 }
 
-.lock-desc {
-  opacity: 0.9;
-  line-height: 1.5;
-  margin: 0.5rem auto 0.8rem;
+/* Ingrédient flottant : on sépare la translation (animée) et l’échelle (hover) */
+.ingredient{
+  position: absolute; left: 10%; top: 50%;
+  transform: translate(-50%, -50%);   /* base position */
+  font-size: 42px; cursor: pointer; user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(255,214,116,.5));
+  will-change: transform;
 }
-
-.play-area {
-  position: relative;
-  height: 220px;
-  margin-top: 0.5rem;
-  border-radius: 14px;
-  border: 1px dashed var(--bar-border);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.ingredient {
-  position: absolute;
-  left: 10%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 42px;
-  cursor: pointer;
-  user-select: none;
-  filter: drop-shadow(0 4px 8px rgba(255, 214, 116, 0.5));
-  transition: transform 0.2s;
-}
-.ingredient:hover {
-  transform: translate(-50%, -50%) scale(1.2);
-}
-
-.float {
+.ingredient.float{
   animation: float 3s ease-in-out infinite;
 }
-@keyframes float {
-  0%, 100% { transform: translate(-50%, -52%); }
-  50% { transform: translate(-50%, -48%); }
+.ingredient:hover{
+  /* combine l’échelle avec la position courante, sans casser l’animation */
+  transform: translate(-50%, -50%) scale(1.2);
 }
-/* Ruban d’alerte (≤ 15%) */
+@keyframes float{
+  0%,100% { transform: translate(-50%, -52%); }
+  50%     { transform: translate(-50%, -48%); }
+}
+
+/* Ruban d’alerte (≤15%) */
 .quest-ribbon{
   position: fixed;
-  top: 72px; left: 50%;
-  transform: translateX(-50%);
+  top: 72px; left: 50%; transform: translateX(-50%);
   z-index: 4600;
-  background: rgba(10,0,20,.75);
-  color: #fff8e6;
+  background: rgba(10,0,20,.75); color: #fff8e6;
   border: 1px solid rgba(255,214,116,.55);
-  border-radius: 10px;
-  padding: .5rem .9rem;
+  border-radius: 10px; padding:.5rem .9rem;
   box-shadow: 0 10px 24px rgba(0,0,0,.45);
   backdrop-filter: blur(6px);
   font-weight: 700;
 }
 
-/* Sac magique (visible même vide) */
-.bag-wrap{
-  position: fixed;
-  top: 72px; right: 12px;
-  z-index: 4700;
-}
-.bag-icon{
-  width: 48px; height: 48px;
-  cursor: pointer;
-  filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
-  transition: transform .2s;
-}
+/* Sac magique */
+.bag-wrap{ position: fixed; top: 72px; right: 12px; z-index: 4700; }
+.bag-icon{ width: 48px; height: 48px; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255,214,116,.7)); transition: transform .2s; }
 .bag-icon:hover{ transform: scale(1.08); }
-
-/* Compteur du sac (badge) */
 .bag-badge{
-  position: absolute;
-  top: -6px; right: -6px;
-  min-width: 18px; height: 18px;
-  padding: 0 4px;
-  background: linear-gradient(90deg,#ffd674,#ffe9a8);
-  color: #3a2400;
-  font-weight: 800; font-size: 12px;
-  border-radius: 999px;
-  display: grid; place-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+  position: absolute; top:-6px; right:-6px;
+  min-width:18px; height:18px; padding:0 4px;
+  background: var(--bar-fill); color:#3a2400;
+  font-weight:800; font-size:12px; border-radius:999px;
+  display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
-
-/* Menu déroulant */
 .bag-menu{
-  display: none;
-  position: absolute;
-  right: 0;
-  margin-top: 8px;
-  min-width: 240px;
-  color: #fff3cc;
-  background: rgba(10,0,20,.82);
-  border: 1px solid rgba(255,214,116,.45);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.45);
-  backdrop-filter: blur(6px);
-  padding: .8rem 1rem;
+  display:none; position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
+  background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
+  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
+  padding:.8rem 1rem;
 }
 .bag-menu.show{ display:block; animation: slideDown .25s ease-out; }
-@keyframes slideDown{
-  from{ opacity: 0; transform: translateY(-6px); }
-  to{ opacity: 1; transform: translateY(0); }
-}
+@keyframes slideDown{ from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
 .bag-menu h3{
   margin:.2rem 0 .6rem; text-align:center;
-  font-family: "Cinzel Decorative", serif;
-  font-size:1.05rem; color:#ffd674;
+  font-family:"Cinzel Decorative", serif; font-size:1.05rem; color:#ffd674;
 }
-.bag-menu ul{
-  list-style:none; margin:0; padding:0;
-  display:flex; flex-direction:column; gap:.6rem;
-}
+.bag-menu ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem; }
 .bag-menu li{
   display:flex; align-items:center; justify-content:space-between; gap:.6rem;
-  background: rgba(255,255,255,.06);
-  border-radius: 10px;
-  padding: .45rem .6rem;
+  background: rgba(255,255,255,.06); border-radius:10px; padding:.45rem .6rem;
 }
 .bag-item{ display:flex; align-items:center; gap:.55rem; }
 .bag-item img{ width:32px; height:32px; display:block; }
 .bag-label{ line-height:1.2 }
 .bag-name{ font-weight:700; }
 .bag-id{ opacity:.6; font-size:.8rem; }
-
-.bag-menu .bag-empty{
-  margin-top:.3rem; text-align:center; opacity:.75;
-  font-style: italic;
-}
-
+.bag-menu .bag-empty{ margin-top:.3rem; text-align:center; opacity:.75; font-style: italic; }
 .bag-menu .bag-use{
-  background: linear-gradient(90deg,#ffd674,#ffe9a8);
-  color:#3a2400; font-weight:800;
-  border:none; border-radius:8px;
-  padding:.25rem .6rem; cursor:pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  background: var(--bar-fill); color:#3a2400; font-weight:800;
+  border:none; border-radius:8px; padding:.25rem .6rem; cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.35);
 }
 .bag-menu .bag-use:hover{ transform: scale(1.05); }
 
-/* Toasts */
+/* Toast */
 .arz-toast{
-  position: fixed;
-  bottom: 16px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 4800;
-  background: rgba(10,0,20,.9);
-  color: #fff8e6;
+  position: fixed; bottom:16px; left:50%; transform: translateX(-50%);
+  z-index: 4800; background: rgba(10,0,20,.9); color:#fff8e6;
   border:1px solid rgba(255,214,116,.5);
-  border-radius: 10px;
-  padding: .5rem .8rem;
-  opacity: 0; transition: opacity .2s;
+  border-radius:10px; padding:.5rem .8rem;
+  opacity:0; transition: opacity .2s;
 }
-.arz-toast.show{ opacity: 1; }
+.arz-toast.show{ opacity:1; }
 
-/* (Optionnel) style quand jauge infinie */
-body.arz-infinite .energy-wrap{
-  box-shadow: 0 0 24px rgba(255,214,116,.65);
-}
-
-
-.btn {
-  cursor: pointer;
-  border: none;
-  border-radius: 12px;
-  padding: 0.6rem 1rem;
-  background: var(--bar-fill);
-  color: #301c0a;
-  font-weight: 700;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin: 0.4rem;
-}
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
-}
-.btn[disabled] {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-/* Passe toujours devant le header sticky */
-.energy-wrap{ z-index: 4000 !important; top: 68px !important; }
-
-/* L’overlay doit être tout en haut */
-.lock-overlay{ z-index: 5000 !important; }
-
-/* === Correction mobile : repositionne la jauge et le sac === */
+/* === Mobile : place la jauge entre titre et sous-titre (centrée) === */
 @media (max-width: 768px){
-  /* jauge */
   .energy-wrap{
-    top: 108px !important;       /* descend sous le titre */
-    left: 12px;                  /* un peu de marge à gauche */
-    right: auto;
-    transform: scale(.9);        /* rend la jauge légèrement plus petite */
+    top: calc(108px + env(safe-area-inset-top, 0px));
+    left: 50%; right: auto; transform: translateX(-50%) scale(.9);
   }
-  .energy-bar{
-    width: 140px;                /* réduit la largeur de la barre */
-  }
+  .energy-bar{ width: 140px; }
 
-  /* sac magique */
   .bag-wrap{
-    top: 108px !important;       /* même hauteur que la jauge */
-    right: 12px;                 /* bord droit de l’écran */
+    top: calc(108px + env(safe-area-inset-top, 0px));
+    right: 12px;
   }
-  .bag-icon{
-    width: 40px; height: 40px;   /* icône plus petite */
+  .bag-icon{ width: 40px; height: 40px; }
+
+  .quest-ribbon{
+    top: calc(152px + env(safe-area-inset-top, 0px));
+    left: 12px; right: 12px; transform: none;
   }
 
-  /* bandeau de quête (quand il reste 15%) */
-  .quest-ribbon{
-    top: 152px;                  /* juste en dessous de la jauge */
-    left: 12px; right: 12px;
-    transform: none;             /* pleine largeur */
-  }
+  /* Si ta bannière utilise ces classes, garde l’espace sous le titre */
+  .header-box{ padding-bottom: 56px; }
+  .subtitle-wrap{ margin-top: 12px !important; }
 }
 
+/* Optionnel : style "infinite" */
+body.arz-infinite .energy-wrap{ box-shadow: 0 0 24px rgba(255,214,116,.65); }
 
+/* Boutons */
+.btn{
+  cursor: pointer; border: none; border-radius: 12px;
+  padding: .6rem 1rem; background: var(--bar-fill); color:#301c0a; font-weight:700;
+  box-shadow: 0 8px 22px rgba(0,0,0,.35); transition: transform .2s, box-shadow .2s;
+  margin: .4rem;
+}
+.btn:hover{ transform: scale(1.05); box-shadow: 0 12px 28px rgba(0,0,0,.5); }
+.btn[disabled]{ opacity:.55; cursor:not-allowed; }
+
+/* Motion réduit (accessibilité) */
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
