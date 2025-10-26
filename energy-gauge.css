@@ -252,15 +252,33 @@ body.arz-infinite .energy-wrap{ box-shadow: 0 0 24px rgba(255,214,116,.65); }
 .btn[disabled]{ opacity:.55; cursor:not-allowed; }
 
 /* Motion réduit (accessibilité) */
-@media (prefers-reduced-motion: reduce){
-  *{ animation: none !important; transition: none !important; }
-}
+@media (max-width: 768px){
+  /* ... ton ancien code mobile ... */
 
-/* === Ajustement du placement (desktop) === */
-@media (min-width: 769px){
-  .energy-wrap{
-    margin-right: 95px;   /* décale la jauge vers la gauche pour ne pas être cachée par le sac */
+  /* --- Ajustement parfait de la jauge et du sac --- */
+  :root{
+    --energyY: 86px;
+    --bagShift: 2px;
   }
+
+  .energy-wrap{
+    top: var(--energyY);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(.95);
+    margin-right: 0;
+    z-index: 4000;
+  }
+
+  .bag-wrap{
+    position: fixed;
+    top: calc(var(--energyY) + var(--bagShift));
+    right: 12px;
+    transform: none;
+    z-index: 4700;
+  }
+
+  .bag-icon{ width: 44px; height: 44px; }
+
+  .image-zone{ margin-top: 96px !important; }
 }
-
-
