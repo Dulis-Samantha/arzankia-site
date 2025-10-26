@@ -173,7 +173,6 @@
           <img src="${meta.img}" alt="" />
           <div class="bag-label">
             <div class="bag-name">${meta.name}</div>
-            <div class="bag-id">${it}</div>
           </div>
         </div>
         <button type="button" class="bag-use" data-index="${idx}">Utiliser</button>
