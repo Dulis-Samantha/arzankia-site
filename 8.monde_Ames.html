@@ -46,6 +46,17 @@
       box-shadow: 0 0 25px rgba(255,255,255,.15);
     }
 
+    .image-zone { position: relative; overflow: visible; z-index: 5; }
+
+    .image-zone .ing-btn{
+      position:absolute;
+      z-index: 3;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:0;
+    }
+
     /* === TEXTE EXPLICATIF === */
     .texte-monde{
       max-width:800px;
@@ -58,6 +69,8 @@
       background: rgba(0,0,0,0.45);
       border-radius: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,.5);
+      position:relative;
+      z-index:0;
     }
 
     /* === BOUTONS === */
@@ -87,7 +100,6 @@
       box-shadow:0 0 18px rgba(255,223,100,1);
     }
 
-    /* === MOBILE === */
     @media (max-width: 600px){
       .container{ padding: 1rem 0.6rem 6.5rem; }
       .texte-monde{ font-size:.95rem; padding:0.9rem; }
@@ -112,53 +124,64 @@
 </head>
 
 <body>
-  
-<div class="lock-overlay" id="lockOverlay">
-  <div class="lock-card">
-    <div class="lock-title">Ta jauge est vide… ⚡</div>
-    <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
-    <div class="play-area" id="playArea">
-      <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+  <!-- === JAUGE D’ÉNERGIE === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Énergie</div>
+    <div class="energy-bar">
+      <div class="energy-fill" id="energyFill"></div>
     </div>
-    <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
-    <button class="btn" id="accessBtn">Recharger</button>
+    <div class="energy-pct" id="energyPct">100%</div>
   </div>
-</div>
-  
+
+  <!-- === OVERLAY DE VERROUILLAGE === -->
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area" id="playArea">
+        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+      </div>
+      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
+      <button class="btn" id="accessBtn">Recharger</button>
+    </div>
+  </div>
+
   <div class="container">
     <!-- TITRE -->
     <h1 class="page-title">Monde des Âmes perdues</h1>
 
-<!-- IMAGE AVEC INGREDIENT CACHÉ : OLIVETTE BRUMIS -->
-<div class="image-zone">
-  <img class="Fees-image" src="monde_Ames.webp" alt="Monde des Âmes perdues">
+    <!-- IMAGE AVEC INGREDIENT CACHÉ -->
+    <div class="image-zone">
+      <img class="Fees-image" src="monde_Ames.webp" alt="Monde des Âmes perdues">
 
-  <!-- Olivette cachée -->
-  <button class="ing-btn quest-ingredient"
-          data-id="ames_olivette"
-          data-recharge="60"
-          aria-label="Olivette brumis"
-          style="bottom:-1%; left:9%; position:absolute; background:transparent; border:none;">
-    <img src="ing_ames.webp" alt="Olivette brumis" class="ingredient-img" style="width:60px; height:auto;">
-  </button>
-</div>
+      <!-- Olivette cachée -->
+      <button class="ing-btn quest-ingredient"
+              data-id="ames_olivette"
+              data-recharge="60"
+              aria-label="Olivette brumis"
+              style="bottom:0; left:9%;">
+        <img src="ing_ames.webp" alt="Olivette brumis" class="ingredient-img" style="width:60px; height:auto;">
+      </button>
+    </div>
 
     <!-- TEXTE -->
     <div class="texte-monde">
       « Ce monde accueille les âmes égarées des différents royaumes d’Arzankia.
-    Pour les libérer, il suffit de les ramener dans leur monde d’origine.
-    Ainsi, les âmes perdues peuvent retrouver leur corps… et leur destinée. »
+      Pour les libérer, il suffit de les ramener dans leur monde d’origine.
+      Ainsi, les âmes perdues peuvent retrouver leur corps… et leur destinée. »
     </div>
 
     <!-- BOUTONS -->
     <div class="button-group">
-       <a href="7.extrait_Ames.html">Extrait du livre</a>
-        <a href="9.entree_Ames.html">Entrée du monde</a>
-        <a href="3.les_mondes.html">Retour</a> 
+      <a href="7.extrait_Ames.html">Extrait du livre</a>
+      <a href="9.entree_Ames.html">Entrée du monde</a>
+      <a href="3.les_mondes.html">← Retour</a>
     </div>
   </div>
-    <!-- Styles et script de la jauge -->
-<link rel="stylesheet" href="energy-gauge.css">
-<script src="energy-gauge.js"></script>
+
+  <!-- Styles et script de la jauge -->
+  <link rel="stylesheet" href="energy-gauge.css">
+  <script src="energy-gauge.js"></script>
 </body>
 </html>
