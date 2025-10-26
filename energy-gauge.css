@@ -169,3 +169,9 @@
   opacity: 0.55;
   cursor: not-allowed;
 }
+/* Passe toujours devant le header sticky */
+.energy-wrap{ z-index: 4000 !important; top: 68px !important; }
+
+/* L’overlay doit être tout en haut */
+.lock-overlay{ z-index: 5000 !important; }
+
