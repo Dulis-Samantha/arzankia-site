@@ -218,4 +218,10 @@ body.arz-infinite .energy-wrap{ box-shadow: 0 0 24px rgba(255,214,116,.65); }
   *{ animation: none !important; transition: none !important; }
 }
 
+/* === Ajustement du placement (desktop) === */
+@media (min-width: 769px){
+  .energy-wrap{
+    margin-right: 95px;   /* décale la jauge vers la gauche pour ne pas être cachée par le sac */
+  }
+}
 
