@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Âmes perdues</title>
 
-  <style>
+   <style>
     /* === BASE === */
     body{
       margin:0;
@@ -46,17 +46,6 @@
       box-shadow: 0 0 25px rgba(255,255,255,.15);
     }
 
-    .image-zone { position: relative; overflow: visible; z-index: 5; }
-
-    .image-zone .ing-btn{
-      position:absolute;
-      z-index: 3;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-      padding:0;
-    }
-
     /* === TEXTE EXPLICATIF === */
     .texte-monde{
       max-width:800px;
@@ -69,8 +58,6 @@
       background: rgba(0,0,0,0.45);
       border-radius: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,.5);
-      position:relative;
-      z-index:0;
     }
 
     /* === BOUTONS === */
@@ -100,6 +87,7 @@
       box-shadow:0 0 18px rgba(255,223,100,1);
     }
 
+    /* === MOBILE === */
     @media (max-width: 600px){
       .container{ padding: 1rem 0.6rem 6.5rem; }
       .texte-monde{ font-size:.95rem; padding:0.9rem; }
@@ -120,6 +108,71 @@
         box-shadow:0 0 8px rgba(255,223,100,.6);
       }
     }
+    .image-zone {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.2rem;
+}
+
+.ing-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.ingredient-img {
+  width: 60px;
+  height: auto;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* effet discret au survol (optionnel) */
+.ing-btn:hover .ingredient-img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* --- Mobile : ajustements spécifiques --- */
+@media (max-width: 768px){
+
+  /* bouton Rubictus (si besoin) */
+  .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{
+    bottom: 15%;
+    left: 12%;
+    transform: none !important;
+  }
+
+  /* jauge centrée sous le titre */
+  .energy-wrap{
+    top: 85px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(.95);
+    margin-right: 0;   /* annule le décalage desktop */
+    z-index: 4000;
+  }
+
+  /* sac aligné à droite, même hauteur que la jauge */
+  .bag-wrap{
+    position: fixed;
+    top: 85px;     /* même valeur que .energy-wrap */
+    right: 12px;   /* ← simple, fiable */
+    transform: none; 
+    z-index: 4700;
+  }
+
+  /* laisse de la place avant l'illustration */
+  .image-zone{
+    margin-top: 96px !important;
+  }
+}
+
+
   </style>
 </head>
 
