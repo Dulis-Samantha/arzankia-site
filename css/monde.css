@@ -266,6 +266,74 @@ body{
   box-shadow: none;
 }
 
+/* === CONTENEUR GLOBAL === */
+.status-bar{
+  position:fixed;
+  top:12px;
+  right:12px;
+  display:flex;
+  gap:12px;
+  z-index:4000;
+  flex-wrap:wrap; /* pour mobile */
+}
+
+/* === CADRES GÉNÉRAUX === */
+.box{
+  background:rgba(10,0,20,.45);
+  border:1px solid rgba(255,214,116,.6);
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+  color:#fff8e6;
+  font-family:'Cinzel Decorative', serif;
+  text-align:center;
+  padding:.6rem .8rem;
+  backdrop-filter:blur(4px);
+}
+
+/* === CADRE DU SAC === */
+.sac-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:90px;
+}
+.sac-box img{
+  width:42px;
+  margin-top:.3rem;
+  filter:drop-shadow(0 0 6px rgba(255,214,116,.7));
+}
+
+/* === CADRE DE L'ARZANSKÂN === */
+.energy-box{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  min-width:200px;
+}
+.energy-box p{
+  margin:0;
+  font-size:1rem;
+  color:#ffd674;
+}
+.energy-bar{
+  flex:1;
+  height:14px;
+  border-radius:8px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,214,116,.5);
+  overflow:hidden;
+}
+.energy-bar .fill{
+  height:100%;
+  background:linear-gradient(90deg,#ffd674,#ffe9a8);
+}
+.percent{
+  font-size:.9rem;
+  color:#fff8e6;
+}
+
+
 
 /* Toast */
 .arz-toast{
