@@ -1,148 +1,246 @@
+/* =========================================================
+   ARZANKIA — STYLES GLOBAUX (version clean)
+   ========================================================= */
+
+/* ---------- Variables ---------- */
 :root{
-  --or:#ffd674; --ivoire:#fff8e6;
-  --verre:rgba(10,0,20,.45); --bord:rgba(255,214,116,.55);
-  --bg-url: url('../images/fonds/fond_etoile_perso.webp'); /* sur chaque page monde, tu peux la surcharger */
+  --or:#ffd674;
+  --ivoire:#fff8e6;
+  --verre:rgba(10,0,20,.45);
+  --bord:rgba(255,214,116,.55);
+  --bg-url:url('../images/fonds/fond_etoile_perso.webp'); /* surcharge par page si besoin */
 }
 
-html,body{height:100%}
+/* ---------- Base ---------- */
+html,body{height:100%;}
 body{
-  margin:0; color:var(--ivoire); font-family:Georgia,serif;
-  background: var(--bg-url) center top/cover no-repeat fixed;
-  text-shadow:1px 1px 4px #000; overflow-x:hidden;
+  margin:0;
+  color:var(--ivoire);
+  font-family:Georgia,serif;
+  background:var(--bg-url) center top/cover no-repeat fixed;
+  text-shadow:1px 1px 4px #000;
+  overflow-x:hidden;
+}
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:clamp(16px,3vw,32px);
 }
 
-.container{max-width:1100px; margin:0 auto; padding:clamp(16px,3vw,32px);}
-
-/* ===== Titre ===== */
-.page-title{display:flex; align-items:center; justify-content:center; gap:clamp(12px,2vw,18px); margin:clamp(16px,3vw,28px) auto;}
-.page-title img{width:clamp(48px,8vw,72px); filter:drop-shadow(0 6px 16px rgba(0,0,0,.5)); border-radius:12px;}
-.page-title h1{margin:0; font-size:clamp(1.6rem,4.8vw,3rem);}
-
-.page-title h1 {
-  text-align: center;
-  width: 100%;
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 700;
-  color: var(--or);
-  text-shadow: 0 0 8px rgba(255, 214, 116, 0.7);
+/* ---------- Titre de page ---------- */
+.page-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(12px,2vw,18px);
+  margin:clamp(16px,3vw,28px) auto;
+}
+.page-title img{
+  width:clamp(48px,8vw,72px);
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.5));
+  border-radius:12px;
+}
+.page-title h1{
+  margin:0;
+  width:100%;
+  text-align:center;
+  font-size:clamp(1.6rem,4.8vw,3rem);
+  font-family:'Cinzel Decorative',serif;
+  font-weight:700;
+  color:var(--or);
+  text-shadow:0 0 8px rgba(255,214,116,.7);
 }
 
-
-/* ===== Cartes / sections ===== */
-.block{background:var(--verre); border:1px solid var(--bord); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.45);}
-.block h2{margin:0; padding:14px 16px; border-bottom:1px solid var(--bord); background:rgba(0,0,0,.25); font-size:clamp(1.1rem,2.8vw,1.4rem);}
+/* ---------- Cartes / sections ---------- */
+.block{
+  background:var(--verre);
+  border:1px solid var(--bord);
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+.block h2{
+  margin:0;
+  padding:14px 16px;
+  border-bottom:1px solid var(--bord);
+  background:rgba(0,0,0,.25);
+  font-size:clamp(1.1rem,2.8vw,1.4rem);
+}
 .block .content{padding:clamp(12px,2.2vw,18px);}
 .hero-img{width:100%; display:block; border-bottom:1px solid var(--bord);}
 
-/* ===== Grille ===== */
-.grid{display:grid; grid-template-columns:1.2fr .8fr; gap:clamp(14px,2.4vw,24px); align-items:start;}
-@media (max-width:860px){.grid{grid-template-columns:1fr;}}
+/* ---------- Grille ---------- */
+.grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:clamp(14px,2.4vw,24px);
+  align-items:start;
+}
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr;}
+}
 
-/* ===== Boutons ronds ===== */
-.btn-ring{display:grid; grid-template-columns:repeat(2,minmax(120px,1fr)); gap:clamp(10px,2vw,16px); justify-items:center;}
-.round{display:inline-grid; place-items:center; width:clamp(88px,14vw,128px); aspect-ratio:1/1; border-radius:50%;
-  background:rgba(0,0,0,.35); border:1px solid var(--bord); text-decoration:none; color:var(--ivoire);
-  padding:10px; transition:.25s transform,.25s box-shadow,.25s background; box-shadow:0 10px 30px rgba(0,0,0,.45);}
+/* ---------- Boutons ronds ---------- */
+.btn-ring{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(120px,1fr));
+  gap:clamp(10px,2vw,16px);
+  justify-items:center;
+}
+.round{
+  display:inline-grid; place-items:center;
+  width:clamp(88px,14vw,128px); aspect-ratio:1/1; border-radius:50%;
+  background:rgba(0,0,0,.35);
+  border:1px solid var(--bord);
+  text-decoration:none; color:var(--ivoire);
+  padding:10px;
+  transition:.25s transform,.25s box-shadow,.25s background;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
 .round:hover{transform:translateY(-2px) scale(1.02); background:rgba(0,0,0,.45); box-shadow:0 14px 34px rgba(0,0,0,.55);}
 .round img{width:70%; filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));}
 .round span{display:block; font-size:.9rem; margin-top:8px; text-align:center;}
 
-/* ===== Lightbox (extrait) ===== */
-.extract{width:100%; border-radius:12px; border:1px solid var(--bord); box-shadow:0 10px 30px rgba(0,0,0,.45); cursor:pointer;}
-.lightbox{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.8); z-index:2000; padding:20px;}
-.lightbox img{max-width:min(92vw,1100px); max-height:86vh; border-radius:14px; border:1px solid var(--bord); background:#000;}
-.lightbox[data-open="true"]{display:grid}
+/* ---------- Lightbox (extrait) ---------- */
+.extract{
+  width:100%;
+  border-radius:12px;
+  border:1px solid var(--bord);
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+  cursor:pointer;
+}
+.lightbox{
+  position:fixed; inset:0;
+  display:none; place-items:center;
+  background:rgba(0,0,0,.8);
+  z-index:2000; padding:20px;
+}
+.lightbox img{
+  max-width:min(92vw,1100px);
+  max-height:86vh;
+  border-radius:14px;
+  border:1px solid var(--bord);
+  background:#000;
+}
+.lightbox[data-open="true"]{display:grid;}
 
-/* ===== HUD commun : Sac + Jauge (alignés) ===== */
-.hud{
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 3000;
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  background: var(--verre);
-  border: 1px solid var(--bord);
-  border-radius: 14px;
-  padding: 8px 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.45);
-  backdrop-filter: blur(4px);
+/* =========================================================
+   HUD — Deux cartes séparées : Sac & Arzanskân
+   ========================================================= */
+
+/* Conteneur des cartes (fixé en haut à droite) */
+.status-bar{
+  position:fixed;
+  top:12px; right:12px;
+  display:flex; gap:12px; flex-wrap:wrap;
+  z-index:4000;
 }
 
-.hud-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+/* Style commun des cartes */
+.box{
+  background:rgba(10,0,20,.45);
+  border:1px solid rgba(255,214,116,.6);
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+  color:#fff8e6;
+  text-align:center;
+  padding:.6rem .8rem;
+  backdrop-filter:blur(4px);
+}
+.box-title{
+  font-family:'Cinzel Decorative',serif;
+  font-weight:700;
+  font-size:.95rem;
+  color:var(--or);
+  text-shadow:0 0 6px rgba(255,214,116,.6);
+  margin:0 0 .35rem 0;
 }
 
-.hud-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--or);
-  text-shadow: 0 0 6px rgba(255, 214, 116, 0.6);
-  letter-spacing: 0.3px;
-  opacity: 0.9;
+/* Carte : Sac */
+.sac-box{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-width:110px; cursor:pointer;
+}
+.sac-box img{
+  width:44px; height:auto;
+  filter:drop-shadow(0 0 6px rgba(255,214,116,.7));
 }
 
-.sac{display:flex; align-items:center; justify-content:center; width:38px; height:38px; min-width:38px; border-radius:10px; border:1px solid var(--bord);
-  background:rgba(0,0,0,.3); cursor:pointer; transition:.2s transform;}
-.sac:hover{transform:translateY(-1px);}
-.sac img{width:26px; height:auto;}
-
-.gauge{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 180px;
+/* Carte : Arzanskân */
+.energy-box{
+  display:flex; flex-direction:column; align-items:stretch; justify-content:center;
+  min-width:240px; position:relative;
+  padding:.7rem .9rem .85rem;
 }
-.bar{
-  position: relative;
-  width: 160px;
-  height: 14px;
-  background: rgba(255,255,255,.15);
-  border: 1px solid var(--bord);
-  border-radius: 999px;
-  overflow: hidden;
+.energy-bar{
+  width:100%; height:14px; border-radius:999px; overflow:hidden;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,214,116,.5);
+  box-shadow:inset 0 0 12px rgba(0,0,0,.35);
 }
-.fill{
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 60%;
-  background: linear-gradient(90deg,#ffd674,#ffe9a8);
-  box-shadow: inset 0 0 12px rgba(0,0,0,.35);
-}
-.pct{font-size:.9rem; min-width:2.5ch}
-
-.energy-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--or);
-  margin-right: 4px;
-  letter-spacing: 0.3px;
-  text-shadow: 0 0 6px rgba(255, 214, 116, 0.6);
+.energy-bar .fill{height:100%; background:linear-gradient(90deg,#ffd674,#ffe9a8);}
+.percent{
+  position:absolute; right:10px; bottom:8px;
+  font-size:.9rem; color:var(--ivoire);
+  text-shadow:0 1px 2px rgba(0,0,0,.5);
 }
 
-@media (max-width:520px){
-  .hud{top:10px; right:10px; padding:8px;}
-  .bar{width:132px; height:12px;}
-  .sac{width:36px; height:36px;}
-  .sac img{width:24px;}
-  .pct{font-size:.85rem;}
+/* ---------- Panneau du sac ---------- */
+.sac-panel{
+  position:fixed;
+  top:calc(12px + 74px); /* sous les cartes */
+  right:12px;
+  z-index:4000;
+  display:none;
+  width:270px;
+  background:rgba(0,0,0,.65);
+  border:1px solid var(--bord);
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  backdrop-filter:blur(6px);
+  font-family:Georgia,serif;
 }
+.sac-panel[data-open="true"]{display:block;}
+.sac-head{
+  background:rgba(0,0,0,.3);
+  border-bottom:1px solid var(--bord);
+  padding:10px 14px;
+  font-weight:700; color:var(--or);
+  font-size:1.05rem; text-align:center;
+  text-shadow:0 0 6px rgba(255,214,116,.6);
+  position:relative;
+}
+.sac-close{
+  position:absolute; right:10px; top:8px;
+  background:none; border:none; color:var(--ivoire);
+  font-size:18px; cursor:pointer;
+}
+.sac-body{padding:12px 14px; color:var(--ivoire); font-size:.95rem;}
+.bag-empty{text-align:center; opacity:.9; font-style:italic; margin-top:6px;}
+.btn-mini{
+  display:block; width:100%; margin-bottom:8px; text-align:center;
+  padding:.55rem 1rem; border-radius:999px; border:none; cursor:pointer; font-weight:700;
+  color:#4a2e00; background:linear-gradient(145deg,#ffe9af,#f2c94c);
+  box-shadow:0 0 12px rgba(255,223,100,.7);
+  transition:.25s transform,.25s box-shadow;
+}
+.btn-mini:hover{transform:translateY(-1px); box-shadow:0 0 18px rgba(255,223,100,1);}
+.btn-mini.ghost{background:rgba(0,0,0,.25); color:var(--ivoire); border:1px solid var(--bord); box-shadow:none;}
 
-/* ===== Footer nav ===== */
-.footer-nav{text-align:center; opacity:.85; margin:28px 0 12px; font-size:.95rem;}
-.footer-nav a{color:var(--or); text-decoration:none;}
-.footer-nav a:hover{text-decoration:underline;}
+/* ---------- Toast ---------- */
+.arz-toast{
+  position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px);
+  background:rgba(0,0,0,.75); color:var(--ivoire);
+  padding:.55rem .9rem; border-radius:999px;
+  border:1px solid var(--bord);
+  opacity:0; transition:.25s ease; z-index:4000;
+}
+.arz-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-/* ===== Mise en page simple : image + texte + boutons ===== */
-
+/* ---------- Hero + call-to-actions ---------- */
 .hero-frame{
   max-width:980px; margin:0 auto;
   padding:10px; border-radius:22px;
-  background: rgba(0,0,0,.35);
+  background:rgba(0,0,0,.35);
   box-shadow:0 16px 40px rgba(0,0,0,.45);
 }
 .main-image{
@@ -150,16 +248,14 @@ body{
   border-radius:18px;
   box-shadow:0 10px 28px rgba(0,0,0,.55);
 }
-
 .quote-box{
   max-width:860px; margin:16px auto 10px;
   padding:12px 16px; text-align:center;
-  background: rgba(0,0,0,.45);
+  background:rgba(0,0,0,.45);
   border:1px solid var(--bord);
   border-radius:14px;
   font-size:clamp(.95rem,1.6vw,1.05rem);
 }
-
 .button-row{
   display:flex; gap:14px; justify-content:center;
   flex-wrap:wrap; margin:16px auto 26px;
@@ -167,180 +263,24 @@ body{
 .button-row a{
   display:inline-block; min-width:210px; text-align:center;
   padding:.65rem 1.4rem; border-radius:28px; font-weight:700;
-  background: linear-gradient(145deg,#ffe9af,#f2c94c);
+  background:linear-gradient(145deg,#ffe9af,#f2c94c);
   color:#4a2e00; text-decoration:none;
   box-shadow:0 0 12px rgba(255,223,100,.7);
   transition:.2s transform,.2s box-shadow;
 }
-.button-row a:hover{
-  transform:translateY(-1px) scale(1.02);
-  box-shadow:0 0 18px rgba(255,223,100,1);
-}
+.button-row a:hover{transform:translateY(-1px) scale(1.02); box-shadow:0 0 18px rgba(255,223,100,1);}
+.footer-nav{text-align:center; opacity:.85; margin:28px 0 12px; font-size:.95rem;}
+.footer-nav a{color:var(--or); text-decoration:none;}
+.footer-nav a:hover{text-decoration:underline;}
 
+/* ---------- Responsif ciblé ---------- */
 @media (max-width:560px){
-  .button-row a{
-    min-width:unset;
-    padding:.55rem 1rem;
-    font-weight:700;
-  }
+  .button-row a{min-width:unset; padding:.55rem 1rem; font-weight:700;}
 }
-/* ===== Panneau du sac ===== */
-/* ===== HUD : Sac magique ===== */
-.sac-panel {
-  position: fixed;
-  top: 48px;
-  right: 12px;
-  z-index: 4000;
-  display: none;
-  width: 270px;
-  background: rgba(0, 0, 0, 0.65);
-  border: 1px solid var(--bord);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  font-family: Georgia, serif;
+@media (max-width:520px){
+  .status-bar{top:10px; right:10px;}
+  .sac-box img{width:40px;}
+  .energy-box{min-width:210px;}
+  .percent{bottom:7px; right:8px;}
+  .sac-panel{top:calc(10px + 74px); right:10px;}
 }
-.sac-panel[data-open="true"] {
-  display: block;
-}
-.sac-head {
-  background: rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid var(--bord);
-  padding: 10px 14px;
-  font-weight: 700;
-  color: var(--or);
-  font-size: 1.05rem;
-  text-align: center;
-  text-shadow: 0 0 6px rgba(255, 214, 116, 0.6);
-  position: relative;
-}
-.sac-close {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  background: none;
-  border: none;
-  color: var(--ivoire);
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.sac-body {
-  padding: 12px 14px;
-  color: var(--ivoire);
-  font-size: 0.95rem;
-}
-
-.bag-empty {
-  text-align: center;
-  opacity: 0.9;
-  font-style: italic;
-  margin-top: 6px;
-}
-
-/* ===== Boutons internes ===== */
-.btn-mini {
-  display: block;
-  width: 100%;
-  margin-bottom: 8px;
-  text-align: center;
-  padding: 0.55rem 1rem;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  color: #4a2e00;
-  background: linear-gradient(145deg, #ffe9af, #f2c94c);
-  box-shadow: 0 0 12px rgba(255, 223, 100, 0.7);
-  transition: 0.25s transform, 0.25s box-shadow;
-}
-.btn-mini:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(255, 223, 100, 1);
-}
-
-.btn-mini.ghost {
-  background: rgba(0, 0, 0, 0.25);
-  color: var(--ivoire);
-  border: 1px solid var(--bord);
-  box-shadow: none;
-}
-
-/* === CONTENEUR GLOBAL === */
-.status-bar{
-  position:fixed;
-  top:12px;
-  right:12px;
-  display:flex;
-  gap:12px;
-  z-index:4000;
-  flex-wrap:wrap; /* pour mobile */
-}
-
-/* === CADRES GÉNÉRAUX === */
-.box{
-  background:rgba(10,0,20,.45);
-  border:1px solid rgba(255,214,116,.6);
-  border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,.4);
-  color:#fff8e6;
-  font-family:'Cinzel Decorative', serif;
-  text-align:center;
-  padding:.6rem .8rem;
-  backdrop-filter:blur(4px);
-}
-
-/* === CADRE DU SAC === */
-.sac-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-width:90px;
-}
-.sac-box img{
-  width:42px;
-  margin-top:.3rem;
-  filter:drop-shadow(0 0 6px rgba(255,214,116,.7));
-}
-
-/* === CADRE DE L'ARZANSKÂN === */
-.energy-box{
-  display:flex;
-  align-items:center;
-  gap:.6rem;
-  min-width:200px;
-}
-.energy-box p{
-  margin:0;
-  font-size:1rem;
-  color:#ffd674;
-}
-.energy-bar{
-  flex:1;
-  height:14px;
-  border-radius:8px;
-  background:rgba(255,255,255,.15);
-  border:1px solid rgba(255,214,116,.5);
-  overflow:hidden;
-}
-.energy-bar .fill{
-  height:100%;
-  background:linear-gradient(90deg,#ffd674,#ffe9a8);
-}
-.percent{
-  font-size:.9rem;
-  color:#fff8e6;
-}
-
-
-
-/* Toast */
-.arz-toast{
-  position: fixed; left:50%; bottom:22px; transform: translateX(-50%) translateY(12px);
-  background: rgba(0,0,0,.75); color: var(--ivoire); padding:.55rem .9rem; border-radius:999px;
-  border:1px solid var(--bord); opacity:0; transition:.25s ease; z-index:4000;
-}
-.arz-toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
-
-
