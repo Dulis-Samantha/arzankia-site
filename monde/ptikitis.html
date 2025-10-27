@@ -36,27 +36,25 @@
     <!-- ===== 2) SAC + JAUGE ===== -->
     <section class="tools-row" aria-label="Commandes">
       <!-- Sac -->
-      <div class="tool">
-        <p class="tool-label">Ton sac</p>
-        <button class="box sac-box"
-                id="sacToggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="sacPanel">
-          <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
-        </button>
-      </div>
+      <div class="status-bar" role="region" aria-label="Accès rapide">
+  <div class="quick-item">
+    <span class="label">Ton sac</span>
+    <button class="box sac-box" id="sacToggle" type="button"
+            aria-expanded="false" aria-controls="sacPanel">
+      <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
+    </button>
+  </div>
 
-      <!-- Jauge -->
-      <div class="tool">
-        <p class="tool-label">Ton Arzanskân</p>
-        <div class="box energy-box" role="status" aria-label="Jauge d'énergie">
-          <!-- pas de titre dans la boîte, le label est au-dessus -->
-          <div class="energy-bar">
-            <div class="fill" style="width:56%"></div>
-          </div>
-        </div>
+  <div class="quick-item gauge">
+    <span class="label">Ton Arzanskân</span>
+    <div class="energy-wrap" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64">
+      <div class="bar">
+        <div class="fill" style="width:64%"></div>
       </div>
+    </div>
+  </div>
+</div>
+
     </section>
 
     <!-- ===== 3) IMAGE ===== -->
