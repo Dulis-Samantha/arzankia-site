@@ -132,7 +132,7 @@ body{
   position:fixed;
   top:12px; right:12px;
   display:flex; gap:12px; flex-wrap:wrap;
-  z-index:4000;
+  z-index:9999; }
 }
 
 /* Style commun des cartes */
@@ -159,6 +159,12 @@ body{
 .sac-box{
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-width:110px; cursor:pointer;
+ appearance:none; -webkit-appearance:none; /* reset bouton */
+}
+
+.sac-box:focus-visible{
+  outline:2px solid var(--or);
+  outline-offset:2px;
 }
 .sac-box img{
   width:44px; height:auto;
