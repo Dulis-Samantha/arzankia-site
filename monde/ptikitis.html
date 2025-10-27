@@ -15,15 +15,29 @@
 </head>
 
 <body>
-  <!-- ===== Panneau inventaire (réutilisé tel quel) ===== -->
-  <aside class="sac-panel" id="sacPanel" role="dialog" aria-modal="false" aria-labelledby="sacTitle">
-    <div class="sac-head" id="sacTitle">
-      Inventaire
-      <button class="sac-close" type="button" aria-label="Fermer">×</button>
+  <!-- ===== Inventaire (panneau) ===== -->
+  <aside id="sacPanel"
+         class="sac-panel"
+         role="dialog"
+         aria-modal="false"
+         aria-labelledby="sacTitle"
+         hidden>
+    <div class="sac-head">
+      <h2 id="sacTitle">Inventaire</h2>
+      <button class="sac-close" type="button" aria-label="Fermer l’inventaire">×</button>
     </div>
-    <div class="sac-body">
+
+    <div class="sac-body" role="document">
       <p class="bag-empty">Ton sac est vide pour l’instant…</p>
-      <!-- tes boutons .btn-mini ici -->
+      <!-- Exemples d’items (à adapter) -->
+      <!--
+      <ul class="bag-list">
+        <li class="bag-item">
+          <img src="../images/ing/ing_reserve_ptikitis.webp" alt="" />
+          <span>Rubictus</span>
+        </li>
+      </ul>
+      -->
     </div>
   </aside>
 
@@ -33,28 +47,34 @@
       <h1>Monde des Ptikitis</h1>
     </header>
 
-    <!-- ===== 2) SAC + JAUGE ===== -->
-    <section class="tools-row" aria-label="Commandes">
+    <!-- ===== 2) SAC + JAUGE =====
+         Mobile : ce bloc est rendu juste sous le titre.
+         Desktop : ce bloc sera aligné à droite via CSS (media query). -->
+    <section class="status-bar" aria-label="Commandes rapides">
       <!-- Sac -->
-      <div class="status-bar" role="region" aria-label="Accès rapide">
-  <div class="quick-item">
-    <span class="label">Ton sac</span>
-    <button class="box sac-box" id="sacToggle" type="button"
-            aria-expanded="false" aria-controls="sacPanel">
-      <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
-    </button>
-  </div>
-
-  <div class="quick-item gauge">
-    <span class="label">Ton Arzanskân</span>
-    <div class="energy-wrap" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64">
-      <div class="bar">
-        <div class="fill" style="width:64%"></div>
+      <div class="sac-zone">
+        <span class="label-s">Ton sac</span>
+        <button id="sacToggle"
+                class="sac-box"
+                type="button"
+                aria-expanded="false"
+                aria-controls="sacPanel">
+          <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
+        </button>
       </div>
-    </div>
-  </div>
-</div>
 
+      <!-- Jauge -->
+      <div class="jauge-zone">
+        <span class="label-j">Ton Arzanskân</span>
+        <div class="energy-bar"
+             role="meter"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="64"
+             aria-label="Énergie">
+          <span style="width:64%"></span>
+        </div>
+      </div>
     </section>
 
     <!-- ===== 3) IMAGE ===== -->
