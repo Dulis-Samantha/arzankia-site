@@ -17,19 +17,35 @@
 <body>
 <!-- HUD : Sac + Jauge -->
 <div class="status-bar">
-  <div class="box sac-box">
-    <p>Ton sac</p>
+  <!-- Sac cliquable -->
+  <button class="box sac-box"
+          id="sacToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="sacPanel">
+    <div class="box-title">Ton sac</div>
     <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
-  </div>
+  </button>
 
+  <!-- Arzanskân -->
   <div class="box energy-box">
-    <p>Ton Arzanskân</p>
-    <div class="energy-bar">
-      <div class="fill" style="width:56%;"></div>
-    </div>
+    <div class="box-title">Ton Arzanskân</div>
+    <div class="energy-bar"><div class="fill" style="width:56%"></div></div>
     <span class="percent">56%</span>
   </div>
 </div>
+
+<!-- Panneau inventaire -->
+<aside class="sac-panel" id="sacPanel" role="dialog" aria-modal="false" aria-labelledby="sacTitle">
+  <div class="sac-head" id="sacTitle">
+    Sac magique
+    <button class="sac-close" type="button" aria-label="Fermer">×</button>
+  </div>
+  <div class="sac-body">
+    <p class="bag-empty">Ton sac est vide pour l’instant…</p>
+    <!-- tes boutons .btn-mini ici -->
+  </div>
+</aside>
 
   <main class="container">
     <!-- Titre seul (pas d’icône) -->
