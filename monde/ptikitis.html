@@ -6,24 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monde des Ptikitis</title>
 
-  <!-- Fond spécifique -->
+  <!-- Fond spécifique à ce monde -->
   <style>:root{ --bg-url: url('../images/fonds/fond_etoile_perso.webp'); }</style>
 
-  <!-- Base commune Mondes -->
+  <!-- Bases communes -->
   <link rel="stylesheet" href="../css/monde.css" />
   <script src="../js/monde.js" defer></script>
-
-  <!-- Mini styles de page (juste pour le rendu EXACT désiré) -->
-  <style>
-    .title-wrap{ text-align:center; margin:18px 0 10px; }
-    .title-wrap h1{ margin:0; font-size:clamp(1.8rem,4.5vw,2.6rem); }
-
-   
-  </style>
 </head>
 
 <body>
-  <!-- HUD : sac + jauge (base commune) -->
+  <!-- HUD : Sac + Jauge -->
   <div class="hud" role="region" aria-label="Interface d'aventurier">
     <button class="sac" title="Ouvrir le sac" aria-label="Ouvrir le sac">
       <img src="../images/bouton/sac_magique.webp" alt="Sac magique" />
@@ -35,18 +27,22 @@
   </div>
 
   <main class="container">
+    <!-- Titre seul (pas d’icône) -->
     <div class="title-wrap">
       <h1>Monde des Ptikitis</h1>
     </div>
 
+    <!-- Image centrale -->
     <div class="hero-frame">
       <img class="main-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
     </div>
 
+    <!-- Texte poétique -->
     <div class="quote-box">
       « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil »
     </div>
 
+    <!-- Boutons dorés -->
     <div class="button-row">
       <a href="../7.extrait_Ptikitis.html">Extrait du livre</a>
       <a href="../9.entree_Ptikitis.html">Entrée du monde</a>
