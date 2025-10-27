@@ -69,7 +69,7 @@
   panel.setAttribute('aria-labelledby', 'sacTitle');
   panel.innerHTML = `
     <div class="sac-head">
-      <strong id="sacTitle">Sac magique</strong>
+      <strong id="sacTitle">Inventaire</strong>
       <button class="sac-close" aria-label="Fermer">×</button>
     </div>
     <div class="sac-body">
