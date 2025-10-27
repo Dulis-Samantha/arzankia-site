@@ -49,8 +49,9 @@
 
   // ---- DOM : jauge + sac existants dans le HUD ----
   const fill = document.querySelector('.fill');
-  const pctTxt = document.querySelector('.pct');
-  const sacBtn = document.querySelector('.sac');
+  const pctTxt = document.querySelector('.percent');   // correspond à <span class="percent">
+  const sacBtn  = document.getElementById('sacToggle') // ou: document.querySelector('.sac-box')
+
 
   // Ruban alerte (≤15 %)
   const ribbon = document.createElement('div');
