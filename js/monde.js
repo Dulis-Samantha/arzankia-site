@@ -5,7 +5,7 @@
   const CONFIG = {
     key: 'arz_energy_v1',
     max: 100,
-    drainPerSecond: 0.10,    // points/s
+    drainPerSecond: 0.10,       // points/s
     tickMs: 1000,
     questThresholdPct: 15,
     zeroRedirectUrl: '2.les_coulisses.html',
@@ -47,11 +47,21 @@
   let state = loadState();
   let intervalId = null;
 
-  // ---- DOM : jauge + sac existants dans le HUD ----
-  const fill = document.querySelector('.fill');
-  const pctTxt = document.querySelector('.percent');   // correspond à <span class="percent">
-  const sacBtn  = document.getElementById('sacToggle') // ou: document.querySelector('.sac-box')
+  // ---- DOM ----
+  // Jauge : span à l'intérieur de .energy-bar
+  const energyBar = document.querySelector('.energy-bar');
+  const fill = document.querySelector('.energy-bar > span');
+  // (facultatif : un affichage % si tu ajoutes <span class="percent">)
+  const pctTxt = document.querySelector('.percent');
 
+  // Bouton sac + panneau déjà présents dans le HTML
+  const sacBtn  = document.getElementById('sacToggle');
+  const panel   = document.getElementById('sacPanel');
+  const closeBtn = panel ? panel.querySelector('.sac-close') : null;
+  const bagToggle = panel ? panel.querySelector('#bagToggle') : null;
+  const bagReset  = panel ? panel.querySelector('#bagReset')  : null;
+  const bagList   = panel ? panel.querySelector('#bagList')   : null;
+  const bagEmpty  = panel ? panel.querySelector('#bagEmpty')  : null;
 
   // Ruban alerte (≤15 %)
   const ribbon = document.createElement('div');
@@ -60,45 +70,17 @@
   ribbon.textContent = CONFIG.messages.low;
   document.body.appendChild(ribbon);
 
-  // Panneau du sac (créé dynamiquement)
-  const panel = document.createElement('div');
-  panel.id = 'sacPanel';
-  panel.className = 'sac-panel';
-  panel.setAttribute('role', 'dialog');
-  panel.setAttribute('aria-modal', 'false');
-  panel.setAttribute('aria-labelledby', 'sacTitle');
-  panel.innerHTML = `
-    <div class="sac-head">
-      <strong id="sacTitle">Inventaire</strong>
-      <button class="sac-close" aria-label="Fermer">×</button>
-    </div>
-    <div class="sac-body">
-      <div class="bag-top">
-        <button class="btn-mini" id="bagToggle"></button>
-        <button class="btn-mini ghost" id="bagReset">Réinitialiser</button>
-      </div>
-      <ul id="bagList"></ul>
-      <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
-    </div>
-  `;
-  document.body.appendChild(panel);
-
-  const closeBtn = panel.querySelector('.sac-close');
-  const bagToggle = panel.querySelector('#bagToggle');
-  const bagReset  = panel.querySelector('#bagReset');
-  const bagList   = panel.querySelector('#bagList');
-  const bagEmpty  = panel.querySelector('#bagEmpty');
-
   // ---- INIT ----
   renderAll();
   if (!state.noPressure && !state.infinite) {
     if (state.energy > 0) start(); else redirectZero();
   }
 
-  // Arrondi + affichage initial de la jauge
+  // ---- RENDER ----
   function renderGauge() {
     const pct = clamp((state.energy / CONFIG.max) * 100, 0, 100);
     if (fill) fill.style.width = pct + '%';
+    if (energyBar) energyBar.setAttribute('aria-valuenow', String(Math.round(pct)));
     if (pctTxt) pctTxt.textContent = Math.round(pct) + '%';
     updateRibbon();
   }
@@ -110,12 +92,14 @@
   }
 
   function updateToggleLabel() {
+    if (!bagToggle) return;
     bagToggle.textContent = state.noPressure
       ? '▶️ Réactiver la jauge'
       : '🕊️ Mode tranquille (désactiver la jauge)';
   }
 
   function renderBag() {
+    if (!bagList || !bagEmpty) return;
     bagList.innerHTML = '';
     if (!state.bag.length) {
       bagEmpty.style.display = 'block';
@@ -175,42 +159,74 @@
     renderGauge(); saveState();
   }
 
+  // ---- redirection à 0 ----
+  function redirectZero(){
+    if (CONFIG.zeroRedirectUrl) {
+      window.location.href = CONFIG.zeroRedirectUrl;
+    }
+  }
+
   // ---- SAC : ouverture/fermeture ----
-  if (sacBtn) {
-    sacBtn.addEventListener('click', () => {
+  if (sacBtn && panel) {
+    sacBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const open = panel.getAttribute('data-open') === 'true';
       panel.setAttribute('data-open', open ? 'false' : 'true');
+      sacBtn.setAttribute('aria-expanded', String(!open));
+      panel.removeAttribute('hidden');
     });
   }
-  closeBtn.addEventListener('click', () => panel.setAttribute('data-open','false'));
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      panel.setAttribute('data-open','false');
+      sacBtn && sacBtn.setAttribute('aria-expanded','false');
+    });
+  }
+  // fermer en cliquant hors du panneau
   document.addEventListener('click', (e) => {
+    if (!panel) return;
     const clickedSac = sacBtn && sacBtn.contains(e.target);
     const clickedPanel = panel.contains(e.target);
-    if (!clickedSac && !clickedPanel) panel.setAttribute('data-open','false');
+    if (!clickedSac && !clickedPanel) {
+      panel.setAttribute('data-open','false');
+      sacBtn && sacBtn.setAttribute('aria-expanded','false');
+    }
+  });
+  // ESC pour fermer
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel && panel.getAttribute('data-open') === 'true') {
+      panel.setAttribute('data-open','false');
+      sacBtn && sacBtn.setAttribute('aria-expanded','false');
+    }
   });
 
   // ---- Sac : actions ----
-  bagReset.addEventListener('click', () => {
-    if (!confirm('Réinitialiser tous les ingrédients ?')) return;
-    state.bag = [];
-    state.totalUses = 0;
-    state.infinite = false;
-    state.msgShown = false;
-    state.drain = CONFIG.drainPerSecond;
-    saveState(); renderAll();
-    toast(CONFIG.messages.reset);
-  });
+  if (bagReset) {
+    bagReset.addEventListener('click', () => {
+      if (!confirm('Réinitialiser tous les ingrédients ?')) return;
+      state.bag = [];
+      state.totalUses = 0;
+      state.infinite = false;
+      state.msgShown = false;
+      state.drain = CONFIG.drainPerSecond;
+      saveState(); renderAll();
+      toast(CONFIG.messages.reset);
+    });
+  }
 
-  bagToggle.addEventListener('click', () => {
-    state.noPressure = !state.noPressure;
-    if (state.noPressure) {
-      stop(); state.energy = CONFIG.max; toast(CONFIG.messages.calm_on);
-    } else {
-      if (!state.infinite && state.energy > 0) start();
-      toast(CONFIG.messages.calm_off);
-    }
-    saveState(); renderAll();
-  });
+  if (bagToggle) {
+    bagToggle.addEventListener('click', () => {
+      state.noPressure = !state.noPressure;
+      if (state.noPressure) {
+        stop(); state.energy = CONFIG.max; toast(CONFIG.messages.calm_on);
+      } else {
+        if (!state.infinite && state.energy > 0) start();
+        toast(CONFIG.messages.calm_off);
+      }
+      saveState(); renderAll();
+    });
+  }
 
   // ---- Collecte d’ingrédients (boutons sur la page) ----
   initCollectibles();
@@ -270,6 +286,7 @@
   }
 
   // ---- Utils ----
+  function getMeta(id){ return CONFIG.items[id] || { name:id, img:'' }; }
   function applyEffect(id){
     const eff = CONFIG.effects[id];
     if (!eff || !eff.drainFactor) return;
