@@ -6,217 +6,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monde des Ptikitis</title>
 
+  <!-- Fond spécifique à ce monde -->
   <style>
-    /* === BASE === */
-    body{
-      margin:0;
-      padding:0;
-      background: url('../fond_etoile_perso.webp') center top no-repeat; /* corrigé */
-      background-size: cover;
-      background-color:#001d26;
-      font-family: Georgia, serif;
-      color:#fff8e6;
-      text-shadow:1px 1px 4px #000;
+    :root{
+      --bg-url: url('../images/fonds/fond_etoile_perso.webp');
     }
-
-    .container{
-      max-width:1100px;
-      margin: 0 auto;
-      padding: 1.2rem 1rem 6rem; 
-    }
-
-    /* === TITRE === */
-    .page-title{
-      text-align:center;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight:700;
-      margin: 1.5rem auto;
-      color:#ffe79a;
-      text-shadow: 0 0 8px rgba(0,0,0,.75), 0 0 18px rgba(255,231,154,.25);
-    }
-
-    /* === IMAGE === */
-    .Fees-image{
-      display:block;
-      width:100%;
-      max-width: 950px;
-      height:auto;
-      margin: 0 auto 1.2rem;
-      border-radius: 18px;
-      box-shadow: 0 0 25px rgba(255,255,255,.15);
-    }
-
-    /* === TEXTE EXPLICATIF === */
-    .texte-monde{
-      max-width:800px;
-      margin: 1.2rem auto;
-      padding: 1rem 1.2rem;
-      font-size: clamp(1rem, 1.4vw, 1.2rem);
-      line-height:1.6;
-      text-align:center;
-      color:#ffe79a;
-      background: rgba(0,0,0,0.45);
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,.5);
-    }
-
-    /* === BOUTONS === */
-    .button-group{
-      display:flex;
-      justify-content:center;
-      gap:1.2rem;
-      margin-top:1.5rem;
-      flex-wrap:wrap;
-    }
-    .button-group a{
-      display:inline-block;
-      padding:.7rem 1.5rem;
-      background: linear-gradient(145deg, #ffe9af, #f2c94c);
-      color:#4a2e00;
-      text-decoration:none;
-      font-weight:700;
-      font-size:1rem;
-      border-radius:30px;
-      box-shadow:0 0 10px rgba(255,223,100,.6);
-      transition: transform .2s ease, box-shadow .2s ease;
-      min-width:180px;
-      text-align:center;
-    }
-    .button-group a:hover{
-      transform: scale(1.05);
-      box-shadow:0 0 18px rgba(255,223,100,1);
-    }
-
-    /* === MOBILE === */
-    @media (max-width: 600px){
-      .container{ padding: 1rem 0.6rem 6.5rem; }
-      .texte-monde{ font-size:.95rem; padding:0.9rem; }
-      .button-group{
-        position: fixed;
-        bottom:10px; left:0; right:0;
-        justify-content:center;
-        background: rgba(0,0,0,.4);
-        padding:.5rem 1rem;
-        z-index:999;
-        gap:.5rem;
-      }
-      .button-group a{
-        font-size:.85rem;
-        padding:.45rem .9rem;
-        min-width:auto;
-        border-radius:25px;
-        box-shadow:0 0 8px rgba(255,223,100,.6);
-      }
-    }
-    .image-zone {
-      position: relative;
-      display: block;
-      width: fit-content;
-      margin: 0 auto 1.2rem;
-    }
-
-    .ing-btn {
-      position: absolute;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      transform: translate(-50%, -50%);
-    }
-
-    .ingredient-img {
-      width: 60px;
-      height: auto;
-      opacity: 0.9;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .ing-btn:hover .ingredient-img {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-
-    @media (max-width: 768px){
-      .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{
-        bottom: 15%;
-        left: 12%;
-        transform: none !important;
-      }
-
-      .energy-wrap{
-        top: 85px;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%) scale(.95);
-        margin-right: 0;
-        z-index: 4000;
-      }
-
-      .bag-wrap{
-        position: fixed;
-        top: 85px;
-        right: 12px;
-        transform: none; 
-        z-index: 4700;
-      }
-
-      .image-zone{
-        margin-top: 96px !important;
-      }
-    }
-
   </style>
+
+  <!-- Fichiers communs -->
+  <link rel="stylesheet" href="../css/monde.css">
+  <script src="../js/monde.js" defer></script>
 </head>
 
 <body>
-  <!-- === Jauge d'énergie === -->
-  <div class="energy-wrap" role="status" aria-live="polite">
-    <div class="energy-icon">✨</div>
-    <div class="energy-label">Énergie</div>
-    <div class="energy-bar">
-      <div class="energy-fill" id="energyFill"></div>
+  <!-- ===== HUD : Sac + Jauge ===== -->
+  <div class="hud" role="region" aria-label="Interface d'aventurier">
+    <button class="sac" title="Ouvrir le sac" aria-label="Ouvrir le sac">
+      <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
+    </button>
+
+    <div class="gauge" aria-live="polite">
+      <div class="bar"><div class="fill"></div></div>
+      <div class="pct">60%</div>
     </div>
-    <div class="energy-pct" id="energyPct">100%</div>
   </div>
 
-  <div class="lock-overlay" id="lockOverlay">
-    <div class="lock-card">
-      <div class="lock-title">Ta jauge est vide… ⚡</div>
-      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
-      <div class="play-area" id="playArea">
-        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+  <!-- ===== CONTENU PRINCIPAL ===== -->
+  <main class="container">
+    <!-- Titre + visuel du monde -->
+    <div class="page-title">
+      <img src="../images/mondes/monde_Ptikitis.webp" alt="Symbole du Monde des Ptikitis">
+      <h1>Monde des Ptikitis</h1>
+    </div>
+
+    <!-- Introduction -->
+    <section class="block">
+      <h2>Bienvenue</h2>
+      <div class="content">
+        <p>Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil. Les Ptikitis, inventeurs joyeux, transforment chaque objet en idée géniale !</p>
       </div>
-      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
-      <button class="btn" id="accessBtn">Recharger</button>
-    </div>
+    </section>
+
+    <!-- Grille : entrée + extrait -->
+    <section class="grid">
+      <!-- Colonne gauche -->
+      <article class="block">
+        <h2>Entrée du monde</h2>
+        <img class="hero-img" src="../images/entree/entree_ptikitis.webp" alt="Entrée du Monde des Ptikitis">
+        <div class="content">
+          <div class="btn-ring">
+            <!-- Bouton ingrédient -->
+            <a class="round" href="#" title="Ingrédient — Rubictus">
+              <img src="../images/bouton/ing_ptikitis.webp" alt="Rubictus">
+              <span>Rubictus</span>
+            </a>
+
+            <!-- Bouton grimoire -->
+            <a class="round" href="../10.grimoire.html" title="Grimoire — Ptikitis">
+              <img src="../images/mondes/monde_Ptikitis.webp" alt="Icône Ptikitis">
+              <span>Grimoire</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Colonne droite -->
+      <aside class="block">
+        <h2>Extrait</h2>
+        <div class="content">
+          <img class="extract" id="extract" src="../images/extraits/extrait_Ptikitis.webp" alt="Extrait du Monde des Ptikitis (agrandissable)">
+          <p style="margin-top:10px; font-size:.95rem; opacity:.9">Clique pour agrandir l’illustration.</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Navigation bas de page -->
+    <p class="footer-nav">
+      🧭 <a href="../3.les_mondes.html">Retour aux Mondes</a>
+    </p>
+  </main>
+
+  <!-- ===== Lightbox extrait ===== -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Agrandissement de l'extrait">
+    <img src="../images/extraits/extrait_Ptikitis.webp" alt="Extrait en grand — Ptikitis">
   </div>
-
-  <div class="container">
-    <h1 class="page-title">Monde des Ptikitis</h1>
-
-    <div class="image-zone">
-      <img class="Fees-image" src="../monde_Ptikitis.webp" alt="Monde des Ptikitis">
-      <button class="ing-btn quest-ingredient"
-              data-id="ptikitis_rubictus"
-              data-recharge="60"
-              aria-label="Rubictus aux baies rouges"
-              style="bottom:-8%; left:15%;">
-        <img src="../ing_ptikitis.webp" alt="Rubictus aux baies rouges" class="ingredient-img">
-      </button>
-    </div>
-
-    <div class="texte-monde">
-      « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil »
-    </div>
-
-    <div class="button-group">
-      <a href="../7.extrait_Ptikitis.html">Extrait du livre</a>
-      <a href="../9.entree_Ptikitis.html">Entrée du monde</a>
-      <a href="../3.les_mondes.html">← Retour</a>
-    </div>
-  </div>
-
-  <link rel="stylesheet" href="../energy-gauge.css?v=13">
-  <script src="../energy-gauge.js?v=9"></script>
 </body>
 </html>
