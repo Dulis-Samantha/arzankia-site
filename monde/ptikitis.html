@@ -1,94 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monde des Ptikitis</title>
 
-  <!-- Fond spécifique à ce monde -->
-  <style>
-    :root{
-      --bg-url: url('../images/fonds/fond_etoile_perso.webp');
-    }
-  </style>
+  <!-- Fond spécifique -->
+  <style>:root{ --bg-url: url('../images/fonds/fond_etoile_perso.webp'); }</style>
 
-  <!-- Fichiers communs -->
-  <link rel="stylesheet" href="../css/monde.css">
+  <!-- Base commune Mondes -->
+  <link rel="stylesheet" href="../css/monde.css" />
   <script src="../js/monde.js" defer></script>
+
+  <!-- Mini styles de page (juste pour le rendu EXACT désiré) -->
+  <style>
+    .title-wrap{ text-align:center; margin:18px 0 10px; }
+    .title-wrap h1{ margin:0; font-size:clamp(1.8rem,4.5vw,2.6rem); }
+
+   
+  </style>
 </head>
 
 <body>
-  <!-- ===== HUD : Sac + Jauge ===== -->
+  <!-- HUD : sac + jauge (base commune) -->
   <div class="hud" role="region" aria-label="Interface d'aventurier">
     <button class="sac" title="Ouvrir le sac" aria-label="Ouvrir le sac">
-      <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
+      <img src="../images/bouton/sac_magique.webp" alt="Sac magique" />
     </button>
-
     <div class="gauge" aria-live="polite">
       <div class="bar"><div class="fill"></div></div>
       <div class="pct">60%</div>
     </div>
   </div>
 
-  <!-- ===== CONTENU PRINCIPAL ===== -->
   <main class="container">
-    <!-- Titre + visuel du monde -->
-    <div class="page-title">
-      <img src="../images/mondes/monde_Ptikitis.webp" alt="Symbole du Monde des Ptikitis">
+    <div class="title-wrap">
       <h1>Monde des Ptikitis</h1>
     </div>
 
-    <!-- Introduction -->
-    <section class="block">
-      <h2>Bienvenue</h2>
-      <div class="content">
-        <p>Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil. Les Ptikitis, inventeurs joyeux, transforment chaque objet en idée géniale !</p>
-      </div>
-    </section>
+    <div class="hero-frame">
+      <img class="main-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
+    </div>
 
-    <!-- Grille : entrée + extrait -->
-    <section class="grid">
-      <!-- Colonne gauche -->
-      <article class="block">
-        <h2>Entrée du monde</h2>
-        <img class="hero-img" src="../images/entree/entree_ptikitis.webp" alt="Entrée du Monde des Ptikitis">
-        <div class="content">
-          <div class="btn-ring">
-            <!-- Bouton ingrédient -->
-            <a class="round" href="#" title="Ingrédient — Rubictus">
-              <img src="../images/bouton/ing_ptikitis.webp" alt="Rubictus">
-              <span>Rubictus</span>
-            </a>
+    <div class="quote-box">
+      « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil »
+    </div>
 
-            <!-- Bouton grimoire -->
-            <a class="round" href="../10.grimoire.html" title="Grimoire — Ptikitis">
-              <img src="../images/mondes/monde_Ptikitis.webp" alt="Icône Ptikitis">
-              <span>Grimoire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Colonne droite -->
-      <aside class="block">
-        <h2>Extrait</h2>
-        <div class="content">
-          <img class="extract" id="extract" src="../images/extraits/extrait_Ptikitis.webp" alt="Extrait du Monde des Ptikitis (agrandissable)">
-          <p style="margin-top:10px; font-size:.95rem; opacity:.9">Clique pour agrandir l’illustration.</p>
-        </div>
-      </aside>
-    </section>
-
-    <!-- Navigation bas de page -->
-    <p class="footer-nav">
-      🧭 <a href="../3.les_mondes.html">Retour aux Mondes</a>
-    </p>
+    <div class="button-row">
+      <a href="../7.extrait_Ptikitis.html">Extrait du livre</a>
+      <a href="../9.entree_Ptikitis.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
+    </div>
   </main>
-
-  <!-- ===== Lightbox extrait ===== -->
-  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Agrandissement de l'extrait">
-    <img src="../images/extraits/extrait_Ptikitis.webp" alt="Extrait en grand — Ptikitis">
-  </div>
 </body>
 </html>
