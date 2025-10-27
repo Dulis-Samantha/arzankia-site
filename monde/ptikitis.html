@@ -16,20 +16,18 @@
 
 <body>
 <!-- HUD : Sac + Jauge -->
-<div class="hud" role="region" aria-label="Interface d'aventurier">
-  <div class="hud-item">
-    <div class="hud-label">Ton sac</div>
-    <button class="sac" title="Ouvrir le sac" aria-label="Ouvrir le sac">
-      <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
-    </button>
+<div class="status-bar">
+  <div class="box sac-box">
+    <p>Ton sac</p>
+    <img src="images/bouton/sac_magique.webp" alt="Sac magique">
   </div>
 
-  <div class="hud-item">
-    <div class="hud-label">Ton Arzanskân</div>
-    <div class="gauge" aria-live="polite">
-      <div class="bar"><div class="fill"></div></div>
-      <div class="pct">100%</div>
+  <div class="box energy-box">
+    <p>Ton Arzanskân</p>
+    <div class="energy-bar">
+      <div class="fill" style="width:56%;"></div>
     </div>
+    <span class="percent">56%</span>
   </div>
 </div>
 
