@@ -156,19 +156,45 @@ body{
 }
 
 /* Carte : Sac */
+/* === Bouton Sac magique === */
 .sac-box{
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-width:110px; cursor:pointer;
- appearance:none; -webkit-appearance:none; /* reset bouton */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:56px;
+  height:56px;
+  cursor:pointer;
+  background:rgba(10,0,20,.45);
+  border:1px solid var(--bord);
+  border-radius:14px;
+  box-shadow:0 0 12px rgba(0,0,0,.45);
+  transition:.25s transform,.25s box-shadow,.25s background;
+  appearance:none;
+  -webkit-appearance:none;
 }
 
+.sac-box img{
+  width:42px;
+  height:auto;
+  filter:drop-shadow(0 0 8px rgba(255,214,116,.7));
+  transition:transform .3s ease, filter .3s ease;
+}
+
+/* Effet survol : léger halo magique et soulèvement */
+.sac-box:hover{
+  background:rgba(0,0,0,.55);
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 0 18px rgba(255,214,116,.6);
+}
+.sac-box:hover img{
+  filter:drop-shadow(0 0 12px rgba(255,230,150,.9));
+  transform:scale(1.12) rotate(-3deg);
+}
+
+/* Effet focus clavier (accessibilité) */
 .sac-box:focus-visible{
   outline:2px solid var(--or);
-  outline-offset:2px;
-}
-.sac-box img{
-  width:44px; height:auto;
-  filter:drop-shadow(0 0 6px rgba(255,214,116,.7));
+  outline-offset:3px;
 }
 
 /* Carte : Arzanskân */
