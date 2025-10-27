@@ -11,7 +11,7 @@
     body{
       margin:0;
       padding:0;
-      background: url('fond_etoile_perso.webp') center top no-repeat;
+      background: url('../fond_etoile_perso.webp') center top no-repeat; /* corrigé */
       background-size: cover;
       background-color:#001d26;
       font-family: Georgia, serif;
@@ -109,130 +109,114 @@
       }
     }
     .image-zone {
-  position: relative;
-  display: block;
-  width: fit-content;
-  margin: 0 auto 1.2rem;
-}
+      position: relative;
+      display: block;
+      width: fit-content;
+      margin: 0 auto 1.2rem;
+    }
 
-.ing-btn {
-  position: absolute;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-}
+    .ing-btn {
+      position: absolute;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+    }
 
-.ingredient-img {
-  width: 60px;
-  height: auto;
-  opacity: 0.9;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
+    .ingredient-img {
+      width: 60px;
+      height: auto;
+      opacity: 0.9;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-/* effet discret au survol (optionnel) */
-.ing-btn:hover .ingredient-img {
-  transform: scale(1.05);
-  opacity: 1;
-}
+    .ing-btn:hover .ingredient-img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
 
-/* --- Mobile : ajustements spécifiques --- */
-@media (max-width: 768px){
+    @media (max-width: 768px){
+      .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{
+        bottom: 15%;
+        left: 12%;
+        transform: none !important;
+      }
 
-  /* bouton Rubictus (si besoin) */
-  .image-zone .quest-ingredient[data-id="ptikitis_rubictus"]{
-    bottom: 15%;
-    left: 12%;
-    transform: none !important;
-  }
+      .energy-wrap{
+        top: 85px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) scale(.95);
+        margin-right: 0;
+        z-index: 4000;
+      }
 
-  /* jauge centrée sous le titre */
-  .energy-wrap{
-    top: 85px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) scale(.95);
-    margin-right: 0;   /* annule le décalage desktop */
-    z-index: 4000;
-  }
+      .bag-wrap{
+        position: fixed;
+        top: 85px;
+        right: 12px;
+        transform: none; 
+        z-index: 4700;
+      }
 
-  /* sac aligné à droite, même hauteur que la jauge */
-  .bag-wrap{
-    position: fixed;
-    top: 85px;     /* même valeur que .energy-wrap */
-    right: 12px;   /* ← simple, fiable */
-    transform: none; 
-    z-index: 4700;
-  }
-
-  /* laisse de la place avant l'illustration */
-  .image-zone{
-    margin-top: 96px !important;
-  }
-}
-
+      .image-zone{
+        margin-top: 96px !important;
+      }
+    }
 
   </style>
 </head>
 
 <body>
   <!-- === Jauge d'énergie === -->
-<div class="energy-wrap" role="status" aria-live="polite">
-  <div class="energy-icon">✨</div>
-  <div class="energy-label">Énergie</div>
-  <div class="energy-bar">
-    <div class="energy-fill" id="energyFill"></div>
-  </div>
-  <div class="energy-pct" id="energyPct">100%</div>
-</div>
-
-<div class="lock-overlay" id="lockOverlay">
-  <div class="lock-card">
-    <div class="lock-title">Ta jauge est vide… ⚡</div>
-    <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
-    <div class="play-area" id="playArea">
-      <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Énergie</div>
+    <div class="energy-bar">
+      <div class="energy-fill" id="energyFill"></div>
     </div>
-    <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
-    <button class="btn" id="accessBtn">Recharger</button>
+    <div class="energy-pct" id="energyPct">100%</div>
   </div>
-</div>
+
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area" id="playArea">
+        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+      </div>
+      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
+      <button class="btn" id="accessBtn">Recharger</button>
+    </div>
+  </div>
 
   <div class="container">
-    <!-- TITRE -->
     <h1 class="page-title">Monde des Ptikitis</h1>
 
-<!-- IMAGE AVEC INGREDIENT CACHÉ : RUBICTUS AUX BAIES ROUGES -->
-<div class="image-zone">
-  <img class="Fees-image" src="monde_Ptikitis.webp" alt="Monde des Ptikitis">
-
-  <!-- Rubictus caché -->
-  <button class="ing-btn quest-ingredient"
-          data-id="ptikitis_rubictus"
-          data-recharge="60"
-          aria-label="Rubictus aux baies rouges"
-          style="bottom:-8%; left:15%;">
-    <img src="ing_ptikitis.webp" alt="Rubictus aux baies rouges" class="ingredient-img">
-  </button>
-</div>
-
-
-    <!-- TEXTE -->
-    <div class="texte-monde">
-     « Un monde où les fleurs servent de catapultes
-    et où chaque rire fait éclore un nouveau rayon de soleil »
+    <div class="image-zone">
+      <img class="Fees-image" src="../monde_Ptikitis.webp" alt="Monde des Ptikitis">
+      <button class="ing-btn quest-ingredient"
+              data-id="ptikitis_rubictus"
+              data-recharge="60"
+              aria-label="Rubictus aux baies rouges"
+              style="bottom:-8%; left:15%;">
+        <img src="../ing_ptikitis.webp" alt="Rubictus aux baies rouges" class="ingredient-img">
+      </button>
     </div>
 
-    <!-- BOUTONS -->
+    <div class="texte-monde">
+      « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil »
+    </div>
+
     <div class="button-group">
-      <a href="7.extrait_Ptikitis.html">Extrait du livre</a>
-        <a href="9.entree_Ptikitis.html">Entrée du monde</a>
-        <a href="3.les_mondes.html">← Retour</a>  
+      <a href="../7.extrait_Ptikitis.html">Extrait du livre</a>
+      <a href="../9.entree_Ptikitis.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
     </div>
   </div>
-  <!-- Styles et script de la jauge -->
-<link rel="stylesheet" href="energy-gauge.css?v=13">
-<script src="energy-gauge.js?v=9"></script>
+
+  <link rel="stylesheet" href="../energy-gauge.css?v=13">
+  <script src="../energy-gauge.js?v=9"></script>
 </body>
 </html>
