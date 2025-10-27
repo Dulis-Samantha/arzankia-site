@@ -116,4 +116,39 @@ body{
     font-weight:700;
   }
 }
+/* ===== Panneau du sac ===== */
+.sac-panel{
+  position: fixed; top: 56px; right: 12px; z-index: 3500; display: none;
+  width: 280px; background: var(--verre);
+  border: 1px solid var(--bord); border-radius: 12px;
+  box-shadow: 0 18px 36px rgba(0,0,0,.5); backdrop-filter: blur(6px);
+}
+.sac-panel[data-open="true"]{ display:block; }
+.sac-head{ display:flex; align-items:center; justify-content:space-between;
+  padding:10px 12px; border-bottom:1px solid var(--bord); background:rgba(0,0,0,.25); }
+.sac-close{ background:none; border:0; color:var(--ivoire); font-size:18px; line-height:1; cursor:pointer; }
+.sac-body{ padding: 10px 12px; }
+.bag-top{ display:flex; gap:8px; margin-bottom:8px; }
+.btn-mini{ padding:.45rem .8rem; border-radius:999px; background:linear-gradient(145deg,#ffe9af,#f2c94c);
+  color:#4a2e00; border:0; font-weight:700; cursor:pointer; box-shadow:0 0 10px rgba(255,223,100,.6); }
+.btn-mini.ghost{ background: rgba(0,0,0,.25); color:var(--ivoire); box-shadow:none; border:1px solid var(--bord); }
+.bag-empty{ opacity:.85; padding:6px 0; }
+.bag-li{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 0; }
+.bag-item{ display:flex; gap:10px; align-items:center; }
+.bag-item img{ width:40px; height:40px; border-radius:8px; border:1px solid var(--bord); object-fit:cover; }
+.bag-name{ font-weight:700; }
+.bag-qty{ opacity:.85; margin-left:6px; }
+.bag-rem{ font-size:.9rem; opacity:.85; }
+.bag-used{ font-size:.9rem; opacity:.7; }
+.bag-use{ padding:.35rem .7rem; border-radius:999px; background:rgba(0,0,0,.3); color:var(--ivoire); border:1px solid var(--bord); cursor:pointer; }
+.bag-use:hover{ transform: translateY(-1px); }
+
+/* Toast */
+.arz-toast{
+  position: fixed; left:50%; bottom:22px; transform: translateX(-50%) translateY(12px);
+  background: rgba(0,0,0,.75); color: var(--ivoire); padding:.55rem .9rem; border-radius:999px;
+  border:1px solid var(--bord); opacity:0; transition:.25s ease; z-index:4000;
+}
+.arz-toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+
 
