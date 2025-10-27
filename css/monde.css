@@ -1,7 +1,7 @@
 :root{
   --or:#ffd674; --ivoire:#fff8e6;
   --verre:rgba(10,0,20,.45); --bord:rgba(255,214,116,.55);
-  --bg-url: url('images/fonds/fond_etoile_perso.webp'); /* sur chaque page monde, tu peux la surcharger */
+  --bg-url: url('../images/fonds/fond_etoile_perso.webp'); /* sur chaque page monde, tu peux la surcharger */
 }
 
 html,body{height:100%}
