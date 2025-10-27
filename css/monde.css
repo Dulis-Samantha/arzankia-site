@@ -18,6 +18,16 @@ body{
 .page-title img{width:clamp(48px,8vw,72px); filter:drop-shadow(0 6px 16px rgba(0,0,0,.5)); border-radius:12px;}
 .page-title h1{margin:0; font-size:clamp(1.6rem,4.8vw,3rem);}
 
+.page-title h1 {
+  text-align: center;
+  width: 100%;
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  color: var(--or);
+  text-shadow: 0 0 8px rgba(255, 214, 116, 0.7);
+}
+
+
 /* ===== Cartes / sections ===== */
 .block{background:var(--verre); border:1px solid var(--bord); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.45);}
 .block h2{margin:0; padding:14px 16px; border-bottom:1px solid var(--bord); background:rgba(0,0,0,.25); font-size:clamp(1.1rem,2.8vw,1.4rem);}
