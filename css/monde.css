@@ -1,5 +1,5 @@
 /* =========================================================
-   ARZANKIA — STYLES GLOBAUX (version clean)
+   ARZANKIA — STYLES GLOBAUX (version clean pour nouveau HTML)
    ========================================================= */
 
 /* ---------- Variables ---------- */
@@ -29,21 +29,13 @@ body{
 
 /* ---------- Titre de page ---------- */
 .page-title{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex; align-items:center; justify-content:center;
   gap:clamp(12px,2vw,18px);
   margin:clamp(16px,3vw,28px) auto;
-}
-.page-title img{
-  width:clamp(48px,8vw,72px);
-  filter:drop-shadow(0 6px 16px rgba(0,0,0,.5));
-  border-radius:12px;
+  text-align:center;
 }
 .page-title h1{
-  margin:0;
-  width:100%;
-  text-align:center;
+  margin:0; width:100%;
   font-size:clamp(1.6rem,4.8vw,3rem);
   font-family:'Cinzel Decorative',serif;
   font-weight:700;
@@ -51,136 +43,43 @@ body{
   text-shadow:0 0 8px rgba(255,214,116,.7);
 }
 
-/* ---------- Cartes / sections ---------- */
-.block{
-  background:var(--verre);
-  border:1px solid var(--bord);
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.45);
-}
-.block h2{
-  margin:0;
-  padding:14px 16px;
-  border-bottom:1px solid var(--bord);
-  background:rgba(0,0,0,.25);
-  font-size:clamp(1.1rem,2.8vw,1.4rem);
-}
-.block .content{padding:clamp(12px,2.2vw,18px);}
-.hero-img{width:100%; display:block; border-bottom:1px solid var(--bord);}
-
-/* ---------- Grille ---------- */
-.grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:clamp(14px,2.4vw,24px);
-  align-items:start;
-}
-@media (max-width:860px){
-  .grid{grid-template-columns:1fr;}
-}
-
-/* ---------- Boutons ronds ---------- */
-.btn-ring{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(120px,1fr));
-  gap:clamp(10px,2vw,16px);
-  justify-items:center;
-}
-.round{
-  display:inline-grid; place-items:center;
-  width:clamp(88px,14vw,128px); aspect-ratio:1/1; border-radius:50%;
-  background:rgba(0,0,0,.35);
-  border:1px solid var(--bord);
-  text-decoration:none; color:var(--ivoire);
-  padding:10px;
-  transition:.25s transform,.25s box-shadow,.25s background;
-  box-shadow:0 10px 30px rgba(0,0,0,.45);
-}
-.round:hover{transform:translateY(-2px) scale(1.02); background:rgba(0,0,0,.45); box-shadow:0 14px 34px rgba(0,0,0,.55);}
-.round img{width:70%; filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));}
-.round span{display:block; font-size:.9rem; margin-top:8px; text-align:center;}
-
-/* ---------- Lightbox (extrait) ---------- */
-.extract{
-  width:100%;
-  border-radius:12px;
-  border:1px solid var(--bord);
-  box-shadow:0 10px 30px rgba(0,0,0,.45);
-  cursor:pointer;
-}
-.lightbox{
-  position:fixed; inset:0;
-  display:none; place-items:center;
-  background:rgba(0,0,0,.8);
-  z-index:2000; padding:20px;
-}
-.lightbox img{
-  max-width:min(92vw,1100px);
-  max-height:86vh;
-  border-radius:14px;
-  border:1px solid var(--bord);
-  background:#000;
-}
-.lightbox[data-open="true"]{display:grid;}
-
 /* =========================================================
-   HUD — Deux cartes séparées : Sac & Arzanskân
+   1) SAC + JAUGE (rangée sous le titre)
    ========================================================= */
-
-/* Conteneur des cartes (fixé en haut à droite) */
-.status-bar{
-  position:fixed;
-  top:12px; right:12px;
-  display:flex; gap:12px; flex-wrap:wrap;
-  z-index:9999; }
+.tools-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(12px,3vw,16px);
+  align-items:start; justify-items:center;
+  max-width:min(900px, 92vw);
+  margin:0 auto clamp(12px,4vw,20px);
+}
+.tool{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+.tool-label{
+  margin:0;
+  font-size:clamp(.85rem,3.5vw,1rem);
+  letter-spacing:.3px;
+  color:var(--ivoire);
+  opacity:.9;
 }
 
-/* Style commun des cartes */
-.box{
-  background:rgba(10,0,20,.45);
-  border:1px solid rgba(255,214,116,.6);
-  border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,.4);
-  color:#fff8e6;
-  text-align:center;
-  padding:.6rem .8rem;
-  backdrop-filter:blur(4px);
-}
-.box-title{
-  font-family:'Cinzel Decorative',serif;
-  font-weight:700;
-  font-size:.95rem;
-  color:var(--or);
-  text-shadow:0 0 6px rgba(255,214,116,.6);
-  margin:0 0 .35rem 0;
-}
-
-/* Carte : Sac */
-/* === Bouton Sac magique === */
+/* Bouton Sac */
 .sac-box{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:56px;
-  height:56px;
+  display:flex; align-items:center; justify-content:center;
+  width:60px; height:60px;
   cursor:pointer;
   background:rgba(10,0,20,.45);
   border:1px solid var(--bord);
   border-radius:14px;
   box-shadow:0 0 12px rgba(0,0,0,.45);
   transition:.25s transform,.25s box-shadow,.25s background;
-  appearance:none;
-  -webkit-appearance:none;
+  appearance:none; -webkit-appearance:none;
 }
-
 .sac-box img{
-  width:42px;
-  height:auto;
+  width:44px; height:auto;
   filter:drop-shadow(0 0 8px rgba(255,214,116,.7));
   transition:transform .3s ease, filter .3s ease;
 }
-
-/* Effet survol : léger halo magique et soulèvement */
 .sac-box:hover{
   background:rgba(0,0,0,.55);
   transform:translateY(-2px) scale(1.05);
@@ -190,18 +89,19 @@ body{
   filter:drop-shadow(0 0 12px rgba(255,230,150,.9));
   transform:scale(1.12) rotate(-3deg);
 }
+.sac-box:focus-visible{ outline:2px solid var(--or); outline-offset:3px; }
 
-/* Effet focus clavier (accessibilité) */
-.sac-box:focus-visible{
-  outline:2px solid var(--or);
-  outline-offset:3px;
-}
-
-/* Carte : Arzanskân */
+/* Boîte Jauge */
 .energy-box{
-  display:flex; flex-direction:column; align-items:stretch; justify-content:center;
-  min-width:240px; position:relative;
+  background:rgba(10,0,20,.45);
+  border:1px solid rgba(255,214,116,.6);
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+  color:#fff8e6;
+  text-align:center;
   padding:.7rem .9rem .85rem;
+  min-width:min(320px, 86vw);
+  backdrop-filter:blur(4px);
 }
 .energy-bar{
   width:100%; height:14px; border-radius:999px; overflow:hidden;
@@ -210,20 +110,16 @@ body{
   box-shadow:inset 0 0 12px rgba(0,0,0,.35);
 }
 .energy-bar .fill{height:100%; background:linear-gradient(90deg,#ffd674,#ffe9a8);}
-.percent{
-  position:absolute; right:10px; bottom:8px;
-  font-size:.9rem; color:var(--ivoire);
-  text-shadow:0 1px 2px rgba(0,0,0,.5);
-}
 
-/* ---------- Panneau du sac ---------- */
+/* =========================================================
+   2) PANNEAU DU SAC (dialog)
+   ========================================================= */
 .sac-panel{
   position:fixed;
-  top:calc(12px + 74px); /* sous les cartes */
-  right:12px;
+  top:12px; right:12px;
   z-index:4000;
   display:none;
-  width:270px;
+  width:min(92vw, 300px);
   background:rgba(0,0,0,.65);
   border:1px solid var(--bord);
   border-radius:12px;
@@ -258,17 +154,9 @@ body{
 .btn-mini:hover{transform:translateY(-1px); box-shadow:0 0 18px rgba(255,223,100,1);}
 .btn-mini.ghost{background:rgba(0,0,0,.25); color:var(--ivoire); border:1px solid var(--bord); box-shadow:none;}
 
-/* ---------- Toast ---------- */
-.arz-toast{
-  position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px);
-  background:rgba(0,0,0,.75); color:var(--ivoire);
-  padding:.55rem .9rem; border-radius:999px;
-  border:1px solid var(--bord);
-  opacity:0; transition:.25s ease; z-index:4000;
-}
-.arz-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
-
-/* ---------- Hero + call-to-actions ---------- */
+/* =========================================================
+   3) HERO, TEXTE, BOUTONS
+   ========================================================= */
 .hero-frame{
   max-width:980px; margin:0 auto;
   padding:10px; border-radius:22px;
@@ -301,18 +189,15 @@ body{
   transition:.2s transform,.2s box-shadow;
 }
 .button-row a:hover{transform:translateY(-1px) scale(1.02); box-shadow:0 0 18px rgba(255,223,100,1);}
-.footer-nav{text-align:center; opacity:.85; margin:28px 0 12px; font-size:.95rem;}
-.footer-nav a{color:var(--or); text-decoration:none;}
-.footer-nav a:hover{text-decoration:underline;}
 
-/* ---------- Responsif ciblé ---------- */
+/* =========================================================
+   4) Responsif ciblé
+   ========================================================= */
 @media (max-width:560px){
-  .button-row a{min-width:unset; padding:.55rem 1rem; font-weight:700;}
+  .energy-box{ min-width: min(320px, 90vw); }
+  .button-row a{ min-width:unset; padding:.55rem 1rem; }
 }
-@media (max-width:520px){
-  .status-bar{top:10px; right:10px;}
-  .sac-box img{width:40px;}
-  .energy-box{min-width:210px;}
-  .percent{bottom:7px; right:8px;}
-  .sac-panel{top:calc(10px + 74px); right:10px;}
+@media (min-width:900px){
+  /* Option : resserrer un peu la rangée d’outils sur desktop */
+  .tools-row{ max-width:780px; }
 }
