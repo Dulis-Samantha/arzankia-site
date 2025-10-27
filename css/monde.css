@@ -1,0 +1,70 @@
+:root{
+  --or:#ffd674; --ivoire:#fff8e6;
+  --verre:rgba(10,0,20,.45); --bord:rgba(255,214,116,.55);
+  --bg-url: url('images/fonds/fond_etoile_perso.webp'); /* sur chaque page monde, tu peux la surcharger */
+}
+
+html,body{height:100%}
+body{
+  margin:0; color:var(--ivoire); font-family:Georgia,serif;
+  background: var(--bg-url) center top/cover no-repeat fixed;
+  text-shadow:1px 1px 4px #000; overflow-x:hidden;
+}
+
+.container{max-width:1100px; margin:0 auto; padding:clamp(16px,3vw,32px);}
+
+/* ===== Titre ===== */
+.page-title{display:flex; align-items:center; justify-content:center; gap:clamp(12px,2vw,18px); margin:clamp(16px,3vw,28px) auto;}
+.page-title img{width:clamp(48px,8vw,72px); filter:drop-shadow(0 6px 16px rgba(0,0,0,.5)); border-radius:12px;}
+.page-title h1{margin:0; font-size:clamp(1.6rem,4.8vw,3rem);}
+
+/* ===== Cartes / sections ===== */
+.block{background:var(--verre); border:1px solid var(--bord); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.45);}
+.block h2{margin:0; padding:14px 16px; border-bottom:1px solid var(--bord); background:rgba(0,0,0,.25); font-size:clamp(1.1rem,2.8vw,1.4rem);}
+.block .content{padding:clamp(12px,2.2vw,18px);}
+.hero-img{width:100%; display:block; border-bottom:1px solid var(--bord);}
+
+/* ===== Grille ===== */
+.grid{display:grid; grid-template-columns:1.2fr .8fr; gap:clamp(14px,2.4vw,24px); align-items:start;}
+@media (max-width:860px){.grid{grid-template-columns:1fr;}}
+
+/* ===== Boutons ronds ===== */
+.btn-ring{display:grid; grid-template-columns:repeat(2,minmax(120px,1fr)); gap:clamp(10px,2vw,16px); justify-items:center;}
+.round{display:inline-grid; place-items:center; width:clamp(88px,14vw,128px); aspect-ratio:1/1; border-radius:50%;
+  background:rgba(0,0,0,.35); border:1px solid var(--bord); text-decoration:none; color:var(--ivoire);
+  padding:10px; transition:.25s transform,.25s box-shadow,.25s background; box-shadow:0 10px 30px rgba(0,0,0,.45);}
+.round:hover{transform:translateY(-2px) scale(1.02); background:rgba(0,0,0,.45); box-shadow:0 14px 34px rgba(0,0,0,.55);}
+.round img{width:70%; filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));}
+.round span{display:block; font-size:.9rem; margin-top:8px; text-align:center;}
+
+/* ===== Lightbox (extrait) ===== */
+.extract{width:100%; border-radius:12px; border:1px solid var(--bord); box-shadow:0 10px 30px rgba(0,0,0,.45); cursor:pointer;}
+.lightbox{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.8); z-index:2000; padding:20px;}
+.lightbox img{max-width:min(92vw,1100px); max-height:86vh; border-radius:14px; border:1px solid var(--bord); background:#000;}
+.lightbox[data-open="true"]{display:grid}
+
+/* ===== HUD commun : Sac + Jauge (alignés) ===== */
+.hud{position:fixed; top:12px; right:12px; z-index:3000; display:flex; align-items:center; gap:8px;
+  background:var(--verre); border:1px solid var(--bord); border-radius:14px; padding:8px 10px; box-shadow:0 10px 30px rgba(0,0,0,.45); backdrop-filter:blur(4px);}
+.sac{display:flex; align-items:center; justify-content:center; width:38px; height:38px; min-width:38px; border-radius:10px; border:1px solid var(--bord);
+  background:rgba(0,0,0,.3); cursor:pointer; transition:.2s transform;}
+.sac:hover{transform:translateY(-1px);}
+.sac img{width:26px; height:auto;}
+
+.gauge{display:flex; align-items:center; gap:8px; min-width:180px;}
+.bar{position:relative; width:160px; height:14px; background:rgba(255,255,255,.15); border:1px solid var(--bord); border-radius:999px; overflow:hidden;}
+.fill{position:absolute; inset:0 auto 0 0; width:60%; background:linear-gradient(90deg,#ffd674,#ffe9a8); box-shadow:inset 0 0 12px rgba(0,0,0,.35);}
+.pct{font-size:.9rem; min-width:2.5ch}
+
+@media (max-width:520px){
+  .hud{top:10px; right:10px; padding:8px;}
+  .bar{width:132px; height:12px;}
+  .sac{width:36px; height:36px;}
+  .sac img{width:24px;}
+  .pct{font-size:.85rem;}
+}
+
+/* ===== Footer nav ===== */
+.footer-nav{text-align:center; opacity:.85; margin:28px 0 12px; font-size:.95rem;}
+.footer-nav a{color:var(--or); text-decoration:none;}
+.footer-nav a:hover{text-decoration:underline;}
