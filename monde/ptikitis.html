@@ -7,7 +7,7 @@
   <title>Monde des Ptikitis</title>
 
   <!-- Fond spécifique à ce monde -->
-  <style>:root{ --bg-url: url('../images/fonds/fond_etoile_perso.webp'); }</style> 
+  <style>:root{ --bg-url: url('../images/fonds/fond_etoile_perso.webp'); }</style>
 
   <!-- Bases communes -->
   <link rel="stylesheet" href="../css/monde.css" />
@@ -15,59 +15,68 @@
 </head>
 
 <body>
-<div class="status-bar">
-  <!-- UNIQUE bouton sac -->
-  <button class="box sac-box"
-          id="sacToggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="sacPanel">
-    <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
-  </button>
-
-  <!-- Jauge -->
-  <div class="box energy-box">
-    <div class="box-title">✨ Ton Arzanskân</div>
-    <div class="energy-bar"><div class="fill" style="width:56%"></div></div>
-    <!-- plus de <span class="percent"> -->
-  </div>
-</div>
-
-<!-- Panneau inventaire -->
-<aside class="sac-panel" id="sacPanel" role="dialog" aria-modal="false" aria-labelledby="sacTitle">
-  <div class="sac-head" id="sacTitle">
-    Inventaire
-    <button class="sac-close" type="button" aria-label="Fermer">×</button>
-  </div>
-  <div class="sac-body">
-    <p class="bag-empty">Ton sac est vide pour l’instant…</p>
-    <!-- tes boutons .btn-mini ici -->
-  </div>
-</aside>
+  <!-- ===== Panneau inventaire (réutilisé tel quel) ===== -->
+  <aside class="sac-panel" id="sacPanel" role="dialog" aria-modal="false" aria-labelledby="sacTitle">
+    <div class="sac-head" id="sacTitle">
+      Inventaire
+      <button class="sac-close" type="button" aria-label="Fermer">×</button>
+    </div>
+    <div class="sac-body">
+      <p class="bag-empty">Ton sac est vide pour l’instant…</p>
+      <!-- tes boutons .btn-mini ici -->
+    </div>
+  </aside>
 
   <main class="container">
-    <!-- Titre seul (pas d’icône) -->
-   <div class="page-title">
-  <h1>Monde des Ptikitis</h1>
-</div>
+    <!-- ===== 1) TITRE ===== -->
+    <header class="page-title">
+      <h1>Monde des Ptikitis</h1>
+    </header>
 
+    <!-- ===== 2) SAC + JAUGE ===== -->
+    <section class="tools-row" aria-label="Commandes">
+      <!-- Sac -->
+      <div class="tool">
+        <p class="tool-label">Ton sac</p>
+        <button class="box sac-box"
+                id="sacToggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="sacPanel">
+          <img src="../images/bouton/sac_magique.webp" alt="Sac magique">
+        </button>
+      </div>
 
-    <!-- Image centrale -->
-    <div class="hero-frame">
-      <img class="main-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
-    </div>
+      <!-- Jauge -->
+      <div class="tool">
+        <p class="tool-label">Ton Arzanskân</p>
+        <div class="box energy-box" role="status" aria-label="Jauge d'énergie">
+          <!-- pas de titre dans la boîte, le label est au-dessus -->
+          <div class="energy-bar">
+            <div class="fill" style="width:56%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Texte poétique -->
-    <div class="quote-box">
+    <!-- ===== 3) IMAGE ===== -->
+    <figure class="hero-frame">
+      <img class="main-image"
+           src="../images/mondes/monde_Ptikitis.webp"
+           alt="Illustration du Monde des Ptikitis">
+    </figure>
+
+    <!-- ===== 4) TEXTE ===== -->
+    <section class="quote-box" aria-label="Description du monde">
       « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil »
-    </div>
+    </section>
 
-    <!-- Boutons dorés -->
-    <div class="button-row">
+    <!-- ===== 5) BOUTONS ===== -->
+    <nav class="button-row" aria-label="Navigation du monde">
       <a href="../7.extrait_Ptikitis.html">Extrait du livre</a>
       <a href="../9.entree_Ptikitis.html">Entrée du monde</a>
       <a href="../3.les_mondes.html">← Retour</a>
-    </div>
+    </nav>
   </main>
 </body>
 </html>
