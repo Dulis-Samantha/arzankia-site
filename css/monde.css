@@ -75,9 +75,28 @@ body{
 .sac:hover{transform:translateY(-1px);}
 .sac img{width:26px; height:auto;}
 
-.gauge{display:flex; align-items:center; gap:8px; min-width:180px;}
-.bar{position:relative; width:160px; height:14px; background:rgba(255,255,255,.15); border:1px solid var(--bord); border-radius:999px; overflow:hidden;}
-.fill{position:absolute; inset:0 auto 0 0; width:60%; background:linear-gradient(90deg,#ffd674,#ffe9a8); box-shadow:inset 0 0 12px rgba(0,0,0,.35);}
+.gauge{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+}
+.bar{
+  position: relative;
+  width: 160px;
+  height: 14px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid var(--bord);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.fill{
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 60%;
+  background: linear-gradient(90deg,#ffd674,#ffe9a8);
+  box-shadow: inset 0 0 12px rgba(0,0,0,.35);
+}
 .pct{font-size:.9rem; min-width:2.5ch}
 
 .energy-label {
