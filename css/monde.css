@@ -316,17 +316,17 @@ body {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px));
     left: 50%; right: auto;
     transform: translateX(-50%) scale(.95);
-    z-index: 4000;
+    gap: .4rem;                 /* un poil plus compact */
   }
-  .energy-bar { width: 140px; }
+
+  .energy-bar { width: 60px; }  /* ← cohérent avec le haut */
+  .energy-pct { min-width: 2ch; font-size: .85rem; } /* plus compact */
 
   .bag-wrap {
-    position: fixed;
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
     right: 12px;
-    transform: none;
-    z-index: 4700;
   }
+
   .bag-icon { width: 44px; height: 44px; }
 
   .quest-ribbon {
