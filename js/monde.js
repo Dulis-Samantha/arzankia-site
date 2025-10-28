@@ -132,20 +132,26 @@
     bagBtn?.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open) renderBag();
   }
+// ---------- Sac : ouverture / fermeture ----------
+function isBagOpen() {
+  return bagPanel?.dataset.open === 'true' || bagPanel?.style.display === 'block';
+}
+bagBtn?.addEventListener('click', () => {
+  const open = !isBagOpen();
+  openBag(open);
+  if (open) renderBag();         // s'assure de l'affichage à chaque ouverture
+});
+bagClose?.addEventListener('click', () => openBag(false));
 
-  // Bouton sac
-  bagBtn?.addEventListener('click', () => {
-    const isOpen = bagPanel?.dataset.open === 'true';
-    openBag(!isOpen);
-  });
-  bagClose?.addEventListener('click', () => openBag(false));
+// Fermer si clic hors panneau (sans bloquer la récolte)
+document.addEventListener('click', (e) => {
+  if (!bagPanel || !bagBtn) return;
+  const t = e.target;
+  // on ignore les clics sur les ingrédients
+  if (t.closest('.quest-ingredient')) return;
+  if (!bagPanel.contains(t) && !bagBtn.contains(t)) openBag(false);
+});
 
-  // Fermer si clic hors panneau
-  document.addEventListener('click', (e) => {
-    if (!bagPanel || !bagBtn) return;
-    const t = e.target;
-    if (!bagPanel.contains(t) && !bagBtn.contains(t)) openBag(false);
-  });
 
   // Réinitialiser
   btnReset?.addEventListener('click', () => {
@@ -172,35 +178,39 @@
   });
   updateCalmLabel();
 
-  // ---------- Récolte d’ingrédients (délégation) ----------
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.quest-ingredient');
-    if (!btn) return;
-    const id   = btn.dataset.id || 'item';
-    const name = btn.dataset.name || id;
-    const img  = btn.dataset.img  || '';
+// ---------- Récolte d’ingrédients (délégation) ----------
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.quest-ingredient');
+  if (!btn) return;
 
-    let bag = loadBag();
-    const found = bag.find(i => i.id === id);
+  const id   = btn.dataset.id   || 'item';
+  const name = btn.dataset.name || id;
+  const img  = btn.dataset.img  || '';
 
-    if (found) {
-      if ((found.qty || 1) >= 2) {
-        toast('Tu possèdes déjà la quantité maximale de cet ingrédient.');
-        return;
-      }
-      found.qty = (found.qty || 1) + 1;
-    } else {
-      bag.push({ id, name, img, qty: 1 });
+  console.log('[CLICK] quest-ingredient', { id, name, img });
+
+  let bag = loadBag();
+  const found = bag.find(i => i.id === id);
+
+  if (found) {
+    if ((found.qty || 1) >= 2) {
+      toast('Tu possèdes déjà la quantité maximale de cet ingrédient.');
+      return;
     }
+    found.qty = (found.qty || 1) + 1;
+  } else {
+    bag.push({ id, name, img, qty: 1 });
+  }
 
-    saveBag(bag);
-    toast(`${name} ajouté à ton sac magique !`);
-    // Si le sac est ouvert, on met à jour la liste en direct
-    if (bagPanel?.dataset.open === 'true') renderBag();
+  saveBag(bag);
+  toast(`${name} ajouté à ton sac magique !`);
 
-    // Log utile pour vérifier rapidement
-    console.log('[arz_bag]', bag);
-  });
+  // Force le rafraîchissement immédiatement, sac ouvert ou non
+  renderBag();
+
+  // Pour diagnostic express dans la console
+  console.log('[arz_bag]', bag);
+});
 
   // ---------- Boot ----------
   animateGaugeTo(getEnergy());
@@ -218,3 +228,4 @@
     resetBag: () => { localStorage.removeItem(BAG_KEY); renderBag(); },
   };
 })();
+
