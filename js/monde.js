@@ -60,7 +60,7 @@
     <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
     <div class="bag-badge" id="bagBadge">0</div>
     <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
-      <h3>Ton sac magique</h3>
+      <h3>Ton inventaire</h3>
       <ul id="bagList"></ul>
       <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
       <button class="bag-toggle" id="bagToggle"></button>
