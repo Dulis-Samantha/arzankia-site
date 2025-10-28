@@ -179,10 +179,11 @@
       bag.push({ id, name, img, qty: 1 });
     }
 
-    saveBag(bag);
-    renderBag();        // ← MAJ immédiate
-    toast(`${name} ajouté à ton sac magique !`);
-    // openBag(true);   // ← décommente si tu veux ouvrir le sac à chaque récolte
+   saveBag(bag);
+renderBag();
+openBag(true);   // ← ouvre le sac après la récolte
+toast(`${name} ajouté à ton sac magique !`);
+
   });
 
   // ---------- Boot ----------
