@@ -157,12 +157,13 @@
     ribbon.style.display = (!S.infinite && !S.chill && pct <= CFG.questThresholdPct) ? 'block' : 'none';
   }
   function redirectZero(){
-    if (overlay){
-      overlay.style.display = 'grid';
-      // Ici tu peux afficher une mini-quête si tu veux
-    }
-    window.location.href = CFG.zeroRedirectUrl;
+  if (overlay){
+    overlay.style.display = 'grid';
+    alert('⚡ Ton énergie est vide, recharge-la avec le bouton en bas à droite !');
   }
+  // 🔒 On désactive temporairement la redirection automatique :
+  // window.location.href = CFG.zeroRedirectUrl;
+}
 
   /* =========================
    * BAG
