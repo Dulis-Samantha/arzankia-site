@@ -14,7 +14,7 @@
     perItemMax: 2,                // quantité max par ingrédient
     infiniteAfterUses: 10,        // mode infini après N utilisations
 
-   bagIconSrc: '../images/bouton/sac_magique.webp',  // ← important
+    bagIconSrc: '../images/bouton/sac_magique.webp',
 
     items: {
       'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: 'ing_ptikitis.webp' },
@@ -41,68 +41,79 @@
   let timer = null;
 
   /* =========================
-   * DOM
+   * DOM de la jauge
    * ========================= */
   const elFill = document.getElementById('energyFill');
   const elPct  = document.getElementById('energyPct');
   const overlay= document.getElementById('lockOverlay');
 
-  // ruban alerte
+  // Ruban alerte
   const ribbon = document.createElement('div');
   ribbon.className = 'quest-ribbon';
   ribbon.textContent = CFG.messages.low;
   document.body.appendChild(ribbon);
 
-  // sac
- const bagWrap = document.createElement('div');
-bagWrap.className = 'bag-wrap';
-bagWrap.innerHTML = `
-  <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
-  <div class="bag-badge" id="bagBadge">0</div>
-  <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
-    <h3>Ton sac magique</h3>
-    <ul id="bagList"></ul>
-    <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+  /* =========================
+   * SAC — injection HTML
+   * ========================= */
+  const bagWrap = document.createElement('div');
+  bagWrap.className = 'bag-wrap';
+  bagWrap.innerHTML = `
+    <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
+    <div class="bag-badge" id="bagBadge">0</div>
+    <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
+      <h3>Ton sac magique</h3>
+      <ul id="bagList"></ul>
+      <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+      <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
+    </div>
+  `;
+  document.body.appendChild(bagWrap);
 
-    <!-- Nouveau bouton pilule -->
-    <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
-  </div>
-`;
-document.body.appendChild(bagWrap);
-
-  const $ = (sel, root=document) => root.querySelector(sel);
+  // Raccourcis DOM
+  const $  = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
-  const bagIcon  = $('#bagIcon', bagWrap);
-  const bagBadge = $('#bagBadge', bagWrap);
-  const bagMenu  = $('#bagMenu', bagWrap);
-  const bagList  = $('#bagList', bagWrap);
-  const bagEmpty = $('#bagEmpty', bagWrap);
-  const bagReset = $('#bagReset', bagWrap);
 
-  /* open/close sac */
+  const bagIcon   = $('#bagIcon',  bagWrap);
+  const bagBadge  = $('#bagBadge', bagWrap);
+  const bagMenu   = $('#bagMenu',  bagWrap);
+  const bagList   = $('#bagList',  bagWrap);
+  const bagEmpty  = $('#bagEmpty', bagWrap);
+  const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
+
+  /* =========================
+   * OUVERTURE / FERMETURE DU SAC
+   * ========================= */
   bagIcon.addEventListener('click', () => {
     const show = !bagMenu.classList.contains('show');
     bagMenu.classList.toggle('show', show);
     bagIcon.setAttribute('aria-expanded', show ? 'true' : 'false');
-    renderBag();
+    if (show) renderBag();
   });
   document.addEventListener('click', (e) => {
-    if(!bagWrap.contains(e.target)) {
+    if (!bagWrap.contains(e.target)) {
       bagMenu.classList.remove('show');
       bagIcon.setAttribute('aria-expanded', 'false');
     }
   });
 
-  /* init collectables */
-  initCollectibles();
+  // Toggle "Mode tranquille" (attaché UNE fois)
+  bagToggle.onclick = () => {
+    S.chill = !S.chill;
+    saveState();
+    renderAll();
+    startIfNeeded();
+  };
 
-  /* boot */
+  /* =========================
+   * INIT
+   * ========================= */
+  initCollectibles();
   renderAll();
   startIfNeeded();
 
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) return;
-    startIfNeeded();
+    if (!document.hidden) startIfNeeded();
   });
   window.addEventListener('beforeunload', saveState);
 
@@ -145,11 +156,10 @@ document.body.appendChild(bagWrap);
     const pct = (S.energy / CFG.max) * 100;
     ribbon.style.display = (!S.infinite && !S.chill && pct <= CFG.questThresholdPct) ? 'block' : 'none';
   }
-
   function redirectZero(){
     if (overlay){
       overlay.style.display = 'grid';
-      // facultatif : propose une mini-quête – tu peux brancher ici
+      // Ici tu peux afficher une mini-quête si tu veux
     }
     window.location.href = CFG.zeroRedirectUrl;
   }
@@ -157,24 +167,30 @@ document.body.appendChild(bagWrap);
   /* =========================
    * BAG
    * ========================= */
-function renderBag(){
-  bagBadge.textContent = String(totalItems());
+  function renderBag(){
+    // badge
+    bagBadge.textContent = String(totalItems());
 
-  // Texte/état visuel du toggle
-  if (S.chill) {
-    bagToggle.classList.add('on');
-    bagToggle.setAttribute('aria-pressed', 'true');
-  } else {
-    bagToggle.classList.remove('on');
-    bagToggle.setAttribute('aria-pressed', 'false');
-  }
+    // état visuel + libellé du toggle
+    if (S.chill) {
+      bagToggle.classList.add('on');
+      bagToggle.setAttribute('aria-pressed', 'true');
+      bagToggle.textContent = 'Désactiver le mode tranquille';
+      bagToggle.title = 'Clique pour désactiver';
+    } else {
+      bagToggle.classList.remove('on');
+      bagToggle.setAttribute('aria-pressed', 'false');
+      bagToggle.textContent = 'Activer le mode tranquille';
+      bagToggle.title = 'Clique pour activer';
+    }
 
-  bagList.innerHTML = '';
-  if (S.bag.length === 0){ bagEmpty.style.display = 'block'; return; }
-  bagEmpty.style.display = 'none';
-
-  // ... (le reste inchangé: génération des <li>, boutons "Utiliser", etc.)
-}
+    // contenu des items
+    bagList.innerHTML = '';
+    if (S.bag.length === 0){
+      bagEmpty.style.display = 'block';
+      return;
+    }
+    bagEmpty.style.display = 'none';
 
     S.bag.forEach((entry, idx) => {
       const meta = metaOf(entry.id);
@@ -198,22 +214,18 @@ function renderBag(){
         useItem(idx);
       });
     });
-
-    // actions secondaires
-    bagReset.onclick = () => {
-      // remet la page en “collectable” : ici, rien à faire si on n’utilise pas de verrous par page
-      toast('Réinitialisation effectuée.');
-    };
   }
 
   function useItem(index){
     const entry = S.bag[index]; if (!entry || entry.qty<=0) return;
+
     // consommer
     entry.qty--;
     if (entry.qty === 0){
       // retire l’emplacement s’il est vide
       S.bag.splice(index,1);
     }
+
     // effet : recharge
     S.energy = CFG.max;
     S.usesTotal++;
@@ -257,8 +269,7 @@ function renderBag(){
             return;
           }
           entry.qty++;
-        }else{
-          // contrôle nombre de slots
+        } else {
           if (S.bag.length >= CFG.bagSlots){
             toast(CFG.messages.bagFull);
             return;
@@ -284,6 +295,7 @@ function renderBag(){
       img : img  || CFG.items[id]?.img  || ''
     };
   }
+
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
   function loadState(){
@@ -292,22 +304,21 @@ function renderBag(){
       const raw = localStorage.getItem(CFG.storageKey);
       if (!raw) return def;
       const s = JSON.parse(raw);
-      // garde-fous
       if (!Array.isArray(s.bag)) s.bag = [];
       if (typeof s.energy !== 'number') s.energy = CFG.max;
       if (typeof s.usesTotal !== 'number') s.usesTotal = 0;
       if (typeof s.chill !== 'boolean') s.chill = false;
       if (typeof s.infinite !== 'boolean') s.infinite = false;
-      // purge quantités > perItemMax
       s.bag.forEach(e=>{ e.qty = clamp(e.qty||0,0,CFG.perItemMax); });
-      // limite slots
       if (s.bag.length > CFG.bagSlots) s.bag = s.bag.slice(0, CFG.bagSlots);
       return s;
-    }catch{ return def; }
+    } catch { return def; }
   }
+
   function saveState(){
     localStorage.setItem(CFG.storageKey, JSON.stringify(S));
   }
+
   function toast(text, ms=1800){
     const t = document.createElement('div');
     t.className = 'arz-toast'; t.textContent = text;
@@ -316,7 +327,7 @@ function renderBag(){
     setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 220); }, ms);
   }
 
-  // petite API console (pratique pour tester)
+  // Petite API console (pratique pour tester)
   window.Arz = {
     get: () => ({...S}),
     resetAll: () => { S = { energy: CFG.max, bag: [], usesTotal: 0, chill:false, infinite:false }; saveState(); renderAll(); startIfNeeded(); },
