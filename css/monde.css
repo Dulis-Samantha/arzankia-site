@@ -337,3 +337,10 @@ body {
 
   .image-zone { margin-top: 96px !important; }
 }
+
+  .quest-ingredient .ingredient-img {
+    transform: scale(var(--zoom-scale-mobile, 1));
+  }
+}
+
+
