@@ -365,10 +365,28 @@
     setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 220); }, ms);
   }
 
-  // Petite API console (pratique pour tester)
-  window.Arz = {
-    get: () => ({...S}),
-    resetAll: () => { S = { energy: CFG.max, bag: [], usesTotal: 0, chill:false, infinite:false }; saveState(); renderAll(); startIfNeeded(); },
-    setEnergy: v => { S.energy = clamp(v,0,CFG.max); saveState(); renderAll(); },
-  };
+// Petite API console (pratique pour tester)
+window.Arz = {
+  get: () => ({ ...S }),
+  resetAll: () => {
+    S = { energy: CFG.max, bag: [], usesTotal: 0, chill: false, infinite: false };
+    saveState();
+    renderAll();
+    startIfNeeded();
+  },
+  setEnergy: v => {
+    S.energy = clamp(v, 0, CFG.max);
+    saveState();
+    renderAll();
+  }
+};
+
+// --- Bouton magique "Recharger énergie" ---
+document.getElementById('refillBtn')?.addEventListener('click', () => {
+  S.energy = CFG.max;
+  saveState();
+  renderAll();
+  startIfNeeded();
+  alert('Énergie rechargée à 100% ⚡');
+});
 })();
