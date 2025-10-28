@@ -164,4 +164,83 @@ function renderBagList(){
 
 // affiche le contenu à l’ouverture du sac
 document.querySelector('.sac')?.addEventListener('click', renderBagList);
+/* ==========================================================
+   🎒 Gestion du sac magique d'Arzanskân
+   ========================================================== */
+(function(){
+  const bagBtn   = document.querySelector('.sac');
+  const bagPanel = document.getElementById('bagPanel');
+  const bagClose = document.querySelector('.sac-close');
+  const bagList  = document.getElementById('bagList');
+  const bagEmpty = document.getElementById('bagEmpty');
+  const btnReset = document.getElementById('btnReset');
+  const btnCalm  = document.getElementById('btnCalm');
+
+  const BAG_KEY = 'arz_bag';
+  const ENERGY_KEY = 'arz_energy_v1';
+
+  // --- Ouvrir / fermer le sac
+  if (bagBtn && bagPanel) {
+    bagBtn.addEventListener('click', () => {
+      const isOpen = bagPanel.dataset.open === 'true';
+      bagPanel.dataset.open = !isOpen;
+      bagPanel.style.display = isOpen ? 'none' : 'block';
+      bagBtn.setAttribute('aria-expanded', !isOpen);
+      renderBag();
+    });
+  }
+
+  if (bagClose) {
+    bagClose.addEventListener('click', () => {
+      bagPanel.dataset.open = 'false';
+      bagPanel.style.display = 'none';
+    });
+  }
+
+  // --- Charger le sac
+  function loadBag(){
+    const raw = localStorage.getItem(BAG_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  // --- Afficher le contenu
+  function renderBag(){
+    const bag = loadBag();
+    bagList.innerHTML = '';
+
+    if (bag.length === 0){
+      bagEmpty.style.display = 'block';
+      return;
+    }
+    bagEmpty.style.display = 'none';
+
+    bag.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'bag-li';
+      li.innerHTML = `
+        <div class="bag-item">
+          <img src="${item.img}" alt="${item.name}" />
+          <div class="bag-name">${item.name} <span class="bag-qty">×${item.qty}</span></div>
+        </div>`;
+      bagList.appendChild(li);
+    });
+  }
+
+  // --- Réinitialiser
+  btnReset?.addEventListener('click', () => {
+    if (confirm("Souhaites-tu vraiment vider ton sac ?")) {
+      localStorage.removeItem(BAG_KEY);
+      renderBag();
+    }
+  });
+
+  // --- Mode tranquille (arrêt de la décharge)
+  btnCalm?.addEventListener('click', () => {
+    const calm = localStorage.getItem('arz_calm') === 'true';
+    localStorage.setItem('arz_calm', (!calm).toString());
+    alert(!calm ? "🕊️ Mode tranquille activé (la jauge ne se vide plus)." : "⚡ Mode tranquille désactivé.");
+  });
+
+})();
+
 
