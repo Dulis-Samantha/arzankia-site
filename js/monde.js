@@ -308,14 +308,6 @@
         // Transition douce (au cas où pas en CSS)
         imgEl.style.transition = imgEl.style.transition || 'transform 0.3s ease';
 
-        // Survol (desktop)
-        imgEl.addEventListener('mouseenter', () => {
-          if (!isMobile) imgEl.style.transform = `scale(${zoomScale})`;
-        });
-        imgEl.addEventListener('mouseleave', () => {
-          if (!isMobile) imgEl.style.transform = '';
-        });
-
         // Pulse au clic / touch
         const pulse = () => {
           imgEl.style.transform = `scale(${zoomScale})`;
