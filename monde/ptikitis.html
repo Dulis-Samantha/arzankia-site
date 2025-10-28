@@ -6,78 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monde des Ptikitis</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/monde.css" />
+  <!-- Polices et styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/energy-gauge.css?v=15" />
+  <link rel="stylesheet" href="../css/monde.css?v=1" />
 </head>
+
 <body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Énergie</div>
+    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
 
-  <!-- ===== HUD : Sac + Jauge ===== -->
-  <div class="hud" role="region" aria-label="Interface d'aventurier">
-    <div class="hud-item">
-      <div class="hud-label">Ton sac</div>
-      <button class="sac" title="Ouvrir le sac" aria-controls="bagPanel" aria-expanded="false">
-        <img src="../images/bouton/sac_magique.webp" alt="Sac magique" />
-      </button>
-    </div>
-
-    <div class="hud-item">
-      <div class="hud-label">Ton Arzanskân</div>
-      <div class="gauge" aria-live="polite">
-        <div class="bar"><div class="fill" id="energyFill"></div></div>
-        <div class="pct" id="energyPct">100%</div>
-      </div>
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
     </div>
   </div>
 
-  <!-- ===== Panneau du sac ===== -->
-  <aside class="sac-panel" id="bagPanel" role="dialog" aria-modal="true" aria-label="Sac magique">
-    <div class="sac-head">
-      TON SAC MAGIQUE
-      <button class="sac-close" type="button" aria-label="Fermer">✕</button>
-    </div>
+  <div class="container">
+    <h1 class="page-title">Monde des Ptikitis</h1>
 
-    <div class="sac-body">
-      <button class="btn-mini" id="btnReset">🔄 Réinitialiser les ingrédients</button>
-      <button class="btn-mini ghost" id="btnCalm">🕊️ Mode tranquille (désactiver la jauge)</button>
-      <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
-      <ul class="bag-list" id="bagList" aria-live="polite"></ul>
-    </div>
-  </aside>
+    <!-- Illustration + ingrédient caché -->
+    <div class="image-zone">
+      <img class="Fees-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
 
-  <!-- ===== Contenu principal ===== -->
-  <main class="container">
-    <div class="page-title">
-      <h1>Monde des Ptikitis</h1>
-    </div>
-
-    <div class="hero-frame">
-      <img class="main-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
-      <!-- ingrédient cliquable -->
-      <button
-        class="quest-ingredient"
-        data-id="ptikitis_rubictus"
-        data-name="Rubictus aux baies rouges"
-        data-img="../images/bouton/ing_ptikitis.webp"
-        title="Cueillir le Rubictus"
-        aria-label="Cueillir le Rubictus aux baies rouges"
-      >
-        <img src="../images/bouton/ing_ptikitis.webp" alt="Rubictus" />
+      <button class="ing-btn quest-ingredient"
+              data-id="ptikitis_rubictus"
+              data-name="Rubictus aux baies rouges"
+              data-img="../images/bouton/ing_ptikitis.webp"
+              aria-label="Rubictus aux baies rouges"
+              style="bottom:-2%; left:12%;">
+        <img class="ingredient-img" src="../images/bouton/ing_ptikitis.webp" alt="Rubictus aux baies rouges" />
       </button>
     </div>
 
-    <div class="quote-box">
-      « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil »
+    <div class="texte-monde">
+      « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil. »
     </div>
 
-    <div class="button-row">
+    <div class="button-group">
       <a href="../7.extrait_Ptikitis.html">Extrait du livre</a>
       <a href="../9.entree_Ptikitis.html">Entrée du monde</a>
       <a href="../3.les_mondes.html">← Retour</a>
     </div>
-  </main>
-  
-  <link rel="stylesheet" href="../css/monde.css?v=5">
-<script src="../js/monde.js?v=5" defer></script>
+  </div>
 
+  <!-- Script logique -->
+  <script src="../js/energy-gauge.js?v=15"></script>
 </body>
 </html>
