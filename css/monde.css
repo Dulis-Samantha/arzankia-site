@@ -150,7 +150,7 @@ body {
 .energy-label { font-family:"Cinzel Decorative",serif; font-variant: small-caps; letter-spacing:.5px; opacity:.9; }
 
 .energy-bar {
-  width: 120px;  /* ← réduite */
+  width: 100px;  /* ← réduite */
   height: var(--bar-h);
   background: var(--bar-bg);
   border-radius: 999px;
@@ -160,7 +160,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .energy-bar { width: 100px; }  /* ← réduite sur mobile */
+  .energy-bar { width: 60px; }  /* ← réduite sur mobile */
 }
 
 .energy-fill {
