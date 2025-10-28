@@ -1,58 +1,50 @@
 // ===== Monde (commun) : jauge + sac =====
-(() => {
+(function(){
   const KEY = 'arz_energy_v1';
-
-  // DOM
   const fill = document.getElementById('energyFill');
-  const pct  = document.getElementById('energyPct');
-  const sacBtn   = document.querySelector('.sac');
-  const bagPanel = document.getElementById('bagPanel');
-  const bagClose = document.querySelector('.sac-close');
-  const btnReset = document.getElementById('btnReset');
-  const btnCalm  = document.getElementById('btnCalm');
-  const bagEmpty = document.getElementById('bagEmpty');
-  const bagList  = document.getElementById('bagList');
+  const pct = document.getElementById('energyPct');
 
-  // État
-  let state = loadState();
-  let timer = null;
+  // Détection du contexte
+  const isMonde = window.location.pathname.includes('/monde/');
+  const tickMs = 1000;
+  const drainRate = 0.08;   // perte par seconde dans un monde (~5 pts / min)
+  const rechargeRate = 0.20; // gain par seconde hors monde (~12 pts / min)
 
-  // Helpers
-  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+  // Utilitaires
+  const clamp = (v, min=0, max=100) => Math.max(min, Math.min(max, v));
+  const getEnergy = () => Number(localStorage.getItem(KEY)) || 100;
+  const setEnergy = (v) => localStorage.setItem(KEY, clamp(v).toFixed(1));
 
-  function renderGauge(){
-    const p = clamp((state.energy/100)*100, 0, 100);
-    if (fill) fill.style.width = p + '%';
-    if (pct)  pct.textContent = Math.round(p) + '%';
+  // Animation fluide de la jauge
+  function animateGauge(target){
+    const current = parseFloat(fill.style.width) || 0;
+    const diff = target - current;
+    const steps = 25;
+    let step = 0;
+    clearInterval(fill.anim);
+    fill.anim = setInterval(()=>{
+      step++;
+      const p = current + (diff * step) / steps;
+      fill.style.width = p + '%';
+      pct.textContent = Math.round(p) + '%';
+      if(step>=steps) clearInterval(fill.anim);
+    }, 30);
   }
 
-  function start(){
-    if (state.noPressure || state.infinite) return;
-    if (timer) return;
-    timer = setInterval(() => {
-      if (document.hidden) return;
-      state.energy = clamp(state.energy - state.drain, 0, 100);
-      if (state.energy <= 0) { state.energy = 0; stop(); }
-      renderGauge(); saveState();
-    }, 1000);
+  // Boucle de vie
+  function tick(){
+    let e = getEnergy();
+    e += isMonde ? -drainRate : rechargeRate;
+    e = clamp(e);
+    setEnergy(e);
+    animateGauge(e);
   }
-  function stop(){ clearInterval(timer); timer = null; }
 
-  function saveState(){ localStorage.setItem(KEY, JSON.stringify(state)); }
-  function loadState(){
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return { energy:100, drain:0.10, noPressure:false, infinite:false };
-    try{
-      const s = JSON.parse(raw);
-      if (typeof s.energy !== 'number') s.energy = 100;
-      if (typeof s.drain  !== 'number') s.drain  = 0.10;
-      if (typeof s.noPressure !== 'boolean') s.noPressure = false;
-      if (typeof s.infinite   !== 'boolean') s.infinite   = false;
-      return s;
-    }catch{
-      return { energy:100, drain:0.10, noPressure:false, infinite:false };
-    }
-  }
+  // Initialisation
+  const initial = getEnergy();
+  animateGauge(initial);
+  setInterval(tick, tickMs);
+})();
 
   // Sac : ouvrir/fermer
   function openBag(open){
