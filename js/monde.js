@@ -229,3 +229,7 @@ document.addEventListener('click', (e) => {
   };
 })();
 
+<link rel="stylesheet" href="../css/monde.css?v=4">
+<script src="../js/monde.js?v=4" defer></script>
+
+
