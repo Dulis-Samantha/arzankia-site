@@ -1,204 +1,320 @@
-/* ==========================================================
-   Arzankân — Jauge + Sac + Récolte d’ingrédients (version corrigée)
-   ========================================================== */
-(function () {
-  // ---------- Constantes ----------
-  const ENERGY_KEY = 'arz_energy_v1';
-  const BAG_KEY    = 'arz_bag';
+;(() => {
+  /* =========================
+   * CONFIG
+   * ========================= */
+  const CFG = {
+    storageKey: 'arz_energy_v2',
+    max: 100,
+    tickMs: 1000,
+    drainPerSecond: 0.10,         // 1 pt / 10 s
+    questThresholdPct: 15,        // bandeau d’alerte
+    zeroRedirectUrl: '2.les_coulisses.html',
 
-  // Détection du contexte (monde ou non)
-  const isMonde = /\/monde\//.test(location.pathname);
+    bagSlots: 5,                  // emplacements
+    perItemMax: 2,                // quantité max par ingrédient
+    infiniteAfterUses: 10,        // mode infini après N utilisations
 
-  // ---------- Sélecteurs ----------
-  const elFill   = document.getElementById('energyFill');
-  const elPct    = document.getElementById('energyPct');
-  const bagPanel = document.getElementById('bagPanel');
-  const bagBtn   = document.querySelector('.sac');
-  const bagClose = document.querySelector('.sac-close');
-  const bagList  = document.getElementById('bagList');
-  const bagEmpty = document.getElementById('bagEmpty');
-  const btnReset = document.getElementById('btnReset');
-  const btnCalm  = document.getElementById('btnCalm');
+    bagIconSrc: 'sac_magique.webp',
 
-  // ---------- Timers ----------
-  let energyTimer = null;
-  let animTimer   = null;
+    items: {
+      'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: 'ing_ptikitis.webp' },
+      'foret_champignon' : { name: 'Champignon azulé',        img: 'ing_foret.webp' },
+      'ames_plante'      : { name: 'Olivette Brumis',         img: 'ing_ames.webp' },
+      'reserve_ptikitis' : { name: 'Pousse rare (Réserve)',   img: 'ing_reserve_ptikitis.webp' },
+      'eau_creature'     : { name: 'Essence des créatures de l’eau', img: 'ing_creature.webp' },
+    },
 
-  // ---------- Utils ----------
-  const clamp = (v, min=0, max=100) => Math.max(min, Math.min(max, v));
-  const getEnergy = () => clamp(parseFloat(localStorage.getItem(ENERGY_KEY)) || 100);
-  const setEnergy = v => localStorage.setItem(ENERGY_KEY, clamp(v).toFixed(1));
-
-  const loadBag = () => {
-    try { return JSON.parse(localStorage.getItem(BAG_KEY)) || []; }
-    catch { return []; }
-  };
-  const saveBag = bag => localStorage.setItem(BAG_KEY, JSON.stringify(bag));
-
-  function toast(text, ms=1800){
-    const t = document.createElement('div');
-    t.className = 'arz-toast';
-    t.textContent = text;
-    document.body.appendChild(t);
-    requestAnimationFrame(()=> t.classList.add('show'));
-    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 250); }, ms);
-  }
-
-  // ---------- Jauge ----------
-  const TICK_MS = 1000;
-  const DRAIN_PER_S = 0.08;
-  const RECHARGE_PER_S = 0.20;
-
-  function animateGaugeTo(target){
-    if (!elFill || !elPct) return;
-    const start = parseFloat(elFill.style.width) || 0;
-    const diff  = target - start;
-    const steps = 24;
-    let i = 0;
-    clearInterval(animTimer);
-    animTimer = setInterval(()=>{
-      i++;
-      const p = start + (diff * i) / steps;
-      elFill.style.width = p + '%';
-      elPct.textContent  = Math.round(p) + '%';
-      if (i >= steps) clearInterval(animTimer);
-    }, 25);
-  }
-
-  function tickEnergy(){
-    let e = getEnergy();
-    const calm = localStorage.getItem('arz_calm') === 'true';
-    if (calm) return;
-    e += isMonde ? -DRAIN_PER_S : RECHARGE_PER_S;
-    e = clamp(e);
-    setEnergy(e);
-    animateGaugeTo(e);
-  }
-
-  function startEnergy(){
-    if (energyTimer) return;
-    animateGaugeTo(getEnergy());
-    energyTimer = setInterval(tickEnergy, TICK_MS);
-  }
-  function stopEnergy(){
-    clearInterval(energyTimer);
-    energyTimer = null;
-  }
-
-  // ---------- Sac ----------
-  function renderBag(){
-    if (!bagList || !bagEmpty) return;
-    const bag = loadBag();
-    bagList.innerHTML = '';
-    if (!bag.length){
-      bagEmpty.style.display = 'block';
-      return;
+    messages: {
+      low: "Ton Arzanskân faiblit… utilise un ingrédient ou pars en quête.",
+      bagFull: "Ton sac est plein (5). Utilise un ingrédient avant d’en ramasser un autre.",
+      added: "Ingrédient ajouté au sac.",
+      perItemMax: "Tu as déjà la quantité maximale de cet ingrédient.",
+      used: "Énergie rechargée à 100%.",
+      infinite: "Bravo ! Ton corps s’accorde à la magie des mondes : ton Arzanskân n’a plus besoin d’être rechargé.",
     }
+  };
+
+  /* =========================
+   * STATE
+   * ========================= */
+  let S = loadState();
+  let timer = null;
+
+  /* =========================
+   * DOM
+   * ========================= */
+  const elFill = document.getElementById('energyFill');
+  const elPct  = document.getElementById('energyPct');
+  const overlay= document.getElementById('lockOverlay');
+
+  // ruban alerte
+  const ribbon = document.createElement('div');
+  ribbon.className = 'quest-ribbon';
+  ribbon.textContent = CFG.messages.low;
+  document.body.appendChild(ribbon);
+
+  // sac
+  const bagWrap = document.createElement('div');
+  bagWrap.className = 'bag-wrap';
+  bagWrap.innerHTML = `
+    <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
+    <div class="bag-badge" id="bagBadge">0</div>
+    <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
+      <h3>Ton sac magique</h3>
+      <ul id="bagList"></ul>
+      <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+      <button class="bag-toggle" id="bagToggle"></button>
+      <button class="bag-reset" id="bagReset">Réinitialiser les respawns</button>
+    </div>
+  `;
+  document.body.appendChild(bagWrap);
+
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+  const bagIcon  = $('#bagIcon', bagWrap);
+  const bagBadge = $('#bagBadge', bagWrap);
+  const bagMenu  = $('#bagMenu', bagWrap);
+  const bagList  = $('#bagList', bagWrap);
+  const bagEmpty = $('#bagEmpty', bagWrap);
+  const bagToggle= $('#bagToggle', bagWrap);
+  const bagReset = $('#bagReset', bagWrap);
+
+  /* open/close sac */
+  bagIcon.addEventListener('click', () => {
+    const show = !bagMenu.classList.contains('show');
+    bagMenu.classList.toggle('show', show);
+    bagIcon.setAttribute('aria-expanded', show ? 'true' : 'false');
+    renderBag();
+  });
+  document.addEventListener('click', (e) => {
+    if(!bagWrap.contains(e.target)) {
+      bagMenu.classList.remove('show');
+      bagIcon.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* init collectables */
+  initCollectibles();
+
+  /* boot */
+  renderAll();
+  startIfNeeded();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) return;
+    startIfNeeded();
+  });
+  window.addEventListener('beforeunload', saveState);
+
+  /* =========================
+   * LOOP / RENDER
+   * ========================= */
+  function startIfNeeded(){
+    if (S.infinite || S.chill) return stop();
+    if (S.energy > 0) start(); else redirectZero();
+  }
+  function start(){
+    if (timer) return;
+    timer = setInterval(tick, CFG.tickMs);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+  function tick(){
+    if (document.hidden || S.infinite || S.chill) return;
+    S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
+    if (S.energy <= 0){ saveState(); return redirectZero(); }
+    renderGauge(); saveState();
+  }
+
+  function renderAll(){
+    renderGauge();
+    renderBag();
+    updateRibbon();
+    document.body.classList.toggle('arz-infinite', !!S.infinite);
+  }
+  function renderGauge(){
+    const pct = Math.round((S.energy / CFG.max) * 100);
+    if (elFill) elFill.style.width = pct + '%';
+    if (elPct)  elPct.textContent = pct + '%';
+    updateRibbon();
+  }
+  function updateRibbon(){
+    const pct = (S.energy / CFG.max) * 100;
+    ribbon.style.display = (!S.infinite && !S.chill && pct <= CFG.questThresholdPct) ? 'block' : 'none';
+  }
+
+  function redirectZero(){
+    if (overlay){
+      overlay.style.display = 'grid';
+      // facultatif : propose une mini-quête – tu peux brancher ici
+    }
+    window.location.href = CFG.zeroRedirectUrl;
+  }
+
+  /* =========================
+   * BAG
+   * ========================= */
+  function renderBag(){
+    // badge
+    bagBadge.textContent = String(totalItems());
+    // titre “mode tranquille”
+    bagToggle.textContent = S.chill ? 'Quitter le mode tranquille' : 'Activer le mode tranquille (sans pression)';
+    // contenu
+    bagList.innerHTML = '';
+    if (S.bag.length === 0){ bagEmpty.style.display = 'block'; return; }
     bagEmpty.style.display = 'none';
-    bag.forEach(item=>{
+
+    S.bag.forEach((entry, idx) => {
+      const meta = metaOf(entry.id);
       const li = document.createElement('li');
-      li.className = 'bag-li';
       li.innerHTML = `
         <div class="bag-item">
-          <img src="${item.img || ''}" alt="${item.name || item.id}">
-          <div class="bag-name">${item.name || item.id} <span class="bag-qty">×${item.qty || 1}</span></div>
-        </div>`;
+          <img src="${meta.img}" alt="">
+          <div>
+            <div class="bag-name">${meta.name}</div>
+            <div class="bag-rem">Il t’en reste <strong>${entry.qty}</strong></div>
+          </div>
+        </div>
+        <button type="button" class="bag-use" data-index="${idx}" ${entry.qty<=0?'disabled':''}>Utiliser</button>
+      `;
       bagList.appendChild(li);
+    });
+
+    $$('.bag-use', bagList).forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const idx = parseInt(btn.getAttribute('data-index'),10);
+        useItem(idx);
+      });
+    });
+
+    // actions secondaires
+    bagToggle.onclick = () => {
+      S.chill = !S.chill;
+      saveState(); renderAll(); startIfNeeded();
+    };
+    bagReset.onclick = () => {
+      // remet la page en “collectable” : ici, rien à faire si on n’utilise pas de verrous par page
+      toast('Réinitialisation effectuée.');
+    };
+  }
+
+  function useItem(index){
+    const entry = S.bag[index]; if (!entry || entry.qty<=0) return;
+    // consommer
+    entry.qty--;
+    if (entry.qty === 0){
+      // retire l’emplacement s’il est vide
+      S.bag.splice(index,1);
+    }
+    // effet : recharge
+    S.energy = CFG.max;
+    S.usesTotal++;
+    toast(CFG.messages.used);
+
+    // passage en “infini”
+    if (!S.infinite && S.usesTotal >= CFG.infiniteAfterUses){
+      S.infinite = true;
+      toast(CFG.messages.infinite, 4200);
+      stop();
+    }
+
+    saveState(); renderAll();
+  }
+
+  function totalItems(){
+    return S.bag.reduce((n,e)=>n+e.qty,0);
+  }
+
+  /* =========================
+   * COLLECT
+   * ========================= */
+  function initCollectibles(){
+    $$('.quest-ingredient').forEach(btn=>{
+      // accessibilité
+      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+      if (!btn.hasAttribute('role')) btn.setAttribute('role','button');
+      btn.addEventListener('keydown', (e) => {
+        if (e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }
+      });
+
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-id');
+        if (!id) return;
+
+        // trouve ou crée l’entrée
+        let entry = S.bag.find(e=>e.id===id);
+        if (entry){
+          if (entry.qty >= CFG.perItemMax){
+            toast(CFG.messages.perItemMax);
+            return;
+          }
+          entry.qty++;
+        }else{
+          // contrôle nombre de slots
+          if (S.bag.length >= CFG.bagSlots){
+            toast(CFG.messages.bagFull);
+            return;
+          }
+          entry = { id, qty: 1 };
+          S.bag.push(entry);
+        }
+
+        saveState(); renderBag(); toast(CFG.messages.added);
+      });
     });
   }
 
-  function openBag(open){
-    if (!bagPanel) return;
-    bagPanel.dataset.open = open ? 'true':'false';
-    bagPanel.style.display = open ? 'block':'none';
-    bagBtn?.setAttribute('aria-expanded', open ? 'true':'false');
-    if (open) renderBag();
+  /* =========================
+   * HELPERS
+   * ========================= */
+  function metaOf(id){
+    const btn = document.querySelector(`.quest-ingredient[data-id="${id}"]`);
+    const name = btn?.getAttribute('data-name');
+    const img  = btn?.getAttribute('data-img');
+    return {
+      name: name || CFG.items[id]?.name || id,
+      img : img  || CFG.items[id]?.img  || ''
+    };
+  }
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  function loadState(){
+    const def = { energy: CFG.max, bag: [], usesTotal: 0, chill: false, infinite:false };
+    try{
+      const raw = localStorage.getItem(CFG.storageKey);
+      if (!raw) return def;
+      const s = JSON.parse(raw);
+      // garde-fous
+      if (!Array.isArray(s.bag)) s.bag = [];
+      if (typeof s.energy !== 'number') s.energy = CFG.max;
+      if (typeof s.usesTotal !== 'number') s.usesTotal = 0;
+      if (typeof s.chill !== 'boolean') s.chill = false;
+      if (typeof s.infinite !== 'boolean') s.infinite = false;
+      // purge quantités > perItemMax
+      s.bag.forEach(e=>{ e.qty = clamp(e.qty||0,0,CFG.perItemMax); });
+      // limite slots
+      if (s.bag.length > CFG.bagSlots) s.bag = s.bag.slice(0, CFG.bagSlots);
+      return s;
+    }catch{ return def; }
+  }
+  function saveState(){
+    localStorage.setItem(CFG.storageKey, JSON.stringify(S));
+  }
+  function toast(text, ms=1800){
+    const t = document.createElement('div');
+    t.className = 'arz-toast'; t.textContent = text;
+    document.body.appendChild(t);
+    requestAnimationFrame(()=> t.classList.add('show'));
+    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 220); }, ms);
   }
 
-  function isBagOpen(){
-    return bagPanel?.dataset.open === 'true' || bagPanel?.style.display === 'block';
-  }
-
-  // ---------- Événements sac ----------
-  bagBtn?.addEventListener('click', ()=>{
-    const open = !isBagOpen();
-    openBag(open);
-    if (open) renderBag();
-  });
-  bagClose?.addEventListener('click', ()=> openBag(false));
-
-  document.addEventListener('click', (e)=>{
-    if (!bagPanel || !bagBtn) return;
-    const t = e.target;
-    if (t.closest('.quest-ingredient')) return; // on ignore la récolte
-    if (!bagPanel.contains(t) && !bagBtn.contains(t)) openBag(false);
-  });
-
-  btnReset?.addEventListener('click', ()=>{
-    if (confirm('Vider le sac et recharger la jauge ?')){
-      localStorage.removeItem(BAG_KEY);
-      setEnergy(100);
-      renderBag();
-      animateGaugeTo(100);
-      toast('Sac vidé et jauge rechargée.');
-    }
-  });
-
-  function updateCalmLabel(){
-    if (!btnCalm) return;
-    const calm = localStorage.getItem('arz_calm') === 'true';
-    btnCalm.textContent = calm ? '▶️ Réactiver la jauge' : '🕊️ Mode tranquille (désactiver la jauge)';
-  }
-  btnCalm?.addEventListener('click', ()=>{
-    const calm = localStorage.getItem('arz_calm') === 'true';
-    localStorage.setItem('arz_calm', (!calm).toString());
-    updateCalmLabel();
-    toast(!calm ? 'Mode tranquille activé.' : 'Mode tranquille désactivé.');
-  });
-  updateCalmLabel();
-
-  // ---------- Récolte d’ingrédients ----------
-  document.addEventListener('click', (e)=>{
-    const btn = e.target.closest('.quest-ingredient');
-    if (!btn) return;
-
-    const id   = btn.dataset.id   || 'item';
-    const name = btn.dataset.name || id;
-    const img  = btn.dataset.img  || '';
-
-    let bag = loadBag();
-    const found = bag.find(i => i.id === id);
-
-    if (found){
-      if ((found.qty || 1) >= 2){
-        toast('Tu possèdes déjà la quantité maximale de cet ingrédient.');
-        return;
-      }
-      found.qty = (found.qty || 1) + 1;
-    } else {
-      bag.push({ id, name, img, qty: 1 });
-    }
-
-   saveBag(bag);
-renderBag();
-openBag(true);   // ← ouvre le sac après la récolte
-toast(`${name} ajouté à ton sac magique !`);
-
-  });
-
-  // ---------- Boot ----------
-  animateGaugeTo(getEnergy());
-  startEnergy();
-
-  document.addEventListener('visibilitychange', ()=>{
-    if (!document.hidden && !energyTimer) startEnergy();
-  });
-
-  // Debug helper
+  // petite API console (pratique pour tester)
   window.Arz = {
-    bag: ()=> loadBag(),
-    energy: ()=> getEnergy(),
-    setEnergy: v => { setEnergy(v); animateGaugeTo(v); },
-    resetBag: ()=> { localStorage.removeItem(BAG_KEY); renderBag(); }
+    get: () => ({...S}),
+    resetAll: () => { S = { energy: CFG.max, bag: [], usesTotal: 0, chill:false, infinite:false }; saveState(); renderAll(); startIfNeeded(); },
+    setEnergy: v => { S.energy = clamp(v,0,CFG.max); saveState(); renderAll(); },
   };
 })();
