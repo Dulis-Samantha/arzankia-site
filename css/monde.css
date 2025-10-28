@@ -102,3 +102,34 @@ body{
   .sac img{ width:24px; }
   .pct{ font-size:.85rem; }
 }
+
+/* ===== Ingrédient cliquable (sur image) ===== */
+.quest-ingredient {
+  position: absolute;
+  bottom: 16px;
+  right: 18px;
+  width: 68px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid var(--bord);
+  background: rgba(0,0,0,0.4);
+  box-shadow: 0 0 14px rgba(255,223,100,0.7);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 2;
+}
+.quest-ingredient img {
+  width: 80%;
+  height: auto;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255,214,116,0.6));
+}
+.quest-ingredient:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 22px rgba(255,223,100,1);
+}
+.hero-frame {
+  position: relative;
+}
+
