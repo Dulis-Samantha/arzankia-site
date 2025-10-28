@@ -77,9 +77,9 @@ body {
   opacity: 0.9;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.ing-btn:hover .ingredient-img {
-  transform: scale(1.05);
-  opacity: 1;
+
+.quest-ingredient .ingredient-img{
+  transform: scale(var(--zoom-scale, 1));
 }
 
 /* === Texte explicatif === */
