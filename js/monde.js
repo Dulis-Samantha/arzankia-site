@@ -246,7 +246,7 @@
   }
 
   /* =========================
-   * COLLECT
+   * COLLECT + ZOOM + POSITION MOBILE
    * ========================= */
   function initCollectibles(){
     $$('.quest-ingredient').forEach(btn=>{
@@ -257,6 +257,7 @@
         if (e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }
       });
 
+      // --- collecte au clic ---
       btn.addEventListener('click', ()=>{
         const id = btn.getAttribute('data-id');
         if (!id) return;
@@ -280,28 +281,45 @@
 
         saveState(); renderBag(); toast(CFG.messages.added);
       });
+
+      // --- zoom réglable (desktop / mobile) ---
+      const imgEl = btn.querySelector('.ingredient-img');
+      if (imgEl) {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        const zoomPct        = parseFloat(btn.getAttribute('data-zoom') || '130');
+        const zoomMobilePct  = parseFloat(btn.getAttribute('data-zoom-mobile') || zoomPct);
+        const zoomScale      = Math.max(1, (isMobile ? zoomMobilePct : zoomPct) / 100);
+
+        // Transition douce (au cas où pas en CSS)
+        imgEl.style.transition = imgEl.style.transition || 'transform 0.3s ease';
+
+        // Survol (desktop)
+        imgEl.addEventListener('mouseenter', () => {
+          if (!isMobile) imgEl.style.transform = `scale(${zoomScale})`;
+        });
+        imgEl.addEventListener('mouseleave', () => {
+          if (!isMobile) imgEl.style.transform = '';
+        });
+
+        // Pulse au clic / touch
+        const pulse = () => {
+          imgEl.style.transform = `scale(${zoomScale})`;
+          setTimeout(() => { imgEl.style.transform = ''; }, 220);
+        };
+        imgEl.addEventListener('mousedown', pulse);
+        imgEl.addEventListener('touchstart', pulse, { passive: true });
+      }
+
+      // --- position mobile via data-* ---
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        const bottomMob = btn.getAttribute('data-bottom-mobile');
+        const leftMob   = btn.getAttribute('data-left-mobile');
+        if (bottomMob) btn.style.bottom = bottomMob;
+        if (leftMob)   btn.style.left   = leftMob;
+      }
     });
   }
-// === Zoom réglable depuis data-zoom (%), au survol et au clic (touch/desktop)
-const imgEl = btn.querySelector('.ingredient-img');
-const zoomPct = parseFloat(btn.getAttribute('data-zoom') || '130');
-const zoomScale = Math.max(1, zoomPct / 100); // sécurité: jamais < 1
-
-// Survol (desktop)
-imgEl.addEventListener('mouseenter', () => {
-  imgEl.style.transform = `scale(\\${zoomScale})`;
-});
-imgEl.addEventListener('mouseleave', () => {
-  imgEl.style.transform = '';
-});
-
-// Clic / touch (mobile et desktop) — petit “pulse” qui respecte le zoom
-const pulse = () => {
-  imgEl.style.transform = `scale(\\${zoomScale})`;
-  setTimeout(() => { imgEl.style.transform = ''; }, 220);
-};
-imgEl.addEventListener('mousedown', pulse);
-imgEl.addEventListener('touchstart', pulse, { passive: true });
 
   /* =========================
    * HELPERS
