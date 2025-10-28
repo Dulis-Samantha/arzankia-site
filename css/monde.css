@@ -132,4 +132,25 @@ body{
 .hero-frame {
   position: relative;
 }
+/* Halo doré mobile dans la jauge */
+.fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 214, 116, 0.8) 40%,
+    rgba(255, 231, 150, 0.3) 70%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  animation: flow 2s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes flow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
 
