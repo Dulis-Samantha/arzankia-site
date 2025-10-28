@@ -54,20 +54,21 @@
   document.body.appendChild(ribbon);
 
   // sac
-  const bagWrap = document.createElement('div');
-  bagWrap.className = 'bag-wrap';
-  bagWrap.innerHTML = `
-    <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
-    <div class="bag-badge" id="bagBadge">0</div>
-    <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
-      <h3>Ton inventaire</h3>
-      <ul id="bagList"></ul>
-      <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
-      <button class="bag-toggle" id="bagToggle"></button>
-      <button class="bag-reset" id="bagReset">Réinitialiser les respawns</button>
-    </div>
-  `;
-  document.body.appendChild(bagWrap);
+ const bagWrap = document.createElement('div');
+bagWrap.className = 'bag-wrap';
+bagWrap.innerHTML = `
+  <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
+  <div class="bag-badge" id="bagBadge">0</div>
+  <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
+    <h3>Ton sac magique</h3>
+    <ul id="bagList"></ul>
+    <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+
+    <!-- Nouveau bouton pilule -->
+    <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
+  </div>
+`;
+document.body.appendChild(bagWrap);
 
   const $ = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
@@ -76,7 +77,6 @@
   const bagMenu  = $('#bagMenu', bagWrap);
   const bagList  = $('#bagList', bagWrap);
   const bagEmpty = $('#bagEmpty', bagWrap);
-  const bagToggle= $('#bagToggle', bagWrap);
   const bagReset = $('#bagReset', bagWrap);
 
   /* open/close sac */
@@ -157,15 +157,24 @@
   /* =========================
    * BAG
    * ========================= */
-  function renderBag(){
-    // badge
-    bagBadge.textContent = String(totalItems());
-    // titre “mode tranquille”
-    bagToggle.textContent = S.chill ? 'Quitter le mode tranquille' : 'Activer le mode tranquille (sans pression)';
-    // contenu
-    bagList.innerHTML = '';
-    if (S.bag.length === 0){ bagEmpty.style.display = 'block'; return; }
-    bagEmpty.style.display = 'none';
+function renderBag(){
+  bagBadge.textContent = String(totalItems());
+
+  // Texte/état visuel du toggle
+  if (S.chill) {
+    bagToggle.classList.add('on');
+    bagToggle.setAttribute('aria-pressed', 'true');
+  } else {
+    bagToggle.classList.remove('on');
+    bagToggle.setAttribute('aria-pressed', 'false');
+  }
+
+  bagList.innerHTML = '';
+  if (S.bag.length === 0){ bagEmpty.style.display = 'block'; return; }
+  bagEmpty.style.display = 'none';
+
+  // ... (le reste inchangé: génération des <li>, boutons "Utiliser", etc.)
+}
 
     S.bag.forEach((entry, idx) => {
       const meta = metaOf(entry.id);
@@ -191,10 +200,6 @@
     });
 
     // actions secondaires
-    bagToggle.onclick = () => {
-      S.chill = !S.chill;
-      saveState(); renderAll(); startIfNeeded();
-    };
     bagReset.onclick = () => {
       // remet la page en “collectable” : ici, rien à faire si on n’utilise pas de verrous par page
       toast('Réinitialisation effectuée.');
