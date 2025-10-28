@@ -8,7 +8,7 @@
     tickMs: 1000,
     drainPerSecond: 0.10,         // 1 pt / 10 s
     questThresholdPct: 15,        // bandeau d’alerte
-    zeroRedirectUrl: '2.les_coulisses.html',
+    zeroRedirectUrl: '../2.les_coulisses.html',
 
     bagSlots: 5,                  // emplacements
     perItemMax: 2,                // quantité max par ingrédient
@@ -156,14 +156,27 @@
     const pct = (S.energy / CFG.max) * 100;
     ribbon.style.display = (!S.infinite && !S.chill && pct <= CFG.questThresholdPct) ? 'block' : 'none';
   }
-  function redirectZero(){
+ function redirectZero(){
+  if (lockShown) return;  // évite les appels multiples
+  lockShown = true;
+  stop();                 // arrête le timer d'énergie
+
   if (overlay){
     overlay.style.display = 'grid';
-    alert('⚡ Ton énergie est vide, recharge-la avec le bouton en bas à droite !');
+    overlay.innerHTML = `
+      <div class="lock-card">
+        <div class="lock-title">⚡ Ton énergie est vide</div>
+        <div class="lock-desc">Tu vas être redirigé vers les Coulisses d’Arzankia…</div>
+      </div>
+    `;
   }
-  // 🔒 On désactive temporairement la redirection automatique :
-  // window.location.href = CFG.zeroRedirectUrl;
+
+  // Redirection douce après 3 secondes
+  setTimeout(() => {
+    window.location.href = CFG.zeroRedirectUrl;
+  }, 3000);
 }
+
 
   /* =========================
    * BAG
