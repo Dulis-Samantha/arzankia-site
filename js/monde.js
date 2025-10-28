@@ -62,7 +62,7 @@
     <img src="${CFG.bagIconSrc}" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
     <div class="bag-badge" id="bagBadge">0</div>
     <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
-      <h3>Ton sac magique</h3>
+      <h3>Ton inventaire</h3>
       <ul id="bagList"></ul>
       <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
       <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
@@ -282,6 +282,26 @@
       });
     });
   }
+// === Zoom réglable depuis data-zoom (%), au survol et au clic (touch/desktop)
+const imgEl = btn.querySelector('.ingredient-img');
+const zoomPct = parseFloat(btn.getAttribute('data-zoom') || '130');
+const zoomScale = Math.max(1, zoomPct / 100); // sécurité: jamais < 1
+
+// Survol (desktop)
+imgEl.addEventListener('mouseenter', () => {
+  imgEl.style.transform = `scale(\\${zoomScale})`;
+});
+imgEl.addEventListener('mouseleave', () => {
+  imgEl.style.transform = '';
+});
+
+// Clic / touch (mobile et desktop) — petit “pulse” qui respecte le zoom
+const pulse = () => {
+  imgEl.style.transform = `scale(\\${zoomScale})`;
+  setTimeout(() => { imgEl.style.transform = ''; }, 220);
+};
+imgEl.addEventListener('mousedown', pulse);
+imgEl.addEventListener('touchstart', pulse, { passive: true });
 
   /* =========================
    * HELPERS
