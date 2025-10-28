@@ -234,6 +234,37 @@ body {
   box-shadow:0 0 6px rgba(111,255,145,.25);
 }
 
+/* Bouton pilule "Mode tranquille" */
+.bag-menu .bag-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 700;
+  font-size: .95rem;
+  background: rgba(255,255,255,.06);
+  color: #fff3cc;
+  border: 1px solid rgba(255,214,116,.35);
+  border-radius: 999px;
+  padding: .4rem .8rem;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.bag-menu .bag-toggle::before{
+  content: '🌙';
+  filter: drop-shadow(0 0 6px rgba(255,214,116,.4));
+}
+.bag-menu .bag-toggle:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+}
+.bag-menu .bag-toggle.on{
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  color: #3a2400;
+  border-color: rgba(255,214,116,.6);
+  text-shadow: none;
+}
+
+
 /* ============================================================
    OVERLAY BLOQUANT
 ============================================================ */
