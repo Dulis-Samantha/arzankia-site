@@ -14,7 +14,7 @@
     perItemMax: 2,                // quantité max par ingrédient
     infiniteAfterUses: 10,        // mode infini après N utilisations
 
-    bagIconSrc: 'sac_magique.webp',
+   bagIconSrc: '../images/bouton/sac_magique.webp',  // ← important
 
     items: {
       'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: 'ing_ptikitis.webp' },
