@@ -112,3 +112,64 @@
     calm:(on)=>{ state.noPressure=!!on; saveState(); updateCalmLabel(); on?stop():start(); }
   };
 })();
+
+// --- Collecte d'ingrédients ---
+document.querySelectorAll('.quest-ingredient').forEach(btn => {
+  if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+  if (!btn.hasAttribute('role')) btn.setAttribute('role', 'button');
+  
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.id;
+    const name = btn.dataset.name || id;
+    const img = btn.dataset.img || '';
+
+    // charger ou créer sac
+    const raw = localStorage.getItem('arz_bag');
+    let bag = raw ? JSON.parse(raw) : [];
+
+    const found = bag.find(item => item.id === id);
+    if (found) {
+      if (found.qty >= 2) {
+        toast('Tu possèdes déjà la quantité maximale de cet ingrédient.');
+        return;
+      }
+      found.qty += 1;
+      toast('Ingrédient ajouté au sac.');
+    } else {
+      bag.push({ id, name, img, qty: 1 });
+      toast('Ingrédient ajouté au sac.');
+    }
+
+    localStorage.setItem('arz_bag', JSON.stringify(bag));
+    renderBagList();
+  });
+});
+
+// --- Rendu du sac ---
+function renderBagList(){
+  const raw = localStorage.getItem('arz_bag');
+  const bag = raw ? JSON.parse(raw) : [];
+  const list = document.getElementById('bagList');
+  const empty = document.getElementById('bagEmpty');
+  list.innerHTML = '';
+
+  if (bag.length === 0){
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  bag.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'bag-li';
+    li.innerHTML = `
+      <div class="bag-item">
+        <img src="${item.img}" alt="${item.name}" />
+        <div class="bag-name">${item.name} <span class="bag-qty">×${item.qty}</span></div>
+      </div>`;
+    list.appendChild(li);
+  });
+}
+
+// affiche le contenu à l’ouverture du sac
+document.querySelector('.sac')?.addEventListener('click', renderBagList);
+
