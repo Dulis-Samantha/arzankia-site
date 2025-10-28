@@ -6,17 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monde des Ptikitis</title>
 
-  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet" />
-
-  <!-- CSS commun aux mondes -->
   <link rel="stylesheet" href="../css/monde.css" />
 </head>
 <body>
 
   <!-- ===== HUD : Sac + Jauge ===== -->
   <div class="hud" role="region" aria-label="Interface d'aventurier">
-    <!-- Sac -->
     <div class="hud-item">
       <div class="hud-label">Ton sac</div>
       <button class="sac" title="Ouvrir le sac" aria-controls="bagPanel" aria-expanded="false">
@@ -24,7 +20,6 @@
       </button>
     </div>
 
-    <!-- Jauge -->
     <div class="hud-item">
       <div class="hud-label">Ton Arzanskân</div>
       <div class="gauge" aria-live="polite">
@@ -57,6 +52,17 @@
 
     <div class="hero-frame">
       <img class="main-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
+      <!-- ingrédient cliquable -->
+      <button
+        class="quest-ingredient"
+        data-id="ptikitis_rubictus"
+        data-name="Rubictus aux baies rouges"
+        data-img="../images/bouton/ing_ptikitis.webp"
+        title="Cueillir le Rubictus"
+        aria-label="Cueillir le Rubictus aux baies rouges"
+      >
+        <img src="../images/bouton/ing_ptikitis.webp" alt="Rubictus" />
+      </button>
     </div>
 
     <div class="quote-box">
@@ -70,7 +76,6 @@
     </div>
   </main>
 
-  <!-- JS commun aux mondes -->
   <script src="../js/monde.js" defer></script>
 </body>
 </html>
