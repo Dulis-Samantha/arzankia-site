@@ -78,10 +78,6 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.quest-ingredient .ingredient-img{
-  transform: scale(var(--zoom-scale, 1));
-}
-
 /* === Texte explicatif === */
 .texte-monde {
   max-width: 800px;
@@ -337,10 +333,6 @@ body {
 
   .image-zone { margin-top: 96px !important; }
 }
-
-  .quest-ingredient .ingredient-img {
-    transform: scale(var(--zoom-scale-mobile, 1));
-  }
 }
 
 
