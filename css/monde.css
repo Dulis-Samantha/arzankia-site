@@ -290,35 +290,42 @@ body {
   text-shadow: none;
 }
 
-
 /* =========================
-  NOTIFICATION (TOAST) CENTRÉE  — centre robuste mobile
+   NOTIFICATION (TOAST) — centre robuste mobile
    ========================= */
 .arz-toast{
   position: fixed;
-  inset: 0;                    /* occupe tout le viewport */
-  display: grid;               /* centrage fiable */
-  place-items: center;         /* centre H+V */
+  inset: 0;
+  display: grid;
+  place-items: center;
   z-index: 9999;
   opacity: 0;
   transition: opacity .35s ease;
-  pointer-events: none;        /* ne bloque pas les taps du dessous */
+  pointer-events: none; /* ne bloque pas l’UI derrière */
 }
 
 .arz-toast.show{ opacity: 1; }
 
-/* La bulle interne (garde ton style) */
 .arz-toast .bubble{
   max-width: min(92vw, 560px);
   text-align: center;
+
+  /* Rendu propre et lisible */
+  font-family: "Cinzel Decorative", serif; /* ou laisse Georgia si tu préfères */
+  font-size: 1rem;
+  line-height: 1.45;
+  text-shadow: none;          /* ← neutralise le text-shadow du body */
+  letter-spacing: .2px;
+
+  /* Cadre + fond */
   background: rgba(10, 0, 20, 0.85);
   color: #fff8e6;
   border: 1px solid rgba(255,214,116,.55);
   border-radius: 14px;
   padding: .9rem 1.1rem;
   box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 22px rgba(255,214,116,.25);
-  font-weight: 700;
-  pointer-events: auto; /* utile si un jour tu mets un bouton dedans */
+
+  pointer-events: auto; /* utile si un jour tu ajoutes un bouton */
   animation: arz-pulse 2s ease-in-out infinite;
 }
 
@@ -395,6 +402,4 @@ body {
 
   .image-zone { margin-top: 96px !important; }
 }
-}
-
 
