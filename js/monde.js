@@ -12,7 +12,7 @@
     zeroRedirectUrl: '../2.les_coulisses.html',
 
     bagSlots: 10,                  // emplacements
-    perItemMax: 2,                // quantité max par ingrédient
+    perItemMax: 1,                // quantité max par ingrédient
 
     bagIconSrc: '../images/bouton/sac_magique.webp',
 
