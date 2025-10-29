@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monde des Créatures Légendaires — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles globaux Monde -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay « jauge vide » === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="page-title">Monde des Créatures Légendaires</h1>
+
+    <!-- Illustration + ingrédients cliquables -->
+    <div class="image-zone">
+      <img class="Fees-image" src="../images/mondes/monde_Creatures.webp" alt="Monde des Créatures Légendaires" />
+
+      <!-- Ingrédient 1 -->
+      <button class="ing-btn quest-ingredient"
+              type="button"
+              data-id="creatures_plume_simorg"
+              data-name="Plume de Simorg"
+              data-img="../images/bouton/ing_creatures_plume.webp"
+              data-size="120"
+              data-size-mobile="52"
+              data-bottom-mobile="18%"
+              data-left-mobile="64%"
+              aria-label="Plume de Simorg"
+              style="bottom: 10%; left: 72%;">
+        <img class="ingredient-img" src="../images/bouton/ing_creatures_plume.webp" alt="Plume de Simorg" />
+      </button>
+
+      <!-- Ingrédient 2 -->
+      <button class="ing-btn quest-ingredient"
+              type="button"
+              data-id="creatures_ecaille_drake"
+              data-name="Écaille de drake"
+              data-img="../images/bouton/ing_creatures_ecaille.webp"
+              data-size="100"
+              data-size-mobile="46"
+              data-bottom-mobile="42%"
+              data-left-mobile="22%"
+              aria-label="Écaille de drake"
+              style="bottom: 38%; left: 24%;">
+        <img class="ingredient-img" src="../images/bouton/ing_creatures_ecaille.webp" alt="Écaille de drake" />
+      </button>
+
+      <!-- Astuce : duplique ces <button> pour ajouter d'autres ingrédients.
+           Pense à ajouter les mêmes IDs dans CFG.items côté JS. -->
+    </div>
+
+    <div class="texte-monde">
+      « Vaste et indomptable, ce monde abrite des êtres extraordinaires, espèces rares et puissantes, qui règnent en maîtres sur des territoires interdits aux imprudents. »
+    </div>
+
+    <div class="button-group">
+      <a href="7.extrait_Creatures.html">Extrait du livre</a>
+      <a href="entree_creatures.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/monde.js" defer></script>
+</body>
+</html>
