@@ -29,7 +29,7 @@
       low: "Ton Arzanskân faiblit… utilise un ingrédient ou pars en quête.",
       bagFull: "Ton sac est plein (5). Utilise un ingrédient avant d’en ramasser un autre.",
       added: "Ingrédient ajouté au sac.",
-      perItemMax: "Tu as déjà la quantité maximale de cet ingrédient.",
+      perItemMax: "Tu as déjà ramassé cet ingrédient. Utilise-le pour pouvoir en ramasser un autre !",
       used: "Énergie rechargée à 100%.",
       infinite: "Bravo ! Ton corps s’accorde à la magie des mondes : ton Arzanskân n’a plus besoin d’être rechargé.",
     }
