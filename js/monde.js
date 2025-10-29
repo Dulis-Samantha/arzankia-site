@@ -410,13 +410,18 @@ function initCollectibles(){
     localStorage.setItem(CFG.storageKey, JSON.stringify(S));
   }
 
-  function toast(text, ms=1800){
-    const t = document.createElement('div');
-    t.className = 'arz-toast'; t.textContent = text;
-    document.body.appendChild(t);
-    requestAnimationFrame(()=> t.classList.add('show'));
-    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 220); }, ms);
-  }
+function toast(text, ms=1800){
+  const t = document.createElement('div');
+  t.className = 'arz-toast';
+  t.innerHTML = `<div class="bubble">${text}</div>`;  // ← bulle interne
+  document.body.appendChild(t);
+
+  requestAnimationFrame(()=> t.classList.add('show'));
+  setTimeout(()=>{
+    t.classList.remove('show');
+    setTimeout(()=> t.remove(), 220);
+  }, ms);
+}
 
 // Petite API console (pratique pour tester)
 window.Arz = {
