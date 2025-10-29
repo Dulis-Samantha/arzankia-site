@@ -7,12 +7,12 @@
     max: 100,
     tickMs: 1000,
     drainPerSecond: 0.10,         // 1 pt / 10 s
+    rechargePerSecond: 0.10,      // 1 pt / 10 s (hors Mondes)
     questThresholdPct: 15,        // bandeau d’alerte
     zeroRedirectUrl: '../2.les_coulisses.html',
 
-    bagSlots: 5,                  // emplacements
+    bagSlots: 10,                  // emplacements
     perItemMax: 2,                // quantité max par ingrédient
-    infiniteAfterUses: 10,        // mode infini après N utilisations
 
     bagIconSrc: '../images/bouton/sac_magique.webp',
 
@@ -33,12 +33,19 @@
       infinite: "Bravo ! Ton corps s’accorde à la magie des mondes : ton Arzanskân n’a plus besoin d’être rechargé.",
     }
   };
+  const isMonde = /\/monde\//.test(location.pathname);
 
   /* =========================
    * STATE
    * ========================= */
   let S = loadState();
-  let timer = null;
+
+// Si le mode n’existe pas encore (ancien système chill/infinite)
+if (!S.mode) {
+  S.mode = 'novice'; // par défaut
+}
+
+let timer = null;
 
   /* =========================
    * DOM de la jauge
@@ -98,12 +105,15 @@
   });
 
   // Toggle "Mode tranquille" (attaché UNE fois)
-  bagToggle.onclick = () => {
-    S.chill = !S.chill;
-    saveState();
-    renderAll();
-    startIfNeeded();
-  };
+ bagToggle.onclick = () => {
+  // Si on est en Novice → on passe en Expérimenté
+  // Si on est en Expérimenté → on revient en Novice
+  S.mode = (S.mode === 'novice') ? 'experimente' : 'novice';
+  saveState();
+  renderAll();
+  startIfNeeded();
+};
+
 
   /* =========================
    * INIT
@@ -133,12 +143,34 @@
     clearInterval(timer);
     timer = null;
   }
-  function tick(){
-    if (document.hidden || S.infinite || S.chill) return;
-    S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
-    if (S.energy <= 0){ saveState(); return redirectZero(); }
-    renderGauge(); saveState();
+ function tick(){
+  if (document.hidden) return;
+
+  // Mode Voyageur expérimenté → énergie éternelle
+  if (S.mode === 'experimente') {
+    S.energy = CFG.max;
+    renderGauge();
+    saveState();
+    return;
   }
+
+  // Mode Novice
+  if (isMonde) {
+    // En Monde → la jauge descend lentement
+    S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
+    if (S.energy <= 0){
+      saveState();
+      return redirectZero(); // redirection si énergie vide
+    }
+  } else {
+    // Hors Monde (Accueil, Coulisses, Héros, Autrice, Grimoire) → la jauge remonte
+    S.energy = clamp(S.energy + CFG.rechargePerSecond, 0, CFG.max);
+  }
+
+  renderGauge();
+  saveState();
+}
+
 
   function renderAll(){
     renderGauge();
@@ -185,18 +217,19 @@
     // badge
     bagBadge.textContent = String(totalItems());
 
-    // état visuel + libellé du toggle
-    if (S.chill) {
-      bagToggle.classList.add('on');
-      bagToggle.setAttribute('aria-pressed', 'true');
-      bagToggle.textContent = 'Désactiver le mode tranquille';
-      bagToggle.title = 'Clique pour désactiver';
-    } else {
-      bagToggle.classList.remove('on');
-      bagToggle.setAttribute('aria-pressed', 'false');
-      bagToggle.textContent = 'Activer le mode tranquille';
-      bagToggle.title = 'Clique pour activer';
-    }
+   
+ // état visuel + libellé du toggle (nouveaux modes)
+if (S.mode === 'experimente') {
+  bagToggle.classList.add('on');
+  bagToggle.setAttribute('aria-pressed', 'true');
+  bagToggle.textContent = 'Revenir en mode Novice';
+  bagToggle.title = 'Énergie éternelle activée';
+} else {
+  bagToggle.classList.remove('on');
+  bagToggle.setAttribute('aria-pressed', 'false');
+  bagToggle.textContent = 'Activer le mode Voyageur expérimenté';
+  bagToggle.title = 'Basculer en énergie éternelle (brillance)';
+}
 
     // contenu des items
     bagList.innerHTML = '';
