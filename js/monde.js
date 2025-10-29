@@ -61,10 +61,29 @@
 
 const isDrainPage = (() => {
   const p = location.pathname;
+
+  // 1) Index des mondes
   const inWorldsIndex = /\/3\.les_mondes\.html$/i.test(p) || p.endsWith('/3.les_mondes.html');
-  const inWorldAreas  = /\/(monde|extraits?|entree)\//i.test(p);
-  return inWorldsIndex || inWorldAreas;
+
+  // 2) Vrais mondes (quêtes)
+  const inMonde = /\/monde\//i.test(p);
+
+  // 3) Extraits des mondes
+  const inExtraits = /\/extraits?\//i.test(p);
+
+  // 4) Entrées de monde (fichiers entrée_*.html)
+  const inEntreeMonde = /\/entree\/entree_[a-z0-9_-]+\.html$/i.test(p);
+
+  // 5) Monde Artiste :
+  //    - soit dans un dossier /artiste/
+  //    - soit ces fichiers à la racine :
+  //      5.chanson_de_camidjo.html, 5.louboutartgif.html, 5.loup_bout_art.html
+  const inArtisteFolder = /\/artiste\//i.test(p);
+  const inArtisteFiles  = /\/(5\.chanson_de_camidjo|5\.louboutartgif|5\.loup_bout_art)\.html$/i.test(p);
+
+  return inWorldsIndex || inMonde || inExtraits || inEntreeMonde || inArtisteFolder || inArtisteFiles;
 })();
+
 
   // — Normalise les IDs "doublons" (ex: foret_champignon_2 → foret_champignon)
 const ID_BASE = (id) => id.replace(/_\d+$/, '');
