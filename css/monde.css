@@ -43,8 +43,8 @@ body {
   color: #ffe79a;
   text-shadow: 0 0 8px rgba(0, 0, 0, .75), 0 0 18px rgba(255, 231, 154, .25);
   position: relative;
-  z-index: 3000;
-  margin-bottom: .6rem; /* un petit espace sous le titre */
+  z-index: 1800; /* FIX: sous la jauge/sac (2500/4700), au-dessus de l’image/ingrédients */
+  margin-bottom: .6rem;
 }
 
 /* === Image + Ingrédient caché === */
@@ -56,7 +56,9 @@ body {
   z-index: 1000;
 }
 
-.Fees-image {
+/* FIX: robuste à la casse dans le HTML */
+.Fees-image,
+.fees-image {
   display: block;
   width: 100%;
   max-width: 950px;
@@ -78,12 +80,11 @@ body {
   z-index: 1100; /* derrière la jauge/sac, devant l’image */
 }
 
-.quest-ingredient {
-  z-index: 1100;  /* même couche pour cette classe utilitaire */
-}
+.quest-ingredient { z-index: 1100; }
 
 .ingredient-img {
-  width: 58px;
+  /* FIX: largeur pilotable par variable (fallback 58px) */
+  width: var(--ing-w, 58px);
   height: auto;
   display: block;
   opacity: 0.9;
@@ -130,36 +131,6 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 18px rgba(255, 223, 100, 1);
 }
-/* --- Ordre des couches (toujours) --- */
-.world-title, .page-title, h1.world-title {
-  position: relative;
-  z-index: 3000;   /* Le titre passe au-dessus de tout */
-}
-
-.energy-wrap {
-  position: fixed;
-  z-index: 2500;   /* Sous le titre, au-dessus des images */
-}
-
-.world-hero, .world-cover, .hero-card, .big-image {
-  position: relative;
-  z-index: 1000;   /* L’image reste en dessous de la jauge */
-}
-
-/* --- Ajustement mobile : on descend la jauge sous le titre --- */
-@media (max-width: 768px){
-  /* Si le titre prend plus de place en mobile, on pousse la jauge */
-  .energy-wrap{
-    top: 110px;    /* augmente si ton titre prend 2 lignes (ex: 120–130px) */
-    right: 12px;
-  }
-
-  /* Un petit espace sous le titre pour respirer */
-  .world-title, .page-title, h1.world-title{
-    margin-bottom: 8px;
-  }
-}
-
 
 /* ============================================================
    JAUGE D’ÉNERGIE
@@ -182,13 +153,13 @@ body {
 }
 @keyframes appear {
   from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .energy-icon { font-size: 22px; filter: drop-shadow(0 0 6px rgba(255,214,116,.7)); }
 .energy-label { font-family:"Cinzel Decorative",serif; font-variant: small-caps; letter-spacing:.5px; opacity:.9; }
 
 .energy-bar {
-  width: 100px;  /* ← réduite */
+  width: 100px;
   height: var(--bar-h);
   background: var(--bar-bg);
   border-radius: 999px;
@@ -198,7 +169,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .energy-bar { width: 60px; }  /* ← réduite sur mobile */
+  .energy-bar { width: 60px; }
 }
 
 .energy-fill {
@@ -244,12 +215,7 @@ body {
   animation: arz-shimmer 1.8s linear infinite;
 }
 
-@keyframes arz-shimmer {
-  to {
-    transform: translateX(250%);
-  }
-}
-
+@keyframes arz-shimmer { to { transform: translateX(250%); } }
 
 /* ============================================================
    SAC MAGIQUE (Inventaire)
@@ -291,9 +257,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .bag-menu {
-    max-height: 72vh; /* un peu moins haut sur mobile */
-  }
+  .bag-menu { max-height: 72vh; }
 }
 
 .bag-menu.show { display:block; animation: slideDown .25s ease-out; }
@@ -343,14 +307,8 @@ body {
   cursor: pointer;
   transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
 }
-.bag-menu .bag-toggle::before{
-  content: '🌙';
-  filter: drop-shadow(0 0 6px rgba(255,214,116,.4));
-}
-.bag-menu .bag-toggle:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0,0,0,.35);
-}
+.bag-menu .bag-toggle::before{ content: '🌙'; filter: drop-shadow(0 0 6px rgba(255,214,116,.4)); }
+.bag-menu .bag-toggle:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.35); }
 .bag-menu .bag-toggle.on{
   background: linear-gradient(145deg, #ffe9af, #f2c94c);
   color: #3a2400;
@@ -371,29 +329,23 @@ body {
   transition: opacity .35s ease;
   pointer-events: none; /* ne bloque pas l’UI derrière */
 }
-
 .arz-toast.show{ opacity: 1; }
 
 .arz-toast .bubble{
   max-width: min(92vw, 560px);
   text-align: center;
-
-  /* Rendu propre et lisible */
-  font-family: "Cinzel Decorative", serif; /* ou laisse Georgia si tu préfères */
+  font-family: "Cinzel Decorative", serif;
   font-size: 1rem;
   line-height: 1.45;
-  text-shadow: none;          /* ← neutralise le text-shadow du body */
+  text-shadow: none;
   letter-spacing: .2px;
-
-  /* Cadre + fond */
   background: rgba(10, 0, 20, 0.85);
   color: #fff8e6;
   border: 1px solid rgba(255,214,116,.55);
   border-radius: 14px;
   padding: .9rem 1.1rem;
   box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 22px rgba(255,214,116,.25);
-
-  pointer-events: auto; /* utile si un jour tu ajoutes un bouton */
+  pointer-events: auto;
   animation: arz-pulse 2s ease-in-out infinite;
 }
 
@@ -402,7 +354,6 @@ body {
   50%  { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 28px rgba(255,214,116,.8); }
   100% { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 12px rgba(255,214,116,.25); }
 }
-
 
 /* ============================================================
    OVERLAY BLOQUANT
@@ -414,7 +365,11 @@ body {
   backdrop-filter: blur(3px);
   animation: fadein .5s ease;
 }
+/* FIX: état visible */
+.lock-overlay.show { display: grid; }
+
 @keyframes fadein { from{opacity:0} to{opacity:1} }
+
 .lock-card {
   width: min(680px, 92vw);
   background: var(--glass);
@@ -449,11 +404,11 @@ body {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px));
     left: 50%; right: auto;
     transform: translateX(-50%) scale(.95);
-    gap: .4rem;                 /* un poil plus compact */
+    gap: .4rem;
   }
 
-  .energy-bar { width: 60px; }  /* ← cohérent avec le haut */
-  .energy-pct { min-width: 2ch; font-size: .85rem; } /* plus compact */
+  .energy-bar { width: 60px; }
+  .energy-pct { min-width: 2ch; font-size: .85rem; }
 
   .bag-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
@@ -463,7 +418,7 @@ body {
   .bag-icon { width: 44px; height: 44px; }
 
   .quest-ribbon {
-    top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + 44px);
+    top: calc(var(--energyY) + env(safe-area-inset-top, 0, 0) + 44px);
     left: 12px; right: 12px;
     transform: none;
   }
@@ -471,3 +426,9 @@ body {
   .image-zone { margin-top: 96px !important; }
 }
 
+/* ============================================================
+   Respect des préférences de mouvement
+============================================================ */
+@media (prefers-reduced-motion: reduce){
+  * { animation: none !important; transition: none !important; }
+}
