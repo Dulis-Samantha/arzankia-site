@@ -4,20 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Monde de la Forêt enchantée</title>
+  <title>Monde de la Forêt Enchantée</title>
 
+  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="../css/monde.css" />
 </head>
 
 <body>
+  <!-- === Jauge d'énergie === -->
   <div class="energy-wrap" role="status" aria-live="polite">
     <div class="energy-icon">✨</div>
     <div class="energy-label">Arzanskân</div>
-    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
     <div id="energyPct" class="energy-pct">100%</div>
   </div>
 
+  <!-- === Overlay “jauge vide” === -->
   <div id="lockOverlay" class="lock-overlay">
     <div class="lock-card">
       <div class="lock-title">Ta jauge est vide… ⚡</div>
@@ -29,9 +36,10 @@
   <div class="container">
     <h1 class="page-title">Monde de la Forêt enchantée</h1>
 
+    <!-- Illustration + ingrédient caché -->
     <div class="image-zone">
       <img class="Fees-image" src="../images/mondes/monde_Foret.webp" alt="Monde de la Forêt enchantée" />
-
+     
       <button class="ing-btn quest-ingredient"
               type="button"
               data-id="foret_champignon"
