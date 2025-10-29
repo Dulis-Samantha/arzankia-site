@@ -17,8 +17,8 @@
     bagIconSrc: '../images/bouton/sac_magique.webp',
 
     items: {
-      'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: 'ing_ptikitis.webp' },
-      'foret_champignon' : { name: 'Champignon azulé',        img: 'ing_foret.webp' },
+      'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: ../'ing_ptikitis.png' },
+      'foret_champignon' : { name: 'Champignon azulé',        img: ../'ing_foret.png' },
       'ames_plante'      : { name: 'Olivette Brumis',         img: 'ing_ames.webp' },
       'reserve_ptikitis' : { name: 'Pousse rare (Réserve)',   img: 'ing_reserve_ptikitis.webp' },
       'eau_creature'     : { name: 'Essence des créatures de l’eau', img: 'ing_creature.webp' },
