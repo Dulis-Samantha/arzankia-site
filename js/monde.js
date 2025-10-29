@@ -313,73 +313,65 @@ if (S.mode === 'experimente') {
     return S.bag.reduce((n,e)=>n+e.qty,0);
   }
 
-  /* =========================
-   * COLLECT + ZOOM + POSITION MOBILE
-   * ========================= */
-  function initCollectibles(){
-    $$('.quest-ingredient').forEach(btn=>{
-      // accessibilité
-      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
-      if (!btn.hasAttribute('role')) btn.setAttribute('role','button');
-      btn.addEventListener('keydown', (e) => {
-        if (e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }
-      });
-
-      // --- collecte au clic ---
-      btn.addEventListener('click', ()=>{
-        const id = btn.getAttribute('data-id');
-        if (!id) return;
-
-        // trouve ou crée l’entrée
-        let entry = S.bag.find(e=>e.id===id);
-        if (entry){
-          if (entry.qty >= CFG.perItemMax){
-            toast(CFG.messages.perItemMax);
-            return;
-          }
-          entry.qty++;
-        } else {
-          if (S.bag.length >= CFG.bagSlots){
-            toast(CFG.messages.bagFull);
-            return;
-          }
-          entry = { id, qty: 1 };
-          S.bag.push(entry);
-        }
-
-        saveState(); renderBag(); toast(CFG.messages.added);
-      });
-
-      // --- zoom réglable (desktop / mobile) ---
-      const imgEl = btn.querySelector('.ingredient-img');
-      if (imgEl) {
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-        const zoomPct        = parseFloat(btn.getAttribute('data-zoom') || '130');
-        const zoomMobilePct  = parseFloat(btn.getAttribute('data-zoom-mobile') || zoomPct);
-        const zoomScale      = Math.max(1, (isMobile ? zoomMobilePct : zoomPct) / 100);
-
-        // Transition douce (au cas où pas en CSS)
-        imgEl.style.transition = imgEl.style.transition || 'transform 0.3s ease';
-
-        // Pulse au clic / touch
-        const pulse = () => {
-          imgEl.style.transform = `scale(${zoomScale})`;
-          setTimeout(() => { imgEl.style.transform = ''; }, 220);
-        };
-        imgEl.addEventListener('mousedown', pulse);
-        imgEl.addEventListener('touchstart', pulse, { passive: true });
-      }
-
-      // --- position mobile via data-* ---
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        const bottomMob = btn.getAttribute('data-bottom-mobile');
-        const leftMob   = btn.getAttribute('data-left-mobile');
-        if (bottomMob) btn.style.bottom = bottomMob;
-        if (leftMob)   btn.style.left   = leftMob;
-      }
+/* =========================
+ * COLLECT + SIZE + POSITION MOBILE
+ * ========================= */
+function initCollectibles(){
+  $$('.quest-ingredient').forEach(btn=>{
+    // accessibilité
+    if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+    if (!btn.hasAttribute('role')) btn.setAttribute('role','button');
+    btn.addEventListener('keydown', (e) => {
+      if (e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }
     });
-  }
+
+    // --- collecte au clic ---
+    btn.addEventListener('click', ()=>{
+      const id = btn.getAttribute('data-id');
+      if (!id) return;
+
+      // trouve ou crée l’entrée
+      let entry = S.bag.find(e=>e.id===id);
+      if (entry){
+        if (entry.qty >= CFG.perItemMax){ toast(CFG.messages.perItemMax); return; }
+        entry.qty++;
+      } else {
+        if (S.bag.length >= CFG.bagSlots){ toast(CFG.messages.bagFull); return; }
+        entry = { id, qty: 1 };
+        S.bag.push(entry);
+      }
+
+      saveState(); renderBag(); toast(CFG.messages.added);
+    });
+
+    // --- TAILLE PAR MONDE (PC / mobile) ---
+    const imgEl = btn.querySelector('.ingredient-img');
+    if (imgEl) {
+      const sizeDesk = parseFloat(btn.getAttribute('data-size') || '');
+      const sizeMob  = parseFloat(btn.getAttribute('data-size-mobile') || '');
+
+      const applyBaseSize = () => {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const chosen = isMobile ? (isNaN(sizeMob) ? sizeDesk : sizeMob) : sizeDesk;
+        if (!isNaN(chosen)) imgEl.style.width = chosen + 'px';
+      };
+      applyBaseSize();
+      window.matchMedia('(max-width: 768px)').addEventListener('change', applyBaseSize);
+
+      // (Aucun pulse au clic/au touch : supprimé)
+      // (Tu peux aussi retirer complètement data-zoom / data-zoom-mobile de l’HTML)
+    }
+
+    // --- position mobile via data-* ---
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const bottomMob = btn.getAttribute('data-bottom-mobile');
+      const leftMob   = btn.getAttribute('data-left-mobile');
+      if (bottomMob) btn.style.bottom = bottomMob;
+      if (leftMob)   btn.style.left   = leftMob;
+    }
+  });
+}
+
 
   /* =========================
    * HELPERS
