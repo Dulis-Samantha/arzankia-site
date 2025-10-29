@@ -59,7 +59,13 @@
     }
   };
 
-  const isMonde = /\/monde\//.test(location.pathname);
+const isDrainPage = (() => {
+  const p = location.pathname;
+  const inWorldsIndex = /\/3\.les_mondes\.html$/i.test(p) || p.endsWith('/3.les_mondes.html');
+  const inWorldAreas  = /\/(monde|extraits?|entree)\//i.test(p);
+  return inWorldsIndex || inWorldAreas;
+})();
+
   // — Normalise les IDs "doublons" (ex: foret_champignon_2 → foret_champignon)
 const ID_BASE = (id) => id.replace(/_\d+$/, '');
 
@@ -201,7 +207,7 @@ function tick(){
   }
 
   // Mode Novice
-  if (isMonde) {
+  if (isDrainPage) {
     // En Monde → la jauge descend lentement
     S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
     if (S.energy <= 0){
@@ -230,7 +236,7 @@ function renderAll(){
 function updateRibbon(){
   const pct = (S.energy / CFG.max) * 100;
   // Le ruban n’apparaît que si on est en mode Novice et dans un Monde
-  const show = (S.mode === 'novice') && isMonde && (pct <= CFG.questThresholdPct);
+  const show = (S.mode === 'novice') && isDrainPage && (pct <= CFG.questThresholdPct);
   ribbon.style.display = show ? 'block' : 'none';
 }
 
