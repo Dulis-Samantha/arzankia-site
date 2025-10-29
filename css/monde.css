@@ -42,6 +42,9 @@ body {
   margin: 1.5rem auto;
   color: #ffe79a;
   text-shadow: 0 0 8px rgba(0, 0, 0, .75), 0 0 18px rgba(255, 231, 154, .25);
+  position: relative;
+  z-index: 3000;
+  margin-bottom: .6rem; /* un petit espace sous le titre */
 }
 
 /* === Image + Ingrédient caché === */
@@ -50,6 +53,7 @@ body {
   display: block;
   width: fit-content;
   margin: 0 auto 1.2rem;
+  z-index: 1000;
 }
 
 .Fees-image {
@@ -59,6 +63,8 @@ body {
   height: auto;
   border-radius: 18px;
   box-shadow: 0 0 25px rgba(255, 255, 255, .15);
+  position: relative;
+  z-index: 1000;
 }
 
 /* Bouton ingrédient */
@@ -69,7 +75,13 @@ body {
   padding: 0;
   cursor: pointer;
   transform: translate(-50%, -50%);
+  z-index: 1100; /* derrière la jauge/sac, devant l’image */
 }
+
+.quest-ingredient {
+  z-index: 1100;  /* même couche pour cette classe utilitaire */
+}
+
 .ingredient-img {
   width: 58px;
   height: auto;
@@ -126,7 +138,7 @@ body {
   position: fixed;
   top: 68px;
   right: 12px;
-  z-index: 4000;
+  z-index: 2500;
   display: flex;
   align-items: center;
   gap: .6rem;
@@ -230,6 +242,7 @@ body {
   margin-top: 8px;
   min-width: 240px;
   color: #fff3cc;
+  z-index: 4710; /* au-dessus de l’icône et de tout le reste */
   
   /* Fond opaque pour masquer l’image derrière */
   background: #0a0014;
