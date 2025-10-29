@@ -4,18 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Monde des Atlantides — Arzankia</title>
+  <title>Monde d'Atlantide</title>
 
   <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles globaux Monde -->
+  <!-- Styles -->
   <link rel="stylesheet" href="../css/monde.css" />
 </head>
+
 <body>
   <!-- === Jauge d'énergie === -->
   <div class="energy-wrap" role="status" aria-live="polite">
-    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-icon">✨</div>
     <div class="energy-label">Arzanskân</div>
     <div class="energy-bar">
       <div id="energyFill" class="energy-fill"></div>
@@ -23,8 +24,8 @@
     <div id="energyPct" class="energy-pct">100%</div>
   </div>
 
-  <!-- === Overlay «jauge vide» === -->
-  <div id="lockOverlay" class="lock-overlay" hidden>
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
     <div class="lock-card">
       <div class="lock-title">Ta jauge est vide… ⚡</div>
       <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
@@ -39,8 +40,7 @@
     <div class="image-zone">
       <img class="Fees-image" src="../images/mondes/monde_Atlantide.webp" alt="Monde des Atlantides" />
       
-      <button
-  class="ing-btn quest-ingredient"
+  <button class="ing-btn quest-ingredient"
   type="button"
   data-id="atlantide_meduse"
   data-name="Œufs de méduse"
