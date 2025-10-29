@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monde des Atlantides — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles globaux Monde -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay «jauge vide» === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="page-title">Monde des Atlantides</h1>
+
+    <!-- Illustration + ingrédients cliquables -->
+    <div class="image-zone">
+      <img class="Fees-image" src="../images/mondes/monde_Atlantide.webp" alt="Monde des Atlantides" />
+
+      <!-- Ingrédient CACHÉ : Œufs de méduse -->
+      <button
+        class="ing-btn quest-ingredient"
+        type="button"
+        data-id="atlantide_meduse"
+        data-name="Œufs de méduse"
+        data-img="../images/bouton/ing_atlantide.png"
+        data-size="60"
+        data-size-mobile="28"
+        data-bottom-mobile="22%"
+        data-left-mobile="68%"
+        aria-label="Œufs de méduse"
+        style="bottom: 14%; left: 72%;"
+        data-hidden="true"
+        hidden>
+        <img class="ingredient-img" src="../images/bouton/ing_atlantide.png" alt="Œufs de méduse" />
+      </button>
+    </div>
+
+    <div class="texte-monde">
+      « Sous la surface, les cités nacrées des Atlantides veillent. L’eau garde les secrets… et parfois des œufs qui brillent comme des étoiles. »
+    </div>
+
+    <div class="button-group">
+      <a href="../extraits/extrait_Atlantide.html">Extrait du livre</a>
+      <a href="../entree/entree_Atlantide.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/monde.js" defer></script>
+</body>
+</html>
