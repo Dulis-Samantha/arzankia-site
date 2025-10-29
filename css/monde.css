@@ -130,6 +130,36 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 18px rgba(255, 223, 100, 1);
 }
+/* --- Ordre des couches (toujours) --- */
+.world-title, .page-title, h1.world-title {
+  position: relative;
+  z-index: 3000;   /* Le titre passe au-dessus de tout */
+}
+
+.energy-wrap {
+  position: fixed;
+  z-index: 2500;   /* Sous le titre, au-dessus des images */
+}
+
+.world-hero, .world-cover, .hero-card, .big-image {
+  position: relative;
+  z-index: 1000;   /* L’image reste en dessous de la jauge */
+}
+
+/* --- Ajustement mobile : on descend la jauge sous le titre --- */
+@media (max-width: 768px){
+  /* Si le titre prend plus de place en mobile, on pousse la jauge */
+  .energy-wrap{
+    top: 110px;    /* augmente si ton titre prend 2 lignes (ex: 120–130px) */
+    right: 12px;
+  }
+
+  /* Un petit espace sous le titre pour respirer */
+  .world-title, .page-title, h1.world-title{
+    margin-bottom: 8px;
+  }
+}
+
 
 /* ============================================================
    JAUGE D’ÉNERGIE
