@@ -127,23 +127,37 @@ let timer = null;
   });
   window.addEventListener('beforeunload', saveState);
 
-  /* =========================
-   * LOOP / RENDER
-   * ========================= */
-  function startIfNeeded(){
-    if (S.infinite || S.chill) return stop();
-    if (S.energy > 0) start(); else redirectZero();
+/* =========================
+ * LOOP / RENDER
+ * ========================= */
+function startIfNeeded(){
+  // Toujours stopper avant de redémarrer (évite les doublons)
+  stop();
+
+  // Mode Voyageur expérimenté → énergie éternelle
+  if (S.mode === 'experimente') {
+    S.energy = CFG.max;
+    renderGauge();
+    saveState();
+    return; // pas de timer en mode éternel
   }
-  function start(){
-    if (timer) return;
-    timer = setInterval(tick, CFG.tickMs);
-  }
-  function stop(){
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-  }
- function tick(){
+
+  // Mode Novice
+  start(); // relance le timer à chaque fois
+}
+
+function start(){
+  if (timer) return;
+  timer = setInterval(tick, CFG.tickMs);
+}
+
+function stop(){
+  if (!timer) return;
+  clearInterval(timer);
+  timer = null;
+}
+
+function tick(){
   if (document.hidden) return;
 
   // Mode Voyageur expérimenté → énergie éternelle
@@ -171,27 +185,34 @@ let timer = null;
   saveState();
 }
 
+function renderAll(){
+  renderGauge();
+  renderBag();
+  updateRibbon();
 
-  function renderAll(){
-    renderGauge();
-    renderBag();
-    updateRibbon();
-    document.body.classList.toggle('arz-infinite', !!S.infinite);
-  }
-  function renderGauge(){
-    const pct = Math.round((S.energy / CFG.max) * 100);
-    if (elFill) elFill.style.width = pct + '%';
-    if (elPct)  elPct.textContent = pct + '%';
-    updateRibbon();
-  }
-  function updateRibbon(){
-    const pct = (S.energy / CFG.max) * 100;
-    ribbon.style.display = (!S.infinite && !S.chill && pct <= CFG.questThresholdPct) ? 'block' : 'none';
-  }
- function redirectZero(){
+  // Ajoute la classe de mode sur le body (utile pour la brillance)
+  document.body.classList.toggle('arz-mode-experimente', S.mode === 'experimente');
+  document.body.classList.toggle('arz-mode-novice', S.mode === 'novice');
+}
+
+function updateRibbon(){
+  const pct = (S.energy / CFG.max) * 100;
+  // Le ruban n’apparaît que si on est en mode Novice et dans un Monde
+  const show = (S.mode === 'novice') && isMonde && (pct <= CFG.questThresholdPct);
+  ribbon.style.display = show ? 'block' : 'none';
+}
+
+function renderGauge(){
+  const pct = Math.round((S.energy / CFG.max) * 100);
+  if (elFill) elFill.style.width = pct + '%';
+  if (elPct)  elPct.textContent = pct + '%';
+  updateRibbon();
+}
+
+function redirectZero(){
   if (lockShown) return;  // évite les appels multiples
   lockShown = true;
-  stop();                 // arrête le timer d'énergie
+  stop(); // arrête le timer d'énergie
 
   if (overlay){
     overlay.style.display = 'grid';
