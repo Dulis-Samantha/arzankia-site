@@ -1,7 +1,12 @@
 ;(() => {
+
   /* =========================
    * CONFIG
    * ========================= */
+
+  // ➜ Ajout d’une ligne pour adapter automatiquement les chemins
+  const BASE = location.pathname.includes('/monde/') ? '../' : '';
+
   const CFG = {
     storageKey: 'arz_energy_v2',
     max: 100,
@@ -9,39 +14,40 @@
     drainPerSecond: 0.10,         // 1 pt / 10 s
     rechargePerSecond: 0.10,      // 1 pt / 10 s (hors Mondes)
     questThresholdPct: 15,        // bandeau d’alerte
-    zeroRedirectUrl: '../2.les_coulisses.html',
 
-    bagSlots: 10,                  // emplacements
-    perItemMax: 1,                // quantité max par ingrédient
+    // ➜ Chemins dynamiques
+    zeroRedirectUrl: BASE + '2.les_coulisses.html',
+    bagIconSrc:      BASE + 'images/bouton/sac_magique.webp',
 
-    bagIconSrc: '../images/bouton/sac_magique.webp',
+    bagSlots: 10,
+    perItemMax: 1,
 
-items: {
-  'ptikitis_rubictus': { 
-    name: 'Rubictus aux baies rouges', 
-    img: '../images/bouton/ing_ptikitis.png' 
-  },
-  'foret_champignon': { 
-    name: 'Champignon azulé', 
-    img: '../images/bouton/ing_foret.png' 
-  },
-  'ames_plante': { 
-    name: 'Olivette Brumis', 
-    img: '../images/bouton/ing_ames.webp' 
-  },
-  'reserve_ptikitis': { 
-    name: 'Pousse rare (Réserve)', 
-    img: '../images/bouton/ing_reserve_ptikitis.webp' 
-  },
-  'eau_creature': { 
-    name: 'Essence des créatures de l’eau', 
-    img: '../images/bouton/ing_creature.webp' 
-  },
-  'atlantide_meduse': { 
-    name: 'Œufs de méduse', 
-    img: '../images/bouton/ing_atlantide.png' 
-  },
-},
+    items: {
+      'ptikitis_rubictus': { 
+        name: 'Rubictus aux baies rouges', 
+        img: BASE + 'images/bouton/ing_ptikitis.png' 
+      },
+      'foret_champignon': { 
+        name: 'Champignon azulé', 
+        img: BASE + 'images/bouton/ing_foret.png' 
+      },
+      'ames_plante': { 
+        name: 'Olivette Brumis', 
+        img: BASE + 'images/bouton/ing_ames.webp' 
+      },
+      'reserve_ptikitis': { 
+        name: 'Pousse rare (Réserve)', 
+        img: BASE + 'images/bouton/ing_reserve_ptikitis.webp' 
+      },
+      'eau_creature': { 
+        name: 'Essence des créatures de l’eau', 
+        img: BASE + 'images/bouton/ing_creature.webp' 
+      },
+      'atlantide_meduse': { 
+        name: 'Œufs de méduse', 
+        img: BASE + 'images/bouton/ing_atlantide.png' 
+      },
+    },
 
     messages: {
       low: "Ton Arzanskân faiblit… utilise un ingrédient ou pars en quête.",
@@ -52,6 +58,7 @@ items: {
       infinite: "Bravo ! Ton corps s’accorde à la magie des mondes : ton Arzanskân n’a plus besoin d’être rechargé.",
     }
   };
+
   const isMonde = /\/monde\//.test(location.pathname);
 
   /* =========================
