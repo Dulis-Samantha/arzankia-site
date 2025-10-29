@@ -290,40 +290,44 @@ body {
   text-shadow: none;
 }
 
+
 /* =========================
-   NOTIFICATION (TOAST) CENTRÉE
+  NOTIFICATION (TOAST) CENTRÉE  — centre robuste mobile
    ========================= */
 .arz-toast{
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;                    /* occupe tout le viewport */
+  display: grid;               /* centrage fiable */
+  place-items: center;         /* centre H+V */
   z-index: 9999;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;        /* ne bloque pas les taps du dessous */
+}
 
+.arz-toast.show{ opacity: 1; }
+
+/* La bulle interne (garde ton style) */
+.arz-toast .bubble{
   max-width: min(92vw, 560px);
   text-align: center;
-
   background: rgba(10, 0, 20, 0.85);
   color: #fff8e6;
   border: 1px solid rgba(255,214,116,.55);
   border-radius: 14px;
   padding: .9rem 1.1rem;
   box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 22px rgba(255,214,116,.25);
-
-  opacity: 0;
-  transition: opacity .35s ease;
-  backdrop-filter: blur(6px);
   font-weight: 700;
-}
-.arz-toast.show{
-  opacity: 1;
+  pointer-events: auto; /* utile si un jour tu mets un bouton dedans */
   animation: arz-pulse 2s ease-in-out infinite;
 }
+
 @keyframes arz-pulse{
   0%   { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 12px rgba(255,214,116,.25); }
   50%  { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 28px rgba(255,214,116,.8); }
   100% { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 12px rgba(255,214,116,.25); }
 }
+
 
 /* ============================================================
    OVERLAY BLOQUANT
