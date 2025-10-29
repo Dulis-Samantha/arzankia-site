@@ -60,6 +60,12 @@
   };
 
   const isMonde = /\/monde\//.test(location.pathname);
+  // — Normalise les IDs "doublons" (ex: foret_champignon_2 → foret_champignon)
+const ID_BASE = (id) => id.replace(/_\d+$/, '');
+
+// — Récupère les métadonnées en priorisant l'ID exact puis l'ID de base
+const getMeta = (id) => CFG.items[id] || CFG.items[ID_BASE(id)] || null;
+
 
   /* =========================
    * STATE
@@ -402,15 +408,19 @@ function initCollectibles(){
   /* =========================
    * HELPERS
    * ========================= */
-  function metaOf(id){
-    const btn = document.querySelector(`.quest-ingredient[data-id="${id}"]`);
-    const name = btn?.getAttribute('data-name');
-    const img  = btn?.getAttribute('data-img');
-    return {
-      name: name || CFG.items[id]?.name || id,
-      img : img  || CFG.items[id]?.img  || ''
-    };
-  }
+function metaOf(id){
+  const btn = document.querySelector(`.quest-ingredient[data-id="${id}"]`);
+  const nameAttr = btn?.getAttribute('data-name');
+  const imgAttr  = btn?.getAttribute('data-img');
+
+  const meta = getMeta(id);  // ← tentera l'ID exact, puis l'ID "de base"
+
+  return {
+    // Priorité : HTML (data-name / data-img) > CFG.items > fallback id / vide
+    name: nameAttr || meta?.name || id,
+    img : imgAttr  || meta?.img  || ''
+  };
+}
 
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
