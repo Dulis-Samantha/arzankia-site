@@ -19,7 +19,7 @@
     zeroRedirectUrl: BASE + '2.les_coulisses.html',
     bagIconSrc:      BASE + 'images/bouton/sac_magique.webp',
 
-    bagSlots: 10,
+    bagSlots: 20,
     perItemMax: 1,
 
     items: {
