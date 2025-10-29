@@ -16,14 +16,32 @@
 
     bagIconSrc: '../images/bouton/sac_magique.webp',
 
- items: {
-  'ptikitis_rubictus': { name: 'Rubictus aux baies rouges', img: '../images/bouton/ing_ptikitis.png' },
-  'foret_champignon' : { name: 'Champignon azulé',          img: '../images/bouton/ing_foret.png' },
-  'ames_plante'      : { name: 'Olivette Brumis',           img: '../images/bouton/ing_ames.webp' },
-  'reserve_ptikitis' : { name: 'Pousse rare (Réserve)',     img: '../images/bouton/ing_reserve_ptikitis.webp' },
-  'eau_creature'     : { name: 'Essence des créatures de l’eau', img: '../images/bouton/ing_creature.webp' },
+items: {
+  'ptikitis_rubictus': { 
+    name: 'Rubictus aux baies rouges', 
+    img: '../images/bouton/ing_ptikitis.png' 
+  },
+  'foret_champignon': { 
+    name: 'Champignon azulé', 
+    img: '../images/bouton/ing_foret.png' 
+  },
+  'ames_plante': { 
+    name: 'Olivette Brumis', 
+    img: '../images/bouton/ing_ames.webp' 
+  },
+  'reserve_ptikitis': { 
+    name: 'Pousse rare (Réserve)', 
+    img: '../images/bouton/ing_reserve_ptikitis.webp' 
+  },
+  'eau_creature': { 
+    name: 'Essence des créatures de l’eau', 
+    img: '../images/bouton/ing_creature.webp' 
+  },
+  'atlantide_meduse': { 
+    name: 'Œufs de méduse', 
+    img: '../images/bouton/ing_atlantide.png' 
+  },
 },
-
 
     messages: {
       low: "Ton Arzanskân faiblit… utilise un ingrédient ou pars en quête.",
