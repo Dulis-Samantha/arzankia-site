@@ -39,9 +39,9 @@
         name: 'Pousse rare (Réserve)', 
         img: BASE + 'images/bouton/ing_reserve_ptikitis.webp' 
       },
-      'eau_creature': { 
-        name: 'Essence des créatures de l’eau', 
-        img: BASE + 'images/bouton/ing_creature.webp' 
+      'creatures_essence_thermale': {
+        name: 'Essence d’Eau Thermale',
+        img: BASE + 'images/bouton/ing_creature.webp'
       },
       'atlantide_meduse': { 
         name: 'Œufs de méduse', 
