@@ -77,12 +77,6 @@ body {
   opacity: 0.9;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.ing-btn,
-.quest-ingredient { 
-  z-index: 3000; /* derrière le sac */
-}
-.bag-wrap { z-index: 20000; }
-.bag-menu { z-index: 20010; }  /* passe au-dessus de tout */
 
 /* === Texte explicatif === */
 .texte-monde {
