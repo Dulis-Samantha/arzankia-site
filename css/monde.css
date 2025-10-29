@@ -222,12 +222,37 @@ body {
   font-weight:800; font-size:12px; border-radius:999px;
   display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
+
 .bag-menu {
-  display:none; position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
-  background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
-  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
-  padding:.8rem 1rem;
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 240px;
+  color: #fff3cc;
+  
+  /* Fond opaque pour masquer l’image derrière */
+  background: #0a0014;
+  border: 1px solid rgba(255, 214, 116, .45);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+  backdrop-filter: blur(6px);
+
+  /* Gestion du contenu */
+  padding: .8rem 1rem;
+  max-height: 78vh;                  /* visible sans dépasser l’écran */
+  overflow-y: auto;                  /* scroll interne si inventaire long */
+  overscroll-behavior: contain;      /* empêche le rebond de page */
+  -webkit-overflow-scrolling: touch; /* scroll fluide sur iOS */
+  padding-right: .4rem;              /* petit confort scroll */
 }
+
+@media (max-width: 768px) {
+  .bag-menu {
+    max-height: 72vh; /* un peu moins haut sur mobile */
+  }
+}
+
 .bag-menu.show { display:block; animation: slideDown .25s ease-out; }
 @keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
 .bag-menu h3 {
