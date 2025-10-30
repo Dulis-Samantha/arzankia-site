@@ -24,6 +24,21 @@
     requestAnimationFrame(()=> t.classList.add('show'));
     setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),220); }, ms);
   }
+  // Base images selon l'emplacement de la page
+const BASE_IMG = BASE + 'images/bouton/';
+
+// Fallback des métadonnées des ingrédients (utile quand la page n’a pas de .quest-ingredient)
+const ITEMS = {
+  'ptikitis_rubictus'             : { name:'Rubictus aux baies rouges',        img: BASE_IMG + 'ing_ptikitis.webp' },
+  'foret_champignon'              : { name:'Champignon azulé',                  img: BASE_IMG + 'ing_foret.webp' },
+  'foret_champignon_2'            : { name:'Champignon azulé',                  img: BASE_IMG + 'ing_foret.webp' },
+  'ames_plante'                   : { name:'Olivette Brumis',                   img: BASE_IMG + 'ing_ames.webp' },
+  'ames_plante_2'                 : { name:'Olivette Brumis',                   img: BASE_IMG + 'ing_ames.webp' },
+  'reserve_ptikitis'              : { name:'Pousse rare (Réserve)',             img: BASE_IMG + 'ing_reserve_ptikitis.webp' },
+  'atlantide_meduse'              : { name:'Œufs de méduse',                    img: BASE_IMG + 'ing_atlantide.webp' },
+  'creatures_essence_thermale'    : { name:'Essence des créatures de l’eau',    img: BASE_IMG + 'ing_creature.webp' }
+};
+
 
   /* -------------------------
    * Attendre le cœur (Arz)
@@ -153,9 +168,10 @@
     bag.forEach((entry, idx)=>{
       const li = document.createElement('li');
       // Le nom et l'image peuvent venir d’attributs data-* de l’HTML de l’ingrédient
-      const btn = document.querySelector(`.quest-ingredient[data-id="${entry.id}"]`);
-      const name = btn?.getAttribute('data-name') || entry.id;
-      const img  = btn?.getAttribute('data-img')  || '';
+    const btn  = document.querySelector(`.quest-ingredient[data-id="${entry.id}"]`);
+const meta = ITEMS[entry.id] || {};
+const name = btn?.getAttribute('data-name') || meta.name || entry.id;
+const img  = btn?.getAttribute('data-img')  || meta.img  || (BASE_IMG + 'grimoire.webp');
 
       li.innerHTML = `
         <div class="bag-item">
