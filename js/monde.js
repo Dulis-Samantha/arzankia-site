@@ -28,11 +28,11 @@
     items: {
       'ptikitis_rubictus': { 
         name: 'Rubictus aux baies rouges', 
-        img: BASE + 'images/bouton/ing_ptikitis.png' 
+        img: BASE + 'images/bouton/ing_ptikitis.webp' 
       },
       'foret_champignon': { 
         name: 'Champignon azulé', 
-        img: BASE + 'images/bouton/ing_foret.png' 
+        img: BASE + 'images/bouton/ing_foret.webp' 
       },
       'ames_plante': { 
         name: 'Olivette Brumis', 
@@ -48,7 +48,7 @@
       },
       'atlantide_meduse': { 
         name: 'Œufs de méduse', 
-        img: BASE + 'images/bouton/ing_atlantide.png' 
+        img: BASE + 'images/bouton/ing_atlantide.webp' 
       },
     },
 
