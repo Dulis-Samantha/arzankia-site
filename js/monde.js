@@ -21,6 +21,8 @@
     // ➜ Chemins dynamiques
     zeroRedirectUrl: BASE + '2.les_coulisses.html',
     bagIconSrc:      BASE + 'images/bouton/sac_magique.webp',
+    grimoireIconSrc: BASE + 'images/bouton/ing_grimoire.webp',
+
 
     bagSlots: 20,
     perItemMax: 1,
@@ -147,6 +149,40 @@ let timer = null;
   const bagList   = $('#bagList',  bagWrap);
   const bagEmpty  = $('#bagEmpty', bagWrap);
   const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
+
+  // --- Icône Grimoire, à côté du sac ---
+const grimoireWrap = document.createElement('div');
+grimoireWrap.className = 'grimoire-wrap';
+grimoireWrap.innerHTML = `
+  <img src="${CFG.grimoireIconSrc}" alt="Grimoire d’Arzankia"
+       class="grimoire-icon" id="grimoireIcon" tabindex="0"
+       aria-label="Ouvrir le Grimoire">
+`;
+document.body.appendChild(grimoireWrap);
+
+// Ouverture de la modale existante
+const grimoireIcon = document.getElementById('grimoireIcon');
+const modalGrimoire = document.getElementById('modalGrimoire');
+const inputG = document.getElementById('pwdGrimoire');
+
+function openGrimoireModal(){
+  modalGrimoire?.classList.add('open');
+  setTimeout(()=>inputG?.focus(),100);
+}
+
+grimoireIcon?.addEventListener('click', openGrimoireModal);
+grimoireIcon?.addEventListener('keydown', (e)=>{
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGrimoireModal(); }
+});
+
+// (Optionnel) petit “hint” visuel 6s pour repérer les objets cachés
+function hintHidden(){
+  const btns = document.querySelectorAll('.quest-ingredient');
+  btns.forEach(b => b.classList.add('reveal-hint'));
+  setTimeout(()=>btns.forEach(b => b.classList.remove('reveal-hint')), 6000);
+}
+grimoireIcon?.addEventListener('click', hintHidden);
+
 
   /* =========================
    * OUVERTURE / FERMETURE DU SAC
