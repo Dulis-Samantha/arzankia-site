@@ -155,6 +155,53 @@ body {
   from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Sac intégré dans la jauge, à GAUCHE du grimoire */
+.energy-wrap .bag-wrap.in-energy {
+  position: static;                 /* plus de position: fixed */
+  order: -3;                        /* sac en 1er */
+  display: flex;
+  align-items: center;
+  margin-right: .25rem;
+}
+
+/* Taille de l’icône du sac dans la jauge */
+.energy-wrap .bag-wrap.in-energy .bag-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+/* Badge du sac (compteur) — re-calé sur petite icône */
+.energy-wrap .bag-wrap.in-energy .bag-badge {
+  position: absolute;
+  transform: translate(10px, -10px);  /* petit décalage en haut-droite de l’icône */
+  min-width: 16px;
+  height: 16px;
+  font-size: 11px;
+  padding: 0 4px;
+}
+
+/* Le grimoire vient juste après le sac */
+.energy-wrap .grimoire-icon{
+  order: -2;            /* après le sac */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(255,214,116,.6));
+  transition: transform .2s ease, filter .2s ease;
+}
+.energy-wrap .grimoire-icon:hover{
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 10px rgba(255,231,150,1));
+}
+
+@media (max-width:768px){
+  .energy-wrap .bag-wrap.in-energy .bag-icon { width: 20px; height: 20px; }
+  .energy-wrap .bag-wrap.in-energy .bag-badge { transform: translate(8px, -8px); font-size: 10px; }
+  .energy-wrap .grimoire-icon { width: 18px; height: 18px; }
+}
+
 .energy-icon { font-size: 22px; filter: drop-shadow(0 0 6px rgba(255,214,116,.7)); }
 .energy-label { font-family:"Cinzel Decorative",serif; font-variant: small-caps; letter-spacing:.5px; opacity:.9; }
 
