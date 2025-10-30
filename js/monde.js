@@ -21,9 +21,6 @@
     // ➜ Chemins dynamiques
     zeroRedirectUrl: BASE + '2.les_coulisses.html',
     bagIconSrc:      BASE + 'images/bouton/sac_magique.webp',
-    grimoireIconSrc: BASE + 'images/bouton/grimoire_test.webp',
-
-
 
     bagSlots: 20,
     perItemMax: 1,
@@ -42,9 +39,9 @@
         img: BASE + 'images/bouton/ing_ames.webp' 
       },
       'reserve_ptikitis': { 
-       name: 'Réserve de Raphaël', 
-       img: BASE + 'images/bouton/ing_reserve_ptikitis.webp',
-  },
+        name: 'Pousse rare (Réserve)', 
+        img: BASE + 'images/bouton/ing_reserve_ptikitis.webp' 
+      },
       'creatures_essence_thermale': {
         name: 'Essence d’Eau Thermale',
         img: BASE + 'images/bouton/ing_creature.webp'
@@ -150,51 +147,6 @@ let timer = null;
   const bagList   = $('#bagList',  bagWrap);
   const bagEmpty  = $('#bagEmpty', bagWrap);
   const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
-
-// === Icône Grimoire INSÉRÉE DANS LA JAUGE ===
-const energyWrap = document.querySelector('.energy-wrap');
-if (energyWrap && !document.getElementById('btnGrimoire')) {
-  const btn = document.createElement('img');
-  btn.src = CFG.grimoireIconSrc;               // ../images/bouton/grimoire_test.webp
-  btn.alt = 'MDE des Héros';
-  btn.id = 'btnGrimoire';                      // même id que sur Héros
-  btn.className = 'grimoire-icon';
-  btn.setAttribute('role', 'button');
-  btn.setAttribute('tabindex', '0');
-  energyWrap.insertBefore(btn, energyWrap.firstChild); // ← à GAUCHE
-}
-
-// Mettre le sac à GAUCHE du grimoire (dans .energy-wrap)
-const bagWrap = document.querySelector('.bag-wrap');   // déjà créé par ton JS
-if (energyWrap && bagWrap && !energyWrap.contains(bagWrap)) {
-  energyWrap.insertBefore(bagWrap, energyWrap.firstChild); // sac tout à gauche
-  bagWrap.classList.add('in-energy');                      // flag CSS
-}
-  
-// — Modale existante
-const modalGrimoire = document.getElementById('modalGrimoire');
-const inputG        = document.getElementById('pwdGrimoire');
-
-function openGrimoireModal(){
-  modalGrimoire?.classList.add('open');
-  setTimeout(()=>inputG?.focus(),100);
-}
-
-const btnG = document.getElementById('btnGrimoire');
-btnG?.addEventListener('click', openGrimoireModal);
-btnG?.addEventListener('keydown', (e)=>{
-  if (e.key==='Enter' || e.key===' ') { e.preventDefault(); openGrimoireModal(); }
-});
-
-// (Optionnel) révéler les ingrédients 6s
-function hintHidden(){
-  const btns = document.querySelectorAll('.quest-ingredient');
-  btns.forEach(b => b.classList.add('reveal-hint'));
-  setTimeout(()=>btns.forEach(b => b.classList.remove('reveal-hint')), 6000);
-}
-btnG?.addEventListener('click', hintHidden);
-
-
 
   /* =========================
    * OUVERTURE / FERMETURE DU SAC
