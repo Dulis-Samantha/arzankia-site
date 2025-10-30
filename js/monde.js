@@ -59,7 +59,6 @@
     if ($('.quest-ribbon')) return;
     const r = document.createElement('div');
     r.className = 'quest-ribbon';
-    r.textContent = 'Ton Arzanskân faiblit… utilise un ingrédient ou pars en quête.';
     document.body.appendChild(r);
   }
 
