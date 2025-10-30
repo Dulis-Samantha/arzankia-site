@@ -151,20 +151,26 @@ let timer = null;
   const bagEmpty  = $('#bagEmpty', bagWrap);
   const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
 
-
 // === Icône Grimoire INSÉRÉE DANS LA JAUGE ===
 const energyWrap = document.querySelector('.energy-wrap');
 if (energyWrap && !document.getElementById('btnGrimoire')) {
   const btn = document.createElement('img');
   btn.src = CFG.grimoireIconSrc;               // ../images/bouton/grimoire_test.webp
   btn.alt = 'MDE des Héros';
-  btn.id = 'btnGrimoire';                      // même id que sur la page Héros
+  btn.id = 'btnGrimoire';                      // même id que sur Héros
   btn.className = 'grimoire-icon';
   btn.setAttribute('role', 'button');
   btn.setAttribute('tabindex', '0');
   energyWrap.insertBefore(btn, energyWrap.firstChild); // ← à GAUCHE
 }
 
+// Mettre le sac à GAUCHE du grimoire (dans .energy-wrap)
+const bagWrap = document.querySelector('.bag-wrap');   // déjà créé par ton JS
+if (energyWrap && bagWrap && !energyWrap.contains(bagWrap)) {
+  energyWrap.insertBefore(bagWrap, energyWrap.firstChild); // sac tout à gauche
+  bagWrap.classList.add('in-energy');                      // flag CSS
+}
+  
 // — Modale existante
 const modalGrimoire = document.getElementById('modalGrimoire');
 const inputG        = document.getElementById('pwdGrimoire');
