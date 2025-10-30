@@ -140,3 +140,41 @@
   0%   { transform: translate(calc(var(--rx) * -1), calc(var(--ry) * -1)); }
   100% { transform: translate(var(--rx), var(--ry)); }
 }
+/* === PATCH TAILLES BULLes (desktop -> mobile) === */
+
+/* 1) Taille pilotée par variable */
+:root { --b-size: 116px; }                /* desktop par défaut */
+.page-mondes .bubble{
+  width: var(--b-size) !important;
+  height: var(--b-size) !important;
+  aspect-ratio: auto;                     /* on force un vrai carré */
+  border-radius: 50%;
+}
+
+/* 2) La grille ne doit pas étirer les items */
+.bubble-row{
+  justify-items: center;                  /* centre chaque bulle */
+  align-items: center;
+}
+
+/* 3) Réductions progressives sur mobile */
+@media (max-width: 900px){
+  :root { --b-size: 96px; }
+  .page-mondes .bubble .label{ font-size: 0.9rem; }
+}
+@media (max-width: 640px){
+  :root { --b-size: 78px; }
+  .page-mondes .bubble .label{ font-size: 0.8rem; }
+}
+@media (max-width: 420px){
+  :root { --b-size: 64px; }
+  .page-mondes .bubble .label{ font-size: 0.72rem; }
+}
+
+/* 4) Optionnel: resserrer les colonnes sur mobile */
+@media (max-width: 640px){
+  .bubble-row{ grid-template-columns: repeat(3, minmax(var(--b-size), 1fr)); }
+}
+@media (max-width: 420px){
+  .bubble-row{ grid-template-columns: repeat(3, minmax(var(--b-size), 1fr)); gap: 10px; }
+}
