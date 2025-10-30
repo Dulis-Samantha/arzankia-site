@@ -372,10 +372,12 @@ body {
    RESPONSIVE (mobile)
 ============================================================ */
 @media (max-width: 768px){
-  :root {
-    --energyY: 86px;
-    --bagShift: 2px;
+  :root{
+    /* +14px par rapport à 86px (ajuste à ton goût) */
+    --energyY: 100px;
+    --bagShift: 5px; /* tu peux aussi passer à 6px si tu veux encore un chouïa plus bas */
   }
+}
 
   .energy-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px));
