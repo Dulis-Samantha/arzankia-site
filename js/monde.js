@@ -21,7 +21,8 @@
     // ➜ Chemins dynamiques
     zeroRedirectUrl: BASE + '2.les_coulisses.html',
     bagIconSrc:      BASE + 'images/bouton/sac_magique.webp',
-    grimoireIconSrc: BASE + 'images/bouton/ing_grimoire.webp',
+    grimoireIconSrc: BASE + 'images/bouton/grimoire_test.webp',
+
 
 
     bagSlots: 20,
@@ -150,17 +151,17 @@ let timer = null;
   const bagEmpty  = $('#bagEmpty', bagWrap);
   const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
 
-  // --- Icône Grimoire, à côté du sac ---
+/* === Icône Grimoire à côté du sac === */
 const grimoireWrap = document.createElement('div');
 grimoireWrap.className = 'grimoire-wrap';
 grimoireWrap.innerHTML = `
   <img src="${CFG.grimoireIconSrc}" alt="Grimoire d’Arzankia"
-       class="grimoire-icon" id="grimoireIcon" tabindex="0"
-       aria-label="Ouvrir le Grimoire">
+       class="grimoire-icon" id="grimoireIcon"
+       tabindex="0" aria-label="Ouvrir le Grimoire">
 `;
 document.body.appendChild(grimoireWrap);
 
-// Ouverture de la modale existante
+// Lien vers ta modale existante
 const grimoireIcon = document.getElementById('grimoireIcon');
 const modalGrimoire = document.getElementById('modalGrimoire');
 const inputG = document.getElementById('pwdGrimoire');
@@ -171,17 +172,18 @@ function openGrimoireModal(){
 }
 
 grimoireIcon?.addEventListener('click', openGrimoireModal);
-grimoireIcon?.addEventListener('keydown', (e)=>{
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGrimoireModal(); }
+grimoireIcon?.addEventListener('keydown', e=>{
+  if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGrimoireModal(); }
 });
 
-// (Optionnel) petit “hint” visuel 6s pour repérer les objets cachés
+/* Bonus : révéler les ingrédients cachés pendant 6s */
 function hintHidden(){
   const btns = document.querySelectorAll('.quest-ingredient');
   btns.forEach(b => b.classList.add('reveal-hint'));
   setTimeout(()=>btns.forEach(b => b.classList.remove('reveal-hint')), 6000);
 }
 grimoireIcon?.addEventListener('click', hintHidden);
+
 
 
   /* =========================
