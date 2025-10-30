@@ -39,9 +39,9 @@
         img: BASE + 'images/bouton/ing_ames.webp' 
       },
       'reserve_ptikitis': { 
-        name: 'Pousse rare (Réserve)', 
-        img: BASE + 'images/bouton/ing_reserve_ptikitis.webp' 
-      },
+       name: 'Réserve de Raphaël', 
+       img: BASE + 'images/bouton/ing_reserve_ptikitis.webp',
+  },
       'creatures_essence_thermale': {
         name: 'Essence d’Eau Thermale',
         img: BASE + 'images/bouton/ing_creature.webp'
