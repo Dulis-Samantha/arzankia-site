@@ -55,13 +55,11 @@
     document.body.appendChild(wrap);
   }
 
-  function ensureRibbon(){
-    if ($('.quest-ribbon')) return;
-    const r = document.createElement('div');
-    r.className = 'quest-ribbon';
-    document.body.appendChild(r);
-  }
-
+ function ensureRibbon(){
+  // Le ruban d’avertissement est désactivé sur cette version,
+  // car l’explication est désormais directement affichée sur la page Monde.
+  return;
+}
   function ensureLockOverlay(){
     if ($('#lockOverlay')) return;
     const o = document.createElement('div');
