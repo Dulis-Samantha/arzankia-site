@@ -316,39 +316,47 @@ body {
   text-shadow: none;
 }
 
-/* Positionne le Grimoire près du sac */
+/* === Grimoire à côté du sac === */
 .grimoire-wrap {
   position: fixed;
   top: 72px;
-  right: 72px;                     /* un peu à gauche du sac */
+  right: 72px; /* le place juste à gauche du sac */
   z-index: 4700;
 }
-.grimoire-icon {
-  width: 48px; height: 48px; cursor: pointer;
-  filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
-  transition: transform .2s;
-}
-.grimoire-icon:hover { transform: scale(1.08); }
 
-/* Mobile : suit les règles de la jauge/sac déjà en place */
+.grimoire-icon {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
+  transition: transform .2s ease;
+}
+
+.grimoire-icon:hover {
+  transform: scale(1.08);
+}
+
+/* Mobile */
 @media (max-width: 768px){
   .grimoire-wrap {
-    top: calc(86px + env(safe-area-inset-top, 0px)); /* cohérent avec .energy-wrap mobile */
+    top: calc(86px + env(safe-area-inset-top, 0px));
     right: 68px;
   }
   .grimoire-icon { width: 44px; height: 44px; }
 }
 
-/* Effet “révélation” optionnel des ingrédients (si tu actives hintHidden) */
+/* Optionnel : effet visuel de révélation */
 .quest-ingredient.reveal-hint .ingredient-img {
   animation: arz-reveal 1s ease-in-out infinite alternate;
   filter: drop-shadow(0 0 10px rgba(255,214,116,.9));
   opacity: 1 !important;
 }
+
 @keyframes arz-reveal {
   from { transform: scale(1.0); }
   to   { transform: scale(1.08); }
 }
+
 
 
 /* =========================
