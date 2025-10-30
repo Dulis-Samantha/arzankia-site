@@ -6,14 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Les Mondes d’Arzankia</title>
 
-   <link rel="stylesheet" href="css/base-pages.css" />
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="css/base-pages.css" />
+  <!-- Styles spécifiques à la page Mondes -->
+  <link rel="stylesheet" href="css/mondes.css" />
 </head>
 
-<body style="
-  /* Fond spécifique à cette page (modifie l’URL si besoin) */
-  background: url('images/fonds/fond_artistes.webp') center/cover no-repeat fixed, #001d26;
-">
-
+<body class="page-mondes">
   <!-- En-tête -->
   <header class="header-box" id="hero">
     <div class="title-accent">
@@ -22,7 +21,7 @@
   </header>
 
   <!-- Phrase explicative -->
-  <div class="subtitle-wrap d2">
+  <section class="subtitle-wrap d2">
     <p class="subtitle subtitle--out">
       <span class="line1">
         Bienvenue, jeune Voyageur.
@@ -33,33 +32,32 @@
         <em>Bonne exploration, aventurier d’Arzankia !</em>
       </span>
     </p>
-    <!-- poussière de fée (placeholder, anim. à brancher en CSS/JS plus tard) -->
     <div class="pixie-dust" aria-hidden="true"></div>
-  </div>
+  </section>
 
-  <!-- Bulles flottantes (structure uniquement) -->
-  <main class="bubble-zone">
+  <!-- Bulles flottantes -->
+  <main class="bubble-zone" aria-label="Navigation des mondes">
     <div class="bubble-row">
-      <a href="monde/Fees.html"      class="bubble fee">       <div class="bubble-inner"><span class="label">Monde des Fées</span></div></a>
-      <a href="monde/ptikitis.html"  class="bubble ptikiti">   <div class="bubble-inner"><span class="label">Monde des Ptikitis</span></div></a>
-      <a href="monde/Ames.html"      class="bubble ames">      <div class="bubble-inner"><span class="label">Âmes perdues</span></div></a>
-      <a href="monde/Yakkas.html"    class="bubble yakkas">    <div class="bubble-inner"><span class="label">Yakkas</span></div></a>
-      <a href="monde/Sirenes.html"   class="bubble sirenes">   <div class="bubble-inner"><span class="label">Sirènes</span></div></a>
-      <a href="monde/Quacks.html"    class="bubble quack">     <div class="bubble-inner"><span class="label">Quacks</span></div></a>
-      <a href="monde/Pans.html"      class="bubble pan">       <div class="bubble-inner"><span class="label">Monde des Pans</span></div></a>
+      <a href="monde/Fees.html"      class="bubble fee"><div class="bubble-inner"><span class="label">Monde des Fées</span></div></a>
+      <a href="monde/ptikitis.html"  class="bubble ptikiti"><div class="bubble-inner"><span class="label">Monde des Ptikitis</span></div></a>
+      <a href="monde/Ames.html"      class="bubble ames"><div class="bubble-inner"><span class="label">Âmes perdues</span></div></a>
+      <a href="monde/Yakkas.html"    class="bubble yakkas"><div class="bubble-inner"><span class="label">Yakkas</span></div></a>
+      <a href="monde/Sirenes.html"   class="bubble sirenes"><div class="bubble-inner"><span class="label">Sirènes</span></div></a>
+      <a href="monde/Quacks.html"    class="bubble quack"><div class="bubble-inner"><span class="label">Quacks</span></div></a>
+      <a href="monde/Pans.html"      class="bubble pan"><div class="bubble-inner"><span class="label">Monde des Pans</span></div></a>
     </div>
 
     <div class="bubble-row">
-      <a href="monde/Cite.html"       class="bubble cite">       <div class="bubble-inner"><span class="label">Cités d’or</span></div></a>
-      <a href="monde/foret.html"      class="bubble foret">      <div class="bubble-inner"><span class="label">Forêt enchantée</span></div></a>
-      <a href="monde/Atlantide.html"  class="bubble atlantides"> <div class="bubble-inner"><span class="label">Atlantides</span></div></a>
-      <a href="monde/Geants.html"     class="bubble geant">      <div class="bubble-inner"><span class="label">Géants</span></div></a>
-      <a href="monde/Creatures.html"  class="bubble creature">   <div class="bubble-inner"><span class="label">Créatures légendaires</span></div></a>
-      <a href="monde/Arenyth.html"    class="bubble arenyth">    <div class="bubble-inner"><span class="label">Arenyth</span></div></a>
-      <a href="5.monde_Artistes.html" class="bubble artistes">   <div class="bubble-inner"><span class="label">Artistes</span></div></a>
+      <a href="monde/Cite.html"       class="bubble cite"><div class="bubble-inner"><span class="label">Cités d’or</span></div></a>
+      <a href="monde/foret.html"      class="bubble foret"><div class="bubble-inner"><span class="label">Forêt enchantée</span></div></a>
+      <a href="monde/Atlantide.html"  class="bubble atlantides"><div class="bubble-inner"><span class="label">Atlantides</span></div></a>
+      <a href="monde/Geants.html"     class="bubble geant"><div class="bubble-inner"><span class="label">Géants</span></div></a>
+      <a href="monde/Creatures.html"  class="bubble creature"><div class="bubble-inner"><span class="label">Créatures légendaires</span></div></a>
+      <a href="monde/Arenyth.html"    class="bubble arenyth"><div class="bubble-inner"><span class="label">Arenyth</span></div></a>
+      <a href="5.monde_Artistes.html" class="bubble artistes"><div class="bubble-inner"><span class="label">Artistes</span></div></a>
     </div>
 
-    <!-- Bulle “secrète” Hégaïa (placeholder : effet à recâbler plus tard) -->
+    <!-- Hégaïa (effet spécial plus tard) -->
     <div class="bubble-row hegaia-alone">
       <a href="8.monde_Hegaia.html" class="bubble hegaia">
         <div class="bubble-inner"><span class="label"></span></div>
@@ -68,14 +66,13 @@
   </main>
 
   <!-- Bouton de retour -->
-  <div class="footer-ghost">
+  <footer class="footer-ghost">
     <a href="2.les_coulisses.html" class="btn-ghost" aria-label="Retour aux coulisses d’Arzankia">← Retour aux coulisses d’Arzankia</a>
-  </div>
-   <!-- ⚙️ JS de base (UX : reveal, ancre douce, etc.) -->
-  <script src="js/base-pages.js"></script>
-  <!-- 1️⃣ Le cœur -->
-  <script src="../js/arz-core.js"></script>
-  <!-- 2️⃣ L’UI monde -->
-  <script src="../js/monde.js"></script>
+  </footer>
+
+  <!-- JS commun -->
+  <script src="js/base-pages.js" defer></script>
+  <!-- JS spécifique à la page Mondes -->
+  <script src="js/mondes.js" defer></script>
 </body>
 </html>
