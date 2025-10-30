@@ -38,6 +38,24 @@
     move();
   });
 
+  // ----- Dérive aléatoire des bulles (CSS variables)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.page-mondes .bubble').forEach((b, i) => {
+    // amplitudes aléatoires
+    const rx = (8 + Math.random() * 20).toFixed(1) + 'px';
+    const ry = (6 + Math.random() * 16).toFixed(1) + 'px';
+    // durées et décalage aléatoires
+    const dur = (8 + Math.random() * 8).toFixed(1) + 's';
+    const delay = (-Math.random() * 10).toFixed(1) + 's';
+
+    b.style.setProperty('--rx', rx);
+    b.style.setProperty('--ry', ry);
+    b.style.setProperty('--dur', dur);
+    b.style.animationDelay = delay;
+  });
+});
+
+
   // Hégaïa clic (effet secret optionnel)
   hegaia?.addEventListener('click',e=>{
     e.preventDefault();
