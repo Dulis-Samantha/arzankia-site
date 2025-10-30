@@ -1,180 +1,105 @@
-/* ===== Page Mondes ===== */
-.page-mondes{
-  background:
-    url("../images/fonds/fond_artistes.webp") center/cover no-repeat fixed,
-    #001d26;
+/* ===== UNIVERS VIVANT ===== */
+.page-mondes {
+  position: relative;
+  overflow: hidden;
+  background: url("../images/fonds/fond_artistes.webp") center/cover no-repeat fixed, #001d26;
   min-height: 100svh;
 }
 
-/* Titre stylé (reprend ton esprit ruban + lueurs) */
-.title-accent{
-  display:inline-flex; align-items:center; gap:clamp(10px,3vw,20px);
-  padding:.35rem .9rem; border-radius:14px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 8px 22px rgba(0,0,0,.28);
+/* ---- Titre ---- */
+.title-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(10px, 3vw, 20px);
+  padding: 0.4rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 22px rgba(0, 0, 0, 0.28);
 }
-.title-accent::before,.title-accent::after{
-  content:""; flex:1 1 120px; height:2px;
-  background: linear-gradient(90deg, transparent, #ffd674 40%, #ffe6a8 60%, transparent);
+.title-accent::before,
+.title-accent::after {
+  content: "";
+  flex: 1 1 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd674 40%, #ffe9a8 60%, transparent);
   filter: drop-shadow(0 0 4px #ffd674aa);
 }
-.header-box h1{
-  margin:0; font-family:"Cinzel Decorative", serif;
-  font-size: clamp(28px,5vw,48px); letter-spacing:.5px;
-  text-shadow: 0 2px 6px rgba(0,0,0,.55);
+.header-box h1 {
+  margin: 0;
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(28px, 5vw, 48px);
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
 }
 
-/* Intro + poussière */
-.subtitle-wrap{ position:relative; width:min(1000px,92vw); margin:.8rem auto 1.6rem; }
-.subtitle{
-  font-size: clamp(18px,2.2vw,22px);
-  color:#fff3cc; background: rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius: 16px; padding: clamp(10px,2vw,18px);
-  box-shadow: 0 8px 22px rgba(0,0,0,.28);
+/* ---- Texte ---- */
+.subtitle-wrap {
+  position: relative;
+  width: min(1000px, 92vw);
+  margin: 1rem auto 2rem;
 }
-.pixie-dust{ position:absolute; inset:0; pointer-events:none; }
+.subtitle {
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: #fff3cc;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: clamp(10px, 2vw, 18px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+.pixie-dust { position:absolute; inset:0; pointer-events:none; }
 
-/* Grille des bulles */
-.bubble-zone{ display:grid; gap: clamp(14px,2vw,22px); width:min(1200px,94vw); margin:2rem auto 3rem; }
-.bubble-row{ display:grid; grid-template-columns: repeat(7, minmax(120px,1fr)); gap: clamp(12px,1.6vw,18px); }
-@media (max-width:1100px){ .bubble-row{ grid-template-columns: repeat(4, minmax(120px,1fr)); } }
-@media (max-width:640px){ .bubble-row{ grid-template-columns: repeat(2, minmax(128px,1fr)); } }
-
-/* Bulle générique */
-.bubble{
-  position:relative; display:block; border-radius:999px;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow: 0 10px 30px rgba(0,0,0,.25) inset, 0 8px 16px rgba(0,0,0,.2);
-  text-decoration:none; transition: transform .25s ease, box-shadow .25s ease;
+/* ---- Zone de bulles ---- */
+.bubble-zone {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  overflow: hidden;
 }
-.bubble:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 14px 36px rgba(0,0,0,.28) inset, 0 12px 22px rgba(0,0,0,.25); }
-.bubble-inner{ aspect-ratio:1/1; display:grid; place-items:center; padding:.75rem; }
-.bubble .label{
-  text-align:center; font-weight:700; line-height:1.2;
-  font-family:"Cinzel Decorative", serif;
-  text-shadow: 0 2px 4px rgba(0,0,0,.65), 0 0 2px rgba(0,0,0,.75);
-}
-
-/* Variantes (reprend tes teintes/animations clés) */
-.fee{
-  background: radial-gradient(circle at center, #ffffffcc, #ffffff22);
-  border: 2px solid #ffffffcc;
-  animation: feePoussiere 3s ease-in-out infinite;
-}
-@keyframes feePoussiere{ 0%,100%{box-shadow:0 0 10px #fff,0 0 20px #fff} 50%{box-shadow:0 0 20px #eee,0 0 30px #fff} }
-
-.ames{
-  background: linear-gradient(135deg, #888ca0, #c2c6d6);
-  animation: brume 4s ease-in-out infinite;
-}
-@keyframes brume{ 0%{box-shadow:0 0 8px rgba(200,200,255,.3)} 50%{box-shadow:0 0 18px rgba(180,180,255,.6)} 100%{box-shadow:0 0 8px rgba(200,200,255,.3)} }
-
-.quack{
-  background: #fdd9b5; color:#111;
-}
-.creature{
-  background: radial-gradient(ellipse at center, #ffb347, #ff9966); color:#111;
-}
-.cite{
-  background: linear-gradient(135deg, #f7d774, #eec643);
-  animation: sable 2.8s ease-in-out infinite;
-}
-@keyframes sable{ 0%,100%{box-shadow:0 0 10px #ffeb8a} 50%{box-shadow:0 0 20px #ffe066} }
-
-.sirenes{ background: linear-gradient(135deg, #00c3ff, #3a86ff); }
-.yakkas{
-  background: radial-gradient(circle at center, #ff6347, #b22222);
-  animation: flammeYak 2.5s infinite;
-}
-@keyframes flammeYak{ 0%{box-shadow:0 0 15px #ff4500} 50%{box-shadow:0 0 30px #ff8c00} 100%{box-shadow:0 0 15px #ff4500} }
-
-.foret{ background: radial-gradient(circle at center, #ffb6d9, #fcdfff); }
-.ptikiti{ background: rgba(255,183,77,.7); }
-.geant{ background: rgba(174,213,129,.7); }
-.atlantides{ background: radial-gradient(circle at 30% 30%, #3a5fcd, #111); }
-.arenyth{ background: linear-gradient(135deg, #2a2a2a, #444); }
-.artistes{
-  background: linear-gradient(45deg, #ff0055, #ffcc00);
-  background-size: 400% 400%;
-  animation: rainbowShift 6s ease-in-out infinite;
-}
-@keyframes rainbowShift{
-  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
-}
-
-/* Mobile */
-@media (max-width:640px){
-  .subtitle{ font-size: clamp(16px,3.5vw,18px); }
-  .bubble-row{ grid-template-columns: repeat(2, minmax(120px,1fr)); }
-}
-/* --- PATCH : taille + dérive + Hégaïa --- */
-.page-mondes .bubble{
-  /* taille plus petite */
-  width: clamp(88px, 9vw, 118px);
-  aspect-ratio: 1/1;
-  /* dérive animée (voir @keyframes plus bas) */
-  --rx: 10px;        /* amplitude X par défaut */
-  --ry: 8px;         /* amplitude Y par défaut */
-  --dur: 10s;        /* durée par défaut */
-  animation: arz-drift var(--dur) ease-in-out infinite alternate;
-}
-.page-mondes .bubble .label{
-  font-size: clamp(11px, 1.1vw, 14px);
-}
-
-/* Hégaïa : présente mais discrète */
-.page-mondes .bubble.hegaia{
-  background: transparent !important;
-  border: 1px dashed rgba(255,255,255,.28) !important;
-  box-shadow: 0 0 30px rgba(255,255,255,.12) !important;
-  opacity: .35 !important;
-  pointer-events: auto;
-}
-.page-mondes .bubble.hegaia:hover{ opacity:.8; }
-
-/* Animation de dérive locale (ne casse pas la grille) */
-@keyframes arz-drift{
-  0%   { transform: translate(calc(var(--rx) * -1), calc(var(--ry) * -1)); }
-  100% { transform: translate(var(--rx), var(--ry)); }
-}
-/* === PATCH TAILLES BULLes (desktop -> mobile) === */
-
-/* 1) Taille pilotée par variable */
-:root { --b-size: 116px; }                /* desktop par défaut */
-.page-mondes .bubble{
-  width: var(--b-size) !important;
-  height: var(--b-size) !important;
-  aspect-ratio: auto;                     /* on force un vrai carré */
+.bubble {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
   border-radius: 50%;
+  font-family: "Cinzel Decorative", serif;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
+.bubble:hover { transform: scale(1.1); }
 
-/* 2) La grille ne doit pas étirer les items */
-.bubble-row{
-  justify-items: center;                  /* centre chaque bulle */
-  align-items: center;
-}
+/* Couleurs */
+.fee { background: radial-gradient(circle, #fff, #cce0ff); }
+.ptikiti { background: #d9a441; }
+.ames { background: #9da2b4; }
+.yakkas { background: #d43c2c; }
+.sirenes { background: #2196f3; }
+.quack { background: #f4d6aa; color: #000; }
+.pan { background: #4e4e4e; }
+.cite { background: #f7d774; }
+.foret { background: #f4b8d8; }
+.atlantides { background: #2e4ca1; }
+.geant { background: #91c16d; }
+.creature { background: #f89b4d; color: #000; }
+.arenyth { background: #2f2f2f; }
+.artistes { background: #f84848; }
 
-/* 3) Réductions progressives sur mobile */
-@media (max-width: 900px){
-  :root { --b-size: 96px; }
-  .page-mondes .bubble .label{ font-size: 0.9rem; }
+/* Hégaïa : visible et discrète */
+.hegaia {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  opacity: 0.4;
+  transition: opacity 0.3s ease, transform 0.4s ease;
 }
-@media (max-width: 640px){
-  :root { --b-size: 78px; }
-  .page-mondes .bubble .label{ font-size: 0.8rem; }
-}
-@media (max-width: 420px){
-  :root { --b-size: 64px; }
-  .page-mondes .bubble .label{ font-size: 0.72rem; }
-}
+.hegaia:hover { opacity: 0.8; transform: scale(1.05); }
 
-/* 4) Optionnel: resserrer les colonnes sur mobile */
-@media (max-width: 640px){
-  .bubble-row{ grid-template-columns: repeat(3, minmax(var(--b-size), 1fr)); }
-}
-@media (max-width: 420px){
-  .bubble-row{ grid-template-columns: repeat(3, minmax(var(--b-size), 1fr)); gap: 10px; }
+/* Mobile : taille adaptée */
+@media (max-width: 700px) {
+  .bubble { font-size: 0.8rem; }
 }
