@@ -316,45 +316,37 @@ body {
   text-shadow: none;
 }
 
-/* === Grimoire à côté du sac === */
-.grimoire-wrap {
+/* === Bouton Grimoire (à côté du sac) === */
+.grimoire-button {
   position: fixed;
   top: 72px;
-  right: 72px; /* le place juste à gauche du sac */
+  right: 72px; /* légèrement à gauche du sac */
   z-index: 4700;
 }
 
-.grimoire-icon {
+.grimoire-button img {
   width: 48px;
   height: 48px;
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
-  transition: transform .2s ease;
+  transition: transform .2s ease, filter .2s ease;
 }
 
-.grimoire-icon:hover {
+.grimoire-button img:hover {
   transform: scale(1.08);
+  filter: drop-shadow(0 0 12px rgba(255,231,150,1));
 }
 
-/* Mobile */
+/* Mobile : réduit un peu la taille */
 @media (max-width: 768px){
-  .grimoire-wrap {
+  .grimoire-button {
     top: calc(86px + env(safe-area-inset-top, 0px));
     right: 68px;
   }
-  .grimoire-icon { width: 44px; height: 44px; }
-}
-
-/* Optionnel : effet visuel de révélation */
-.quest-ingredient.reveal-hint .ingredient-img {
-  animation: arz-reveal 1s ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 10px rgba(255,214,116,.9));
-  opacity: 1 !important;
-}
-
-@keyframes arz-reveal {
-  from { transform: scale(1.0); }
-  to   { transform: scale(1.08); }
+  .grimoire-button img {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 
