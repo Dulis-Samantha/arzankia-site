@@ -152,14 +152,18 @@ let timer = null;
   const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
 
 /* === Icône Grimoire à côté du sac === */
-const grimoireWrap = document.createElement('div');
-grimoireWrap.className = 'grimoire-wrap';
-grimoireWrap.innerHTML = `
-  <img src="${CFG.grimoireIconSrc}" alt="Grimoire d’Arzankia"
-       class="grimoire-icon" id="grimoireIcon"
-       tabindex="0" aria-label="Ouvrir le Grimoire">
-`;
-document.body.appendChild(grimoireWrap);
+// === Icône Grimoire INSÉRÉE DANS LA JAUGE ===
+const energyWrap = document.querySelector('.energy-wrap');
+if (energyWrap && !document.getElementById('btnGrimoire')) {
+  const btn = document.createElement('img');
+  btn.src = CFG.grimoireIconSrc;               // ../images/bouton/grimoire_test.webp
+  btn.alt = 'MDE des Héros';
+  btn.id = 'btnGrimoire';                      // même id que sur la page Héros
+  btn.className = 'grimoire-icon';
+  btn.setAttribute('role', 'button');
+  btn.setAttribute('tabindex', '0');
+  energyWrap.insertBefore(btn, energyWrap.firstChild); // ← icône placée à GAUCHE de la jauge
+}
 
 // Lien vers ta modale existante
 const grimoireIcon = document.getElementById('grimoireIcon');
