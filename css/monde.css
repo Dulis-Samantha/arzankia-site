@@ -316,21 +316,26 @@ body {
   text-shadow: none;
 }
 
-/* Icône grimoire À L’INTÉRIEUR de .energy-wrap, à gauche */
-.energy-wrap { display:flex; align-items:center; gap:.6rem; } /* déjà présent, ok */
+/* Icône grimoire dans la jauge */
+.energy-wrap { display:flex; align-items:center; gap:.6rem; }
+
 .energy-wrap .grimoire-icon{
-  width: 28px; height: 28px; cursor: pointer;
-  filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
+  order: -1;           /* la met bien à gauche */
+  margin-right: auto;  /* pousse le reste à droite */
+  width: 20px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(255,214,116,.6));
   transition: transform .2s ease, filter .2s ease;
 }
 .energy-wrap .grimoire-icon:hover{
-  transform: scale(1.08);
-  filter: drop-shadow(0 0 12px rgba(255,231,150,1));
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 10px rgba(255,231,150,1));
 }
 @media (max-width:768px){
-  .energy-wrap .grimoire-icon{ width:26px; height:26px; }
+  .energy-wrap .grimoire-icon{ width:18px; height:18px; }
 }
-
 
 
 /* =========================
