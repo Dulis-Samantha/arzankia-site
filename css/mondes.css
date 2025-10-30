@@ -105,19 +105,38 @@
   0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
 }
 
-/* Hégaïa : invisible, non décorée, mais cliquable */
-.hegaia-alone{ margin-top: 1.2rem; display:grid; place-items:center; }
-.bubble.hegaia{
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  opacity: 0 !important;           /* invisible */
-  pointer-events: auto;            /* reste cliquable */
-  transition: none !important;
-}
-
 /* Mobile */
 @media (max-width:640px){
   .subtitle{ font-size: clamp(16px,3.5vw,18px); }
   .bubble-row{ grid-template-columns: repeat(2, minmax(120px,1fr)); }
+}
+/* --- PATCH : taille + dérive + Hégaïa --- */
+.page-mondes .bubble{
+  /* taille plus petite */
+  width: clamp(88px, 9vw, 118px);
+  aspect-ratio: 1/1;
+  /* dérive animée (voir @keyframes plus bas) */
+  --rx: 10px;        /* amplitude X par défaut */
+  --ry: 8px;         /* amplitude Y par défaut */
+  --dur: 10s;        /* durée par défaut */
+  animation: arz-drift var(--dur) ease-in-out infinite alternate;
+}
+.page-mondes .bubble .label{
+  font-size: clamp(11px, 1.1vw, 14px);
+}
+
+/* Hégaïa : présente mais discrète */
+.page-mondes .bubble.hegaia{
+  background: transparent !important;
+  border: 1px dashed rgba(255,255,255,.28) !important;
+  box-shadow: 0 0 30px rgba(255,255,255,.12) !important;
+  opacity: .35 !important;
+  pointer-events: auto;
+}
+.page-mondes .bubble.hegaia:hover{ opacity:.8; }
+
+/* Animation de dérive locale (ne casse pas la grille) */
+@keyframes arz-drift{
+  0%   { transform: translate(calc(var(--rx) * -1), calc(var(--ry) * -1)); }
+  100% { transform: translate(var(--rx), var(--ry)); }
 }
