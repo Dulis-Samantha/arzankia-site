@@ -124,7 +124,7 @@ body {
 ============================================================ */
 .energy-wrap {
   position: fixed;
-  top: 68px;
+  top: 84px;  /* avant : 68px */
   right: 12px;
   z-index: 4000;
   display: flex;
@@ -212,7 +212,7 @@ body {
 /* ============================================================
    SAC MAGIQUE (Inventaire)
 ============================================================ */
-.bag-wrap { position: fixed; top: 72px; right: 12px; z-index: 4700; }
+.bag-wrap { position: fixed; top: 88px;; right: 12px; z-index: 4700; }
 .bag-icon { width: 48px; height: 48px; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255,214,116,.7)); transition: transform .2s; }
 .bag-icon:hover { transform: scale(1.08); }
 .bag-badge {
