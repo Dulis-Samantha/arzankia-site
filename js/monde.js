@@ -151,7 +151,7 @@ let timer = null;
   const bagEmpty  = $('#bagEmpty', bagWrap);
   const bagToggle = $('#bagToggle', bagWrap);    // ← bouton "Mode tranquille"
 
-/* === Icône Grimoire à côté du sac === */
+
 // === Icône Grimoire INSÉRÉE DANS LA JAUGE ===
 const energyWrap = document.querySelector('.energy-wrap');
 if (energyWrap && !document.getElementById('btnGrimoire')) {
@@ -162,31 +162,31 @@ if (energyWrap && !document.getElementById('btnGrimoire')) {
   btn.className = 'grimoire-icon';
   btn.setAttribute('role', 'button');
   btn.setAttribute('tabindex', '0');
-  energyWrap.insertBefore(btn, energyWrap.firstChild); // ← icône placée à GAUCHE de la jauge
+  energyWrap.insertBefore(btn, energyWrap.firstChild); // ← à GAUCHE
 }
 
-// Lien vers ta modale existante
-const grimoireIcon = document.getElementById('grimoireIcon');
+// — Modale existante
 const modalGrimoire = document.getElementById('modalGrimoire');
-const inputG = document.getElementById('pwdGrimoire');
+const inputG        = document.getElementById('pwdGrimoire');
 
 function openGrimoireModal(){
   modalGrimoire?.classList.add('open');
   setTimeout(()=>inputG?.focus(),100);
 }
 
-grimoireIcon?.addEventListener('click', openGrimoireModal);
-grimoireIcon?.addEventListener('keydown', e=>{
-  if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGrimoireModal(); }
+const btnG = document.getElementById('btnGrimoire');
+btnG?.addEventListener('click', openGrimoireModal);
+btnG?.addEventListener('keydown', (e)=>{
+  if (e.key==='Enter' || e.key===' ') { e.preventDefault(); openGrimoireModal(); }
 });
 
-/* Bonus : révéler les ingrédients cachés pendant 6s */
+// (Optionnel) révéler les ingrédients 6s
 function hintHidden(){
   const btns = document.querySelectorAll('.quest-ingredient');
   btns.forEach(b => b.classList.add('reveal-hint'));
   setTimeout(()=>btns.forEach(b => b.classList.remove('reveal-hint')), 6000);
 }
-grimoireIcon?.addEventListener('click', hintHidden);
+btnG?.addEventListener('click', hintHidden);
 
 
 
