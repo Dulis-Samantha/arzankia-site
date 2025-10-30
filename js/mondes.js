@@ -1,12 +1,10 @@
-// Animation libre des bulles + poussière
+// === UNIVERS VIVANT ===
 (function(){
-  const d=document;
-  const bubbles=[...d.querySelectorAll('.bubble:not(.hegaia)')];
-  const hegaia=d.querySelector('.hegaia');
+  const d = document;
 
-  // --- Animation de poussière
+  // --- Création poussière de fée
   d.addEventListener('DOMContentLoaded', ()=>{
-    const dust=d.querySelector('.pixie-dust');
+    const dust = d.querySelector('.pixie-dust');
     if(!dust) return;
     for(let i=0;i<25;i++){
       const p=d.createElement('span');
@@ -21,52 +19,59 @@
     }
   });
 
-  // --- Flottement aléatoire des bulles
-  bubbles.forEach(b=>{
-    const x0=parseFloat(getComputedStyle(b).left)||0;
-    const y0=parseFloat(getComputedStyle(b).top)||0;
-    let offsetX=(Math.random()*40)-20;
-    let offsetY=(Math.random()*30)-15;
-    let angle=Math.random()*Math.PI*2;
-    function move(){
-      angle+=0.01+(Math.random()*0.01);
-      const dx=Math.sin(angle)*offsetX;
-      const dy=Math.cos(angle)*offsetY;
-      b.style.transform=`translate(${dx}px, ${dy}px)`;
-      requestAnimationFrame(move);
+  // --- Animation de poussière
+  const kf=document.createElement('style');
+  kf.textContent=`@keyframes dustMove{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}`;
+  document.head.appendChild(kf);
+
+  // --- Positionner et animer les bulles
+  d.addEventListener('DOMContentLoaded',()=>{
+    const zone = d.querySelector('.bubble-zone');
+    const bubbles = [...zone.querySelectorAll('.bubble')];
+    const w = zone.clientWidth;
+    const h = zone.clientHeight;
+
+    bubbles.forEach((b,i)=>{
+      const size = 80 + Math.random()*80; // taille 80–160 px
+      const x = Math.random()*(w-size);
+      const y = Math.random()*(h-size);
+      b.style.width = size+'px';
+      b.style.height = size+'px';
+      b.style.left = x+'px';
+      b.style.top  = y+'px';
+      // vitesse & direction
+      const dx = (Math.random()*0.4-0.2);
+      const dy = (Math.random()*0.4-0.2);
+      const speed = 0.2 + Math.random()*0.3;
+      b.dataset.vx = dx*speed;
+      b.dataset.vy = dy*speed;
+    });
+
+    function animate(){
+      bubbles.forEach(b=>{
+        let x = parseFloat(b.style.left);
+        let y = parseFloat(b.style.top);
+        let vx = parseFloat(b.dataset.vx);
+        let vy = parseFloat(b.dataset.vy);
+        const size = parseFloat(b.style.width);
+        // rebond sur les bords
+        if(x+vx<0 || x+size+vx>w) b.dataset.vx = vx = -vx;
+        if(y+vy<0 || y+size+vy>h) b.dataset.vy = vy = -vy;
+        b.style.left = (x+vx)+'px';
+        b.style.top  = (y+vy)+'px';
+      });
+      requestAnimationFrame(animate);
     }
-    move();
+    animate();
   });
 
-  // ----- Dérive aléatoire des bulles (CSS variables)
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.page-mondes .bubble').forEach((b, i) => {
-    // amplitudes aléatoires
-    const rx = (8 + Math.random() * 20).toFixed(1) + 'px';
-    const ry = (6 + Math.random() * 16).toFixed(1) + 'px';
-    // durées et décalage aléatoires
-    const dur = (8 + Math.random() * 8).toFixed(1) + 's';
-    const delay = (-Math.random() * 10).toFixed(1) + 's';
-
-    b.style.setProperty('--rx', rx);
-    b.style.setProperty('--ry', ry);
-    b.style.setProperty('--dur', dur);
-    b.style.animationDelay = delay;
-  });
-});
-
-
-  // Hégaïa clic (effet secret optionnel)
-  hegaia?.addEventListener('click',e=>{
+  // --- Effet secret Hégaïa
+  d.addEventListener('click',e=>{
+    const h = e.target.closest('.hegaia');
+    if(!h) return;
     e.preventDefault();
-    hegaia.style.transition='transform 0.5s ease, opacity 0.5s ease';
-    hegaia.style.transform='scale(1.3)';
-    hegaia.style.opacity='1';
-    setTimeout(()=>window.location.href=hegaia.href,800);
+    h.style.transform='scale(1.4)';
+    h.style.opacity='1';
+    setTimeout(()=>window.location.href=h.href,1000);
   });
 })();
-
-// --- Animation keyframes pour la poussière
-const st=document.createElement('style');
-st.textContent=`@keyframes dustMove{0%{transform:translateY(0) scale(1);}50%{transform:translateY(-20px) scale(0.8);}100%{transform:translateY(0) scale(1);}}`;
-document.head.appendChild(st);
