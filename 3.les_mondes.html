@@ -592,6 +592,26 @@
       .subtitle .mot{ animation:none !important; opacity:1 !important; transform:none !important; }
     }
 
+    /* --- Intro lisible dans le bandeau sous le titre --- */
+.subtitle--out p{
+  color: #f6ecd5;                     /* teinte douce (moins agressive) */
+  text-shadow: 0 0 6px rgba(0,0,0,.4);/* renforce le contraste sans “éblouir” */
+  background: rgba(0,0,0,.35);        /* petite plaque translucide */
+  padding: 1.4rem 2rem;
+  border-radius: 12px;
+  max-width: 820px;
+  margin: 1rem auto 0;
+  line-height: 1.6;
+  font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+  text-align: center;
+}
+
+.highlight{
+  color:#ffd674; 
+  font-weight:700;
+}
+
+
     .pixie-dust{
       position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible; will-change: transform;
     }
@@ -686,16 +706,16 @@
   </div>
 
 <div class="subtitle-wrap d2">
-  <p class="subtitle subtitle--out">
-    <span class="line1">
-      Bienvenue, jeune Voyageur.  
-      Dans les Mondes d’Arzankia, ton énergie se consume peu à peu.  
-      Grâce à ton <strong>Arzanskân</strong>, tu peux surveiller ta vitalité.  
-      Si la fatigue t’envahit, quitte les Mondes quelque temps : ton énergie s’y régénérera.  
-      Tu pourras aussi y découvrir des <strong>ingrédients magiques</strong> capables de te redonner force et éclat.  
-      <em>Bonne exploration, aventurier d’Arzankia !</em>
-    </span>
-  </p>
+  <div class="subtitle subtitle--out">
+    <p>
+      Bienvenue, jeune Voyageur.<br><br>
+      Dans les Mondes d’Arzankia, ton énergie se consume peu à peu.<br>
+      Grâce à ton <span class="highlight">Arzanskân</span>, tu peux surveiller ta vitalité.<br><br>
+      Si la fatigue t’envahit, quitte les Mondes quelque temps : ton énergie s’y régénérera.<br><br>
+      Tu pourras aussi y découvrir des ingrédients magiques capables de te redonner force et éclat.<br><br>
+      Bonne exploration, aventurier d’Arzankia !
+    </p>
+  </div>
   <div class="pixie-dust" aria-hidden="true"></div>
 </div>
 
