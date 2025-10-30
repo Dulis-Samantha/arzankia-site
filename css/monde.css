@@ -316,37 +316,19 @@ body {
   text-shadow: none;
 }
 
-/* === Bouton Grimoire (à côté du sac) === */
-.grimoire-button {
-  position: fixed;
-  top: 72px;
-  right: 72px; /* légèrement à gauche du sac */
-  z-index: 4700;
-}
-
-.grimoire-button img {
-  width: 48px;
-  height: 48px;
-  cursor: pointer;
+/* Icône grimoire À L’INTÉRIEUR de .energy-wrap, à gauche */
+.energy-wrap { display:flex; align-items:center; gap:.6rem; } /* déjà présent, ok */
+.energy-wrap .grimoire-icon{
+  width: 28px; height: 28px; cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
   transition: transform .2s ease, filter .2s ease;
 }
-
-.grimoire-button img:hover {
+.energy-wrap .grimoire-icon:hover{
   transform: scale(1.08);
   filter: drop-shadow(0 0 12px rgba(255,231,150,1));
 }
-
-/* Mobile : réduit un peu la taille */
-@media (max-width: 768px){
-  .grimoire-button {
-    top: calc(86px + env(safe-area-inset-top, 0px));
-    right: 68px;
-  }
-  .grimoire-button img {
-    width: 42px;
-    height: 42px;
-  }
+@media (max-width:768px){
+  .energy-wrap .grimoire-icon{ width:26px; height:26px; }
 }
 
 
