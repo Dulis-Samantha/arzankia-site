@@ -322,8 +322,8 @@ body {
 .energy-wrap .grimoire-icon{
   order: -1;           /* la met bien à gauche */
   margin-right: auto;  /* pousse le reste à droite */
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   display: block;
   cursor: pointer;
   filter: drop-shadow(0 0 6px rgba(255,214,116,.6));
