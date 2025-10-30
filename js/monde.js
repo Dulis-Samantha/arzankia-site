@@ -5,7 +5,10 @@
    * ========================= */
 
   // ➜ Ajout d’une ligne pour adapter automatiquement les chemins
-  const BASE = location.pathname.includes('/monde/') ? '../' : '';
+ const BASE = (location.pathname.includes('/monde/') ||
+              location.pathname.includes('/extraits/') ||
+              location.pathname.includes('/entree/')) ? '../' : '';
+
 
   const CFG = {
     storageKey: 'arz_energy_v2',
