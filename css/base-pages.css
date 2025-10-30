@@ -1,0 +1,123 @@
+/* =========================
+   ARZANKIA — Base pages (hors-monde)
+   Typo & ambiance cohérentes avec les Mondes
+========================= */
+:root{
+  --or:#ffd674;
+  --ivoire:#fff8e6;
+  --verre:rgba(10,0,20,.45);
+  --bord:rgba(255,214,116,.55);
+  --encre:#0b0a15;
+  --ombre:0 18px 40px rgba(0,0,0,.45);
+  --r:14px;                /* rayon par défaut */
+  --w:1100px;              /* largeur max */
+  --gap: clamp(14px,2.4vw,22px);
+}
+
+/* =========== Base =========== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  color:var(--ivoire);
+  background-color:#001d26; /* couleur de base si pas d'image */
+  text-shadow: 1px 1px 4px #000;
+  overflow-x:hidden;
+}
+
+.container{
+  max-width:var(--w);
+  margin:0 auto;
+  padding:clamp(16px,3vw,28px);
+}
+
+/* =========== Titres =========== */
+.page-title{
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--or);
+  text-align:center;
+  margin: 12px auto 10px;
+  text-shadow: 0 0 10px rgba(255,214,116,.35), 0 0 22px rgba(255,214,116,.15);
+}
+
+.subtitle-wrap{
+  display:block;
+  margin: 0 auto clamp(18px,3vw,28px);
+  text-align:center;
+}
+.subtitle{
+  display:inline-block;
+  background: rgba(0,0,0,.35);
+  border:1px solid var(--bord);
+  padding: clamp(10px,1.8vw,16px) clamp(14px,2.4vw,22px);
+  border-radius: var(--r);
+  box-shadow: var(--ombre);
+  line-height:1.5;
+}
+.subtitle strong{color:var(--or)}
+
+/* =========== Cartes/verre =========== */
+.card{
+  background: var(--verre);
+  border:1px solid var(--bord);
+  border-radius: var(--r);
+  box-shadow: var(--ombre);
+  padding: clamp(14px,2.5vw,22px);
+}
+
+/* =========== Boutons =========== */
+.btn{
+  display:inline-block;
+  min-width: 180px;
+  text-align:center;
+  padding:.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight:700;
+  text-decoration:none;
+  color:#3a2400;
+  background: linear-gradient(145deg,#ffe9af,#f2c94c);
+  box-shadow: 0 0 10px rgba(255,223,100,.6);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover{ transform: translateY(-2px); box-shadow: 0 0 18px rgba(255,223,100,1); }
+.btn.outline{
+  background:transparent; color:var(--ivoire);
+  border:1px solid var(--bord);
+}
+
+/* =========== Grilles =========== */
+.grid{
+  display:grid;
+  gap:var(--gap);
+}
+.grid.cols-2{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid.cols-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+@media (max-width: 900px){
+  .grid.cols-3{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .grid.cols-2, .grid.cols-3{ grid-template-columns: 1fr; }
+}
+
+/* =========== Révélations au scroll =========== */
+.reveal{
+  opacity:0; transform: translateY(12px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal.in{ opacity:1; transform:none; }
+
+/* =========== Accessibilité courante =========== */
+:focus-visible{
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+/* =========== Petits utilitaires =========== */
+.center{text-align:center}
+.mt{ margin-top: var(--gap); }
+.mb{ margin-bottom: var(--gap); }
+
+/* =========== Masquer la jauge si elle existe =========== */
+.energy-wrap, .bag-wrap, .quest-ribbon { display: none !important; }
