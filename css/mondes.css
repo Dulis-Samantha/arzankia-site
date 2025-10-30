@@ -1,0 +1,81 @@
+/* ===== Page Mondes — styles spécifiques ===== */
+
+.page-mondes {
+  background:
+    url("../images/fonds/fond_artistes.webp") center/cover no-repeat fixed,
+    #001d26;
+  min-height: 100svh;
+}
+
+/* Sous-titre + poussière de fée */
+.subtitle-wrap { position: relative; }
+.pixie-dust {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: .25;
+  /* L’animation sera branchée en JS (mondes.js) */
+}
+
+/* Zone des bulles */
+.bubble-zone {
+  display: grid;
+  gap: clamp(10px, 2vw, 20px);
+  margin: 2rem auto 3rem;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+.bubble-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(120px, 1fr));
+  gap: clamp(10px, 1.5vw, 18px);
+}
+@media (max-width: 1100px) {
+  .bubble-row { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+}
+@media (max-width: 640px) {
+  .bubble-row { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+}
+
+/* Bulle */
+.bubble {
+  position: relative;
+  display: block;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25) inset, 0 8px 16px rgba(0,0,0,.2);
+  text-decoration: none;
+  transform: translateZ(0); /* pour animations fluides */
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.bubble:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 36px rgba(0,0,0,.28) inset, 0 12px 22px rgba(0,0,0,.25);
+}
+.bubble-inner {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  padding: .75rem;
+}
+.bubble .label {
+  display: inline-block;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: "Cinzel Decorative", serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+
+/* Ligne spéciale pour Hégaïa */
+.hegaia-alone {
+  margin-top: 1.5rem;
+  display: grid;
+  place-items: center;
+}
+.hegaia-alone .bubble { width: min(260px, 55vw); }
+
+/* Option: variantes visuelles par monde (icônes / bg image) */
+/* Exemple : .bubble.foret { background-image: url("../images/mondes/monde_foret.webp"); background-size: cover; } */
