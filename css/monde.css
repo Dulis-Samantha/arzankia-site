@@ -373,30 +373,30 @@ body {
 ============================================================ */
 @media (max-width: 768px){
   :root{
-    /* +14px par rapport à 86px (ajuste à ton goût) */
-    --energyY: 100px;
-    --bagShift: 5px; /* tu peux aussi passer à 6px si tu veux encore un chouïa plus bas */
+    --energyY: 100px;  /* descend jauge + sac */
+    --bagShift: 5px;   /* petit décalage du sac seul */
   }
-}
 
   .energy-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px));
-    left: 50%; right: auto;
+    left: 50%;
+    right: auto;
     transform: translateX(-50%) scale(.95);
-    gap: .4rem;                 /* un poil plus compact */
+    gap: .4rem;
   }
 
-  .energy-bar { width: 60px; }  /* ← cohérent avec le haut */
-  .energy-pct { min-width: 2ch; font-size: .85rem; } /* plus compact */
+  .energy-bar { width: 60px; }
+  .energy-pct { min-width: 2ch; font-size: .85rem; }
 
   .bag-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
     right: 12px;
+    left: auto;
   }
 
   .bag-icon { width: 44px; height: 44px; }
 
-  .quest-ribbon {
+  .quest-ribbon{
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + 44px);
     left: 12px; right: 12px;
     transform: none;
@@ -404,6 +404,8 @@ body {
 
   .image-zone { margin-top: 96px !important; }
 }
+
+
   /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
 @media (max-width: 768px) {
   .header-box {
