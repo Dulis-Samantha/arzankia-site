@@ -1,81 +1,123 @@
-/* ===== Page Mondes — styles spécifiques ===== */
-
-.page-mondes {
+/* ===== Page Mondes ===== */
+.page-mondes{
   background:
     url("../images/fonds/fond_artistes.webp") center/cover no-repeat fixed,
     #001d26;
   min-height: 100svh;
 }
 
-/* Sous-titre + poussière de fée */
-.subtitle-wrap { position: relative; }
-.pixie-dust {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  opacity: .25;
-  /* L’animation sera branchée en JS (mondes.js) */
+/* Titre stylé (reprend ton esprit ruban + lueurs) */
+.title-accent{
+  display:inline-flex; align-items:center; gap:clamp(10px,3vw,20px);
+  padding:.35rem .9rem; border-radius:14px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 8px 22px rgba(0,0,0,.28);
+}
+.title-accent::before,.title-accent::after{
+  content:""; flex:1 1 120px; height:2px;
+  background: linear-gradient(90deg, transparent, #ffd674 40%, #ffe6a8 60%, transparent);
+  filter: drop-shadow(0 0 4px #ffd674aa);
+}
+.header-box h1{
+  margin:0; font-family:"Cinzel Decorative", serif;
+  font-size: clamp(28px,5vw,48px); letter-spacing:.5px;
+  text-shadow: 0 2px 6px rgba(0,0,0,.55);
 }
 
-/* Zone des bulles */
-.bubble-zone {
-  display: grid;
-  gap: clamp(10px, 2vw, 20px);
-  margin: 2rem auto 3rem;
-  max-width: 1200px;
-  padding: 0 1rem;
+/* Intro + poussière */
+.subtitle-wrap{ position:relative; width:min(1000px,92vw); margin:.8rem auto 1.6rem; }
+.subtitle{
+  font-size: clamp(18px,2.2vw,22px);
+  color:#fff3cc; background: rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius: 16px; padding: clamp(10px,2vw,18px);
+  box-shadow: 0 8px 22px rgba(0,0,0,.28);
 }
-.bubble-row {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(120px, 1fr));
-  gap: clamp(10px, 1.5vw, 18px);
-}
-@media (max-width: 1100px) {
-  .bubble-row { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
-}
-@media (max-width: 640px) {
-  .bubble-row { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
-}
+.pixie-dust{ position:absolute; inset:0; pointer-events:none; }
 
-/* Bulle */
-.bubble {
-  position: relative;
-  display: block;
-  border-radius: 999px;
-  backdrop-filter: blur(4px);
+/* Grille des bulles */
+.bubble-zone{ display:grid; gap: clamp(14px,2vw,22px); width:min(1200px,94vw); margin:2rem auto 3rem; }
+.bubble-row{ display:grid; grid-template-columns: repeat(7, minmax(120px,1fr)); gap: clamp(12px,1.6vw,18px); }
+@media (max-width:1100px){ .bubble-row{ grid-template-columns: repeat(4, minmax(120px,1fr)); } }
+@media (max-width:640px){ .bubble-row{ grid-template-columns: repeat(2, minmax(128px,1fr)); } }
+
+/* Bulle générique */
+.bubble{
+  position:relative; display:block; border-radius:999px;
   background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.18);
   box-shadow: 0 10px 30px rgba(0,0,0,.25) inset, 0 8px 16px rgba(0,0,0,.2);
-  text-decoration: none;
-  transform: translateZ(0); /* pour animations fluides */
-  transition: transform .25s ease, box-shadow .25s ease;
+  text-decoration:none; transition: transform .25s ease, box-shadow .25s ease;
 }
-.bubble:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 14px 36px rgba(0,0,0,.28) inset, 0 12px 22px rgba(0,0,0,.25);
-}
-.bubble-inner {
-  aspect-ratio: 1 / 1;
-  display: grid;
-  place-items: center;
-  padding: .75rem;
-}
-.bubble .label {
-  display: inline-block;
-  text-align: center;
-  line-height: 1.2;
-  font-weight: 700;
-  font-family: "Cinzel Decorative", serif;
-  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+.bubble:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 14px 36px rgba(0,0,0,.28) inset, 0 12px 22px rgba(0,0,0,.25); }
+.bubble-inner{ aspect-ratio:1/1; display:grid; place-items:center; padding:.75rem; }
+.bubble .label{
+  text-align:center; font-weight:700; line-height:1.2;
+  font-family:"Cinzel Decorative", serif;
+  text-shadow: 0 2px 4px rgba(0,0,0,.65), 0 0 2px rgba(0,0,0,.75);
 }
 
-/* Ligne spéciale pour Hégaïa */
-.hegaia-alone {
-  margin-top: 1.5rem;
-  display: grid;
-  place-items: center;
+/* Variantes (reprend tes teintes/animations clés) */
+.fee{
+  background: radial-gradient(circle at center, #ffffffcc, #ffffff22);
+  border: 2px solid #ffffffcc;
+  animation: feePoussiere 3s ease-in-out infinite;
 }
-.hegaia-alone .bubble { width: min(260px, 55vw); }
+@keyframes feePoussiere{ 0%,100%{box-shadow:0 0 10px #fff,0 0 20px #fff} 50%{box-shadow:0 0 20px #eee,0 0 30px #fff} }
 
-/* Option: variantes visuelles par monde (icônes / bg image) */
-/* Exemple : .bubble.foret { background-image: url("../images/mondes/monde_foret.webp"); background-size: cover; } */
+.ames{
+  background: linear-gradient(135deg, #888ca0, #c2c6d6);
+  animation: brume 4s ease-in-out infinite;
+}
+@keyframes brume{ 0%{box-shadow:0 0 8px rgba(200,200,255,.3)} 50%{box-shadow:0 0 18px rgba(180,180,255,.6)} 100%{box-shadow:0 0 8px rgba(200,200,255,.3)} }
+
+.quack{
+  background: #fdd9b5; color:#111;
+}
+.creature{
+  background: radial-gradient(ellipse at center, #ffb347, #ff9966); color:#111;
+}
+.cite{
+  background: linear-gradient(135deg, #f7d774, #eec643);
+  animation: sable 2.8s ease-in-out infinite;
+}
+@keyframes sable{ 0%,100%{box-shadow:0 0 10px #ffeb8a} 50%{box-shadow:0 0 20px #ffe066} }
+
+.sirenes{ background: linear-gradient(135deg, #00c3ff, #3a86ff); }
+.yakkas{
+  background: radial-gradient(circle at center, #ff6347, #b22222);
+  animation: flammeYak 2.5s infinite;
+}
+@keyframes flammeYak{ 0%{box-shadow:0 0 15px #ff4500} 50%{box-shadow:0 0 30px #ff8c00} 100%{box-shadow:0 0 15px #ff4500} }
+
+.foret{ background: radial-gradient(circle at center, #ffb6d9, #fcdfff); }
+.ptikiti{ background: rgba(255,183,77,.7); }
+.geant{ background: rgba(174,213,129,.7); }
+.atlantides{ background: radial-gradient(circle at 30% 30%, #3a5fcd, #111); }
+.arenyth{ background: linear-gradient(135deg, #2a2a2a, #444); }
+.artistes{
+  background: linear-gradient(45deg, #ff0055, #ffcc00);
+  background-size: 400% 400%;
+  animation: rainbowShift 6s ease-in-out infinite;
+}
+@keyframes rainbowShift{
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+
+/* Hégaïa : invisible, non décorée, mais cliquable */
+.hegaia-alone{ margin-top: 1.2rem; display:grid; place-items:center; }
+.bubble.hegaia{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;           /* invisible */
+  pointer-events: auto;            /* reste cliquable */
+  transition: none !important;
+}
+
+/* Mobile */
+@media (max-width:640px){
+  .subtitle{ font-size: clamp(16px,3.5vw,18px); }
+  .bubble-row{ grid-template-columns: repeat(2, minmax(120px,1fr)); }
+}
