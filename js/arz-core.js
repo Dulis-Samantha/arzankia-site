@@ -1,251 +1,289 @@
 ;(() => {
-  // Évite double chargement
-  if (window.ArzCore) return;
+  // Empêche une double init
+  if (window.ArzUIMonde) return;
+  window.ArzUIMonde = true;
 
-  /* =========================
-   * CONFIG (ne dépend PAS de l'UI)
-   * ========================= */
+  /* -------------------------
+   * Utils
+   * ------------------------- */
   const BASE = (location.pathname.includes('/monde/') ||
                 location.pathname.includes('/extraits/') ||
                 location.pathname.includes('/entree/')) ? '../' : '';
 
-  const CFG = {
-    storageKey: 'arz_energy_v2',
-    max: 100,
-    tickMs: 1000,
-    drainPerSecond: 0.10,     // ↓ en pages "monde"
-    rechargePerSecond: 0.10,  // ↑ hors "monde"
-    questThresholdPct: 15,    // utile pour un éventuel ruban côté UI
-    zeroRedirectUrl: BASE + '2.les_coulisses.html',
-    autoRedirectOnZero: true  // si true : redirige quand énergie = 0 (sur pages drain)
-  };
+  const $  = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
 
-  // Détecte si la page actuelle est "drainante" (monde / extrait / entrée / artistes…)
-  const isDrainPage = (() => {
-    const p = location.pathname;
-    const inWorldsIndex = /\/3\.les_mondes\.html$/i.test(p) || p.endsWith('/3.les_mondes.html');
-    const inMonde       = /\/monde\//i.test(p);
-    const inExtraits    = /\/extraits?\//i.test(p);
-    const inEntree      = /\/entree\/entree_[a-z0-9_-]+\.html$/i.test(p);
-    const inArtFolder   = /\/artiste\//i.test(p);
-    const inArtFiles    = /\/(5\.chanson_de_camidjo|5\.louboutartgif|5\.loup_bout_art)\.html$/i.test(p);
-    return inWorldsIndex || inMonde || inExtraits || inEntree || inArtFolder || inArtFiles;
-  })();
+  const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
 
-  /* =========================
-   * STATE + STORAGE
-   * ========================= */
-  function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
-
-  function loadState(){
-    const def = {
-      energy: CFG.max,
-      bag: [],           // [{id, qty}]
-      usesTotal: 0,
-      mode: 'novice',    // 'novice' | 'experimente'
-      infinite: false    // compat rétro
-    };
-    try{
-      const raw = localStorage.getItem(CFG.storageKey);
-      if (!raw) return def;
-      const s = JSON.parse(raw);
-      // gardes
-      if (typeof s.energy !== 'number') s.energy = CFG.max;
-      if (!Array.isArray(s.bag)) s.bag = [];
-      if (typeof s.usesTotal !== 'number') s.usesTotal = 0;
-      if (!s.mode) s.mode = 'novice';
-      s.bag.forEach(e => { e.qty = clamp(e.qty||0, 0, 1); });
-      return s;
-    } catch { return def; }
+  function toast(text, ms=1800){
+    // Nécessite la CSS .arz-toast/.bubble déjà dans tes styles
+    const t = document.createElement('div');
+    t.className = 'arz-toast';
+    t.innerHTML = `<div class="bubble">${text}</div>`;
+    document.body.appendChild(t);
+    requestAnimationFrame(()=> t.classList.add('show'));
+    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),220); }, ms);
   }
 
-  function saveState(){
-    localStorage.setItem(CFG.storageKey, JSON.stringify(S));
+  /* -------------------------
+   * Attendre le cœur (Arz)
+   * ------------------------- */
+  function whenCoreReady(cb){
+    if (window.Arz && typeof window.Arz.get === 'function') return cb();
+    const it = setInterval(()=>{
+      if (window.Arz && typeof window.Arz.get === 'function'){
+        clearInterval(it); cb();
+      }
+    }, 30);
+    setTimeout(()=>clearInterval(it), 6000);
   }
 
-  let S = loadState();
-  let timer = null;
-  let lockedZero = false;
+  /* -------------------------
+   * Injection UI (jauge + sac)
+   * ------------------------- */
+  function ensureEnergyUI(){
+    if ($('.energy-wrap')) return;
 
-  /* =========================
-   * LOOP (indépendant de l’UI)
-   * ========================= */
-  function startIfNeeded(){
-    stop(); // anti-doublons
+    const wrap = document.createElement('div');
+    wrap.className = 'energy-wrap';
+    wrap.innerHTML = `
+      <div class="energy-icon">⚡</div>
+      <div class="energy-label">Arzanskân</div>
+      <div class="energy-bar"><div class="energy-fill" id="energyFill" style="width:0%"></div></div>
+      <div class="energy-pct" id="energyPct">0%</div>
+    `;
+    document.body.appendChild(wrap);
+  }
 
-    if (S.mode === 'experimente'){
-      // énergie éternelle (pas de timer)
-      S.energy = CFG.max;
-      saveState();
-      emit('arz:energy', { pct: 100, energy: S.energy });
-      emit('arz:modechange', { mode: S.mode });
-      return;
+  function ensureRibbon(){
+    if ($('.quest-ribbon')) return;
+    const r = document.createElement('div');
+    r.className = 'quest-ribbon';
+    r.textContent = 'Ton Arzanskân faiblit… utilise un ingrédient ou pars en quête.';
+    document.body.appendChild(r);
+  }
+
+  function ensureLockOverlay(){
+    if ($('#lockOverlay')) return;
+    const o = document.createElement('div');
+    o.id = 'lockOverlay';
+    o.className = 'lock-overlay';
+    o.style.display = 'none';
+    document.body.appendChild(o);
+  }
+
+  function ensureBagUI(){
+    if ($('.bag-wrap')) return;
+    const bagWrap = document.createElement('div');
+    bagWrap.className = 'bag-wrap';
+    bagWrap.innerHTML = `
+      <img src="${BASE}images/bouton/sac_magique.webp" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
+      <div class="bag-badge" id="bagBadge">0</div>
+      <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
+        <h3>Ton inventaire</h3>
+        <ul id="bagList"></ul>
+        <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+        <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
+      </div>
+    `;
+    document.body.appendChild(bagWrap);
+
+    // Interactions du sac
+    const bagIcon   = $('#bagIcon',  bagWrap);
+    const bagMenu   = $('#bagMenu',  bagWrap);
+    bagIcon.addEventListener('click', ()=>{
+      const show = !bagMenu.classList.contains('show');
+      bagMenu.classList.toggle('show', show);
+      bagIcon.setAttribute('aria-expanded', show ? 'true' : 'false');
+      if (show) renderBag(); // affichage à l’ouverture
+    });
+    document.addEventListener('click', (e)=>{
+      if (!bagWrap.contains(e.target)){
+        bagMenu.classList.remove('show');
+        bagIcon.setAttribute('aria-expanded','false');
+      }
+    });
+
+    // Toggle mode (novice ↔ expérimenté)
+    $('#bagToggle').addEventListener('click', ()=>{
+      const { mode } = Arz.get();
+      Arz.setMode(mode === 'novice' ? 'experimente' : 'novice');
+    });
+  }
+
+  /* -------------------------
+   * Rendu UI (écoute événements du cœur)
+   * ------------------------- */
+  function renderGaugeFromCore(detail){
+    const elFill = $('#energyFill');
+    const elPct  = $('#energyPct');
+    if (!elFill || !elPct) return;
+
+    const pct = clamp(Math.round((detail.energy/detail.cfg?.max||detail.pct)||0),0,100);
+    elFill.style.width   = pct + '%';
+    elPct.textContent    = pct + '%';
+
+    // Ruban (novice + drain + sous seuil)
+    const ribbon = $('.quest-ribbon');
+    if (ribbon){
+      const threshold = (Arz.get().cfg.questThresholdPct ?? 15);
+      const show = (detail.mode === 'novice') && detail.isDrainPage && (pct <= threshold);
+      ribbon.style.display = show ? 'block' : 'none';
     }
 
-    start(); // novice → toujours lancer le timer
+    // Classe de mode pour effets visuels (brillance)
+    document.body.classList.toggle('arz-mode-experimente', detail.mode === 'experimente');
+    document.body.classList.toggle('arz-mode-novice', detail.mode === 'novice');
   }
 
-  function start(){
-    if (timer) return;
-    timer = setInterval(tick, CFG.tickMs);
-    emit('arz:start', {});
-  }
+  function renderBag(){
+    const bag = Arz.get().bag || [];
+    const bagBadge = $('#bagBadge');
+    const bagList  = $('#bagList');
+    const bagEmpty = $('#bagEmpty');
 
-  function stop(){
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-    emit('arz:stop', {});
-  }
+    if (bagBadge) bagBadge.textContent = String(bag.reduce((n,e)=>n+e.qty,0));
 
-  function tick(){
-    if (document.hidden) return;
+    if (!bagList || !bagEmpty) return;
+    bagList.innerHTML = '';
 
-    if (S.mode === 'experimente'){
-      S.energy = CFG.max;
-      pushEnergy();
+    if (bag.length === 0){
+      bagEmpty.style.display = 'block';
       return;
     }
+    bagEmpty.style.display = 'none';
 
-    if (isDrainPage){
-      S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
-      if (S.energy <= 0){
-        pushEnergy();
-        if (!lockedZero){
-          lockedZero = true;
-          emit('arz:zero', { redirect: CFG.autoRedirectOnZero, to: CFG.zeroRedirectUrl });
-          if (CFG.autoRedirectOnZero){
-            // redirection douce (pas d’overlay côté core)
-            setTimeout(() => { location.href = CFG.zeroRedirectUrl; }, 3000);
-          }
+    bag.forEach((entry, idx)=>{
+      const li = document.createElement('li');
+      // Le nom et l'image peuvent venir d’attributs data-* de l’HTML de l’ingrédient
+      const btn = document.querySelector(`.quest-ingredient[data-id="${entry.id}"]`);
+      const name = btn?.getAttribute('data-name') || entry.id;
+      const img  = btn?.getAttribute('data-img')  || '';
+
+      li.innerHTML = `
+        <div class="bag-item">
+          <img src="${img}" alt="">
+          <div>
+            <div class="bag-name">${name}</div>
+            <div class="bag-rem">Il t’en reste <strong>${entry.qty}</strong></div>
+          </div>
+        </div>
+        <button type="button" class="bag-use" data-index="${idx}" ${entry.qty<=0?'disabled':''}>Utiliser</button>
+      `;
+      bagList.appendChild(li);
+    });
+
+    $$('.bag-use', bagList).forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const idx = parseInt(btn.getAttribute('data-index'),10);
+        if (Arz.useItemByIndex(idx)) {
+          toast('Énergie rechargée à 100% ⚡', 1400);
+          renderBag();
         }
-        saveState();
-        return;
-      }
-    } else {
-      // recharge hors monde
-      S.energy = clamp(S.energy + CFG.rechargePerSecond, 0, CFG.max);
+      });
+    });
+
+    // État du bouton de mode
+    const toggle = $('#bagToggle');
+    if (toggle){
+      const { mode } = Arz.get();
+      const on = (mode === 'experimente');
+      toggle.classList.toggle('on', on);
+      toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+      toggle.textContent = on ? 'Revenir en mode Novice' : 'Activer le mode Voyageur expérimenté';
+      toggle.title = on ? 'Énergie éternelle activée' : 'Basculer en énergie éternelle (brillance)';
     }
-
-    pushEnergy();
   }
 
-  function pushEnergy(){
-    saveState();
-    const pct = Math.round((S.energy / CFG.max) * 100);
-    emit('arz:energy', { pct, energy: S.energy, isDrainPage, mode: S.mode });
-  }
+  function bindIngredients(){
+    $$('.quest-ingredient').forEach(btn=>{
+      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex','0');
+      if (!btn.hasAttribute('role'))     btn.setAttribute('role','button');
+      btn.addEventListener('keydown', (e)=>{
+        if (e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }
+      });
 
-  /* =========================
-   * BAG (logique minimale, sans UI)
-   * ========================= */
-  function addItem(id){
-    // 1 seul exemplaire par item (cohérent avec perItemMax=1)
-    let entry = S.bag.find(e => e.id === id);
-    if (entry){
-      if (entry.qty >= 1) {
-        emit('arz:bag:perItemMax', { id });
-        return false;
+      // Collecte → passe par le cœur
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-id');
+        if (!id) return;
+        const ok = Arz.addItem(id);
+        if (ok){
+          toast('Ingrédient ajouté au sac.');
+          renderBag();
+        }
+      });
+
+      // Taille responsive via data-size / data-size-mobile
+      const imgEl = btn.querySelector('.ingredient-img');
+      if (imgEl){
+        const sizeDesk = parseFloat(btn.getAttribute('data-size') || '');
+        const sizeMob  = parseFloat(btn.getAttribute('data-size-mobile') || '');
+        const applyBaseSize = ()=>{
+          const isMob = window.matchMedia('(max-width: 768px)').matches;
+          const chosen = isMob ? (isNaN(sizeMob)?sizeDesk:sizeMob) : sizeDesk;
+          if (!isNaN(chosen)) imgEl.style.width = chosen + 'px';
+        };
+        applyBaseSize();
+        window.matchMedia('(max-width: 768px)').addEventListener('change', applyBaseSize);
       }
-      entry.qty++;
-    } else {
-      S.bag.push({ id, qty: 1 });
-    }
-    saveState();
-    emit('arz:bagchange', { bag: clone(S.bag) });
-    return true;
+
+      // Position mobile via data-bottom-mobile / data-left-mobile
+      if (window.matchMedia('(max-width: 768px)').matches){
+        const b = btn.getAttribute('data-bottom-mobile');
+        const l = btn.getAttribute('data-left-mobile');
+        if (b) btn.style.bottom = b;
+        if (l) btn.style.left   = l;
+      }
+    });
   }
 
-  function useItemById(id){
-    const idx = S.bag.findIndex(e => e.id === id && e.qty > 0);
-    if (idx === -1) return false;
-    return useItemByIndex(idx);
+  /* -------------------------
+   * Hooks des événements du cœur
+   * ------------------------- */
+  function hookCoreEvents(){
+    document.addEventListener('arz:energy',      e => renderGaugeFromCore(e.detail));
+    document.addEventListener('arz:modechange',  () => { renderBag(); });
+    document.addEventListener('arz:bagchange',   () => { renderBag(); });
+    document.addEventListener('arz:item:used',   () => { renderBag(); });
+
+    // Optionnel : mini-overlay quand energie = 0 avant redirection
+    document.addEventListener('arz:zero', (e)=>{
+      const { redirect, to } = e.detail || {};
+      const overlay = $('#lockOverlay');
+      if (!overlay) return;
+      overlay.style.display = 'grid';
+      overlay.innerHTML = `
+        <div class="lock-card">
+          <div class="lock-title">⚡ Ton énergie est vide</div>
+          <div class="lock-desc">${redirect ? 'Tu vas être redirigé vers les Coulisses d’Arzankia…' : 'Reviens hors des Mondes pour te recharger.'}</div>
+        </div>
+      `;
+    });
   }
 
-  function useItemByIndex(index){
-    const entry = S.bag[index];
-    if (!entry || entry.qty <= 0) return false;
+  /* -------------------------
+   * Boot UI
+   * ------------------------- */
+  function boot(){
+    ensureEnergyUI();
+    ensureRibbon();
+    ensureLockOverlay();
+    ensureBagUI();
+    bindIngredients();
+    hookCoreEvents();
 
-    entry.qty--;
-    if (entry.qty === 0) S.bag.splice(index, 1);
-
-    // Effet par défaut : recharge totale
-    S.energy = CFG.max;
-    S.usesTotal++;
-
-    saveState();
-    emit('arz:item:used', { bag: clone(S.bag) });
-    pushEnergy();
-    return true;
+    // 1er rendu depuis l’état courant
+    const st = Arz.get();
+    renderGaugeFromCore({
+      pct: Math.round((st.energy / st.cfg.max)*100),
+      energy: st.energy,
+      mode: st.mode,
+      isDrainPage: Arz.isDrainPage(),
+      cfg: st.cfg
+    });
+    renderBag();
   }
 
-  function totalItems(){
-    return S.bag.reduce((n,e)=>n+e.qty,0);
-  }
-
-  /* =========================
-   * MODE / API PUBLIQUE
-   * ========================= */
-  function setMode(mode){
-    if (mode !== 'novice' && mode !== 'experimente') return;
-    S.mode = mode;
-    saveState();
-    emit('arz:modechange', { mode });
-    startIfNeeded();
-  }
-
-  function resetAll(){
-    S = { energy: CFG.max, bag: [], usesTotal: 0, mode: 'novice', infinite: false };
-    lockedZero = false;
-    saveState();
-    emit('arz:reset', {});
-    startIfNeeded();
-    pushEnergy();
-  }
-
-  function setEnergy(v){
-    S.energy = clamp(v, 0, CFG.max);
-    lockedZero = (S.energy <= 0);
-    saveState();
-    pushEnergy();
-  }
-
-  function get(){
-    return {
-      ...S,
-      isDrainPage,
-      totalItems: totalItems(),
-      cfg: { ...CFG }
-    };
-  }
-
-  /* =========================
-   * EVENTS / LIFECYCLE
-   * ========================= */
-  function emit(name, detail){
-    document.dispatchEvent(new CustomEvent(name, { detail }));
-  }
-  function clone(o){ return JSON.parse(JSON.stringify(o)); }
-
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) startIfNeeded();
-  });
-  window.addEventListener('beforeunload', saveState);
-
-  // Boot
-  startIfNeeded();
-  pushEnergy();
-
-  // Expose l’API
-  window.ArzCore = true;
-  window.Arz = {
-    // lecture/écriture
-    get, setEnergy, resetAll, setMode,
-    // boucle
-    start: startIfNeeded, stop,
-    // bag
-    addItem, useItemById, useItemByIndex, totalItems,
-    // utilitaires
-    isDrainPage: () => isDrainPage
-  };
+  whenCoreReady(boot);
 })();
