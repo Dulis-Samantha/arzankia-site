@@ -85,7 +85,11 @@
 .foret { background: #f4b8d8; }
 .atlantides { background: #2e4ca1; }
 .geant { background: #91c16d; }
-.creature { background: #f89b4d; color: #000; }
+.creature {
+  background: #f89b4d;color: #fff;                   /* ✅ texte en blanc */
+ 
+}
+
 .arenyth { background: #2f2f2f; }
 .artistes { background: #f84848; }
 
