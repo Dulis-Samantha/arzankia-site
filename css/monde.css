@@ -402,3 +402,23 @@ body {
 
   .image-zone { margin-top: 96px !important; }
 }
+  /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
+@media (max-width: 768px) {
+  .header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem; /* espace entre le titre et la jauge */
+  }
+
+  .header-box h1 {
+    margin-bottom: 0.3rem;
+  }
+
+  .arzanskan-bar, .arzanskan-container {
+    margin-top: .3rem !important;
+    position: relative !important; /* empêche le chevauchement */
+    top: auto !important;
+  }
+}
+
