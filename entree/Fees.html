@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde des Fées — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">L'arbre des Fées</h1>
+ 
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <img
+        class="entree-image"
+        src="../images/entree/entree_fees.webp"
+        alt="Entrée du monde des Fées"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+    </figure>
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <p>Je suivis maman à travers un petit sentier ombragé, vers un coin du jardin que je connaissais à peine. Là, un saule pleureur immense se dressait devant nous. Ses longues branches caressaient doucement le sol.</p>
+
+      <p>Mais ce qui attira aussitôt mon regard, ce furent les fleurs : de petits flocons de coton blanc et rose, qui tombaient lentement des branches. Elles scintillaient comme de la rosée, puis disparaissaient dans la terre, légères et silencieuses… comme des larmes de lumière.</p>
+
+      <p>Je m’arrêtai, fasciné. Ce saule était vivant, magique. Et je comprenais déjà : c’était l’entrée du monde de maman.</p>
+
+      <p>— Nous y sommes, dit-elle d’une voix douce.</p>
+
+      <p>Elle s’avança lentement vers le tronc, sortit sa pierre violette, et posa sa main contre l’écorce. Ses doigts glissèrent lentement sur le bois, comme une caresse. Au moment où elle retira sa main, les fleurs de coton, suspendues dans les airs, cessèrent de tomber… comme si le temps s’était arrêté.</p>
+
+      <p>Puis, une rafale soudaine fit frémir les branches. Les fleurs éclatèrent en poussière lumineuse, formant de petites fées qui se mirent à danser autour de l’arbre enchanté.</p>
+
+      <p>Peu à peu, un visage apparut sur le tronc. Les traits étaient faits d’écorce et de lumière. Le saule pleureur… nous sourit.</p>
+
+      <p>Je restai immobile, incapable de détourner les yeux. Alors, sous mon regard ébahi, une porte en écorce se creusa dans le bois. Derrière elle, un monde s’ouvrait : <strong>le Monde des Fées</strong>.</p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <a href="../monde/Fees.html">← Retour au monde des Fées</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
