@@ -37,9 +37,12 @@ const ITEMS = {
   'reserve_ptikitis'              : { name:'Pousse rare (Réserve)',             img: BASE_IMG + 'ing_reserve_ptikitis.webp' },
   'atlantide_meduse'              : { name:'Œufs de méduse',                    img: BASE_IMG + 'ing_atlantide.webp' },
   'creatures_essence_thermale'    : { name:'Eau thermale',                      img: BASE_IMG + 'ing_creature.webp' },
-  'larme_geant'                   : { name:'Larme de géant',                    img: BASE_IMG + 'ing_geant.webp' }
-  'hegaia_pierre'                 : { name:'Pierre Luminescente',               img: BASE_IMG + 'ing_hegaia.webp' }
-  'pans_poussiere'                : { name:'Poussière d'étoile',                img: BASE_IMG + 'ing_pan.webp' }
+  'larme_geant'                   : { name:'Larme de géant',                    img: BASE_IMG + 'ing_geant.webp' },
+  'hegaia_pierre'                 : { name:'Pierre Luminescente',               img: BASE_IMG + 'ing_hegaia.webp' },
+  'pans_poussiere'                : { name:'Poussière d'étoile',                img: BASE_IMG + 'ing_pan.webp' },
+  'remede_miracle'                : { name:'Remède miracle',                    img: BASE_IMG + 'ing_quacks.webp' },
+  'cocktail_huitre'               : { name:'Cocktail d'huître',                 img: BASE_IMG + 'ing_sirenes.webp' },
+  'yakkas_ecaille'                : { name:'Écaille de Dragon',                 img: BASE_IMG + 'ing_yakkas.webp' }
 }
 
 
