@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde des Pans — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">Entrée du monde des Pans</h1>
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <!-- Remplace l’image par ton fichier si besoin -->
+      <img
+        class="Fees-image"
+        src="../images/entree/entree_pans.webp"
+        alt="Entrée du monde des Pans"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+      <figcaption class="img-caption sr-only">Le passage nuageux vers la prairie d’air.</figcaption>
+    </figure>
+
+    <!-- Bouton ingrédient caché : Nuage -->
+    <button class="ing-btn quest-ingredient"
+            type="button"
+            data-id="ingredient_pan"
+            data-name="Nuage"
+            data-img="../images/bouton/ing_pans.webp"
+            data-size="48"
+            data-size-mobile="28"
+            data-bottom-mobile="18%"
+            data-left-mobile="50%"
+            aria-label="Nuage (ingrédient des Pans)"
+            style="bottom:18%; left:50%; transform:translateX(-50%);">
+      <img class="ingredient-img"
+           src="../images/bouton/ing_pans.webp"
+           alt="Ingrédient : Nuage" />
+    </button>
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <h2 class="chapter-subtitle">📖 L'escalier trampoline</h2>
+
+      <p>
+        Arrivé à la prairie d’air, je tendis ma Canneya à Fanfan. Elle la fit tournoyer élégamment entre ses doigts, puis, dans un mouvement souple et précis, la planta dans le sol. Une onde légère se propagea, comme un frisson de magie qui parcourait la prairie.
+      </p>
+      <p>
+        Puis, sans un bruit, un nouvel escalier apparut. Des marches-trampolines, souples et rebondissantes, se matérialisèrent dans les airs, montant en zigzag jusqu’à une étrange porte suspendue. Un grand écran lumineux, semblable à un écran de télévision géant m’attendait en haut.
+      </p>
+      <p>
+        — C’est à toi de jouer, me dit Fanfan. Bonne chance pour ta quête, Raphaël. On se retrouve plus tard… au Monde des Artistes.
+      </p>
+      <p>
+        Elle me fit un petit signe de la main, puis recula d’un pas, me laissant seul face à l’escalier suspendu.
+      </p>
+      <p>
+        Je pris une grande inspiration, serrai ma Canneya entre mes doigts… et m’élançai.
+      </p>
+      <p>
+        À chaque saut, les marches bondissantes me renvoyaient plus haut, me propulsant d’un palier à l’autre comme sur un trampoline céleste. Je devais faire attention à ne pas glisser, car tout autour, ce n’était que vide et nuages.
+      </p>
+      <p>
+        Arrivé sur la dernière marche du trampoline, le cœur battant à tout rompre, je sentis une montée d’adrénaline. C’était maintenant ou jamais.
+      </p>
+      <p>
+        Je pris de l’élan, fléchis les jambes… et me lançai dans un salto avant.
+      </p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <!-- Ajuste le lien si ton fichier monde a un autre nom (ex: 8.monde_Pans.html) -->
+      <a href="../monde/Pans.html">← Retour au Monde des Pans</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
