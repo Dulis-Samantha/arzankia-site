@@ -56,6 +56,7 @@ const ITEMS = {
   'pans_poussiere'             : { name: "Poussière d’étoile",                 img: BASE_IMG + 'ing_pan.webp' },
   'remede_miracle'             : { name: "Remède miracle",                     img: BASE_IMG + 'ing_quacks.webp' },
   'cocktail_huitre'            : { name: "Cocktail d’huître",                  img: BASE_IMG + 'ing_sirenes.webp' },
+  'arenyth_ingredient'         : { name: "Fleur Barbapapa",                    img: BASE_IMG + 'ing_arenyth.webp' },
   'yakkas_ecaille'             : { name: "Écaille de Dragon",                  img: BASE_IMG + 'ing_yakkas.webp' }
 };
 
