@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde des Yakkas — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">Entrée du monde des Yakkas</h1>
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <img
+        class="Fees-image"
+        src="../images/entree/entree_yakkas.webp"
+        alt="Entrée du monde des Yakkas"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+    </figure>
+
+    <!-- (Bouton ingrédient caché retiré à la demande) -->
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <h2 class="chapter-subtitle">La porte des Dragons</h2>
+
+      <p>La téléportation nous déposa au cœur d’une vaste prairie silencieuse.</p>
+      <p>— Nous sommes dans la Prairie d’Air, annonça Binbin. Il balaya l’horizon du regard. — Tout autour de toi se trouvent des escaliers invisibles qui mènent aux Portes des Mondes Aériens. Mais tant qu’on ne te les a pas révélés… tu ne peux pas les voir.</p>
+      <p>Il fouilla dans sa sacoche et en sortit un objet métallique étrange. Il semblait très ancien, patiné par le temps mais toujours solide. Un genre de pointe ou de crochet d’ancrage, peut-être même une vieille griffe de traction. Dès qu’il le serra dans sa main, l’air vibra légèrement.</p>
+      <p>Puis, lentement, des pierres surgirent du vide, comme invoquées par un souffle invisible. Elles s’élevèrent une à une, lévitant et se plaçant avec une précision presque irréelle. Un escalier flottant prit forme, suspendu dans le vide, montant vers le ciel pâle. Tout au bout, une grande arche lumineuse, flottant entre ciel et brume, attendait mon passage.</p>
+      <p>— C’est la porte vers le Monde des Yakkas, dit Binbin d’une voix posée… Pour l’instant… c’est la seule que tu peux voir.</p>
+      <p>Je le remerciai sincèrement. Il me fit un signe de tête, déjà pressé de repartir vers d’autres missions.</p>
+      <p>Fanfan s’approcha et se pencha vers moi pour murmurer à mon oreille : — On se retrouve demain, chez les Artistes. À dix heures, ça te va ?</p>
+      <p>Je souris et acquiesçai, le cœur soudain plus léger. Puis, dans un souffle d’air doré, ils disparurent tous les deux, me laissant seul face à l’arche… et à la suite de mon aventure.</p>
+      <p>Je baissai les yeux vers mon Skân. Plus de la moitié de mon énergie s’était déjà envolée. J’hésitais... Était-ce vraiment raisonnable de continuer maintenant ?</p>
+      <p>Mais j’étais trop près de mon but. Trop proche pour reculer. Alors je serrai les dents et avançai. Je posai le pied sur le premier bloc de pierre flottant, et commençai à grimper l’escalier suspendu dans le vide. À chaque pas, le vertige me gagnait un peu plus. L’air devenait plus léger, plus silencieux.</p>
+      <p>Arrivé devant l’Arche en pierre, je constatai qu’il me fallait traverser un étrange fluide transparent, un peu comme une membrane invisible, magnétique, qui ondulait doucement. Je pris une profonde inspiration, serrant les poings pour me donner du courage… Et je passai sous l’Arche.</p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <a href="../monde/Yakkas.html">← Retour au monde des Yakkas</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
