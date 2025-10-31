@@ -29,14 +29,15 @@ const BASE_IMG = BASE + 'images/bouton/';
 
 // Fallback des métadonnées des ingrédients (utile quand la page n’a pas de .quest-ingredient)
 const ITEMS = {
-  'ptikitis_rubictus'             : { name:'Rubictus aux baies rouges',        img: BASE_IMG + 'ing_ptikitis.webp' },
+  'ptikitis_rubictus'             : { name:'Rubictus aux baies rouges',         img: BASE_IMG + 'ing_ptikitis.webp' },
   'foret_champignon'              : { name:'Champignon azulé',                  img: BASE_IMG + 'ing_foret.webp' },
   'foret_champignon_2'            : { name:'Champignon azulé',                  img: BASE_IMG + 'ing_foret.webp' },
   'ames_plante'                   : { name:'Olivette Brumis',                   img: BASE_IMG + 'ing_ames.webp' },
   'ames_plante_2'                 : { name:'Olivette Brumis',                   img: BASE_IMG + 'ing_ames.webp' },
   'reserve_ptikitis'              : { name:'Pousse rare (Réserve)',             img: BASE_IMG + 'ing_reserve_ptikitis.webp' },
   'atlantide_meduse'              : { name:'Œufs de méduse',                    img: BASE_IMG + 'ing_atlantide.webp' },
-  'creatures_essence_thermale'    : { name:'Essence des créatures de l’eau',    img: BASE_IMG + 'ing_creature.webp' }
+  'creatures_essence_thermale'    : { name:'Essence des créatures de l’eau',    img: BASE_IMG + 'ing_creature.webp' },
+  'larme_geant'                   : { name:'Larme de géant',                    img: BASE_IMG + 'ing_geant.webp' }
 };
 
 
