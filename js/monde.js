@@ -38,6 +38,7 @@ const ITEMS = {
   'atlantide_meduse'              : { name:'Œufs de méduse',                    img: BASE_IMG + 'ing_atlantide.webp' },
   'creatures_essence_thermale'    : { name:'Essence des créatures de l’eau',    img: BASE_IMG + 'ing_creature.webp' },
   'larme_geant'                   : { name:'Larme de géant',                    img: BASE_IMG + 'ing_geant.webp' }
+  'hegaia_pierre'                 : { name:'Pierre Luminescente d’Hégaïa',      img: BASE_IMG + 'ing_hegaia.webp' }
 };
 
 
