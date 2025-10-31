@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Extrait — Monde des Cités d’Or</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS commun -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <!-- ===== Contenu principal ===== -->
+  <main class="container">
+    <!-- 🔹 Titre principal -->
+    <h1 class="page-title">La carte de feu</h1>
+
+    <!-- 🔹 Image -->
+    <figure class="image-zone">
+      <img
+        src="../images/extraits/extrait_cite.webp"
+        alt="Extrait du Monde des Cités d’Or"
+        class="Fees-image"
+      />
+    </figure>
+
+    <!-- 🔹 Bloc texte -->
+    <article class="texte-monde">
+      <!-- Titre répété dans l’article -->
+      <h2 class="extrait-titre">La carte de feu</h2>
+
+      <p>
+        <span class="dc">A</span>ndréa ferma les yeux un instant, puis fit un mouvement rapide de la tête.
+        Un tourbillon d’air se forma autour de nous, soulevant le sable dans une danse silencieuse.
+      </p>
+
+      <p>
+        Andréa ouvrit alors les yeux et, d’un simple regard, fit jaillir une boule de feu étincelante.
+        Elle la lança dans la spirale d’air ; au moment de l’impact, un éclair éclata comme un coup de tonnerre dans un ciel clair.
+      </p>
+
+      <p>
+        L’énergie se répandit sur le sol, et Andréa la guida du bout des doigts, jusqu’à ce que les flammes tracent un dessin flamboyant sur le sable : 
+        une carte mouvante révélant l’emplacement exact de Binbin.
+      </p>
+
+      <p>
+        Je m’agenouillai pour observer le dessin.<br />
+        — Il est dans un temple souterrain, murmurai-je.
+      </p>
+
+      <p>
+        Andréa nous indiqua comment y accéder, traçant du doigt un itinéraire invisible dans le sable encore chaud.
+      </p>
+    </article>
+
+    <!-- 🔹 Boutons navigation -->
+    <div class="button-group" style="margin-top:18px;">
+      <a href="../3.les_mondes.html">← Les Mondes</a>
+      <a href="../8.monde_Cite.html">Rejoindre le monde des Cités d’Or</a>
+    </div>
+  </main>
+
+  <!-- Scripts communs -->
+  <script src="../js/arz-core.js"></script>
+  <script src="../js/monde.js"></script>
+</body>
+</html>
