@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monde des Cités d’or — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles globaux Monde -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay «jauge vide» === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="page-title">Monde des Cités d’or</h1>
+
+    <!-- Illustration + ingrédients cliquables -->
+    <div class="image-zone">
+      <img class="Fees-image" src="../images/mondes/monde_cite.webp" alt="Monde des Cités d’or" />
+
+      <!-- Ingrédient magique : Sable Enchanté -->
+      <button class="ing-btn quest-ingredient"
+              type="button"
+              data-id="cite_sable"
+              data-name="Sable Enchanté des Anciens"
+              data-img="../images/bouton/ing_cite.webp"
+              data-size="90"
+              data-size-mobile="36"
+              data-bottom-mobile="20%"
+              data-left-mobile="62%"
+              aria-label="Sable Enchanté"
+              style="bottom: 12%; left: 66%;">
+        <img class="ingredient-img" src="../images/bouton/ing_cite.webp" alt="Sable Enchanté" />
+      </button>
+    </div>
+
+    <div class="texte-monde">
+      Un monde où les sables mouvants du désert reposent sur les vestiges d’une civilisation oubliée... Là où les temples ensevelis murmurent encore les secrets des trésors enchantés.
+    </div>
+
+    <div class="button-group">
+      <a href="../extraits/extrait_Cite.html">Extrait du livre</a>
+      <a href="../entree/entree_Cite.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/monde.js" defer></script>
+</body>
+</html>
