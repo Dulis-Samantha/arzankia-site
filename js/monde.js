@@ -7,6 +7,7 @@ const HIDE_GAUGE = (() => {
     p.endsWith('/index.html') ||
     p === '/' ||
     p.endsWith('accueil.html')
+    p.endsWith('1.accueil.html')
   );
 })();
 
