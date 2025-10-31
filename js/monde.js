@@ -132,14 +132,24 @@ const ITEMS = {
   /* -------------------------
    * Rendu UI (écoute événements du cœur)
    * ------------------------- */
-  function renderGaugeFromCore(detail){
-    const elFill = $('#energyFill');
-    const elPct  = $('#energyPct');
-    if (!elFill || !elPct) return;
+ function renderGaugeFromCore(detail){
+  const elFill = $('#energyFill');
+  const elPct  = $('#energyPct');
+  if (!elFill || !elPct) return;
 
-    const pct = clamp(Math.round((detail.energy/detail.cfg?.max||detail.pct)||0),0,100);
-    elFill.style.width   = pct + '%';
-    elPct.textContent    = pct + '%';
+  let pct = 0;
+
+  if (typeof detail.energy === 'number' && detail?.cfg && typeof detail.cfg.max === 'number' && detail.cfg.max > 0){
+    pct = Math.round( (detail.energy / detail.cfg.max) * 100 );
+  } else if (typeof detail.pct === 'number'){
+    // Si le cœur fournit déjà un pourcentage
+    pct = Math.round(detail.pct);
+  }
+
+  pct = clamp(pct, 0, 100);
+  elFill.style.width = pct + '%';
+  elPct.textContent  = pct + '%';
+}
 
     // Ruban (novice + drain + sous seuil)
     const ribbon = $('.quest-ribbon');
