@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Extrait — Monde des Sirènes</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS commun -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <!-- ===== Contenu principal ===== -->
+  <main class="container">
+    <!-- 🔹 Titre principal -->
+    <h1 class="page-title">Le Poisson aux Crocs de Nuit</h1>
+
+    <!-- 🔹 Image -->
+    <figure class="image-zone">
+      <img
+        src="../images/extraits/extrait_sirene.webp"
+        alt="Extrait du Monde des Sirènes"
+        class="Fees-image"
+      />
+    </figure>
+
+    <!-- 🔹 Bloc texte -->
+    <article class="texte-monde">
+      <!-- Titre répété dans l’article -->
+      <h2 class="extrait-titre">Le Poisson aux Crocs de Nuit</h2>
+
+      <p>
+        <span class="dc">U</span>n énorme poisson, terrifiant, se tenait devant moi.
+        Il devait bien mesurer cinq mètres de long, au moins trois fois ma taille.
+        Son corps massif ondulait lentement, comme s’il goûtait déjà sa proie.
+      </p>
+
+      <p>
+        Des antennes bioluminescentes couraient le long de son dos,
+        et sa gueule béante, cerclée de tentacules visqueux, tremblait d’impatience.
+        Ses yeux globuleux sortirent lentement de leurs orbites,
+        libérant une sorte de liquide bleu-noir dans l’eau.
+      </p>
+    </article>
+
+    <!-- 🔹 Boutons navigation -->
+    <div class="button-group" style="margin-top:18px;">
+      <a href="../3.les_mondes.html">← Les Mondes</a>
+      <a href="../8.monde_Sirenes.html">Rejoindre le monde des Sirènes</a>
+    </div>
+  </main>
+
+  <!-- Scripts communs -->
+  <script src="../js/arz-core.js"></script>
+  <script src="../js/monde.js"></script>
+</body>
+</html>
