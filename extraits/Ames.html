@@ -1,34 +1,76 @@
-    <!-- 🔹 Titre principal -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Extrait — Monde des Âmes</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS commun -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <!-- ===== Contenu principal ===== -->
+  <main class="container">
     <h1 class="page-title">La fée rouge</h1>
 
-    <!-- 🔹 Image -->
     <figure class="image-zone">
       <img
-        src="../images/extraits/extrait_ames.webp"
-        alt="Extrait du Monde des Âmes perdues"
-        class="Ames-image"
+        src="../images/extraits/extrait_Ames.webp"
+        alt="Extrait du Monde des Âmes — La fée rouge"
+        class="Fees-image"
       />
     </figure>
 
-    <!-- 🔹 Bloc texte -->
     <article class="texte-monde">
-      <h2 class="extrait-titre">La fée rouge</h2>
-      <p>Alors que Philibert observait les sphères, l’une d’elles l’arrêta net. Elle flottait un peu à l’écart, irradiant une lumière plus vive que les autres. 
-      À l’intérieur… une fée. Minuscule. Splendide. Sa robe écarlate était faite de pétales de coquelicot et une fine couronne de rubis reposait sur ses cheveux ondulés. 
-      Elle s’approcha du bord de la sphère, posa ses petites mains contre la paroi brillante, et leva les yeux vers Philibert. Ses ailes frémissaient doucement. Sa voix était faible, mais claire.</p>
+      <p class="p-dc">
+        <span class="punc">«&#8239;</span>
+        <span class="dc">A</span>
+        <span class="rest">lors que Philibert observait les sphères, l’une d’elles l’arrêta net. Elle flottait un peu à l’écart, irradiant une lumière plus vive que les autres. À l’intérieur… une fée. Minuscule. Splendide. Sa robe écarlate était faite de pétales de coquelicot et une fine couronne de rubis reposait sur ses cheveux ondulés. Elle s’approcha du bord de la sphère, posa ses petites mains contre la paroi brillante, et leva les yeux vers Philibert. Ses ailes frémissaient doucement. Sa voix était faible, mais claire.</span>
+      </p>
+
       <p>— S’il te plaît… aide-moi à rentrer chez moi.</p>
-      <p>Philibert ne bougea pas tout de suite. Il resta là, silencieux, le regard plongé dans celui de la fée, comme s’il entendait bien plus que des mots.</p>
-      <p>— Prenons celle-ci, me dit Philibert en désignant la sphère. Cette petite fée m’a l’air précieuse…</p>
+
+      <p>
+        Philibert ne bougea pas tout de suite. Il resta là, silencieux, le regard plongé dans celui de la fée, comme s’il entendait bien plus que des mots.
+      </p>
+
+      <p>
+        — Prenons celle-ci, me dit Philibert en désignant la sphère. Cette petite fée m’a l’air précieuse…
+      </p>
     </article>
 
-    <!-- 🔹 Boutons navigation -->
     <div class="button-group" style="margin-top:18px;">
-      <a href="../3.les_mondes.html">← Les Mondes</a>
-      <a href="../monde/Ames.html">Rejoindre le monde des Âmes perdues</a>
+      <a href="../les_mondes.html">← Retour aux Mondes</a>
+      <a href="../monde/Ames.html">Rejoindre le Monde des Âmes</a>
     </div>
   </main>
 
-  <!-- Scripts communs -->
+  <!-- === Scripts === -->
   <script defer src="../js/base-pages.js"></script>
   <script defer src="../js/arz-core.js"></script>
   <script defer src="../js/monde.js"></script>
