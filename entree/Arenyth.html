@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde d'Arenyth — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">Entrée du Monde d'Arenyth</h1>
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <!-- Remplace le nom de fichier si besoin (webp/png) -->
+      <img
+        class="Fees-image"
+        src="../images/entree/entree_arenyth.webp"
+        alt="Entrée du Monde d'Arenyth — Départ vers Arenyth"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+      <figcaption class="illustration-caption">Départ vers Arenyth</figcaption>
+    </figure>
+
+    <!-- (Facultatif) Bouton ingrédient caché — laisser commenté si non utilisé -->
+    <!--
+    <button class="ing-btn quest-ingredient"
+            type="button"
+            data-id="arenyth_ingredient"
+            data-name="Fleur Barbapapa"
+            data-img="../images/bouton/ing_arenyth.webp"
+            data-size="48"
+            data-size-mobile="28"
+            data-bottom-mobile="5%"
+            data-left-mobile="48%"
+            aria-label="Fleur Barbapapa"
+            style="bottom:5%; left:48%;">
+      <img class="ingredient-img"
+           src="../images/bouton/ing_arenyth.webp"
+           alt="Fleur Barbapapa" />
+    </button>
+    -->
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <h2 class="chapter-subtitle">📖 Extrait du livre — Monde d’Arenyth</h2>
+
+      <p>Je me préparai avec une excitation fébrile : ce soir, c’était le grand spectacle.</p>
+      <p>Maman avait décidé de m’y accompagner. Elle préférait qu’on parte ensemble plutôt que je file dans mon coin avec Amandine. Après ça, j’aurais quartier libre jusqu’à la fin de l’événement.</p>
+      <p>Le monde d’Arenyth n’était pas un monde ordinaire. Il avait été façonné par les Zouppis eux-mêmes : un royaume aérien suspendu entre ciel et nuages. Son entrée se trouvait dans la Prairie d’Air.</p>
+      <p>Quand nous arrivâmes, un Zouppi attendait, drapé dans des voiles vaporeux. Un immense cercle lumineux brillait dans le ciel, flottant au-dessus de nous.</p>
+      <p>À côté du Zouppi se dressait un socle en bois, surmonté d’une sphère de cristal remplie de boules phosphorescentes.</p>
+      <p>La machine me fit aussitôt penser à un vieux tirage du loto… mais mille fois plus mystérieux.</p>
+      <p>— Voyons, voyons… approchez donc…</p>
+      <p>La voix du Zouppi était douce et chantante, presque hypnotique.</p>
+      <p>Maman s’avança.</p>
+      <p>Les boules, prises dans un souffle invisible, se mirent à tourner en spirale à l’intérieur de la sphère. Un chuchotement s’éleva, comme si elles se consultaient.</p>
+      <p>Puis l’une d’elles se détacha du lot et flotta lentement vers nous.</p>
+      <p>Maman tendit la main : la boule y atterrit, chaude et vibrante comme un cœur vivant.</p>
+      <p>Le Zouppi tapa dans ses mains : <em>Paf !</em></p>
+      <p>La sphère explosa en un nuage d’étincelles.</p>
+      <p>Un petit animal en jaillit, déployant des ailes fines et irisées. Il tournoya dans l’air avant de grandir, encore et encore, jusqu’à devenir gigantesque.</p>
+      <p>Devant nous se dressait un scarabée géant aux reflets verts et violets. Sa carapace miroitait comme un précieux bijou. Un vrombissement grave résonna lorsqu’il déploya ses ailes translucides.</p>
+      <p>Maman se tourna vers moi avec un sourire complice et prit place sur le dos de l’insecte monumental.</p>
+      <p>— Monte, vite ! dit-elle en tapotant derrière elle pour m’inviter.</p>
+      <p>Je grimpai, le cœur battant, les mains crispées sur sa taille pour ne pas tomber.</p>
+      <p>Le scarabée frappa le sol de ses pattes, battit des ailes et nous souleva dans un grand souffle d’air.</p>
+      <p>Nous nous élançâmes vers le cercle lumineux suspendu dans le ciel, à dos de cette monture extraordinaire.</p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <!-- Ajuste le chemin si ton fichier monde est ailleurs (ex: ../8.monde_Arenyth.html) -->
+      <a href="../monde/arenyth.html">← Retour au Monde d’Arenyth</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
