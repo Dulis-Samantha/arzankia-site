@@ -36,10 +36,11 @@ const ITEMS = {
   'ames_plante_2'                 : { name:'Olivette Brumis',                   img: BASE_IMG + 'ing_ames.webp' },
   'reserve_ptikitis'              : { name:'Pousse rare (Réserve)',             img: BASE_IMG + 'ing_reserve_ptikitis.webp' },
   'atlantide_meduse'              : { name:'Œufs de méduse',                    img: BASE_IMG + 'ing_atlantide.webp' },
-  'creatures_essence_thermale'    : { name:'Essence des créatures de l’eau',    img: BASE_IMG + 'ing_creature.webp' },
+  'creatures_essence_thermale'    : { name:'Eau thermale',                      img: BASE_IMG + 'ing_creature.webp' },
   'larme_geant'                   : { name:'Larme de géant',                    img: BASE_IMG + 'ing_geant.webp' }
-  'hegaia_pierre'                 : { name:'Pierre Luminescente d’Hégaïa',      img: BASE_IMG + 'ing_hegaia.webp' }
-};
+  'hegaia_pierre'                 : { name:'Pierre Luminescente',               img: BASE_IMG + 'ing_hegaia.webp' }
+  'pans_poussiere'                : { name:'Poussière d'étoile',                img: BASE_IMG + 'ing_pan.webp' }
+}
 
 
   /* -------------------------
