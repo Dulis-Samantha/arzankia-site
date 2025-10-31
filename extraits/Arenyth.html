@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Extrait — Monde d’Arenyth</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS commun -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <!-- ===== Contenu principal ===== -->
+  <main class="container">
+    <!-- 🔹 Titre principal -->
+    <h1 class="page-title">La fille mystérieuse</h1>
+
+    <!-- 🔹 Image -->
+    <figure class="image-zone">
+      <img
+        src="../images/extraits/extrait_arenyth.webp"
+        alt="Extrait du Monde d’Arenyth"
+        class="Fees-image"
+      />
+    </figure>
+
+    <!-- 🔹 Bloc texte -->
+    <article class="texte-monde">
+      <!-- Titre répété dans l’article -->
+      <h2 class="extrait-titre">La fille mystérieuse</h2>
+
+      <p>Zouppimaître leva lentement les mains vers le ciel, implorant la magie des anciens.</p>
+
+      <p>
+        En réponse, la foule se mit à taper des pieds en cadence, faisant vibrer les estrades comme un tambour sacré.
+        Autour de l’arène, les Magiciens se prirent les mains, formant quatre immenses cercles vivants, un pour chaque élément.
+      </p>
+
+      <p>L’énergie montait. L’air lui-même semblait frissonner.</p>
+
+      <p>
+        Puis, soudain, un éclair de lumière jaillit : un flash aveuglant envahit toute l’arène.
+        Au cœur de ce halo, la jeune fille s’éleva doucement dans les airs, portée par une force invisible.
+      </p>
+
+      <p>
+        Et là… un phénomène incroyable se produisit.
+        Des éclairs d’électricité pure jaillirent des mains des Magiciens.
+        Ils ne fonçaient pas au hasard : ils convergeaient tous vers elle, comme attirés, absorbés, aspirés.
+      </p>
+    </article>
+
+    <!-- 🔹 Boutons navigation -->
+    <div class="button-group" style="margin-top:18px;">
+      <a href="../3.les_mondes.html">← Les Mondes</a>
+      <a href="../8.monde_Arenyth.html">Rejoindre le monde d’Arenyth</a>
+    </div>
+  </main>
+
+  <!-- Scripts communs -->
+  <script src="../js/arz-core.js"></script>
+  <script src="../js/monde.js"></script>
+</body>
+</html>
