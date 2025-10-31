@@ -224,23 +224,50 @@ body {
   font-weight:800; font-size:12px; border-radius:999px;
   display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
-.bag-menu {
-  display:none; position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
+/* menu fermé / ouvert */
+.bag-menu { 
+  display:none; 
+  position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
   background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
   border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
   padding:.8rem 1rem;
 }
-.bag-menu.show { display:block; animation: slideDown .25s ease-out; }
-@keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
-.bag-menu h3 {
-  margin:.2rem 0 .6rem; text-align:center;
-  font-family:"Cinzel Decorative", serif; font-size:1.05rem; color:#ffd674;
+
+/* quand il s'ouvre, on garde le FLEX (sinon la liste ne prend pas la hauteur dispo) */
+.bag-menu.show { 
+  display:flex; 
+  animation: slideDown .25s ease-out; 
+  flex-direction: column;          /* utile si jamais le bloc scroll est plus haut */
+  max-height: min(70vh, 520px);    /* borne la hauteur globale */
+  overflow: hidden;                /* le scroll sera sur la liste */
 }
-.bag-menu ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem; }
-.bag-menu li {
-  display:flex; align-items:center; justify-content:space-between; gap:.6rem;
-  background: rgba(255,255,255,.06); border-radius:10px; padding:.45rem .6rem;
+
+/* liste scrollable */
+.bag-menu ul{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:.6rem;
+
+  flex: 1 1 auto;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: .25rem;
+  scrollbar-gutter: stable both-edges;
 }
+
+/* scrollbars */
+.bag-menu ul::-webkit-scrollbar{ width:10px; }
+.bag-menu ul::-webkit-scrollbar-track{ background: rgba(255,255,255,.05); border-radius:10px; }
+.bag-menu ul::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, #ffd674, #ffe7a8);
+  border-radius:10px; border:2px solid rgba(10,0,20,.55);
+}
+.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,.05); }
+
+@media (max-width:768px){
+  .bag-menu.show{ max-height:78vh; }
+}
+
 .bag-item { display:flex; align-items:center; gap:.55rem; }
 .bag-item img { width:32px; height:32px; display:block; }
 .bag-label { line-height:1.2 }
