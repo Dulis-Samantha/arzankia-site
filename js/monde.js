@@ -103,45 +103,69 @@ const ITEMS = {
     o.style.display = 'none';
     document.body.appendChild(o);
   }
+function ensureBagUI(){
+  if ($('.bag-wrap')) return;
 
-  function ensureBagUI(){
-    if ($('.bag-wrap')) return;
-    const bagWrap = document.createElement('div');
-    bagWrap.className = 'bag-wrap';
-    bagWrap.innerHTML = `
-      <img src="${BASE}images/bouton/sac_magique.webp" alt="Sac magique" class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
-      <div class="bag-badge" id="bagBadge">0</div>
-      <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
-        <h3>Ton inventaire</h3>
-        <ul id="bagList"></ul>
-        <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
-        <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
-      </div>
-    `;
-    document.body.appendChild(bagWrap);
+  const bagWrap = document.createElement('div');
+  bagWrap.className = 'bag-wrap';
+  bagWrap.innerHTML = `
+    <img src="${BASE}images/bouton/sac_magique.webp" alt="Sac magique"
+         class="bag-icon" id="bagIcon" aria-haspopup="true" aria-expanded="false">
+    <div class="bag-badge" id="bagBadge">0</div>
+    <div class="bag-menu" id="bagMenu" role="menu" aria-label="Inventaire">
+      <h3>Ton inventaire</h3>
+      <ul id="bagList"></ul>
+      <div class="bag-empty" id="bagEmpty">Ton sac est vide…</div>
+      <button class="bag-toggle" id="bagToggle" aria-pressed="false" title="Mode tranquille">Mode tranquille</button>
+    </div>
+  `;
+  document.body.appendChild(bagWrap);
 
-    // Interactions du sac
-    const bagIcon   = $('#bagIcon',  bagWrap);
-    const bagMenu   = $('#bagMenu',  bagWrap);
-    bagIcon.addEventListener('click', ()=>{
-      const show = !bagMenu.classList.contains('show');
-      bagMenu.classList.toggle('show', show);
-      bagIcon.setAttribute('aria-expanded', show ? 'true' : 'false');
-      if (show) renderBag(); // affichage à l’ouverture
-    });
-    document.addEventListener('click', (e)=>{
-      if (!bagWrap.contains(e.target)){
-        bagMenu.classList.remove('show');
-        bagIcon.setAttribute('aria-expanded','false');
-      }
-    });
+  // Sélecteurs internes (il FAUT ces lignes)
+  const bagIcon = $('#bagIcon', bagWrap);
+  const bagMenu = $('#bagMenu', bagWrap);
+  const bagList = $('#bagList', bagWrap);
 
-    // Toggle mode (novice ↔ expérimenté)
-    $('#bagToggle').addEventListener('click', ()=>{
-      const { mode } = Arz.get();
-      Arz.setMode(mode === 'novice' ? 'experimente' : 'novice');
-    });
-  }
+  // Focus helper pour la zone scrollable
+  const focusBagList = () => {
+    if (bagList && !bagList.hasAttribute('tabindex')) bagList.setAttribute('tabindex','0');
+    bagList?.focus({ preventScroll: true });
+  };
+
+  // Ouvrir / fermer sur clic icône
+  bagIcon.addEventListener('click', () => {
+    const show = !bagMenu.classList.contains('show');
+    bagMenu.classList.toggle('show', show);
+    bagIcon.setAttribute('aria-expanded', show ? 'true' : 'false');
+    if (show) { renderBag(); focusBagList(); }
+  });
+
+  // Fermer si clic en dehors
+  document.addEventListener('click', (e) => {
+    if (!bagMenu.classList.contains('show')) return;
+    if (!bagWrap.contains(e.target)) {
+      bagMenu.classList.remove('show');
+      bagIcon.setAttribute('aria-expanded','false');
+    }
+  });
+
+  // Ne pas fermer quand on clique dans le menu
+  bagMenu.addEventListener('click', (e) => e.stopPropagation());
+
+  // Fermer avec Échap
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && bagMenu.classList.contains('show')) {
+      bagMenu.classList.remove('show');
+      bagIcon.setAttribute('aria-expanded','false');
+    }
+  });
+
+  // Toggle mode (novice ↔ expérimenté) inchangé
+  $('#bagToggle', bagWrap).addEventListener('click', () => {
+    const { mode } = Arz.get();
+    Arz.setMode(mode === 'novice' ? 'experimente' : 'novice');
+  });
+}
 
   /* -------------------------
    * Rendu UI (écoute événements du cœur)
