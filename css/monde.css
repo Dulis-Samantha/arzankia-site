@@ -251,6 +251,7 @@ body {
   max-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* inertie iOS */
   padding-right: .25rem;
   scrollbar-gutter: stable both-edges;
 }
