@@ -756,34 +756,36 @@
   </div>
 
   <!-- Script apparition texte -->
-  <script>
-    function reveleSecretHegaia(event) {
-      event.preventDefault();
-      const fenetre = document.getElementById("texte-hegaia-secret");
-      const span = document.getElementById("texte-hegaia-tape");
-      const texte = "🌿 Le voile s’est levé… Tu viens d’ouvrir un passage secret d'Arzankia.";
+<script>
+  function reveleSecretHegaia(event) {
+    event.preventDefault();
 
-      fenetre.style.display = "block";
-      span.textContent = "";
+    const fenetre = document.getElementById("texte-hegaia-secret");
+    const span = document.getElementById("texte-hegaia-tape");
+    const texte = "🌿 Le voile s’est levé… Tu viens d’ouvrir un passage secret d'Arzankia.";
 
-      let i = 0;
-      function type() {
-        if (i < texte.length) {
-          span.textContent += texte.charAt(i);
-          i++;
-          setTimeout(type, 50);
-        }
+    // ✅ On stocke l’URL avant le setTimeout
+    const url = event.currentTarget.getAttribute('href');
+
+    fenetre.style.display = "block";
+    span.textContent = "";
+
+    let i = 0;
+    function type() {
+      if (i < texte.length) {
+        span.textContent += texte.charAt(i);
+        i++;
+        setTimeout(type, 50);
       }
-      type();
-
-      setTimeout(() => {
-        // Si ton vrai fichier est ailleurs, remplace la cible ci-dessous
-       const url = event.currentTarget.getAttribute('href');
-       window.location.href = url;
-
-      }, 5000);
     }
-  </script>
+    type();
+
+    // ✅ La redirection se fera bien après 5 secondes
+    setTimeout(() => {
+      window.location.href = url;
+    }, 5000);
+  }
+</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', ()=>{
