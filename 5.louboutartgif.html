@@ -6,6 +6,9 @@
   <meta name="robots" content="noindex" />
   <title>Loup-Bout’Art — Boutique</title>
 
+    <!-- Styles externes : CHEMIN CORRIGÉ -->
+  <link rel="stylesheet" href="css/monde.css" />
+
   <style>
     :root{
       --or:#ffd674;
@@ -250,5 +253,10 @@
       window.addEventListener('resize', syncDetails);
     })();
   </script>
+
+  <script defer src="js/base-pages.js"></script>  <!-- 1. helpers / base -->
+<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge -->
+<script defer src="js/monde.js"></script>       <!-- 3. interface (UI) -->
+  
 </body>
 </html>
