@@ -328,30 +328,64 @@ body {
   border-color: rgba(255,214,116,.6);
   text-shadow: none;
 }
-/* ===== Inventaire scrollable dans le menu du sac ===== */
-
-/* 1) On borne la hauteur globale du menu (pour éviter qu'il déborde de l'écran) */
+/* ====== SAC — Menu ====== */
 .bag-menu{
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 240px;
+
+  /* style visuel */
+  color: #fff3cc;
+  background: rgba(10, 0, 20, 0.82);
+  border: 1px solid rgba(255,214,116,.45);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  padding: .8rem 1rem;
+
+  /* comportement */
   max-height: min(70vh, 520px);
-  display: flex;               /* permet de donner un flex à la liste */
-  flex-direction: column;
-  overflow: hidden;            /* masque le surplus, le scroll sera sur la liste */
+  display: none;               /* fermé par défaut */
+  overflow: hidden;            /* le scroll se fait dans la liste */
+  z-index: 5000;
+  /* structure flex activée SEULEMENT en état ouvert */
 }
 
-/* 2) La liste d’items devient scrollable */
+.bag-menu.show{
+  display: flex;
+  flex-direction: column;      /* active la structure quand ouvert */
+  animation: bag-slideDown .25s ease-out;
+}
+
+@keyframes bag-slideDown{
+  from{ opacity:0; transform: translateY(-6px); }
+  to  { opacity:1; transform: none; }
+}
+
+/* ====== SAC — Liste scrollable ====== */
 .bag-menu ul{
-  flex: 1 1 auto;              /* prend la place disponible sous le titre/boutons */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+
+  flex: 1 1 auto;              /* occupe l’espace sous le titre/boutons */
+  min-height: 0;               /* indispensable pour autoriser le scroll en flex */
   max-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: .25rem;       /* petit espace pour la scrollbar */
+  padding-right: .25rem;       /* espace pour la scrollbar */
   scrollbar-gutter: stable both-edges;
 }
 
-/* 3) Jolis scrollbars (WebKit + Firefox) */
+/* Scrollbars (WebKit) */
 .bag-menu ul::-webkit-scrollbar{ width:10px; }
 .bag-menu ul::-webkit-scrollbar-track{
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,.05);
   border-radius:10px;
 }
 .bag-menu ul::-webkit-scrollbar-thumb{
@@ -360,12 +394,12 @@ body {
   border:2px solid rgba(10,0,20,.55);
 }
 
-/* Firefox */
-.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,0.05); }
+/* Scrollbars (Firefox) */
+.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,.05); }
 
-/* (Optionnel) sur mobile, un peu plus haut pour scroller confortablement */
-@media (max-width: 768px){
-  .bag-menu{ max-height: 78vh; }
+/* Mobile : un peu plus haut pour scroller confortablement */
+@media (max-width:768px){
+  .bag-menu.show{ max-height: 78vh; }
 }
 
 
