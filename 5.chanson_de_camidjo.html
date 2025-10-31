@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
 
+    <!-- Styles externes : CHEMIN CORRIGÉ -->
+  <link rel="stylesheet" href="css/monde.css" />
 
 <style>
   /* ===== Fond & base ===== */
@@ -663,6 +665,10 @@ document.getElementById('btnBack').addEventListener('click', function (e) {
   if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
 });
 </script>
-
+  
+<script defer src="js/base-pages.js"></script>  <!-- 1. helpers / base -->
+<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge -->
+<script defer src="js/monde.js"></script>       <!-- 3. interface (UI) -->
+  
 </body>
 </html>
