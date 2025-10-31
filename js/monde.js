@@ -6,7 +6,7 @@ const HIDE_GAUGE = (() => {
   return (
     p.endsWith('/index.html') ||
     p === '/' ||
-    p.endsWith('accueil.html')
+    p.endsWith('accueil.html') ||
     p.endsWith('1.accueil.html')
   );
 })();
@@ -18,9 +18,11 @@ const HIDE_GAUGE = (() => {
   /* -------------------------
    * Utils
    * ------------------------- */
-  const BASE = (location.pathname.includes('/monde/') ||
-                location.pathname.includes('/extraits/') ||
-                location.pathname.includes('/entree/')) ? '../' : '';
+const P = location.pathname;
+const BASE = (P.includes('/monde/') ||
+              P.includes('/extrait/') || P.includes('/extraits/') ||
+              P.includes('/entree/')) ? '../' : '';
+
 
   const $  = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
@@ -299,11 +301,10 @@ const img  = btn?.getAttribute('data-img')  || meta.img  || (BASE_IMG + 'grimoir
       `;
     });
   }
-
-  /* -------------------------
-   * Boot UI
-   * ------------------------- */
- function boot() {
+/* -------------------------
+ * Boot UI
+ * ------------------------- */
+function boot() {
   if (!HIDE_GAUGE) {
     ensureEnergyUI();
     ensureRibbon();
@@ -313,19 +314,19 @@ const img  = btn?.getAttribute('data-img')  || meta.img  || (BASE_IMG + 'grimoir
 
   bindIngredients();
   hookCoreEvents();
+
+  // --- 1er rendu (déplacé ici) ---
+  const st = Arz.get();
+  renderGaugeFromCore({
+    pct: Math.round((st.energy / st.cfg.max) * 100),
+    energy: st.energy,
+    mode: st.mode,
+    isDrainPage: Arz.isDrainPage(),
+    cfg: st.cfg
+  });
+  renderBag();
 }
 
-    // 1er rendu depuis l’état courant
-    const st = Arz.get();
-    renderGaugeFromCore({
-      pct: Math.round((st.energy / st.cfg.max)*100),
-      energy: st.energy,
-      mode: st.mode,
-      isDrainPage: Arz.isDrainPage(),
-      cfg: st.cfg
-    });
-    renderBag();
-  }
+whenCoreReady(boot);
 
-  whenCoreReady(boot);
 })();
