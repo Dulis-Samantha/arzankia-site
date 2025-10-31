@@ -1,4 +1,15 @@
 ;(() => {
+
+  // Masquer jauge/sac sur accueil et index
+const HIDE_GAUGE = (() => {
+  const p = location.pathname.toLowerCase();
+  return (
+    p.endsWith('/index.html') ||
+    p === '/' ||
+    p.endsWith('accueil.html')
+  );
+})();
+
   // Empêche une double init
   if (window.ArzUIMonde) return;
   window.ArzUIMonde = true;
