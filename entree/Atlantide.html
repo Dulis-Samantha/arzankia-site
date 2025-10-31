@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde d’Atlantide — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <img
+        class="Fees-image"
+        src="../images/entree/entree_atlantide.webp"
+        alt="Entrée du monde d’Atlantide"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+    </figure>
+
+    <!-- (Facultatif) Bouton ingrédient caché — à activer si besoin
+    <button class="ing-btn quest-ingredient"
+      type="button"
+      data-id="atlantide_ingredient"
+      data-name="Nom de l’ingrédient"
+      data-img="../images/bouton/ing_atlantide.webp"
+      data-size="48"
+      data-size-mobile="28"
+      data-bottom-mobile="5%"
+      data-left-mobile="48%"
+      aria-label="Nom de l’ingrédient"
+      style="bottom:5%; left:48%;">
+      <img class="ingredient-img"
+           src="../images/bouton/ing_atlantide.webp"
+           alt="Nom de l’ingrédient" />
+    </button>
+    -->
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <h2 class="chapter-subtitle">Le seuil glacé</h2>
+
+      <p>Cassandre plongea la main dans la poche de sa tunique et en sortit un petit coquillage nacré, avec une perle blanche incrustée en son centre. Elle effleura la perle du bout des doigts. Aussitôt, une lumière douce et irisée s’en échappa. Des étincelles magiques se mirent à crépiter autour d’elle.</p>
+
+      <p>Tout à coup, le ciel devint d’un blanc éclatant. Des flocons cristallins commencèrent à tomber, tourbillonnant, avant de se poser sur l’océan. Mais ce n’était pas une neige ordinaire : chaque flocon brillait d’un éclat presque féerique. Ils se posaient sur l’eau en silence, se soudant immédiatement à la surface.</p>
+
+      <p>Quel spectacle… C’était irréel. En quelques battements de cœur, l’océan disparut sous un manteau de glace translucide. Une patinoire naturelle, étrangement surréaliste, s’étendait désormais devant nous, miroitant des reflets argentés sous la lumière du ciel.</p>
+
+      <p>Cassandre scrutait l’horizon, les yeux plissés. Enfin, elle leva un bras et pointa du doigt un point noir sur la banquise.</p>
+
+      <p>— L’entrée est là-bas, dit-elle simplement, sa voix résonnant étrangement sur le silence glacé.</p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <a href="../monde/Atlantide.html">← Retour au monde Atlantide</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
