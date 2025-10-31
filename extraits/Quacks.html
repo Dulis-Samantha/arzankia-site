@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Extrait — Monde des Quacks</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS commun -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <!-- ===== Contenu principal ===== -->
+  <main class="container">
+    <!-- 🔹 Titre principal -->
+    <h1 class="page-title">Le Désenvoûtement</h1>
+
+    <!-- 🔹 Image -->
+    <figure class="image-zone">
+      <img
+        src="../images/extraits/extrait_Quacks.webp"
+        alt="Extrait du Monde des Quacks"
+        class="Fees-image"
+      />
+    </figure>
+
+    <!-- 🔹 Bloc texte -->
+    <article class="texte-monde">
+      <!-- Titre répété dans l’article -->
+      <h2 class="extrait-titre">Le Désenvoûtement</h2>
+
+      <p>
+        <span class="dc">T</span>rès vite, la chaleur envahit la hutte. Une sueur froide glissa le long de mon dos.
+        Mon cœur battait à tout rompre. Qu’est-ce que j’étais venu faire ici ? Pourquoi avais-je accepté ?
+      </p>
+
+      <p>
+        — Respire, et écoute ma voix, murmura Achintya, aussi calme qu’un ruisseau.
+      </p>
+
+      <p>
+        Il sortit une grande coquille nacrée. Dans son creux, il déposa des feuilles séchées aux reflets argentés,
+        puis frotta deux pierres l’une contre l’autre.
+      </p>
+
+      <p>
+        Une étincelle naquit, vive, brève, suivie d’un souffle discret.
+        Les feuilles prirent feu dans un petit crépitement étouffé.
+      </p>
+    </article>
+
+    <!-- 🔹 Boutons navigation -->
+    <div class="button-group" style="margin-top:18px;">
+      <a href="../3.les_mondes.html">← Les Mondes</a>
+      <a href="../8.monde_Quacks.html">Rejoindre le monde des Quacks</a>
+    </div>
+  </main>
+
+  <!-- Scripts communs -->
+  <script src="../js/arz-core.js"></script>
+  <script src="../js/monde.js"></script>
+</body>
+</html>
