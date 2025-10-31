@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monde des Fées — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles globaux Monde -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay «jauge vide» === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="page-title">Monde des Fées</h1>
+
+    <!-- Illustration + ingrédients cliquables -->
+    <div class="image-zone">
+      <img class="Fees-image" src="../images/mondes/monde_fees.webp" alt="Monde des Fées" />
+
+      <!-- Ingrédient magique : Poudre de Fée -->
+      <button class="ing-btn quest-ingredient"
+              type="button"
+              data-id="fees_poudre"
+              data-name="Poudre de Fée Lumineuse"
+              data-img="../images/bouton/ing_fees.webp"
+              data-size="85"
+              data-size-mobile="36"
+              data-bottom-mobile="24%"
+              data-left-mobile="70%"
+              aria-label="Poudre de Fée Lumineuse"
+              style="bottom: 15%; left: 74%;">
+        <img class="ingredient-img" src="../images/bouton/ing_fees.webp" alt="Poudre de Fée Lumineuse" />
+      </button>
+    </div>
+
+    <div class="texte-monde">
+      « Un monde où chaque battement d’aile fait danser la lumière, et où les secrets murmurent dans le parfum des pétales. »
+    </div>
+
+    <div class="button-group">
+      <a href="../extraits/extrait_Fees.html">Extrait du livre</a>
+      <a href="../entree/entree_Fees.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/monde.js" defer></script>
+</body>
+</html>
