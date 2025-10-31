@@ -20,18 +20,20 @@
     autoRedirectOnZero: true  // si true : redirige quand énergie = 0 (sur pages drain)
   };
 
-  // Détecte si la page actuelle est "drainante" (monde / extrait / entrée / artistes…)
-  const isDrainPage = (() => {
-    const p = location.pathname;
-    const inWorldsIndex = /\/3\.les_mondes\.html$/i.test(p) || p.endsWith('/3.les_mondes.html');
-    const inMonde       = /\/monde\//i.test(p);
-    const inExtraits    = /\/extraits?\//i.test(p);
-    const inEntree      = /\/entree\/entree_[a-z0-9_-]+\.html$/i.test(p);
-    const inArtFolder   = /\/artiste\//i.test(p);
-    const inArtFiles    = /\/(5\.chanson_de_camidjo|5\.louboutartgif|5\.loup_bout_art)\.html$/i.test(p);
-    return inWorldsIndex || inMonde || inExtraits || inEntree || inArtFolder || inArtFiles;
-  })();
-
+  // --- Pages où la jauge se décharge ---
+const isDrainPage = (() => {
+  const p = location.pathname.toLowerCase();
+  return (
+    p.includes('3.monde.html') ||
+    p.includes('/monde/') ||
+    p.includes('/extrait/') ||
+    p.includes('/chanson_de_camidjo/') ||
+    p.includes('/louboutartgif/') ||
+    p.includes('/loup_bout_art/') ||
+    p.includes('/entree/')
+  );
+})();
+  
   /* =========================
    * STATE + STORAGE
    * ========================= */
