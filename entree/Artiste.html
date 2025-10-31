@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde des Artistes — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">Entrée du monde des Artistes</h1>
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <img
+        class="entree-image"
+        src="../images/entree/entree_artiste.webp"
+        alt="Entrée du monde des Artistes"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+    </figure>
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <p>Philibert m’entraîna jusqu’à un vieux tilleul géant. Son tronc avait une forme étrange… comme une guitare sculptée dans le bois vivant.</p>
+      <p>Philibert posa doucement sa main sur les cordes de bois, et une douce mélodie cristalline résonna.</p>
+      <p>Les feuilles de l’arbre, en forme de notes de musique, s’envolèrent en tourbillonnant autour de nous. Le tronc vibra, perdit sa forme de guitare… et des taches de peinture apparurent, comme si quelqu’un l’avait éclaboussé de couleurs arc-en-ciel.</p>
+      <p>Peu à peu, une porte magique se dessina, tout en spirales et en teintes chatoyantes. Malgré la pluie, la porte restait intacte, comme protégée par un sort. Autour de nous, l’eau et la lumière formaient des arcs-en-ciel dansants.</p>
+      <p>C’était magnifique.</p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <a href="../5.monde_Artistes.html">← Retour au monde des Artistes</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
