@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Extrait — Monde des Artistes</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS commun -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar"><div id="energyFill" class="energy-fill"></div></div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <!-- ===== Contenu principal ===== -->
+  <main class="container">
+    <!-- 🔹 Titre principal -->
+    <h1 class="page-title">Le tableau magique</h1>
+
+    <!-- 🔹 Image -->
+    <figure class="image-zone">
+      <img
+        src="../images/extraits/extrait_artiste.webp"
+        alt="Extrait du Monde des Artistes"
+        class="Fees-image"
+      />
+    </figure>
+
+    <!-- 🔹 Bloc texte -->
+    <article class="texte-monde">
+      <!-- Titre répété dans l’article -->
+      <h2 class="extrait-titre">Le tableau magique</h2>
+
+      <p>
+        <span class="dc">A</span>près le départ de Philibert, je me dirigeai vers la première petite cabane.
+        À l’entrée, un peintre aux doigts tachés d’encre colorée dessinait un drôle de petit être,
+        avec de grandes ailes de dragon et des yeux ronds comme des billes.
+        Je me dis aussitôt qu’il devait sûrement exister quelque part, dans un des nombreux mondes d’Arzankia.
+      </p>
+
+      <p>
+        À l’intérieur, l’air sentait la craie, la peinture et le vieux papier.
+        Des dessins en noir et blanc, réalisés sur de grandes feuilles de papier Canson, étaient soigneusement rangés dans des caissettes de bois clair.
+      </p>
+
+      <p>
+        Sur la palissade du fond, une soixantaine de tableaux étaient accrochés.
+        La plupart représentaient des créatures fantastiques, plus étranges les unes que les autres.
+      </p>
+
+      <p>
+        Je m’approchai de l’un d’eux. Il montrait un animal étrange, entre la chauve-souris et le requin.
+        Il avait des dents pointues et de grosses narines, d’où s’échappait une sorte de poussière brune, comme du sable magique.
+        Je restai figé.
+      </p>
+
+      <p>
+        L’impression qu’il me regardait était si forte que j’en avais des frissons.
+        Ses yeux semblaient vivants.
+        Et soudain… l’horrible créature sortit du tableau dans un nuage de poussière !
+      </p>
+
+      <p>
+        Elle s’envola dans la boutique en poussant un cri strident, tourna autour de moi, et fonça droit sur mes cheveux !
+        Par réflexe, je me baissai juste à temps.
+        Un petit balai était posé contre le mur ; je le saisis à deux mains, prêt à me défendre.
+      </p>
+    </article>
+
+    <!-- 🔹 Boutons navigation -->
+    <div class="button-group" style="margin-top:18px;">
+      <a href="../3.les_mondes.html">← Les Mondes</a>
+      <a href="../8.monde_Artistes.html">Rejoindre le monde des Artistes</a>
+    </div>
+  </main>
+
+  <!-- Scripts communs -->
+  <script src="../js/arz-core.js"></script>
+  <script src="../js/monde.js"></script>
+</body>
+</html>
