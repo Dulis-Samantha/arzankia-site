@@ -745,8 +745,7 @@
     </div>
 
     <!-- Bulle secrète Hégaïa -->
-    <div class="bubble-row hegaia-alone">
-    <a href="monde/Hegaia.html" class="bubble hegaia flotter2" onclick="reveleSecretHegaia(event)">
+    <div class="bubble-row hegaia-alone"><a href="monde/Hegaia.html" class="bubble hegaia flotter2" onclick="reveleSecretHegaia(event)">
         <div class="bubble-inner"><span class="label"></span></div>
       </a>
     </div>
@@ -779,7 +778,9 @@
 
       setTimeout(() => {
         // Si ton vrai fichier est ailleurs, remplace la cible ci-dessous
-        window.location.href = "8.monde_Hegaia.html";
+       const url = event.currentTarget.getAttribute('href');
+       window.location.href = url;
+
       }, 5000);
     }
   </script>
