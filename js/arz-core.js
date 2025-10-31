@@ -24,7 +24,7 @@
 const isDrainPage = (() => {
   const p = location.pathname.toLowerCase();
   return (
-    p.includes('3.monde.html') ||
+    p.includes('3.les_mondes.html') ||
     p.includes('/monde/') ||
     p.includes('/extrait/') ||
     p.includes('/chanson_de_camidjo/') ||
