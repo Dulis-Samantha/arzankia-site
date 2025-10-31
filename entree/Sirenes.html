@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde des Sirènes — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">Entrée du monde des Sirènes</h1>
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <img
+        class="Fees-image"
+        src="../images/entree/entree_sirene.webp"
+        alt="Entrée du monde des Sirènes"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+      <figcaption class="img-caption sr-only">Tourbillon des Sirènes — Portail aquatique</figcaption>
+    </figure>
+
+    <!-- Bouton ingrédient caché : Perle blanche d’Huître -->
+    <button class="ing-btn quest-ingredient"
+            type="button"
+            data-id="ingredient_sirenes"
+            data-name="Perle blanche d’Huître"
+            data-img="../images/bouton/ing_sirenes.webp"
+            data-size="48"
+            data-size-mobile="28"
+            data-bottom-mobile="20%"
+            data-left-mobile="50%"
+            aria-label="Perle blanche d’Huître"
+            style="bottom:20%; left:50%; transform:translateX(-50%);">
+      <img class="ingredient-img"
+           src="../images/bouton/ing_sirenes.webp"
+           alt="Ingrédient : Perle blanche d’Huître" />
+    </button>
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <h2 class="chapter-subtitle">Tourbillon des Sirènes</h2>
+
+      <p>
+        Nous apparûmes sur une minuscule île, perdue au cœur d’un vaste océan. Rien autour, juste de l’eau à perte de vue…
+      </p>
+      <p>
+        Sur l’île, un seul palmier, un peu tordu, comme s’il s’ennuyait depuis des siècles.
+      </p>
+      <p>
+        — Ici, c’est l’endroit d’où partent les Mondes Aquatiques, expliqua Alicia.
+      </p>
+      <p>
+        — Ah, comme la Prairie d’Air pour les mondes aériens ?
+      </p>
+      <p>
+        — Exactement.
+      </p>
+      <p>
+        Elle sortit un petit miroir de poche. Avec assurance, elle le frotta du plat de la main. La magie opéra aussitôt…
+      </p>
+      <p>
+        L’océan se mit à bouillonner comme un immense bain à remous. De petites vagues s’agitaient à la surface, faisant éclater de grosses bulles. Des traînées de vapeur s’envolaient dans l’air, voilant l’horizon d’un brouillard grisant.
+      </p>
+      <p>
+        Puis, d’un coup, tout redevint étrangement silencieux. Le brouillard se dissipa et au loin, un tourbillon se forma, aspirant les vagues dans un silence hypnotisant.
+      </p>
+      <p>
+        — C’est là-bas, dit Alicia en me le désignant du doigt.
+      </p>
+      <p>
+        Je plissai les yeux, main en visière sur mon front.
+      </p>
+      <p>
+        — La vache… ça fait super loin…
+      </p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <a href="../monde/Sirenes.html">← Retour au Monde des Sirènes</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
