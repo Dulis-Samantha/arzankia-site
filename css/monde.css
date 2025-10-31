@@ -13,6 +13,8 @@
   --text: #fff8e6;
   --glass: rgba(10, 0, 20, 0.45);
   --overlay: rgba(0, 0, 0, 0.7);
+  --bag-w: 48px;   /* largeur de l'icône du sac */
+  --bag-gap: 16px; /* espace visuel entre jauge et sac */
 }
 
 /* -------------------------
@@ -125,7 +127,7 @@ body {
 .energy-wrap {
   position: fixed;
   top: 84px;  /* avant : 68px */
-  right: 12px;
+  right: calc(12px + var(--bag-w) + var(--bag-gap));
   z-index: 4000;
   display: flex;
   align-items: center;
@@ -430,7 +432,7 @@ body {
   .energy-wrap{
     position: fixed !important;
     top: 84px;               /* ajuste à ton goût */
-    right: 12px;
+    right: calc(12px + var(--bag-w) + var(--bag-gap));
     left: auto;              /* annule le centrage mobile */
     transform: none !important;
   }
