@@ -7,6 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <title>Monde des Artistes – Arzankia</title>
 
+    <!-- Styles externes : CHEMIN CORRIGÉ -->
+  <link rel="stylesheet" href="css/monde.css" />
+  
 <style>
   
 :root{
@@ -469,11 +472,10 @@ function startFireworks(){
 })();
 }
 </script>
-  <!-- Styles et script de la jauge -->
-<link rel="stylesheet" href="energy-gauge.css">
-<script src="energy-gauge.js"></script>
-
-
+  
+<script defer src="js/base-pages.js"></script>  <!-- 1. helpers / base -->
+<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge -->
+<script defer src="js/monde.js"></script>       <!-- 3. interface (UI) -->
 
 </body>
 </html>
