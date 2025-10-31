@@ -224,48 +224,47 @@ body {
   font-weight:800; font-size:12px; border-radius:999px;
   display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
-/* menu fermé / ouvert */
+/* état fermé */
 .bag-menu {
-  display:none;
-  position:absolute;
-  right:0;
-  margin-top:8px;
-  min-width:240px;
-  color:#fff3cc;
-  background: rgba(10,0,20,.82);
-  border:1px solid rgba(255,214,116,.45);
-  border-radius:12px;
-  box-shadow:0 8px 24px rgba(0,0,0,.45);
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 240px;
+  color: #fff3cc;
+  background: rgba(10, 0, 20, 0.82);
+  border: 1px solid rgba(255, 214, 116, 0.45);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(6px);
-  padding:.8rem 1rem;
-
-  z-index: 5000; /* <<< AJOUT ICI */
+  padding: 0.8rem 1rem;
+  max-height: min(70vh, 520px);     /* borne la hauteur globale */
+  display: none;                    /* 🔹 par défaut, caché */
+  flex-direction: column;           /* structure pour scroll */
+  overflow: hidden;
+  z-index: 5000;
 }
 
-
-/* quand il s'ouvre, on garde le FLEX (sinon la liste ne prend pas la hauteur dispo) */
-.bag-menu.show { 
-  display:flex; 
-  animation: slideDown .25s ease-out; 
-  flex-direction: column;          /* utile si jamais le bloc scroll est plus haut */
-  max-height: min(70vh, 520px);    /* borne la hauteur globale */
-  overflow: hidden;                /* le scroll sera sur la liste */
+/* état ouvert */
+.bag-menu.show {
+  display: flex;                    /* 🔹 visible en flex */
+  animation: slideDown .25s ease-out;
 }
 
-/* liste scrollable */
-.bag-menu ul{
-  list-style:none; margin:0; padding:0;
-  display:flex; flex-direction:column; gap:.6rem;
-
+/* zone scrollable */
+.bag-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   flex: 1 1 auto;
-  max-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; /* inertie iOS */
+  -webkit-overflow-scrolling: touch;
   padding-right: .25rem;
   scrollbar-gutter: stable both-edges;
 }
-
 /* scrollbars */
 .bag-menu ul::-webkit-scrollbar{ width:10px; }
 .bag-menu ul::-webkit-scrollbar-track{ background: rgba(255,255,255,.05); border-radius:10px; }
