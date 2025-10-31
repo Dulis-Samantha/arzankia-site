@@ -225,13 +225,23 @@ body {
   display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
 /* menu fermé / ouvert */
-.bag-menu { 
-  display:none; 
-  position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
-  background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
-  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
+.bag-menu {
+  display:none;
+  position:absolute;
+  right:0;
+  margin-top:8px;
+  min-width:240px;
+  color:#fff3cc;
+  background: rgba(10,0,20,.82);
+  border:1px solid rgba(255,214,116,.45);
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
   padding:.8rem 1rem;
+
+  z-index: 5000; /* <<< AJOUT ICI */
 }
+
 
 /* quand il s'ouvre, on garde le FLEX (sinon la liste ne prend pas la hauteur dispo) */
 .bag-menu.show { 
