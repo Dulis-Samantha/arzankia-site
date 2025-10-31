@@ -303,13 +303,17 @@ const img  = btn?.getAttribute('data-img')  || meta.img  || (BASE_IMG + 'grimoir
   /* -------------------------
    * Boot UI
    * ------------------------- */
-  function boot(){
+ function boot() {
+  if (!HIDE_GAUGE) {
     ensureEnergyUI();
     ensureRibbon();
     ensureLockOverlay();
     ensureBagUI();
-    bindIngredients();
-    hookCoreEvents();
+  }
+
+  bindIngredients();
+  hookCoreEvents();
+}
 
     // 1er rendu depuis l’état courant
     const st = Arz.get();
