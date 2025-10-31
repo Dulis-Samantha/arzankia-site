@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monde des Géants — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles globaux Monde -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+<body>
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay «jauge vide» === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="page-title">Monde des Géants</h1>
+
+    <!-- Illustration + ingrédients cliquables -->
+    <div class="image-zone">
+      <img class="Fees-image" src="../images/mondes/monde_geants.webp" alt="Monde des Géants" />
+
+      <!-- Ingrédient magique : Pollen de Tambour -->
+      <button class="ing-btn quest-ingredient"
+              type="button"
+              data-id="larme_geant"
+              data-name="Larme de géant"
+              data-img="../images/bouton/ing_geant.webp"
+              data-size="90"
+              data-size-mobile="38"
+              data-bottom-mobile="22%"
+              data-left-mobile="66%"
+              aria-label="Larme de géant"
+              style="bottom: 12%; left: 68%;">
+        <img class="ingredient-img" src="../images/bouton/ing_geant.webp" alt="Larme de géant" />
+      </button>
+    </div>
+
+    <div class="texte-monde">
+      « Un monde démesuré, où même les arbres touchent le ciel et où les rires résonnent comme des tambours sacrés… »
+    </div>
+
+    <div class="button-group">
+      <a href="../extraits/extrait_Geants.html">Extrait du livre</a>
+      <a href="../entree/entree_Geants.html">Entrée du monde</a>
+      <a href="../3.les_mondes.html">← Retour</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/monde.js" defer></script>
+</body>
+</html>
