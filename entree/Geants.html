@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Entrée — Monde des Géants — Arzankia</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles communs -->
+  <link rel="stylesheet" href="../css/monde.css" />
+</head>
+
+<body>
+  <!-- === Jauge d’énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon" aria-hidden="true">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay" hidden>
+    <div class="lock-card" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+      <div id="lockTitle" class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique&nbsp;!</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <header class="page-head">
+      <h1 class="page-title">L'arbre des Géants</h1>
+    
+    </header>
+
+    <!-- Illustration d’entrée -->
+    <figure class="image-zone">
+      <img
+        class="entree-image"
+        src="../images/entree/entree_geants.webp"
+        alt="Entrée du monde des Géants"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+    </figure>
+
+    <!-- Récit -->
+    <article class="texte-monde">
+      <p>On traversa le jardin de papy en silence. Au bout de quelques pas, Antony s’arrêta et me montra un pommier au tronc épais.</p>
+
+      <p>— C’est celui-là. Notre porte d’entrée.</p>
+
+      <p>Il s’avança vers l’arbre, sortit une montre à gousset brillante et la fit claquer dans sa paume.</p>
+
+      <p>— T’as vu ça ? La classe, non ? Elle vient du Monde des Artistes, dit-il avec fierté.</p>
+
+      <p>— Sérieux ? Ta clé vient vraiment d’un monde d’Arzankia ? demandai-je, ébahi.</p>
+
+      <p>Il me lança un regard amusé, presque moqueur.</p>
+
+      <p>— Ben… toutes les clés viennent d’Arzankia. T’as encore beaucoup à apprendre.</p>
+
+      <p>Antony posa doucement sa main sur l’écorce du pommier et le caressa avec une étonnante délicatesse. Sa montre à gousset se mit aussitôt à briller, comme si elle répondait à l’appel de l’arbre.</p>
+
+      <p>À ce moment-là, le pommier frissonna, puis commença à grandir. Ses branches s’élevèrent lentement vers le ciel, projetant une ombre immense sur tout le jardin. Son tronc grossit, s’élargit, devenant plus large qu’une maison.</p>
+
+      <p>Quand il eut terminé sa transformation, il semblait toucher le ciel. Juste devant nous, à la base du tronc, une porte en bois apparut. Antony posa la main sur la poignée, et ouvrit la porte en grand.</p>
+
+      <p>— Bienvenue dans le Monde des Géants, dit-il en ouvrant la porte.</p>
+    </article>
+
+    <!-- Navigation -->
+    <nav class="button-group" aria-label="Navigation">
+      <a href="../monde/Geants.html">← Retour au monde des Géants</a>
+      <a href="../3.les_mondes.html">Tous les mondes</a>
+    </nav>
+  </main>
+
+  <!-- Scripts communs -->
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/monde.js"></script>
+</body>
+</html>
