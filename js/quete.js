@@ -95,6 +95,11 @@
       q.status = 'done';
       save(LS_QUESTS, quests);
 
+       document.dispatchEvent(new CustomEvent('arz:quest-item-delivered', {
+  detail: { id: q.targetIngredient }
+}));
+
+
       // ---- RÉCOMPENSES ----
       const meta = META.load();
       meta.questsCompleted = (meta.questsCompleted || 0) + 1;
@@ -118,41 +123,51 @@
       return true;
     }
 
-    // ---------- Hooks UI (boutons & événements) ----------
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.quest-starter[data-quest-id]');
-      if(!btn) return;
-      startQuest({
-        id:               btn.dataset.questId,
-        title:            btn.dataset.questTitle || 'Quête',
-        targetIngredient: btn.dataset.questTargetIngredient,
-        targetName:       btn.dataset.questTargetName || 'Ingrédient',
-        deliverTo:        btn.dataset.questDeliverTo
-      });
-    });
+// ---------- Hooks UI (boutons & événements) ----------
 
-    document.addEventListener('arz:ingredient-collected', (ev) => {
-      const { id, name } = ev.detail || {};
-      const quests = load(LS_QUESTS, {});
-      let changed = false;
+// Donneur de quête (ex. Zouppikiti)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.quest-starter[data-quest-id]');
+  if (!btn) return;
+  startQuest({
+    id:               btn.dataset.questId,
+    title:            btn.dataset.questTitle || 'Quête',
+    targetIngredient: btn.dataset.questTargetIngredient,
+    targetName:       btn.dataset.questTargetName || 'Ingrédient',
+    deliverTo:        btn.dataset.questDeliverTo
+  });
+});
 
-      for (const qid in quests) {
-        const q = quests[qid];
-        if (q.status === 'active' && q.targetIngredient === id) {
-          q.status = 'gathered';
-          changed = true;
+// Marquer “gathered” quand l’ingrédient est collecté
+document.addEventListener('arz:ingredient-collected', (ev) => {
+  const { id, name } = ev.detail || {};
+  const quests = load(LS_QUESTS, {});
+  let changed = false;
 
-          // Effet visuel sur le receveur
-          const rcv = document.querySelector(`.quest-receiver[data-quest-id="${qid}"]`);
-          if (rcv) rcv.classList.add('pulse');
+  for (const qid in quests) {
+    const q = quests[qid];
+    if (q.status === 'active' && q.targetIngredient === id) {
+      q.status = 'gathered';
+      changed = true;
 
-          say(`🧺 Parfait ! Tu as obtenu <b>${name || q.targetName}</b>.<br>
-               Va maintenant voir <b>Zouppiame</b> dans le <b>Monde des Âmes</b>.`);
-        }
-      }
+      // petit effet visuel sur le receveur (ex. Zouppiame)
+      const rcv = document.querySelector(`.quest-receiver[data-quest-id="${qid}"]`);
+      if (rcv) rcv.classList.add('pulse');
 
-      if (changed) save(LS_QUESTS, quests);
-    });
+      say(`🧺 Parfait ! Tu as obtenu <b>${name || q.targetName}</b>.<br>
+           Va maintenant voir <b>${q.deliverTo}</b> pour remettre l’ingrédient.`);
+    }
+  }
+  if (changed) save(LS_QUESTS, quests);
+});
+
+// Receveur de quête (ex. Zouppiame)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.quest-receiver[data-quest-id]');
+  if (!btn) return;
+  const ok = ARZ_QUESTS.completeIfGathered(btn.dataset.questId, btn.dataset.receiver);
+  if (ok) btn.classList.remove('pulse'); // retire l’animation si présent
+});
 
     // ---------- API globale ----------
     window.ARZ_QUESTS = { startQuest, completeIfGathered };
