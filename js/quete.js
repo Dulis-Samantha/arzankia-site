@@ -6,6 +6,16 @@
    - Déblocage Test "Quel héros es-tu ?" (≥3 quêtes)
    - Spécialisation finale (symbole + mode infini)
    ============================================================ */
+// --- Sécurité : attendre ArzCore avant d'exécuter quete.js
+if (!window.Arz) {
+  console.warn('ArzCore ou UI non chargés avant quete.js — attente du démarrage.');
+  document.addEventListener('arz:start', () => {
+    console.info('ArzCore détecté, initialisation de quete.js');
+    if (typeof initQuete === 'function') initQuete();  // ta fonction d’init
+  }, { once:true });
+  throw new Error('Stop: ArzCore pas encore chargé');
+}
+
 (() => {
   if (!window.Arz || !window.ARZ_QUESTS) {
     console.warn("⚠️ ArzCore ou UI non chargés avant quete.js");
