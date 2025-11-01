@@ -11,16 +11,16 @@
   // ---- bootstrap : attendre Arz si besoin, sinon lancer direct
   function bootstrap() {
     if (!window.Arz) {
-      console.warn('ArzCore ou UI non chargés avant quete.js — attente du démarrage.');
+      console.warn('ArzCore non prêt — quete.js attend arz:start.');
       document.addEventListener('arz:start', initQuete, { once: true });
-      return; // on attend l’événement puis on initialisera
+      return;
     }
     initQuete(); // Arz déjà prêt
   }
 
-  // ---- tout ton code quêtes est ici
+  // ---- tout le code Quêtes
   function initQuete() {
-    if (window.ArzQuete) return; // anti-double init
+    if (window.ArzQuete) return;   // anti-double init (namespace Quêtes)
     window.ArzQuete = true;
 
     // ---------- Storage utils ----------
@@ -47,7 +47,7 @@
       }
     };
 
-    // ---------- UI: overlay de dialogue ----------
+    // ---------- UI légère : overlay de dialogue ----------
     function say(html){
       const wrap = document.createElement('div');
       Object.assign(wrap.style, {
@@ -99,7 +99,6 @@
       const meta = META.load();
       meta.questsCompleted = (meta.questsCompleted || 0) + 1;
 
-      // Palier 3 → déverrouille le test + dialogue spécial
       if (meta.questsCompleted >= 3 && !meta.testUnlocked) {
         meta.testUnlocked = true;
         say(`🪄 <b>Zouppiame</b> : Bravo, déjà <b>trois quêtes</b> accomplies !<br>
@@ -111,7 +110,7 @@
 
       META.save(meta);
 
-      // Recharge la jauge + recalcul du drain (vu par arz-core.js)
+      // Recharge + recalcul du drain côté ArzCore
       document.dispatchEvent(new CustomEvent('arz:reward', {
         detail: { recharge:true, questsCompleted: meta.questsCompleted }
       }));
@@ -119,7 +118,7 @@
       return true;
     }
 
-    // ---------- Hooks UI ----------
+    // ---------- Hooks UI (boutons & événements) ----------
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.quest-starter[data-quest-id]');
       if(!btn) return;
