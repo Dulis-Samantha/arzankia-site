@@ -88,6 +88,28 @@
     if(meta.questsCompleted >= 3) meta.testUnlocked = true; // déblocage test
     META.save(meta);
 
+     // ---- RÉCOMPENSES ----
+const meta = META.load();
+meta.questsCompleted = (meta.questsCompleted || 0) + 1;
+
+// Palier 3 → déverrouille le test + dialogue spécial
+if (meta.questsCompleted >= 3 && !meta.testUnlocked) {
+  meta.testUnlocked = true;
+  say(`🪄 <b>Zouppiame</b> : Bravo, déjà <b>trois quêtes</b> accomplies !<br>
+  Tu peux à présent passer ton <b>examen de passage</b> pour découvrir ta <b>spécialisation</b>.<br>
+  Va trouver <b>Raphaël</b> pour commencer ton test !`);
+} else {
+  say("🎉 Quête terminée ! Zouppiame te remercie. Ta jauge est rechargée et ton expérience augmente. ✨");
+}
+
+META.save(meta);
+
+// Recharge la jauge + recalcul du drain (vu par arz-core.js)
+document.dispatchEvent(new CustomEvent('arz:reward', {
+  detail: { recharge:true, questsCompleted: meta.questsCompleted }
+}));
+
+
     // Recharge la jauge + recalcul du drain (vu par arz-core.js)
     document.dispatchEvent(new CustomEvent('arz:reward', {
       detail: { recharge:true, questsCompleted: meta.questsCompleted }
