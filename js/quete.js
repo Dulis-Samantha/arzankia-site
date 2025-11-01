@@ -7,6 +7,12 @@
    - Spécialisation finale (symbole + mode infini)
    ============================================================ */
 (() => {
+  if (!window.Arz || !window.ARZ_QUESTS) {
+    console.warn("⚠️ ArzCore ou UI non chargés avant quete.js");
+  }
+})();
+
+(() => {
   if (window.ArzQuete) return; // anti-double init
   window.ArzQuete = true;
 
