@@ -279,6 +279,18 @@
       const resultDiv = document.getElementById("quiz-result");
       resultDiv.innerHTML = `<span class="magie">${prenom}, tu es un héros ${result} !</span>`;
 
+      // Écrit la spécialisation (visible par tout le site)
+if (window.ARZ_META && typeof ARZ_META.setSpec === 'function') {
+  ARZ_META.setSpec(result);
+} else {
+  // fallback si quete.js n'est pas chargé
+  try {
+    const m = JSON.parse(localStorage.getItem('arz_meta_v1')) || {};
+    m.spec = result;
+    localStorage.setItem('arz_meta_v1', JSON.stringify(m));
+  } catch {}
+}
+
    // Redirection au bout de 4 secondes (optionnel)
 setTimeout(() => {
   const params = `?prenom=${encodeURIComponent(prenom)}`;
@@ -295,17 +307,6 @@ setTimeout(() => {
 }, 4000);
     }
   </script>
-  <script>
-(() => {
-  try {
-    const m = JSON.parse(localStorage.getItem('arz_meta_v1')) || {};
-    const link = document.getElementById('test-hero-link');
-    if (m.testUnlocked && link) {
-      link.style.display = 'inline-block';
-      link.classList.add('pulse'); // effet lumineux du quete.css ✨
-    }
-  } catch {}
-})();
-</script>
+
 </body>
 </html>
