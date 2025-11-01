@@ -2,9 +2,9 @@
    ARZANKIA — Système de quêtes
    - Boutons .quest-starter et .quest-receiver
    - Journal de quêtes (localStorage)
-   - Récompenses: recharge + ralentissement du drain
+   - Récompenses : recharge + ralentissement du drain
    - Déblocage Test "Quel héros es-tu ?" (≥3 quêtes)
-   - Spécialisation (symbole + mode final infini)
+   - Spécialisation finale (symbole + mode infini)
    ============================================================ */
 (() => {
   if (window.ArzQuete) return; // anti-double init
@@ -34,7 +34,7 @@
     }
   };
 
-  // ---------- UI: petit overlay de dialogue ----------
+  // ---------- UI: overlay de dialogue ----------
   function say(html){
     const wrap = document.createElement('div');
     Object.assign(wrap.style, {
@@ -48,9 +48,9 @@
       boxShadow:'0 16px 40px rgba(0,0,0,.4)', lineHeight:'1.5'
     });
     box.innerHTML = `<div>${html}</div>
-    <div style="text-align:right;margin-top:10px">
-      <button style="background:#ffe39c;border:none;border-radius:12px;padding:8px 14px;cursor:pointer">OK</button>
-    </div>`;
+      <div style="text-align:right;margin-top:10px">
+        <button style="background:#ffe39c;border:none;border-radius:12px;padding:8px 14px;cursor:pointer">OK</button>
+      </div>`;
     wrap.appendChild(box);
     wrap.addEventListener('click', e => { if(e.target===wrap) wrap.remove(); });
     box.querySelector('button').addEventListener('click', ()=>wrap.remove());
@@ -68,8 +68,8 @@
     save(LS_QUESTS, quests);
 
     say(`👋 <b>Zouppikiti</b> : Salut Raphaël ! On a besoin de toi.<br>
-        Peux-tu aller dans la <b>Forêt</b> récupérer un <b>${targetName}</b> ?
-        Puis rapporte-le à <b>Zouppiame</b> dans le <b>Monde des Âmes</b>. ✨`);
+      Peux-tu aller dans la <b>Forêt</b> récupérer un <b>${targetName}</b> ?
+      Puis rapporte-le à <b>Zouppiame</b> dans le <b>Monde des Âmes</b>. ✨`);
   }
 
   function completeIfGathered(questId, deliverToSlug){
@@ -84,43 +84,29 @@
 
     // ---- RÉCOMPENSES ----
     const meta = META.load();
-    meta.questsCompleted = (meta.questsCompleted||0) + 1;
-    if(meta.questsCompleted >= 3) meta.testUnlocked = true; // déblocage test
+    meta.questsCompleted = (meta.questsCompleted || 0) + 1;
+
+    // Palier 3 → déverrouille le test + dialogue spécial
+    if (meta.questsCompleted >= 3 && !meta.testUnlocked) {
+      meta.testUnlocked = true;
+      say(`🪄 <b>Zouppiame</b> : Bravo, déjà <b>trois quêtes</b> accomplies !<br>
+      Tu peux à présent passer ton <b>examen de passage</b> pour découvrir ta <b>spécialisation</b>.<br>
+      Va trouver <b>Raphaël</b> pour commencer ton test !`);
+    } else {
+      say("🎉 Quête terminée ! Zouppiame te remercie. Ta jauge est rechargée et ton expérience augmente. ✨");
+    }
+
     META.save(meta);
-
-     // ---- RÉCOMPENSES ----
-const meta = META.load();
-meta.questsCompleted = (meta.questsCompleted || 0) + 1;
-
-// Palier 3 → déverrouille le test + dialogue spécial
-if (meta.questsCompleted >= 3 && !meta.testUnlocked) {
-  meta.testUnlocked = true;
-  say(`🪄 <b>Zouppiame</b> : Bravo, déjà <b>trois quêtes</b> accomplies !<br>
-  Tu peux à présent passer ton <b>examen de passage</b> pour découvrir ta <b>spécialisation</b>.<br>
-  Va trouver <b>Raphaël</b> pour commencer ton test !`);
-} else {
-  say("🎉 Quête terminée ! Zouppiame te remercie. Ta jauge est rechargée et ton expérience augmente. ✨");
-}
-
-META.save(meta);
-
-// Recharge la jauge + recalcul du drain (vu par arz-core.js)
-document.dispatchEvent(new CustomEvent('arz:reward', {
-  detail: { recharge:true, questsCompleted: meta.questsCompleted }
-}));
-
 
     // Recharge la jauge + recalcul du drain (vu par arz-core.js)
     document.dispatchEvent(new CustomEvent('arz:reward', {
       detail: { recharge:true, questsCompleted: meta.questsCompleted }
     }));
 
-    say("🎉 Quête terminée ! Zouppiame te remercie. Ta jauge est rechargée et ton expérience augmente. ✨");
     return true;
   }
 
   // ---------- Hooks UI ----------
-  // 1) Clique sur un lanceur de quête
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.quest-starter[data-quest-id]');
     if(!btn) return;
@@ -133,32 +119,30 @@ document.dispatchEvent(new CustomEvent('arz:reward', {
     });
   });
 
-  // 2) Quand un ingrédient est récolté par ton système existant
-  // (Ajoute un seul dispatch dans ta fonction de collecte)
- document.addEventListener('arz:ingredient-collected', (ev) => {
-  const { id, name } = ev.detail || {};
-  const quests = load(LS_QUESTS, {});
-  let changed = false;
+  document.addEventListener('arz:ingredient-collected', (ev) => {
+    const { id, name } = ev.detail || {};
+    const quests = load(LS_QUESTS, {});
+    let changed = false;
 
-  for (const qid in quests) {
-    const q = quests[qid];
-    if (q.status === 'active' && q.targetIngredient === id) {
-      q.status = 'gathered';
-      changed = true;
+    for (const qid in quests) {
+      const q = quests[qid];
+      if (q.status === 'active' && q.targetIngredient === id) {
+        q.status = 'gathered';
+        changed = true;
 
-      // 💫 Ajout de l'effet visuel sur le receveur correspondant
-      const rcv = document.querySelector(`.quest-receiver[data-quest-id="${qid}"]`);
-      if (rcv) rcv.classList.add('pulse');
+        // Effet visuel sur le receveur
+        const rcv = document.querySelector(`.quest-receiver[data-quest-id="${qid}"]`);
+        if (rcv) rcv.classList.add('pulse');
 
-      say(`🧺 Parfait ! Tu as obtenu <b>${name || q.targetName}</b>.<br>
-           Va maintenant voir <b>Zouppiame</b> dans le <b>Monde des Âmes</b>.`);
+        say(`🧺 Parfait ! Tu as obtenu <b>${name || q.targetName}</b>.<br>
+             Va maintenant voir <b>Zouppiame</b> dans le <b>Monde des Âmes</b>.`);
+      }
     }
-  }
 
-  if (changed) save(LS_QUESTS, quests);
-});
+    if (changed) save(LS_QUESTS, quests);
+  });
 
-  // ---------- API globale utile ----------
+  // ---------- API globale ----------
   window.ARZ_QUESTS = { startQuest, completeIfGathered };
   window.ARZ_META   = META;
 })();
