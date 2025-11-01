@@ -20,7 +20,7 @@ const HIDE_GAUGE = (() => {
    * ------------------------- */
 const P = location.pathname;
 const BASE = (P.includes('/monde/') ||
-              P.includes('/extrait/') || P.includes('/extraits/') ||
+              P.includes('/extraits/') || P.includes('/extraits/') ||
               P.includes('/entree/')) ? '../' : '';
 
 
