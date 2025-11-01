@@ -342,6 +342,23 @@ function renderGaugeFromCore(detail){
     toggle.textContent = on ? 'Revenir en mode Novice' : 'Activer le mode Voyageur expérimenté';
   }
 }
+  function applyConsumableEffect(id, reg) {
+  if (!reg?.effect) return;
+
+  if (reg.effect.type === 'recharge') {
+    const v = reg.effect.value;
+    if (typeof v === 'string' && v.endsWith('%')) {
+      const pct = parseFloat(v) / 100;
+      S.energy = Math.min(CFG.max, S.energy + CFG.max * pct);
+    } else {
+      S.energy = Math.min(CFG.max, S.energy + Number(v || 0));
+    }
+    renderGauge && renderGauge();
+    saveState && saveState();
+    toast('Énergie rechargée ⚡', 1200);
+  }
+}
+
 
   function bindIngredients(){
     $$('.quest-ingredient').forEach(btn=>{
