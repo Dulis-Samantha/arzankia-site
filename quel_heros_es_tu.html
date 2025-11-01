@@ -293,8 +293,19 @@ setTimeout(() => {
     window.location.href = `fiche_${result}.html${params}`;
   }
 }, 4000);
-
     }
   </script>
+  <script>
+(() => {
+  try {
+    const m = JSON.parse(localStorage.getItem('arz_meta_v1')) || {};
+    const link = document.getElementById('test-hero-link');
+    if (m.testUnlocked && link) {
+      link.style.display = 'inline-block';
+      link.classList.add('pulse'); // effet lumineux du quete.css ✨
+    }
+  } catch {}
+})();
+</script>
 </body>
 </html>
