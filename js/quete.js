@@ -113,27 +113,28 @@
 
   // 2) Quand un ingrédient est récolté par ton système existant
   // (Ajoute un seul dispatch dans ta fonction de collecte)
-  document.addEventListener('arz:ingredient-collected', (ev) => {
-    const { id, name } = ev.detail || {};
-    const quests = load(LS_QUESTS, {});
-    let changed = false;
-    for(const qid in quests){
-      const q = quests[qid];
-      if(q.status==='active' && q.targetIngredient===id){
-        q.status = 'gathered'; changed = true;
-        say(`🧺 Parfait ! Tu as obtenu <b>${name || q.targetName}</b>.<br>
-             Va maintenant voir <b>Zouppiame</b> dans le <b>Monde des Âmes</b>.`);
-      }
-    }
-    if(changed) save(LS_QUESTS, quests);
-  });
+ document.addEventListener('arz:ingredient-collected', (ev) => {
+  const { id, name } = ev.detail || {};
+  const quests = load(LS_QUESTS, {});
+  let changed = false;
 
-  // 3) Clique sur un receveur de quête (ex. Zouppiame)
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.quest-receiver[data-quest-id]');
-    if(!btn) return;
-    completeIfGathered(btn.dataset.questId, btn.dataset.receiver);
-  });
+  for (const qid in quests) {
+    const q = quests[qid];
+    if (q.status === 'active' && q.targetIngredient === id) {
+      q.status = 'gathered';
+      changed = true;
+
+      // 💫 Ajout de l'effet visuel sur le receveur correspondant
+      const rcv = document.querySelector(`.quest-receiver[data-quest-id="${qid}"]`);
+      if (rcv) rcv.classList.add('pulse');
+
+      say(`🧺 Parfait ! Tu as obtenu <b>${name || q.targetName}</b>.<br>
+           Va maintenant voir <b>Zouppiame</b> dans le <b>Monde des Âmes</b>.`);
+    }
+  }
+
+  if (changed) save(LS_QUESTS, quests);
+});
 
   // ---------- API globale utile ----------
   window.ARZ_QUESTS = { startQuest, completeIfGathered };
