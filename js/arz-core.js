@@ -146,54 +146,46 @@ document.addEventListener('arz:spec-final', ()=>{
     emit('arz:stop', {});
   }
 
- function tick() {
+function tick() {
   if (document.hidden) return;
 
-  // --- Mode expérience (énergie infinie)
+  // --- Mode expérimenté → énergie infinie
   if (S.mode === 'experimente') {
     S.energy = CFG.max;
     pushEnergy();
     return;
   }
 
-  // --- Décharge seulement sur les pages concernées
+  // --- Si la page draine l’énergie
   if (isDrainPage) {
-    // Ici, on applique le multiplicateur selon la progression des quêtes
-    S.energy = Math.max(0, S.energy - (CFG.drainPerTick * DRAIN_MULT));
+    const drain = CFG.drainPerSecond * (CFG.tickMs / 1000);
+    S.energy = Math.max(0, S.energy - drain * DRAIN_MULT);
+
+    // Si énergie à zéro → événement + redirection éventuelle
+    if (S.energy <= 0) {
+      pushEnergy();
+      if (!lockedZero) {
+        lockedZero = true;
+        emit('arz:zero', { redirect: CFG.autoRedirectOnZero, to: CFG.zeroRedirectUrl });
+        if (CFG.autoRedirectOnZero) {
+          setTimeout(() => { location.href = CFG.zeroRedirectUrl; }, 3000);
+        }
+      }
+      saveState();
+      return;
+    }
+  } 
+  else {
+    // --- Recharge hors des mondes
+    const recharge = CFG.rechargePerSecond * (CFG.tickMs / 1000);
+    S.energy = clamp(S.energy + recharge, 0, CFG.max);
   }
 
-  // --- Mise à jour de l'affichage et sauvegarde
-  renderGauge && renderGauge();
-  saveState && saveState();
+  // --- Mise à jour générale
+  pushEnergy();
+  saveState();
 }
 
-
-      if (S.energy <= 0){
-        pushEnergy();
-        if (!lockedZero){
-          lockedZero = true;
-          emit('arz:zero', { redirect: CFG.autoRedirectOnZero, to: CFG.zeroRedirectUrl });
-          if (CFG.autoRedirectOnZero){
-            // redirection douce (pas d’overlay côté core)
-            setTimeout(() => { location.href = CFG.zeroRedirectUrl; }, 3000);
-          }
-        }
-        saveState();
-        return;
-      }
-    } else {
-      // recharge hors monde
-      S.energy = clamp(S.energy + CFG.rechargePerSecond, 0, CFG.max);
-    }
-
-    pushEnergy();
-  }
-
-  function pushEnergy(){
-    saveState();
-    const pct = Math.round((S.energy / CFG.max) * 100);
-    emit('arz:energy', { pct, energy: S.energy, isDrainPage, mode: S.mode });
-  }
 
   /* =========================
    * BAG (logique minimale, sans UI)
