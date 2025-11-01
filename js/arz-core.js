@@ -48,21 +48,20 @@ function getDrainMultiplierFromQuests(){
 }
 let DRAIN_MULT = getDrainMultiplierFromQuests();
 
-// Récompense (appelée par quete.js à la fin d’une quête)
 document.addEventListener('arz:reward', ()=>{
   DRAIN_MULT = getDrainMultiplierFromQuests();
   S.energy = CFG.max;            // recharge totale
-  saveState && saveState();
-  renderGauge && renderGauge();
+  saveState();
+  pushEnergy();
 });
 
-// Spécialisation finale → énergie infinie
 document.addEventListener('arz:spec-final', ()=>{
   DRAIN_MULT = 0;
-  S.mode = 'experimente';        // si déjà géré chez toi
+  S.mode = 'experimente';
   S.energy = CFG.max;
-  saveState && saveState();
-  renderGauge && renderGauge();
+  saveState();
+  pushEnergy();
+  startIfNeeded();  // garantit que la jauge se relance proprement
 });
 
   
