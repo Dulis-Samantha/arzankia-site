@@ -33,6 +33,52 @@ const isDrainPage = (() => {
     p.includes('/entree/')
   );
 })();
+
+  // --- Pages où la jauge se décharge ---
+const isDrainPage = (() => {
+  const p = location.pathname.toLowerCase();
+  return (
+    p.includes('3.les_mondes.html') ||
+    p.includes('/monde/') ||
+    p.includes('/extrait/') ||
+    p.includes('/chanson_de_camidjo/') ||
+    p.includes('/louboutartgif/') ||
+    p.includes('/loup_bout_art/') ||
+    p.includes('/entree/')
+  );
+})();
+
+// --- Modificateur de décharge lié aux quêtes ---
+function _meta(){ try{ return JSON.parse(localStorage.getItem('arz_meta_v1'))||{} }catch{ return {} } }
+function getDrainMultiplierFromQuests(){
+  const m = _meta();
+  if (m.specFinal) return 0;          // énergie infinie à la fin
+  const q = m.questsCompleted||0;
+  if(q>=10) return 0.45;
+  if(q>=6)  return 0.60;
+  if(q>=3)  return 0.75;              // après 3 quêtes : test débloqué
+  if(q>=1)  return 0.90;
+  return 1.00;
+}
+let DRAIN_MULT = getDrainMultiplierFromQuests();
+
+// Récompense (appelée par quete.js à la fin d’une quête)
+document.addEventListener('arz:reward', ()=>{
+  DRAIN_MULT = getDrainMultiplierFromQuests();
+  S.energy = CFG.max;            // recharge totale
+  saveState && saveState();
+  renderGauge && renderGauge();
+});
+
+// Spécialisation finale → énergie infinie
+document.addEventListener('arz:spec-final', ()=>{
+  DRAIN_MULT = 0;
+  S.mode = 'experimente';        // si déjà géré chez toi
+  S.energy = CFG.max;
+  saveState && saveState();
+  renderGauge && renderGauge();
+});
+
   
   /* =========================
    * STATE + STORAGE
@@ -100,17 +146,28 @@ const isDrainPage = (() => {
     emit('arz:stop', {});
   }
 
-  function tick(){
-    if (document.hidden) return;
+ function tick() {
+  if (document.hidden) return;
 
-    if (S.mode === 'experimente'){
-      S.energy = CFG.max;
-      pushEnergy();
-      return;
-    }
+  // --- Mode expérience (énergie infinie)
+  if (S.mode === 'experimente') {
+    S.energy = CFG.max;
+    pushEnergy();
+    return;
+  }
 
-    if (isDrainPage){
-      S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
+  // --- Décharge seulement sur les pages concernées
+  if (isDrainPage) {
+    // Ici, on applique le multiplicateur selon la progression des quêtes
+    S.energy = Math.max(0, S.energy - (CFG.drainPerTick * DRAIN_MULT));
+  }
+
+  // --- Mise à jour de l'affichage et sauvegarde
+  renderGauge && renderGauge();
+  saveState && saveState();
+}
+
+
       if (S.energy <= 0){
         pushEnergy();
         if (!lockedZero){
