@@ -50,3 +50,37 @@
     width: 72px;
   }
 }
+
+/* --- Overlay de dialogue des Zouppis --- */
+.arz-dialog {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+}
+
+.arz-dialog-box {
+  max-width: min(560px, 92vw);
+  background: rgba(25,18,40,0.96);
+  color: #ffeec0;
+  border-radius: 18px;
+  padding: 18px 22px;
+  font-family: Georgia, serif;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  line-height: 1.5;
+  text-align: left;
+}
+.arz-dialog-box button {
+  background: #ffe39c;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  float: right;
+}
+.arz-dialog-box button:hover {
+  background: #fff0c9;
+}
