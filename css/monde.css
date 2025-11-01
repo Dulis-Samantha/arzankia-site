@@ -363,6 +363,17 @@ body {
   to  { opacity:1; transform: none; }
 }
 
+.bag-section { margin:10px 0 6px; color:#ffeaa7; font-size:14px; }
+.bag-list { list-style:none; margin:0 0 8px; padding:0; }
+.bag-item { display:flex; align-items:center; gap:8px; padding:6px 8px; background:rgba(255,255,255,.06); border-radius:10px; margin-bottom:6px; }
+.bag-thumb { width:32px; height:32px; object-fit:contain; }
+.bag-info { flex:1; }
+.bag-name { font-size:13px; }
+.bag-qty  { font-size:12px; opacity:.85; }
+.bag-use { background:#ffe39c; border:none; border-radius:10px; padding:6px 10px; cursor:pointer; }
+.bag-use:hover { filter:brightness(1.05); }
+
+
 /* ====== SAC — Liste scrollable ====== */
 .bag-menu ul{
   list-style: none;
