@@ -328,7 +328,7 @@ p.intro .word {
 
     <div class="cta-row">
       <div class="quiz-button">
-     <a href="quel_heros_es_tu.html">Fais le test :<br>Quel héros es-tu ?</a>
+    <a id="test-hero-link" href="tests/quel-hero.html" style="display:none">
       </div>
       <div class="grimoire-button">
         <img
@@ -374,6 +374,15 @@ p.intro .word {
       <div id="msgGrimoire"></div>
     </div>
   </div>
+  
+  <script>
+(() => {
+  try{
+    const m = JSON.parse(localStorage.getItem('arz_meta_v1'))||{};
+    if(m.testUnlocked) document.getElementById('test-hero-link').style.display='inline-block';
+  }catch{}
+})();
+</script>
 
   <script>
     /* Utilitaire : normaliser une chaîne (accents/majuscules) */
@@ -484,6 +493,7 @@ p.intro .word {
 <script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
 <script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
 <script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
+<script defer src="js/quete.js"></script>  
 
 
 </body>
