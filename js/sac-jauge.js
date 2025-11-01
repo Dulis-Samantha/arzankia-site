@@ -268,16 +268,25 @@ const img  = btn?.getAttribute('data-img')  || meta.img  || (BASE_IMG + 'grimoir
         if (e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }
       });
 
-      // Collecte → passe par le cœur
-      btn.addEventListener('click', ()=>{
-        const id = btn.getAttribute('data-id');
-        if (!id) return;
-        const ok = Arz.addItem(id);
-        if (ok){
-          toast('Ingrédient ajouté au sac.');
-          renderBag();
-        }
-      });
+     btn.addEventListener('click', () => {
+  const id = btn.getAttribute('data-id');
+  if (!id) return;
+
+  const ok = Arz.addItem(id);
+  if (ok) {
+    toast('Ingrédient ajouté au sac.');
+    renderBag();
+
+    // 🔽 Ici : avertit qu'un ingrédient a été récolté
+    document.dispatchEvent(new CustomEvent('arz:ingredient-collected', {
+      detail: {
+        id: id,
+        name: btn.getAttribute('data-name') || 'Ingrédient'
+      }
+    }));
+  }
+});
+
 
       // Taille responsive via data-size / data-size-mobile
       const imgEl = btn.querySelector('.ingredient-img');
