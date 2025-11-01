@@ -34,20 +34,6 @@ const isDrainPage = (() => {
   );
 })();
 
-  // --- Pages où la jauge se décharge ---
-const isDrainPage = (() => {
-  const p = location.pathname.toLowerCase();
-  return (
-    p.includes('3.les_mondes.html') ||
-    p.includes('/monde/') ||
-    p.includes('/extrait/') ||
-    p.includes('/chanson_de_camidjo/') ||
-    p.includes('/louboutartgif/') ||
-    p.includes('/loup_bout_art/') ||
-    p.includes('/entree/')
-  );
-})();
-
 // --- Modificateur de décharge lié aux quêtes ---
 function _meta(){ try{ return JSON.parse(localStorage.getItem('arz_meta_v1'))||{} }catch{ return {} } }
 function getDrainMultiplierFromQuests(){
@@ -233,6 +219,20 @@ function tick() {
   function totalItems(){
     return S.bag.reduce((n,e)=>n+e.qty,0);
   }
+    /* =========================
+   * PUSH ÉNERGIE (événement global)
+   * ========================= */
+  function pushEnergy() {
+    const pct = Math.round((S.energy / CFG.max) * 100);
+    emit('arz:energy', {
+      pct,
+      energy: S.energy,
+      mode: S.mode,
+      isDrainPage,
+      cfg: CFG
+    });
+  }
+
 
   /* =========================
    * MODE / API PUBLIQUE
