@@ -37,27 +37,44 @@
   <div class="container">
     <h1 class="page-title">Monde des Ptikitis</h1>
 
-    <!-- Illustration + ingrédient caché -->
-    <div class="image-zone">
-      <img class="Fees-image" src="../images/mondes/monde_Ptikitis.webp" alt="Monde des Ptikitis" />
-      
-<button class="ing-btn quest-ingredient"
-        type="button"
-        data-id="ptikitis_rubictus"
-        data-name="Rubictus aux baies rouges"
-        data-img="../images/bouton/ing_ptikitis.webp"
-        data-size="150"             
-        data-size-mobile="46"      
-        data-bottom-mobile="-15%"
-        data-left-mobile="10%"
-        aria-label="Rubictus aux baies rouges"
-        style="bottom:-19%; left:10%;">
-  <img class="ingredient-img"
-       src="../images/bouton/ing_ptikitis.webp"
-       alt="Rubictus aux baies rouges" />
-</button>
+ <!-- Illustration + ingrédients + quête -->
+<div class="image-zone">
+  <img class="Fees-image"
+       src="../images/mondes/monde_Ptikitis.webp"
+       alt="Monde des Ptikitis" />
 
-    </div>
+  <!-- Bouton ingrédient -->
+  <button class="ing-btn quest-ingredient"
+          type="button"
+          data-id="ptikitis_rubictus"
+          data-name="Rubictus aux baies rouges"
+          data-img="../images/bouton/ing_ptikitis.webp"
+          data-size="150"
+          data-size-mobile="46"
+          data-bottom-mobile="-15%"
+          data-left-mobile="10%"
+          aria-label="Rubictus aux baies rouges"
+          style="bottom:-19%; left:10%;">
+    <img class="ingredient-img"
+         src="../images/bouton/ing_ptikitis.webp"
+         alt="Rubictus aux baies rouges" />
+  </button>
+
+  <!-- Bouton quête : Zouppikiti -->
+  <button class="ing-btn quest-starter"
+          type="button"
+          data-quest-id="quete_ptikitis"
+          data-quest-title="Champignon azulé pour Zouppiame"
+          data-quest-target-ingredient="foret_champignon"
+          data-quest-target-name="Champignon azulé"
+          data-quest-deliver-to="zouppiame"
+          style="bottom:18%; left:12%;">
+    <img class="ingredient-img"
+         src="../images/bouton/zouppikitis.webp"
+         alt="Zouppikiti" />
+  </button>
+</div>
+
 
     <div class="texte-monde">
       « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil. »
@@ -73,6 +90,7 @@
 <script defer src="../js/base-pages.js"></script>  <!-- 1. outils communs -->
 <script defer src="../js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
 <script defer src="../js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
+<script defer src="../js/quete.js"></script>  
 
 
 </body>
