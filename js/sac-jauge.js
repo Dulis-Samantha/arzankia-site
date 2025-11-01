@@ -449,6 +449,14 @@ function boot() {
   bindIngredients();
   hookCoreEvents();
 
+document.addEventListener('arz:quest-item-delivered', (ev) => {
+  const id = ev.detail?.id;
+  if (!id) return;
+  Arz.removeOne(id);
+  renderBag();
+});
+
+
   // --- 1er rendu (déplacé ici) ---
   const st = Arz.get();
   renderGaugeFromCore({
