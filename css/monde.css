@@ -120,23 +120,6 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 18px rgba(255, 223, 100, 1);
 }
-/* ============================================================
-   FONDS SPÉCIFIQUES À CHAQUE MONDE
-   ============================================================ */
-
-body.monde-terre {
-  background: url('../images/fonds/fond_foret_enchantee.webp') center top no-repeat;
-  background-size: cover;
-  background-color: #001d26; /* couleur dominante du ciel */
-}
-
-
-body.monde-aquatique {
-  background: url('../images/fonds/fond_coulisse_arzankia.webp') center top no-repeat;
-  background-size: cover;
-  background-color: #001d26; /* couleur dominante du ciel */
-}
-
 
 /* ============================================================
    JAUGE D’ÉNERGIE
@@ -590,59 +573,4 @@ body.monde-aquatique {
     top: auto !important;
   }
 }
-/* === Priorité locale (Coulisses) : même mise en forme que Monde === */
-:root{
-  /* Ajuste la hauteur d’ancrage si besoin */
-  --hud-top: 140px;
-}
-
-/* Base commune : HUD au-dessus du contenu */
-.energy-wrap,
-.bag-wrap{
-  position: fixed !important;
-  z-index: 5000 !important;
-}
-
-/* ====== Desktop (≥769px) — jauge à gauche du sac, comme Monde ====== */
-@media (min-width: 769px){
-  .energy-wrap{
-    top: var(--hud-top) !important;
-    right: 112px !important;     /* jauge à gauche du sac */
-    left: auto !important;
-    transform: none !important;
-  }
-  .bag-wrap{
-    top: calc(var(--hud-top) + 4px) !important; /* léger alignement vertical */
-    right: 12px !important;        /* sac à droite */
-    left: auto !important;
-    transform: none !important;
-  }
-}
-
-/* ====== Mobile (≤768px) — centré entre titre et texte ====== */
-@media (max-width: 768px){
-  .energy-wrap{
-    top: var(--hud-top) !important;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-  }
-  .bag-wrap{
-    top: calc(var(--hud-top) + 56px) !important; /* sac sous la jauge */
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-  }
-
-  /* Option : éviter toute superposition avec l’image/texte en tête de page */
-  .image-zone,
-  .container,
-  .header-box{
-    scroll-margin-top: calc(var(--hud-top) + 120px);
-    /* si besoin, décale un peu le contenu */
-    /* margin-top: 96px; */
-  }
-}
-
-
 
