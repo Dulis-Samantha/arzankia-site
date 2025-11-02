@@ -206,6 +206,27 @@
 
 </head>
 <body>
+   <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div class="energy-fill" id="energyFill"></div>
+    </div>
+    <div class="energy-pct" id="energyPct">100%</div>
+  </div>
+
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area" id="playArea">
+        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+      </div>
+      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
+      <button class="btn" id="accessBtn">Recharger</button>
+    </div>
+  </div>
 
   <!-- Bloc titre -->
   <div class="bloc">
