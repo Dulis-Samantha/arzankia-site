@@ -1,0 +1,86 @@
+/* ============================================================
+   ARZANKIA — Styles des quêtes
+   - Boutons starters (Zouppis)
+   - Boutons receveurs
+   - Dialogues / overlays (si besoin)
+   ============================================================ */
+
+/* --- Positionnement général --- */
+.ing-btn.quest-starter,
+.ing-btn.quest-receiver {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 3;
+}
+
+.ing-btn.quest-starter:hover,
+.ing-btn.quest-receiver:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  filter: brightness(1.15);
+}
+
+/* --- Images des Zouppis --- */
+.ing-btn.quest-starter img,
+.ing-btn.quest-receiver img {
+  display: block;
+  width: 120px;       /* taille desktop */
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --- Animation de pulsation magique --- */
+.pulse {
+  animation: questPulse 2.2s ease-in-out infinite;
+}
+@keyframes questPulse {
+  0%,100% { filter: drop-shadow(0 2px 6px rgba(255,230,160,0.6)); }
+  50%     { filter: drop-shadow(0 0 16px rgba(255,230,160,0.95)); }
+}
+
+/* --- Adaptation mobile --- */
+@media (max-width: 768px) {
+  .ing-btn.quest-starter img,
+  .ing-btn.quest-receiver img {
+    width: 72px;
+  }
+}
+
+/* --- Overlay de dialogue des Zouppis --- */
+.arz-dialog {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+}
+
+.arz-dialog-box {
+  max-width: min(560px, 92vw);
+  background: rgba(25,18,40,0.96);
+  color: #ffeec0;
+  border-radius: 18px;
+  padding: 18px 22px;
+  font-family: Georgia, serif;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  line-height: 1.5;
+  text-align: left;
+}
+.arz-dialog-box button {
+  background: #ffe39c;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  float: right;
+}
+.arz-dialog-box button:hover {
+  background: #fff0c9;
+}

@@ -1,0 +1,173 @@
+/* ============================================================
+   ARZANKIA — Base commune (toutes pages)
+   - Variables
+   - Reset léger
+   - Typo, couleurs
+   - Layout de base
+   - En-tête, sous-titre, boutons
+   - Accessibilité & utilitaires
+   ============================================================ */
+
+/* -------------------------
+   Variables globales
+------------------------- */
+:root{
+  /* Couleurs */
+  --bg:#001d26;
+  --text:#fff8e6;
+  --text-dim:#e9dcc2;
+  --gold:#ffd674;
+  --gold-2:#ffe9a8;
+  --glass:rgba(10,0,20,.45);
+  --stroke:rgba(255,214,116,.55);
+
+  /* Mesures & rayons */
+  --radius:16px;
+  --pad:clamp(12px,2vw,20px);
+  --shadow:0 8px 22px rgba(0,0,0,.28);
+
+  /* Z-index */
+  --z-header:100;
+  --z-fg:10;
+
+  /* Typo scale */
+  --fs-xxl: clamp(28px, 5vw, 48px);
+  --fs-xl:  clamp(22px, 3vw, 32px);
+  --fs-lg:  clamp(18px, 2vw, 22px);
+  --fs-md:  1rem;
+  --fs-sm:  .925rem;
+}
+
+/* -------------------------
+   Reset léger + base
+------------------------- */
+*,*::before,*::after{ box-sizing: border-box; }
+html{ scroll-behavior:smooth; }
+html:focus-within{ scroll-behavior:auto; } /* évite jerks focus */
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font-family: Georgia, serif;
+  line-height:1.55;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  min-height:100svh;
+}
+img,svg,video,canvas{ max-width:100%; height:auto; }
+a{ color:inherit; text-decoration:none; }
+a:hover{ text-decoration:underline; text-decoration-color:rgba(255,255,255,.35); }
+:where(h1,h2,h3){ margin:0 0 .6rem; font-weight:700; }
+
+/* -------------------------
+   Conteneurs
+------------------------- */
+.container{
+  width:min(1100px, 92vw);
+  margin-inline:auto;
+  padding-inline:var(--pad);
+}
+
+/* -------------------------
+   En-tête / Titre
+------------------------- */
+.header-box{
+  position:relative; z-index:var(--z-header);
+  padding: clamp(18px, 4vw, 36px) 0;
+  text-align:center;
+}
+.title-accent{
+  display:inline-block;
+  padding: .4rem .9rem;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), var(--shadow);
+}
+.title-accent h1{
+  font-family: "Cinzel Decorative", serif;
+  font-size: var(--fs-xxl);
+  letter-spacing:.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
+}
+
+/* -------------------------
+   Sous-titre / Intro
+------------------------- */
+.subtitle-wrap{
+  position:relative;
+  margin: .8rem auto 1.6rem;
+  width:min(1000px, 92vw);
+}
+.subtitle{
+  font-size:var(--fs-lg);
+  color:var(--text-dim);
+  background: rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius: var(--radius);
+  padding: clamp(10px, 2vw, 18px);
+  box-shadow: var(--shadow);
+}
+.subtitle em{ color:var(--gold-2); font-style:italic; }
+
+/* -------------------------
+   Boutons génériques
+------------------------- */
+.btn, .btn-ghost{
+  display:inline-block;
+  padding:.65rem 1rem;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.2px;
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  will-change: transform;
+}
+.btn{
+  background: linear-gradient(90deg, var(--gold), var(--gold-2));
+  color:#3a2c06; border:1px solid rgba(255,255,255,.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+.btn:hover{ transform: translateY(-1px); }
+
+.btn-ghost{
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+.btn-ghost:hover{ transform: translateY(-1px); }
+
+/* -------------------------
+   Pied de page léger
+------------------------- */
+.footer-ghost{
+  display:flex; justify-content:center; padding: 1.6rem 0 2.4rem;
+}
+
+/* -------------------------
+   Révélations douces (IO)
+------------------------- */
+.reveal{ opacity:0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.reveal-in{ opacity:1; transform:none; }
+
+/* -------------------------
+   Préférence accessibilité
+------------------------- */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* -------------------------
+   Helpers / A11y
+------------------------- */
+.visually-hidden{
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+.center { display:grid; place-items:center; }
+.card{
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  box-shadow: var(--shadow);
+}

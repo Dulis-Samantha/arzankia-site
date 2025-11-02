@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monde des Ptikitis</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/monde.css" />
+  <link rel="stylesheet" href="../css/quete.css" />
+
+</head>
+
+<body>
+  <body class="monde-terre">
+
+  <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div id="energyFill" class="energy-fill"></div>
+    </div>
+    <div id="energyPct" class="energy-pct">100%</div>
+  </div>
+
+  <!-- === Overlay “jauge vide” === -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area"></div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <h1 class="page-title">Monde des Ptikitis</h1>
+
+ <!-- Illustration + ingrédients + quête -->
+<div class="image-zone">
+  <img class="Fees-image"
+       src="../images/mondes/monde_Ptikitis.webp"
+       alt="Monde des Ptikitis" />
+
+  <!-- Bouton ingrédient -->
+  <button class="ing-btn quest-ingredient"
+          type="button"
+          data-id="ptikitis_rubictus"
+          data-name="Rubictus aux baies rouges"
+          data-img="../images/bouton/ing_ptikitis.webp"
+          data-size="150"
+          data-size-mobile="46"
+          data-bottom-mobile="-15%"
+          data-left-mobile="10%"
+          aria-label="Rubictus aux baies rouges"
+          style="bottom:-19%; left:10%;">
+    <img class="ingredient-img"
+         src="../images/bouton/ing_ptikitis.webp"
+         alt="Rubictus aux baies rouges" />
+  </button>
+
+  <!-- Bouton quête : Zouppikiti -->
+  <button class="ing-btn quest-starter"
+          type="button"
+          data-quest-id="quete_ptikitis"
+          data-quest-title="Champignon azulé pour Zouppiame"
+          data-quest-target-ingredient="foret_champignon"
+          data-quest-target-name="Champignon azulé"
+          data-quest-deliver-to="zouppiame"
+          style="bottom:-10%; left:90%;">
+    <img class="ingredient-img"
+         src="../images/bouton/zouppikitis.webp"
+         alt="Zouppikiti" />
+  </button>
+</div>
+
+
+    <div class="texte-monde">
+      « Un monde où les fleurs servent de catapultes et où chaque rire fait éclore un nouveau rayon de soleil. »
+    </div>
+
+  <div class="button-group">
+  <a href="../extraits/Ptikitis.html">Extrait du livre</a>
+  <a href="../entree/Ptikitis.html">Entrée du monde</a>
+  <a href="../3.les_mondes.html">← Retour</a>
+</div>
+  </div>
+
+<script defer src="../js/base-pages.js"></script>  <!-- 1. outils communs -->
+<script defer src="../js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+<script defer src="../js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
+<script defer src="../js/quete.js"></script>  
+
+
+</body>
+</html>

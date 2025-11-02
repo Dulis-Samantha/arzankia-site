@@ -1,0 +1,599 @@
+/* ============================================================
+   ARZANKIA — Jauge d’énergie + Sac magique + Styles Monde
+   ============================================================ */
+
+/* -------------------------
+   Variables globales
+------------------------- */
+:root {
+  --bar-h: 16px;
+  --bar-bg: rgba(255, 255, 255, 0.15);
+  --bar-fill: linear-gradient(90deg, #ffd674, #ffe9a8);
+  --bar-border: rgba(255, 214, 116, 0.6);
+  --text: #fff8e6;
+  --glass: rgba(10, 0, 20, 0.45);
+  --overlay: rgba(0, 0, 0, 0.7);
+  --bag-w: 48px;   /* largeur de l'icône du sac */
+  --bag-gap: 16px; /* espace visuel entre jauge et sac */
+}
+
+/* -------------------------
+   BASE DES PAGES MONDE
+------------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('../images/fonds/fond_etoile_perso.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #001d26;
+  font-family: Georgia, serif;
+  color: #fff8e6;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.2rem 1rem 6rem;
+}
+
+.page-title {
+  text-align: center;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  margin: 1.5rem auto;
+  color: #ffe79a;
+  text-shadow: 0 0 8px rgba(0, 0, 0, .75), 0 0 18px rgba(255, 231, 154, .25);
+}
+
+/* === Image + Ingrédient caché === */
+.image-zone {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.2rem;
+}
+
+.Fees-image {
+  display: block;
+  width: 100%;
+  max-width: 950px;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, .15);
+}
+
+/* Bouton ingrédient */
+.ing-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+.ingredient-img {
+  width: 58px;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* === Texte explicatif === */
+.texte-monde {
+  max-width: 800px;
+  margin: 1.2rem auto;
+  padding: 1rem 1.2rem;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  text-align: center;
+  color: #ffe79a;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .5);
+}
+
+/* === Boutons navigation === */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.button-group a {
+  display: inline-block;
+  padding: .7rem 1.5rem;
+  min-width: 180px;
+  text-align: center;
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  color: #4a2e00;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(255, 223, 100, .6);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.button-group a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 223, 100, 1);
+}
+
+/* === Fonds différents par monde === */
+body.monde-terre {
+  background: url('../images/fonds/fond_foret_enchantee.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #001d26;
+}
+
+body.monde-aquatique {
+  background: url('../images/fonds/fond_coulisse_arzankia.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #0b1030;
+}
+
+body.monde-aerien {
+  background: url('../images/fonds/fond_monde.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #002a12;
+}
+
+/* Coulisses : cacher l'UI mais laisser la logique tourner */
+.hud-hidden .energy-wrap { display: none !important; }      /* jauge invisible */
+.hud-hidden #lockOverlay { display: none !important; }      /* pas de blocage */
+
+/* ============================================================
+   JAUGE D’ÉNERGIE
+============================================================ */
+.energy-wrap {
+  position: fixed;
+  top: 84px;  /* avant : 68px */
+  right: calc(12px + var(--bag-w) + var(--bag-gap));
+  z-index: 4000;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  background: var(--glass);
+  border: 1px solid var(--bar-border);
+  padding: .6rem .75rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  backdrop-filter: blur(6px);
+  animation: appear 1.5s ease;
+}
+@keyframes appear {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.energy-icon { font-size: 22px; filter: drop-shadow(0 0 6px rgba(255,214,116,.7)); }
+.energy-label { font-family:"Cinzel Decorative",serif; font-variant: small-caps; letter-spacing:.5px; opacity:.9; }
+
+.energy-bar {
+  width: 100px;  /* ← réduite */
+  height: var(--bar-h);
+  background: var(--bar-bg);
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--bar-border);
+}
+
+@media (max-width: 768px) {
+  .energy-bar { width: 60px; }  /* ← réduite sur mobile */
+}
+
+.energy-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: var(--bar-fill);
+  box-shadow: inset 0 0 12px rgba(255,214,116,.55);
+  transition: width .45s cubic-bezier(.22,.61,.36,1);
+}
+.energy-pct { min-width: 3ch; text-align: right; font-size: .9rem; opacity: .85; }
+
+/* Ruban d’alerte (≤15%) */
+.quest-ribbon {
+  position: fixed;
+  top: 72px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4600;
+  background: rgba(10,0,20,.75);
+  color: #fff8e6;
+  border: 1px solid rgba(255,214,116,.55);
+  border-radius: 10px;
+  padding: .5rem .9rem;
+  box-shadow: 0 10px 24px rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  font-weight: 700;
+}
+
+/* Effet de brillance pour le mode Voyageur expérimenté */
+.arz-mode-experimente .energy-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  left: -50%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: arz-shimmer 1.8s linear infinite;
+}
+
+@keyframes arz-shimmer {
+  to {
+    transform: translateX(250%);
+  }
+}
+
+
+/* ============================================================
+   SAC MAGIQUE (Inventaire)
+============================================================ */
+.bag-wrap { position: fixed; top: 88px;; right: 12px; z-index: 4700; }
+.bag-icon { width: 48px; height: 48px; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255,214,116,.7)); transition: transform .2s; }
+.bag-icon:hover { transform: scale(1.08); }
+.bag-badge {
+  position: absolute; top:-6px; right:-6px;
+  min-width:18px; height:18px; padding:0 4px;
+  background: var(--bar-fill); color:#3a2400;
+  font-weight:800; font-size:12px; border-radius:999px;
+  display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+/* état fermé */
+.bag-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 240px;
+  color: #fff3cc;
+  background: rgba(10, 0, 20, 0.82);
+  border: 1px solid rgba(255, 214, 116, 0.45);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  padding: 0.8rem 1rem;
+  max-height: min(70vh, 520px);     /* borne la hauteur globale */
+  display: none;                    /* 🔹 par défaut, caché */
+  flex-direction: column;           /* structure pour scroll */
+  overflow: hidden;
+  z-index: 5000;
+}
+
+/* état ouvert */
+.bag-menu.show {
+  display: flex;                    /* 🔹 visible en flex */
+  animation: slideDown .25s ease-out;
+}
+
+/* zone scrollable */
+.bag-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-right: .25rem;
+  scrollbar-gutter: stable both-edges;
+}
+/* scrollbars */
+.bag-menu ul::-webkit-scrollbar{ width:10px; }
+.bag-menu ul::-webkit-scrollbar-track{ background: rgba(255,255,255,.05); border-radius:10px; }
+.bag-menu ul::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, #ffd674, #ffe7a8);
+  border-radius:10px; border:2px solid rgba(10,0,20,.55);
+}
+.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,.05); }
+
+@media (max-width:768px){
+  .bag-menu.show{ max-height:78vh; }
+}
+
+.bag-item { display:flex; align-items:center; gap:.55rem; }
+.bag-item img { width:32px; height:32px; display:block; }
+.bag-label { line-height:1.2 }
+.bag-name { font-weight:700; }
+.bag-menu .bag-empty { margin-top:.3rem; text-align:center; opacity:.75; font-style: italic; }
+.bag-menu .bag-use {
+  background: var(--bar-fill); color:#3a2400; font-weight:800;
+  border:none; border-radius:8px; padding:.25rem .6rem; cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+.bag-menu .bag-use:hover { transform: scale(1.05); }
+
+.bag-used {
+  color:#6fff91; font-weight:700;
+  text-shadow:0 0 6px rgba(111,255,145,.7);
+  background:rgba(0,40,0,.28);
+  border-radius:8px; padding:.28rem .55rem;
+  display:inline-block; font-size:.9rem;
+  box-shadow:0 0 6px rgba(111,255,145,.25);
+}
+
+/* Bouton pilule "Mode tranquille" */
+.bag-menu .bag-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 700;
+  font-size: .95rem;
+  background: rgba(255,255,255,.06);
+  color: #fff3cc;
+  border: 1px solid rgba(255,214,116,.35);
+  border-radius: 999px;
+  padding: .4rem .8rem;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.bag-menu .bag-toggle::before{
+  content: '';
+  filter: drop-shadow(0 0 6px rgba(255,214,116,.4));
+}
+.bag-menu .bag-toggle:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+}
+.bag-menu .bag-toggle.on{
+  background: linear-gradient(145deg, #ffe9af, #f2c94c);
+  color: #3a2400;
+  border-color: rgba(255,214,116,.6);
+  text-shadow: none;
+}
+/* ====== SAC — Menu ====== */
+.bag-menu{
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 240px;
+
+  /* style visuel */
+  color: #fff3cc;
+  background: rgba(10, 0, 20, 0.82);
+  border: 1px solid rgba(255,214,116,.45);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  padding: .8rem 1rem;
+
+  /* comportement */
+  max-height: min(70vh, 520px);
+  display: none;               /* fermé par défaut */
+  overflow: hidden;            /* le scroll se fait dans la liste */
+  z-index: 5000;
+  /* structure flex activée SEULEMENT en état ouvert */
+}
+
+.bag-menu.show{
+  display: flex;
+  flex-direction: column;      /* active la structure quand ouvert */
+  animation: bag-slideDown .25s ease-out;
+}
+
+@keyframes bag-slideDown{
+  from{ opacity:0; transform: translateY(-6px); }
+  to  { opacity:1; transform: none; }
+}
+
+.bag-section { margin:10px 0 6px; color:#ffeaa7; font-size:14px; }
+.bag-list { list-style:none; margin:0 0 8px; padding:0; }
+.bag-item { display:flex; align-items:center; gap:8px; padding:6px 8px; background:rgba(255,255,255,.06); border-radius:10px; margin-bottom:6px; }
+.bag-thumb { width:32px; height:32px; object-fit:contain; }
+.bag-info { flex:1; }
+.bag-name { font-size:13px; }
+.bag-qty  { font-size:12px; opacity:.85; }
+.bag-use { background:#ffe39c; border:none; border-radius:10px; padding:6px 10px; cursor:pointer; }
+.bag-use:hover { filter:brightness(1.05); }
+
+
+/* ====== SAC — Liste scrollable ====== */
+.bag-menu ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+
+  flex: 1 1 auto;              /* occupe l’espace sous le titre/boutons */
+  min-height: 0;               /* indispensable pour autoriser le scroll en flex */
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: .25rem;       /* espace pour la scrollbar */
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Scrollbars (WebKit) */
+.bag-menu ul::-webkit-scrollbar{ width:10px; }
+.bag-menu ul::-webkit-scrollbar-track{
+  background: rgba(255,255,255,.05);
+  border-radius:10px;
+}
+.bag-menu ul::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, #ffd674, #ffe7a8);
+  border-radius:10px;
+  border:2px solid rgba(10,0,20,.55);
+}
+
+/* Scrollbars (Firefox) */
+.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,.05); }
+
+/* Mobile : un peu plus haut pour scroller confortablement */
+@media (max-width:768px){
+  .bag-menu.show{ max-height: 78vh; }
+}
+
+
+/* =========================
+   NOTIFICATION (TOAST) — centre robuste mobile
+   ========================= */
+.arz-toast{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none; /* ne bloque pas l’UI derrière */
+}
+
+.arz-toast.show{ opacity: 1; }
+
+.arz-toast .bubble{
+  max-width: min(92vw, 560px);
+  text-align: center;
+
+  /* Rendu propre et lisible */
+  font-family: "Cinzel Decorative", serif; /* ou laisse Georgia si tu préfères */
+  font-size: 1rem;
+  line-height: 1.45;
+  text-shadow: none;          /* ← neutralise le text-shadow du body */
+  letter-spacing: .2px;
+
+  /* Cadre + fond */
+  background: rgba(10, 0, 20, 0.85);
+  color: #fff8e6;
+  border: 1px solid rgba(255,214,116,.55);
+  border-radius: 14px;
+  padding: .9rem 1.1rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 22px rgba(255,214,116,.25);
+
+  pointer-events: auto; /* utile si un jour tu ajoutes un bouton */
+  animation: arz-pulse 2s ease-in-out infinite;
+}
+
+@keyframes arz-pulse{
+  0%   { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 12px rgba(255,214,116,.25); }
+  50%  { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 28px rgba(255,214,116,.8); }
+  100% { box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 12px rgba(255,214,116,.25); }
+}
+
+
+/* ============================================================
+   OVERLAY BLOQUANT
+============================================================ */
+.lock-overlay {
+  position: fixed; inset: 0; z-index: 5000;
+  display: none; place-items: center;
+  background: var(--overlay);
+  backdrop-filter: blur(3px);
+  animation: fadein .5s ease;
+}
+@keyframes fadein { from{opacity:0} to{opacity:1} }
+.lock-card {
+  width: min(680px, 92vw);
+  background: var(--glass);
+  border: 1px solid var(--bar-border);
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem 1.25rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  animation: rise .8s ease-out;
+}
+@keyframes rise { from{transform:translateY(20px);opacity:0} to{transform:none;opacity:1} }
+.lock-title {
+  font-family:"Cinzel Decorative", serif;
+  font-size: clamp(22px, 3.2vw, 32px);
+  margin: .4rem 0;
+  color: #ffd674;
+  text-shadow: 0 0 10px rgba(255,214,116,.6);
+}
+.lock-desc { opacity:.9; line-height:1.5; margin:.5rem auto .8rem; }
+
+/* ============================================================
+   RESPONSIVE (mobile)
+============================================================ */
+@media (max-width: 768px){
+  :root{
+    --energyY: 100px;  /* descend jauge + sac */
+    --bagShift: 5px;   /* petit décalage du sac seul */
+  }
+
+  .energy-wrap {
+    top: calc(var(--energyY) + env(safe-area-inset-top, 0px));
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(.95);
+    gap: .4rem;
+  }
+
+  .energy-bar { width: 60px; }
+  .energy-pct { min-width: 2ch; font-size: .85rem; }
+
+  .bag-wrap {
+    top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
+    right: 12px;
+    left: auto;
+  }
+
+  .bag-icon { width: 44px; height: 44px; }
+
+  .quest-ribbon{
+    top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + 44px);
+    left: 12px; right: 12px;
+    transform: none;
+  }
+
+  .image-zone { margin-top: 96px !important; }
+}
+
+
+  /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
+@media (max-width: 768px) {
+  .header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem; /* espace entre le titre et la jauge */
+  }
+
+  .header-box h1 {
+    margin-bottom: 0.3rem;
+  }
+
+  .arzanskan-bar, .arzanskan-container {
+    margin-top: .3rem !important;
+    position: relative !important; /* empêche le chevauchement */
+    top: auto !important;
+  }
+}
+/* FORCE DESKTOP (≥769px) : jauge + sac en position fixe à droite */
+@media (min-width: 769px){
+  .energy-wrap{
+    position: fixed !important;
+    top: 84px;               /* ajuste à ton goût */
+    right: calc(12px + var(--bag-w) + var(--bag-gap));
+    left: auto;              /* annule le centrage mobile */
+    transform: none !important;
+  }
+  .bag-wrap{
+    position: fixed !important;
+    top: 88px;               /* ajuste à ton goût */
+    right: 12px;
+    left: auto;
+    transform: none !important;
+  }
+
+  /* Si, quelque part, tu as ces classes pour la jauge: */
+  .arzanskan-bar, .arzanskan-container{
+    position: static !important;   /* ne pas casser la jauge fixe */
+    margin-top: 0 !important;
+    top: auto !important;
+  }
+}
+
