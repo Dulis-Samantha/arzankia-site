@@ -80,6 +80,14 @@
       quests[id] = { id, title, status:'active', targetIngredient, targetName, deliverTo };
       save(LS_QUESTS, quests);
 
+document.dispatchEvent(new CustomEvent('arz:quest-started', {
+  detail: {
+    id,                      // ex: "quete_ptikitis"
+    targetIngredient,        // ex: "foret_champignon"
+    deliverTo                // ex: "zouppiame"
+  }
+}));
+
       say(`👋 <b>Zouppikiti</b> : Salut Raphaël ! On a besoin de toi.<br>
         Peux-tu aller dans la <b>Forêt</b> récupérer un <b>${targetName}</b> ?
         Puis rapporte-le à <b>Zouppiame</b> dans le <b>Monde des Âmes</b>. ✨`);
