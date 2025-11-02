@@ -125,7 +125,7 @@ body {
    ============================================================ */
 
 body.monde-ptikitis {
-  background: url('../images/mondes/monde_Ptikitis.webp') center top no-repeat;
+  background: url('../images/fonds/fond_foret_enchantee.webp') center top no-repeat;
   background-size: cover;
   background-color: #001d26; /* couleur dominante du ciel */
 }
