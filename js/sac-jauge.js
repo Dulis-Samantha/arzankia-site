@@ -41,6 +41,18 @@ const isConsumable = id => getReg(id).kind === 'consumable';
 const isQuest      = id => getReg(id).kind === 'quest';
 const isStash      = id => getReg(id).kind === 'stash';
 
+  function hasActiveQuestFor(ingredientId, expectedQuestId){
+  try{
+    const qs = JSON.parse(localStorage.getItem('arz_quests_v1')) || {};
+    return Object.values(qs).some(q =>
+      q &&
+      q.status === 'active' &&
+      q.targetIngredient === ingredientId &&
+      (!expectedQuestId || q.id === expectedQuestId)
+    );
+  }catch{ return false; }
+}
+
   // ====== Sac : lecture / écriture / ajout / retrait ======
 Arz.getBag = function () {
   try { return JSON.parse(localStorage.getItem('arz_bag_v1')) || []; }
@@ -360,24 +372,77 @@ function renderGaugeFromCore(detail){
 }
 
 
-  function bindIngredients(){
-    $$('.quest-ingredient').forEach(btn=>{
-      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex','0');
-      if (!btn.hasAttribute('role'))     btn.setAttribute('role','button');
-      btn.addEventListener('keydown', (e)=>{
-        if (e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }
-      });
+function bindIngredients() {
 
-     btn.addEventListener('click', () => {
+  // === 1) État initial : griser/verrouiller si quest-only sans quête active ===
+  $$('.quest-ingredient').forEach(btn => {
+    const id = btn.getAttribute('data-id');
+    const strictQuestId = btn.getAttribute('data-quest-id'); // facultatif
+    const requiresQuest = btn.classList.contains('quest-only') || btn.dataset.requiresQuest === 'true';
+
+    if (requiresQuest) {
+      const ok = hasActiveQuestFor(id, strictQuestId);
+      btn.classList.toggle('locked', !ok);
+      if (!ok) {
+        btn.setAttribute('aria-disabled', 'true');
+        btn.style.pointerEvents = 'auto'; // pour pouvoir cliquer et afficher le message
+        btn.title = "Accepte d'abord la quête auprès du Zouppi.";
+      } else {
+        btn.removeAttribute('aria-disabled');
+        btn.removeAttribute('title');
+      }
+    }
+  });
+
+  document.addEventListener('arz:quest-started', (ev) => {
+  const { targetIngredient, id: questId } = ev.detail || {};
+  if (!targetIngredient) return;
+
+  $$('.quest-ingredient').forEach(btn => {
+    const ing = btn.getAttribute('data-id');
+    const strictQuestId = btn.getAttribute('data-quest-id') || null;
+    const requiresQuest = btn.classList.contains('quest-only') || btn.dataset.requiresQuest === 'true';
+
+    if (requiresQuest && ing === targetIngredient && (!strictQuestId || strictQuestId === questId)){
+      btn.classList.remove('locked');
+      btn.removeAttribute('aria-disabled');
+      btn.removeAttribute('title');
+    }
+  });
+});
+
+
+  // === 2) Gestion de l’accessibilité clavier ===
+  $$('.quest-ingredient').forEach(btn => {
+    if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+    if (!btn.hasAttribute('role')) btn.setAttribute('role', 'button');
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
+
+    // === 3) Clic sur l’ingrédient ===
+   btn.addEventListener('click', () => {
   const id = btn.getAttribute('data-id');
   if (!id) return;
 
+  // Gate de quête si nécessaire
+  const requiresQuest = btn.classList.contains('quest-only') || btn.dataset.requiresQuest === 'true';
+  const strictQuestId = btn.getAttribute('data-quest-id'); // si tu veux lier à une quête précise
+
+  if (requiresQuest && !hasActiveQuestFor(id, strictQuestId)){
+    toast("Tu dois d’abord accepter la quête auprès du Zouppi.");
+    btn.classList.add('locked');
+    return;
+  }
+
+  // Ok: récolte
   const ok = Arz.addItem(id);
   if (ok) {
     toast('Ingrédient ajouté au sac.');
     renderBag();
 
-    // 🔽 Ici : avertit qu'un ingrédient a été récolté
+    // Visuel + notification qu’un ingrédient lié à une quête est obtenu
+    btn.classList.add('collected');
     document.dispatchEvent(new CustomEvent('arz:ingredient-collected', {
       detail: {
         id: id,
@@ -386,6 +451,7 @@ function renderGaugeFromCore(detail){
     }));
   }
 });
+bindIngredients()
 
 
       // Taille responsive via data-size / data-size-mobile
