@@ -9,9 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Styles externes : CHEMIN CORRIGÉ -->
-  <link rel="stylesheet" href="css/monde.css" />
-
 <style>
   :root{
     --or:#ffd700;
@@ -32,7 +29,7 @@
     font-family:Georgia,serif;
     color:var(--ivoire);
     text-shadow:0 1px 3px rgba(0,0,0,.5);
-    background: url('images/fonds/fond_etoile_perso.webp') center/cover no-repeat fixed;
+    background:url('fond_etoile_perso.webp') center/cover no-repeat fixed;
   }
 
   /* ===== Blocs noirs ===== */
@@ -209,43 +206,11 @@
 
 </head>
 <body>
-  <!-- === Jauge d’énergie === -->
-  <div class="energy-wrap" role="status" aria-live="polite">
-    <div class="energy-icon">✨</div>
-    <div class="energy-label">Arzanskân</div>
-    <div class="energy-bar">
-      <div class="energy-fill" id="energyFill"></div>
-    </div>
-    <div class="energy-pct" id="energyPct">100%</div>
-  </div>
-
-  <!-- === Sac magique === -->
-  <div class="bag-wrap" id="bagWrap" aria-label="Sac d’Arzankia">
-    <button class="bag-btn" id="bagBtn" aria-haspopup="true" aria-controls="bagMenu">🎒</button>
-    <ul class="bag-menu" id="bagMenu" hidden>
-      <li class="bag-title">Sac d’Arzankia</li>
-      <li class="bag-empty">Ton sac est vide...</li>
-      <!-- Les ingrédients collectés s’afficheront ici -->
-    </ul>
-  </div>
-
-
-  <div class="lock-overlay" id="lockOverlay">
-    <div class="lock-card">
-      <div class="lock-title">Ta jauge est vide… ⚡</div>
-      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
-      <div class="play-area" id="playArea">
-        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
-      </div>
-      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
-      <button class="btn" id="accessBtn">Recharger</button>
-    </div>
-  </div>
 
   <!-- Bloc titre -->
-     <div class="bloc" id="coulissesHeader">
+  <div class="bloc">
     <p class="headline">
-      <span class="headline-small">Les coulisses</span><br>
+      <span class="headline-small">Bienvenue dans les coulisses</span><br>
       <span class="headline-big glow-gradient">d’Arzankia</span>
 </p>
   </div>
@@ -264,43 +229,18 @@
 
   <!-- Boutons -->
   <div class="buttons">
-   <a class="btn btn-gold" href="3.les_heros.html">Les Héros d’Arzankia</a>
-   <a class="btn btn-gold" href="3.les_mondes.html">Les Mondes d’Arzankia</a>
-   <a class="btn btn-gold" href="2.autrice.html">À propos de l'autrice</a>
-   <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
+    <a class="btn btn-gold" href="3.les_heros.html" target="_blank" rel="noopener">Les Héros d’Arzankia</a>
+    <a class="btn btn-gold" href="3.les_mondes.html" target="_blank" rel="noopener">Les Mondes d’Arzankia</a>
+    <a class="btn btn-gold" href="2.autrice.html" target="_blank" rel="noopener"> À propos de l'autrice</a>
+    <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
   </div>
-  
-<script>
-(function(){
-  const head = document.getElementById('coulissesHeader');
-  function placeHUD(){
-    if(!head) return;
-    const rect = head.getBoundingClientRect();
-    const top = Math.round(rect.bottom + window.scrollY + 12);
-    document.documentElement.style.setProperty('--hud-top', top + 'px');
-  }
-
-  // 1) premières mesures
-  if (document.readyState !== 'loading') placeHUD();
-  window.addEventListener('load', placeHUD, { once:true });
-
-  // 2) si la taille/viewport bouge
-  window.addEventListener('resize', placeHUD);
-  window.addEventListener('orientationchange', placeHUD);
-
-  // 3) si les polices se chargent après coup (peut faire bouger le titre)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(placeHUD).catch(()=>{});
-  }
-})();
-</script>
 
 
+    
 <script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
-<script defer src="js/arz-core.js"></script>    <!-- 2. logique jauge -->
-<script defer src="js/sac-jauge.js"></script>   <!-- 3. UI : sac + jauge -->
-<script defer src="js/quete.js"></script>       <!-- 4. système de quêtes -->
-
-</body>
+<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+<script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
+<script defer src="js/quete.js"></script>  
+  
+  </body>
 </html>
-
