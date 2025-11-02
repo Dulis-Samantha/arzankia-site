@@ -121,6 +121,26 @@ body {
   box-shadow: 0 0 18px rgba(255, 223, 100, 1);
 }
 
+/* === Fonds différents par monde === */
+body.monde-terre {
+  background: url('../images/fonds/fond_foret_enchantee.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #001d26;
+}
+
+body.monde-aquatique {
+  background: url('../images/fonds/fond_arzankia.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #0b1030;
+}
+
+body.monde-aerien {
+  background: url('../images/fonds/fond_monde.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #002a12;
+}
+
+
 /* ============================================================
    JAUGE D’ÉNERGIE
 ============================================================ */
