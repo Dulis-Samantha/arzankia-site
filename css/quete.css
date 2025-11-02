@@ -24,14 +24,18 @@
   filter: brightness(1.15);
 }
 
-/* Verrou visuel pour ingrédients non ramassables tant que la quête n’est pas active */
-.ing-btn.ingredient.locked {
+/* Ingrédient verrouillé tant que la quête n'est pas lancée */
+.ing-btn.locked { cursor: not-allowed; }
+.ing-btn.locked .ingredient-img {
   filter: grayscale(1) brightness(.75);
-  pointer-events: none;        /* empêche le clic */
-  cursor: not-allowed;
+  opacity: .7;
+  transform: none !important;
 }
-.ing-btn.ingredient.locked img { opacity: .7; }
-
+.ing-btn.collected .ingredient-img {
+  opacity: .35;
+  filter: saturate(.4);
+  pointer-events: none;
+}
 
 /* --- Images des Zouppis --- */
 .ing-btn.quest-starter img,
