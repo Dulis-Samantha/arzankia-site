@@ -177,3 +177,101 @@ document.addEventListener('click', (e) => {
   // Lancer
   bootstrap();
 })();
+
+// === GARDES DE COLLECTE (unicité + quête obligatoire) ========================
+
+// Utilitaires inventaire (tentative d’API Arz, sinon fallback localStorage)
+const BAG_LS_KEY = 'arz_bag_v2'; // adapte si ton projet utilise un autre nom
+
+function bagLoad() {
+  // 1) API Arz si dispo
+  if (window.Arz && Arz.bag && typeof Arz.bag.list === 'function') {
+    try { return Arz.bag.list(); } catch(_) {}
+  }
+  // 2) Fallback localStorage (format libre: [{id,name,...}])
+  try { return JSON.parse(localStorage.getItem(BAG_LS_KEY)) || []; } catch { return []; }
+}
+function bagHas(id) {
+  // 1) API Arz si dispo
+  if (window.Arz && Arz.bag && typeof Arz.bag.has === 'function') {
+    try { return !!Arz.bag.has(id); } catch(_) {}
+  }
+  // 2) Fallback LS
+  return bagLoad().some(it => it.id === id);
+}
+
+// Quête active pour un ingrédient ?
+function questActiveFor(ingId) {
+  const qs = (typeof load === 'function') ? load('arz_quests_v1', {}) : {};
+  return Object.values(qs).some(q => q && q.status === 'active' && q.targetIngredient === ingId);
+}
+// Quête déjà marquée "gathered" (on ne doit plus recollecter) ?
+function questAlreadyGathered(ingId) {
+  const qs = (typeof load === 'function') ? load('arz_quests_v1', {}) : {};
+  return Object.values(qs).some(q => q && q.status === 'gathered' && q.targetIngredient === ingId);
+}
+
+// Visuel verrouillé/déverrouillé selon état des quêtes
+function updateCollectibilityHints() {
+  document.querySelectorAll('.ing-btn.ingredient[data-id]').forEach(btn => {
+    const id = btn.dataset.id;
+    const questOnly = btn.classList.contains('quest-only') || btn.dataset.questOnly === '1';
+    const allowed = !questOnly || questActiveFor(id);
+    btn.classList.toggle('locked', !allowed);
+    if (!allowed) {
+      btn.title = 'Commence la quête liée pour pouvoir ramasser cet ingrédient';
+    } else {
+      btn.removeAttribute('title');
+    }
+  });
+}
+
+// Bloque la collecte AVANT que ton handler principal ne s’exécute
+// (useCapture=true pour passer en priorité)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.ing-btn.ingredient[data-id]');
+  if (!btn) return;
+
+  const id   = btn.dataset.id;
+  const name = btn.dataset.name || 'Ingrédient';
+  const questOnly = btn.classList.contains('quest-only') || btn.dataset.questOnly === '1';
+
+  // 1) Interdit si l’ingrédient est "de quête" et qu’aucune quête active ne le demande
+  if (questOnly && !questActiveFor(id)) {
+    e.preventDefault(); e.stopPropagation();
+    say(`⛔ <b>${name}</b> ne peut être ramassé que lorsque la quête correspondante est <b>en cours</b>.`);
+    return;
+  }
+
+  // 2) Interdit si déjà dans le sac (unicité)
+  if (bagHas(id)) {
+    e.preventDefault(); e.stopPropagation();
+    say(`👜 Tu as déjà <b>${name}</b> dans ton sac. Un seul exemplaire est autorisé.`);
+    return;
+  }
+
+  // 3) Par sécurité, évite la double collecte si la quête l’a déjà marqué "gathered"
+  if (questAlreadyGathered(id)) {
+    e.preventDefault(); e.stopPropagation();
+    say(`✅ La quête liée à <b>${name}</b> est déjà validée côté collecte.`);
+    return;
+  }
+
+}, true); // <-- capture
+
+// Mets à jour les indices visuels aux grands moments
+document.addEventListener('DOMContentLoaded', updateCollectibilityHints);
+document.addEventListener('arz:start', updateCollectibilityHints, { once:true });
+
+// Après démarrage d’une quête -> réévalue l’état visuel
+const _startQuestRef = (window.ARZ_QUESTS && window.ARZ_QUESTS.startQuest) || null;
+if (_startQuestRef) {
+  window.ARZ_QUESTS.startQuest = function(cfg){
+    const r = _startQuestRef(cfg);
+    try { updateCollectibilityHints(); } catch(_){}
+    return r;
+  };
+}
+// Après passage à "gathered"/"done" -> réévalue aussi
+document.addEventListener('arz:ingredient-collected', updateCollectibilityHints);
+
