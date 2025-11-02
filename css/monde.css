@@ -140,6 +140,9 @@ body.monde-aerien {
   background-color: #002a12;
 }
 
+/* Coulisses : cacher l'UI mais laisser la logique tourner */
+.hud-hidden .energy-wrap { display: none !important; }      /* jauge invisible */
+.hud-hidden #lockOverlay { display: none !important; }      /* pas de blocage */
 
 /* ============================================================
    JAUGE D’ÉNERGIE
