@@ -281,18 +281,28 @@
    <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
   </div>
   
-  <script>
+<script>
 (function(){
   const head = document.getElementById('coulissesHeader');
   function placeHUD(){
     if(!head) return;
     const rect = head.getBoundingClientRect();
-    // Positionne 12px sous le bloc titre, en coordonnées document
     const top = Math.round(rect.bottom + window.scrollY + 12);
     document.documentElement.style.setProperty('--hud-top', top + 'px');
   }
-  window.addEventListener('load', placeHUD, {once:true});
+
+  // 1) premières mesures
+  if (document.readyState !== 'loading') placeHUD();
+  window.addEventListener('load', placeHUD, { once:true });
+
+  // 2) si la taille/viewport bouge
   window.addEventListener('resize', placeHUD);
+  window.addEventListener('orientationchange', placeHUD);
+
+  // 3) si les polices se chargent après coup (peut faire bouger le titre)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(placeHUD).catch(()=>{});
+  }
 })();
 </script>
 
