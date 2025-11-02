@@ -305,6 +305,30 @@ p.intro .word {
   </style>
 </head>
 <body>
+   <body class="hud-hidden">
+
+   <!-- === Jauge d'énergie === -->
+  <div class="energy-wrap" role="status" aria-live="polite">
+    <div class="energy-icon">✨</div>
+    <div class="energy-label">Arzanskân</div>
+    <div class="energy-bar">
+      <div class="energy-fill" id="energyFill"></div>
+    </div>
+    <div class="energy-pct" id="energyPct">100%</div>
+  </div>
+
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-card">
+      <div class="lock-title">Ta jauge est vide… ⚡</div>
+      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
+      <div class="play-area" id="playArea">
+        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
+      </div>
+      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
+      <button class="btn" id="accessBtn">Recharger</button>
+    </div>
+  </div>
+
   <div class="container">
     <h1>Les Héros d’Arzankia</h1>
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros</p>
@@ -492,8 +516,11 @@ p.intro .word {
 
 <script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
 <script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+
+<script>document.documentElement.classList.add('hud-hidden');</script>
+
 <script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
-<script defer src="js/quete.js"></script>  
+<script defer src="js/quete.js"></script>
 
 
 </body>
