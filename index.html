@@ -12,12 +12,11 @@
       color: #ffe066;
       overflow: hidden;
       background: url('fond_etoile_perso.webp') center/cover no-repeat fixed;
-      
     }
 
     /* Calque bleu foncé au-dessus du fond */
     .calque-bleu {
-      background-color: #001133;
+      background-color: #000814;
       position: absolute;
       width: 100%;
       height: 100%;
@@ -30,13 +29,17 @@
       opacity: 0;
     }
 
+    /* === Rideaux noirs === */
     .rideau-gauche, .rideau-droit {
       position: absolute;
       top: 0;
       width: 50%;
       height: 100%;
-      background-color: #281f43;
       z-index: 3;
+      background: radial-gradient(circle at 30% 20%, #111 0%, #000 70%);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.8);
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 
     .rideau-gauche {
@@ -75,6 +78,7 @@
       to { transform: translateX(0); }
     }
 
+    /* Texte d’intro */
     .intro-fixe {
       position: absolute;
       z-index: 2;
@@ -98,7 +102,7 @@
   </style>
 </head>
 <body>
-  <!-- Calque bleu foncé par-dessus le fond image -->
+  <!-- Calque bleu foncé par-dessus le fond -->
   <div class="calque-bleu" id="calque"></div>
 
   <!-- Texte d’introduction -->
@@ -112,10 +116,10 @@
   <div class="rideau-droit" id="droit"></div>
 
   <script>
-    // 1. Faire disparaître le calque bleu après ouverture du rideau
+    // 1. Faire disparaître le calque après ouverture
     setTimeout(() => {
       document.getElementById("calque").classList.add("fade-out");
-    }, 2000); // juste après ouverture
+    }, 2000);
 
     // 2. Fermer les rideaux après 5 secondes
     setTimeout(() => {
@@ -128,6 +132,5 @@
       window.location.href = "1.accueil.html";
     }, 7000);
   </script>
-
 </body>
 </html>
