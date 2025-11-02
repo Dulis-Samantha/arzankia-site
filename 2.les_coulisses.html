@@ -17,7 +17,29 @@
     --or:#ffd700;
     --ivoire:#fff8e6;
     --fond-voile: rgba(0,0,0,.65);
+    --hud-top: 140px;
   }
+  /* Jauge à gauche du sac */
+.energy-wrap{
+  position: fixed;
+  top: var(--hud-top);
+  right: 112px;            /* espace pour laisser le sac à droite */
+  z-index: 1500;
+}
+
+/* Sac (menu flottant) — classe générée par ton UI sac-jauge.js */
+.bag-menu{
+  position: fixed;
+  top: var(--hud-top);
+  right: 12px;
+  z-index: 1501;
+}
+
+/* Petits écrans : rapproche tout du bord et baisse un peu */
+@media (max-width: 768px){
+  .energy-wrap{ right: 96px; }
+  .bag-menu{ right: 8px; }
+}
 
   /* ===== Base ===== */
   body{
@@ -209,7 +231,6 @@
 
 </head>
 <body>
-  <body>
   <!-- === Jauge d’énergie === -->
   <div class="energy-wrap" role="status" aria-live="polite">
     <div class="energy-icon">✨</div>
@@ -233,7 +254,7 @@
   </div>
 
   <!-- Bloc titre -->
-  <div class="bloc">
+     <div class="bloc" id="coulissesHeader">
     <p class="headline">
       <span class="headline-small">Les coulisses</span><br>
       <span class="headline-big glow-gradient">d’Arzankia</span>
@@ -259,6 +280,22 @@
    <a class="btn btn-gold" href="2.autrice.html">À propos de l'autrice</a>
    <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
   </div>
+  
+  <script>
+(function(){
+  const head = document.getElementById('coulissesHeader');
+  function placeHUD(){
+    if(!head) return;
+    const rect = head.getBoundingClientRect();
+    // Positionne 12px sous le bloc titre, en coordonnées document
+    const top = Math.round(rect.bottom + window.scrollY + 12);
+    document.documentElement.style.setProperty('--hud-top', top + 'px');
+  }
+  window.addEventListener('load', placeHUD, {once:true});
+  window.addEventListener('resize', placeHUD);
+})();
+</script>
+
 
 <script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
 <script defer src="js/arz-core.js"></script>    <!-- 2. logique jauge -->
