@@ -30,6 +30,12 @@ body {
   color: #fff8e6;
   text-shadow: 1px 1px 4px #000;
 }
+body.monde-ptikitis {
+  background: url('../images/fonds/fond_ptikitis.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #001d26;
+}
+
 
 .container {
   max-width: 1100px;
