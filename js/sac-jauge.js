@@ -41,18 +41,6 @@ const isConsumable = id => getReg(id).kind === 'consumable';
 const isQuest      = id => getReg(id).kind === 'quest';
 const isStash      = id => getReg(id).kind === 'stash';
 
-  function hasActiveQuestFor(ingredientId, expectedQuestId){
-  try{
-    const qs = JSON.parse(localStorage.getItem('arz_quests_v1')) || {};
-    return Object.values(qs).some(q =>
-      q &&
-      q.status === 'active' &&
-      q.targetIngredient === ingredientId &&
-      (!expectedQuestId || q.id === expectedQuestId)
-    );
-  }catch{ return false; }
-}
-
   // ====== Sac : lecture / écriture / ajout / retrait ======
 Arz.getBag = function () {
   try { return JSON.parse(localStorage.getItem('arz_bag_v1')) || []; }
@@ -372,108 +360,32 @@ function renderGaugeFromCore(detail){
 }
 
 
-function bindIngredients() {
-  const mq = window.matchMedia('(max-width: 768px)');
+  function bindIngredients(){
+    $$('.quest-ingredient').forEach(btn=>{
+      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex','0');
+      if (!btn.hasAttribute('role'))     btn.setAttribute('role','button');
+      btn.addEventListener('keydown', (e)=>{
+        if (e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }
+      });
 
-  // === A) État initial : lock si "quest-only" sans quête active ===
-  $$('.quest-ingredient').forEach(btn => {
-    const id = btn.getAttribute('data-id');
-    const strictQuestId = btn.getAttribute('data-quest-id'); // facultatif
-    const requiresQuest = btn.classList.contains('quest-only') || btn.dataset.requiresQuest === 'true';
+     btn.addEventListener('click', () => {
+  const id = btn.getAttribute('data-id');
+  if (!id) return;
 
-    if (requiresQuest) {
-      const ok = hasActiveQuestFor(id, strictQuestId);
-      btn.classList.toggle('locked', !ok);
-      if (!ok) {
-        btn.setAttribute('aria-disabled', 'true');
-        btn.style.pointerEvents = 'auto';        // clic autorisé pour montrer le toast
-        btn.title = "Accepte d'abord la quête auprès du Zouppi.";
-      } else {
-        btn.removeAttribute('aria-disabled');
-        btn.removeAttribute('title');
+  const ok = Arz.addItem(id);
+  if (ok) {
+    toast('Ingrédient ajouté au sac.');
+    renderBag();
+
+    // 🔽 Ici : avertit qu'un ingrédient a été récolté
+    document.dispatchEvent(new CustomEvent('arz:ingredient-collected', {
+      detail: {
+        id: id,
+        name: btn.getAttribute('data-name') || 'Ingrédient'
       }
-    }
-  });
-
-  // === B) Déverrouillage en live quand une quête démarre ===
-  document.addEventListener('arz:quest-started', (ev) => {
-    const { targetIngredient, id: questId } = ev.detail || {};
-    if (!targetIngredient) return;
-
-    $$('.quest-ingredient').forEach(btn => {
-      const ing = btn.getAttribute('data-id');
-      const strictQuestId = btn.getAttribute('data-quest-id') || null;
-      const requiresQuest = btn.classList.contains('quest-only') || btn.dataset.requiresQuest === 'true';
-
-      if (requiresQuest && ing === targetIngredient && (!strictQuestId || strictQuestId === questId)) {
-        btn.classList.remove('locked');
-        btn.removeAttribute('aria-disabled');
-        btn.removeAttribute('title');
-      }
-    });
-  });
-
-  // === C) Accessibilité + interactions ===
-  $$('.quest-ingredient').forEach(btn => {
-    // a11y
-    if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
-    if (!btn.hasAttribute('role'))     btn.setAttribute('role', 'button');
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-    });
-
-    // Clic (avec garde de quête)
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-id');
-      if (!id) return;
-
-      const requiresQuest = btn.classList.contains('quest-only') || btn.dataset.requiresQuest === 'true';
-      const strictQuestId = btn.getAttribute('data-quest-id'); // si tu veux lier à une quête précise
-
-      if (requiresQuest && !hasActiveQuestFor(id, strictQuestId)) {
-        toast("Tu dois d’abord accepter la quête auprès du Zouppi.");
-        btn.classList.add('locked');
-        return;
-      }
-
-      // Récolte
-      const ok = Arz.addItem(id);
-      if (ok) {
-        toast('Ingrédient ajouté au sac.');
-        renderBag();
-        btn.classList.add('collected');
-
-        document.dispatchEvent(new CustomEvent('arz:ingredient-collected', {
-          detail: {
-            id: id,
-            name: btn.getAttribute('data-name') || 'Ingrédient'
-          }
-        }));
-      }
-    });
-
-    // === D) Tailles/positions responsives (data-*) ===
-    const imgEl = btn.querySelector('.ingredient-img');
-    const sizeDesk = parseFloat(btn.getAttribute('data-size') || '');
-    const sizeMob  = parseFloat(btn.getAttribute('data-size-mobile') || '');
-
-    const applyBaseSize = () => {
-      const isMob = mq.matches;
-      const chosen = isMob ? (isNaN(sizeMob) ? sizeDesk : sizeMob) : sizeDesk;
-      if (!isNaN(chosen) && imgEl) imgEl.style.width = chosen + 'px';
-    };
-    applyBaseSize();
-    mq.addEventListener('change', applyBaseSize);
-
-    // Position mobile
-    if (mq.matches) {
-      const b = btn.getAttribute('data-bottom-mobile');
-      const l = btn.getAttribute('data-left-mobile');
-      if (b) btn.style.bottom = b;
-      if (l) btn.style.left   = l;
-    }
-  });
-}
+    }));
+  }
+});
 
 
       // Taille responsive via data-size / data-size-mobile
