@@ -131,6 +131,13 @@ body.monde-ptikitis {
 }
 
 
+body.monde-sirene {
+  background: url('../images/fonds/fond_coulisse_arzankia.webp') center top no-repeat;
+  background-size: cover;
+  background-color: #001d26; /* couleur dominante du ciel */
+}
+
+
 /* ============================================================
    JAUGE D’ÉNERGIE
 ============================================================ */
