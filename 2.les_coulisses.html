@@ -17,31 +17,7 @@
     --or:#ffd700;
     --ivoire:#fff8e6;
     --fond-voile: rgba(0,0,0,.65);
-    --hud-top: 140px;
   }
-  /* Jauge à gauche du sac */
-/* === Priorité locale Coulisses : repositionne le HUD === */
-.energy-wrap,
-.bag-wrap {
-  position: fixed !important;
-  top: var(--hud-top) !important;
-  z-index: 5000 !important;
-}
-
-.energy-wrap {
-  right: 112px !important; /* jauge à gauche du sac */
-}
-
-.bag-wrap {
-  right: 12px !important;  /* sac à droite */
-}
-
-/* Petits écrans */
-@media (max-width: 768px) {
-  .energy-wrap { right: 96px !important; }
-  .bag-wrap { right: 8px !important; }
-}
-
 
   /* ===== Base ===== */
   body{
@@ -242,6 +218,17 @@
     </div>
     <div class="energy-pct" id="energyPct">100%</div>
   </div>
+
+  <!-- === Sac magique === -->
+  <div class="bag-wrap" id="bagWrap" aria-label="Sac d’Arzankia">
+    <button class="bag-btn" id="bagBtn" aria-haspopup="true" aria-controls="bagMenu">🎒</button>
+    <ul class="bag-menu" id="bagMenu" hidden>
+      <li class="bag-title">Sac d’Arzankia</li>
+      <li class="bag-empty">Ton sac est vide...</li>
+      <!-- Les ingrédients collectés s’afficheront ici -->
+    </ul>
+  </div>
+
 
   <div class="lock-overlay" id="lockOverlay">
     <div class="lock-card">
