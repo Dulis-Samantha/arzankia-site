@@ -20,26 +20,28 @@
     --hud-top: 140px;
   }
   /* Jauge à gauche du sac */
-.energy-wrap{
-  position: fixed;
-  top: var(--hud-top);
-  right: 112px;            /* espace pour laisser le sac à droite */
-  z-index: 1500;
+/* === Priorité locale Coulisses : repositionne le HUD === */
+.energy-wrap,
+.bag-wrap {
+  position: fixed !important;
+  top: var(--hud-top) !important;
+  z-index: 5000 !important;
 }
 
-/* Sac (menu flottant) — classe générée par ton UI sac-jauge.js */
-.bag-menu{
-  position: fixed;
-  top: var(--hud-top);
-  right: 12px;
-  z-index: 1501;
+.energy-wrap {
+  right: 112px !important; /* jauge à gauche du sac */
 }
 
-/* Petits écrans : rapproche tout du bord et baisse un peu */
-@media (max-width: 768px){
-  .energy-wrap{ right: 96px; }
-  .bag-menu{ right: 8px; }
+.bag-wrap {
+  right: 12px !important;  /* sac à droite */
 }
+
+/* Petits écrans */
+@media (max-width: 768px) {
+  .energy-wrap { right: 96px !important; }
+  .bag-wrap { right: 8px !important; }
+}
+
 
   /* ===== Base ===== */
   body{
