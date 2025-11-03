@@ -23,14 +23,42 @@ const ARZ_ITEMS = {
   'ptikitis_rubictus': { name:'Rubictus aux baies rouges', img:'../images/bouton/ing_ptikitis.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'50%'} },
   'reserve_ptikitis' : { name:'Pousse rare (Réserve)',     img:'../images/bouton/ing_reserve_ptikitis.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'100%'} },
   'eau_thermale'     : { name:'Eau thermale',              img:'../images/bouton/ing_eau_thermale.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'30%'} },
+  'larme_gant'     : { name:'Larme de géant',              img:'../images/bouton/ing_geant.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'30%'} },
 
   // --- OBJETS DE QUÊTE (non consommables)
   'foret_champignon' : { name:'Champignon azulé', img:'../images/bouton/ing_foret.png', kind:'quest', stack:false },
 
   // --- STOCK / CRAFT (non consommables, serviront au labo d’Amandine)
-  'ames_plante'      : { name:'Olivette Brumis', img:'../images/bouton/ing_ames.webp', kind:'stash', stack:true },
-  'ames_plante_2'    : { name:'Olivette Brumis', img:'../images/bouton/ing_ames.webp', kind:'stash', stack:true },
-  'eau_creature'     : { name:'Essence des créatures de l’eau', img:'../images/bouton/ing_creature.webp', kind:'stash', stack:true },
+  // === AMES ===
+'ames_plante'      : { name:'Olivette Brumis', img:'../images/bouton/ing_ames.webp', kind:'stash', stack:true },
+
+// === FORÊT ===
+'foret_fleur'      : { name:'Pétale de forêt enchantée', img:'../images/bouton/ing_foret.webp', kind:'stash', stack:true },
+
+
+// === PANS ===
+'pans_poudre'      : { name:'Poudre de nuage', img:'../images/bouton/ing_pans.webp', kind:'stash', stack:true },
+
+
+// === ATLANTIDE ===
+'atlantide_perle'  : { name:'Perle d’Atlantide', img:'../images/bouton/ing_atlantide.webp', kind:'stash', stack:true },
+
+// === SIRÈNES ===
+'sirene_ecume'     : { name:'Écume des sirènes', img:'../images/bouton/ing_sirene.webp', kind:'stash', stack:true },
+
+// === ARENYTH ===
+'arenyth_barbabichon': { name:'Barbabichon', img:'../images/bouton/ing_arenyth.webp', kind:'stash', stack:true },
+
+// === CITÉS D’OR ===
+'cite_argile'       : { name:'Argile de roche sableuse', img:'../images/bouton/ing_cite.webp', kind:'stash', stack:true },
+'cite_cactus'       : { name:'Cactus des sables dorés', img:'../images/bouton/bouton_cite.webp', kind:'quest', stack:true },
+
+// === FÉES ===
+'fee_pollen'        : { name:'Pollen archidale', img:'../images/bouton/ing_fee.webp', kind:'stash', stack:true },
+
+// === SIRÈNES — BOUTON SPÉCIAL ===
+'sirene_essence'    : { name:'Essence chantante des Sirènes', img:'../images/bouton/bouton_sirene.webp', kind:'quest', stack:true },
+
 
   // ...ajoute ici les autres ingrédients au fur et à mesure
 };
