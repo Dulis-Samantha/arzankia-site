@@ -50,8 +50,8 @@ const ARZ_ITEMS = {
 'arenyth_barbabichon': { name:'Barbabichon', img:'../images/bouton/ing_arenyth.webp', kind:'stash', stack:true },
 
 // === CITÉS D’OR ===
-'cite_argile'       : { name:'Argile de roche sableuse', img:'../images/bouton/ing_cite.webp', kind:'stash', stack:true },
-'cite_cactus'       : { name:'Cactus des sables dorés', img:'../images/bouton/bouton_cite.webp', kind:'quest', stack:true },
+'cite_argile'       : { name:'Argile de roche sableuse', img:'../images/bouton/bouton_cite.webp', kind:'stash', stack:true },
+'cite_cactus'       : { name:'Cactus des sables', img:'../images/bouton/ing_cite.webp', kind:'quest', stack:true },
 
 // === FÉES ===
 'fee_pollen'        : { name:'Pollen archidale', img:'../images/bouton/ing_fee.webp', kind:'stash', stack:true },
