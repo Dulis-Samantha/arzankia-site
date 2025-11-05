@@ -15,103 +15,6 @@ const HIDE_GAUGE = (() => {
   if (window.ArzUIMonde) return;
   window.ArzUIMonde = true;
 
-  // =====================
-// ARZ — Registre items
-// =====================
-const ARZ_ITEMS = {
-  // --- CONSOMMABLES (utilisables depuis le sac)
-  'ptikitis_rubictus': { name:'Rubictus aux baies rouges', img:'../images/bouton/ing_ptikitis.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'50%'} },
-  'reserve_ptikitis' : { name:'Pousse rare (Réserve)',     img:'../images/bouton/ing_reserve_ptikitis.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'100%'} },
-  'eau_thermale'     : { name:'Eau thermale',              img:'../images/bouton/ing_eau_thermale.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'30%'} },
-  'larme_gant'     : { name:'Larme de géant',              img:'../images/bouton/ing_geant.webp', kind:'consumable', stack:true, effect:{type:'recharge', value:'30%'} },
-
-  // --- OBJETS DE QUÊTE (non consommables)
-  'foret_champignon' : { name:'Champignon azulé', img:'../images/bouton/ing_foret.png', kind:'quest', stack:false },
-
-  // --- STOCK / CRAFT (non consommables, serviront au labo d’Amandine)
-  // === AMES ===
-'ames_plante'      : { name:'Olivette Brumis', img:'../images/bouton/ing_ames.webp', kind:'stash', stack:true },
-
-// === FORÊT ===
-'foret_fleur'      : { name:'Pétale de forêt enchantée', img:'../images/bouton/ing_foret.webp', kind:'stash', stack:true },
-
-
-// === PANS ===
-'pans_poudre'      : { name:'Poudre de nuage', img:'../images/bouton/ing_pans.webp', kind:'stash', stack:true },
-
-
-// === ATLANTIDE ===
-'atlantide_perle'  : { name:'Perle d’Atlantide', img:'../images/bouton/ing_atlantide.webp', kind:'stash', stack:true },
-
-// === SIRÈNES ===
-'sirene_ecume'     : { name:'Écume des sirènes', img:'../images/bouton/ing_sirene.webp', kind:'stash', stack:true },
-
-// === ARENYTH ===
-'arenyth_barbabichon': { name:'Barbabichon', img:'../images/bouton/ing_arenyth.webp', kind:'stash', stack:true },
-
-// === CITÉS D’OR ===
-'cite_argile'       : { name:'Argile de roche sableuse', img:'../images/bouton/bouton_cite.webp', kind:'stash', stack:true },
-'cite_cactus'       : { name:'Cactus des sables', img:'../images/bouton/ing_cite.webp', kind:'quest', stack:true },
-
-// === FÉES ===
-'fee_pollen'        : { name:'Pollen archidale', img:'../images/bouton/ing_fee.webp', kind:'stash', stack:true },
-
-// === SIRÈNES — BOUTON SPÉCIAL ===
-'sirene_essence'    : { name:'Essence chantante des Sirènes', img:'../images/bouton/bouton_sirene.webp', kind:'quest', stack:true },
-
-
-  // ...ajoute ici les autres ingrédients au fur et à mesure
-};
-
-// helpers
-const getReg = id => ARZ_ITEMS[id] || { name:id, img:'', kind:'stash', stack:true }; // par défaut: stock
-const isConsumable = id => getReg(id).kind === 'consumable';
-const isQuest      = id => getReg(id).kind === 'quest';
-const isStash      = id => getReg(id).kind === 'stash';
-
-  // ====== Sac : lecture / écriture / ajout / retrait ======
-Arz.getBag = function () {
-  try { return JSON.parse(localStorage.getItem('arz_bag_v1')) || []; }
-  catch { return []; }
-};
-
-Arz.saveBag = function (b) {
-  localStorage.setItem('arz_bag_v1', JSON.stringify(b));
-};
-
-Arz.addItem = function (id) {
-  const reg = getReg(id);
-  const bag = Arz.getBag();
-  const idx = bag.findIndex(it => it.id === id);
-
-  if (idx >= 0 && reg.stack) {
-    bag[idx].qty = (bag[idx].qty || 1) + 1;
-  } else if (idx === -1) {
-    bag.push({ id, qty: 1, kind: reg.kind });
-  } else {
-    // non-empilable déjà présent → on ignore
-    return false;
-  }
-  Arz.saveBag(bag);
-  // Notifie l’UI existante
-  document.dispatchEvent(new CustomEvent('arz:bagchange'));
-  return true;
-};
-
-Arz.getItemByIndex = idx => Arz.getBag()[idx];
-
-Arz.removeOne = function (id) {
-  const bag = Arz.getBag();
-  const i = bag.findIndex(it => it.id === id);
-  if (i < 0) return false;
-  if ((bag[i].qty || 1) > 1) bag[i].qty--; else bag.splice(i, 1);
-  Arz.saveBag(bag);
-  document.dispatchEvent(new CustomEvent('arz:bagchange'));
-  return true;
-};
-
-
-
   /* -------------------------
    * Utils
    * ------------------------- */
@@ -297,96 +200,65 @@ function renderGaugeFromCore(detail){
     document.body.classList.toggle('arz-mode-novice', detail.mode === 'novice');
   }
 
- function renderBag() {
-  const bag = Arz.getBag();
-  const bagBadge = $('#bagBadge');
-  const bagList  = $('#bagList');
-  const bagEmpty = $('#bagEmpty');
+  function renderBag(){
+    const bag = Arz.get().bag || [];
+    const bagBadge = $('#bagBadge');
+    const bagList  = $('#bagList');
+    const bagEmpty = $('#bagEmpty');
 
-  if (bagBadge) bagBadge.textContent = String(bag.reduce((n, e) => n + e.qty, 0));
-  if (!bagList || !bagEmpty) return;
+    if (bagBadge) bagBadge.textContent = String(bag.reduce((n,e)=>n+e.qty,0));
 
-  if (bag.length === 0) {
+    if (!bagList || !bagEmpty) return;
     bagList.innerHTML = '';
-    bagEmpty.style.display = 'block';
-    return;
-  }
-  bagEmpty.style.display = 'none';
 
-  // 3 groupes
-  const groups = { consumable: [], stash: [], quest: [] };
-  for (const it of bag) (groups[it.kind] || groups.stash).push(it);
-
-  const mkItem = (it, idx) => {
-    const reg = getReg(it.id);
-    const qty = it.qty || 1;
-    const usable = (it.kind === 'consumable');
-    return `
-      <li class="bag-item" data-index="${idx}">
-        <img src="${reg.img || (BASE + 'images/bouton/grimoire.webp')}" alt="" class="bag-thumb">
-        <div class="bag-info">
-          <div class="bag-name">${reg.name || it.id}</div>
-          <div class="bag-qty">×${qty}</div>
-        </div>
-        ${usable ? `<button class="bag-use" data-index="${idx}" title="Utiliser">Utiliser</button>` : ``}
-      </li>
-    `;
-  };
-
-  const flat = [];
-  const pushGroup = (title, arr) => {
-    if (!arr.length) return '';
-    const start = flat.length;
-    flat.push(...arr);
-    const items = arr.map((it, i) => mkItem(it, start + i)).join('');
-    return `<h4 class="bag-section">${title}</h4><ul class="bag-list">${items}</ul>`;
-  };
-
-  bagList.innerHTML =
-    pushGroup('À consommer', groups.consumable) +
-    pushGroup('À stocker',   groups.stash) +
-    pushGroup('Ingrédients de quête', groups.quest);
-
-  // Binder les "Utiliser" (consommables seulement)
-  $$('.bag-use', bagList).forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = parseInt(btn.getAttribute('data-index'), 10);
-      const entry = Arz.getItemByIndex(idx);
-      const reg   = entry && getReg(entry.id);
-      if (!entry || !reg || reg.kind !== 'consumable') return;
-
-      applyConsumableEffect(entry.id, reg);
-      Arz.removeOne(entry.id);
-      renderBag();
-    });
-  });
-
-  const toggle = $('#bagToggle');
-  if (toggle) {
-    const { mode } = Arz.get();
-    const on = (mode === 'experimente');
-    toggle.classList.toggle('on', on);
-    toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
-    toggle.textContent = on ? 'Revenir en mode Novice' : 'Activer le mode Voyageur expérimenté';
-  }
-}
-  function applyConsumableEffect(id, reg) {
-  if (!reg?.effect) return;
-
-  if (reg.effect.type === 'recharge') {
-    const v = reg.effect.value;
-    if (typeof v === 'string' && v.endsWith('%')) {
-      const pct = parseFloat(v) / 100;
-      S.energy = Math.min(CFG.max, S.energy + CFG.max * pct);
-    } else {
-      S.energy = Math.min(CFG.max, S.energy + Number(v || 0));
+    if (bag.length === 0){
+      bagEmpty.style.display = 'block';
+      return;
     }
-    renderGauge && renderGauge();
-    saveState && saveState();
-    toast('Énergie rechargée ⚡', 1200);
-  }
-}
+    bagEmpty.style.display = 'none';
 
+    bag.forEach((entry, idx)=>{
+      const li = document.createElement('li');
+      // Le nom et l'image peuvent venir d’attributs data-* de l’HTML de l’ingrédient
+    const btn  = document.querySelector(`.quest-ingredient[data-id="${entry.id}"]`);
+const meta = ITEMS[entry.id] || {};
+const name = btn?.getAttribute('data-name') || meta.name || entry.id;
+const img  = btn?.getAttribute('data-img')  || meta.img  || (BASE_IMG + 'grimoire.webp');
+
+      li.innerHTML = `
+        <div class="bag-item">
+          <img src="${img}" alt="">
+          <div>
+            <div class="bag-name">${name}</div>
+            <div class="bag-rem">Il t’en reste <strong>${entry.qty}</strong></div>
+          </div>
+        </div>
+        <button type="button" class="bag-use" data-index="${idx}" ${entry.qty<=0?'disabled':''}>Utiliser</button>
+      `;
+      bagList.appendChild(li);
+    });
+
+    $$('.bag-use', bagList).forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const idx = parseInt(btn.getAttribute('data-index'),10);
+        if (Arz.useItemByIndex(idx)) {
+          toast('Énergie rechargée à 100% ⚡', 1400);
+          renderBag();
+        }
+      });
+    });
+
+    // État du bouton de mode
+    const toggle = $('#bagToggle');
+    if (toggle){
+      const { mode } = Arz.get();
+      const on = (mode === 'experimente');
+      toggle.classList.toggle('on', on);
+      toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+      toggle.textContent = on ? 'Revenir en mode Novice' : 'Activer le mode Voyageur expérimenté';
+      toggle.title = on ? 'Énergie éternelle activée' : 'Basculer en énergie éternelle (brillance)';
+    }
+  }
 
   function bindIngredients(){
     $$('.quest-ingredient').forEach(btn=>{
@@ -396,25 +268,16 @@ function renderGaugeFromCore(detail){
         if (e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }
       });
 
-     btn.addEventListener('click', () => {
-  const id = btn.getAttribute('data-id');
-  if (!id) return;
-
-  const ok = Arz.addItem(id);
-  if (ok) {
-    toast('Ingrédient ajouté au sac.');
-    renderBag();
-
-    // 🔽 Ici : avertit qu'un ingrédient a été récolté
-    document.dispatchEvent(new CustomEvent('arz:ingredient-collected', {
-      detail: {
-        id: id,
-        name: btn.getAttribute('data-name') || 'Ingrédient'
-      }
-    }));
-  }
-});
-
+      // Collecte → passe par le cœur
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-id');
+        if (!id) return;
+        const ok = Arz.addItem(id);
+        if (ok){
+          toast('Ingrédient ajouté au sac.');
+          renderBag();
+        }
+      });
 
       // Taille responsive via data-size / data-size-mobile
       const imgEl = btn.querySelector('.ingredient-img');
@@ -476,14 +339,6 @@ function boot() {
 
   bindIngredients();
   hookCoreEvents();
-
-document.addEventListener('arz:quest-item-delivered', (ev) => {
-  const id = ev.detail?.id;
-  if (!id) return;
-  Arz.removeOne(id);
-  renderBag();
-});
-
 
   // --- 1er rendu (déplacé ici) ---
   const st = Arz.get();
