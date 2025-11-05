@@ -33,37 +33,6 @@ const isDrainPage = (() => {
     p.includes('/entree/')
   );
 })();
-
-// --- Modificateur de décharge lié aux quêtes ---
-function _meta(){ try{ return JSON.parse(localStorage.getItem('arz_meta_v1'))||{} }catch{ return {} } }
-function getDrainMultiplierFromQuests(){
-  const m = _meta();
-  if (m.specFinal) return 0;          // énergie infinie à la fin
-  const q = m.questsCompleted||0;
-  if(q>=10) return 0.45;
-  if(q>=6)  return 0.60;
-  if(q>=3)  return 0.75;              // après 3 quêtes : test débloqué
-  if(q>=1)  return 0.90;
-  return 1.00;
-}
-let DRAIN_MULT = getDrainMultiplierFromQuests();
-
-document.addEventListener('arz:reward', ()=>{
-  DRAIN_MULT = getDrainMultiplierFromQuests();
-  S.energy = CFG.max;            // recharge totale
-  saveState();
-  pushEnergy();
-});
-
-document.addEventListener('arz:spec-final', ()=>{
-  DRAIN_MULT = 0;
-  S.mode = 'experimente';
-  S.energy = CFG.max;
-  saveState();
-  pushEnergy();
-  startIfNeeded();  // garantit que la jauge se relance proprement
-});
-
   
   /* =========================
    * STATE + STORAGE
@@ -131,46 +100,43 @@ document.addEventListener('arz:spec-final', ()=>{
     emit('arz:stop', {});
   }
 
-function tick() {
-  if (document.hidden) return;
+  function tick(){
+    if (document.hidden) return;
 
-  // --- Mode expérimenté → énergie infinie
-  if (S.mode === 'experimente') {
-    S.energy = CFG.max;
-    pushEnergy();
-    return;
-  }
-
-  // --- Si la page draine l’énergie
-  if (isDrainPage) {
-    const drain = CFG.drainPerSecond * (CFG.tickMs / 1000);
-    S.energy = Math.max(0, S.energy - drain * DRAIN_MULT);
-
-    // Si énergie à zéro → événement + redirection éventuelle
-    if (S.energy <= 0) {
+    if (S.mode === 'experimente'){
+      S.energy = CFG.max;
       pushEnergy();
-      if (!lockedZero) {
-        lockedZero = true;
-        emit('arz:zero', { redirect: CFG.autoRedirectOnZero, to: CFG.zeroRedirectUrl });
-        if (CFG.autoRedirectOnZero) {
-          setTimeout(() => { location.href = CFG.zeroRedirectUrl; }, 3000);
-        }
-      }
-      saveState();
       return;
     }
-  } 
-  else {
-    // --- Recharge hors des mondes
-    const recharge = CFG.rechargePerSecond * (CFG.tickMs / 1000);
-    S.energy = clamp(S.energy + recharge, 0, CFG.max);
+
+    if (isDrainPage){
+      S.energy = clamp(S.energy - CFG.drainPerSecond, 0, CFG.max);
+      if (S.energy <= 0){
+        pushEnergy();
+        if (!lockedZero){
+          lockedZero = true;
+          emit('arz:zero', { redirect: CFG.autoRedirectOnZero, to: CFG.zeroRedirectUrl });
+          if (CFG.autoRedirectOnZero){
+            // redirection douce (pas d’overlay côté core)
+            setTimeout(() => { location.href = CFG.zeroRedirectUrl; }, 3000);
+          }
+        }
+        saveState();
+        return;
+      }
+    } else {
+      // recharge hors monde
+      S.energy = clamp(S.energy + CFG.rechargePerSecond, 0, CFG.max);
+    }
+
+    pushEnergy();
   }
 
-  // --- Mise à jour générale
-  pushEnergy();
-  saveState();
-}
-
+  function pushEnergy(){
+    saveState();
+    const pct = Math.round((S.energy / CFG.max) * 100);
+    emit('arz:energy', { pct, energy: S.energy, isDrainPage, mode: S.mode });
+  }
 
   /* =========================
    * BAG (logique minimale, sans UI)
@@ -218,20 +184,6 @@ function tick() {
   function totalItems(){
     return S.bag.reduce((n,e)=>n+e.qty,0);
   }
-    /* =========================
-   * PUSH ÉNERGIE (événement global)
-   * ========================= */
-  function pushEnergy() {
-    const pct = Math.round((S.energy / CFG.max) * 100);
-    emit('arz:energy', {
-      pct,
-      energy: S.energy,
-      mode: S.mode,
-      isDrainPage,
-      cfg: CFG
-    });
-  }
-
 
   /* =========================
    * MODE / API PUBLIQUE
