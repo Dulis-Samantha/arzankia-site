@@ -13,8 +13,6 @@
   --text: #fff8e6;
   --glass: rgba(10, 0, 20, 0.45);
   --overlay: rgba(0, 0, 0, 0.7);
-  --bag-w: 48px;   /* largeur de l'icône du sac */
-  --bag-gap: 16px; /* espace visuel entre jauge et sac */
 }
 
 /* -------------------------
@@ -121,36 +119,13 @@ body {
   box-shadow: 0 0 18px rgba(255, 223, 100, 1);
 }
 
-/* === Fonds différents par monde === */
-body.monde-terre {
-  background: url('../images/fonds/fond_foret_enchantee.webp') center top no-repeat;
-  background-size: cover;
-  background-color: #001d26;
-}
-
-body.monde-aquatique {
-  background: url('../images/fonds/fond_coulisse_arzankia.webp') center top no-repeat;
-  background-size: cover;
-  background-color: #0b1030;
-}
-
-body.monde-aerien {
-  background: url('../images/fonds/fond_monde.webp') center top no-repeat;
-  background-size: cover;
-  background-color: #002a12;
-}
-
-/* Coulisses : cacher l'UI mais laisser la logique tourner */
-.hud-hidden .energy-wrap { display: none !important; }      /* jauge invisible */
-.hud-hidden #lockOverlay { display: none !important; }      /* pas de blocage */
-
 /* ============================================================
    JAUGE D’ÉNERGIE
 ============================================================ */
 .energy-wrap {
   position: fixed;
   top: 84px;  /* avant : 68px */
-  right: calc(12px + var(--bag-w) + var(--bag-gap));
+  right: 12px;
   z-index: 4000;
   display: flex;
   align-items: center;
@@ -247,60 +222,23 @@ body.monde-aerien {
   font-weight:800; font-size:12px; border-radius:999px;
   display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
-/* état fermé */
 .bag-menu {
-  position: absolute;
-  right: 0;
-  margin-top: 8px;
-  min-width: 240px;
-  color: #fff3cc;
-  background: rgba(10, 0, 20, 0.82);
-  border: 1px solid rgba(255, 214, 116, 0.45);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
-  padding: 0.8rem 1rem;
-  max-height: min(70vh, 520px);     /* borne la hauteur globale */
-  display: none;                    /* 🔹 par défaut, caché */
-  flex-direction: column;           /* structure pour scroll */
-  overflow: hidden;
-  z-index: 5000;
+  display:none; position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
+  background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
+  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
+  padding:.8rem 1rem;
 }
-
-/* état ouvert */
-.bag-menu.show {
-  display: flex;                    /* 🔹 visible en flex */
-  animation: slideDown .25s ease-out;
+.bag-menu.show { display:block; animation: slideDown .25s ease-out; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+.bag-menu h3 {
+  margin:.2rem 0 .6rem; text-align:center;
+  font-family:"Cinzel Decorative", serif; font-size:1.05rem; color:#ffd674;
 }
-
-/* zone scrollable */
-.bag-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  flex: 1 1 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding-right: .25rem;
-  scrollbar-gutter: stable both-edges;
+.bag-menu ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem; }
+.bag-menu li {
+  display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+  background: rgba(255,255,255,.06); border-radius:10px; padding:.45rem .6rem;
 }
-/* scrollbars */
-.bag-menu ul::-webkit-scrollbar{ width:10px; }
-.bag-menu ul::-webkit-scrollbar-track{ background: rgba(255,255,255,.05); border-radius:10px; }
-.bag-menu ul::-webkit-scrollbar-thumb{
-  background: linear-gradient(180deg, #ffd674, #ffe7a8);
-  border-radius:10px; border:2px solid rgba(10,0,20,.55);
-}
-.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,.05); }
-
-@media (max-width:768px){
-  .bag-menu.show{ max-height:78vh; }
-}
-
 .bag-item { display:flex; align-items:center; gap:.55rem; }
 .bag-item img { width:32px; height:32px; display:block; }
 .bag-label { line-height:1.2 }
@@ -351,91 +289,6 @@ body.monde-aerien {
   border-color: rgba(255,214,116,.6);
   text-shadow: none;
 }
-/* ====== SAC — Menu ====== */
-.bag-menu{
-  position: absolute;
-  right: 0;
-  margin-top: 8px;
-  min-width: 240px;
-
-  /* style visuel */
-  color: #fff3cc;
-  background: rgba(10, 0, 20, 0.82);
-  border: 1px solid rgba(255,214,116,.45);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.45);
-  backdrop-filter: blur(6px);
-  padding: .8rem 1rem;
-
-  /* comportement */
-  max-height: min(70vh, 520px);
-  display: none;               /* fermé par défaut */
-  overflow: hidden;            /* le scroll se fait dans la liste */
-  z-index: 5000;
-  /* structure flex activée SEULEMENT en état ouvert */
-}
-
-.bag-menu.show{
-  display: flex;
-  flex-direction: column;      /* active la structure quand ouvert */
-  animation: bag-slideDown .25s ease-out;
-}
-
-@keyframes bag-slideDown{
-  from{ opacity:0; transform: translateY(-6px); }
-  to  { opacity:1; transform: none; }
-}
-
-.bag-section { margin:10px 0 6px; color:#ffeaa7; font-size:14px; }
-.bag-list { list-style:none; margin:0 0 8px; padding:0; }
-.bag-item { display:flex; align-items:center; gap:8px; padding:6px 8px; background:rgba(255,255,255,.06); border-radius:10px; margin-bottom:6px; }
-.bag-thumb { width:32px; height:32px; object-fit:contain; }
-.bag-info { flex:1; }
-.bag-name { font-size:13px; }
-.bag-qty  { font-size:12px; opacity:.85; }
-.bag-use { background:#ffe39c; border:none; border-radius:10px; padding:6px 10px; cursor:pointer; }
-.bag-use:hover { filter:brightness(1.05); }
-
-
-/* ====== SAC — Liste scrollable ====== */
-.bag-menu ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-
-  flex: 1 1 auto;              /* occupe l’espace sous le titre/boutons */
-  min-height: 0;               /* indispensable pour autoriser le scroll en flex */
-  max-height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: .25rem;       /* espace pour la scrollbar */
-  scrollbar-gutter: stable both-edges;
-}
-
-/* Scrollbars (WebKit) */
-.bag-menu ul::-webkit-scrollbar{ width:10px; }
-.bag-menu ul::-webkit-scrollbar-track{
-  background: rgba(255,255,255,.05);
-  border-radius:10px;
-}
-.bag-menu ul::-webkit-scrollbar-thumb{
-  background: linear-gradient(180deg, #ffd674, #ffe7a8);
-  border-radius:10px;
-  border:2px solid rgba(10,0,20,.55);
-}
-
-/* Scrollbars (Firefox) */
-.bag-menu ul{ scrollbar-width: thin; scrollbar-color: #ffd674 rgba(255,255,255,.05); }
-
-/* Mobile : un peu plus haut pour scroller confortablement */
-@media (max-width:768px){
-  .bag-menu.show{ max-height: 78vh; }
-}
-
 
 /* =========================
    NOTIFICATION (TOAST) — centre robuste mobile
@@ -577,7 +430,7 @@ body.monde-aerien {
   .energy-wrap{
     position: fixed !important;
     top: 84px;               /* ajuste à ton goût */
-    right: calc(12px + var(--bag-w) + var(--bag-gap));
+    right: 12px;
     left: auto;              /* annule le centrage mobile */
     transform: none !important;
   }
