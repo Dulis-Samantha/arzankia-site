@@ -352,9 +352,9 @@ p.intro .word {
 
 <div class="cta-row">
   <div class="quiz-button">
-    <a id="test-hero-link" href="tests/quel-hero.html" style="display:none">
-      Faire le test « Quel héros es-tu ? »
-    </a>
+<a id="test-hero-link" href="tests/quel-hero.html">
+  Faire le test « Quel héros es-tu ? »
+</a>
   </div>
 
   <div class="grimoire-button">
@@ -401,15 +401,6 @@ p.intro .word {
       <div id="msgGrimoire"></div>
     </div>
   </div>
-  
-  <script>
-(() => {
-  try{
-    const m = JSON.parse(localStorage.getItem('arz_meta_v1'))||{};
-    if(m.testUnlocked) document.getElementById('test-hero-link').style.display='inline-block';
-  }catch{}
-})();
-</script>
 
   <script>
     /* Utilitaire : normaliser une chaîne (accents/majuscules) */
