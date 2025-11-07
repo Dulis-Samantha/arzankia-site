@@ -231,6 +231,10 @@ body {
   background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
   border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
   padding:.8rem 1rem;
+  max-height: 60vh;          /* limite la hauteur du menu à 60% de la hauteur écran */
+  overflow: hidden;          /* masque par défaut, sauf pour la zone interne */
+  display: flex;
+  flex-direction: column;
 }
 .bag-menu.show { display:block; animation: slideDown .25s ease-out; }
 @keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
@@ -238,7 +242,40 @@ body {
   margin:.2rem 0 .6rem; text-align:center;
   font-family:"Cinzel Decorative", serif; font-size:1.05rem; color:#ffd674;
 }
-.bag-menu ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem; }
+.bag-menu ul { 
+   list-style:none;
+   margin:0; 
+   padding:0; 
+   display:flex; 
+   flex-direction:column; 
+   gap:.6rem; 
+   flex: 1;
+  overflow-y: auto;          /* active le scroll vertical */
+  max-height: 45vh;          /* sécurité si jamais la structure change */
+  padding-right: .4rem;      /* évite que le scroll colle au bord */
+}
+
+/* Personnalisation de la barre de défilement (Chrome, Edge) */
+.bag-menu ul::-webkit-scrollbar {
+  width: 8px;
+}
+.bag-menu ul::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.05);
+  border-radius: 999px;
+}
+.bag-menu ul::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,#ffe9af,#f2c94c);
+  border-radius: 999px;
+  box-shadow: 0 0 6px rgba(0,0,0,.25);
+}
+
+
+/* Firefox */
+.bag-menu ul{
+  scrollbar-width: thin;
+  scrollbar-color: #f2c94c rgba(255,255,255,.05);
+}
+ 
 .bag-menu li {
   display:flex; align-items:center; justify-content:space-between; gap:.6rem;
   background: rgba(255,255,255,.06); border-radius:10px; padding:.45rem .6rem;
