@@ -494,7 +494,10 @@ body {
 }
 
 
-  /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
+/* ============================================================
+   FIX — Positionner la jauge à gauche du sac (desktop)
+============================================================ */
+/* --- Mobile : jauge + sac sous le titre, non fixés --- */
 @media (max-width: 768px) {
   .header-box {
     display: flex;
@@ -503,10 +506,33 @@ body {
     gap: .6rem; /* espace entre le titre et la jauge */
   }
 
-  .header-box h1 {
-    margin-bottom: 0.3rem;
+  .header-box h1 { margin-bottom: 0.3rem; }
+
+  .hud-mobile{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 12px;                  /* espace entre jauge et sac */
+    margin: 8px auto 14px;      /* sous le titre */
+    width: 100%;
   }
 
+  /* la jauge et le sac ne sont plus en position fixe */
+  .hud-mobile .energy-wrap,
+  .hud-mobile .bag-wrap{
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: auto !important;
+  }
+
+  /* on réduit un peu visuellement si besoin */
+  .hud-mobile .energy-wrap { gap: .45rem; }
+  .hud-mobile .bag-icon  { width: 44px; height: 44px; }
+
+  /* si tu avais .arzanskan-bar / .arzanskan-container */
   .arzanskan-bar, .arzanskan-container {
     margin-top: .3rem !important;
     position: relative !important; /* empêche le chevauchement */
@@ -514,9 +540,7 @@ body {
   }
 }
 
-/* ============================================================
-   FIX — Positionner la jauge à gauche du sac (desktop)
-============================================================ */
+/* --- Desktop : jauge à gauche du sac, fixés --- */
 @media (min-width: 769px) {
   :root {
     --hud-top: 84px;       /* hauteur commune */
