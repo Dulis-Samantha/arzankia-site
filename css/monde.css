@@ -13,6 +13,10 @@
   --text: #fff8e6;
   --glass: rgba(10, 0, 20, 0.45);
   --overlay: rgba(0, 0, 0, 0.7);
+  --hud-top: 84px;
+  --bag-right: 12px;   /* marge du sac au bord droit */
+  --bag-size: 48px;    /* largeur/hauteur de l'icône du sac */
+  --hud-gap: 12px;     /* espace entre jauge et sac */
 }
 
 /* -------------------------
@@ -387,6 +391,30 @@ body {
 
   .energy-bar { width: 60px; }
   .energy-pct { min-width: 2ch; font-size: .85rem; }
+
+   @media (min-width: 769px){
+  .bag-wrap{
+    position: fixed !important;
+    top: var(--hud-top);
+    right: var(--bag-right);
+    left: auto;
+    transform: none !important;
+  }
+
+  .energy-wrap{
+    position: fixed !important;
+    top: var(--hud-top);
+    /* jauge = sac + gap → se place à gauche du sac */
+    right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
+    left: auto;
+    transform: none !important;
+  }
+}
+
+/* Optionnel : si tu changes la taille de l’icône sac en mobile */
+@media (max-width: 768px){
+  .bag-icon{ width: var(--bag-size); height: var(--bag-size); }
+}
 
   .bag-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
