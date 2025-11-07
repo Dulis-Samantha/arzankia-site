@@ -57,8 +57,8 @@ const ITEMS = {
   'pans_poussiere'             : { name: "Poussière d’étoile",                 img: BASE_IMG + 'ing_pan.webp' },
   'remede_miracle'             : { name: "Remède miracle",                     img: BASE_IMG + 'ing_quacks.webp' },
   'plante_sirene'              : { name: "Plante des fonds marins",            img: BASE_IMG + 'ing_sirene_2.webp' },
-  'Huitre_sirene'              : { name: "Huître",                             img: BASE_IMG + 'ing_sirene.webp' },
-  'arenyth_barbabichon'         : { name: "Fleur Barbabichon",                 img: BASE_IMG + 'ing_arenyth.webp' },
+  'huitre_sirene'              : { name: "Huître",                             img: BASE_IMG + 'ing_sirene.webp' },
+  'arenyth_barbabichon'        : { name: "Fleur Barbabichon",                 img: BASE_IMG + 'ing_arenyth.webp' },
   'yakkas_ecaille'             : { name: "Écaille de Dragon",                  img: BASE_IMG + 'ing_yakkas.webp' }
 };
 
