@@ -513,28 +513,33 @@ body {
     top: auto !important;
   }
 }
-/* FORCE DESKTOP (≥769px) : jauge + sac en position fixe à droite */
-@media (min-width: 769px){
-  .energy-wrap{
-    position: fixed !important;
-    top: 84px;               /* ajuste à ton goût */
-    right: 12px;
-    left: auto;              /* annule le centrage mobile */
-    transform: none !important;
-  }
-  .bag-wrap{
-    position: fixed !important;
-    top: 88px;               /* ajuste à ton goût */
-    right: 12px;
-    left: auto;
-    transform: none !important;
+
+/* ============================================================
+   FIX — Positionner la jauge à gauche du sac (desktop)
+============================================================ */
+@media (min-width: 769px) {
+  :root {
+    --hud-top: 84px;       /* hauteur commune */
+    --bag-right: 12px;     /* distance du sac au bord droit */
+    --bag-size: 48px;      /* taille du sac */
+    --hud-gap: 12px;       /* espace entre sac et jauge */
   }
 
-  /* Si, quelque part, tu as ces classes pour la jauge: */
-  .arzanskan-bar, .arzanskan-container{
-    position: static !important;   /* ne pas casser la jauge fixe */
-    margin-top: 0 !important;
-    top: auto !important;
+  /* Sac à droite */
+  .bag-wrap {
+    position: fixed !important;
+    top: var(--hud-top);
+    right: var(--bag-right);
+    z-index: 4700;
+  }
+
+  /* Jauge juste à gauche du sac */
+  .energy-wrap {
+    position: fixed !important;
+    top: var(--hud-top);
+    right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
+    z-index: 4600;
   }
 }
+
 
