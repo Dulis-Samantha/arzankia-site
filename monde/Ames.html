@@ -11,20 +11,38 @@
 
   <!-- Styles globaux Monde -->
   <link rel="stylesheet" href="../css/monde.css" />
+</head>
 
 <body class="monde-terre">
-   <header class="header-box">
-  <!-- === Jauge d'énergie === -->
-  <div class="energy-wrap" role="status" aria-live="polite">
-    <div class="energy-icon" aria-hidden="true">✨</div>
-    <div class="energy-label">Arzanskân</div>
-    <div class="energy-bar">
-      <div id="energyFill" class="energy-fill"></div>
+  <!-- En-tête : Titre PUIS HUD (jauge + sac) -->
+  <header class="header-box">
+    <h1 class="page-title">Monde des Âmes perdues</h1>
+
+    <div class="hud-mobile">
+      <!-- === Jauge d'énergie === -->
+      <div class="energy-wrap" role="status" aria-live="polite">
+        <div class="energy-icon" aria-hidden="true">✨</div>
+        <div class="energy-label">Arzanskân</div>
+        <div class="energy-bar">
+          <div id="energyFill" class="energy-fill"></div>
+        </div>
+        <div id="energyPct" class="energy-pct">100%</div>
+      </div>
+
+      <!-- === Sac magique === -->
+      <div class="bag-wrap">
+        <img class="bag-icon" src="../images/icons/sac.webp" alt="Sac magique" />
+        <span class="bag-badge" id="bagBadge" style="display:none">0</span>
+        <div class="bag-menu" id="bagMenu">
+          <h3>Sac magique</h3>
+          <ul id="bagList"></ul>
+          <button class="bag-toggle" id="modeToggle" type="button">Mode tranquille</button>
+        </div>
+      </div>
     </div>
-    <div id="energyPct" class="energy-pct">100%</div>
-  </div>
   </header>
-  <!-- === Overlay « jauge vide » === -->
+
+  <!-- === Overlay « jauge vide » (hors header) === -->
   <div id="lockOverlay" class="lock-overlay" hidden>
     <div class="lock-card">
       <div class="lock-title">Ta jauge est vide… ⚡</div>
@@ -33,9 +51,8 @@
     </div>
   </div>
 
-
   <div class="container">
-    <h1 class="page-title">Monde des Âmes perdues</h1>
+    <!-- (on n’affiche pas un 2e h1 ici, il est déjà dans le header) -->
 
     <!-- Illustration + ingrédients cliquables -->
     <div class="image-zone">
@@ -56,7 +73,7 @@
         <img class="ingredient-img" src="../images/bouton/ing_ames.webp" alt="Olivette Brumis" />
       </button>
 
-      <!-- Ingrédient : Olivette Brumis -->
+      <!-- Ingrédient : Olivette Brumis (2) -->
       <button class="ing-btn quest-ingredient"
         type="button"
         data-id="ames_plante_2"
@@ -70,17 +87,14 @@
         style="bottom: 27%; left: 85%;">
         <img class="ingredient-img" src="../images/bouton/ing_ames.webp" alt="Olivette Brumis" />
       </button>
-      
+
       <button class="ing-btn quest-receiver"
         type="button"
         data-receiver="zouppiame"
         data-quest-id="quete_ptikitis"
         style="bottom:22%; left:65%;">
-  <img class="ingredient-img"
-       src="../images/bouton/zouppiame.webp"
-       alt="Zouppiame" />
-        </button>
-
+        <img class="ingredient-img" src="../images/bouton/zouppiame.webp" alt="Zouppiame" />
+      </button>
     </div>
 
     <div class="texte-monde">
@@ -94,14 +108,18 @@
       <a href="../3.les_mondes.html">← Retour</a>
     </div>
   </div>
-  
-<script defer src="../js/base-pages.js"></script>
-<script defer src="../js/arz-core.js"></script>
-<script defer src="../js/sac-jauge.js"></script>
 
+  <script defer src="../js/base-pages.js"></script>
+  <script defer src="../js/arz-core.js"></script>
+  <script defer src="../js/sac-jauge.js"></script>
 
-
-
+  <!-- Mini-init clic sac si besoin -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const icon = document.querySelector('.bag-icon');
+      const menu = document.getElementById('bagMenu');
+      icon && menu && icon.addEventListener('click', () => menu.classList.toggle('show'));
+    });
+  </script>
 </body>
 </html>
-
