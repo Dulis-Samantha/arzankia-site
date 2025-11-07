@@ -48,7 +48,7 @@ const ITEMS = {
   'foret_champignon_2'         : { name: "Champignon azulé",                   img: BASE_IMG + 'ing_foret.webp' },
   'ames_plante'                : { name: "Olivette Brumis",                    img: BASE_IMG + 'ing_ames.webp' },
   'ames_plante_2'              : { name: "Olivette Brumis",                    img: BASE_IMG + 'ing_ames.webp' },
-  'reserve_ptikitis'           : { name: "Pousse rare (Réserve)",              img: BASE_IMG + 'ing_reserve_ptikitis.webp' },
+  'reserve_ptikitis'           : { name: "Pousse rare (Réserve)",              img: BASE_IMG + 'reserve_ptikiti.webp' },
   'cite_cactus'                : { name: "Cactus des sables",                  img: BASE_IMG + 'ing_cite.webp' },
   'atlantide_meduse'           : { name: "Œufs de méduse",                     img: BASE_IMG + 'ing_atlantide.webp' },
   'creatures_essence_thermale' : { name: "Eau thermale",                       img: BASE_IMG + 'ing_creature.webp' },
