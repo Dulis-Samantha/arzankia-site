@@ -143,14 +143,16 @@ function ensureBagUI(){
     if (show) { renderBag(); focusBagList(); }
   });
 
-  // Fermer si clic en dehors
-  document.addEventListener('click', (e) => {
-    if (!bagMenu.classList.contains('show')) return;
-    if (!bagWrap.contains(e.target)) {
-      bagMenu.classList.remove('show');
-      bagIcon.setAttribute('aria-expanded','false');
-    }
-  });
+// Fermer si clic en dehors (robuste, passe avant d'autres handlers)
+document.addEventListener('click', (e) => {
+  if (!bagMenu.classList.contains('show')) return;
+  const path = e.composedPath ? e.composedPath() : [];
+  if (!path.includes(bagWrap)) {
+    bagMenu.classList.remove('show');
+    bagIcon.setAttribute('aria-expanded','false');
+  }
+}, true); // ← useCapture = true
+
 
   // Ne pas fermer quand on clique dans le menu
   bagMenu.addEventListener('click', (e) => e.stopPropagation());
