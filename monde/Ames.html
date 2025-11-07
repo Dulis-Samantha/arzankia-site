@@ -92,17 +92,9 @@
     </div>
   </div>
 
-  <script defer src="../js/base-pages.js"></script>
-  <script defer src="../js/arz-core.js"></script>
-  <script defer src="../js/sac-jauge.js"></script>
+ <script defer src="../js/base-pages.js"></script>  <!-- 1. outils communs -->
+<script defer src="../js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+<script defer src="../js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
 
-  <!-- Mini-init clic sac si besoin -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const icon = document.querySelector('.bag-icon');
-      const menu = document.getElementById('bagMenu');
-      icon && menu && icon.addEventListener('click', () => menu.classList.toggle('show'));
-    });
-  </script>
 </body>
 </html>
