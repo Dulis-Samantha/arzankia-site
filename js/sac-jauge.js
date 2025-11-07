@@ -58,8 +58,8 @@ const ITEMS = {
   'remede_miracle'             : { name: "Remède miracle",                     img: BASE_IMG + 'ing_quacks.webp' },
   'plante_sirene'              : { name: "Plante des fonds marins",            img: BASE_IMG + 'ing_sirene_2.webp' },
   'huitre_sirene'              : { name: "Huître",                             img: BASE_IMG + 'ing_sirene.webp' },
-  'arenyth_barbabichon'        : { name: "Fleur Barbabichon",                 img: BASE_IMG + 'ing_arenyth.webp' },
-  'yakkas_ecaille'             : { name: "Écaille de Dragon",                  img: BASE_IMG + 'ing_yakkas.webp' }
+  'arenyth_barbabichon'        : { name: "Fleur Barbabichon",                  img: BASE_IMG + 'ing_arenyth.webp' },
+  'yakkas_cendre'              : { name: "Cendre de Dragon",                   img: BASE_IMG + 'ing_yakkas.webp' }
 };
 
 
