@@ -216,7 +216,13 @@ body {
 /* ============================================================
    SAC MAGIQUE (Inventaire)
 ============================================================ */
-.bag-wrap { position: fixed; top: 88px;; right: 12px; z-index: 4700; }
+.bag-wrap { 
+   position: fixed; 
+   top: 88px; 
+   right: 12px; 
+   z-index: 4700; 
+}
+
 .bag-icon { width: 48px; height: 48px; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255,214,116,.7)); transition: transform .2s; }
 .bag-icon:hover { transform: scale(1.08); }
 .bag-badge {
@@ -226,8 +232,14 @@ body {
   font-weight:800; font-size:12px; border-radius:999px;
   display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
+
 .bag-menu {
-  display:none; position:absolute; right:0; margin-top:8px; min-width:240px; color:#fff3cc;
+  display:none; 
+  position:absolute; 
+  right:0;
+  margin-top: 0;  
+  min-width:240px; 
+  color:#fff3cc;
   background: rgba(10,0,20,.82); border:1px solid rgba(255,214,116,.45);
   border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.45); backdrop-filter: blur(6px);
   padding:.8rem 1rem;
@@ -235,7 +247,9 @@ body {
   overflow: hidden;          /* masque par défaut, sauf pour la zone interne */
   display: flex;
   flex-direction: column;
+  top: calc(100% + 8px)
 }
+
 .bag-menu.show { display:block; animation: slideDown .25s ease-out; }
 @keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
 .bag-menu h3 {
