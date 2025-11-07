@@ -494,112 +494,46 @@ body {
 }
 
 
-/* ============================================================
-   FIX — Positionner la jauge à gauche du sac (desktop)
-============================================================ */
-/* ============================================================
-   RESPONSIVE (mobile) — Titre + HUD sticky
-============================================================ */
-@media (max-width: 768px){
-
-  /* Le header (titre + HUD) reste collé en haut au scroll */
-  .header-box{
-    position: sticky;
-    top: 0;
-    z-index: 5000;
+  /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
+@media (max-width: 768px) {
+  .header-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: .5rem;
-    padding: .5rem .75rem .6rem;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(255,214,116,.25);
+    gap: .6rem; /* espace entre le titre et la jauge */
   }
 
-  .header-box .page-title{
-    margin: 0;
-    padding: .2rem 0 .1rem;
-    font-size: 1.35rem;
-    line-height: 1.2;
-    text-align: center;
-    color: var(--text);
+  .header-box h1 {
+    margin-bottom: 0.3rem;
   }
 
-  /* Le HUD aligné sous le titre, centré */
-  .hud-mobile{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-  }
-
-  /* On neutralise les positions fixes de la jauge et du sac dans le header */
-  .hud-mobile .energy-wrap,
-  .hud-mobile .bag-wrap{
-    position: static !important;
+  .arzanskan-bar, .arzanskan-container {
+    margin-top: .3rem !important;
+    position: relative !important; /* empêche le chevauchement */
     top: auto !important;
-    right: auto !important;
-    left: auto !important;
-    transform: none !important;
-    z-index: auto !important;
-  }
-
-  /* Taille/espacement plus compacts sur mobile */
-  .hud-mobile .energy-wrap{
-    gap: .45rem;
-    padding: .5rem .6rem;
-  }
-  .energy-bar { width: 60px; }
-  .energy-pct { min-width: 2ch; font-size: .85rem; }
-  .hud-mobile .bag-icon{ width: 44px; height: 44px; }
-
-  /* Le ruban d’alerte s’aligne sous le header */
-  .quest-ribbon{
-    position: sticky;
-    top: calc(56px + 46px); /* ~ hauteur titre + HUD, ajuste si besoin */
-    z-index: 4900;
-    left: 12px; right: 12px;
-    transform: none;
-  }
-
-  /* Un petit espace sous le header pour respirer */
-  .container{ 
-    padding-top: .5rem;
-  }
-
-  /* L’image ne doit pas se cacher sous le header sticky */
-  .image-zone{ 
-    margin-top: .5rem !important; 
   }
 }
-
-
-/* ============================================================
-   Desktop : jauge à gauche du sac, fixés
-============================================================ */
+/* FORCE DESKTOP (≥769px) : jauge + sac en position fixe à droite */
 @media (min-width: 769px){
-  :root {
-    --hud-top: 84px;
-    --bag-right: 12px;
-    --bag-size: 48px;
-    --hud-gap: 12px;
+  .energy-wrap{
+    position: fixed !important;
+    top: 84px;               /* ajuste à ton goût */
+    right: 12px;
+    left: auto;              /* annule le centrage mobile */
+    transform: none !important;
   }
   .bag-wrap{
     position: fixed !important;
-    top: var(--hud-top);
-    right: var(--bag-right);
+    top: 88px;               /* ajuste à ton goût */
+    right: 12px;
     left: auto;
     transform: none !important;
-    z-index: 4700;
   }
-  .energy-wrap{
-    position: fixed !important;
-    top: var(--hud-top);
-    right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
-    left: auto;
-    transform: none !important;
-    z-index: 4600;
+
+  /* Si, quelque part, tu as ces classes pour la jauge: */
+  .arzanskan-bar, .arzanskan-container{
+    position: static !important;   /* ne pas casser la jauge fixe */
+    margin-top: 0 !important;
+    top: auto !important;
   }
 }
