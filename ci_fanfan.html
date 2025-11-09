@@ -188,13 +188,13 @@
 
     <!-- Jeu-questionnaire -->
     <h2> À quel point connais-tu Fanfan ?</h2>
-    <p><em>Clique sur les 5 mots qui lui correspondent vraiment…</em></p>
+    <p><em>Clique sur les 4 mots qui lui correspondent vraiment…</em></p>
 
     <div class="grid" id="wordGrid">
       <div class="word" data-word="Magicienne">Magicienne</div>
       <div class="word" data-word="Hegaia">Hégaïa</div>
       <div class="word" data-word="Aventurière">Aventurière</div>
-      <div class="word" data-word="Fidèle">Fidèle</div>
+      <div class="word" data-word="Magicienne">Magicienne</div>
       <div class="word" data-word="Méchante">Méchante</div>
       <div class="word" data-word="Bretagne">Bretagne</div>
       <div class="word" data-word="Chercheuse">Chercheuse</div>
@@ -251,8 +251,8 @@
   </div>
 
   <script>
-    // 5 bonnes réponses (attention: data-word="Hegaia" sans accent)
-    const correctWords = ["Hegaia","Fidèle","Chercheuse","Chevalière","Corse"];
+    // 4 bonnes réponses (attention: data-word="Hegaia" sans accent)
+    const correctWords = ["Hegaia","Chercheuse","Chevalière","Corse"];
     let selectedCorrect = new Set();
     let gameCompleted = false;
 
