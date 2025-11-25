@@ -127,10 +127,9 @@ body {
    JAUGE D’ÉNERGIE
 ============================================================ */
 .energy-wrap {
-  position: fixed;
-  top: 84px;  /* avant : 68px */
-  right: 12px;
-  z-index: 4000;
+  position: static;              /* ← plus fixe */
+  margin: 1rem auto 0;           /* centrée en haut de la page */
+  z-index: 1;                    /* pas besoin de 4000 si ce n’est plus un overlay */
   display: flex;
   align-items: center;
   gap: .6rem;
@@ -142,6 +141,7 @@ body {
   backdrop-filter: blur(6px);
   animation: appear 1.5s ease;
 }
+
 @keyframes appear {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -447,14 +447,6 @@ body {
     --bagShift: 5px;   /* petit décalage du sac seul */
   }
 
-  .energy-wrap {
-    top: calc(var(--energyY) + env(safe-area-inset-top, 0px));
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) scale(.95);
-    gap: .4rem;
-  }
-
   .energy-bar { width: 60px; }
   .energy-pct { min-width: 2ch; font-size: .85rem; }
 
@@ -463,15 +455,6 @@ body {
     position: fixed !important;
     top: var(--hud-top);
     right: var(--bag-right);
-    left: auto;
-    transform: none !important;
-  }
-
-  .energy-wrap{
-    position: fixed !important;
-    top: var(--hud-top);
-    /* jauge = sac + gap → se place à gauche du sac */
-    right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
     left: auto;
     transform: none !important;
   }
