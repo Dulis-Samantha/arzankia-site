@@ -517,11 +517,14 @@ body {
 @media (min-width: 769px){
   .energy-wrap{
     position: fixed !important;
-    top: 84px;               /* ajuste à ton goût */
-    right: 12px;
-    left: auto;              /* annule le centrage mobile */
+    top: 84px; /* ou var(--hud-top) si tu préfères */
+    /* jauge = sac + gap → se place à gauche du sac */
+    right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
+    left: auto;
     transform: none !important;
   }
+}
+
   .bag-wrap{
     position: fixed !important;
     top: 88px;               /* ajuste à ton goût */
