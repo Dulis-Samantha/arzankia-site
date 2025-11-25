@@ -13,6 +13,13 @@ const HIDE_GAUGE = (() => {
   );
 })();
 
+  if (HIDE_GAUGE) {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.arzanskan-container')?.style.setProperty('display','none','important');
+    document.querySelector('.arzanskan-bar')?.style.setProperty('display','none','important');
+    document.querySelector('.energy-wrap')?.remove();
+  });
+}
 
   // Empêche une double init
   if (window.ArzUIMonde) return;
