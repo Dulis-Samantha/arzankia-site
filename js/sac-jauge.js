@@ -100,7 +100,7 @@ const ITEMS = {
       <div class="energy-bar"><div class="energy-fill" id="energyFill" style="width:0%"></div></div>
       <div class="energy-pct" id="energyPct">0%</div>
     `;
-    document.body.appendChild(wrap);
+    document.body.prepend(wrap);
   }
 
  function ensureRibbon(){
