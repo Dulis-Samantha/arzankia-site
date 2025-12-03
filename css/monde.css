@@ -526,26 +526,20 @@ body {
 
 @media (min-width: 992px) {
   .layout-desktop {
-    display: flex;
+    display: flex !important;      /* Force le flex */
+    flex-direction: row !important;/* Image à gauche, texte à droite */
     gap: 40px;
     align-items: flex-start;
+    justify-content: flex-start;   /* si besoin */
+  }
+
+  .layout-desktop .image-zone,
+  .layout-desktop .texte-monde {
+    flex: 1 1 50%;                 /* chacun prend 50% */
+    max-width: 50%;
   }
 
   .layout-desktop .image-zone {
-    flex: 1;
-    max-width: 50%;
-    position: relative; /* nécessaire pour que le bouton se place correctement */
-  }
-
-  .layout-desktop .image-zone img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px; /* optionnel */
-  }
-
-  .layout-desktop .texte-monde {
-    flex: 1;
-    max-width: 50%;
+    position: relative;
   }
 }
