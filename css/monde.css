@@ -523,3 +523,29 @@ body {
     top: auto !important;
   }
 }
+
+@media (min-width: 992px) {
+  .layout-desktop {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .layout-desktop .image-zone {
+    flex: 1;
+    max-width: 50%;
+    position: relative; /* nécessaire pour que le bouton se place correctement */
+  }
+
+  .layout-desktop .image-zone img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px; /* optionnel */
+  }
+
+  .layout-desktop .texte-monde {
+    flex: 1;
+    max-width: 50%;
+  }
+}
