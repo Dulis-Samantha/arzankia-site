@@ -524,22 +524,32 @@ body {
   }
 }
 
+/* Layout Desktop */
 @media (min-width: 992px) {
   .layout-desktop {
-    display: flex !important;      /* Force le flex */
-    flex-direction: row !important;/* Image à gauche, texte à droite */
-    gap: 40px;
+    display: flex;
+    flex-direction: row;      /* ligne : image à gauche, texte à droite */
+    gap: 40px;                /* espace entre image et texte */
     align-items: flex-start;
-    justify-content: flex-start;   /* si besoin */
-  }
-
-  .layout-desktop .image-zone,
-  .layout-desktop .texte-monde {
-    flex: 1 1 50%;                 /* chacun prend 50% */
-    max-width: 50%;
+    justify-content: flex-start;
   }
 
   .layout-desktop .image-zone {
-    position: relative;
+    flex: 1 1 50%;            /* image prend 50% de la largeur */
+    max-width: 50%;
+    display: flex;
+    justify-content: center;  /* centrage horizontal image */
+  }
+
+  .layout-desktop .texte-monde {
+    flex: 1 1 50%;            /* texte prend 50% */
+    max-width: 50%;
+  }
+
+  /* Ajuste l'image à l'intérieur de figure */
+  .layout-desktop .image-zone img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 }
