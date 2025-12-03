@@ -32,40 +32,38 @@
     </div>
   </div>
 
-  <main class="container">
-    <header class="page-head">
-      <h1 class="page-title">Entrée du monde des Ptikitis</h1>
-    </header>
+<main class="container">
+  <header class="page-head">
+    <h1 class="page-title">Entrée du monde des Ptikitis</h1>
+  </header>
 
-    <!-- Illustration d’entrée -->
+  <div class="layout-desktop">
+    <!-- Image -->
     <figure class="image-zone">
       <img
         class="Fees-image"
         src="../images/entree/entree_ptikitis.webp"
-        alt="Entrée du monde des Ptikitis, un grand arbre aux cabanes minuscules"
-        width="1200"
-        height="800"
-        loading="eager"
+        alt="Entrée du monde des Ptikitis"
       />
+      <!-- Ingrédient positionné par-dessus l'image -->
+      <button class="ing-btn quest-ingredient"
+          type="button"
+          data-id="reserve_ptikitis"
+          data-name="Réserve de Raphaël"
+          data-img="../images/bouton/ing_reserve_ptikitis.webp"
+          data-size="48"
+          data-size-mobile="28"
+          data-bottom-mobile="91.5%"
+          data-left-mobile="48%"
+          aria-label="Réserve de Raphaël"
+          style="bottom:64%; left:48%;">
+        <img class="ingredient-img"
+             src="../images/bouton/ing_reserve_ptikitis.webp"
+             alt="Réserve de Raphaël" />
+      </button>
+    </figure>
 
-    <!-- Ingrédient caché -->
-    <button class="ing-btn quest-ingredient"
-        type="button"
-        data-id="reserve_ptikitis"
-        data-name="Réserve de Raphaël"
-        data-img="../images/bouton/ing_reserve_ptikitis.webp"
-        data-size="48"
-        data-size-mobile="28"
-        data-bottom-mobile="91.5%"
-        data-left-mobile="48%"
-        aria-label="Réserve de Raphaël"
-        style="bottom:64%; left:48%;">
-      <img class="ingredient-img"
-           src="../images/bouton/ing_reserve_ptikitis.webp"
-           alt="Réserve de Raphaël" />
-    </button>
-
-    <!-- Récit -->
+    <!-- Texte -->
     <article class="texte-monde">
       <h2 class="chapter-subtitle">L’arbre des Ptikitis</h2>
 
@@ -112,14 +110,15 @@
       <p>On se dévisagea un instant, en silence. Puis, elle me fit signe de la rejoindre, comme si elle m’attendait depuis toujours.</p>
 
       <p>Le cœur battant, je me glissai à quatre pattes sous le rideau de feuilles, franchis le tronc… et basculai de l’autre côté.</p>
-    </article>
+     </article>
+  </div>
 
-    <!-- Navigation -->
-    <nav class="button-group" aria-label="Navigation">
-      <a href="../monde/Ptikitis.html">← Retour au monde Ptikitis</a>
-      <a href="../3.les_mondes.html">Tous les mondes</a>
-    </nav>
-  </main>
+  <!-- Navigation -->
+  <nav class="button-group" aria-label="Navigation">
+    <a href="../monde/Ptikitis.html">← Retour au monde Ptikitis</a>
+    <a href="../3.les_mondes.html">Tous les mondes</a>
+  </nav>
+</main>
 
 <script defer src="../js/base-pages.js"></script>
 <script defer src="../js/arz-core.js"></script>
