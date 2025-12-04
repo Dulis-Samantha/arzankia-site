@@ -5,7 +5,11 @@
   <meta charset="UTF-8">
    <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrée du Monde des Sirènes</title>
+  <title>Louise - Sirène</title>
+
+    <!-- Styles externes : CHEMIN CORRIGÉ -->
+  <link rel="stylesheet" href="css/monde.css" />
+  
   <style>
     body {
       margin: 0;
@@ -204,9 +208,14 @@ window.addEventListener('load', () => {
 });
 </script>
   
+
 <script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
 <script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+
+<script>document.documentElement.classList.add('hud-hidden');</script>
+
 <script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
+<script defer src="js/quete.js"></script>
 
 
 
