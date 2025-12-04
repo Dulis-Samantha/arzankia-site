@@ -6,11 +6,11 @@ const HIDE_GAUGE = (() => {
   return (
     p.endsWith('/index.html') ||
     p === '/' ||
-    p.endsWith('accueil.html') ||
     p.endsWith('1.accueil.html') ||
     p.includes('les_heros') ||
     p.includes('les_coulisses') ||
     p.endsWith('2.autrice.html') ||
+    p.endsWith('bonus_louise.html') ||
     p.endsWith('4.derriere_le_voile.html')
   );
 })();
