@@ -209,6 +209,41 @@
         line-height:1.6;
       }
     }
+    .portrait-block {
+  position: relative;
+  display: inline-block;
+}
+
+.pescadrille-btn {
+  position: absolute;
+  right: -90px;   /* distance à ajuster */
+  top: 40%;       /* hauteur centrée */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pescadrille-btn img {
+  width: 110px;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.pescadrille-btn img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Version mobile : Pescadrille passe sous la photo */
+@media (max-width: 899px) {
+  .pescadrille-btn {
+    position: static;
+    display: block;
+    margin: 0.8rem auto 1.2rem;
+    text-align: center;
+  }
+}
+
   </style>
 </head>
 
@@ -245,12 +280,18 @@
 <div id="bulle-magique" style="display: none; opacity: 0; transition: opacity 1s; text-align:center; margin-top: 2em; font-style: italic; color: #ffd;">
 </div>
 
-<!-- Bouton poisson repositionné -->
-<div style="text-align: right; padding-right: 2em; margin-top: 2em;">
-  <button id="poisson-secret" style="background: none; border: none; cursor: pointer;">
-    <img src="poisson_secret.png" alt="Passage secret" title="Un indice glisse entre les vagues..." style="width: 100px; opacity: 0.7; transition: opacity 0.3s;">
-  </button>
-</div>
+<section class="hero-layout">
+
+  <!-- Portrait -->
+  <div class="portrait-block">
+    <img src="photo_louise.webp" alt="Portrait de Louise" class="image-hero" />
+
+    <!-- Pescadrille juste à côté -->
+    <button id="poisson-secret" class="pescadrille-btn">
+      <img src="poisson_secret.png" alt="Pescadrille" />
+    </button>
+  </div>
+
 
 </div>
 <script>
