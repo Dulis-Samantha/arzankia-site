@@ -6,6 +6,9 @@
   <meta name="robots" content="noindex">
   <title>Bougie Magique - Corrigée</title>
 
+    <!-- Styles externes : CHEMIN CORRIGÉ -->
+  <link rel="stylesheet" href="css/monde.css" />
+
   <!-- Police type machine + ta police actuelle -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Special+Elite&display=swap" rel="stylesheet">
 
@@ -320,9 +323,14 @@ Aujourd’hui, je suis fière de vous présenter le tome I de ma série Les Hér
   </script>
 
 
-<script src="js/base-pages.js"></script>
-<script src="js/arz-core.js"></script>
-<script src="js/sac-jauge.js"></script>
+<script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
+<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+
+<script>document.documentElement.classList.add('hud-hidden');</script>
+
+<script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
+<script defer src="js/quete.js"></script>
+
 
 
 </body>
