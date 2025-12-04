@@ -9,7 +9,9 @@ const HIDE_GAUGE = (() => {
     p.endsWith('accueil.html') ||
     p.endsWith('1.accueil.html') ||
     p.includes('les_heros') ||
-    p.includes('les_coulisses')
+    p.includes('les_coulisses') ||
+    p.endsWith('2.autrice.html') ||
+    p.endsWith('4.derriere_le_voile.html')
   );
 })();
 
