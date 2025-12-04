@@ -183,41 +183,45 @@
 }
 
 
-    @media (min-width: 900px){
-      .hero-layout{
-        display:flex;
-        align-items:flex-start;
-        gap:2rem;
-      }
+@media (min-width: 900px){
+  .hero-layout{
+    display:flex;
+    align-items:flex-start;
+    gap:3rem;              /* un peu plus d'espace entre image et parchemin */
+    justify-content:center;
+  }
 
-      .image-hero{
-        width:30%;          /* portrait plus grand */
-        max-width:560px;
-        margin:0;
-        margin-left:130px; 
-      }
+  .image-hero{
+    width:340px;           /* portrait plus grand */
+    max-width:380px;
+    margin:0;              /* on enlève le gros décalage vers la droite */
+  }
 
-      .right-col{
-        flex:1;
-        max-width:400px;    /* colonne parchemin moins large */
-      }
+  .right-col{
+    flex:1;
+    max-width:400px;       /* colonne parchemin moins large */
+  }
 
-      .parchemin{
-        max-width:460px;
-        padding:2rem 1.8rem;
-        font-size:1.05rem;
-        line-height:1.6;
-      }
-    }
-    .portrait-block {
+  .parchemin{
+    max-width:460px;
+    padding:2rem 1.8rem;
+    font-size:1.05rem;
+    line-height:1.6;
+  }
+}
+
+/* Bloc portrait + Pescadrille */
+.portrait-block {
   position: relative;
   display: inline-block;
 }
 
+/* Position du Pescadrille sur grand écran */
 .pescadrille-btn {
   position: absolute;
-  right: -90px;   /* distance à ajuster */
-  top: 40%;       /* hauteur centrée */
+  right: -50px;            /* rapproché de l'image (avant -90px) */
+  top: 50%;                /* centré verticalement */
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
