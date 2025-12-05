@@ -9,209 +9,246 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- styles communs -->
   <link rel="stylesheet" href="css/monde.css">
 
+  <style>
+    :root{
+      --or:#ffd700;
+      --ivoire:#fff8e6;
+      --fond-voile: rgba(0,0,0,.65);
+    }
 
-<style>
-  :root{
-    --or:#ffd700;
-    --ivoire:#fff8e6;
-    --fond-voile: rgba(0,0,0,.65);
-  }
+    /* ===== Base ===== */
+    body{
+      margin:0;
+      min-height:100vh;
+      padding:32px 16px 40px;
+      font-family:Georgia,serif;
+      color:var(--ivoire);
+      text-shadow:0 1px 3px rgba(0,0,0,.5);
+      background:url('images/fonds/fond_etoile_perso.webp') center/cover no-repeat fixed;
+    }
 
-  /* ===== Base ===== */
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:22px;
-    padding:24px;
-    font-family:Georgia,serif;
-    color:var(--ivoire);
-    text-shadow:0 1px 3px rgba(0,0,0,.5);
-    background:url('images/fonds/fond_etoile_perso.webp') center/cover no-repeat fixed;
-  }
+    main.page{
+      max-width:1000px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+      align-items:center;
+    }
 
-  /* ===== Blocs noirs ===== */
-  .bloc{
-    background:var(--fond-voile);
-    border-radius:20px;
-    padding:clamp(16px,4vw,32px);
-    max-width:800px;
-    width:min(92vw,800px);
-    text-align:center;
-    box-shadow:0 6px 20px rgba(0,0,0,.45);
-    backdrop-filter:blur(4px);
-    -webkit-backdrop-filter:blur(4px);
-  }
+    section{
+      width:100%;
+    }
 
-  /* ===== Titre en 2 lignes ===== */
-  .headline{
-    margin:0;
-    line-height:1.2;
-    text-align:center;
-    font-family:"Cinzel",serif;
-  }
-  .headline-small{
-    font-size:clamp(1.1rem, 0.9rem + 1.2vw, 1.6rem);
-    font-weight:600;
-    letter-spacing:.06em;
-    color:#ffeaa0;
-    text-shadow:0 0 10px rgba(0,0,0,.6);
-  }
-  .headline-big{
-    display:block;
-    font-size:clamp(1.9rem, 1.3rem + 3vw, 3.2rem);
-    font-weight:700;
-    background: linear-gradient(180deg,#fffdf4 0%,#ffeaa0 45%,#e6c05c 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    -webkit-text-fill-color: transparent; /* Safari */
-    text-shadow:0 0 12px rgba(255,215,0,.28);
-  }
+    /* ===== Blocs noirs ===== */
+    .bloc{
+      background:var(--fond-voile);
+      border-radius:20px;
+      padding:clamp(16px,4vw,32px);
+      max-width:800px;
+      width:min(92vw,800px);
+      text-align:center;
+      box-shadow:0 6px 20px rgba(0,0,0,.45);
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
+      margin:0 auto 10px;
+    }
 
-  /* ===== Intro & phrase spéciale ===== */
-  .lead{
-    margin:0 0 .8rem;
-    line-height:1.8;
-    font-size:1.15rem;
-  }
+    /* ===== Titre général (page 1 fusionnée) ===== */
+    .intro-title{
+      margin:0 0 .3rem;
+      font-family:"Cinzel",serif;
+      font-size:clamp(2.2rem, 1.4rem + 3vw, 3.3rem);
+      color:#ffd43b;
+      text-align:center;
+      text-shadow:0 0 14px rgba(0,0,0,.75);
+    }
+    .intro-sub{
+      margin:0 0 1rem;
+      text-align:center;
+      font-size:1.15rem;
+      letter-spacing:.08em;
+    }
 
-  .special{
-    margin:0;
-    font-family:'Cormorant Garamond', serif; /* lisible et élégante */
-    font-size:1.3rem;
-    line-height:1.8;
-    text-align:center;
-    letter-spacing:.5px;
-    color:#ffeaa0;
-    text-shadow:0 0 10px rgba(0,0,0,.6);
-  }
+    .intro-note{
+      font-size:1.1rem;
+      line-height:1.7;
+    }
 
- /* Effet de lumière qui se balade – titre + mots-clés */
-.glow-gradient, .glow-sweep{
-  display:inline-block;
-  background: linear-gradient(
-    90deg,
-    #ffeaa0 0%,
-    #ffffff 20%,
-    #ffd700 50%,
-    #ffffff 80%,
-    #ffeaa0 100%
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent; /* Safari */
-  animation: shineSweep 3.2s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 6px rgba(255,255,200,.40),
-    0 0 14px rgba(255,215,0,.30);
-}
+    .intro-link{
+      text-align:center;
+      font-size:1.02rem;
+      margin-top:8px;
+    }
+    .intro-link a{
+      color:#ffeaa0;
+      text-decoration:underline;
+    }
 
-@keyframes shineSweep{
-  0%{
-    background-position: 0% 50%;
-    text-shadow:
-      0 0 6px rgba(255,255,200,.40),
-      0 0 14px rgba(255,215,0,.30);
-  }
-  50%{
-    background-position: 50% 50%;
-    text-shadow:
-      0 0 12px rgba(255,255,255,.90),
-      0 0 22px rgba(255,215,0,.60);
-  }
-  100%{
-    background-position: 100% 50%;
-    text-shadow:
-      0 0 6px rgba(255,255,200,.40),
-      0 0 14px rgba(255,215,0,.30);
-  }
-}
+    /* ===== Titre en 2 lignes (bloc coulisses) ===== */
+    .headline{
+      margin:0;
+      line-height:1.2;
+      text-align:center;
+      font-family:"Cinzel",serif;
+    }
+    .headline-small{
+      font-size:clamp(1.1rem, 0.9rem + 1.2vw, 1.6rem);
+      font-weight:600;
+      letter-spacing:.06em;
+      color:#ffeaa0;
+      text-shadow:0 0 10px rgba(0,0,0,.6);
+      text-transform:uppercase;
+    }
+    .headline-big{
+      display:block;
+      font-size:clamp(1.9rem, 1.3rem + 3vw, 3.2rem);
+      font-weight:700;
+      background: linear-gradient(180deg,#fffdf4 0%,#ffeaa0 45%,#e6c05c 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color: transparent; /* Safari */
+      text-shadow:0 0 12px rgba(255,215,0,.28);
+    }
 
-/* Mots-clés renforcés (gros, lisibles, sans italique) – version fusionnée */
-.special .kw{
-  font-weight:900;
-  font-size:1.08em;
-  letter-spacing:.015em;
-  white-space:nowrap;
-  /* brillance par défaut pour rester lisible hors animation */
-  text-shadow:
-    0 0 4px rgba(255,255,255,.85),
-    0 0 10px rgba(255,255,200,.55),
-    0 0 16px rgba(255,215,0,.35);
-}
+    /* ===== Intro & phrase spéciale ===== */
+    .lead{
+      margin:0 0 .8rem;
+      line-height:1.8;
+      font-size:1.15rem;
+    }
 
-/* Mobile : éviter les débords si l’écran est étroit */
-@media (max-width: 400px){
-  .special .kw{ white-space: normal; }
-}
+    .special{
+      margin:0;
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.3rem;
+      line-height:1.8;
+      text-align:center;
+      letter-spacing:.5px;
+      color:#ffeaa0;
+      text-shadow:0 0 10px rgba(0,0,0,.6);
+    }
 
-/* Accessibilité : réduire les animations si demandé */
-@media (prefers-reduced-motion: reduce){
-  .glow-gradient, .glow-sweep{ animation: none !important; }
-}
+    /* Effet de lumière qui se balade – titre + mots-clés */
+    .glow-gradient, .glow-sweep{
+      display:inline-block;
+      background: linear-gradient(
+        90deg,
+        #ffeaa0 0%,
+        #ffffff 20%,
+        #ffd700 50%,
+        #ffffff 80%,
+        #ffeaa0 100%
+      );
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: shineSweep 3.2s ease-in-out infinite alternate;
+      text-shadow:
+        0 0 6px rgba(255,255,200,.40),
+        0 0 14px rgba(255,215,0,.30);
+    }
 
-  /* ===== Boutons ===== */
-  .buttons{
-    display:grid;
-    gap:14px;
-    justify-items:center;
-    margin-top:10px;
-  }
-  .btn{
-    min-height:48px;
-    padding:0 20px;
-    border-radius:14px;
-    font-size:1.05rem;
-    text-decoration:none;
-    display:inline-grid;
-    place-items:center;
-    width:min(360px,90%);
-    transition:transform .2s, box-shadow .2s;
-  }
-  .btn-gold{
-    color:#241a00;
-    background:linear-gradient(180deg,#fff6bf 0%,#ffe48a 45%,#f3c34f 100%);
-    border:1px solid #d5a93a;
-    box-shadow: inset 0 2px 8px rgba(255,255,255,.35), 0 6px 16px rgba(0,0,0,.35);
-  }
-  .btn-gold:hover{
-    transform:translateY(-2px);
-    box-shadow: inset 0 2px 10px rgba(255,255,255,.5), 0 10px 20px rgba(0,0,0,.4);
-  }
-  .btn-ghost{
-    color:var(--ivoire);
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.25);
-  }
-  .btn-ghost:hover{
-    background:rgba(255,255,255,.18);
-    transform:translateY(-2px);
-  }
+    @keyframes shineSweep{
+      0%{
+        background-position: 0% 50%;
+        text-shadow:
+          0 0 6px rgba(255,255,200,.40),
+          0 0 14px rgba(255,215,0,.30);
+      }
+      50%{
+        background-position: 50% 50%;
+        text-shadow:
+          0 0 12px rgba(255,255,255,.90),
+          0 0 22px rgba(255,215,0,.60);
+      }
+      100%{
+        background-position: 100% 50%;
+        text-shadow:
+          0 0 6px rgba(255,255,200,.40),
+          0 0 14px rgba(255,215,0,.30);
+      }
+    }
 
-  /* ===== Responsif & accessibilité ===== */
-  @media (max-width:400px){
-    .special .kw{ white-space:normal; } /* évite les débords */
-    .special{ font-size:1.2rem; }
-  }
+    /* Mots-clés renforcés */
+    .special .kw{
+      font-weight:900;
+      font-size:1.08em;
+      letter-spacing:.015em;
+      white-space:nowrap;
+      text-shadow:
+        0 0 4px rgba(255,255,255,.85),
+        0 0 10px rgba(255,255,200,.55),
+        0 0 16px rgba(255,215,0,.35);
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    .glow-gradient{ animation:none !important }
-  }
-</style>
+    /* ===== Boutons ===== */
+    .buttons{
+      display:grid;
+      gap:14px;
+      justify-items:center;
+      margin-top:10px;
+    }
+    .btn{
+      min-height:48px;
+      padding:0 20px;
+      border-radius:14px;
+      font-size:1.05rem;
+      text-decoration:none;
+      display:inline-grid;
+      place-items:center;
+      width:min(360px,90%);
+      transition:transform .2s, box-shadow .2s;
+      cursor:pointer;
+    }
+    .btn-gold{
+      color:#241a00;
+      background:linear-gradient(180deg,#fff6bf 0%,#ffe48a 45%,#f3c34f 100%);
+      border:1px solid #d5a93a;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,.35), 0 6px 16px rgba(0,0,0,.35);
+    }
+    .btn-gold:hover{
+      transform:translateY(-2px);
+      box-shadow: inset 0 2px 10px rgba(255,255,255,.5), 0 10px 20px rgba(0,0,0,.4);
+    }
+    .btn-ghost{
+      color:var(--ivoire);
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.25);
+    }
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.18);
+      transform:translateY(-2px);
+    }
+    .btn-intro{
+      margin:6px auto 4px;
+      display:block;
+    }
 
+    /* ===== Responsif & accessibilité ===== */
+    @media (max-width: 400px){
+      .special .kw{ white-space: normal; }
+      .special{ font-size:1.2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .glow-gradient,
+      .glow-sweep{
+        animation:none !important;
+      }
+    }
+  </style>
 </head>
-<body>
-  <body class="hud-hidden">
 
-   <!-- === Jauge d'énergie === -->
+<body class="hud-hidden">
+
+  <!-- === Jauge d'énergie === -->
   <div class="energy-wrap" role="status" aria-live="polite">
     <div class="energy-icon">✨</div>
     <div class="energy-label">Arzanskân</div>
@@ -221,6 +258,7 @@
     <div class="energy-pct" id="energyPct">100%</div>
   </div>
 
+  <!-- Overlay verrouillage jauge -->
   <div class="lock-overlay" id="lockOverlay">
     <div class="lock-card">
       <div class="lock-title">Ta jauge est vide… ⚡</div>
@@ -228,49 +266,73 @@
       <div class="play-area" id="playArea">
         <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
       </div>
-      <button class="btn" id="spawnBtn">Faire apparaître l’ingrédient</button>
-      <button class="btn" id="accessBtn">Recharger</button>
+      <button class="btn btn-gold" id="spawnBtn">Faire apparaître l’ingrédient</button>
+      <button class="btn btn-ghost" id="accessBtn">Recharger</button>
     </div>
   </div>
 
-  <!-- Bloc titre -->
-  <div class="bloc">
-    <p class="headline">
-      <span class="headline-small">Bienvenue dans les coulisses</span><br>
-      <span class="headline-big glow-gradient">d’Arzankia</span>
-</p>
-  </div>
+  <main class="page">
 
-  <!-- Bloc texte -->
-  <div class="bloc">
-    <p class="lead">Ici, les secrets prennent vie…</p>
-<p class="special">
-  Tu y découvriras tout ce qu’il faut savoir sur les
-  <span class="kw glow-sweep">mondes d’Arzankia</span>, sur les
-  <span class="kw glow-sweep">héros</span> qui les traversent, ainsi que des
-  <span class="kw glow-sweep">anecdotes inédites</span> et des
-  <span class="kw glow-sweep">révélations cachées</span>.
-</p>
-  </div>
+    <!-- ===================== SECTION 1 : INTRO ===================== -->
+    <section id="top">
+      <h1 class="intro-title">Les Héros d’Arzankia</h1>
+      <p class="intro-sub">L’aventure continue ici…</p>
 
-  <!-- Boutons -->
- <!-- Boutons -->
-<div class="buttons">
-  <a class="btn btn-gold" href="3.les_heros.html">Les Héros d’Arzankia</a>
-  <a class="btn btn-gold" href="3.les_mondes.html">Les Mondes d’Arzankia</a>
-  <a class="btn btn-gold" href="2.autrice.html">À propos de l'autrice</a>
-  <a class="btn btn-ghost" href="1.accueil.html">← Retour à l’accueil</a>
-</div>
+      <div class="bloc">
+        <p class="intro-note">
+          ✨ Certains passages secrets te mèneront à des endroits cachés du site…
+          Ouvre bien l’œil, aventurier d’Arzankia. ✨
+        </p>
+      </div>
 
+      <a href="#coulisses" class="btn btn-gold btn-intro">Les Coulisses d’Arzankia</a>
 
-    
-<script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
-<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+      <p class="intro-link">
+        Tu souhaites en savoir plus sur la <span class="kw glow-sweep">saga</span> ?<br>
+        Rends-toi sur la page
+        <a href="https://www.arzankia.fr" target="_blank" rel="noopener">www.arzankia.fr</a>
+        et dépose ton avis d’aventurier.
+      </p>
+    </section>
 
-<script>document.documentElement.classList.add('hud-hidden');</script>
+    <!-- ===================== SECTION 2 : COULISSES ===================== -->
+    <section id="coulisses">
+      <!-- Bloc titre -->
+      <div class="bloc">
+        <p class="headline">
+          <span class="headline-small">Bienvenue dans les coulisses</span><br>
+          <span class="headline-big glow-gradient">d’Arzankia</span>
+        </p>
+      </div>
 
-<script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
-<script defer src="js/quete.js"></script>  
-  
-  </body>
+      <!-- Bloc texte -->
+      <div class="bloc">
+        <p class="lead">Ici, les secrets prennent vie…</p>
+        <p class="special">
+          Tu y découvriras tout ce qu’il faut savoir sur les
+          <span class="kw glow-sweep">mondes d’Arzankia</span>, sur les
+          <span class="kw glow-sweep">héros</span> qui les traversent, ainsi que des
+          <span class="kw glow-sweep">anecdotes inédites</span> et des
+          <span class="kw glow-sweep">révélations cachées</span>.
+        </p>
+      </div>
+
+      <!-- Boutons -->
+      <div class="buttons">
+        <a class="btn btn-gold" href="3.les_heros.html">Les Héros d’Arzankia</a>
+        <a class="btn btn-gold" href="3.les_mondes.html">Les Mondes d’Arzankia</a>
+        <a class="btn btn-gold" href="2.autrice.html">À propos de l'autrice</a>
+        <a class="btn btn-ghost" href="#top">← Retour en haut de la page</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script defer src="js/base-pages.js"></script>
+  <script defer src="js/arz-core.js"></script>
+  <script>document.documentElement.classList.add('hud-hidden');</script>
+  <script defer src="js/sac-jauge.js"></script>
+  <script defer src="js/quete.js"></script>
+</body>
 </html>
