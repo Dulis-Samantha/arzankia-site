@@ -65,9 +65,9 @@
       font-family:"Cinzel",serif;
     }
     .headline-small{
-       margin:0 0 .3rem;
+      margin:0 0 .3rem;
       font-family:"Cinzel",serif;
-      font-size:clamp(2.2rem, 1.4rem + 3vw, 3.3rem);
+      font-size:clamp(1.8rem, 1.2rem + 2vw, 2.6rem); /* plus petit */
       color:#ffd43b;
       text-align:center;
       text-shadow:0 0 14px rgba(0,0,0,.75);
@@ -75,7 +75,7 @@
     .headline-big{
       margin:0 0 1rem;
       text-align:center;
-      font-size:1.15rem;
+      font-size:clamp(1rem, 0.9rem + 0.8vw, 1.3rem); /* plus discret */
       letter-spacing:.08em;
     }
 
@@ -86,12 +86,6 @@
     }
 
     /* ===== Texte spécial ===== */
-    .lead{
-      margin:0 0 .8rem;
-      line-height:1.8;
-      font-size:1.15rem;
-    }
-
     .special{
       margin:0;
       font-family:'Cormorant Garamond', serif;
@@ -101,6 +95,14 @@
       letter-spacing:.5px;
       color:#ffeaa0;
       text-shadow:0 0 10px rgba(0,0,0,.6);
+    }
+
+    /* Zone texte explicatif sans bloc noir */
+    .explication{
+      max-width:800px;
+      width:min(92vw,800px);
+      margin:12px auto 0;
+      text-align:center;
     }
 
     /* Effet de lumière – titre + mots-clés */
@@ -187,6 +189,16 @@
       transform:translateY(-2px);
       box-shadow: inset 0 2px 10px rgba(255,255,255,.5), 0 10px 20px rgba(0,0,0,.4);
     }
+    .btn-ghost{
+      color:var(--ivoire);
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.25);
+    }
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.18);
+      transform:translateY(-2px);
+    }
+
     .intro-link{
       text-align:center;
       font-size:1.02rem;
@@ -248,21 +260,21 @@
           <span class="headline-small">Bienvenue dans les coulisses d’Arzankia,</span><br>
           <span class="headline-big glow-gradient">l’aventure continue ici.</span>
         </p>
-
-        <p class="intro-note">
-          ✨ Certains passages secrets te mèneront à des endroits cachés du site…
-          Ouvre bien l’œil, aventurier d’Arzankia. ✨
-        </p>
-      </div>
-
-      <!-- Texte explication -->
-      <div class="bloc">
+    
+      <!-- Texte explication SANS bloc noir -->
+      <div class="explication">
         <p class="special">
           Tu y découvriras tout ce qu’il faut savoir sur les
           <span class="kw glow-sweep">mondes d’Arzankia</span>, sur les
           <span class="kw glow-sweep">héros</span> qui les traversent, ainsi que des
           <span class="kw glow-sweep">anecdotes inédites</span> et des
           <span class="kw glow-sweep">révélations cachées</span>.
+        </p>
+      </div>
+
+         <p class="intro-note">
+          ✨ Certains passages secrets te mèneront à des endroits cachés du site…
+          Ouvre bien l’œil, aventurier d’Arzankia. ✨
         </p>
       </div>
 
