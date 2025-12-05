@@ -57,38 +57,7 @@
       margin:0 auto 10px;
     }
 
-    /* ===== Titre général (page 1 fusionnée) ===== */
-    .intro-title{
-      margin:0 0 .3rem;
-      font-family:"Cinzel",serif;
-      font-size:clamp(2.2rem, 1.4rem + 3vw, 3.3rem);
-      color:#ffd43b;
-      text-align:center;
-      text-shadow:0 0 14px rgba(0,0,0,.75);
-    }
-    .intro-sub{
-      margin:0 0 1rem;
-      text-align:center;
-      font-size:1.15rem;
-      letter-spacing:.08em;
-    }
-
-    .intro-note{
-      font-size:1.1rem;
-      line-height:1.7;
-    }
-
-    .intro-link{
-      text-align:center;
-      font-size:1.02rem;
-      margin-top:8px;
-    }
-    .intro-link a{
-      color:#ffeaa0;
-      text-decoration:underline;
-    }
-
-    /* ===== Titre en 2 lignes (bloc coulisses) ===== */
+    /* ===== Titre principal ===== */
     .headline{
       margin:0;
       line-height:1.2;
@@ -96,7 +65,7 @@
       font-family:"Cinzel",serif;
     }
     .headline-small{
-      font-size:clamp(1.1rem, 0.9rem + 1.2vw, 1.6rem);
+      font-size:clamp(1.3rem, 1.1rem + 1.4vw, 1.9rem);
       font-weight:600;
       letter-spacing:.06em;
       color:#ffeaa0;
@@ -105,7 +74,7 @@
     }
     .headline-big{
       display:block;
-      font-size:clamp(1.9rem, 1.3rem + 3vw, 3.2rem);
+      font-size:clamp(2rem, 1.5rem + 3vw, 3.2rem);
       font-weight:700;
       background: linear-gradient(180deg,#fffdf4 0%,#ffeaa0 45%,#e6c05c 100%);
       -webkit-background-clip:text;
@@ -115,7 +84,13 @@
       text-shadow:0 0 12px rgba(255,215,0,.28);
     }
 
-    /* ===== Intro & phrase spéciale ===== */
+    .intro-note{
+      font-size:1.1rem;
+      line-height:1.7;
+      margin:0;
+    }
+
+    /* ===== Texte spécial ===== */
     .lead{
       margin:0 0 .8rem;
       line-height:1.8;
@@ -133,7 +108,7 @@
       text-shadow:0 0 10px rgba(0,0,0,.6);
     }
 
-    /* Effet de lumière qui se balade – titre + mots-clés */
+    /* Effet de lumière – titre + mots-clés */
     .glow-gradient, .glow-sweep{
       display:inline-block;
       background: linear-gradient(
@@ -176,8 +151,8 @@
       }
     }
 
-    /* Mots-clés renforcés */
-    .special .kw{
+    /* Mots-clés renforcés : partout */
+    .kw{
       font-weight:900;
       font-size:1.08em;
       letter-spacing:.015em;
@@ -217,23 +192,19 @@
       transform:translateY(-2px);
       box-shadow: inset 0 2px 10px rgba(255,255,255,.5), 0 10px 20px rgba(0,0,0,.4);
     }
-    .btn-ghost{
-      color:var(--ivoire);
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.25);
+    .intro-link{
+      text-align:center;
+      font-size:1.02rem;
+      margin-top:16px;
     }
-    .btn-ghost:hover{
-      background:rgba(255,255,255,.18);
-      transform:translateY(-2px);
-    }
-    .btn-intro{
-      margin:6px auto 4px;
-      display:block;
+    .intro-link a{
+      color:#ffeaa0;
+      text-decoration:underline;
     }
 
     /* ===== Responsif & accessibilité ===== */
     @media (max-width: 400px){
-      .special .kw{ white-space: normal; }
+      .kw{ white-space: normal; }
       .special{ font-size:1.2rem; }
     }
 
@@ -273,41 +244,24 @@
 
   <main class="page">
 
-    <!-- ===================== SECTION 1 : INTRO ===================== -->
+    <!-- ===================== SECTION COULISSES ===================== -->
     <section id="top">
-      <h1 class="intro-title">Les Héros d’Arzankia</h1>
-      <p class="intro-sub">L’aventure continue ici…</p>
 
+      <!-- Titre + phrase "passages secrets" -->
       <div class="bloc">
+        <p class="headline">
+          <span class="headline-small">Bienvenue dans les coulisses d’Arzankia,</span><br>
+          <span class="headline-big glow-gradient">l’aventure continue ici.</span>
+        </p>
+
         <p class="intro-note">
           ✨ Certains passages secrets te mèneront à des endroits cachés du site…
           Ouvre bien l’œil, aventurier d’Arzankia. ✨
         </p>
       </div>
 
-      <a href="#coulisses" class="btn btn-gold btn-intro">Les Coulisses d’Arzankia</a>
-
-      <p class="intro-link">
-        Tu souhaites en savoir plus sur la <span class="kw glow-sweep">saga</span> ?<br>
-        Rends-toi sur la page
-        <a href="https://www.arzankia.fr" target="_blank" rel="noopener">www.arzankia.fr</a>
-        et dépose ton avis d’aventurier.
-      </p>
-    </section>
-
-    <!-- ===================== SECTION 2 : COULISSES ===================== -->
-    <section id="coulisses">
-      <!-- Bloc titre -->
+      <!-- Texte explication -->
       <div class="bloc">
-        <p class="headline">
-          <span class="headline-small">Bienvenue dans les coulisses</span><br>
-          <span class="headline-big glow-gradient">d’Arzankia</span>
-        </p>
-      </div>
-
-      <!-- Bloc texte -->
-      <div class="bloc">
-        <p class="lead">Ici, les secrets prennent vie…</p>
         <p class="special">
           Tu y découvriras tout ce qu’il faut savoir sur les
           <span class="kw glow-sweep">mondes d’Arzankia</span>, sur les
@@ -322,8 +276,16 @@
         <a class="btn btn-gold" href="3.les_heros.html">Les Héros d’Arzankia</a>
         <a class="btn btn-gold" href="3.les_mondes.html">Les Mondes d’Arzankia</a>
         <a class="btn btn-gold" href="2.autrice.html">À propos de l'autrice</a>
-        <a class="btn btn-ghost" href="#top">← Retour en haut de la page</a>
       </div>
+
+      <!-- Lien vers avis -->
+      <p class="intro-link">
+        Tu souhaites en savoir plus sur la <span class="kw glow-sweep">saga</span> ?<br>
+        Rends-toi sur la page
+        <a href="https://www.arzankia.fr" target="_blank" rel="noopener">www.arzankia.fr</a>
+        et dépose ton avis d’aventurier.
+      </p>
+
     </section>
 
   </main>
