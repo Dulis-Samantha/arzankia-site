@@ -9,17 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- styles communs -->
   <link rel="stylesheet" href="css/monde.css">
 
   <style>
     :root{
-      --or:#ffd700;
       --ivoire:#fff8e6;
-      --fond-voile: rgba(0,0,0,.65);
+      --fond-voile:rgba(0,0,0,.65);
     }
 
-    /* ===== Base ===== */
     body{
       margin:0;
       min-height:100vh;
@@ -39,11 +36,31 @@
       align-items:center;
     }
 
-    section{
-      width:100%;
+    /* ===== TITRE ===== */
+    .title-container{
+      text-align:center;
+      max-width:900px;
+      margin:0 auto 10px;
     }
 
-    /* ===== Blocs noirs ===== */
+    .headline-small{
+      font-family:"Cinzel";
+      font-size:clamp(1.8rem, 1.2rem + 2vw, 2.6rem);
+      font-weight:700;
+      color:#ffd43b;
+      text-shadow:0 0 14px rgba(0,0,0,.75);
+      margin:0;
+    }
+
+    .headline-big{
+      font-family:"Cinzel";
+      font-size:clamp(1.1rem, 0.9rem + 0.8vw, 1.3rem);
+      margin:4px 0 12px;
+      letter-spacing:.05em;
+      color:#ffeaa0;
+    }
+
+    /* ===== Bloc noir ===== */
     .bloc{
       background:var(--fond-voile);
       border-radius:20px;
@@ -53,30 +70,7 @@
       text-align:center;
       box-shadow:0 6px 20px rgba(0,0,0,.45);
       backdrop-filter:blur(4px);
-      -webkit-backdrop-filter:blur(4px);
-      margin:0 auto 10px;
-    }
-
-    /* ===== Titre principal ===== */
-    .headline{
-      margin:0;
-      line-height:1.2;
-      text-align:center;
-      font-family:"Cinzel",serif;
-    }
-    .headline-small{
-      margin:0 0 .3rem;
-      font-family:"Cinzel",serif;
-      font-size:clamp(1.8rem, 1.2rem + 2vw, 2.6rem); /* plus petit */
-      color:#ffd43b;
-      text-align:center;
-      text-shadow:0 0 14px rgba(0,0,0,.75);
-    }
-    .headline-big{
-      margin:0 0 1rem;
-      text-align:center;
-      font-size:clamp(1rem, 0.9rem + 0.8vw, 1.3rem); /* plus discret */
-      letter-spacing:.08em;
+      margin:0 auto;
     }
 
     .intro-note{
@@ -85,75 +79,25 @@
       margin:0;
     }
 
-    /* ===== Texte spécial ===== */
+    /* ===== Texte explicatif hors bloc ===== */
+    .explication{
+      max-width:800px;
+      margin:16px auto 0;
+      text-align:center;
+    }
+
     .special{
-      margin:0;
-      font-family:'Cormorant Garamond', serif;
+      font-family:'Cormorant Garamond';
       font-size:1.3rem;
       line-height:1.8;
-      text-align:center;
-      letter-spacing:.5px;
       color:#ffeaa0;
+      margin:0;
       text-shadow:0 0 10px rgba(0,0,0,.6);
     }
 
-    /* Zone texte explicatif sans bloc noir */
-    .explication{
-      max-width:800px;
-      width:min(92vw,800px);
-      margin:12px auto 0;
-      text-align:center;
-    }
-
-    /* Effet de lumière – titre + mots-clés */
-    .glow-gradient, .glow-sweep{
-      display:inline-block;
-      background: linear-gradient(
-        90deg,
-        #ffeaa0 0%,
-        #ffffff 20%,
-        #ffd700 50%,
-        #ffffff 80%,
-        #ffeaa0 100%
-      );
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-      animation: shineSweep 3.2s ease-in-out infinite alternate;
-      text-shadow:
-        0 0 6px rgba(255,255,200,.40),
-        0 0 14px rgba(255,215,0,.30);
-    }
-
-    @keyframes shineSweep{
-      0%{
-        background-position: 0% 50%;
-        text-shadow:
-          0 0 6px rgba(255,255,200,.40),
-          0 0 14px rgba(255,215,0,.30);
-      }
-      50%{
-        background-position: 50% 50%;
-        text-shadow:
-          0 0 12px rgba(255,255,255,.90),
-          0 0 22px rgba(255,215,0,.60);
-      }
-      100%{
-        background-position: 100% 50%;
-        text-shadow:
-          0 0 6px rgba(255,255,200,.40),
-          0 0 14px rgba(255,215,0,.30);
-      }
-    }
-
-    /* Mots-clés renforcés : partout */
     .kw{
       font-weight:900;
       font-size:1.08em;
-      letter-spacing:.015em;
-      white-space:nowrap;
       text-shadow:
         0 0 4px rgba(255,255,255,.85),
         0 0 10px rgba(255,255,200,.55),
@@ -165,103 +109,64 @@
       display:grid;
       gap:14px;
       justify-items:center;
-      margin-top:10px;
+      margin-top:16px;
     }
+
     .btn{
       min-height:48px;
       padding:0 20px;
       border-radius:14px;
-      font-size:1.05rem;
-      text-decoration:none;
+      width:min(360px,90%);
       display:inline-grid;
       place-items:center;
-      width:min(360px,90%);
-      transition:transform .2s, box-shadow .2s;
-      cursor:pointer;
-    }
-    .btn-gold{
-      color:#241a00;
-      background:linear-gradient(180deg,#fff6bf 0%,#ffe48a 45%,#f3c34f 100%);
+      background:linear-gradient(180deg,#fff6bf,#ffe48a 45%,#f3c34f);
       border:1px solid #d5a93a;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,.35), 0 6px 16px rgba(0,0,0,.35);
+      color:#241a00;
+      font-size:1.05rem;
+      text-decoration:none;
+      transition:transform .2s, box-shadow .2s;
     }
-    .btn-gold:hover{
+
+    .btn:hover{
       transform:translateY(-2px);
-      box-shadow: inset 0 2px 10px rgba(255,255,255,.5), 0 10px 20px rgba(0,0,0,.4);
-    }
-    .btn-ghost{
-      color:var(--ivoire);
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.25);
-    }
-    .btn-ghost:hover{
-      background:rgba(255,255,255,.18);
-      transform:translateY(-2px);
+      box-shadow: inset 0 2px 10px rgba(255,255,255,.5),0 10px 20px rgba(0,0,0,.4);
     }
 
     .intro-link{
       text-align:center;
-      font-size:1.02rem;
-      margin-top:16px;
-    }
-    .intro-link a{
-      color:#ffeaa0;
-      text-decoration:underline;
-    }
-
-    /* ===== Responsif & accessibilité ===== */
-    @media (max-width: 400px){
-      .kw{ white-space: normal; }
-      .special{ font-size:1.2rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .glow-gradient,
-      .glow-sweep{
-        animation:none !important;
-      }
+      margin-top:14px;
     }
   </style>
 </head>
 
 <body class="hud-hidden">
 
-  <!-- === Jauge d'énergie === -->
-  <div class="energy-wrap" role="status" aria-live="polite">
+  <!-- Jauge -->
+  <div class="energy-wrap">
     <div class="energy-icon">✨</div>
     <div class="energy-label">Arzanskân</div>
-    <div class="energy-bar">
-      <div class="energy-fill" id="energyFill"></div>
-    </div>
+    <div class="energy-bar"><div class="energy-fill" id="energyFill"></div></div>
     <div class="energy-pct" id="energyPct">100%</div>
   </div>
 
-  <!-- Overlay verrouillage jauge -->
-  <div class="lock-overlay" id="lockOverlay">
-    <div class="lock-card">
-      <div class="lock-title">Ta jauge est vide… ⚡</div>
-      <div class="lock-desc">Pour poursuivre ta visite d’Arzankia, récolte un ingrédient magique !</div>
-      <div class="play-area" id="playArea">
-        <div class="ingredient float" id="ingredient" style="display:none">🌿</div>
-      </div>
-      <button class="btn btn-gold" id="spawnBtn">Faire apparaître l’ingrédient</button>
-      <button class="btn btn-ghost" id="accessBtn">Recharger</button>
-    </div>
-  </div>
-
   <main class="page">
-
-    <!-- ===================== SECTION COULISSES ===================== -->
     <section id="top">
 
-      <!-- Titre + phrase "passages secrets" -->
+      <!-- ===== Titre HORS BLOC ===== -->
+      <div class="title-container">
+        <p class="headline-small">Bienvenue dans les coulisses d’Arzankia,</p>
+        <p class="headline-big glow-gradient">l’aventure continue ici.</p>
+      </div>
+
+      <!-- ===== Bloc noir uniquement pour passages secrets ===== -->
       <div class="bloc">
-        <p class="headline">
-          <span class="headline-small">Bienvenue dans les coulisses d’Arzankia,</span><br>
-          
+        <p class="intro-note">
+          ✨ Certains passages secrets te mèneront à des endroits cachés du site…  
+          Ouvre bien l’œil, aventurier d’Arzankia. ✨
         </p>
-    
-      <!-- Texte explication SANS bloc noir -->
+      </div>
+
+      <!-- ===== Texte explicatif hors bloc ===== -->
       <div class="explication">
         <p class="special">
           Tu y découvriras tout ce qu’il faut savoir sur les
@@ -272,38 +177,28 @@
         </p>
       </div>
 
-        <span class="headline-big glow-gradient">l’aventure continue ici.</span>
-        
-         <p class="intro-note">
-          ✨ Certains passages secrets te mèneront à des endroits cachés du site…
-          Ouvre bien l’œil, aventurier d’Arzankia. ✨
-        </p>
-      </div>
-
-      <!-- Boutons -->
+      <!-- ===== Boutons ===== -->
       <div class="buttons">
-        <a class="btn btn-gold" href="3.les_heros.html">Les Héros d’Arzankia</a>
-        <a class="btn btn-gold" href="3.les_mondes.html">Les Mondes d’Arzankia</a>
-        <a class="btn btn-gold" href="2.autrice.html">À propos de l'autrice</a>
+        <a class="btn" href="3.les_heros.html">Les Héros d’Arzankia</a>
+        <a class="btn" href="3.les_mondes.html">Les Mondes d’Arzankia</a>
+        <a class="btn" href="2.autrice.html">À propos de l'autrice</a>
       </div>
 
-      <!-- Lien vers avis -->
+      <!-- ===== Lien avis ===== -->
       <p class="intro-link">
         Tu souhaites en savoir plus sur la <span class="kw glow-sweep">saga</span> ?<br>
-        Rends-toi sur la page
-        <a href="https://www.arzankia.fr" target="_blank" rel="noopener">www.arzankia.fr</a>
+        Rends-toi sur  
+        <a href="https://www.arzankia.fr" target="_blank">www.arzankia.fr</a>  
         et dépose ton avis d’aventurier.
       </p>
 
     </section>
-
   </main>
 
-  <!-- Scripts -->
   <script defer src="js/base-pages.js"></script>
   <script defer src="js/arz-core.js"></script>
-  <script>document.documentElement.classList.add('hud-hidden');</script>
   <script defer src="js/sac-jauge.js"></script>
   <script defer src="js/quete.js"></script>
+
 </body>
 </html>
