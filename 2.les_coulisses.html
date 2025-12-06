@@ -49,10 +49,11 @@
     main.page {
       max-width: 1000px;
       margin: 0 auto;
+      min-height: calc(100vh - 80px);
       display: flex;
       flex-direction: column;
-      gap: 28px;
       align-items: center;
+      justify-content: center; /* centre le bloc dans la hauteur */
     }
 
     section#top {
@@ -62,14 +63,8 @@
 
     /* ===== ANIMATIONS DOUCES ===== */
     @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ===== TITRE ===== */
@@ -98,9 +93,9 @@
       margin: 0;
     }
 
-    /* ===== Texte explicatif hors bloc ===== */
+    /* ===== Texte explicatif ===== */
     .explication {
-      max-width: 820px;
+      max-width: 760px;
       margin: 20px auto 0;
       text-align: center;
       animation: fade-up 0.8s ease-out 0.12s both;
@@ -109,7 +104,7 @@
     .special {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.25rem;
-      line-height: 1.8;
+      line-height: 1.9;
       color: var(--or-doux);
       margin: 0;
       text-shadow: 0 0 10px rgba(0,0,0,.6);
@@ -117,20 +112,41 @@
 
     .kw {
       font-weight: 900;
-      font-size: 1.08em;
+      font-size: 1.06em;
+    }
+
+    /* on garde le glow fort uniquement sur "révélations cachées" */
+    .kw-glow {
       text-shadow:
         0 0 4px rgba(255,255,255,.85),
         0 0 10px rgba(255,255,200,.55),
         0 0 16px rgba(255,215,0,.35);
     }
 
+    @keyframes glow-sweep {
+      from {
+        text-shadow:
+          0 0 4px rgba(255,255,255,.7),
+          0 0 8px rgba(255,220,150,.4);
+      }
+      to {
+        text-shadow:
+          0 0 6px rgba(255,255,255,1),
+          0 0 14px rgba(255,220,150,.9);
+      }
+    }
+
+    .glow-sweep {
+      animation: glow-sweep 2.6s ease-in-out infinite alternate;
+    }
+
     /* ===== Bloc noir (passages secrets) ===== */
     .bloc {
       background: var(--fond-voile);
       border-radius: 24px;
-      padding: clamp(16px, 4vw, 28px);
-      max-width: 780px;
-      width: min(92vw, 780px);
+      padding: clamp(16px, 4vw, 26px);
+      max-width: 760px;
+      width: min(92vw, 760px);
       text-align: center;
       box-shadow: 0 6px 20px rgba(0,0,0,.55);
       backdrop-filter: blur(4px);
@@ -139,7 +155,7 @@
     }
 
     .intro-note {
-      font-size: 1.05rem;
+      font-size: 1.03rem;
       line-height: 1.7;
       margin: 0;
     }
@@ -211,24 +227,6 @@
       filter: brightness(1.08);
     }
 
-    /* Petite animation douce de glow sur les mots-clés si glow-sweep existe pas déjà */
-    @keyframes glow-sweep {
-      from {
-        text-shadow:
-          0 0 4px rgba(255,255,255,.7),
-          0 0 8px rgba(255,220,150,.4);
-      }
-      to {
-        text-shadow:
-          0 0 6px rgba(255,255,255,1),
-          0 0 14px rgba(255,220,150,.9);
-      }
-    }
-
-    .glow-sweep {
-      animation: glow-sweep 2.6s ease-in-out infinite alternate;
-    }
-
     /* Réduction des animations si l'utilisateur préfère */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -242,15 +240,10 @@
       body {
         padding: 24px 12px 32px;
       }
-
-      .title-container {
-        margin-bottom: 10px;
+      main.page {
+        min-height: auto;
+        justify-content: flex-start;
       }
-
-      .bloc {
-        margin-top: 20px;
-      }
-
       .special {
         font-size: 1.15rem;
       }
@@ -271,28 +264,28 @@
   <main class="page">
     <section id="top" aria-labelledby="coulisses-title">
 
-      <!-- ===== Titre HORS BLOC ===== -->
+      <!-- ===== Titre ===== -->
       <div class="title-container">
         <h1 id="coulisses-title" class="headline-small">
           Les coulisses d’Arzankia
         </h1>
         <p class="headline-sub">
-          Le portail des secrets, des mondes cachés et des héros d’Arzankia.
+          Ici, tu passes derrière le décor de la saga.
         </p>
       </div>
 
-      <!-- ===== Texte explicatif hors bloc ===== -->
+      <!-- ===== Texte explicatif ===== -->
       <div class="explication">
         <p class="special">
-          Tu y découvriras tout ce qu’il faut savoir sur les
-          <span class="kw glow-sweep">mondes d’Arzankia</span>, sur les
-          <span class="kw glow-sweep">héros</span> qui les traversent, ainsi que des
-          <span class="kw glow-sweep">anecdotes inédites</span> et des
-          <span class="kw glow-sweep">révélations cachées</span>.
+          Dans cette partie du site, tu vas explorer les
+          <span class="kw">mondes d’Arzankia</span>, faire connaissance avec ses
+          <span class="kw">héros</span> et découvrir des
+          <span class="kw">anecdotes inédites</span>, des coulisses et quelques
+          <span class="kw kw-glow glow-sweep">révélations cachées</span>…
         </p>
       </div>
 
-      <!-- ===== Bloc noir uniquement pour passages secrets ===== -->
+      <!-- ===== Bloc noir passages secrets ===== -->
       <div class="bloc" aria-label="Message secret">
         <p class="intro-note">
           ✨ Certains passages secrets te mèneront à des endroits cachés du site…<br>
@@ -309,7 +302,7 @@
 
       <!-- ===== Lien avis / achat ===== -->
       <p class="intro-link">
-        Tu souhaites en savoir plus sur la <span class="kw glow-sweep">saga</span> ?<br>
+        Tu souhaites en savoir plus sur la <span class="kw kw-glow">saga</span> ?<br>
         Rends-toi sur
         <a href="https://www.arzankia.fr" target="_blank" rel="noopener">
           www.arzankia.fr
