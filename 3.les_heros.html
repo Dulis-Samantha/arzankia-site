@@ -32,7 +32,12 @@
     .container{
       max-width:960px;
       margin:0 auto 1.5em;
-      background: radial-gradient(circle at top, rgba(0,0,0,.75), rgba(0,0,0,.88));
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.85) 0%,
+        rgba(0,0,0,0.65) 45%,
+        rgba(0,0,0,0.35) 100%
+      );
       border-radius:18px;
       padding:2.2em 2.2em 2.4em;
       border:1px solid rgba(255,255,255,.08);
@@ -118,9 +123,10 @@
     /* ——— Grille des héros ——— */
     .hero-buttons{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-      gap:.9rem;
+      grid-template-columns:repeat(4,minmax(140px,1fr));
+      gap:.9rem 1rem;
       align-items:center;
+      justify-items:center;
       margin-top:1.2rem;
     }
 
@@ -138,6 +144,7 @@
       border:1px solid rgba(255,255,255,.06);
       box-shadow:inset 0 0 10px rgba(255,200,100,.25), 0 4px 10px rgba(0,0,0,.35);
       transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+      max-width:200px;
     }
 
     .hero-buttons a:hover{
@@ -146,7 +153,12 @@
       box-shadow:inset 0 0 14px rgba(255,210,120,.35), 0 6px 14px rgba(0,0,0,.45);
     }
 
-    /* Héros principal : Raphaël mis légèrement en avant */
+    /* Raphaël : première ligne, centré, style héros principal */
+    .hero-buttons a:nth-child(1){
+      grid-column:1 / -1;
+      max-width:220px;
+    }
+
     .hero-buttons a.hero-main{
       background:linear-gradient(145deg,#f7c96a,#f19b3a);
       color:#3a1c00;
@@ -156,6 +168,12 @@
     .hero-buttons a.hero-main:hover{
       transform:translateY(-3px);
       filter:brightness(1.08);
+    }
+
+    /* Paola + Fanfan sur la deuxième ligne (2 colonnes chacun) */
+    .hero-buttons a:nth-child(2),
+    .hero-buttons a:nth-child(3){
+      grid-column:span 2;
     }
 
     /* ——— Mobile : 2 colonnes fixes ——— */
@@ -171,6 +189,13 @@
         padding:.85em .6em;
         font-size:.95rem;
         border-radius:12px;
+        max-width:none;
+      }
+      /* on enlève la mise en page spéciale sur mobile */
+      .hero-buttons a:nth-child(1),
+      .hero-buttons a:nth-child(2),
+      .hero-buttons a:nth-child(3){
+        grid-column:auto;
       }
     }
 
@@ -379,8 +404,12 @@
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros</p>
 
     <div class="hero-buttons">
+      <!-- 1 : Raphaël -->
       <a href="ci_raphael.html" class="hero-main">Raphaël</a>
+      <!-- 2 : Paola + Fanfan -->
+      <a href="ci_paola.html">Paola</a>
       <a href="ci_fanfan.html">Fanfan</a>
+      <!-- 3 : les autres -->
       <a href="ci_antony.html">Antony</a>
       <a href="ci_esteban.html">Esteban</a>
       <a href="ci_louise.html">Louise</a>
@@ -391,7 +420,6 @@
       <a href="ci_maxime.html">Maxime</a>
       <a href="ci_lizea.html">Lizéa</a>
       <a href="ci_ysaak.html">Ysaak</a>
-      <a href="ci_paola.html">Paola</a>
       <a href="#" id="btnAlicia">Alicia</a>
     </div>
 
