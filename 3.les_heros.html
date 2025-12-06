@@ -39,7 +39,7 @@
         rgba(0,0,0,0.35) 100%
       );
       border-radius:18px;
-      padding:2.2em 2.2em 2.4em;
+      padding:2.6em 2.2em 2.8em; /* un peu plus d’air */
       border:1px solid rgba(255,255,255,.08);
       box-shadow:0 14px 40px var(--verre-ombre);
       backdrop-filter:blur(6px);
@@ -63,7 +63,7 @@
       justify-content: center;
       flex-wrap: wrap;
       font-size: 1.15rem;
-      margin: 0 auto 1.4em;
+      margin: 0 auto 1.8em;
       max-width: 52ch;
       opacity: .97;
       perspective: 800px;
@@ -73,14 +73,13 @@
       display: inline-block;
       opacity: 0;
       transform: scale(0.3) translate(0,0);
-      animation: magicOnce 7s ease-in-out forwards; /* cycle un peu plus court */
+      animation: magicOnce 7s ease-in-out forwards;
       animation-delay: calc(var(--i) * 160ms);
       margin-right: 0.35em;
       will-change: transform, opacity, text-shadow;
       backface-visibility: hidden;
     }
 
-    /* Cycle unique : apparition → petite orbite → stabilisation finale */
     @keyframes magicOnce {
       0% {
         opacity: 0;
@@ -92,10 +91,10 @@
         transform: scale(1) translate(0,0) rotate(0deg);
         text-shadow: 0 0 6px rgba(255,215,0,.35);
       }
-      40% { /* stable */
+      40% {
         transform: scale(1) translate(0,0) rotate(0deg);
       }
-      70% { /* orbite magique plus douce */
+      70% {
         transform: scale(1) translate(24px,-24px) rotate(180deg);
         text-shadow: 0 0 12px rgba(255,255,255,.7);
       }
@@ -103,14 +102,13 @@
         transform: scale(1) translate(0,0) rotate(360deg);
         text-shadow: 0 0 10px rgba(255,215,0,.6);
       }
-      100% { /* figé pour toujours */
+      100% {
         opacity: 1;
         transform: scale(1) translate(0,0) rotate(0deg);
         text-shadow: 0 0 6px rgba(255,215,0,.35);
       }
     }
 
-    /* Accessibilité : pas d’animation si réduite */
     @media (prefers-reduced-motion: reduce) {
       p.intro .word {
         animation: none !important;
@@ -120,121 +118,119 @@
       }
     }
 
-  /* ——— Héros : nouvelle disposition en 4 niveaux ——— */
+    /* ——— Héros : disposition en 4 niveaux ——— */
 
-.hero-section{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:1.6rem;
-  margin-top:1.4rem;
-}
+    .hero-section{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:2rem;           /* plus d’espace entre les niveaux */
+      margin-top:2rem;
+    }
 
-/* 1 : Raphaël seul */
-.hero-main-row{
-  display:flex;
-  justify-content:center;
-  width:100%;
-}
+    /* 1 : Raphaël seul */
+    .hero-main-row{
+      display:flex;
+      justify-content:center;
+      width:100%;
+    }
 
-/* 2 : Paola + Fanfan */
-.hero-close-row{
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  flex-wrap:wrap;
-  width:100%;
-}
+    /* 2 : Paola + Fanfan */
+    .hero-close-row{
+      display:flex;
+      justify-content:center;
+      gap:1.2rem;
+      flex-wrap:wrap;
+      width:100%;
+    }
 
-/* 3 : Ligne complète des héros */
-.hero-row{
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  flex-wrap:wrap;
-  width:100%;
-  max-width:1000px;
-}
+    /* 3 & 4 : Lignes complètes des héros */
+    .hero-row{
+      display:flex;
+      justify-content:center;
+      gap:1.2rem;
+      flex-wrap:wrap;
+      width:100%;
+      max-width:1000px;
+    }
 
-/* Style commun des boutons héros */
-.hero-btn{
-  display:block;
-  background:linear-gradient(145deg,#6a341a,#b67032);
-  color:#ffe9b0;
-  padding:.65em 1em;
-  border-radius:14px;
-  text-decoration:none;
-  font-weight:700;
-  font-size:1rem;
-  text-align:center;
-  text-shadow:1px 1px 2px #3d250c;
-  border:1px solid rgba(255,255,255,.06);
-  box-shadow:inset 0 0 10px rgba(255,200,100,.25), 0 4px 10px rgba(0,0,0,.35);
-  transition:transform .18s ease, filter .18s ease;
-  min-width:120px;
-}
+    /* Style commun des boutons héros */
+    .hero-btn{
+      display:block;
+      background:linear-gradient(145deg,#6a341a,#b67032);
+      color:#ffe9b0;
+      padding:.65em 1em;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:1rem;
+      text-align:center;
+      text-shadow:1px 1px 2px #3d250c;
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:inset 0 0 10px rgba(255,200,100,.25), 0 4px 10px rgba(0,0,0,.35);
+      transition:transform .18s ease, filter .18s ease;
+      min-width:120px;
+    }
 
-/* Hover */
-.hero-btn:hover{
-  transform:translateY(-2px);
-  filter:brightness(1.06);
-}
+    .hero-btn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.06);
+    }
 
-/* Bouton principal : Raphaël */
-.hero-btn.hero-main{
-  background:linear-gradient(145deg,#f7c96a,#f19b3a);
-  color:#3a1c00;
-  box-shadow:0 0 14px rgba(255,215,120,.7), 0 6px 16px rgba(0,0,0,.45);
-}
-.hero-btn.hero-main:hover{
-  transform:translateY(-3px);
-  filter:brightness(1.08);
-}
+    /* Bouton principal : Raphaël */
+    .hero-btn.hero-main{
+      background:linear-gradient(145deg,#f7c96a,#f19b3a);
+      color:#3a1c00;
+      box-shadow:0 0 14px rgba(255,215,120,.7), 0 6px 16px rgba(0,0,0,.45);
+    }
+    .hero-btn.hero-main:hover{
+      transform:translateY(-3px);
+      filter:brightness(1.08);
+    }
 
-/* Responsive */
-@media(max-width:600px){
-  .hero-row{
-    flex-direction:column;
-    align-items:center;
-  }
-  .hero-btn{
-    width:70%;
-    max-width:260px;
-  }
-}
-      /* on enlève la mise en page spéciale sur mobile */
-      .hero-buttons a:nth-child(1),
-      .hero-buttons a:nth-child(2),
-      .hero-buttons a:nth-child(3){
-        grid-column:auto;
+    /* Responsive */
+    @media(max-width:600px){
+      .container{
+        padding:2.2em 1.4em 2.4em;
+      }
+      .hero-row{
+        flex-direction:column;
+        align-items:center;
+      }
+      .hero-btn{
+        width:70%;
+        max-width:260px;
       }
     }
 
     /* ===== Rangée bouton test + grimoire ===== */
     .cta-row{
       display:flex;
+      flex-direction:column;          /* tout en colonne */
       align-items:center;
       justify-content:center;
       gap:1.4rem;
-      flex-wrap:wrap;
-      margin-top:1.8rem;
+      margin-top:2.6rem;             /* on descend bien le bloc test */
+      text-align:center;
     }
 
     .quiz-lead{
       text-align:center;
-      margin:0 0 .5rem;
-      font-size:.98rem;
+      margin:0 0 .6rem;
+      font-size:1.02rem;
       opacity:.9;
     }
 
-    /* ===== Bouton quiz doré ===== */
     .quiz-button{
       text-align:center;
-      max-width: 360px;
+      max-width: 420px;
+      margin:0 auto;
     }
+
+    /* ===== Bouton quiz doré ===== */
     .quiz-button a{
       display:inline-block;
-      padding:1em 1.6em;
+      padding:1em 1.8em;
       background:linear-gradient(145deg,#ffd65b,#e6b800);
       color:#2a1c00;
       font-weight:800;
@@ -414,39 +410,39 @@
     <h1>Les Héros d’Arzankia</h1>
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros</p>
 
-<div class="hero-section">
+    <div class="hero-section">
 
-  <!-- 1 : Raphaël -->
-  <div class="hero-main-row">
-    <a href="ci_raphael.html" class="hero-btn hero-main">Raphaël</a>
-  </div>
+      <!-- 1 : Raphaël -->
+      <div class="hero-main-row">
+        <a href="ci_raphael.html" class="hero-btn hero-main">Raphaël</a>
+      </div>
 
-  <!-- 2 : Paola + Fanfan -->
-  <div class="hero-close-row">
-    <a href="ci_paola.html" class="hero-btn">Paola</a>
-    <a href="ci_fanfan.html" class="hero-btn">Fanfan</a>
-  </div>
+      <!-- 2 : Paola + Fanfan -->
+      <div class="hero-close-row">
+        <a href="ci_paola.html" class="hero-btn">Paola</a>
+        <a href="ci_fanfan.html" class="hero-btn">Fanfan</a>
+      </div>
 
-  <!-- 3 : Première grande ligne -->
-  <div class="hero-row">
-    <a href="ci_antony.html" class="hero-btn">Antony</a>
-    <a href="ci_esteban.html" class="hero-btn">Esteban</a>
-    <a href="ci_amandine.html" class="hero-btn">Amandine</a>
-    <a href="ci_louise.html" class="hero-btn">Louise</a>
-    <a href="ci_cassandre.html" class="hero-btn">Cassandre</a>
-    <a href="ci_kelyan.html" class="hero-btn">Kelyan</a>
-  </div>
+      <!-- 3 : Première grande ligne -->
+      <div class="hero-row">
+        <a href="ci_antony.html" class="hero-btn">Antony</a>
+        <a href="ci_esteban.html" class="hero-btn">Esteban</a>
+        <a href="ci_amandine.html" class="hero-btn">Amandine</a>
+        <a href="ci_louise.html" class="hero-btn">Louise</a>
+        <a href="ci_cassandre.html" class="hero-btn">Cassandre</a>
+        <a href="ci_kelyan.html" class="hero-btn">Kelyan</a>
+      </div>
 
-  <!-- 4 : Deuxième grande ligne -->
-  <div class="hero-row">
-    <a href="ci_lizea.html" class="hero-btn">Lizéa</a>
-    <a href="ci_ysaak.html" class="hero-btn">Ysaak</a>
-    <a href="ci_andrea.html" class="hero-btn">Andréa</a>
-    <a href="ci_maxime.html" class="hero-btn">Maxime</a>
-    <a href="#" id="btnAlicia" class="hero-btn">Alicia</a>
-  </div>
+      <!-- 4 : Deuxième grande ligne -->
+      <div class="hero-row">
+        <a href="ci_lizea.html" class="hero-btn">Lizéa</a>
+        <a href="ci_ysaak.html" class="hero-btn">Ysaak</a>
+        <a href="ci_andrea.html" class="hero-btn">Andréa</a>
+        <a href="ci_maxime.html" class="hero-btn">Maxime</a>
+        <a href="#" id="btnAlicia" class="hero-btn">Alicia</a>
+      </div>
 
-</div>
+    </div>
 
     <div class="cta-row">
       <div class="quiz-button">
