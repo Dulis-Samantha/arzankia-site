@@ -38,7 +38,10 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(0,0,0,.1) 0, rgba(0,0,0,.6) 65%);
+      background:
+        radial-gradient(circle at 20% 0, rgba(0,0,0,.15) 0, transparent 40%),
+        radial-gradient(circle at 80% 0, rgba(0,0,0,.2) 0, transparent 45%),
+        radial-gradient(circle at 50% 60%, rgba(0,0,0,.55) 0, rgba(0,0,0,.7) 65%);
       pointer-events: none;
       z-index: -1;
     }
@@ -57,11 +60,24 @@
       max-width: 900px;
     }
 
+    /* ===== ANIMATIONS DOUCES ===== */
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* ===== TITRE ===== */
     .title-container {
       text-align: center;
-      margin: 0 auto 10px;
+      margin: 0 auto 14px;
       max-width: 900px;
+      animation: fade-up 0.8s ease-out both;
     }
 
     .headline-small {
@@ -85,8 +101,9 @@
     /* ===== Texte explicatif hors bloc ===== */
     .explication {
       max-width: 820px;
-      margin: 18px auto 0;
+      margin: 20px auto 0;
       text-align: center;
+      animation: fade-up 0.8s ease-out 0.12s both;
     }
 
     .special {
@@ -112,12 +129,13 @@
       background: var(--fond-voile);
       border-radius: 24px;
       padding: clamp(16px, 4vw, 28px);
-      max-width: 820px;
-      width: min(92vw, 820px);
+      max-width: 780px;
+      width: min(92vw, 780px);
       text-align: center;
       box-shadow: 0 6px 20px rgba(0,0,0,.55);
       backdrop-filter: blur(4px);
-      margin: 22px auto 4px;
+      margin: 24px auto 8px;
+      animation: fade-up 0.8s ease-out 0.24s both;
     }
 
     .intro-note {
@@ -129,9 +147,10 @@
     /* ===== Boutons ===== */
     .buttons {
       display: grid;
-      gap: 14px;
+      gap: 16px;
       justify-items: center;
-      margin-top: 22px;
+      margin-top: 26px;
+      animation: fade-up 0.8s ease-out 0.4s both;
     }
 
     .btn {
@@ -148,7 +167,10 @@
       font-weight: 600;
       text-decoration: none;
       box-shadow: 0 4px 10px rgba(0,0,0,.35);
-      transition: transform .18s ease-out, box-shadow .18s ease-out, filter .18s ease-out;
+      transition:
+        transform .18s ease-out,
+        box-shadow .18s ease-out,
+        filter .18s ease-out;
       cursor: pointer;
     }
 
@@ -173,9 +195,10 @@
     /* ===== Lien vers le site ===== */
     .intro-link {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 24px;
       font-size: .98rem;
       line-height: 1.6;
+      animation: fade-up 0.8s ease-out 0.55s both;
     }
 
     .intro-link a {
@@ -206,14 +229,26 @@
       animation: glow-sweep 2.6s ease-in-out infinite alternate;
     }
 
+    /* Réduction des animations si l'utilisateur préfère */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
       body {
         padding: 24px 12px 32px;
       }
 
+      .title-container {
+        margin-bottom: 10px;
+      }
+
       .bloc {
-        margin-top: 18px;
+        margin-top: 20px;
       }
 
       .special {
