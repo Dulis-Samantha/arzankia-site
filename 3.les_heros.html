@@ -120,17 +120,44 @@
       }
     }
 
-    /* ——— Grille des héros ——— */
-    .hero-buttons{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(140px,1fr));
-      gap:.9rem 1rem;
+     /* ——— Héros : mise en page structurée ——— */
+
+    .hero-section{
+      display:flex;
+      flex-direction:column;
       align-items:center;
-      justify-items:center;
+      gap:1.2rem;
       margin-top:1.2rem;
     }
 
-    .hero-buttons a{
+    /* Ligne Raphaël seul */
+    .hero-main-row{
+      display:flex;
+      justify-content:center;
+      width:100%;
+    }
+
+    /* Ligne Paola + Fanfan */
+    .hero-close-row{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      flex-wrap:wrap;
+      width:100%;
+    }
+
+    /* Grille pour les autres héros */
+    .hero-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(130px,1fr));
+      gap:.8rem 1rem;
+      justify-items:center;
+      width:100%;
+      max-width:720px;
+    }
+
+    /* Style commun des boutons héros */
+    .hero-btn{
       display:block;
       background:linear-gradient(145deg,#6a341a,#b67032);
       color:#ffe9b0;
@@ -144,53 +171,46 @@
       border:1px solid rgba(255,255,255,.06);
       box-shadow:inset 0 0 10px rgba(255,200,100,.25), 0 4px 10px rgba(0,0,0,.35);
       transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
-      max-width:200px;
+      max-width:220px;
     }
 
-    .hero-buttons a:hover{
+    .hero-btn:hover{
       transform:translateY(-2px);
       filter:brightness(1.06);
       box-shadow:inset 0 0 14px rgba(255,210,120,.35), 0 6px 14px rgba(0,0,0,.45);
     }
 
-    /* Raphaël : première ligne, centré, style héros principal */
-    .hero-buttons a:nth-child(1){
-      grid-column:1 / -1;
-      max-width:220px;
-    }
-
-    .hero-buttons a.hero-main{
+    /* Héros principal : Raphaël */
+    .hero-btn.hero-main{
       background:linear-gradient(145deg,#f7c96a,#f19b3a);
       color:#3a1c00;
       box-shadow:0 0 14px rgba(255,215,120,.7), 0 6px 16px rgba(0,0,0,.45);
       transform:translateY(-1px);
     }
-    .hero-buttons a.hero-main:hover{
+    .hero-btn.hero-main:hover{
       transform:translateY(-3px);
       filter:brightness(1.08);
     }
 
-    /* Paola + Fanfan sur la deuxième ligne (2 colonnes chacun) */
-    .hero-buttons a:nth-child(2),
-    .hero-buttons a:nth-child(3){
-      grid-column:span 2;
-    }
-
-    /* ——— Mobile : 2 colonnes fixes ——— */
+    /* Responsive mobile */
     @media (max-width:600px){
       .container{
         padding:1.4em 1.1em 1.6em;
       }
-      .hero-buttons{
+
+      .hero-grid{
         grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:.8rem;
+        max-width:none;
       }
-      .hero-buttons a{
+
+      .hero-btn{
         padding:.85em .6em;
         font-size:.95rem;
         border-radius:12px;
         max-width:none;
       }
+    }
+
       /* on enlève la mise en page spéciale sur mobile */
       .hero-buttons a:nth-child(1),
       .hero-buttons a:nth-child(2),
@@ -403,25 +423,36 @@
     <h1>Les Héros d’Arzankia</h1>
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros</p>
 
-    <div class="hero-buttons">
-      <!-- 1 : Raphaël -->
-      <a href="ci_raphael.html" class="hero-main">Raphaël</a>
-      <!-- 2 : Paola + Fanfan -->
-      <a href="ci_paola.html">Paola</a>
-      <a href="ci_fanfan.html">Fanfan</a>
-      <!-- 3 : les autres -->
-      <a href="ci_antony.html">Antony</a>
-      <a href="ci_esteban.html">Esteban</a>
-      <a href="ci_louise.html">Louise</a>
-      <a href="ci_cassandre.html">Cassandre</a>
-      <a href="ci_kelyan.html">Kelyan</a>
-      <a href="ci_amandine.html">Amandine</a>
-      <a href="ci_andrea.html">Andréa</a>
-      <a href="ci_maxime.html">Maxime</a>
-      <a href="ci_lizea.html">Lizéa</a>
-      <a href="ci_ysaak.html">Ysaak</a>
-      <a href="#" id="btnAlicia">Alicia</a>
+    <div class="hero-section">
+
+      <!-- Raphaël seul au centre -->
+      <div class="hero-main-row">
+        <a href="ci_raphael.html" class="hero-btn hero-main">Raphaël</a>
+      </div>
+
+      <!-- Paola + Fanfan juste en dessous -->
+      <div class="hero-close-row">
+        <a href="ci_paola.html" class="hero-btn">Paola</a>
+        <a href="ci_fanfan.html" class="hero-btn">Fanfan</a>
+      </div>
+
+      <!-- Tous les autres héros en grille -->
+      <div class="hero-grid">
+        <a href="ci_antony.html"   class="hero-btn">Antony</a>
+        <a href="ci_esteban.html"  class="hero-btn">Esteban</a>
+        <a href="ci_louise.html"   class="hero-btn">Louise</a>
+        <a href="ci_cassandre.html" class="hero-btn">Cassandre</a>
+        <a href="ci_kelyan.html"   class="hero-btn">Kelyan</a>
+        <a href="ci_amandine.html" class="hero-btn">Amandine</a>
+        <a href="ci_andrea.html"   class="hero-btn">Andréa</a>
+        <a href="ci_maxime.html"   class="hero-btn">Maxime</a>
+        <a href="ci_lizea.html"    class="hero-btn">Lizéa</a>
+        <a href="ci_ysaak.html"    class="hero-btn">Ysaak</a>
+        <a href="#" id="btnAlicia" class="hero-btn">Alicia</a>
+      </div>
+
     </div>
+
 
     <div class="cta-row">
       <div class="quiz-button">
