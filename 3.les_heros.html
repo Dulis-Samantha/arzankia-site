@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Les Héros d’Arzankia</title>
   
-  <!-- Styles externes : CHEMIN CORRIGÉ -->
+  <!-- Styles externes -->
   <link rel="stylesheet" href="css/monde.css" />
 
   <style>
@@ -21,136 +21,181 @@
     }
 
     body{
-     background: url('images/fonds/fond_heros.webp') center/cover fixed no-repeat;
+      background: url('images/fonds/fond_heros.webp') center/cover fixed no-repeat;
       margin:0;
-      padding:2em;
+      padding:2.5em 1.5em 2em;
       font-family:Georgia, serif;
       color:var(--texte);
       text-shadow:0 0 6px #000;
     }
 
     .container{
-      max-width:1000px;
-      margin:0 auto;
-      background:var(--fond-noir);
-      padding:2em;
-      border-radius:12px;
-      box-shadow:0 10px 28px var(--verre-ombre);
+      max-width:960px;
+      margin:0 auto 1.5em;
+      background: radial-gradient(circle at top, rgba(0,0,0,.75), rgba(0,0,0,.88));
+      border-radius:18px;
+      padding:2.2em 2.2em 2.4em;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 14px 40px var(--verre-ombre);
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
     }
 
     h1{
       text-align:center;
       color:var(--or);
       text-shadow:0 0 10px #3a1c00;
-      margin: 0 0 0.6em;  
-      letter-spacing:.3px;
+      margin: 0 0 0.6em;
+      letter-spacing:.04em;
+      font-family: "Cinzel", serif;
+      font-size:clamp(2rem,1.6rem + 1.3vw,2.5rem);
     }
-/* Conteneur d’intro */
-p.intro {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-size: 1.2rem;
-  margin: 0 auto 1.2em;
-  max-width: 50ch;
-  opacity: .95;
-  perspective: 800px;
-}
 
-p.intro .word {
-  display: inline-block;
-  opacity: 0;
-  transform: scale(0.3) translate(0,0);
-  animation: magicOnce 10s ease-in-out forwards; /* 1 seul cycle */
-  animation-delay: calc(var(--i) * 200ms);
-  margin-right: 0.35em;
-  will-change: transform, opacity, text-shadow;
-  backface-visibility: hidden;
-}
+    /* Conteneur d’intro */
+    p.intro {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 1.15rem;
+      margin: 0 auto 1.4em;
+      max-width: 52ch;
+      opacity: .97;
+      perspective: 800px;
+    }
 
-/* Cycle unique : apparition → stable → orbite → stabilisation finale */
-@keyframes magicOnce {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translate(0,0) rotate(0deg);
-    text-shadow: none;
-  }
-  20% {
-    opacity: 1;
-    transform: scale(1) translate(0,0) rotate(0deg);
-    text-shadow: 0 0 6px rgba(255,215,0,.35);
-  }
-  40% { /* stable */
-    transform: scale(1) translate(0,0) rotate(0deg);
-  }
-  70% { /* orbite magique */
-    transform: scale(1) translate(40px,-40px) rotate(180deg);
-    text-shadow: 0 0 12px rgba(255,255,255,.7);
-  }
-  90% {
-    transform: scale(1) translate(0,0) rotate(360deg);
-    text-shadow: 0 0 10px rgba(255,215,0,.6);
-  }
-  100% { /* figé pour toujours */
-    opacity: 1;
-    transform: scale(1) translate(0,0) rotate(0deg);
-    text-shadow: 0 0 6px rgba(255,215,0,.35);
-  }
-}
+    p.intro .word {
+      display: inline-block;
+      opacity: 0;
+      transform: scale(0.3) translate(0,0);
+      animation: magicOnce 7s ease-in-out forwards; /* cycle un peu plus court */
+      animation-delay: calc(var(--i) * 160ms);
+      margin-right: 0.35em;
+      will-change: transform, opacity, text-shadow;
+      backface-visibility: hidden;
+    }
 
-/* Accessibilité : pas d’animation si réduite */
-@media (prefers-reduced-motion: reduce) {
-  p.intro .word {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    text-shadow: none !important;
-  }
-}
+    /* Cycle unique : apparition → petite orbite → stabilisation finale */
+    @keyframes magicOnce {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translate(0,0) rotate(0deg);
+        text-shadow: none;
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1) translate(0,0) rotate(0deg);
+        text-shadow: 0 0 6px rgba(255,215,0,.35);
+      }
+      40% { /* stable */
+        transform: scale(1) translate(0,0) rotate(0deg);
+      }
+      70% { /* orbite magique plus douce */
+        transform: scale(1) translate(24px,-24px) rotate(180deg);
+        text-shadow: 0 0 12px rgba(255,255,255,.7);
+      }
+      90% {
+        transform: scale(1) translate(0,0) rotate(360deg);
+        text-shadow: 0 0 10px rgba(255,215,0,.6);
+      }
+      100% { /* figé pour toujours */
+        opacity: 1;
+        transform: scale(1) translate(0,0) rotate(0deg);
+        text-shadow: 0 0 6px rgba(255,215,0,.35);
+      }
+    }
 
- /* ——— Grille des héros ——— */
-.hero-buttons{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:.9rem;
-  align-items:center;
-  margin-top:1.2rem;
-}
+    /* Accessibilité : pas d’animation si réduite */
+    @media (prefers-reduced-motion: reduce) {
+      p.intro .word {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-shadow: none !important;
+      }
+    }
 
-/* lien = bloc pour bien remplir la colonne */
-.hero-buttons a{
-  display:block;                /* <— AJOUT */
-  background:linear-gradient(145deg,#6a341a,#b67032);
-  color:#ffe9b0;
-  padding:.65em 1em;
-  border-radius:14px;
-  text-decoration:none;
-  font-weight:700;
-  font-size:1rem;
-  text-align:center;
-  text-shadow:1px 1px 2px #3d250c;
-  border:1px solid rgba(255,255,255,.06);
-  box-shadow:inset 0 0 10px rgba(255,200,100,.25), 0 4px 10px rgba(0,0,0,.35);
-  transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
-}
+    /* ——— Grille des héros ——— */
+    .hero-buttons{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+      gap:.9rem;
+      align-items:center;
+      margin-top:1.2rem;
+    }
 
-/* ——— Mobile : 2 colonnes fixes ——— */
-@media (max-width:600px){
-  .container{ padding:1.2em; }
-  .hero-buttons{
-    grid-template-columns:repeat(2,minmax(0,1fr));  /* 2 colonnes */
-    gap:.8rem;
-  }
-  .hero-buttons a{
-    padding:.85em .6em;   /* un poil plus compact */
-    font-size:.95rem;
-    border-radius:12px;
-  }
-}
+    .hero-buttons a{
+      display:block;
+      background:linear-gradient(145deg,#6a341a,#b67032);
+      color:#ffe9b0;
+      padding:.65em 1em;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:1rem;
+      text-align:center;
+      text-shadow:1px 1px 2px #3d250c;
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:inset 0 0 10px rgba(255,200,100,.25), 0 4px 10px rgba(0,0,0,.35);
+      transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+    }
+
+    .hero-buttons a:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.06);
+      box-shadow:inset 0 0 14px rgba(255,210,120,.35), 0 6px 14px rgba(0,0,0,.45);
+    }
+
+    /* Héros principal : Raphaël mis légèrement en avant */
+    .hero-buttons a.hero-main{
+      background:linear-gradient(145deg,#f7c96a,#f19b3a);
+      color:#3a1c00;
+      box-shadow:0 0 14px rgba(255,215,120,.7), 0 6px 16px rgba(0,0,0,.45);
+      transform:translateY(-1px);
+    }
+    .hero-buttons a.hero-main:hover{
+      transform:translateY(-3px);
+      filter:brightness(1.08);
+    }
+
+    /* ——— Mobile : 2 colonnes fixes ——— */
+    @media (max-width:600px){
+      .container{
+        padding:1.4em 1.1em 1.6em;
+      }
+      .hero-buttons{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:.8rem;
+      }
+      .hero-buttons a{
+        padding:.85em .6em;
+        font-size:.95rem;
+        border-radius:12px;
+      }
+    }
+
+    /* ===== Rangée bouton test + grimoire ===== */
+    .cta-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:1.4rem;
+      flex-wrap:wrap;
+      margin-top:1.8rem;
+    }
+
+    .quiz-lead{
+      text-align:center;
+      margin:0 0 .5rem;
+      font-size:.98rem;
+      opacity:.9;
+    }
 
     /* ===== Bouton quiz doré ===== */
-    .quiz-button{ text-align:center; }
+    .quiz-button{
+      text-align:center;
+      max-width: 360px;
+    }
     .quiz-button a{
       display:inline-block;
       padding:1em 1.6em;
@@ -168,28 +213,21 @@ p.intro .word {
       max-width:90vw;
       transition:transform .18s ease, filter .18s ease;
     }
-    .quiz-button a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
-
-    /* ===== Rangée bouton test + grimoire ===== */
-    .cta-row{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:1.4rem;            /* espace entre les deux */
-      flex-wrap:wrap;
-      margin-top:1.6rem;
+    .quiz-button a:hover{
+      filter:brightness(1.15);
+      transform:translateY(-2px);
     }
 
-    /* ===== Grimoire : plus grand + lumineux + animé ===== */
+    /* ===== Grimoire ===== */
     .grimoire-button img{
-      height:100px;           /* taille PC */
+      height:100px;
       width:auto;
       display:block;
       cursor:pointer;
       transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
       filter:drop-shadow(0 0 10px rgba(255,215,0,.45));
       outline:none;
-      animation:grimoirePulse 2.6s infinite ease-in-out;  /* lueur pulsante */
+      animation:grimoirePulse 2.6s infinite ease-in-out;
     }
     .grimoire-button img:hover{
       transform:scale(1.08) rotate(-2deg);
@@ -204,7 +242,7 @@ p.intro .word {
       50%     { filter:drop-shadow(0 0 18px rgba(255,240,150,.9)); }
     }
     @media (max-width:600px){
-      .grimoire-button img{ height:120px; }  /* taille mobile */
+      .grimoire-button img{ height:120px; }
     }
 
     /* ===== Pied de page ===== */
@@ -236,7 +274,10 @@ p.intro .word {
       -webkit-backdrop-filter:blur(4px);
       transition:transform .18s ease, filter .18s ease;
     }
-    .footer-buttons a:hover{ filter:brightness(1.15); transform:translateY(-2px); }
+    .footer-buttons a:hover{
+      filter:brightness(1.15);
+      transform:translateY(-2px);
+    }
 
     /* ===== Modales ===== */
     #modalGrimoire, #modalAlicia {
@@ -262,7 +303,10 @@ p.intro .word {
       text-align: center;
       position: relative;
     }
-    #modalGrimoire h3, #modalAlicia h3 { margin:0 0 0.6em; color: var(--or); }
+    #modalGrimoire h3, #modalAlicia h3 {
+      margin:0 0 0.6em;
+      color: var(--or);
+    }
     #modalGrimoire input, #modalAlicia input {
       padding: .6em .9em;
       border-radius: 10px;
@@ -304,19 +348,20 @@ p.intro .word {
     }
   </style>
 </head>
-<body>
-   <body class="hud-hidden">
 
-   <!-- === Jauge d'énergie === -->
+<body class="hud-hidden">
+
+  <!-- === Jauge d'énergie === -->
   <div class="energy-wrap" role="status" aria-live="polite">
     <div class="energy-icon">✨</div>
-    <div class="energy-label">Arzanskân</div>
+    <div class="energy-label">Arzankân</div>
     <div class="energy-bar">
       <div class="energy-fill" id="energyFill"></div>
     </div>
     <div class="energy-pct" id="energyPct">100%</div>
   </div>
 
+  <!-- Overlay verrouillage énergie -->
   <div class="lock-overlay" id="lockOverlay">
     <div class="lock-card">
       <div class="lock-title">Ta jauge est vide… ⚡</div>
@@ -334,7 +379,7 @@ p.intro .word {
     <p class="intro">Clique sur un nom pour découvrir les secrets et talents de chaque héros</p>
 
     <div class="hero-buttons">
-      <a href="ci_raphael.html">Raphaël</a>
+      <a href="ci_raphael.html" class="hero-main">Raphaël</a>
       <a href="ci_fanfan.html">Fanfan</a>
       <a href="ci_antony.html">Antony</a>
       <a href="ci_esteban.html">Esteban</a>
@@ -350,23 +395,24 @@ p.intro .word {
       <a href="#" id="btnAlicia">Alicia</a>
     </div>
 
-<div class="cta-row">
-  <div class="quiz-button">
-<a id="test-hero-link" href="quel_heros_es_tu.html">
-  Faire le test « Quel héros es-tu ? »
-</a>
-  </div>
+    <div class="cta-row">
+      <div class="quiz-button">
+        <p class="quiz-lead">Tu ne sais pas encore quel héros te ressemble le plus ?</p>
+        <a id="test-hero-link" href="quel_heros_es_tu.html">
+          Faire le test « Quel héros es-tu ? »
+        </a>
+      </div>
 
-  <div class="grimoire-button">
-    <img
-      src="images/bouton/grimoire.webp"
-      alt="Le Grimoire des Héros"
-      id="btnGrimoire"
-      role="button"
-      tabindex="0"
-    >
-  </div>
-</div>
+      <div class="grimoire-button">
+        <img
+          src="images/bouton/grimoire.webp"
+          alt="Le Grimoire des Héros"
+          id="btnGrimoire"
+          role="button"
+          tabindex="0"
+        >
+      </div>
+    </div>
 
     <div class="footer-buttons">
       <a href="2.les_coulisses.html">Retour aux Coulisses d’Arzankia</a>
@@ -417,8 +463,7 @@ p.intro .word {
 
     function verifierCleAlicia() {
       const valeur = normalise(inputA.value);
-      /* toutes variantes accentuées de "Nélicé" → "nelice" après normalisation */
-      const autorise = ["nelice"];
+      const autorise = ["nelice"]; // variantes de "Nélicé"
       if(autorise.includes(valeur)){
         window.location.href = "ci_alicia.html";
       } else {
@@ -432,7 +477,9 @@ p.intro .word {
       setTimeout(()=>inputA.focus(),100);
     });
     closeA.addEventListener("click", ()=> modalA.classList.remove("open"));
-    modalA.addEventListener("click", (e)=>{ if(e.target===modalA) modalA.classList.remove("open"); });
+    modalA.addEventListener("click", (e)=>{
+      if(e.target===modalA) modalA.classList.remove("open");
+    });
     okA.addEventListener("click", verifierCleAlicia);
     inputA.addEventListener("keydown", (e)=>{
       if(e.key==="Enter") verifierCleAlicia();
@@ -449,9 +496,11 @@ p.intro .word {
 
     function ouvrirGrimoire() {
       const valeur = normalise(inputG.value);
-      if(valeur==="aventurier"){ window.location.href="grimoire_aventurier.html"; }
-      else if(valeur==="chercheur"){ window.location.href="grimoire_chercheur.html"; }
-      else if(
+      if(valeur==="aventurier"){
+        window.location.href="grimoire_aventurier.html";
+      } else if(valeur==="chercheur"){
+        window.location.href="grimoire_chercheur.html";
+      } else if(
         valeur.includes("pescadrille") ||
         valeur.includes("pecadrille")  ||
         valeur.includes("ecaille")     ||
@@ -469,7 +518,9 @@ p.intro .word {
       setTimeout(()=>inputG.focus(),100);
     });
     closeG.addEventListener("click", ()=> modalG.classList.remove("open"));
-    modalG.addEventListener("click", (e)=>{ if(e.target===modalG) modalG.classList.remove("open"); });
+    modalG.addEventListener("click", (e)=>{
+      if(e.target===modalG) modalG.classList.remove("open");
+    });
     okG.addEventListener("click", ouvrirGrimoire);
     inputG.addEventListener("keydown", (e)=>{
       if(e.key==="Enter") ouvrirGrimoire();
@@ -484,37 +535,33 @@ p.intro .word {
         setTimeout(()=>inputG.focus(),100);
       }
     });
-    
- // Effet Star Wars magique : zoom global + rotation par mot
-(function () {
-  const p = document.querySelector('p.intro');
-  if (!p || p.dataset.split === "1") return;
 
-  const words = p.textContent.trim().split(/\s+/); // sépare en mots
-  p.textContent = "";
+    /* Effet magique sur le texte d'intro : split en mots */
+    (function () {
+      const p = document.querySelector('p.intro');
+      if (!p || p.dataset.split === "1") return;
 
-  words.forEach((w, i) => {
-    const span = document.createElement("span");
-    span.className = "word";
-    span.textContent = w;
-    span.style.setProperty("--i", i);
-    p.appendChild(span);
-    p.appendChild(document.createTextNode(" "));
-  });
+      const words = p.textContent.trim().split(/\s+/);
+      p.textContent = "";
 
-  p.dataset.split = "1";
-})();
-<!-- ton script précédent -->
-</script>
+      words.forEach((w, i) => {
+        const span = document.createElement("span");
+        span.className = "word";
+        span.textContent = w;
+        span.style.setProperty("--i", i);
+        p.appendChild(span);
+        p.appendChild(document.createTextNode(" "));
+      });
 
-<script defer src="js/base-pages.js"></script>  <!-- 1. outils communs -->
-<script defer src="js/arz-core.js"></script>    <!-- 2. cœur de la jauge (logique) -->
+      p.dataset.split = "1";
+    })();
+  </script>
 
-<script>document.documentElement.classList.add('hud-hidden');</script>
-
-<script defer src="js/sac-jauge.js"></script>   <!-- 3. interface (UI : sac + jauge) -->
-<script defer src="js/quete.js"></script>
-
+  <script defer src="js/base-pages.js"></script>
+  <script defer src="js/arz-core.js"></script>
+  <script>document.documentElement.classList.add('hud-hidden');</script>
+  <script defer src="js/sac-jauge.js"></script>
+  <script defer src="js/quete.js"></script>
 
 </body>
 </html>
