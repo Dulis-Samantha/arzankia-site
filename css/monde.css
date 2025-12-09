@@ -223,7 +223,14 @@ body {
   z-index: 4700; 
 }
 
-.bag-icon { width: 48px; height: 48px; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255,214,116,.7)); transition: transform .2s; }
+.bag-icon {
+  width: 72px;      /* taille augmentée */
+  height: 72px;     /* pareil pour garder le ratio */
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
+  transition: transform .2s;
+}
+
 .bag-icon:hover { transform: scale(1.08); }
 .bag-badge {
   position: absolute; top:-6px; right:-6px;
