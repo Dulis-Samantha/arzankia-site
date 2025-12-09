@@ -448,40 +448,45 @@ body {
 /* ============================================================
    RESPONSIVE (mobile)
 ============================================================ */
+/* ============================================================
+   RESPONSIVE (mobile)
+============================================================ */
 @media (max-width: 768px){
   :root{
-    --energyY: 100px;  /* descend jauge + sac */
-    --bagShift: 5px;   /* petit décalage du sac seul */
-    --bag-size: 70px;   /* ✅ sac plus petit uniquement sur mobile */
+    --energyY: 90px;     /* hauteur de base jauge/sac */
+    --bagShift: 0px;     /* petit ajustement vertical du sac */
+    --bag-size: 120px;   /* 🔥 même taille que desktop, bien grosse */
   }
 
+  /* jauge un peu plus compacte sur mobile */
   .energy-bar { width: 60px; }
   .energy-pct { min-width: 2ch; font-size: .85rem; }
 
-   @media (min-width: 769px){
-  .bag-wrap{
-    position: fixed !important;
-    top: var(--hud-top);
-    right: var(--bag-right);
-    left: auto;
-    transform: none !important;
-  }
-}
+  /* sac : positionné en haut à droite, taille contrôlée par --bag-size */
   .bag-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
     right: 12px;
     left: auto;
   }
 
+  /* ruban d’alerte sous le sac, en fonction de sa vraie taille */
   .quest-ribbon{
-    top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + 44px);
-    left: 12px; right: 12px;
+    top: calc(
+      var(--energyY)
+      + env(safe-area-inset-top, 0px)
+      + var(--bag-size)
+      + 8px
+    );
+    left: 12px;
+    right: 12px;
     transform: none;
   }
 
-  .image-zone { margin-top: 96px !important; }
+  /* décale un peu l’image pour ne pas qu’elle passe sous le sac/ruban */
+  .image-zone {
+    margin-top: calc(var(--energyY) + var(--bag-size) + 40px) !important;
+  }
 }
-
 
   /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
 @media (max-width: 768px) {
