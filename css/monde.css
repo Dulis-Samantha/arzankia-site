@@ -452,6 +452,7 @@ body {
   :root{
     --energyY: 100px;  /* descend jauge + sac */
     --bagShift: 5px;   /* petit décalage du sac seul */
+    --bag-size: 70px;   /* ✅ sac plus petit uniquement sur mobile */
   }
 
   .energy-bar { width: 60px; }
@@ -471,8 +472,6 @@ body {
     right: 12px;
     left: auto;
   }
-
-  .bag-icon { width: 44px; height: 44px; }
 
   .quest-ribbon{
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + 44px);
