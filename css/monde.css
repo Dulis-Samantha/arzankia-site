@@ -15,7 +15,7 @@
   --overlay: rgba(0, 0, 0, 0.7);
   --hud-top: 84px;
   --bag-right: 12px;   /* marge du sac au bord droit */
-  --bag-size: 120px;    /* largeur/hauteur de l'icône du sac */
+  --bag-size: 140px;    /* largeur/hauteur de l'icône du sac */
   --hud-gap: 12px;     /* espace entre jauge et sac */
 }
 
