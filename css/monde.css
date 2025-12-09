@@ -15,7 +15,7 @@
   --overlay: rgba(0, 0, 0, 0.7);
   --hud-top: 84px;
   --bag-right: 12px;   /* marge du sac au bord droit */
-  --bag-size: 140px;    /* largeur/hauteur de l'icône du sac */
+  --bag-size: 48px;    /* largeur/hauteur de l'icône du sac */
   --hud-gap: 12px;     /* espace entre jauge et sac */
 }
 
@@ -218,14 +218,14 @@ body {
 ============================================================ */
 .bag-wrap{ 
   position: fixed; 
-  top: var(--hud-top);         /* ✅ même hauteur que la jauge */
-  right: var(--bag-right);     /* utilise la variable */
+  top: 88px; 
+  right: 12px; 
   z-index: 4700; 
 }
 
 .bag-icon {
-  width: var(--bag-size);
-  height: var(--bag-size);
+  width: 100px;      /* taille augmentée */
+  height: 100px;     /* pareil pour garder le ratio */
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
   transition: transform .2s;
@@ -350,7 +350,7 @@ body {
   border-radius: 999px;
   padding: .4rem .8rem;
   cursor: pointer;
-  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s.ease;
 }
 .bag-menu .bag-toggle::before{
   content: '';
@@ -403,7 +403,7 @@ body {
   box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 22px rgba(255,214,116,.25);
 
   pointer-events: auto; /* utile si un jour tu ajoutes un bouton */
-  animation: arz-pulse 2s ease-in-out infinite;
+  animation: arz-pulse 2s.ease-in-out infinite;
 }
 
 @keyframes arz-pulse{
@@ -433,7 +433,7 @@ body {
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
   backdrop-filter: blur(8px);
   text-align: center;
-  animation: rise .8s ease-out;
+  animation: rise .8s.ease-out;
 }
 @keyframes rise { from{transform:translateY(20px);opacity:0} to{transform:none;opacity:1} }
 .lock-title {
@@ -448,45 +448,41 @@ body {
 /* ============================================================
    RESPONSIVE (mobile)
 ============================================================ */
-/* ============================================================
-   RESPONSIVE (mobile)
-============================================================ */
 @media (max-width: 768px){
   :root{
-    --energyY: 90px;     /* hauteur de base jauge/sac */
-    --bagShift: 0px;     /* petit ajustement vertical du sac */
-    --bag-size: 120px;   /* 🔥 même taille que desktop, bien grosse */
+    --energyY: 100px;  /* descend jauge + sac */
+    --bagShift: 5px;   /* petit décalage du sac seul */
   }
 
-  /* jauge un peu plus compacte sur mobile */
   .energy-bar { width: 60px; }
   .energy-pct { min-width: 2ch; font-size: .85rem; }
 
-  /* sac : positionné en haut à droite, taille contrôlée par --bag-size */
+   @media (min-width: 769px){
+  .bag-wrap{
+    position: fixed !important;
+    top: var(--hud-top);
+    right: var(--bag-right);
+    left: auto;
+    transform: none !important;
+  }
+}
   .bag-wrap {
     top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + var(--bagShift));
     right: 12px;
     left: auto;
   }
 
-  /* ruban d’alerte sous le sac, en fonction de sa vraie taille */
+  .bag-icon { width: 44px; height: 44px; }
+
   .quest-ribbon{
-    top: calc(
-      var(--energyY)
-      + env(safe-area-inset-top, 0px)
-      + var(--bag-size)
-      + 8px
-    );
-    left: 12px;
-    right: 12px;
+    top: calc(var(--energyY) + env(safe-area-inset-top, 0px) + 44px);
+    left: 12px; right: 12px;
     transform: none;
   }
 
-  /* décale un peu l’image pour ne pas qu’elle passe sous le sac/ruban */
-  .image-zone {
-    margin-top: calc(var(--energyY) + var(--bag-size) + 40px) !important;
-  }
+  .image-zone { margin-top: 96px !important; }
 }
+
 
   /* --- Ajustement mobile : jauge Arzanskân sous le titre --- */
 @media (max-width: 768px) {
@@ -512,6 +508,7 @@ body {
   .energy-wrap{
     position: fixed !important;
     top: 84px; /* ou var(--hud-top) si tu préfères */
+    /* jauge = sac + gap → se place à gauche du sac */
     right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
     left: auto;
     transform: none !important;
@@ -525,7 +522,6 @@ body {
     left: auto;
     transform: none !important;
   }
-
 
   /* Si, quelque part, tu as ces classes pour la jauge: */
   .arzanskan-bar, .arzanskan-container{
