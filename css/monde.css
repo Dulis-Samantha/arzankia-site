@@ -218,8 +218,8 @@ body {
 ============================================================ */
 .bag-wrap{ 
   position: fixed; 
-  top: 88px; 
-  right: 12px; 
+  top: var(--hud-top);         /* ✅ même hauteur que la jauge */
+  right: var(--bag-right);     /* utilise la variable */
   z-index: 4700; 
 }
 
@@ -512,7 +512,6 @@ body {
   .energy-wrap{
     position: fixed !important;
     top: 84px; /* ou var(--hud-top) si tu préfères */
-    /* jauge = sac + gap → se place à gauche du sac */
     right: calc(var(--bag-right) + var(--bag-size) + var(--hud-gap));
     left: auto;
     transform: none !important;
@@ -526,6 +525,7 @@ body {
     left: auto;
     transform: none !important;
   }
+
 
   /* Si, quelque part, tu as ces classes pour la jauge: */
   .arzanskan-bar, .arzanskan-container{
