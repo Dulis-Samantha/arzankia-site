@@ -224,8 +224,8 @@ body {
 }
 
 .bag-icon {
-  width: 72px;      /* taille augmentée */
-  height: 72px;     /* pareil pour garder le ratio */
+  width: 100px;      /* taille augmentée */
+  height: 100px;     /* pareil pour garder le ratio */
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
   transition: transform .2s;
