@@ -15,7 +15,7 @@
   --overlay: rgba(0, 0, 0, 0.7);
   --hud-top: 84px;
   --bag-right: 12px;   /* marge du sac au bord droit */
-  --bag-size: 48px;    /* largeur/hauteur de l'icône du sac */
+  --bag-size: 100px;    /* largeur/hauteur de l'icône du sac */
   --hud-gap: 12px;     /* espace entre jauge et sac */
 }
 
@@ -224,8 +224,8 @@ body {
 }
 
 .bag-icon {
-  width: 100px;      /* taille augmentée */
-  height: 100px;     /* pareil pour garder le ratio */
+  width: var(--bag-size);
+  height: var(--bag-size);
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(255,214,116,.7));
   transition: transform .2s;
